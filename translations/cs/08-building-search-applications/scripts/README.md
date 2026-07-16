@@ -1,36 +1,27 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0d69f2d5814a698d3de5d0235940b5ae",
-  "translation_date": "2025-05-19T18:54:17+00:00",
-  "source_file": "08-building-search-applications/scripts/README.md",
-  "language_code": "cs"
-}
--->
-# Příprava dat pro přepis
+# Příprava dat přepisu
 
-Skripty pro přípravu dat pro přepis stahují přepisy videí z YouTube a připravují je pro použití se vzorovým příkladem Sémantického vyhledávání s OpenAI Embeddings a Functions.
+Skripty pro přípravu dat přepisu stahují přepisy videí z YouTube a připravují je k použití se vzorcem Semantic Search with OpenAI Embeddings and Functions.
 
-Skripty pro přípravu dat pro přepis byly testovány na nejnovějších verzích Windows 11, macOS Ventura a Ubuntu 22.04 (a vyšších).
+Skripty pro přípravu dat přepisu byly testovány na nejnovějších verzích Windows 11, macOS Ventura a Ubuntu 22.04 (a novějších).
 
-## Vytvoření potřebných prostředků Azure OpenAI Service
+## Vytvoření požadovaných zdrojů Azure OpenAI Service
 
 > [!IMPORTANT]
 > Doporučujeme aktualizovat Azure CLI na nejnovější verzi, aby byla zajištěna kompatibilita s OpenAI
 > Viz [Dokumentace](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
-1. Vytvořte skupinu prostředků
+1. Vytvořte skupinu zdrojů
 
 > [!NOTE]
-> Pro tyto instrukce používáme skupinu prostředků s názvem "semantic-video-search" ve východní části USA.
-> Můžete změnit název skupiny prostředků, ale při změně umístění pro prostředky
+> V těchto pokynech používáme skupinu zdrojů pojmenovanou "semantic-video-search" v oblasti East US.
+> Název skupiny zdrojů můžete změnit, ale při změně umístění zdrojů
 > zkontrolujte [tabulku dostupnosti modelů](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
 ```
 
-1. Vytvořte prostředek Azure OpenAI Service.
+1. Vytvořte zdroj Azure OpenAI Service.
 
 ```console
 az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
@@ -46,9 +37,9 @@ az cognitiveservices account keys list --name semantic-video-openai \
    --resource-group semantic-video-search | jq -r .key1
 ```
 
-1. Nasadit následující modely:
-   - `text-embedding-ada-002` version `2` or greater, named `text-embedding-ada-002`
-   - `gpt-35-turbo` version `0613` or greater, named `gpt-35-turbo`
+1. Nasaďte následující modely:
+   - `text-embedding-ada-002` verze `2` nebo vyšší, pojmenovaný `text-embedding-ada-002`
+   - `gpt-4o-mini` pojmenovaný `gpt-4o-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -62,26 +53,25 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-4o-mini \
+    --model-name gpt-4o-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
 ```
 
-## Potřebný software
+## Požadovaný software
 
 - [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) nebo novější
 
 ## Proměnné prostředí
 
-Pro spuštění skriptů pro přípravu dat pro přepis z YouTube jsou vyžadovány následující proměnné prostředí.
+Následující proměnné prostředí jsou nutné k spuštění skriptů pro přípravu dat přepisu YouTube.
 
 ### Na Windows
 
-Doporučujeme přidat proměnné do `uživatelských` environment variables.
-`Windows Start` > `Upravit systémové proměnné prostředí` > `Proměnné prostředí` > `Uživatelské proměnné` for [USER] > `Nový`.
+Doporučujeme přidat proměnné do vašich uživatelských proměnných prostředí.
+`Start Windows` > `Upravit systémové proměnné prostředí` > `Proměnné prostředí` > `Uživatelské proměnné` pro [USER] > `Nový`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -90,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
-### Na Linux a macOS
+<!-- Proměnné prostředí můžete přidat do svého profilu PowerShell.
 
-Doporučujeme přidat následující exporty do vašeho souboru `~/.bashrc` or `~/.zshrc`.
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<váš API klíč služby Azure OpenAI>"
+$env:AZURE_OPENAI_ENDPOINT = "<váš koncový bod služby Azure OpenAI>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<název nasazení modelu služby Azure OpenAI>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<váš API klíč vývojáře Google>"
+``` -->
+
+### Na Linuxu a macOS
+
+Doporučujeme přidat následující exporty do souboru `~/.bashrc` nebo `~/.zshrc`.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -101,10 +100,10 @@ export AZURE_OPENAI_MODEL_DEPLOYMENT_NAME=<your Azure OpenAI Service model deplo
 export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ```
 
-## Instalace potřebných Python knihoven
+## Instalace požadovaných knihoven Python
 
 1. Nainstalujte [git klienta](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst), pokud již není nainstalován.
-1. Z okna `Terminálu` naklonujte vzorek do vámi preferované složky pro repozitáře.
+1. Otevřete `Terminál` a naklonujte vzorek do preferované složky repozitáře.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -116,7 +115,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    cd semanic-search-openai-embeddings-functions/src/data_prep
    ```
 
-1. Vytvořte virtuální prostředí pro Python.
+1. Vytvořte virtuální prostředí Python.
 
     Na Windows:
 
@@ -124,13 +123,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
     python -m venv .venv
     ```
 
-    Na macOS a Linux:
+    Na macOS a Linuxu:
 
     ```bash
     python3 -m venv .venv
     ```
 
-1. Aktivujte virtuální prostředí pro Python.
+1. Aktivujte virtuální prostředí Python.
 
    Na Windows:
 
@@ -138,13 +137,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    .venv\Scripts\activate
    ```
 
-   Na macOS a Linux:
+   Na macOS a Linuxu:
 
    ```bash
    source .venv/bin/activate
    ```
 
-1. Nainstalujte potřebné knihovny.
+1. Nainstalujte požadované knihovny.
 
    Na Windows:
 
@@ -152,13 +151,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    pip install -r requirements.txt
    ```
 
-   Na macOS a Linux:
+   Na macOS a Linuxu:
 
    ```bash
    pip3 install -r requirements.txt
    ```
 
-## Spuštění skriptů pro přípravu dat pro přepis z YouTube
+## Spusťte skripty pro přípravu dat přepisu YouTube
 
 ### Na Windows
 
@@ -166,11 +165,15 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 .\transcripts_prepare.ps1
 ```
 
-### Na macOS a Linux
+### Na macOS a Linuxu
 
 ```bash
 ./transcripts_prepare.sh
 ```
 
-**Zřeknutí se odpovědnosti**:  
-Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé v důsledku použití tohoto překladu.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

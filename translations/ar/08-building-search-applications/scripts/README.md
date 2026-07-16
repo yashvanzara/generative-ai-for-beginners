@@ -1,29 +1,21 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0d69f2d5814a698d3de5d0235940b5ae",
-  "translation_date": "2025-05-19T18:46:33+00:00",
-  "source_file": "08-building-search-applications/scripts/README.md",
-  "language_code": "ar"
-}
--->
-# إعداد بيانات النسخ
+# تحضير بيانات النسخ
 
-تقوم نصوص إعداد بيانات النسخ بتنزيل نصوص فيديوهات يوتيوب وتجهيزها للاستخدام مع البحث الدلالي باستخدام OpenAI Embeddings وFunctions.
+تقوم سكربتات تحضير بيانات النسخ بتنزيل نصوص فيديوهات يوتيوب وتحضيرها للاستخدام مع نموذج البحث الدلالي باستخدام تضمينات OpenAI والوظائف.
 
-تم اختبار نصوص إعداد بيانات النسخ على الإصدارات الأحدث من Windows 11، macOS Ventura، وUbuntu 22.04 (وما فوق).
+تم اختبار سكربتات تحضير بيانات النسخ على أحدث إصدارات Windows 11 وmacOS Ventura وUbuntu 22.04 (وما فوق).
 
 ## إنشاء موارد خدمة Azure OpenAI المطلوبة
 
 > [!IMPORTANT]
-> نقترح تحديث Azure CLI إلى أحدث إصدار لضمان التوافق مع OpenAI
-> انظر [Documentation](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
+> نقترح عليك تحديث Azure CLI إلى أحدث إصدار لضمان التوافق مع OpenAI
+> انظر [التوثيق](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
 1. إنشاء مجموعة موارد
 
 > [!NOTE]
-> لهذه التعليمات، نستخدم مجموعة الموارد المسماة "semantic-video-search" في شرق الولايات المتحدة.
-> يمكنك تغيير اسم مجموعة الموارد، ولكن عند تغيير موقع الموارد، تحقق من [جدول توفر النموذج](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
+> في هذه التعليمات نستخدم مجموعة الموارد المسماة "semantic-video-search" في شرق الولايات المتحدة.
+> يمكنك تغيير اسم مجموعة الموارد، ولكن عند تغيير موقع الموارد، 
+> تحقق من [جدول توفر النماذج](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
@@ -36,7 +28,7 @@ az cognitiveservices account create --name semantic-video-openai --resource-grou
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. الحصول على النقطة النهائية والمفاتيح للاستخدام في هذا التطبيق
+1. الحصول على نقطة النهاية والمفاتيح لاستخدامها في هذا التطبيق
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -46,8 +38,8 @@ az cognitiveservices account keys list --name semantic-video-openai \
 ```
 
 1. نشر النماذج التالية:
-   - `text-embedding-ada-002` version `2` or greater, named `text-embedding-ada-002`
-   - `gpt-35-turbo` version `0613` or greater, named `gpt-35-turbo`
+   - `text-embedding-ada-002` الإصدار `2` أو أعلى، المسمى `text-embedding-ada-002`
+   - `gpt-4o-mini` المسمى `gpt-4o-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -61,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-4o-mini \
+    --model-name gpt-4o-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -75,12 +66,12 @@ az cognitiveservices account deployment create \
 
 ## متغيرات البيئة
 
-تُطلب متغيرات البيئة التالية لتشغيل نصوص إعداد بيانات النسخ لليوتيوب.
+متغيرات البيئة التالية مطلوبة لتشغيل سكربتات تحضير بيانات النسخ من YouTube.
 
-### على Windows
+### على ويندوز
 
-ننصح بإضافة المتغيرات إلى `user` environment variables.
-`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` for [USER] > `New`.
+يُنصح بإضافة المتغيرات إلى متغيرات بيئة `user`.
+`قائمة ابدأ في ويندوز` > `تحرير متغيرات بيئة النظام` > `متغيرات البيئة` > `متغيرات المستخدم` لـ [USER] > `جديد`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -89,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
-### على Linux وmacOS
+<!-- يمكنك إضافة متغيرات البيئة إلى ملف تعريف PowerShell الخاص بك.
 
-ننصح بإضافة التصديرات التالية إلى ملف `~/.bashrc` or `~/.zshrc`.
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<مفتاح API الخاص بخدمة Azure OpenAI>"
+$env:AZURE_OPENAI_ENDPOINT = "<نقطة نهاية خدمة Azure OpenAI>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<اسم نشر نموذج خدمة Azure OpenAI>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<مفتاح API لمطور Google الخاص بك>"
+``` -->
+
+### على لينكس وmacOS
+
+يُنصح بإضافة الصادرات التالية إلى ملف `~/.bashrc` أو `~/.zshrc`.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -102,8 +102,8 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 ## تثبيت مكتبات Python المطلوبة
 
-1. تثبيت [git client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) إذا لم يكن مثبتًا بالفعل.
-1. من نافذة `Terminal`، استنساخ النموذج إلى مجلد المستودع المفضل لديك.
+1. قم بتثبيت [عميل git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) إذا لم يكن مثبتًا بالفعل.
+1. من نافذة `Terminal`، انسخ النموذج إلى مجلد المستودع المفضل لديك.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -115,9 +115,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    cd semanic-search-openai-embeddings-functions/src/data_prep
    ```
 
-1. إنشاء بيئة Python افتراضية.
+1. أنشئ بيئة Python افتراضية.
 
-    على Windows:
+    على ويندوز:
 
     ```powershell
     python -m venv .venv
@@ -129,9 +129,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
     python3 -m venv .venv
     ```
 
-1. تفعيل بيئة Python الافتراضية.
+1. فعّل بيئة Python الافتراضية.
 
-   على Windows:
+   على ويندوز:
 
    ```powershell
    .venv\Scripts\activate
@@ -143,9 +143,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    source .venv/bin/activate
    ```
 
-1. تثبيت المكتبات المطلوبة.
+1. ثبّت المكتبات المطلوبة.
 
-   على windows:
+   على ويندوز:
 
    ```powershell
    pip install -r requirements.txt
@@ -157,9 +157,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    pip3 install -r requirements.txt
    ```
 
-## تشغيل نصوص إعداد بيانات النسخ لليوتيوب
+## تشغيل سكربتات تحضير بيانات نسخ YouTube
 
-### على windows
+### على ويندوز
 
 ```powershell
 .\transcripts_prepare.ps1
@@ -171,5 +171,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ./transcripts_prepare.sh
 ```
 
-**إخلاء المسؤولية**:  
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية هو المصدر الموثوق. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

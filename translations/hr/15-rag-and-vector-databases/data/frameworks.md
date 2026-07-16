@@ -1,106 +1,99 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b5466bcedc3c75aa35476270362f626a",
-  "translation_date": "2025-05-20T02:09:03+00:00",
-  "source_file": "15-rag-and-vector-databases/data/frameworks.md",
-  "language_code": "hr"
-}
--->
-# Okviri za neuronske mreže
+# Neural Network Frameworks
 
-Kao što smo već naučili, kako bismo mogli učinkovito trenirati neuronske mreže, trebamo učiniti dvije stvari:
+Kao što smo već naučili, da bismo mogli učinkovito trenirati neuronske mreže, potrebno je napraviti dvije stvari:
 
-* Raditi s tenzorima, npr. množiti, zbrajati i izračunavati neke funkcije poput sigmoida ili softmaxa
-* Izračunati gradijente svih izraza kako bismo mogli provesti optimizaciju gradijentnim spuštanjem
+* Raditi s tenzorima, npr. množiti, zbrajati i izračunavati funkcije poput sigmoid ili softmax
+* Izračunati gradijente svih izraza kako bismo mogli provesti optimizaciju gradijentnim spustom
 
-Iako biblioteka `numpy` može obaviti prvi dio, trebamo neki mehanizam za izračunavanje gradijenata. U našem okviru koji smo razvili u prethodnom odjeljku morali smo ručno programirati sve funkcije derivacija unutar metode `backward`, koja provodi unazadno širenje pogreške. Idealno, okvir bi nam trebao pružiti mogućnost izračunavanja gradijenata *bilo kojeg izraza* koji možemo definirati.
+Iako `numpy` biblioteka može obaviti prvi dio, potrebna nam je mehanika za izračun gradijenata. U našem okviru koji smo razvili u prethodnom poglavlju morali smo ručno programirati sve funkcije derivacija unutar metode `backward`, koja provodi backpropagation. Idealno bi bilo da nam okvir omogući izračun gradijenata *bilo kojeg izraza* koji definiramo.
 
-Još jedna važna stvar je mogućnost izvođenja proračuna na GPU-u ili bilo kojoj drugoj specijaliziranoj jedinici za proračun, kao što je TPU. Trening dubokih neuronskih mreža zahtijeva *puno* proračuna, i mogućnost paraleliziranja tih proračuna na GPU-ima je vrlo važna.
+Još jedna važna stvar je mogućnost izvođenja izračuna na GPU-u ili drugim specijaliziranim računalnim jedinicama, poput TPU-a. Trening dubokih neuronskih mreža zahtijeva *puno* izračuna, a mogućnost paralelizacije tih izračuna na GPU-ima je vrlo važna.
 
-> ✅ Pojam 'paralelizirati' znači raspodijeliti proračune na više uređaja.
+> ✅ Pojam 'paralelizirati' znači raspodijeliti izračune na više uređaja.
 
-Trenutno su dva najpopularnija okvira za neuronske mreže: TensorFlow i PyTorch. Oba pružaju niskorazinski API za rad s tenzorima na CPU-u i GPU-u. Povrh niskorazinskog API-ja, postoji i visokorazinski API, nazvan Keras i PyTorch Lightning.
+Trenutno su dva najpopularnija okvira za neuronske mreže: TensorFlow i PyTorch. Oba nude niskorazinski API za rad s tenzorima na CPU-u i GPU-u. Iznad niskorazinskog API-ja nalaze se i viši API-ji, nazvani Keras i PyTorch Lightning.
 
-Niskorazinski API | TensorFlow| PyTorch
---------------|-------------------------------------|--------------------------------
-Visokorazinski API| Keras| PyTorch Lightning
+Niskorazinski API | TensorFlow | PyTorch
+-----------------|------------|---------
+Višerazinski API | Keras      | PyTorch
 
-**Niskorazinski API-ji** u oba okvira omogućuju vam izgradnju takozvanih **proračunskih grafova**. Ovaj graf definira kako izračunati izlaz (obično funkciju gubitka) s danim ulaznim parametrima i može se poslati na proračun na GPU, ako je dostupan. Postoje funkcije za diferenciranje ovog proračunskog grafa i izračunavanje gradijenata, koji se zatim mogu koristiti za optimizaciju parametara modela.
+**Niskorazinski API-ji** u oba okvira omogućuju izgradnju tzv. **računalnih grafova**. Taj graf definira kako izračunati izlaz (obično funkciju gubitka) za zadane ulazne parametre, i može se poslati na izračun na GPU ako je dostupan. Postoje funkcije za diferenciranje tog računalnog grafa i izračun gradijenata, koji se potom koriste za optimizaciju parametara modela.
 
-**Visokorazinski API-ji** uvelike smatraju neuronske mreže **sekvencom slojeva**, i čine konstruiranje većine neuronskih mreža puno lakšim. Trening modela obično zahtijeva pripremu podataka i zatim pozivanje funkcije `fit` da obavi posao.
+**Višerazinski API-ji** tretiraju neuronske mreže kao **niz slojeva** i znatno olakšavaju izgradnju većine neuronskih mreža. Trening modela obično zahtijeva pripremu podataka, a zatim pozivanje funkcije `fit` koja obavlja trening.
 
-Visokorazinski API omogućuje vam brzo konstruiranje tipičnih neuronskih mreža bez brige o puno detalja. Istovremeno, niskorazinski API nudi mnogo više kontrole nad procesom treniranja, i stoga se puno koristi u istraživanju, kada se bavite novim arhitekturama neuronskih mreža.
+Višerazinski API omogućuje brzo sastavljanje tipičnih neuronskih mreža bez brige o mnogim detaljima. Istovremeno, niskorazinski API pruža puno veću kontrolu nad procesom treniranja, zbog čega se često koristi u istraživanjima i radu s novim arhitekturama neuronskih mreža.
 
-Također je važno razumjeti da možete koristiti oba API-ja zajedno, npr. možete razviti vlastitu arhitekturu slojeva mreže koristeći niskorazinski API, a zatim je koristiti unutar veće mreže konstruirane i trenirane s visokorazinskim API-jem. Ili možete definirati mrežu koristeći visokorazinski API kao sekvencu slojeva, a zatim koristiti vlastitu niskorazinsku petlju treniranja za provođenje optimizacije. Oba API-ja koriste iste osnovne koncepte i dizajnirana su da dobro surađuju.
+Važno je razumjeti da se oba API-ja mogu koristiti zajedno, npr. možete razviti vlastitu arhitekturu sloja koristeći niskorazinski API, a zatim je koristiti unutar veće mreže sastavljene i trenirane višerazinskim API-jem. Ili možete definirati mrežu kao niz slojeva višerazinskim API-jem, a zatim koristiti vlastitu niskorazinsku petlju treniranja za optimizaciju. Oba API-ja dijele iste osnovne koncepte i dizajnirani su da dobro surađuju.
 
 ## Učenje
 
-U ovom tečaju nudimo većinu sadržaja i za PyTorch i za TensorFlow. Možete odabrati svoj preferirani okvir i proći samo odgovarajuće bilježnice. Ako niste sigurni koji okvir odabrati, pročitajte neke rasprave na internetu o **PyTorch vs. TensorFlow**. Također možete pogledati oba okvira kako biste bolje razumjeli.
+U ovom tečaju nudimo većinu sadržaja za PyTorch i TensorFlow. Možete odabrati okvir koji vam više odgovara i pratiti samo pripadajuće bilježnice. Ako niste sigurni koji okvir odabrati, pročitajte rasprave na internetu o **PyTorch vs. TensorFlow**. Također možete pogledati oba okvira kako biste bolje razumjeli razlike.
 
-Gdje god je moguće, koristit ćemo visokorazinske API-je radi jednostavnosti. Međutim, vjerujemo da je važno razumjeti kako neuronske mreže rade od temelja, stoga na početku počinjemo raditi s niskorazinskim API-jem i tenzorima. Međutim, ako želite brzo početi i ne želite trošiti puno vremena na učenje tih detalja, možete ih preskočiti i odmah prijeći na bilježnice s visokorazinskim API-jem.
+Kad god je moguće, koristit ćemo višerazinske API-je radi jednostavnosti. No smatramo da je važno razumjeti kako neuronske mreže funkcioniraju od samih početaka, pa stoga u početku radimo s niskorazinskim API-jem i tenzorima. Ako želite brzo krenuti i ne želite trošiti puno vremena na detalje, možete preskočiti taj dio i odmah prijeći na bilježnice s višerazinskim API-jem.
 
-## ✍️ Vježbe: Okviri
+## ✍️ Vježbe: Frameworks
 
-Nastavite svoje učenje u sljedećim bilježnicama:
+Nastavite s učenjem u sljedećim bilježnicama:
 
-Niskorazinski API | TensorFlow+Keras Bilježnica | PyTorch
---------------|-------------------------------------|--------------------------------
-Visokorazinski API| Keras | *PyTorch Lightning*
+Niskorazinski API | TensorFlow+Keras bilježnica | PyTorch
+-----------------|-------------------------------|---------
+Višerazinski API | Keras                         | *PyTorch Lightning*
 
-Nakon što svladate okvire, ponovimo pojam prenaučenosti.
+Nakon što savladate okvire, ponovimo pojam overfittinga.
 
-# Prenaučenost
+# Overfitting
 
-Prenaučenost je izuzetno važan koncept u strojnom učenju, i vrlo je važno točno ga shvatiti!
+Overfitting je iznimno važan pojam u strojnome učenju i važno ga je pravilno razumjeti!
 
-Razmotrite sljedeći problem aproksimacije 5 točaka (predstavljenih s `x` na grafovima ispod):
+Razmotrimo problem aproksimacije 5 točaka (označenih s `x` na donjim grafovima):
 
-!linear | prenaučenost
+!linear | overfit
 -------------------------|--------------------------
 **Linearni model, 2 parametra** | **Nelinearni model, 7 parametara**
 Greška na treningu = 5.3 | Greška na treningu = 0
 Greška na validaciji = 5.1 | Greška na validaciji = 20
 
-* S lijeve strane vidimo dobru aproksimaciju pravom linijom. Budući da je broj parametara adekvatan, model ispravno shvaća distribuciju točaka.
-* S desne strane, model je previše moćan. Budući da imamo samo 5 točaka, a model ima 7 parametara, može se prilagoditi tako da prolazi kroz sve točke, čineći grešku na treningu 0. Međutim, to sprječava model da razumije ispravan uzorak podataka, stoga je greška na validaciji vrlo visoka.
+* S lijeve strane vidimo dobru aproksimaciju pravom linijom. Budući da je broj parametara primjeren, model dobro hvata raspored točaka.
+* S desne strane model je premoćan. Budući da imamo samo 5 točaka, a model ima 7 parametara, može se prilagoditi tako da prođe kroz sve točke, čineći grešku na treningu 0. Međutim, to sprječava model da razumije pravi obrazac podataka, zbog čega je greška na validaciji vrlo visoka.
 
-Vrlo je važno postići ispravnu ravnotežu između bogatstva modela (broja parametara) i broja uzoraka za trening.
+Vrlo je važno pronaći pravi balans između složenosti modela (broja parametara) i broja uzoraka za trening.
 
-## Zašto dolazi do prenaučenosti
+## Zašto dolazi do overfittinga
 
   * Nedovoljno podataka za trening
-  * Previše moćan model
+  * Premoćan model
   * Previše šuma u ulaznim podacima
 
-## Kako otkriti prenaučenost
+## Kako otkriti overfitting
 
-Kao što možete vidjeti iz gornjeg grafa, prenaučenost se može otkriti vrlo niskom greškom na treningu i visokom greškom na validaciji. Normalno, tijekom treninga vidjet ćemo kako greške na treningu i validaciji počinju opadati, a zatim u nekom trenutku greška na validaciji može prestati opadati i početi rasti. Ovo će biti znak prenaučenosti i pokazatelj da bismo vjerojatno trebali zaustaviti trening u tom trenutku (ili barem napraviti snimku modela).
+Kao što se vidi na gornjem grafu, overfitting se može prepoznati po vrlo niskoj grešci na treningu i visokoj grešci na validaciji. Tijekom treniranja obično vidimo da se greške na treningu i validaciji smanjuju, a zatim u nekom trenutku greška na validaciji prestane padati i počne rasti. To je znak overfittinga i pokazatelj da bismo vjerojatno trebali prekinuti treniranje u tom trenutku (ili barem napraviti snimku modela).
 
-## Kako spriječiti prenaučenost
+overfitting
 
-Ako vidite da dolazi do prenaučenosti, možete učiniti jedno od sljedećeg:
+## Kako spriječiti overfitting
 
- * Povećajte količinu podataka za trening
- * Smanjite složenost modela
- * Koristite neku tehniku regularizacije, kao što je Dropout, koju ćemo razmotriti kasnije.
+Ako primijetite da dolazi do overfittinga, možete učiniti jedno od sljedećeg:
 
-## Prenaučenost i kompromis pristranosti-varijance
+ * Povećati količinu podataka za trening
+ * Smanjiti složenost modela
+ * Koristiti neku tehniku regularizacije, poput Dropout-a, koju ćemo kasnije razmotriti.
 
-Prenaučenost je zapravo slučaj općenitijeg problema u statistici nazvanog kompromis pristranosti-varijance. Ako razmotrimo moguće izvore pogreške u našem modelu, možemo vidjeti dvije vrste pogrešaka:
+## Overfitting i kompromis između pristranosti i varijance
 
-* **Pogreške pristranosti** uzrokovane su time što naš algoritam ne može ispravno uhvatiti odnos između podataka za trening. To može biti rezultat činjenice da naš model nije dovoljno moćan (**nedovoljno učenje**).
-* **Pogreške varijance**, koje su uzrokovane time što model aproksimira šum u ulaznim podacima umjesto smislenog odnosa (**prenaučenost**).
+Overfitting je zapravo poseban slučaj općeg problema u statistici nazvanog kompromis između pristranosti i varijance (Bias-Variance Tradeoff). Ako razmotrimo moguće izvore pogreške u našem modelu, možemo razlikovati dvije vrste pogrešaka:
 
-Tijekom treninga, pogreška pristranosti opada (kako naš model uči aproksimirati podatke), a pogreška varijance raste. Važno je zaustaviti trening - bilo ručno (kada otkrijemo prenaučenost) ili automatski (uvođenjem regularizacije) - kako bismo spriječili prenaučenost.
+* **Pogreške pristranosti (Bias errors)** nastaju kada naš algoritam ne može pravilno uhvatiti odnos u podacima za trening. To može biti zato što model nije dovoljno moćan (**underfitting**).
+* **Pogreške varijance (Variance errors)** nastaju kada model aproksimira šum u ulaznim podacima umjesto stvarnog odnosa (**overfitting**).
+
+Tijekom treniranja, pogreška pristranosti opada (kako model uči podatke), a pogreška varijance raste. Važno je prekinuti treniranje – ručno (kad otkrijemo overfitting) ili automatski (uvođenjem regularizacije) – kako bismo spriječili overfitting.
 
 ## Zaključak
 
-U ovoj lekciji naučili ste o razlikama između raznih API-ja za dva najpopularnija AI okvira, TensorFlow i PyTorch. Osim toga, naučili ste o vrlo važnoj temi, prenaučenosti.
+U ovoj lekciji ste naučili o razlikama između različitih API-ja za dva najpopularnija AI okvira, TensorFlow i PyTorch. Također ste upoznati s vrlo važnom temom, overfittingom.
 
 ## 🚀 Izazov
 
-U pratećim bilježnicama pronaći ćete 'zadaci' na dnu; prođite kroz bilježnice i dovršite zadatke.
+U pratećim bilježnicama naći ćete 'zadace' na dnu; radite kroz bilježnice i dovršite zadatke.
 
 ## Pregled i samostalno učenje
 
@@ -108,16 +101,16 @@ Istražite sljedeće teme:
 
 - TensorFlow
 - PyTorch
-- Prenaučenost
+- Overfitting
 
 Postavite si sljedeća pitanja:
 
 - Koja je razlika između TensorFlow i PyTorch?
-- Koja je razlika između prenaučenosti i nedovoljnog učenja?
+- Koja je razlika između overfittinga i underfittinga?
 
 ## Zadatak
 
-U ovom laboratoriju traži se da riješite dva problema klasifikacije koristeći jednostruke i višeslojne potpuno povezane mreže koristeći PyTorch ili TensorFlow.
+U ovom laboratoriju trebate riješiti dva problema klasifikacije koristeći jednoslojne i višeslojne potpuno povezane mreže koristeći PyTorch ili TensorFlow.
 
 **Odricanje od odgovornosti**:  
-Ovaj dokument je preveden korištenjem AI usluge prevođenja [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne odgovaramo za nesporazume ili pogrešne interpretacije proizašle iz korištenja ovog prijevoda.
+Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazuma ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.

@@ -1,56 +1,47 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "59021c5f419d3feda19075910a74280a",
-  "translation_date": "2025-05-20T02:38:02+00:00",
-  "source_file": "15-rag-and-vector-databases/data/perceptron.md",
-  "language_code": "fi"
-}
--->
-# Johdatus neuroverkkoihin: Perceptron
+# Johdanto neuroverkkoihin: Perceptroni
 
-Yksi ensimmäisistä yrityksistä toteuttaa jotain nykyaikaisen neuroverkon kaltaista tehtiin Frank Rosenblattin toimesta Cornell Aeronautical Laboratoryssa vuonna 1957. Se oli laitteistototeutus nimeltä "Mark-1", joka oli suunniteltu tunnistamaan yksinkertaisia geometrisia kuvioita, kuten kolmioita, neliöitä ja ympyröitä.
+Yksi ensimmäisistä yrityksistä toteuttaa jotain nykyaikaisen neuroverkon kaltaista tehtiin vuonna 1957 Frank Rosenblattin toimesta Cornell Aeronautical Laboratoryssa. Se oli laitteistopohjainen toteutus nimeltä "Mark-1", joka oli suunniteltu tunnistamaan primitiivisiä geometrisia kuvioita, kuten kolmioita, neliöitä ja ympyröitä.
 
 |      |      |
 |--------------|-----------|
-|<img src='images/Rosenblatt-wikipedia.jpg' alt='Frank Rosenblatt'/> | <img src='images/Mark_I_perceptron_wikipedia.jpg' alt='The Mark 1 Perceptron' />|
+|<img src='../../../../translated_images/fi/Rosenblatt-wikipedia.1d205667acda28c0.webp' alt='Frank Rosenblatt'/> | <img src='../../../../translated_images/fi/Mark_I_perceptron_wikipedia.434e46ca39e2be80.webp' alt='The Mark 1 Perceptron' />|
 
 > Kuvia Wikipediasta
 
-Syöttökuva esitettiin 20x20 valokennorivistöllä, joten neuroverkossa oli 400 syötettä ja yksi binaarinen lähtö. Yksinkertainen verkko sisälsi yhden neuronin, jota kutsutaan myös **kynnyksen logiikkayksiköksi**. Neuroverkon painot toimivat kuin potentiometrit, jotka vaativat manuaalista säätämistä harjoitusvaiheen aikana.
+Syötekuva esitettiin 20x20 valosolutaulukolla, joten neuroverkolla oli 400 syötettä ja yksi binäärinen lähtö. Yksinkertainen verkko sisälsi yhden neuronin, jota kutsutaan myös **kynnyslogiikkayksiköksi**. Neuroverkon painot toimivat kuin potentiometrit, joita säädettiin manuaalisesti harjoitteluvaiheessa.
 
-> ✅ Potentiometri on laite, jonka avulla käyttäjä voi säätää piirin vastusta.
+> ✅ Potentiometri on laite, joka mahdollistaa piirin vastuksen säätämisen käyttäjän toimesta.
 
-> New York Times kirjoitti tuolloin perceptronista: *sähköisen tietokoneen alkio, jonka [laivasto] odottaa voivan kävellä, puhua, nähdä, kirjoittaa, lisääntyä ja olla tietoinen olemassaolostaan.*
+> The New York Times kirjoitti tuolloin perceptronista: *elektronisen tietokoneen alkio, jonka [laivasto] odottaa pystyvän kävelemään, puhumaan, näkemään, kirjoittamaan, lisääntymään ja tiedostamaan olemassaolonsa.*
 
 ## Perceptron-malli
 
-Oletetaan, että mallissamme on N ominaisuutta, jolloin syöttövektori olisi N:n kokoinen vektori. Perceptron on **binaarinen luokittelumalli**, eli se voi erottaa kahdenlaisia syöttödataa. Oletamme, että jokaiselle syöttövektorille x perceptronimme tuotos olisi joko +1 tai -1 riippuen luokasta. Tuotos lasketaan kaavalla:
+Oletetaan, että mallissamme on N ominaisuutta, jolloin syötevektori on kooltaan N. Perceptron on **binääriluokittelumalli**, eli se pystyy erottamaan kaksi syöteluokkaa toisistaan. Oletamme, että jokaiselle syötevektorille x perceptronin lähtö on joko +1 tai -1 luokasta riippuen. Lähtö lasketaan kaavalla:
 
 y(x) = f(w<sup>T</sup>x)
 
-missä f on askelaktivointifunktio
+missä f on askelaktivaatiofunktio
 
 ## Perceptronin opettaminen
 
-Perceptronin opettamiseksi meidän täytyy löytää painojen vektori w, joka luokittelee suurimman osan arvoista oikein, eli tuottaa pienimmän **virheen**. Tämä virhe määritellään **perceptron-kriteerillä** seuraavalla tavalla:
+Perceptronin opettamiseksi meidän täytyy löytää painovektori w, joka luokittelee suurimman osan arvoista oikein, eli tuottaa pienimmän **virheen**. Tämä virhe määritellään **perceptronin kriteerinä** seuraavasti:
 
 E(w) = -∑w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
 
 missä:
 
-* summa otetaan niistä harjoitusdatan pisteistä i, jotka tuottavat väärän luokittelun
-* x<sub>i</sub> on syöttödata ja t<sub>i</sub> on joko -1 tai +1 negatiivisille ja positiivisille esimerkeille vastaavasti.
+* summa lasketaan niille harjoitusdatan pisteille i, jotka johtavat väärään luokitteluun
+* x<sub>i</sub> on syötedata ja t<sub>i</sub> on joko -1 tai +1 negatiivisille ja positiivisille esimerkeille vastaavasti.
 
-Tätä kriteeriä pidetään painojen w funktiona, ja meidän täytyy minimoida se. Usein käytetään menetelmää nimeltä **gradienttilasku**, jossa aloitetaan joillakin alkuperäisillä painoilla w<sup>(0)</sup>, ja sitten jokaisessa vaiheessa päivitetään painot kaavan mukaan:
+Tätä kriteeriä pidetään painojen w funktiona, ja meidän täytyy minimoida se. Usein käytetään menetelmää nimeltä **gradienttilasku**, jossa aloitetaan jollain alkuarvolla w<sup>(0)</sup> ja päivitetään painoja jokaisella askeleella kaavan mukaisesti:
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> - η∇E(w)
 
-Tässä η on niin sanottu **oppimisnopeus**, ja ∇E(w) tarkoittaa E:n **gradienttia**. Kun olemme laskeneet gradientin, päädymme seuraavaan:
+Tässä η on niin kutsuttu **oppimisnopeus** ja ∇E(w) tarkoittaa E:n **gradienttia**. Kun gradientti on laskettu, päädymme muotoon
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> + ∑ηx<sub>i</sub>t<sub>i</sub>
 
-Algoritmi Pythonissa näyttää tältä:
+Algoritmi Pythonilla näyttää tältä:
 
 ```python
 def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
@@ -74,24 +65,25 @@ def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
 
 ## Yhteenveto
 
-Tässä oppitunnissa opit perceptronista, joka on binaarinen luokittelumalli, ja kuinka opettaa sitä painojen vektorin avulla.
+Tässä oppitunnissa opit perceptronista, joka on binääriluokittelumalli, ja miten sitä opetetaan käyttämällä painovektoria.
 
 ## 🚀 Haaste
 
-Jos haluat kokeilla oman perceptronin rakentamista, kokeile tätä Microsoft Learn -laboratoriota, joka käyttää Azure ML designeria.
+Jos haluat kokeilla oman perceptronin rakentamista, kokeile tätä Microsoft Learn -labraa, joka käyttää Azure ML designeria
 
-## Katsaus & Itseopiskelu
 
-Jos haluat nähdä, kuinka voimme käyttää perceptronia lelumallin sekä todellisten ongelmien ratkaisemiseen, ja jatkaa oppimista - siirry Perceptron-muistikirjaan.
+## Kertaus & Itsenäinen opiskelu
+
+Nähdäksesi, miten perceptronia voidaan käyttää leikkimielisen ongelman sekä todellisten ongelmien ratkaisuun ja jatkaaksesi oppimista - siirry Perceptron-muistikirjaan.
 
 Tässä on myös mielenkiintoinen artikkeli perceptroneista.
 
 ## Tehtävä
 
-Tässä oppitunnissa olemme toteuttaneet perceptronin binaarisen luokittelutehtävän suorittamiseen, ja olemme käyttäneet sitä kahden käsin kirjoitetun numeron luokitteluun. Tässä laboratoriossa sinua pyydetään ratkaisemaan numeron luokittelun ongelma kokonaan, eli määrittämään, mikä numero todennäköisimmin vastaa annettua kuvaa.
+Tässä oppitunnissa olemme toteuttaneet perceptronin binääriluokittelutehtävään ja käyttäneet sitä kahden käsinkirjoitetun numeron luokitteluun. Tässä labrassa sinun tulee ratkaista numeroluokittelun ongelma kokonaisuudessaan, eli määrittää, mikä numero todennäköisimmin vastaa annettua kuvaa.
 
 * Ohjeet
 * Muistikirja
 
 **Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi katsoa auktoritatiiviseksi lähteeksi. Kriittisen tiedon kohdalla suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinkäsityksistä tai virhetulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattikäännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää virallisena lähteenä. Tärkeissä tiedoissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.

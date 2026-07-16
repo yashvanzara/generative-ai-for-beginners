@@ -1,71 +1,62 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "11f03c81f190d9cbafd0f977dcbede6c",
-  "translation_date": "2025-05-20T07:22:26+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "pl"
-}
--->
-[![Open Source Models](../../../translated_images/17-lesson-banner.85938ffe06e157e1dfc9ae2fcf0de326892e71c463f62b397291ad54bd8e9602.pl.png)](https://aka.ms/gen-ai-lesson17-gh?WT.mc_id=academic-105485-koreyst)
+[![Open Source Models](../../../translated_images/pl/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## Wprowadzenie
 
-Agenci AI to ekscytujący rozwój w dziedzinie Generative AI, umożliwiający ewolucję dużych modeli językowych (LLM) z asystentów w agentów zdolnych do podejmowania działań. Frameworki Agentów AI pozwalają deweloperom tworzyć aplikacje, które dają LLM dostęp do narzędzi i zarządzania stanem. Te frameworki zwiększają również widoczność, umożliwiając użytkownikom i deweloperom monitorowanie działań planowanych przez LLM, co poprawia zarządzanie doświadczeniami.
+Agenci AI reprezentują ekscytujący rozwój w generatywnej sztucznej inteligencji, umożliwiając dużym modelom językowym (LLMs) ewolucję z asystentów do agentów zdolnych do podejmowania działań. Ramy AI Agent umożliwiają programistom tworzenie aplikacji, które dają LLM dostęp do narzędzi i zarządzania stanem. Te ramy również zwiększają przejrzystość, pozwalając użytkownikom i programistom monitorować działania planowane przez LLM, co poprawia zarządzanie doświadczeniem.
 
 Lekcja obejmie następujące obszary:
 
-- Zrozumienie, czym jest Agent AI - Czym dokładnie jest Agent AI?
-- Eksploracja czterech różnych frameworków Agentów AI - Co je wyróżnia?
-- Zastosowanie tych Agentów AI do różnych przypadków użycia - Kiedy powinniśmy używać Agentów AI?
+- Zrozumienie, czym jest AI Agent - Czym dokładnie jest AI Agent?
+- Przegląd pięciu różnych ram AI Agent - Co je wyróżnia?
+- Zastosowanie tych AI Agentów do różnych przypadków użycia - Kiedy powinniśmy korzystać z AI Agentów?
 
 ## Cele nauki
 
 Po ukończeniu tej lekcji będziesz w stanie:
 
-- Wyjaśnić, czym są Agenci AI i jak można ich używać.
-- Zrozumieć różnice między niektórymi popularnymi frameworkami Agentów AI i jak się różnią.
-- Zrozumieć, jak działają Agenci AI, aby móc budować z nimi aplikacje.
+- Wyjaśnić, czym są AI Agenci i jak można ich używać.
+- Zrozumieć różnice między niektórymi popularnymi ramami AI Agent i czym się różnią.
+- Rozumieć, jak działają AI Agenci, aby tworzyć z nimi aplikacje.
 
-## Czym są Agenci AI?
+## Czym są AI Agenci?
 
-Agenci AI to bardzo ekscytujące pole w świecie Generative AI. Z tym entuzjazmem czasami pojawia się zamieszanie dotyczące terminów i ich zastosowania. Aby uprościć sprawę i uwzględnić większość narzędzi, które odnoszą się do Agentów AI, będziemy używać następującej definicji:
+AI Agenci to bardzo ekscytująca dziedzina w świecie Generatywnej AI. Z tą ekscytacją czasem wiąże się zamieszanie co do terminów i ich zastosowań. Aby zachować prostotę i uwzględnić większość narzędzi odnoszących się do AI Agentów, użyjemy tej definicji:
 
-Agenci AI pozwalają dużym modelom językowym (LLM) wykonywać zadania, dając im dostęp do **stanu** i **narzędzi**.
+AI Agents pozwalają dużym modelom językowym (LLMs) wykonywać zadania, dając im dostęp do **stanu** i **narzędzi**.
 
-![Agent Model](../../../translated_images/what-agent.61a7315e4b722e06561f6c93e682a51357308b53884f00af289b5a81e3e65242.pl.png)
+![Agent Model](../../../translated_images/pl/what-agent.21f2893bdfd01e6a.webp)
 
-Zdefiniujmy te pojęcia:
+Zdefiniujmy te terminy:
 
-**Duże modele językowe** - To modele, o których mowa w całym tym kursie, takie jak GPT-3.5, GPT-4, Llama-2, itp.
+**Duże Modele Językowe** - To modele, o których mowa w całym kursie, takie jak GPT-3.5, GPT-4, Llama-2 itd.
 
-**Stan** - Odnosi się do kontekstu, w którym działa LLM. LLM używa kontekstu swoich poprzednich działań oraz bieżącego kontekstu, kierując swoje decyzje dotyczące kolejnych działań. Frameworki Agentów AI umożliwiają deweloperom łatwiejsze utrzymanie tego kontekstu.
+**Stan** - Odnosi się do kontekstu, w którym pracuje LLM. LLM używa kontekstu swoich poprzednich działań oraz bieżącego kontekstu, kierując podejmowaniem decyzji dla kolejnych działań. Ramy AI Agent ułatwiają programistom utrzymanie tego kontekstu.
 
-**Narzędzia** - Aby wykonać zadanie, które użytkownik zażądał, a LLM zaplanował, LLM potrzebuje dostępu do narzędzi. Przykłady narzędzi to baza danych, API, zewnętrzna aplikacja, a nawet inny LLM!
+**Narzędzia** - Aby wykonać zadanie, o które prosi użytkownik i które LLM zaplanował, LLM potrzebuje dostępu do narzędzi. Przykładami narzędzi mogą być baza danych, API, zewnętrzna aplikacja lub nawet inny LLM!
 
-Te definicje, miejmy nadzieję, dadzą ci solidne podstawy, gdy będziemy przyglądać się, jak są one implementowane. Przyjrzyjmy się kilku różnym frameworkom Agentów AI:
+Te definicje mają nadzieję, że dadzą ci solidne podstawy w dalszej części, gdy przyjrzymy się, jak są one implementowane. Sprawdźmy kilka różnych ram AI Agent:
 
-## Agenci LangChain
+## LangChain Agents
 
-[LangChain Agents](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) to implementacja definicji, które podaliśmy powyżej.
+[LangChain Agents](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) to implementacja powyższych definicji.
 
-Aby zarządzać **stanem**, używa wbudowanej funkcji zwanej `AgentExecutor`. Akceptuje ona zdefiniowane `agent` oraz `tools`, które są dla niej dostępne.
+Aby zarządzać **stanem**, używa wbudowanej funkcji zwanej `AgentExecutor`. Przyjmuje ona zdefiniowanego `agenta` i dostępne dla niego `narzędzia`.
 
-`Agent Executor` przechowuje również historię czatu, aby zapewnić kontekst czatu.
+`Agent Executor` także przechowuje historię czatu, aby zapewnić kontekst rozmowy.
 
-![Langchain Agents](../../../translated_images/langchain-agents.4709b559c14be8903a59abf4ebef43916a23fac43924b133a7552121ff5e6730.pl.png)
+![Langchain Agents](../../../translated_images/pl/langchain-agents.edcc55b5d5c43716.webp)
 
-LangChain oferuje [katalog narzędzi](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst), które można zaimportować do swojej aplikacji, w której LLM może uzyskać dostęp. Są one tworzone przez społeczność i zespół LangChain.
+LangChain oferuje [katalog narzędzi](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst), które można zaimportować do swojej aplikacji, do których LLM może mieć dostęp. Są one tworzone przez społeczność i zespół LangChain.
 
 Możesz następnie zdefiniować te narzędzia i przekazać je do `Agent Executor`.
 
-Widoczność to kolejny ważny aspekt, gdy mówimy o Agentach AI. Ważne jest, aby deweloperzy aplikacji rozumieli, z którego narzędzia korzysta LLM i dlaczego. W tym celu zespół LangChain opracował LangSmith.
+Widoczność to kolejny ważny aspekt, gdy mówimy o AI Agentach. Ważne jest, aby programiści aplikacji rozumieli, które narzędzie LLM używa i dlaczego. W tym celu zespół LangChain opracował LangSmith.
 
 ## AutoGen
 
-Kolejnym frameworkiem Agentów AI, o którym będziemy rozmawiać, jest [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). Głównym celem AutoGen są rozmowy. Agenci są zarówno **rozmowni**, jak i **dostosowywalni**.
+Kolejną ramą AI Agent, którą omówimy, jest [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). Głównym celem AutoGen są konwersacje. Agenci są zarówno **rozmowni**, jak i **dostosowywalni**.
 
-**Rozmowni -** LLM mogą rozpocząć i kontynuować rozmowę z innym LLM, aby ukończyć zadanie. Odbywa się to poprzez tworzenie `AssistantAgents` i nadawanie im określonej wiadomości systemowej.
+**Rozmowni -** LLM mogą rozpocząć i kontynuować rozmowę z innym LLM, aby wykonać zadanie. Odbywa się to poprzez tworzenie `AssistantAgents` i nadawanie im konkretnej wiadomości systemowej.
 
 ```python
 
@@ -73,7 +64,7 @@ autogen.AssistantAgent( name="Coder", llm_config=llm_config, ) pm = autogen.Assi
 
 ```
 
-**Dostosowywalni** - Agenci mogą być definiowani nie tylko jako LLM, ale również jako użytkownik lub narzędzie. Jako deweloper, możesz zdefiniować `UserProxyAgent`, który jest odpowiedzialny za interakcję z użytkownikiem w celu uzyskania informacji zwrotnej przy wykonywaniu zadania. Ta informacja zwrotna może kontynuować wykonywanie zadania lub je zatrzymać.
+**Dostosowywalni** - Agenci mogą być definiowani nie tylko jako LLM, ale także jako użytkownik lub narzędzie. Jako programista możesz zdefiniować `UserProxyAgent`, który odpowiada za interakcję z użytkownikiem w celu uzyskania opinii przy wykonywaniu zadania. Ta opinia może kontynuować wykonanie zadania lub je zatrzymać.
 
 ```python
 user_proxy = UserProxyAgent(name="user_proxy")
@@ -81,30 +72,30 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 ### Stan i Narzędzia
 
-Aby zmienić i zarządzać stanem, asystent Agent generuje kod Python, aby ukończyć zadanie.
+Aby zmieniać i zarządzać stanem, agent asystent generuje kod Pythona do wykonania zadania.
 
-Oto przykład procesu:
+Oto przykład tego procesu:
 
-![AutoGen](../../../translated_images/autogen.8ac57409019150ec5a17c6381a92863116b19acce02604b4bf5681225dee62eb.pl.png)
+![AutoGen](../../../translated_images/pl/autogen.dee9a25a45fde584.webp)
 
-#### LLM Zdefiniowany z Wiadomością Systemową
+#### LLM zdefiniowany wiadomością systemową
 
 ```python
 system_message="For weather related tasks, only use the functions you have been provided with. Reply TERMINATE when the task is done."
 ```
 
-Te wiadomości systemowe kierują tym konkretnym LLM, które funkcje są istotne dla jego zadania. Pamiętaj, że z AutoGen możesz mieć wiele zdefiniowanych AssistantAgents z różnymi wiadomościami systemowymi.
+Ta wiadomość systemowa kieruje tym konkretnym LLM, które funkcje są istotne dla jego zadania. Pamiętaj, że w AutoGen możesz mieć wielu zdefiniowanych AssistantAgents z różnymi wiadomościami systemowymi.
 
-#### Czat Rozpoczyna Użytkownik
+#### Rozmowa rozpoczyna się użytkownik
 
 ```python
 user_proxy.initiate_chat( chatbot, message="I am planning a trip to NYC next week, can you help me pick out what to wear? ", )
 
 ```
 
-Ta wiadomość od user_proxy (Człowieka) rozpoczyna proces Agenta, aby zbadać możliwe funkcje, które powinien wykonać.
+Ta wiadomość od user_proxy (Człowieka) rozpocznie proces agenta do zbadania możliwych funkcji, które powinien wykonać.
 
-#### Funkcja jest Wykonywana
+#### Wywołanie funkcji
 
 ```bash
 chatbot (to user_proxy):
@@ -115,21 +106,103 @@ chatbot (to user_proxy):
 
 ```
 
-Gdy początkowy czat zostanie przetworzony, Agent wyśle sugerowane narzędzie do wywołania. W tym przypadku jest to funkcja nazwana `get_weather`. Depending on your configuration, this function can be automatically executed and read by the Agent or can be executed based on user input.
+Po przetworzeniu początkowej rozmowy agent wyśle proponowane narzędzie do wywołania. W tym przypadku jest to funkcja o nazwie `get_weather`. W zależności od konfiguracji ta funkcja może być automatycznie wykonywana i odczytywana przez agenta lub wywoływana na podstawie wejścia użytkownika.
 
-You can find a list of [AutoGen code samples](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) to further explore how to get started building.
+Możesz znaleźć listę [przykładów kodu AutoGen](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst), aby dalej eksplorować, jak zacząć budować.
+
+## Microsoft Agent Framework
+
+[Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst) to otwartoźródłowe SDK Microsoft do tworzenia AI Agentów i systemów wieloagentowych w **Python** i **.NET**. Łączy ono zalety dwóch wcześniejszych projektów Microsoft — funkcje korporacyjne **Semantic Kernel** i orkiestrację wieloagentową **AutoGen** — w jedną, wspieraną ramę. Jeśli dziś zaczynasz nowy projekt agenta, to jest zalecany następca AutoGen.
+
+Framework skalowalny jest od pojedynczego **agenta czatu** aż po złożone **workflowy wieloagentowe**, a także integruje się bezpośrednio z Microsoft Foundry, Azure OpenAI i OpenAI. Zapewnia też wbudowaną obserwowalność przez OpenTelemetry, abyś mógł dokładnie śledzić, co robią twoi agenci.
+
+### Stan i Narzędzia
+
+**Stan** - Framework zarządza kontekstem rozmowy za pomocą **wątków**. Agent śledzi historię wiadomości (żądania użytkownika, wywołania narzędzi i ich wyniki), więc każda kolejna tura opiera się na poprzednich. Wątki mogą być również zapisywane, co pozwala na wstrzymanie i wznowienie rozmowy.
+
+**Narzędzia** - Przekazujesz agentowi narzędzia, przekazując zwykłe funkcje Pythona. Typowane parametry są automatycznie zamieniane na schemat, więc model wie, jak i kiedy je wywoływać (function calling). Framework obsługuje też serwery Model Context Protocol (MCP) oraz narzędzia hostowane, takie jak interpreter kodu.
+
+Oto przykład pojedynczego agenta z niestandardowym narzędziem:
+
+```python
+import asyncio
+from typing import Annotated
+
+from pydantic import Field
+from agent_framework import Agent
+from agent_framework.openai import OpenAIChatClient
+
+
+def get_weather(
+    location: Annotated[str, Field(description="The location to get the weather for.")],
+) -> str:
+    """Get the weather for a given location."""
+    return f"The weather in {location} is sunny with a high of 22°C."
+
+
+async def main():
+    agent = Agent(
+        client=OpenAIChatClient(),
+        instructions="You are a helpful assistant that can answer weather questions.",
+        tools=[get_weather],
+    )
+
+    response = await agent.run("What's the weather in Amsterdam?")
+    print(response)
+
+
+asyncio.run(main())
+```
+
+Aby połączyć się z Azure OpenAI w Microsoft Foundry, przekaż swoje punkt końcowy i dane uwierzytelniające do klienta:
+
+```python
+from azure.identity.aio import AzureCliCredential
+from agent_framework.openai import OpenAIChatClient
+
+client = OpenAIChatClient(
+    model="my-gpt-4o-deployment",
+    azure_endpoint="https://my-resource.openai.azure.com",
+    credential=AzureCliCredential(),
+)
+```
+
+### Workflowy wieloagentowe
+
+To, co wyróżnia framework, to orkiestracja kilku agentów razem. Na przykład możesz uruchamiać agentów jeden po drugim (każdy przekazuje swój kontekst następnemu) lub rozgałęziać się do kilku agentów równolegle i agregować ich wyniki:
+
+```python
+from agent_framework.orchestrations import SequentialBuilder, ConcurrentBuilder
+
+# Uruchom agentów kolejno, przekazując kontekst rozmowy wzdłuż łańcucha
+sequential = SequentialBuilder(participants=[researcher, writer, editor]).build()
+
+# Rozgałęź do agentów równolegle, a następnie zbierz ich odpowiedzi
+concurrent = ConcurrentBuilder(participants=[analyst_a, analyst_b, analyst_c]).build()
+```
+
+Aby zainstalować framework i zacząć:
+
+```bash
+pip install agent-framework-core
+# Opcjonalne integracje
+pip install agent-framework-openai       # OpenAI i Azure OpenAI
+pip install agent-framework-foundry      # Microsoft Foundry
+```
+
+Możesz zgłębić więcej w [repozytorium Microsoft Agent Framework](https://github.com/microsoft/agent-framework?WT.mc_id=academic-105485-koreyst) oraz w [oficjalnej dokumentacji](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst).
 
 ## Taskweaver
 
-The next agent framework we will explore is [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). It is known as a "code-first" agent because instead of working strictly with `strings` , it can work with DataFrames in Python. This becomes extremely useful for data analysis and generation tasks. This can be things like creating graphs and charts or generating random numbers.
+Kolejną ramą agenta, którą omówimy, jest [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). Znany jest jako agent „pierwszeństwo kodu”, ponieważ zamiast pracować wyłącznie ze `stringami`, może operować na DataFrame'ach w Pythonie. Jest to niezwykle przydatne w zadaniach analizy danych i generowania danych. Mogą to być rzeczy takie jak tworzenie wykresów i diagramów lub generowanie losowych liczb.
 
-### State and Tools
+### Stan i Narzędzia
 
-To manage the state of the conversation, TaskWeaver uses the concept of a `Planner`. The `Planner` is a LLM that takes the request from the users and maps out the tasks that need to be completed to fulfill this request.
+Aby zarządzać stanem rozmowy, TaskWeaver używa koncepcji `Plannera`. `Planner` to LLM, który przyjmuje żądanie od użytkowników i mapuje zadania, które trzeba wykonać, aby spełnić to żądanie.
 
-To complete the tasks the `Planner` is exposed to the collection of tools called `Plugins`. Mogą to być klasy Python lub ogólny interpreter kodu. Te wtyczki są przechowywane jako osadzenia, aby LLM mógł lepiej wyszukiwać odpowiednią wtyczkę.
+Aby wykonać zadania, `Planner` ma dostęp do kolekcji narzędzi zwanych `Plugins`. Mogą to być klasy Pythona lub ogólny interpreter kodu. Te wtyczki przechowywane są jako osadzenia, aby LLM mógł lepiej wyszukiwać odpowiednią wtyczkę.
 
-![Taskweaver](../../../translated_images/taskweaver.c0997002a3df51572f6cad019c41202b7c2110cbfcccc4af2e5d6a0ace4b4545.pl.png)
+![Taskweaver](../../../translated_images/pl/taskweaver.da8559999267715a.webp)
 
 Oto przykład wtyczki do obsługi wykrywania anomalii:
 
@@ -137,37 +210,41 @@ Oto przykład wtyczki do obsługi wykrywania anomalii:
 class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_col_name: str, value_col_name: str):
 ```
 
-Kod jest weryfikowany przed wykonaniem. Inną funkcją zarządzania kontekstem w Taskweaver jest `experience`. Experience allows for the context of a conversation to be stored over to the long term in a YAML file. This can be configured so that the LLM improves over time on certain tasks given that it is exposed to prior conversations.
+Kod jest weryfikowany przed wykonaniem. Kolejną funkcją do zarządzania kontekstem w Taskweaver jest `experience`. Experience pozwala na długoterminowe przechowywanie kontekstu rozmowy w pliku YAML. Można to skonfigurować tak, żeby LLM poprawiał się z czasem w pewnych zadaniach, biorąc pod uwagę wcześniejsze rozmowy.
 
 ## JARVIS
 
-The last agent framework we will explore is [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). What makes JARVIS unique is that it uses an LLM to manage the `state` rozmowy, a `tools` to inne modele AI. Każdy z modeli AI to wyspecjalizowane modele, które wykonują określone zadania, takie jak wykrywanie obiektów, transkrypcja czy opisywanie obrazów.
+Ostatnią ramą agenta, którą omówimy, jest [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file&WT.mc_id=academic-105485-koreyst). To, co wyróżnia JARVIS, to fakt, że używa LLM do zarządzania `stanem` rozmowy, a `narzędzia` to inne modele AI. Każdy z modeli AI jest modelem specjalistycznym, który wykonuje określone zadania, takie jak wykrywanie obiektów, transkrypcja lub opisywanie obrazów.
 
-![JARVIS](../../../translated_images/jarvis.d41d7c4c81bf015bd7ced7f1108abdec56b312472aaf3f63b5b0e82a5f4fb395.pl.png)
+![JARVIS](../../../translated_images/pl/jarvis.762ddbadbd1a3a33.webp)
 
-LLM, będący modelem ogólnego przeznaczenia, otrzymuje żądanie od użytkownika i identyfikuje konkretne zadanie oraz wszelkie argumenty/dane potrzebne do wykonania zadania.
+LLM, będąc modelem ogólnego przeznaczenia, odbiera żądanie od użytkownika i identyfikuje konkretne zadanie oraz wszelkie argumenty/dane potrzebne do wykonania tego zadania.
 
 ```python
 [{"task": "object-detection", "id": 0, "dep": [-1], "args": {"image": "e1.jpg" }}]
 ```
 
-LLM następnie formatuje żądanie w sposób, który specjalistyczny model AI może zinterpretować, na przykład jako JSON. Gdy model AI zwróci swoją prognozę na podstawie zadania, LLM otrzymuje odpowiedź.
+LLM następnie formatuje żądanie w sposób zrozumiały dla specjalistycznego modelu AI, na przykład w JSON. Kiedy model AI zwróci swoją predykcję na podstawie zadania, LLM odbiera odpowiedź.
 
-Jeśli do wykonania zadania potrzebne są wiele modeli, również zinterpretuje odpowiedzi od tych modeli, zanim połączy je, aby wygenerować odpowiedź dla użytkownika.
+Jeśli do wykonania zadania wymaga się kilku modeli, LLM również interpretuje odpowiedzi tych modeli, zanim połączy je, aby wygenerować odpowiedź dla użytkownika.
 
-Poniższy przykład pokazuje, jak to by działało, gdy użytkownik żąda opisu i liczenia obiektów na obrazku:
+Poniższy przykład pokazuje, jak to działa, gdy użytkownik prosi o opis i liczbę obiektów na zdjęciu:
 
 ## Zadanie
 
-Aby kontynuować naukę o Agentach AI, możesz zbudować z AutoGen:
+Aby kontynuować naukę o AI Agentach, możesz zbudować z Microsoft Agent Framework:
 
-- Aplikację, która symuluje spotkanie biznesowe z różnymi działami startupu edukacyjnego.
-- Stwórz wiadomości systemowe, które prowadzą LLM w zrozumieniu różnych person i priorytetów oraz umożliwiają użytkownikowi zaprezentowanie nowego pomysłu na produkt.
-- LLM powinien następnie generować pytania uzupełniające z każdego działu, aby dopracować i poprawić prezentację oraz pomysł na produkt.
+- Aplikację symulującą spotkanie biznesowe z różnymi działami startupu edukacyjnego.
+- Utwórz wiadomości systemowe, które pomogą LLM zrozumieć różne persony i priorytety, oraz umożliwią użytkownikowi zaproponowanie nowego pomysłu na produkt.
+- LLM powinien następnie wygenerować pytania uzupełniające z każdego działu, aby doprecyzować i ulepszyć prezentację i pomysł na produkt.
 
 ## Nauka nie kończy się tutaj, kontynuuj podróż
 
-Po ukończeniu tej lekcji, sprawdź naszą [kolekcję nauki o Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby kontynuować pogłębianie wiedzy o Generative AI!
+Po ukończeniu tej lekcji sprawdź naszą [kolekcję nauki Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby kontynuować rozwijanie wiedzy o generatywnej AI!
 
-**Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się o dokładność, prosimy mieć świadomość, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku istotnych informacji zalecane jest profesjonalne tłumaczenie przez człowieka. Nie ponosimy odpowiedzialności za wszelkie nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

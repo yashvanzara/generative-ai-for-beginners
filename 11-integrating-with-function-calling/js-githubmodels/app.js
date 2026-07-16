@@ -1,18 +1,26 @@
 import ModelClient from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
 
-const token = process.env["GITHUB_TOKEN"];
-const endpoint = "https://models.inference.ai.azure.com";
+// Get these from your Microsoft Foundry project's "Overview" page
+// (GitHub Models is retiring end of July 2026 - see https://ai.azure.com/catalog/models)
+const token = process.env["AZURE_INFERENCE_CREDENTIAL"];
+if (!token) {
+    throw new Error("AZURE_INFERENCE_CREDENTIAL environment variable is required. Please set it before running this application.");
+}
+const endpoint = process.env["AZURE_INFERENCE_ENDPOINT"];
+if (!endpoint) {
+    throw new Error("AZURE_INFERENCE_ENDPOINT environment variable is required. Please set it before running this application.");
+}
 
 /* By using the Azure AI Inference SDK, you can easily experiment with different models
    by modifying the value of `modelName` in the code below. For this code sample
    you need a model supporting tools. The following compatible models are
-   available in the GitHub Models service:
+   available in the Microsoft Foundry Models catalog:
 
-   Cohere: Cohere-command-r, Cohere-command-r-plus
-   Mistral AI: Mistral-large, Mistral-large-2407, Mistral-Nemo, Mistral-small
-   Azure OpenAI: gpt-4o-mini, gpt-4o */
-const modelName = "gpt-4o";
+   Cohere: Cohere-command-r-08-2024, Cohere-command-r-plus-08-2024
+   Mistral AI: Mistral-large-2411, Mistral-small-2503
+   OpenAI: gpt-5-mini, gpt-4o-mini, gpt-4o, gpt-4.1, gpt-4.1-mini */
+const modelName = "gpt-5-mini";
 
 function getFlightInfo({ originCity, destinationCity }) {
     if (originCity === "Seattle" && destinationCity === "Miami") {
@@ -129,10 +137,25 @@ export async function main() {
             // We expect the tool to be a function call
             if (toolCall.type === "function") {
                 const toolCall = response.body.choices[0].message.tool_calls[0];
-                // Parse the function call arguments and call the function
-                const functionArgs = JSON.parse(toolCall.function.arguments);
-                console.log(`Calling function \`${toolCall.function.name}\` with arguments ${toolCall.function.arguments}`);
-                const callableFunc = namesToFunctions[toolCall.function.name];
+
+                // SECURITY: Validate function name exists in allowed functions map
+                const functionName = toolCall.function.name;
+                if (!Object.prototype.hasOwnProperty.call(namesToFunctions, functionName)) {
+                    throw new Error(`Unknown function requested: ${functionName}. Only allowed functions are: ${Object.keys(namesToFunctions).join(', ')}`);
+                }
+
+                // SECURITY: Safely parse JSON with error handling
+                let functionArgs;
+                try {
+                    functionArgs = JSON.parse(toolCall.function.arguments);
+                } catch (parseError) {
+                    throw new Error(`Failed to parse function arguments: ${parseError.message}`);
+                }
+
+                // Log function call (avoid logging sensitive data in production)
+                console.log(`Calling function \`${functionName}\` with arguments ${toolCall.function.arguments}`);
+
+                const callableFunc = namesToFunctions[functionName];
                 const functionReturn = callableFunc(functionArgs);
                 console.log(`Function returned = ${functionReturn}`);
 

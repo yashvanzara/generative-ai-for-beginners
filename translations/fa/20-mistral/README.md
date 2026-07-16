@@ -1,47 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4bd0fafda5d66cd9d60f1ebc7820415e",
-  "translation_date": "2025-05-20T10:46:11+00:00",
-  "source_file": "20-mistral/README.md",
-  "language_code": "fa"
-}
--->
-# ساخت مدل‌های Mistral
+# ساخت با مدل‌های میسترال
 
 ## مقدمه
 
-این درس شامل موارد زیر خواهد بود:
-- بررسی مدل‌های مختلف Mistral
-- درک موارد استفاده و سناریوهای هر مدل
-- نمونه‌های کد که ویژگی‌های منحصر به فرد هر مدل را نشان می‌دهند.
+این درس شامل موارد زیر است:
+- بررسی مدل‌های مختلف میسترال
+- درک کاربردها و سناریوهای هر مدل
+- بررسی نمونه‌های کد که ویژگی‌های منحصر به فرد هر مدل را نشان می‌دهند.
 
-## مدل‌های Mistral
+## مدل‌های میسترال
 
-در این درس، ۳ مدل مختلف Mistral را بررسی خواهیم کرد: **Mistral Large**، **Mistral Small** و **Mistral Nemo**.
+در این درس، ما سه مدل مختلف میسترال را بررسی خواهیم کرد:
+**میسترال بزرگ**، **میسترال کوچک** و **میسترال نِمو**.
 
-هر یک از این مدل‌ها به صورت رایگان در بازار مدل‌های Github در دسترس هستند. کد موجود در این دفترچه یادداشت از این مدل‌ها برای اجرای کد استفاده خواهد کرد. در اینجا جزئیات بیشتری درباره استفاده از مدل‌های Github برای [نمونه‌سازی با مدل‌های هوش مصنوعی](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst) آورده شده است.
+هر یک از این مدل‌ها به صورت رایگان در [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) در دسترس هستند. کد این نت‌بوک از این مدل‌ها برای اجرای کد استفاده خواهد کرد.
 
-## Mistral Large 2 (2407)
-Mistral Large 2 در حال حاضر مدل پرچمدار Mistral است و برای استفاده سازمانی طراحی شده است.
+> **توجه:** GitHub Models در پایان ژوئیه ۲۰۲۶ بازنشسته خواهد شد. جزئیات بیشتری درباره استفاده از [Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) برای نمونه‌سازی با مدل‌های هوش مصنوعی در اینجا موجود است.
 
-این مدل یک ارتقا به مدل اصلی Mistral Large است که ارائه می‌دهد:
-- پنجره متنی بزرگتر - ۱۲۸k در مقابل ۳۲k
-- عملکرد بهتر در وظایف ریاضی و کدنویسی - دقت متوسط ۷۶.۹٪ در مقابل ۶۰.۴٪
-- افزایش عملکرد چندزبانه - زبان‌ها شامل: انگلیسی، فرانسوی، آلمانی، اسپانیایی، ایتالیایی، پرتغالی، هلندی، روسی، چینی، ژاپنی، کره‌ای، عربی و هندی.
 
-با این ویژگی‌ها، Mistral Large در موارد زیر برتری دارد:
-- *تولید مبتنی بر بازیابی (RAG)* - به دلیل پنجره متنی بزرگتر
-- *فراخوانی تابع* - این مدل دارای فراخوانی تابع بومی است که اجازه می‌دهد با ابزارها و API‌های خارجی ادغام شود. این فراخوانی‌ها می‌توانند به صورت موازی یا به ترتیب یکی پس از دیگری انجام شوند.
-- *تولید کد* - این مدل در تولید Python، Java، TypeScript و C++ برتری دارد.
+## میسترال بزرگ ۲ (2407)
+میسترال بزرگ ۲ در حال حاضر مدل پرچمدار از میسترال است و برای استفاده سازمانی طراحی شده است.
 
-### مثال RAG با استفاده از Mistral Large 2
+این مدل یک ارتقاء نسبت به مدل میسترال بزرگ اصلی است که ارائه می‌دهد:
+- پنجره زمینه بزرگ‌تر - ۱۲۸k در برابر ۳۲k
+- عملکرد بهتر در وظایف ریاضی و برنامه‌نویسی - دقت متوسط ۷۶.۹٪ در برابر ۶۰.۴٪
+- عملکرد چندزبانه بهبود یافته - زبان‌ها شامل: انگلیسی، فرانسوی، آلمانی، اسپانیایی، ایتالیایی، پرتغالی، هلندی، روسی، چینی، ژاپنی، کره‌ای، عربی و هندی.
 
-در این مثال، ما از Mistral Large 2 برای اجرای یک الگوی RAG بر روی یک سند متنی استفاده می‌کنیم. سوال به زبان کره‌ای نوشته شده و درباره فعالیت‌های نویسنده قبل از دانشگاه می‌پرسد.
+با این ویژگی‌ها، میسترال بزرگ در موارد زیر برجسته است:
+- *تولید تقویت‌شده بازیابی (RAG)* - به دلیل پنجره زمینه بزرگ‌تر
+- *فراخوانی تابع* - این مدل دارای فراخوانی تابع بومی است که امکان ادغام با ابزارها و APIهای خارجی را فراهم می‌کند. این فراخوانی‌ها می‌توانند به صورت موازی یا به ترتیب انجام شوند.
+- *تولید کد* - این مدل در تولید کدهای پایتون، جاوا، تایپ‌اسکریپت و ++C عملکرد خوبی دارد.
 
-این مدل از مدل Cohere Embeddings برای ایجاد جاسازی‌های سند متنی و همچنین سوال استفاده می‌کند. برای این نمونه، از بسته Python به نام faiss به عنوان یک فروشگاه برداری استفاده می‌کند.
+### مثال RAG با استفاده از میسترال بزرگ ۲
 
-پرسش ارسالی به مدل Mistral شامل سوالات و قطعات بازیابی شده مشابه سوال است. مدل سپس یک پاسخ به زبان طبیعی ارائه می‌دهد.
+در این مثال، از میسترال بزرگ ۲ برای اجرای الگوی RAG روی یک سند متنی استفاده می‌کنیم. پرسش به زبان کره‌ای نوشته شده و درباره فعالیت‌های نویسنده قبل از دانشگاه است.
+
+از مدل تعبیه‌های Cohere برای ایجاد تعبیه از سند متنی و پرسش استفاده می‌کند. برای این نمونه، از بسته پایتون faiss به عنوان فروشگاه برداری استفاده می‌شود.
+
+پیشنهادی که به مدل میسترال ارسال می‌شود، شامل پرسش‌ها و بخش‌های بازیابی شده‌ای است که شبیه پرسش هستند. سپس مدل پاسخ به زبان طبیعی ارائه می‌دهد.
 
 ```python 
 pip install faiss-cpu
@@ -58,9 +53,10 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference import EmbeddingsClient
 
-endpoint = "https://models.inference.ai.azure.com"
+# اینها را از صفحه "نمای کلی" پروژه Microsoft Foundry خود دریافت کنید
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -99,7 +95,7 @@ d = text_embeddings.shape[1]
 index = faiss.IndexFlatL2(d)
 index.add(text_embeddings)
 
-question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?？"
+question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?"
 
 question_embedding = embed_client.embed(
     input=[question],
@@ -109,7 +105,7 @@ question_embedding = embed_client.embed(
 question_embeddings = np.array(question_embedding.data[0].embedding)
 
 
-D, I = index.search(question_embeddings.reshape(1, -1), k=2) # distance, index
+D, I = index.search(question_embeddings.reshape(1, -1), k=2) # فاصله، شاخص
 retrieved_chunks = [chunks[i] for i in I.tolist()[0]]
 
 prompt = f"""
@@ -137,29 +133,30 @@ chat_response = client.complete(
 print(chat_response.choices[0].message.content)
 ```
 
-## Mistral Small
-Mistral Small مدل دیگری در خانواده مدل‌های Mistral در دسته برتر/سازمانی است. همانطور که از نامش پیداست، این مدل یک مدل زبان کوچک (SLM) است. مزایای استفاده از Mistral Small عبارتند از:
-- صرفه‌جویی در هزینه در مقایسه با LLMهای Mistral مانند Mistral Large و NeMo - کاهش قیمت ۸۰٪
-- تأخیر کم - پاسخ سریعتر در مقایسه با LLMهای Mistral
-- انعطاف‌پذیری - می‌تواند در محیط‌های مختلف با محدودیت‌های کمتر بر منابع مورد نیاز مستقر شود.
+## میسترال کوچک
+میسترال کوچک مدل دیگری از خانواده میسترال در دسته بندی پریمیوم/سازمانی است. همانطور که از نامش پیداست، این مدل یک مدل زبان کوچک (SLM) است. مزایای استفاده از میسترال کوچک عبارت‌اند از:
+- صرفه‌جویی در هزینه نسبت به مدل‌های بزرگ میسترال مانند میسترال بزرگ و نِمو - کاهش قیمت ۸۰٪
+- تأخیر کم - پاسخ سریع‌تر نسبت به مدل‌های بزرگ میسترال
+- انعطاف‌پذیری - قابل استقرار در محیط‌های مختلف با محدودیت‌های کمتر در منابع مورد نیاز.
 
-Mistral Small برای موارد زیر عالی است:
-- وظایف مبتنی بر متن مانند خلاصه‌سازی، تحلیل احساسات و ترجمه.
-- برنامه‌هایی که درخواست‌های مکرر دارند به دلیل مقرون به صرفه بودن
-- وظایف کد با تأخیر کم مانند بررسی و پیشنهادات کد
 
-## مقایسه Mistral Small و Mistral Large
+میسترال کوچک برای موارد زیر عالی است:
+- وظایف متنی مانند خلاصه‌سازی، تحلیل احساسات و ترجمه.
+- کاربردهایی که درخواست‌های مکرر به علت صرفه‌جویی در هزینه دارد
+- وظایف کد با تأخیر کم مانند بازبینی و پیشنهاد کد
 
-برای نشان دادن تفاوت‌های تأخیر بین Mistral Small و Large، سلول‌های زیر را اجرا کنید.
+## مقایسه میسترال کوچک و میسترال بزرگ
 
-باید تفاوتی در زمان‌های پاسخ بین ۳-۵ ثانیه مشاهده کنید. همچنین به طول و سبک پاسخ‌ها بر اساس همان درخواست توجه کنید.
+برای نشان دادن تفاوت در تأخیر بین میسترال کوچک و بزرگ، سلول‌های زیر را اجرا کنید.
+
+باید تفاوتی در زمان پاسخ بین ۳ تا ۵ ثانیه مشاهده کنید. همچنین طول و سبک پاسخ‌ها روی همان پرسش را توجه نمایید.
 
 ```python 
 
 import os 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-small"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -188,9 +185,9 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -212,32 +209,33 @@ print(response.choices[0].message.content)
 
 ```
 
-## Mistral NeMo
+## میسترال نِمو
 
-در مقایسه با دو مدل دیگر مورد بحث در این درس، Mistral NeMo تنها مدل رایگان با مجوز Apache2 است.
+در مقایسه با دو مدل دیگر که در این درس بحث شدند، میسترال نِمو تنها مدل رایگان با مجوز Apache2 است.
 
-به عنوان یک ارتقا به LLM منبع باز قبلی Mistral، یعنی Mistral 7B، در نظر گرفته می‌شود.
+این مدل به عنوان ارتقاء مدل LLM منبع باز قبلی میسترال، میسترال 7B، شناخته می‌شود.
 
-برخی دیگر از ویژگی‌های مدل NeMo عبارتند از:
+برخی از ویژگی‌های دیگر مدل نِمو عبارت‌اند از:
 
-- *رمزگذاری کارآمدتر:* این مدل از رمزگذار Tekken به جای tiktoken که معمولاً استفاده می‌شود، استفاده می‌کند. این امر به عملکرد بهتر در زبان‌ها و کدهای بیشتر کمک می‌کند.
+- *نشانه‌گذاری مؤثرتر:* این مدل از توکنایزر Tekken استفاده می‌کند که نسبت به tiktoken شایع‌تر است. این امکان عملکرد بهتر روی زبان‌ها و کدهای بیشتر را فراهم می‌کند.
 
-- *تنظیم دقیق:* مدل پایه برای تنظیم دقیق در دسترس است. این امر انعطاف‌پذیری بیشتری برای موارد استفاده‌ای که ممکن است نیاز به تنظیم دقیق داشته باشند، فراهم می‌کند.
+- *فاین‌تونیگ:* مدل پایه برای فاین‌تونیگ در دسترس است. این امکان انعطاف‌پذیری بیشتری برای مواردی که نیاز به فاین‌تونیگ دارند فراهم می‌کند.
 
-- *فراخوانی تابع بومی* - مانند Mistral Large، این مدل برای فراخوانی تابع آموزش دیده است. این امر آن را منحصر به فرد می‌کند به عنوان یکی از اولین مدل‌های منبع باز که این کار را انجام می‌دهد.
+- *فراخوانی تابع بومی* - مانند میسترال بزرگ، این مدل نیز برای فراخوانی تابع آموزش دیده است. این ویژگی آن را به یکی از اولین مدل‌های منبع باز تبدیل کرده است که این قابلیت را دارد.
 
-### مقایسه رمزگذارها
 
-در این نمونه، ما بررسی خواهیم کرد که Mistral NeMo چگونه در مقایسه با Mistral Large رمزگذاری را انجام می‌دهد.
+### مقایسه توکنایزرها
 
-هر دو نمونه از همان درخواست استفاده می‌کنند اما باید مشاهده کنید که NeMo تعداد کمتری رمز را در مقایسه با Mistral Large برمی‌گرداند.
+در این نمونه، نگاهی می‌اندازیم به نحوه توکن‌سازی مدل میسترال نِمو در مقایسه با میسترال بزرگ.
+
+هر دو نمونه همان پرسش را می‌گیرند اما باید ببینید که نِمو توکن‌های کمتری نسبت به میسترال بزرگ بازمی‌گرداند.
 
 ```bash
 pip install mistral-common
 ```
 
 ```python 
-# Import needed packages:
+# وارد کردن بسته‌های مورد نیاز:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -248,13 +246,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# بارگذاری توکنیزر میسترال
 
-model_name = "open-mistral-nemo	"
+model_name = "open-mistral-nemo"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# توکنیزه کردن یک لیست از پیام‌ها
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -272,7 +270,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -288,12 +286,12 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# شمارش تعداد توکن‌ها
 print(len(tokens))
 ```
 
 ```python
-# Import needed packages:
+# وارد کردن بسته‌های مورد نیاز:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -304,13 +302,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# بارگذاری توکنایزر میسترال
 
 model_name = "mistral-large-latest"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# توکنایز کردن یک لیست از پیام‌ها
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -328,7 +326,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -344,13 +342,17 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# شمارش تعداد توکن‌ها
 print(len(tokens))
 ```
 
-## یادگیری در اینجا متوقف نمی‌شود، سفر را ادامه دهید
+## یادگیری اینجا متوقف نمی‌شود، مسیر را ادامه دهید
 
-پس از تکمیل این درس، مجموعه یادگیری [Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ما را بررسی کنید تا به ارتقای دانش خود در زمینه هوش مصنوعی مولد ادامه دهید!
+پس از اتمام این درس، مجموعه [Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ما را بررسی کنید تا دانش خود را در زمینه هوش مصنوعی مولد ارتقا دهید!
 
-**سلب مسئولیت**:  
-این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌ها باشند. سند اصلی به زبان مادری آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما مسئولیتی در قبال سوء تفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری خود باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوء تفاهم یا برداشت نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

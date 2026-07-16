@@ -1,93 +1,101 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7a655f30d1dcbdfe6eff2558eff249af",
-  "translation_date": "2025-05-19T19:23:41+00:00",
-  "source_file": "09-building-image-applications/README.md",
-  "language_code": "ro"
-}
--->
 # Construirea aplicațiilor de generare a imaginilor
 
-Există mai mult la LLM-uri decât generarea de text. Este, de asemenea, posibil să generezi imagini din descrieri textuale. A avea imagini ca modalitate poate fi extrem de util în numeroase domenii, de la MedTech, arhitectură, turism, dezvoltare de jocuri și altele. În acest capitol, vom analiza cele două modele de generare a imaginilor cele mai populare, DALL-E și Midjourney.
+[![Construirea aplicațiilor de generare a imaginilor](../../../translated_images/ro/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+
+LLM-urile nu sunt doar pentru generarea de text. De asemenea, este posibil să generezi imagini din descrieri textuale. Având imaginile ca modalitate poate fi extrem de util în numeroase domenii, de la MedTech, arhitectură, turism, dezvoltare de jocuri și altele. În acest capitol, vom analiza cele două modele de generare a imaginilor cele mai populare, DALL-E și Midjourney.
 
 ## Introducere
 
 În această lecție, vom acoperi:
 
-- Generarea de imagini și de ce este utilă.
+- Generarea imaginilor și de ce este utilă.
 - DALL-E și Midjourney, ce sunt și cum funcționează.
-- Cum să construiești o aplicație de generare a imaginilor.
+- Cum ai construi o aplicație de generare a imaginilor.
 
 ## Obiective de învățare
 
-După finalizarea acestei lecții, vei putea:
+După ce vei finaliza această lecție, vei putea să:
 
-- Să construiești o aplicație de generare a imaginilor.
-- Să definești limitele aplicației tale cu meta-propuneri.
-- Să lucrezi cu DALL-E și Midjourney.
+- Construiești o aplicație de generare a imaginilor.
+- Definesti limitele aplicației tale cu metaprompts.
+- Lucrezi cu DALL-E și Midjourney.
 
 ## De ce să construiești o aplicație de generare a imaginilor?
 
-Aplicațiile de generare a imaginilor sunt o modalitate excelentă de a explora capacitățile AI Generativă. Ele pot fi utilizate, de exemplu, pentru:
+Aplicațiile de generare a imaginilor sunt o modalitate excelentă de a explora capacitățile AI Generativ. Pot fi folosite, de exemplu, pentru:
 
-- **Editare și sinteză de imagini**. Poți genera imagini pentru o varietate de cazuri de utilizare, cum ar fi editarea și sinteza imaginilor.
+- **Editarea și sinteza imaginilor**. Poți genera imagini pentru diverse cazuri de utilizare, cum ar fi editarea imaginilor și sinteza imaginilor.
 
-- **Aplicate în diverse industrii**. Pot fi, de asemenea, folosite pentru a genera imagini pentru diverse industrii precum Medtech, Turism, Dezvoltare de jocuri și altele.
+- **Aplicate într-o varietate de industrii**. Ele pot fi folosite și pentru generarea de imagini pentru diverse industrii precum MedTech, Turism, Dezvoltare de jocuri și altele.
 
 ## Scenariu: Edu4All
 
-Ca parte a acestei lecții, vom continua să lucrăm cu startup-ul nostru, Edu4All. Studenții vor crea imagini pentru evaluările lor, exact ce imagini depinde de studenți, dar ar putea fi ilustrații pentru propriul lor basm sau crearea unui nou personaj pentru povestea lor sau să îi ajute să-și vizualizeze ideile și conceptele.
+Ca parte a acestei lecții, vom continua să lucrăm cu startup-ul nostru, Edu4All, în această lecție. Elevii vor crea imagini pentru evaluările lor, exact ce fel de imagini este la alegerea elevilor, dar ar putea fi ilustrații pentru propriul lor basm sau pentru a crea un personaj nou pentru povestea lor sau pentru a-i ajuta să-și vizualizeze ideile și conceptele.
 
-Iată ce ar putea genera studenții de la Edu4All, de exemplu, dacă lucrează în clasă la monumente:
+Iată ce ar putea genera elevii Edu4All, de exemplu dacă lucrează în clasă pe monumente:
 
-folosind o propunere ca
+![Startup Edu4All, clasă pe monumente, Turnul Eiffel](../../../translated_images/ro/startup.94d6b79cc4bb3f5a.webp)
+
+folosind un prompt precum
 
 > "Câine lângă Turnul Eiffel în lumina dimineții"
 
 ## Ce sunt DALL-E și Midjourney?
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) și [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) sunt două dintre cele mai populare modele de generare a imaginilor, care îți permit să folosești propuneri pentru a genera imagini.
+[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) și [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) sunt două dintre cele mai populare modele de generare a imaginilor, ele îți permit să folosești prompturi pentru a genera imagini.
 
 ### DALL-E
 
-Să începem cu DALL-E, care este un model AI Generativă ce generează imagini din descrieri textuale.
+Să începem cu DALL-E, care este un model AI generativ ce generează imagini din descrieri textuale.
 
-- **CLIP**, este un model care generează încorporări, care sunt reprezentări numerice ale datelor, din imagini și text.
+> [DALL-E este o combinație a două modele, CLIP și atenția difuză](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
 
-- **Atenție difuză**, este un model care generează imagini din încorporări. DALL-E este antrenat pe un set de date de imagini și text și poate fi folosit pentru a genera imagini din descrieri textuale. De exemplu, DALL-E poate fi folosit pentru a genera imagini cu o pisică cu pălărie sau un câine cu mohawk.
+- **CLIP**, este un model care generează embeddinguri, care sunt reprezentări numerice ale datelor, din imagini și text.
+
+- **Atenția difuză**, este un model care generează imagini din embeddinguri. DALL-E este antrenat pe un set de date cu imagini și text și poate fi folosit pentru a genera imagini din descrieri textuale. De exemplu, DALL-E poate fi folosit pentru a genera imagini cu o pisică cu pălărie, sau un câine cu mohawk.
 
 ### Midjourney
 
-Midjourney funcționează într-un mod similar cu DALL-E, generând imagini din propuneri textuale. Midjourney poate fi, de asemenea, folosit pentru a genera imagini folosind propuneri precum „o pisică cu pălărie” sau „un câine cu mohawk”.
+Midjourney funcționează într-un mod similar cu DALL-E, generează imagini pornind de la prompturi text. Midjourney poate fi de asemenea folosit pentru a genera imagini folosind prompturi ca “o pisică cu pălărie”, sau un “câine cu mohawk”.
+
+![Imagine generată de Midjourney, porumbel mecanic](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
+_Imagine credit Wikipedia, imagine generată de Midjourney_
 
 ## Cum funcționează DALL-E și Midjourney
 
-Mai întâi, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E este un model AI Generativă bazat pe arhitectura transformatoare cu un _transformator autoregresiv_.
+Mai întâi, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E este un model AI generativ bazat pe arhitectura transformer cu un _transformer autoregresiv_.
 
-Un _transformator autoregresiv_ definește cum un model generează imagini din descrieri textuale, generând un pixel pe rând, și apoi folosind pixelii generați pentru a genera următorul pixel. Trecând prin mai multe straturi într-o rețea neuronală, până când imaginea este completă.
+Un _transformer autoregresiv_ definește modul în care un model generează imagini din descrieri textuale, generează un pixel pe rând, apoi folosește pixelii generați pentru a genera următorul pixel. Trecând prin multiple straturi într-o rețea neurală, până când imaginea este completă.
 
-Cu acest proces, DALL-E controlează atribute, obiecte, caracteristici și altele în imaginea generată. Totuși, DALL-E 2 și 3 au mai mult control asupra imaginii generate.
+Prin acest proces, DALL-E controlează atribute, obiecte, caracteristici și altele în imaginea pe care o generează. Totuși, DALL-E 2 și 3 au control mai mare asupra imaginii generate.
 
-## Construirea primei tale aplicații de generare a imaginilor
+## Construiește-ți prima aplicație de generare a imaginilor
 
-Deci, ce este necesar pentru a construi o aplicație de generare a imaginilor? Ai nevoie de următoarele biblioteci:
+Deci, ce este nevoie pentru a construi o aplicație de generare a imaginilor? Ai nevoie de următoarele biblioteci:
 
-- **python-dotenv**, este recomandat să folosești această bibliotecă pentru a păstra secretele într-un fișier _.env_ departe de cod.
-- **openai**, această bibliotecă este ceea ce vei folosi pentru a interacționa cu API-ul OpenAI.
+- **python-dotenv**, este recomandat să folosești această bibliotecă pentru a-ți păstra secretele într-un fișier _.env_ departe de cod.
+- **openai**, această bibliotecă este ce vei folosi pentru a interacționa cu API-ul OpenAI.
 - **pillow**, pentru a lucra cu imagini în Python.
 - **requests**, pentru a te ajuta să faci cereri HTTP.
+
+## Creează și implementează un model Azure OpenAI
+
+Dacă nu ai făcut deja, urmează instrucțiunile de pe pagina [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)
+pentru a crea un serviciu și model Azure OpenAI. Selectează **gpt-image-1** ca model (modelul actual Azure OpenAI pentru generarea imaginilor; DALL-E 3 este moștenire și nu mai este disponibil pentru implementări noi).
+
+## Creează aplicația
 
 1. Creează un fișier _.env_ cu următorul conținut:
 
    ```text
    AZURE_OPENAI_ENDPOINT=<your endpoint>
    AZURE_OPENAI_API_KEY=<your key>
+   AZURE_OPENAI_DEPLOYMENT="gpt-image-1"
    ```
 
-   Localizează aceste informații în Portalul Azure pentru resursa ta în secțiunea "Keys and Endpoint".
+   Găsește aceste informații în portalul Azure OpenAI Foundry pentru resursa ta în secțiunea "Deployments".
 
-1. Colectează bibliotecile de mai sus într-un fișier numit _requirements.txt_ astfel:
+1. Adună bibliotecile de mai sus într-un fișier numit _requirements.txt_ astfel:
 
    ```text
    python-dotenv
@@ -104,66 +112,63 @@ Deci, ce este necesar pentru a construi o aplicație de generare a imaginilor? A
    pip install -r requirements.txt
    ```
 
-   Pentru Windows, folosește următoarele comenzi pentru a crea și activa mediul tău virtual:
+   Pentru Windows, folosește comenzile următoare pentru a crea și activa mediul virtual:
 
    ```bash
    python3 -m venv venv
    venv\Scripts\activate.bat
    ```
 
-1. Adaugă următorul cod într-un fișier numit _app.py_:
+1. Adaugă următorul cod în fișierul numit _app.py_:
 
-   ```python
-   import openai
-   import os
-   import requests
-   from PIL import Image
-   import dotenv
+    ```python
+    import openai
+    import os
+    import requests
+    from PIL import Image
+    import dotenv
+    from openai import OpenAI, AzureOpenAI
+    
+    # importă dotenv
+    dotenv.load_dotenv()
+    
+    # Configurează clientul serviciului Azure OpenAI
+    client = AzureOpenAI(
+      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
+      api_key=os.environ['AZURE_OPENAI_API_KEY'],
+      api_version = "2024-10-21"
+      )
+    try:
+        # Creează o imagine folosind API-ul de generare a imaginilor
+        generation_response = client.images.generate(
+                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+                                size='1024x1024', n=1,
+                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
+                              )
 
-   # import dotenv
-   dotenv.load_dotenv()
+        # Setează directorul pentru imaginea stocată
+        image_dir = os.path.join(os.curdir, 'images')
 
-   # Get endpoint and key from environment variables
-   openai.api_base = os.environ['AZURE_OPENAI_ENDPOINT']
-   openai.api_key = os.environ['AZURE_OPENAI_API_KEY']
+        # Dacă directorul nu există, creează-l
+        if not os.path.isdir(image_dir):
+            os.mkdir(image_dir)
 
-   # Assign the API version (DALL-E is currently supported for the 2023-06-01-preview API version only)
-   openai.api_version = '2023-06-01-preview'
-   openai.api_type = 'azure'
+        # Initializează calea imaginii (reține că tipul fișierului trebuie să fie png)
+        image_path = os.path.join(image_dir, 'generated-image.png')
 
+        # Preia imaginea generată
+        image_url = generation_response.data[0].url  # extrage URL-ul imaginii din răspuns
+        generated_image = requests.get(image_url).content  # descarcă imaginea
+        with open(image_path, "wb") as image_file:
+            image_file.write(generated_image)
 
-   try:
-       # Create an image by using the image generation API
-       generation_response = openai.Image.create(
-           prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-           size='1024x1024',
-           n=2,
-           temperature=0,
-       )
-       # Set the directory for the stored image
-       image_dir = os.path.join(os.curdir, 'images')
+        # Afișează imaginea în vizualizatorul implicit de imagini
+        image = Image.open(image_path)
+        image.show()
 
-       # If the directory doesn't exist, create it
-       if not os.path.isdir(image_dir):
-           os.mkdir(image_dir)
-
-       # Initialize the image path (note the filetype should be png)
-       image_path = os.path.join(image_dir, 'generated-image.png')
-
-       # Retrieve the generated image
-       image_url = generation_response["data"][0]["url"]  # extract image URL from response
-       generated_image = requests.get(image_url).content  # download the image
-       with open(image_path, "wb") as image_file:
-           image_file.write(generated_image)
-
-       # Display the image in the default image viewer
-       image = Image.open(image_path)
-       image.show()
-
-   # catch exceptions
-   except openai.InvalidRequestError as err:
-       print(err)
-
+    # prinde excepțiile
+    except openai.BadRequestError as err:
+        print(err)
    ```
 
 Să explicăm acest cod:
@@ -185,33 +190,31 @@ Să explicăm acest cod:
   dotenv.load_dotenv()
   ```
 
-- După aceea, setăm endpoint-ul, cheia pentru API-ul OpenAI, versiunea și tipul.
+- După aceea, configurăm clientul serviciului Azure OpenAI 
 
   ```python
-  # Get endpoint and key from environment variables
-  openai.api_base = os.environ['AZURE_OPENAI_ENDPOINT']
-  openai.api_key = os.environ['AZURE_OPENAI_API_KEY']
-
-  # add version and type, Azure specific
-  openai.api_version = '2023-06-01-preview'
-  openai.api_type = 'azure'
+  # Obțineți endpoint-ul și cheia din variabilele de mediu
+  client = AzureOpenAI(
+      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
+      api_key=os.environ['AZURE_OPENAI_API_KEY'],
+      api_version = "2024-10-21"
+      )
   ```
 
-- Apoi, generăm imaginea:
+- Urmează generarea imaginii:
 
   ```python
-  # Create an image by using the image generation API
-  generation_response = openai.Image.create(
-      prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-      size='1024x1024',
-      n=2,
-      temperature=0,
-  )
+  # Creează o imagine folosind API-ul de generare a imaginilor
+  generation_response = client.images.generate(
+                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+                        size='1024x1024', n=1,
+                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
+                      )
   ```
 
   Codul de mai sus răspunde cu un obiect JSON care conține URL-ul imaginii generate. Putem folosi URL-ul pentru a descărca imaginea și a o salva într-un fișier.
 
-- În cele din urmă, deschidem imaginea și folosim vizualizatorul standard de imagini pentru a o afișa:
+- În final, deschidem imaginea și folosim vizualizatorul standard de imagini pentru a o afișa:
 
   ```python
   image = Image.open(image_path)
@@ -220,73 +223,85 @@ Să explicăm acest cod:
 
 ### Mai multe detalii despre generarea imaginii
 
-Să ne uităm la codul care generează imaginea în mai multe detalii:
+Să analizăm codul care generează imaginea mai în detaliu:
 
-```python
-generation_response = openai.Image.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0,
-    )
-```
+   ```python
+     generation_response = client.images.generate(
+                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+                               size='1024x1024', n=1,
+                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
+                           )
+   ```
 
-- **prompt**, este propunerea text care este folosită pentru a genera imaginea. În acest caz, folosim propunerea "Iepuraș pe cal, ținând o acadea, pe un câmp cu ceață unde cresc narcise".
+- **prompt**, este promptul text folosit pentru a genera imaginea. În acest caz, folosim promptul "Iepuraș pe cal, ținând un acadea, pe o pajiște ceațoasă unde cresc narcise".
 - **size**, este dimensiunea imaginii generate. În acest caz, generăm o imagine de 1024x1024 pixeli.
 - **n**, este numărul de imagini generate. În acest caz, generăm două imagini.
-- **temperature**, este un parametru care controlează aleatorietatea rezultatului unui model AI Generativă. Temperatura este o valoare între 0 și 1 unde 0 înseamnă că rezultatul este determinist și 1 înseamnă că rezultatul este aleatoriu. Valoarea implicită este 0.7.
+- **temperature**, este un parametru care controlează aleatorietatea ieșirii unui model AI generativ. Temperatura este o valoare între 0 și 1 unde 0 înseamnă că ieșirea este deterministă, iar 1 înseamnă că ieșirea este aleatorie. Valoarea implicită este 0.7.
 
-Există mai multe lucruri pe care le poți face cu imaginile, pe care le vom acoperi în secțiunea următoare.
+Mai sunt și alte lucruri pe care le poți face cu imaginile și pe care le vom acoperi în secțiunea următoare.
 
-## Capacități suplimentare de generare a imaginilor
+## Capacități suplimentare ale generării imaginilor
 
-Până acum ai văzut cum am reușit să generăm o imagine folosind câteva linii de cod în Python. Totuși, există mai multe lucruri pe care le poți face cu imaginile.
+Ai văzut până acum cum am putut genera o imagine folosind câteva linii în Python. Totuși, mai există și alte lucruri pe care le poți face cu imaginile.
 
-Poți, de asemenea, să faci următoarele:
+Poți face, de asemenea, următoarele:
 
-- **Realiza editări**. Prin furnizarea unei imagini existente, a unei măști și a unei propuneri, poți modifica o imagine. De exemplu, poți adăuga ceva într-o porțiune a unei imagini. Imaginează-ți imaginea noastră cu iepurașul, poți adăuga o pălărie iepurașului. Cum ai face asta este prin furnizarea imaginii, a unei măști (identificând partea din zonă pentru schimbare) și a unei propuneri textuale pentru a spune ce ar trebui făcut.
+- **Efectuarea de modificări**. Furnizând o imagine existentă, o mască și un prompt, poți modifica o imagine. De exemplu, poți adăuga ceva într-o porțiune din imagine. Imaginează-ți imaginea noastră cu iepurașul, poți adăuga o pălărie iepurașului. Cum faci asta este oferind imaginea, o mască (identificând zona pentru schimbare) și un prompt text pentru a specifica ce trebuie făcut.
+> Notă: acest lucru nu este suportat în DALL-E 3.
+ 
+Iată un exemplu folosind GPT Image:
+
+   ```python
+   response = client.images.edit(
+       model="gpt-image-1",
+       image=open("sunlit_lounge.png", "rb"),
+       mask=open("mask.png", "rb"),
+       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
+   )
+   image_url = response.data[0].url
+   ```
+
+  Imaginea de bază ar conține doar lounge-ul cu piscină, dar imaginea finală ar avea un flamingo:
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+  <img src="../../../translated_images/ro/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
+  <img src="../../../translated_images/ro/mask.1b2976ccec9e011e.webp" style="width: 30%; max-width: 200px; height: auto;">
+  <img src="../../../translated_images/ro/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
+</div>
+
+
+- **Crearea de variații**. Ideea este să iei o imagine existentă și să ceri crearea de variații. Pentru a crea o variație, oferi o imagine și un prompt text și scrii cod astfel:
 
   ```python
-  response = openai.Image.create_edit(
-    image=open("base_image.png", "rb"),
-    mask=open("mask.png", "rb"),
-    prompt="An image of a rabbit with a hat on its head.",
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  Imaginea de bază ar conține doar iepurele, dar imaginea finală ar avea pălăria pe iepure.
-
-- **Creează variații**. Ideea este că iei o imagine existentă și ceri să fie create variații. Pentru a crea o variație, furnizezi o imagine și o propunere textuală și codul astfel:
-
-  ```python
-  response = openai.Image.create_variation(
+  response = client.images.create_variation(
     image=open("bunny-lollipop.png", "rb"),
     n=1,
     size="1024x1024"
   )
-  image_url = response['data'][0]['url']
+  image_url = response.data[0].url
   ```
 
-  > Notă, aceasta este suportată doar pe OpenAI
+  > Notă, acest lucru este suportat doar pe modelul DALL-E 2 de la OpenAI, nu pe gpt-image-1
 
 ## Temperatura
 
-Temperatura este un parametru care controlează aleatorietatea rezultatului unui model AI Generativă. Temperatura este o valoare între 0 și 1 unde 0 înseamnă că rezultatul este determinist și 1 înseamnă că rezultatul este aleatoriu. Valoarea implicită este 0.7.
+Temperatura este un parametru care controlează aleatorietatea ieșirii unui model AI generativ. Temperatura este o valoare între 0 și 1 unde 0 înseamnă că ieșirea este deterministă, iar 1 înseamnă că ieșirea este aleatorie. Valoarea implicită este 0.7.
 
-Să ne uităm la un exemplu de cum funcționează temperatura, rulând această propunere de două ori:
+Să privim un exemplu despre cum funcționează temperatura, rulând acest prompt de două ori:
 
-> Propunere: "Iepuraș pe cal, ținând o acadea, pe un câmp cu ceață unde cresc narcise"
+> Prompt : "Iepuraș pe cal, ținând un acadea, pe o pajiște ceațoasă unde cresc narcise"
 
-Acum să rulăm aceeași propunere doar pentru a vedea că nu vom obține aceeași imagine de două ori:
+![Iepuraș pe un cal ținând un acadea, versiunea 1](../../../translated_images/ro/v1-generated-image.a295cfcffa3c13c2.webp)
 
-După cum poți vedea, imaginile sunt similare, dar nu aceleași. Să încercăm să schimbăm valoarea temperaturii la 0.1 și să vedem ce se întâmplă:
+Acum să rulăm același prompt doar ca să vedem că nu vom obține aceeași imagine de două ori:
+
+![Imagine generată cu iepuraș pe cal](../../../translated_images/ro/v2-generated-image.33f55a3714efe61d.webp)
+
+După cum vezi, imaginile sunt similare, dar nu identice. Hai să încercăm să schimbăm valoarea temperaturii la 0.1 și să vedem ce se întâmplă:
 
 ```python
- generation_response = openai.Image.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
+ generation_response = client.images.generate(
+        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Introduceți textul solicitării aici
         size='1024x1024',
         n=2
     )
@@ -294,38 +309,41 @@ După cum poți vedea, imaginile sunt similare, dar nu aceleași. Să încercăm
 
 ### Schimbarea temperaturii
 
-Așadar, să încercăm să facem răspunsul mai determinist. Am putea observa din cele două imagini generate că în prima imagine, există un iepuraș și în a doua imagine, există un cal, deci imaginile variază foarte mult.
+Deci să încercăm să facem răspunsul mai determinist. Am putea observa din cele două imagini generate că în prima imagine este un iepuraș iar în a doua este un cal, deci imaginile variază mult.
 
-Prin urmare, să ne schimbăm codul și să setăm temperatura la 0, astfel:
+Așadar, să schimbăm codul nostru și să setăm temperatura la 0, astfel:
 
 ```python
-generation_response = openai.Image.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
+generation_response = client.images.generate(
+        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Introduceți textul solicitării aici
         size='1024x1024',
         n=2,
         temperature=0
     )
 ```
 
-Acum când rulezi acest cod, obții aceste două imagini:
+Acum când rulezi acest cod, vei obține aceste două imagini:
 
-Aici poți vedea clar cum imaginile se aseamănă mai mult.
+- ![Temperatura 0, v1](../../../translated_images/ro/v1-temp-generated-image.a4346e1d2360a056.webp)
+- ![Temperatura 0 , v2](../../../translated_images/ro/v2-temp-generated-image.871d0c920dbfb0f1.webp)
 
-## Cum să definești limitele pentru aplicația ta cu metapropuneri
+Aici poți vedea clar cum imaginile seamănă mult mai mult între ele.
 
-Cu demo-ul nostru, putem deja genera imagini pentru clienții noștri. Totuși, trebuie să creăm niște limite pentru aplicația noastră.
+## Cum să definești limite pentru aplicația ta cu metaprompturi
 
-De exemplu, nu dorim să generăm imagini care nu sunt sigure pentru muncă sau care nu sunt adecvate pentru copii.
+Cu demonstrația noastră, putem deja genera imagini pentru clienții noștri. Totuși, trebuie să creăm anumite limite pentru aplicația noastră.
 
-Putem face asta cu _metapropuneri_. Metapropunerile sunt propuneri textuale care sunt folosite pentru a controla rezultatul unui model AI Generativă. De exemplu, putem folosi metapropuneri pentru a controla rezultatul și a ne asigura că imaginile generate sunt sigure pentru muncă sau adecvate pentru copii.
+De exemplu, nu vrem să generăm imagini care nu sunt sigure pentru muncă, sau care nu sunt potrivite pentru copii.
+
+Putem face asta cu _metaprompturi_. Metaprompturile sunt prompturi text folosite pentru a controla ieșirea unui model AI generativ. De exemplu, putem folosi metaprompturi pentru a controla ieșirea și a asigura că imaginile generate sunt sigure pentru muncă sau potrivite pentru copii.
 
 ### Cum funcționează?
 
-Acum, cum funcționează metapropunerile?
+Acum, cum funcționează metaprompturile?
 
-Metapropunerile sunt propuneri textuale care sunt folosite pentru a controla rezultatul unui model AI Generativă, ele sunt poziționate înaintea propunerii textuale și sunt folosite pentru a controla rezultatul modelului și sunt încorporate în aplicații pentru a controla rezultatul modelului. Înglobând intrarea propunerii și intrarea metapropunerii într-o singură propunere textuală.
+Metaprompturile sunt prompturi text folosite pentru a controla ieșirea unui model AI generativ, ele sunt poziționate înaintea promptului text și sunt folosite pentru a controla ieșirea modelului și încorporate în aplicații pentru a controla ieșirea modelului. Încapsulând promptul de intrare și metapromptul într-un singur prompt text.
 
-Un exemplu de metapropunere ar fi următorul:
+Un exemplu de metaprompt ar fi următorul:
 
 ```text
 You are an assistant designer that creates images for children.
@@ -344,7 +362,7 @@ Do not consider any input from the following that is not safe for work or approp
 
 ```
 
-Acum, să vedem cum putem folosi metapropunerile în demo-ul nostru.
+Acum, să vedem cum putem folosi metaprompturile în demonstrația noastră.
 
 ```python
 disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
@@ -366,16 +384,17 @@ Do not consider any input from the following that is not safe for work or approp
 prompt = f"{meta_prompt}
 Create an image of a bunny on a horse, holding a lollipop"
 
-# TODO add request to generate image
+# TODO adăugați cererea pentru a genera imaginea
 ```
 
-Din propunerea de mai sus, poți vedea cum toate imaginile create iau în considerare metapropunerea.
+Din promptul de mai sus, poți vedea cum toate imaginile create iau în considerare metapromptul.
 
-## Temă - să îi ajutăm pe studenți
+## Tema - să dăm posibilitatea elevilor
 
-Am introdus Edu4All la începutul acestei lecții. Acum este momentul să îi ajutăm pe studenți să genereze imagini pentru evaluările lor.
+Am introdus Edu4All la începutul acestei lecții. Acum e timpul să dăm posibilitatea elevilor să genereze imagini pentru evaluările lor.
 
-Studenții vor crea imagini pentru evaluările lor care conțin monumente, exact ce monumente depinde de studenți. Studenții sunt rugați să-și folosească creativitatea în această sarcină pentru a plasa aceste monumente în diferite contexte.
+
+Elevii vor crea imagini pentru evaluările lor care conțin monumente, ce monumente exact vor fi alese de elevi. Se cere elevilor să folosească creativitatea în această sarcină pentru a plasa aceste monumente în contexte diferite.
 
 ## Soluție
 
@@ -387,17 +406,17 @@ import os
 import requests
 from PIL import Image
 import dotenv
-
+from openai import AzureOpenAI
 # import dotenv
 dotenv.load_dotenv()
 
-# Get endpoint and key from environment variables
-openai.api_base = "<replace with endpoint>"
-openai.api_key = "<replace with api key>"
+# Obțineți endpoint-ul și cheia din variabilele de mediu
+client = AzureOpenAI(
+  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
+  api_key=os.environ['AZURE_OPENAI_API_KEY'],
+  api_version = "2024-10-21"
+  )
 
-# Assign the API version (DALL-E is currently supported for the 2023-06-01-preview API version only)
-openai.api_version = '2023-06-01-preview'
-openai.api_type = 'azure'
 
 disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
 
@@ -412,50 +431,54 @@ The image needs to be in landscape orientation.
 The image needs to be in a 16:9 aspect ratio.
 
 Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}"""
+{disallow_list}
+"""
 
-prompt = f"""{metaprompt}
+prompt = f"""{meta_prompt}
 Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
+"""
 
 try:
-    # Create an image by using the image generation API
-    generation_response = openai.Image.create(
-        prompt=prompt,    # Enter your prompt text here
+    # Creați o imagine folosind API-ul de generare a imaginilor
+    generation_response = client.images.generate(
+        prompt=prompt,    # Introduceți aici textul promptului dvs.
         size='1024x1024',
-        n=2,
-        temperature=0,
+        n=1,
     )
-    # Set the directory for the stored image
+    # Setați directorul pentru imaginea stocată
     image_dir = os.path.join(os.curdir, 'images')
 
-    # If the directory doesn't exist, create it
+    # Dacă directorul nu există, creați-l
     if not os.path.isdir(image_dir):
         os.mkdir(image_dir)
 
-    # Initialize the image path (note the filetype should be png)
+    # Inițializați calea imaginii (rețineți că tipul fișierului ar trebui să fie png)
     image_path = os.path.join(image_dir, 'generated-image.png')
 
-    # Retrieve the generated image
-    image_url = generation_response["data"][0]["url"]  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
+    # Recuperați imaginea generată
+    image_url = generation_response.data[0].url  # extrageți URL-ul imaginii din răspuns
+    generated_image = requests.get(image_url).content  # descărcați imaginea
     with open(image_path, "wb") as image_file:
         image_file.write(generated_image)
 
-    # Display the image in the default image viewer
+    # Afișați imaginea în vizualizatorul de imagini implicit
     image = Image.open(image_path)
     image.show()
 
-# catch exceptions
-except openai.InvalidRequestError as err:
+# prinde excepțiile
+except openai.BadRequestError as err:
     print(err)
 ```
 
-## Foarte bine! Continuă să înveți
+## Lucru excelent! Continuă să înveți
 
-După finalizarea acestei lecții, verifică [colecția noastră de învățare AI Generativă](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) pentru a continua să-ți îmbunătățești cunoștințele despre AI Generativă!
+După ce finalizezi această lecție, consultă colecția noastră [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) pentru a-ți continua dezvoltarea cunoștințelor despre Generative AI!
 
-Mergi la Lecția 10 unde vom analiza cum să [construiești aplicații AI cu cod redus](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Mergi la Lecția 10 unde vom vedea cum să [construim aplicații AI cu low-code](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
 
-**Declinare**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să obținem acuratețe, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională umană. Nu suntem responsabili pentru neînțelegerile sau interpretările greșite care decurg din utilizarea acestei traduceri.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

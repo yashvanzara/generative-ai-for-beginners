@@ -1,99 +1,94 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "27a5347a5022d5ef0a72ab029b03526a",
-  "translation_date": "2025-05-20T00:56:14+00:00",
-  "source_file": "14-the-generative-ai-application-lifecycle/README.md",
-  "language_code": "ro"
-}
--->
-[![Integrarea cu apelarea funcțiilor](../../../translated_images/14-lesson-banner.0b85d0b37979269e80a18bb1e758e1ccca0a2195b426a0af666c8ad14aee60b0.ro.png)](https://aka.ms/gen-ai-lesson14-gh?WT.mc_id=academic-105485-koreyst)
+[![Integrarea cu apelarea funcțiilor](../../../translated_images/ro/14-lesson-banner.066d74a31727ac12.webp)](https://youtu.be/ewtQY_RJrzs?si=dyJ2bjiljH7UUHCh)
 
-# Ciclul de viață al aplicațiilor AI generative
+# Ciclu de viață al aplicației AI generative
 
-O întrebare importantă pentru toate aplicațiile AI este relevanța funcțiilor AI, deoarece AI este un domeniu care evoluează rapid. Pentru a te asigura că aplicația ta rămâne relevantă, fiabilă și robustă, trebuie să o monitorizezi, evaluezi și îmbunătățești continuu. Aici intervine ciclul de viață al AI generative.
+O întrebare importantă pentru toate aplicațiile AI este relevanța caracteristicilor AI, deoarece AI este un domeniu în rapidă evoluție, pentru a asigura că aplicația dvs. rămâne relevantă, de încredere și robustă, trebuie să o monitorizați, evaluați și îmbunătățiți continuu. Aici intervine ciclul de viață al AI generative.
 
-Ciclul de viață al AI generative este un cadru care te ghidează prin etapele de dezvoltare, implementare și întreținere a unei aplicații AI generative. Te ajută să definești obiectivele, să măsori performanța, să identifici provocările și să implementezi soluțiile. De asemenea, te ajută să aliniezi aplicația cu standardele etice și legale ale domeniului tău și ale părților interesate. Urmând ciclul de viață al AI generative, te poți asigura că aplicația ta oferă mereu valoare și satisface utilizatorii.
+Ciclul de viață al AI generative este un cadru care vă ghidează prin etapele de dezvoltare, implementare și întreținere a unei aplicații AI generative. Acesta vă ajută să vă definiți obiectivele, să vă măsurați performanța, să identificați provocările și să implementați soluțiile. De asemenea, vă ajută să vă aliniați aplicația la standardele etice și legale ale domeniului și ale părților interesate. Urmând ciclul de viață al AI generative, puteți asigura că aplicația dvs. oferă întotdeauna valoare și satisface utilizatorii.
 
 ## Introducere
 
-În acest capitol, vei:
+În acest capitol, veți:
 
-- Înțelege schimbarea de paradigmă de la MLOps la LLMOps
-- Ciclul de viață LLM
+- Înțelegeți schimbarea de paradigmă de la MLOps la LLMOps
+- Ciclul de viață al LLM-urilor
 - Instrumente pentru ciclul de viață
 - Metrificarea și evaluarea ciclului de viață
 
-## Înțelege schimbarea de paradigmă de la MLOps la LLMOps
+## Înțelegeți schimbarea de paradigmă de la MLOps la LLMOps
 
-LLM-urile sunt un nou instrument în arsenalul Inteligenței Artificiale, fiind extrem de puternice în sarcinile de analiză și generare pentru aplicații. Totuși, această putere are unele consecințe în modul în care eficientizăm sarcinile de AI și învățare automată clasică.
+LLM-urile sunt un instrument nou în arsenalul Inteligenței Artificiale, sunt extrem de puternice în sarcini de analiză și generare pentru aplicații, totuși această putere are unele consecințe asupra modului în care eficientizăm sarcinile AI și Machine Learning Clasic.
 
-Astfel, avem nevoie de un nou paradigm pentru a adapta acest instrument într-un mod dinamic, cu stimulentele corecte. Putem categoriza aplicațiile AI mai vechi ca "Aplicații ML" și aplicațiile AI mai noi ca "Aplicații GenAI" sau doar "Aplicații AI", reflectând tehnologia și tehnicile predominante folosite la acel moment. Aceasta schimbă narațiunea noastră în mai multe moduri, uită-te la următoarea comparație.
+Cu asta, avem nevoie de o nouă paradigmă pentru a adapta acest instrument într-un mod dinamic, cu stimulente corecte. Putem clasifica aplicațiile AI mai vechi ca „Aplicații ML” și aplicațiile AI mai noi ca „Aplicații GenAI” sau pur și simplu „Aplicații AI”, reflectând tehnologia și tehnicile principale folosite la momentul respectiv. Aceasta schimbă narațiunea noastră în mai multe moduri, priviți comparația următoare.
 
-![Comparație LLMOps vs. MLOps](../../../translated_images/01-llmops-shift.82d7bf6eb2d98a01e35f234df654e9aa4ebec89792f274695a5da8dc3f388084.ro.png)
+![Comparație LLMOps vs. MLOps](../../../translated_images/ro/01-llmops-shift.29bc933cb3bb0080.webp)
 
-Observă că în LLMOps, ne concentrăm mai mult pe dezvoltatorii de aplicații, folosind integrațiile ca punct cheie, folosind "Modele ca serviciu" și gândindu-ne la următoarele puncte pentru metrici.
+Observați că în LLMOps, ne concentrăm mai mult pe Dezvoltatorii Aplicațiilor, folosind integrările ca punct cheie, utilizând „Modele-ca-Serviciu” și gândind la următorii indicatori pentru metrici.
 
 - Calitate: Calitatea răspunsului
-- Daune: AI responsabil
+- Daună: AI responsabilă
 - Onestitate: Fundamentarea răspunsului (Are sens? Este corect?)
 - Cost: Bugetul soluției
-- Latență: Timpul mediu pentru răspunsul token
+- Latență: Timp mediu pentru răspunsul cu tokeni
 
-## Ciclul de viață LLM
+## Ciclul de viață al LLM-urilor
 
-Mai întâi, pentru a înțelege ciclul de viață și modificările, să observăm următoarea infografică.
+Mai întâi, pentru a înțelege ciclul de viață și modificările, să notăm următorul infografic.
 
-![Infografic LLMOps](../../../translated_images/02-llmops.287de964b5ce9577678b7f053efb3a3c92adf0852c882c5bae94c11b7563e4db.ro.png)
+![Infografic LLMOps](../../../translated_images/ro/02-llmops.70a942ead05a7645.webp)
 
-După cum poți observa, acesta este diferit de ciclurile de viață obișnuite din MLOps. LLM-urile au multe cerințe noi, cum ar fi Prompting, tehnici diferite pentru a îmbunătăți calitatea (Fine-Tuning, RAG, Meta-Prompts), evaluare și responsabilitate diferită cu AI responsabil, și în final, noi metrici de evaluare (Calitate, Daune, Onestitate, Cost și Latență).
+După cum puteți observa, acesta este diferit de ciclurile obișnuite din MLOps. LLM-urile au multe cerințe noi, cum ar fi promptarea, tehnici diferite pentru îmbunătățirea calității (fine-tuning, RAG, meta-prompturi), evaluare diferită și responsabilitate cu AI responsabilă, în final, metrici noi de evaluare (calitate, daună, onestitate, cost și latență).
 
-De exemplu, aruncă o privire la modul în care ideăm. Folosind ingineria de prompturi pentru a experimenta cu diverse LLM-uri pentru a explora posibilități și a testa dacă ipotezele lor ar putea fi corecte.
+De exemplu, aruncați o privire asupra modului în care generăm idei. Folosind ingineria prompturilor pentru a experimenta cu diverse LLM-uri pentru a explora posibilități de a testa dacă ipoteza noastră ar putea fi corectă.
 
-Observă că acest proces nu este liniar, ci bucle integrate, iterative și cu un ciclu general.
+Rețineți că aceasta nu este liniară, ci bucle integrate, iterative și cu un ciclu general de supraveghere.
 
-Cum am putea explora acești pași? Să intrăm în detaliu în modul în care am putea construi un ciclu de viață.
+Cum am putea explora acești pași? Să intrăm în detaliu despre cum am putea construi un ciclu de viață.
 
-![Flux de lucru LLMOps](../../../translated_images/03-llm-stage-flows.f3b87c210c1fe37084a7b7408877ff1688e2dc565694789820ec259e76d4ed05.ro.png)
+![Flux de lucru LLMOps](../../../translated_images/ro/03-llm-stage-flows.3a1e1c401235a6cf.webp)
 
-Acesta poate părea puțin complicat, să ne concentrăm mai întâi pe cele trei mari etape.
+Aceasta poate părea puțin complicat, să ne concentrăm mai întâi pe cele trei pași mari.
 
 1. Ideare/Explorare: Explorare, aici putem explora conform nevoilor noastre de afaceri. Prototipare, crearea unui [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) și testarea dacă este suficient de eficient pentru ipoteza noastră.
-1. Construire/Augmentare: Implementare, acum, începem să evaluăm pentru seturi de date mai mari și să implementăm tehnici, cum ar fi Fine-tuning și RAG, pentru a verifica robustețea soluției noastre. Dacă nu este, reimplementarea, adăugarea de noi pași în fluxul nostru sau restructurarea datelor ar putea ajuta. După testarea fluxului nostru și a scalei noastre, dacă funcționează și verificăm metricile noastre, este gata pentru următorul pas.
-1. Operaționalizare: Integrare, acum adăugăm sisteme de monitorizare și alerte în sistemul nostru, implementare și integrare a aplicației în aplicația noastră.
+1. Construire/Extindere: Implementare, acum, începem să evaluăm pentru seturi de date mai mari, implementăm tehnici, precum fine-tuning și RAG, pentru a verifica robustețea soluției. Dacă nu funcționează, re-implementarea, adăugarea de noi pași în fluxul nostru sau restructurarea datelor poate ajuta. După testarea fluxului nostru și scalarea lui, dacă funcționează și metricile noastre sunt confirmate, este gata pentru pasul următor.
+1. Operaționalizare: Integrare, acum adăugăm sistemele de monitorizare și alerte în sistemul nostru, implementarea și integrarea aplicației în aplicația noastră.
 
-Apoi, avem ciclul general de Management, concentrându-ne pe securitate, conformitate și guvernanță.
+Apoi, avem ciclul general de management, axat pe securitate, conformitate și guvernanță.
 
-Felicitări, acum ai aplicația AI gata de utilizare și operațională. Pentru o experiență practică, aruncă o privire la [Demo-ul Contoso Chat.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreys)
+Felicitări, acum aveți aplicația AI gata de utilizare și operațională. Pentru o experiență practică, aruncați o privire la [Contoso Chat Demo.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst)
 
 Acum, ce instrumente am putea folosi?
 
 ## Instrumente pentru ciclul de viață
 
-Pentru instrumente, Microsoft oferă [Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys) și [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) pentru a facilita și face ciclul tău ușor de implementat și gata de utilizare.
+Pentru instrumente, Microsoft oferă [Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) și [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) care facilitează și face ciclul dumneavoastră ușor de implementat și gata de utilizare.
 
-[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys), îți permite să folosești [AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreys). AI Studio este un portal web care îți permite să explorezi modele, exemple și instrumente. Gestionarea resurselor tale, fluxuri de dezvoltare UI și opțiuni SDK/CLI pentru dezvoltarea Code-First.
+[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) vă permite să folosiți [Microsoft Foundry](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst). Microsoft Foundry (fost Azure AI Studio) este un portal web care vă permite să explorați modele, mostre și instrumente, să vă gestionați resursele și să folosiți fluxuri de dezvoltare UI, precum și opțiuni SDK/CLI pentru dezvoltare Code-First.
 
-![Posibilități Azure AI](../../../translated_images/04-azure-ai-platform.bf903e8cdf00f73896d804bd8e6bea62f5280498c998271bd5629c1efa8b466f.ro.png)
+![Posibilități Azure AI](../../../translated_images/ro/04-azure-ai-platform.80203baf03a12fa8.webp)
 
-Azure AI îți permite să folosești multiple resurse pentru a gestiona operațiunile, serviciile, proiectele, căutările vectoriale și nevoile de baze de date.
+Azure AI vă permite să utilizați multiple resurse pentru a vă gestiona operațiunile, serviciile, proiectele, căutările vectoriale și nevoile de baze de date.
 
-![LLMOps cu Azure AI](../../../translated_images/05-llm-azure-ai-prompt.dc29c0d74b1dd939f7c6cbf28b1fee54b9a846ba04d4068c40134e2627cb7232.ro.png)
+![LLMOps cu Azure AI](../../../translated_images/ro/05-llm-azure-ai-prompt.a5ce85cdbb494bdf.webp)
 
-Construiește, de la Proof-of-Concept(POC) până la aplicații la scară largă cu PromptFlow:
+Construiți, de la dovada de concept (POC) până la aplicații la scară largă cu PromptFlow:
 
-- Proiectează și construiește aplicații din VS Code, cu instrumente vizuale și funcționale
-- Testează și ajustează aplicațiile tale pentru AI de calitate, cu ușurință.
-- Folosește Azure AI Studio pentru a integra și itera cu cloud, împinge și implementează pentru integrare rapidă.
+- Proiectați și construiți aplicații din VS Code, cu instrumente vizuale și funcționale
+- Testați și adaptați aplicațiile pentru AI de calitate, cu ușurință.
+- Folosiți Microsoft Foundry pentru integrare și iterație cu cloud-ul, Push și Deploy pentru integrare rapidă.
 
-![LLMOps cu PromptFlow](../../../translated_images/06-llm-promptflow.8f0a6fcbea793a042a3db89ca1db1aa8fd540526958c97b5e894748fb4a87edd.ro.png)
+![LLMOps cu PromptFlow](../../../translated_images/ro/06-llm-promptflow.a183eba07a3a7fdf.webp)
 
-## Grozav! Continuă învățarea!
+## Minunat! Continuați să învățați!
 
-Minunat, acum învață mai multe despre cum structurăm o aplicație pentru a folosi conceptele cu [Aplicația Contoso Chat](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst), pentru a verifica cum Advocacy-ul Cloud adaugă aceste concepte în demonstrații. Pentru mai mult conținut, verifică sesiunea noastră [Ignite breakout!
+Minunat, acum învățați mai multe despre cum structurăm o aplicație pentru a folosi conceptele cu [Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst), pentru a vedea cum Cloud Advocacy adaugă aceste concepte în demonstrații. Pentru mai mult conținut, verificați sesiunea noastră breakout Ignite!
 ](https://www.youtube.com/watch?v=DdOylyrTOWg)
 
-Acum, verifică Lecția 15, pentru a înțelege cum [Generarea augmentată prin recuperare și bazele de date vectoriale](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) impactează AI generativă și pentru a crea aplicații mai captivante!
+Acum, verificați Lecția 15, pentru a înțelege cum [Retrieval Augmented Generation and Vector Databases](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) influențează AI generativ și pentru a face aplicații mai captivante!
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea umană profesională. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

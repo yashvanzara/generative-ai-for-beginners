@@ -1,67 +1,59 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4c2a0b0c738b649ef049fb99a23be661",
-  "translation_date": "2025-05-20T11:05:11+00:00",
-  "source_file": "21-meta/README.md",
-  "language_code": "es"
-}
--->
-# Construyendo con los Modelos de la Familia Meta
+# Construyendo con los Modelos de la Familia Meta 
 
-## Introducción
+## Introducción 
 
-Esta lección cubrirá:
+Esta lección cubrirá: 
 
-- Exploración de los dos principales modelos de la familia Meta - Llama 3.1 y Llama 3.2
-- Comprensión de los casos de uso y escenarios para cada modelo
-- Ejemplo de código para mostrar las características únicas de cada modelo
+- Exploración de los dos principales modelos de la familia Meta - Llama 3.1 y Llama 3.2 
+- Comprensión de los casos de uso y escenarios para cada modelo 
+- Ejemplo de código para mostrar las características únicas de cada modelo 
 
-## La Familia de Modelos Meta
 
-En esta lección, exploraremos 2 modelos de la familia Meta o "Manada Llama" - Llama 3.1 y Llama 3.2
+## La Familia de Modelos Meta 
 
-Estos modelos vienen en diferentes variantes y están disponibles en el mercado de Modelos de GitHub. Aquí hay más detalles sobre cómo usar los Modelos de GitHub para [prototipar con modelos de IA](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+En esta lección, exploraremos 2 modelos de la familia Meta o "Llama Herd" - Llama 3.1 y Llama 3.2.
 
-Variantes del Modelo:
-- Llama 3.1 - 70B Instruct
-- Llama 3.1 - 405B Instruct
-- Llama 3.2 - 11B Vision Instruct
-- Llama 3.2 - 90B Vision Instruct
+Estos modelos vienen en diferentes variantes y están disponibles en el mercado de modelos de GitHub. Aquí hay más detalles sobre cómo usar GitHub Models para [prototipar con modelos de IA](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
 
-*Nota: Llama 3 también está disponible en los Modelos de GitHub pero no se cubrirá en esta lección*
+Variantes del Modelo: 
+- Llama 3.1 - 70B Instruct 
+- Llama 3.1 - 405B Instruct 
+- Llama 3.2 - 11B Vision Instruct 
+- Llama 3.2 - 90B Vision Instruct 
 
-## Llama 3.1
+*Nota: Llama 3 también está disponible en GitHub Models, pero no se cubrirá en esta lección*
 
-Con 405 mil millones de parámetros, Llama 3.1 se ajusta a la categoría de LLM de código abierto.
+## Llama 3.1 
 
-El modelo es una mejora respecto a la versión anterior Llama 3 al ofrecer:
+Con 405 Mil Millones de Parámetros, Llama 3.1 se ubica en la categoría de LLM de código abierto. 
 
-- Ventana de contexto más grande - 128k tokens vs 8k tokens
-- Mayor cantidad de tokens de salida máxima - 4096 vs 2048
-- Mejor soporte multilingüe - debido al aumento en los tokens de entrenamiento
+El modelo es una mejora respecto al lanzamiento anterior Llama 3 ofreciendo: 
 
-Esto permite que Llama 3.1 maneje casos de uso más complejos al construir aplicaciones GenAI, incluyendo:
-- Llamadas a funciones nativas - la capacidad de llamar herramientas y funciones externas fuera del flujo de trabajo de LLM
-- Mejor rendimiento RAG - debido a la ventana de contexto más alta
-- Generación de datos sintéticos - la capacidad de crear datos efectivos para tareas como el ajuste fino
+- Ventana de contexto más grande - 128k tokens vs 8k tokens 
+- Mayor cantidad máxima de tokens de salida - 4096 vs 2048 
+- Mejor soporte multilingüe - debido al aumento en tokens de entrenamiento 
 
-### Llamadas a Funciones Nativas
+Esto permite a Llama 3.1 manejar casos de uso más complejos al construir aplicaciones GenAI, incluyendo: 
+- Llamadas a funciones nativas - la capacidad de llamar a herramientas y funciones externas fuera del flujo de trabajo del LLM
+- Mejor rendimiento RAG - debido a la ventana de contexto más alta 
+- Generación de datos sintéticos - la capacidad de crear datos efectivos para tareas como el ajuste fino 
 
-Llama 3.1 ha sido ajustado para ser más efectivo al realizar llamadas a funciones o herramientas. También tiene dos herramientas integradas que el modelo puede identificar como necesarias de usar según el aviso del usuario. Estas herramientas son:
+### Llamadas a Funciones Nativas 
 
-- **Brave Search** - Se puede usar para obtener información actualizada como el clima realizando una búsqueda web
-- **Wolfram Alpha** - Se puede usar para cálculos matemáticos más complejos, por lo que no es necesario escribir tus propias funciones.
+Llama 3.1 ha sido ajustado para ser más efectivo al hacer llamadas a funciones o herramientas. También tiene dos herramientas integradas que el modelo puede identificar como necesarias de usar basándose en el prompt del usuario. Estas herramientas son: 
 
-También puedes crear tus propias herramientas personalizadas que LLM puede llamar.
+- **Brave Search** - Puede usarse para obtener información actualizada como el clima realizando una búsqueda web 
+- **Wolfram Alpha** - Puede usarse para cálculos matemáticos más complejos por lo que no es necesario escribir tus propias funciones. 
 
-En el ejemplo de código a continuación:
+También puedes crear tus propias herramientas personalizadas que el LLM puede llamar. 
 
-- Definimos las herramientas disponibles (brave_search, wolfram_alpha) en el aviso del sistema.
-- Enviamos un aviso de usuario que pregunta sobre el clima en cierta ciudad.
-- El LLM responderá con una llamada a la herramienta Brave Search que se verá así `<|python_tag|>brave_search.call(query="Stockholm weather")`
+En el ejemplo de código abajo: 
 
-*Nota: Este ejemplo solo realiza la llamada a la herramienta, si deseas obtener los resultados, necesitarás crear una cuenta gratuita en la página de la API de Brave y definir la función en sí misma*
+- Definimos las herramientas disponibles (brave_search, wolfram_alpha) en el prompt del sistema. 
+- Enviamos un prompt del usuario que pregunta sobre el clima en cierta ciudad. 
+- El LLM responderá con una llamada a la herramienta Brave Search que se verá así `<|python_tag|>brave_search.call(query="Stockholm weather")` 
+
+*Nota: Este ejemplo solo hace la llamada a la herramienta, si deseas obtener los resultados, deberás crear una cuenta gratuita en la página de la API de Brave y definir la función en sí.
 
 ```python 
 import os
@@ -101,15 +93,16 @@ response = client.complete(messages=messages, model=model_name)
 print(response.choices[0].message.content)
 ```
 
-## Llama 3.2
+## Llama 3.2 
 
-A pesar de ser un LLM, una limitación que tiene Llama 3.1 es la multimodalidad. Es decir, la capacidad de usar diferentes tipos de entrada, como imágenes, como avisos y proporcionar respuestas. Esta capacidad es una de las características principales de Llama 3.2. Estas características también incluyen:
+A pesar de ser un LLM, una limitación de Llama 3.1 es su falta de multimodalidad. Es decir, la incapacidad de usar diferentes tipos de entrada como imágenes como prompts y proporcionar respuestas. Esta habilidad es una de las principales características de Llama 3.2. Estas características también incluyen: 
 
-- Multimodalidad - tiene la capacidad de evaluar tanto avisos de texto como de imagen
-- Variaciones de tamaño pequeño a mediano (11B y 90B) - esto proporciona opciones de implementación flexibles,
-- Variaciones solo de texto (1B y 3B) - esto permite que el modelo se implemente en dispositivos de borde / móviles y proporciona baja latencia
+- Multimodalidad - tiene la capacidad de evaluar tanto prompts de texto como de imagen 
+- Variaciones de tamaño pequeño a mediano (11B y 90B) - esto proporciona opciones flexibles de despliegue, 
+- Variaciones solo de texto (1B y 3B) - esto permite que el modelo sea desplegado en dispositivos de borde / móviles y proporciona baja latencia 
 
-El soporte multimodal representa un gran paso en el mundo de los modelos de código abierto. El ejemplo de código a continuación toma tanto una imagen como un aviso de texto para obtener un análisis de la imagen de Llama 3.2 90B.
+El soporte multimodal representa un gran paso en el mundo de los modelos de código abierto. El ejemplo de código de abajo toma tanto una imagen como un prompt de texto para obtener un análisis de la imagen de Llama 3.2 90B. 
+
 
 ### Soporte Multimodal con Llama 3.2
 
@@ -158,9 +151,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## El aprendizaje no se detiene aquí, continúa el viaje
+## El aprendizaje no termina aquí, continúa el viaje
 
-Después de completar esta lección, consulta nuestra [colección de Aprendizaje de IA Generativa](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) para continuar mejorando tus conocimientos sobre IA Generativa.
+Después de completar esta lección, visita nuestra [colección de Aprendizaje de IA Generativa](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) para seguir elevando tus conocimientos en IA Generativa!
 
-**Descargo de responsabilidad**:
-Este documento ha sido traducido utilizando el servicio de traducción de IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda la traducción profesional humana. No somos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Aviso legal**:  
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos responsabilizamos por malentendidos o interpretaciones erróneas derivadas del uso de esta traducción.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

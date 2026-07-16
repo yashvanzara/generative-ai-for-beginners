@@ -16,37 +16,54 @@ To start taking this course, you will need to complete the following steps.
 
 To avoid any dependency issues when running the code, we recommend running this course in a [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=academic-105485-koreyst).
 
-This can be created by selecting the `Code` option on your forked version of this repo and selecting the **Codespaces** option.
+In your fork: **Code -> Codespaces -> New on main**
 
 ![Dialog showing buttons to create a codespace](./images/who-will-pay.webp?WT.mc_id=academic-105485-koreyst)
 
-### 3. Storing Your API Keys
+#### 2.1 Add a secret
 
-Keeping your API keys safe and secure is important when building any type of application. We recommend not to store any API keys directly in your code. Committing those details to a public repository could result in security issues and even unwanted costs if used by a bad actor.
-Here's a step-by-step guide on how to create a `.env` file for Python and add the `GITHUB_TOKEN`:
+1. ⚙️ Gear icon -> Command Pallete-> Codespaces : Manage user secret -> Add a new secret.
+2. Name OPENAI_API_KEY, paste your key, Save.
 
-1. **Navigate to Your Project Directory**: Open your terminal or command prompt and navigate to your project's root directory where you want to create the `.env` file.
+### 3.  What’s next?
 
-   ```bash
-   cd path/to/your/project
-   ```
+| I want to…          | Go to…                                                                  |
+|---------------------|-------------------------------------------------------------------------|
+| Start Lesson 1      | [`01-introduction-to-genai`](../01-introduction-to-genai/README.md)     |
+| Work offline        | [`setup-local.md`](02-setup-local.md)                                   |
+| Setup an LLM Provider | [`providers.md`](03-providers.md)                                        |
+| Meet other learners | [Join our Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)   |
 
-2. **Create the `.env` File**: Use your preferred text editor to create a new file named `.env`. If you're using the command line, you can use `touch` (on Unix-based systems) or `echo` (on Windows):
+## Troubleshooting
+
+
+| Symptom                                   | Fix                                                             |
+|-------------------------------------------|-----------------------------------------------------------------|
+| Container build stuck > 10 min            | **Codespaces ➜ “Rebuild Container”**                            |
+| `python: command not found`               | Terminal didn’t attach; click **+** ➜ *bash*                    |
+| `401 Unauthorized` from OpenAI            | Wrong / expired `OPENAI_API_KEY`                                |
+| VS Code shows “Dev container mounting…”   | Refresh the browser tab—Codespaces sometimes loses connection   |
+| Notebook kernel missing                   | Notebook menu ➜ **Kernel ▸ Select Kernel ▸ Python 3**           |
 
    Unix-based systems:
+
    ```bash
    touch .env
    ```
 
    Windows:
+
    ```cmd
    echo . > .env
    ```
 
-3. **Edit the `.env` File**: Open the `.env` file in a text editor (e.g., VS Code, Notepad++, or any other editor). Add the following line to the file, replacing `your_github_token_here` with your actual GitHub token:
+3. **Edit the `.env` File**: Open the `.env` file in a text editor (e.g., VS Code, Notepad++, or any other editor). Add the following lines to the file, replacing the placeholders with your actual Microsoft Foundry Models endpoint and key (see [`providers.md`](03-providers.md) for how to get these):
+
+   > **Note:** GitHub Models (and its `GITHUB_TOKEN` variable) is retiring at the end of July 2026. Use [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) instead.
 
    ```env
-   GITHUB_TOKEN=your_github_token_here
+   AZURE_INFERENCE_ENDPOINT=your_foundry_endpoint_here
+   AZURE_INFERENCE_CREDENTIAL=your_foundry_api_key_here
    ```
 
 4. **Save the File**: Save the changes and close the text editor.
@@ -66,13 +83,14 @@ Here's a step-by-step guide on how to create a `.env` file for Python and add th
    # Load environment variables from .env file
    load_dotenv()
 
-   # Access the GITHUB_TOKEN variable
-   github_token = os.getenv("GITHUB_TOKEN")
+   # Access the Microsoft Foundry Models variables
+   endpoint = os.getenv("AZURE_INFERENCE_ENDPOINT")
+   token = os.getenv("AZURE_INFERENCE_CREDENTIAL")
 
-   print(github_token)
+   print(endpoint)
    ```
 
-That's it! You've successfully created a `.env` file, added your GitHub token, and loaded it into your Python application.
+That's it! You've successfully created a `.env` file, added your Microsoft Foundry Models credentials, and loaded them into your Python application.
 
 ## How to Run locally on your computer
 
@@ -87,9 +105,9 @@ cd generative-ai-for-beginners
 
 Once you have everything checked out, you can get started!
 
-## Optional Steps 
+## Optional Steps
 
-### Installing Miniconda 
+### Installing Miniconda
 
 [Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) is a lightweight installer for installing [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst), Python, as well as a few packages.
 Conda itself is a package manager, that makes it easy to setup and switch between different Python [**virtual environments**](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) and packages. It also comes in handy for installing packages that are not available via `pip`.
@@ -105,19 +123,18 @@ Go ahead and populate your environment file with the snippet below:
 ```yml
 name: <environment-name>
 channels:
- - defaults
- - microsoft
+  - defaults
+  - microsoft
 dependencies:
-- python=<python-version>
-- openai
-- python-dotenv
-- pip
-- pip:
-    - azure-ai-ml
-
+  - python=<python-version>
+  - openai
+  - python-dotenv
+  - pip
+  - pip:
+      - azure-ai-ml
 ```
 
-If you find you getting errors using conda you can mannually install the Microsoft AI Libraries using the following command in a terminal. 
+If you find you are getting errors using conda you can manually install the Microsoft AI Libraries using the following command in a terminal.
 
 ```
 conda install -c microsoft azure-ai-ml
@@ -166,21 +183,22 @@ Once you access the URL, you should see the course outline and be able to naviga
 
 ### Running in a container
 
-An alternative to setting everything up on your computer or Codespace is to use a [container](https://en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst). The special `.devcontainer` folder within the course repository makes it possible for VS Code to set up the project within a container. Outside of Codespaces, this will require the installation of Docker, and quite frankly, it involves a bit of work, so we recommend this only to those with experience working with containers.
+An alternative to setting everything up on your computer or Codespace is to use a [container](<https://en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst>). The special `.devcontainer` folder within the course repository makes it possible for VS Code to set up the project within a container. Outside of Codespaces, this will require the installation of Docker, and quite frankly, it involves a bit of work, so we recommend this only to those with experience working with containers.
 
 One of the best ways to keep your API keys secure when using GitHub Codespaces is by using Codespace Secrets. Please follow the [Codespaces secrets management](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-secrets-for-your-codespaces?WT.mc_id=academic-105485-koreyst) guide to learn more about this.
 
+
 ## Lessons and Technical Requirements
 
-The course has 6 concept lessons and 6 coding lessons.
+The course has "Learn" lessons that explain Generative AI concepts and "Build" lessons with hands-on code examples in both **Python** and **TypeScript** where possible.
 
-For the coding lessons, we are using the Azure OpenAI Service. You will need access to the Azure OpenAI service and an API key to run this code. You can apply to get access by [completing this application](https://azure.microsoft.com/products/ai-services/openai-service?WT.mc_id=academic-105485-koreyst).
+For the coding lessons, we use Azure OpenAI in Microsoft Foundry. You'll need an Azure subscription and an API key. Access is open - no application required - so you can [create a Microsoft Foundry resource and deploy a model](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) to get your endpoint and key.
 
-While you wait for your application to be processed, each coding lesson also includes a `README.md` file where you can view the code and outputs.
+Each coding lesson also includes a `README.md` file where you can view the code and outputs without running anything.
 
 ## Using the Azure OpenAI Service for the first time
 
-If this is your first time working with the Azure OpenAI service, please follow this guide on how to [create and deploy an Azure OpenAI Service resource.](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)
+If this is your first time working with the Azure OpenAI service, please follow this guide on how to [create and deploy an Azure OpenAI Service resource.](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)
 
 ## Using the OpenAI API for the first time
 
@@ -211,3 +229,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 ## Let's Get Started
 
 Now that you have completed the needed steps to complete this course, let's get started by getting an [introduction to Generative AI and LLMs](../01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst).
+

@@ -1,67 +1,61 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4c2a0b0c738b649ef049fb99a23be661",
-  "translation_date": "2025-05-20T11:16:44+00:00",
-  "source_file": "21-meta/README.md",
-  "language_code": "sr"
-}
--->
-# Izgradnja sa Meta porodicom modela
+# Прављење са Мета породичним моделима 
 
-## Uvod
+## Увод 
 
-Ova lekcija će pokriti:
+Ова лекција ће обухватити: 
 
-- Istraživanje dva glavna modela iz Meta porodice - Llama 3.1 i Llama 3.2
-- Razumevanje upotrebe i scenarija za svaki model
-- Primer koda koji pokazuje jedinstvene karakteristike svakog modela
+- Истраживање два главна Мета породична модела - Llama 3.1 и Llama 3.2 
+- Разумевање случајева употребе и сценарија за сваки модел 
+- Пример кода који показује јединствене карактеристике сваког модела 
 
-## Meta porodica modela
 
-U ovoj lekciji ćemo istražiti 2 modela iz Meta porodice ili "Llama stada" - Llama 3.1 i Llama 3.2
+## Мета породица модела 
 
-Ovi modeli dolaze u različitim varijantama i dostupni su na GitHub Model tržištu. Ovde su dodatne informacije o korišćenju GitHub Modela za [prototipiranje sa AI modelima](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+У овој лекцији ћемо проучити 2 модела из Мета породице или "Llama Herd" - Llama 3.1 и Llama 3.2.
 
-Varijante modela:
-- Llama 3.1 - 70B Instruct
-- Llama 3.1 - 405B Instruct
-- Llama 3.2 - 11B Vision Instruct
-- Llama 3.2 - 90B Vision Instruct
+Ови модели долазе у различитим варијантама и доступни су у [Microsoft Foundry Models catalog](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
 
-*Napomena: Llama 3 je takođe dostupna na GitHub Modelima, ali neće biti pokrivena u ovoj lekciji*
+> **Напомена:** GitHub Models се укида крајем јула 2026. Више детаља о коришћењу [Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) за прототипирање са AI моделима можете пронаћи овде.
 
-## Llama 3.1
+Варијанте модела: 
+- Llama 3.1 - 70B Инструкт 
+- Llama 3.1 - 405B Инструкт 
+- Llama 3.2 - 11B Vision Инструкт 
+- Llama 3.2 - 90B Vision Инструкт 
 
-Sa 405 milijardi parametara, Llama 3.1 spada u kategoriju open source LLM.
+*Напомена: Llama 3 је такође доступан у Microsoft Foundry Models али неће бити обрађен у овој лекцији*
 
-Model je unapređenje ranijeg izdanja Llama 3 i nudi:
+## Llama 3.1 
 
-- Veći kontekstualni prozor - 128k tokena naspram 8k tokena
-- Veći maksimalni izlazni tokeni - 4096 naspram 2048
-- Bolja podrška za više jezika - zbog povećanja broja trening tokena
+Са 405 милијарди параметара, Llama 3.1 спада у категорију отворених LLM модела. 
 
-Ovo omogućava Llama 3.1 da se nosi sa složenijim slučajevima upotrebe pri izradi GenAI aplikacija, uključujući:
-- Pozivanje nativnih funkcija - sposobnost pozivanja eksternih alata i funkcija izvan LLM radnog toka
-- Bolje RAG performanse - zbog većeg kontekstualnog prozora
-- Generisanje sintetičkih podataka - sposobnost kreiranja efektivnih podataka za zadatke kao što je fino podešavanje
+Модел је надоградња у односу на ранији издање Llama 3 нудећи: 
 
-### Pozivanje nativnih funkcija
+- Већи контекстни прозор - 128к токена у поређењу са 8к токена 
+- Већи Максимални број излазних токена - 4096 уместо 2048 
+- Боља мултилингвистичка подршка - због повећања броја токена за обуку 
 
-Llama 3.1 je fino podešena da bude efikasnija u pravljenju poziva funkcija ili alata. Takođe ima dva ugrađena alata koje model može prepoznati kao potrebne za korišćenje na osnovu korisničkog zahteva. Ovi alati su:
+Ово омогућава Llama 3.1 да решава сложеније случајеве употребе при изради GenAI апликација укључујући: 
+- Нативно позивање функција - могућност позива спољних алата и функција изван LLM радног тока
+- Боље RAG перформансе - због већег контекстног прозора 
+- Генерација синтетичких података - могућност креирања ефикасних података за задатке као што је фино подешавање 
 
-- **Brave Search** - Može se koristiti za dobijanje najnovijih informacija kao što je vreme putem web pretrage
-- **Wolfram Alpha** - Može se koristiti za složenije matematičke proračune, tako da pisanje sopstvenih funkcija nije potrebno.
+### Нативно позивање функција 
 
-Takođe možete kreirati sopstvene prilagođene alate koje LLM može pozvati.
+Llama 3.1 је фино подешен да буде ефикаснији у прављењу позива функцијама или алатима. Такође има два уграђена алата која модел може препознати као неопходна за употребу на основу упита корисника. Тим алатима су: 
 
-U sledećem primeru koda:
+- **Brave Search** - Може се користити за добијање најсвежијих информација попут времена обављањем претраге веба 
+- **Wolfram Alpha** - Може се користити за сложеније математичке прорачуне тако да није потребно писати сопствене функције. 
 
-- Definišemo dostupne alate (brave_search, wolfram_alpha) u sistemskom zahtevu.
-- Šaljemo korisnički zahtev koji pita o vremenu u određenom gradu.
-- LLM će odgovoriti pozivom alata Brave Search, koji će izgledati ovako `<|python_tag|>brave_search.call(query="Stockholm weather")`
+Такође можете креирати своје прилагођене алате које LLM може позивати. 
 
-*Napomena: Ovaj primer samo pravi poziv alata, ako želite da dobijete rezultate, potrebno je da kreirate besplatan nalog na Brave API stranici i definišete samu funkciju*
+У примеру кода испод: 
+
+- Дефинишемо доступне алате (brave_search, wolfram_alpha) у системској поруци. 
+- Слањем корисничког упита који пита о времену у одређеном граду. 
+- LLM ће одговорити позивом алата ка Brave Search алату који ће изгледати овако `<|python_tag|>brave_search.call(query="Stockholm weather")` 
+
+*Напомена: Овај пример само прави позив алату, ако желите да добијете резултате, потребно је да направите бесплатни налог на Brave API страници и дефинишете саму функцију.
 
 ```python 
 import os
@@ -69,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Узмите ове из странице „Преглед“ вашег Microsoft Foundry пројекта
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -101,17 +96,18 @@ response = client.complete(messages=messages, model=model_name)
 print(response.choices[0].message.content)
 ```
 
-## Llama 3.2
+## Llama 3.2 
 
-Iako je LLM, jedno ograničenje koje Llama 3.1 ima je multimodalnost. To jest, sposobnost korišćenja različitih tipova ulaza kao što su slike kao zahtevi i pružanje odgovora. Ova sposobnost je jedna od glavnih karakteristika Llama 3.2. Ove karakteristike takođe uključuju:
+Иако је LLM, једно ограничење Llama 3.1 је његов недостатак мултимодалности. То јест, неспособност коришћења различитих типова улазних података као што су слике као упити и пружање одговора. Ова способност је једна од главних карактеристика Llama 3.2. Ове карактеристике такође укључују: 
 
-- Multimodalnost - ima sposobnost evaluacije i tekstualnih i slikovnih zahteva
-- Varijacije male do srednje veličine (11B i 90B) - ovo pruža fleksibilne opcije za implementaciju,
-- Varijacije samo za tekst (1B i 3B) - ovo omogućava modelu da bude implementiran na edge/mobilnim uređajima i pruža nisku latenciju
+- Мултимодалност - има способност да оцени и текстуалне и сликовне упите 
+- Варијације мале до средње величине (11B и 90B) - ово пружа флексибилне опције за имплементацију, 
+- Варијације само за текст (1B и 3B) - ово омогућава моделу да се имплементира на уређајима краја мреже / мобилним уређајима и пружа ниску латенцију 
 
-Podrška za multimodalnost predstavlja veliki korak u svetu open source modela. Sledeći primer koda uzima i slikovni i tekstualni zahtev kako bi dobio analizu slike od Llama 3.2 90B.
+Подршка мултимодалности представља велики корак у свету отворених модела. Пример кода испод узима и слику и текстуални упит за добијање анализе слике од Llama 3.2 90B. 
 
-### Multimodalna podrška sa Llama 3.2
+
+### Мултимодална подршка са Llama 3.2
 
 ```python 
 import os
@@ -126,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Узмите ово са странице "Преглед" вашег Microsoft Foundry пројекта
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -158,9 +155,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## Učenje se ne završava ovde, nastavite putovanje
+## Учивање овде не престаје, наставите путовање
 
-Nakon završetka ove lekcije, pogledajte našu [kolekciju za učenje generativne AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) da nastavite sa usavršavanjem svog znanja o generativnoj AI!
+Након завршетка ове лекције, погледајте нашу [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) да бисте наставили да унапређујете своје знање о генеративној вештачкој интелигенцији!
 
-**Одрицање од одговорности**:  
-Овај документ је преведен користећи AI услугу превођења [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, молимо вас да будете свесни да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати меродавним извором. За критичне информације, препоручује се професионални људски превод. Не преузимамо одговорност за било каква неспоразума или погрешна тумачења која проистичу из употребе овог превода.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Изјава о одрицању одговорности**:
+Овај документ је преведен коришћењем услуге за аутоматски превод [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

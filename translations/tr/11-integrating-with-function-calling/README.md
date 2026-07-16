@@ -1,85 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77a48a201447be19aa7560706d6f93a0",
-  "translation_date": "2025-05-19T21:28:48+00:00",
-  "source_file": "11-integrating-with-function-calling/README.md",
-  "language_code": "tr"
-}
--->
-# Fonksiyon çağrımı ile entegrasyon
+# Fonksiyon çağrısı ile entegrasyon
 
-[![Fonksiyon çağrımı ile entegrasyon](../../../translated_images/11-lesson-banner.5da178a9bf0c61125724b82872e87e5530d352453ec40cb59a13e27f9346c41e.tr.png)](https://aka.ms/gen-ai-lesson11-gh?WT.mc_id=academic-105485-koreyst)
+[![Fonksiyon çağrısı ile entegrasyon](../../../translated_images/tr/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-Önceki derslerde oldukça fazla şey öğrendiniz. Ancak, daha fazla geliştirme yapabiliriz. Ele alabileceğimiz bazı konular, yanıtın aşağı akışta daha kolay çalışılabilmesi için nasıl daha tutarlı bir yanıt formatı elde edebileceğimizdir. Ayrıca, uygulamamızı daha da zenginleştirmek için diğer kaynaklardan veri eklemek isteyebiliriz.
+Önceki derslerde oldukça fazla şey öğrendiniz. Ancak, daha da iyileştirebiliriz. Ele alabileceğimiz bazı konular, yanıtı daha tutarlı bir formatta alarak yanıta downstream işlemek için kolaylık sağlamaktır. Ayrıca, uygulamamızı daha da zenginleştirmek için diğer kaynaklardan veri eklemek isteyebiliriz.
 
-Yukarıda belirtilen sorunlar, bu bölümde ele alınmak istenen konulardır.
+Yukarıda bahsedilen sorunlar bu bölümün çözmeye çalıştığı konulardır.
 
 ## Giriş
 
-Bu derste ele alınacak konular:
+Bu ders şunları kapsayacak:
 
-- Fonksiyon çağrımının ne olduğunu ve kullanım alanlarını açıklamak.
-- Azure OpenAI kullanarak bir fonksiyon çağrımı oluşturmak.
-- Bir uygulamaya fonksiyon çağrımını nasıl entegre edeceğinizi öğrenmek.
+- Fonksiyon çağrısının ne olduğunu ve kullanım alanlarını açıklamak.
+- Azure OpenAI kullanarak fonksiyon çağrısı oluşturmak.
+- Bir uygulamaya fonksiyon çağrısını nasıl entegre edeceğimizi göstermek.
 
 ## Öğrenme Hedefleri
 
 Bu dersin sonunda şunları yapabileceksiniz:
 
-- Fonksiyon çağrımının kullanım amacını açıklamak.
-- Azure OpenAI Hizmeti kullanarak Fonksiyon Çağrımı kurmak.
+- Fonksiyon çağrısı kullanım amacını açıklamak.
+- Azure OpenAI Servisi kullanarak Fonksiyon Çağrısı kurmak.
 - Uygulamanızın kullanım durumu için etkili fonksiyon çağrıları tasarlamak.
 
-## Senaryo: Sohbet botumuzu fonksiyonlarla geliştirmek
+## Senaryo: Fonksiyonlarla chatbot’umuzu geliştirmek
 
-Bu ders için, kullanıcıların teknik kursları bulmak için bir sohbet botu kullanmalarına olanak tanıyan bir özellik oluşturmak istiyoruz. Kullanıcıların beceri seviyelerine, mevcut rollerine ve ilgi duydukları teknolojiye uygun kurslar önereceğiz.
+Bu ders için, kullanıcıların teknik kurslar bulmak amacıyla bir chatbot kullanabileceği bir özellik geliştirmek istiyoruz. Kullanıcının beceri seviyesi, mevcut rolü ve ilgilendiği teknolojilere uygun kursları önereceğiz.
 
-Bu senaryoyu tamamlamak için şu kombinasyonu kullanacağız:
+Bu senaryoyu tamamlamak için aşağıdaki kombinasyonu kullanacağız:
 
-- Kullanıcı için bir sohbet deneyimi oluşturmak için `Azure OpenAI`.
-- Kullanıcının isteğine göre kurs bulmasına yardımcı olmak için `Microsoft Learn Catalog API`.
-- Kullanıcının sorgusunu alıp bir API isteği yapmak için bir fonksiyona göndermek için `Function Calling`.
+- Kullanıcı için sohbet deneyimi oluşturmak amacıyla `Azure OpenAI`.
+- Kullanıcının talebine göre kurs bulmaya yardımcı olmak için `Microsoft Learn Catalog API`.
+- Kullanıcının sorgusunu alıp bir fonksiyona API isteği yapmak üzere göndermek için `Fonksiyon Çağrısı`.
 
-Başlamak için, öncelikle neden fonksiyon çağrımını kullanmak isteyebileceğimize bakalım:
+Başlamak için, neden öncelikle fonksiyon çağrısı kullanmak istediğimize bakalım:
 
-## Neden Fonksiyon Çağrımı
+## Neden Fonksiyon Çağrısı
 
-Fonksiyon çağrımından önce, bir LLM'den gelen yanıtlar yapılandırılmamış ve tutarsızdı. Geliştiriciler, her yanıt varyasyonunu ele alabilmek için karmaşık doğrulama kodları yazmak zorundaydı. Kullanıcılar "Stockholm'deki şu anki hava durumu nedir?" gibi cevaplar alamıyordu. Bunun nedeni, modellerin verilerin eğitildiği zamana kadar sınırlı olmasıydı.
+Fonksiyon çağrısı öncesinde, bir LLM’den gelen yanıtlar yapısız ve tutarsızdı. Geliştiriciler, yanıtların her bir varyasyonunu işleyebilmek için karmaşık doğrulama kodları yazmak zorundaydı. Kullanıcılar “Stockholm’daki güncel hava durumu nedir?” gibi sorulara cevap alamıyordu. Çünkü modeller, eğitildikleri veri zamanına kadar sınırlıydı.
 
-Fonksiyon Çağrımı, Azure OpenAI Hizmeti'nin aşağıdaki sınırlamaları aşmak için sunduğu bir özelliktir:
+Fonksiyon Çağrısı, Azure OpenAI Servisi’nin aşağıdaki sınırlamaları aşmak için sunduğu bir özelliktir:
 
-- **Tutarlı yanıt formatı**. Yanıt formatını daha iyi kontrol edebilirsek, yanıtı diğer sistemlere daha kolay entegre edebiliriz.
-- **Dış veri**. Bir uygulamanın diğer kaynaklarından verileri sohbet bağlamında kullanma yeteneği.
+- **Tutarlı yanıt formatı**. Yanıt formatını daha iyi kontrol edebilirsek, yanıtı downstream diğer sistemlere entegre etmek daha kolay olur.
+- **Dış veri**. Uygulamanın diğer kaynaklarından gelen verileri sohbet bağlamında kullanabilme yeteneği.
 
-## Senaryo aracılığıyla problemi açıklamak
+## Sorunu bir senaryo ile göstermek
 
-> Aşağıdaki senaryoyu çalıştırmak istiyorsanız, [dahil edilen not defterini](../../../11-integrating-with-function-calling/python/aoai-assignment.ipynb) kullanmanızı öneririz. Sorunu ele almak için fonksiyonların nasıl yardımcı olabileceğini açıklamaya çalışırken sadece okumak da mümkündür.
+> Aşağıdaki senaryoyu çalıştırmak istiyorsanız, [ekli not defterini](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) kullanmanızı öneririz. Ayrıca sadece okuyarak fonksiyonların sorunu nasıl çözdüğünü anlamaya çalışabilirsiniz.
 
-Yanıt formatı problemini açıklayan örneğe bakalım:
+Yanıt formatı sorununu gösteren örneğe bakalım:
 
-Diyelim ki öğrenci verilerinin bir veritabanını oluşturmak istiyoruz, böylece onlara doğru kursu önerebiliriz. Aşağıda, içerdiği veriler açısından çok benzer olan iki öğrenci açıklaması bulunmaktadır.
+Diyelim ki, öğrencilere uygun kurslar önerebilmek için öğrenci verilerinden oluşan bir veritabanı oluşturmak istiyoruz. Aşağıda, içerdikleri veri bakımından çok benzer olan iki öğrenci açıklaması bulunmaktadır.
 
-1. Azure OpenAI kaynağımıza bir bağlantı oluşturun:
+1. Azure OpenAI kaynağımıza bağlantı oluşturalım:
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # Yanıtlar API'si Azure OpenAI (Microsoft Foundry) v1 uç noktasından sağlanır
+   # bu yüzden OpenAI istemcisini <your-endpoint>/openai/v1/ adresine yönlendiriyoruz.
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   Aşağıda, `api_type`, `api_base`, `api_version` and `api_key`.
+   Aşağıda, Azure OpenAI bağlantımızı yapılandırmak için bazı Python kodları vardır. V1 uç noktası kullandığımız için sadece `api_key` ve `base_url` ayarlamamız yeterlidir ( `api_version` gerekmez).
 
-1. Creating two student descriptions using variables `student_1_description` and `student_2_description` ayarladığımız Azure OpenAI'ye bağlantımızı yapılandırmak için biraz Python kodu bulunmaktadır.
+1. `student_1_description` ve `student_2_description` değişkenlerini kullanarak iki öğrenci açıklaması oluşturmak.
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -87,9 +81,9 @@ Diyelim ki öğrenci verilerinin bir veritabanını oluşturmak istiyoruz, böyl
    student_2_description = "Michael Lee is a sophomore majoring in computer science at Stanford University. He has a 3.8 GPA. Michael is known for his programming skills and is an active member of the university's Robotics Club. He hopes to pursue a career in artificial intelligence after finishing his studies."
    ```
 
-   Yukarıdaki öğrenci açıklamalarını verileri ayrıştırmak için bir LLM'ye göndermek istiyoruz. Bu veriler daha sonra uygulamamızda kullanılabilir ve bir API'ye gönderilebilir veya bir veritabanında saklanabilir.
+   Yukarıdaki öğrenci açıklamalarını veriyi ayrıştırmak için bir LLM’ye göndermek istiyoruz. Bu veriler daha sonra uygulamamızda kullanılabilir, bir API’ye gönderilebilir veya veritabanında saklanabilir.
 
-1. İlgilendiğimiz bilgileri LLM'ye talimat verdiğimiz iki özdeş istem oluşturalım:
+1. LLM’ye hangi bilgileri istediğimizi belirtmek için iki özdeş istem (prompt) oluşturalım:
 
    ```python
    prompt1 = f'''
@@ -119,33 +113,35 @@ Diyelim ki öğrenci verilerinin bir veritabanını oluşturmak istiyoruz, böyl
    '''
    ```
 
-   Yukarıdaki istemler, LLM'ye bilgileri çıkarmasını ve yanıtı JSON formatında döndürmesini talimat verir.
+   Yukarıdaki istemler, LLM’ye bilgileri çıkarıp JSON formatında yanıt vermesini belirtiyor.
 
-1. İstemleri ve Azure OpenAI ile bağlantıyı kurduktan sonra, `openai.ChatCompletion`. We store the prompt in the `messages` variable and assign the role to `user` kullanarak istemleri LLM'ye göndereceğiz. Bu, bir kullanıcının bir sohbet botuna yazdığı bir mesajı taklit etmek içindir.
+1. İstemleri ve Azure OpenAI bağlantısını ayarladıktan sonra, `client.responses.create` kullanarak istemleri LLM’ye göndereceğiz. İstemi `input` değişkenine koyuyoruz ve rolü `user` olarak belirliyoruz. Bu, kullanıcının chatbot’a yazdığı mesajı taklit eder.
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # istem birden gelen yanıt
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # istem ikiden gelen yanıt
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-Şimdi her iki isteği de LLM'ye gönderebilir ve aldığımız yanıtı `openai_response1['choices'][0]['message']['content']`.
+Şimdi her iki isteği LLM’ye gönderebilir ve `openai_response1.output_text` gibi ifadelerle yanıtları inceleyebiliriz.
 
-1. Lastly, we can convert the response to JSON format by calling `json.loads` gibi bulabiliriz:
+1. Son olarak, yanıtı JSON formatına çevirmek için `json.loads` fonksiyonunu kullanalım:
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # Yanıt JSON nesnesi olarak yükleniyor
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
@@ -173,59 +169,60 @@ Diyelim ki öğrenci verilerinin bir veritabanını oluşturmak istiyoruz, böyl
    }
    ```
 
-   İstemler aynı ve açıklamalar benzer olmasına rağmen, `Grades` property formatted differently, as we can sometimes get the format `3.7` or `3.7 GPA` for example.
+   İstemler aynı ve açıklamalar benzer olmasına rağmen, `Grades` özelliğinin değerlerini farklı formatlarda görüyoruz. Örneğin bazen `3.7`, bazen `3.7 GPA` formatı alınabiliyor.
 
-   This result is because the LLM takes unstructured data in the form of the written prompt and returns also unstructured data. We need to have a structured format so that we know what to expect when storing or using this data
+   Bu sonuç, LLM’nin yazılı istem şeklindeki yapısız veriyi alıp yine yapısız veri döndürmesindendir. Bu veriyi saklarken veya kullanırken ne bekleyeceğimizi bilmek için yapılandırılmış bir formata ihtiyacımız vardır.
 
-So how do we solve the formatting problem then? By using functional calling, we can make sure that we receive structured data back. When using function calling, the LLM does not actually call or run any functions. Instead, we create a structure for the LLM to follow for its responses. We then use those structured responses to know what function to run in our applications.
+Peki, biçimlendirme sorununu nasıl çözeceğiz? Fonksiyon çağrısı kullanarak, yapılandırılmış veri almamızı sağlayabiliriz. Fonksiyon çağrısı kullanıldığında LLM aslında herhangi bir fonksiyonu çağırmaz veya çalıştırmaz. Bunun yerine yanıtları için takip edilecek bir yapı oluştururuz. Bu yapılandırılmış yanıtları uygulamalarımızda hangi fonksiyonun çalıştırılacağına karar vermek için kullanırız.
 
-![function flow](../../../translated_images/Function-Flow.01a723a374f79e5856d9915c39e16c59fa2a00c113698b22a28e616224f407e1.tr.png)
+![fonksiyon akışı](../../../translated_images/tr/Function-Flow.083875364af4f4bb.webp)
 
-We can then take what is returned from the function and send this back to the LLM. The LLM will then respond using natural language to answer the user's query.
+Daha sonra fonksiyondan dönen bilgiyi tekrar LLM’ye gönderebiliriz. LLM, kullanıcının sorgusuna doğal dilde yanıt verir.
 
-## Use Cases for using function calls
+## Fonksiyon çağrıları için kullanım alanları
 
-There are many different use cases where function calls can improve your app like:
+Fonksiyon çağrılarının uygulamanızı geliştirebileceği birçok farklı kullanım alanı vardır:
 
-- **Calling External Tools**. Chatbots are great at providing answers to questions from users. By using function calling, the chatbots can use messages from users to complete certain tasks. For example, a student can ask the chatbot to "Send an email to my instructor saying I need more assistance with this subject". This can make a function call to `send_email(to: string, body: string)`
+- **Dış Araçları Çağırma**. Chatbotlar, kullanıcılardan gelen sorulara cevap vermede iyidir. Fonksiyon çağrısı kullanarak, sohbet botları kullanıcı mesajlarını bazı görevleri tamamlamak için kullanabilir. Örneğin, bir öğrenci chatbot’a "Bu konuda daha fazla yardıma ihtiyacım olduğunu öğretmenime söyleyen bir e-posta gönder" diyor. Bu `send_email(to: string, body: string)` fonksiyon çağrısı yapabilir.
 
-- **Create API or Database Queries**. Users can find information using natural language that gets converted into a formatted query or API request. An example of this could be a teacher who requests "Who are the students that completed the last assignment" which could call a function named `get_completed(student_name: string, assignment: int, current_status: string)`
+- **API veya Veritabanı Sorguları Oluşturma**. Kullanıcılar doğal dil kullanarak bilgi bulabilir ve bu istek formatlanmış sorgu veya API isteğine dönüştürülür. Örneğin, "Son görevi tamamlayan öğrenciler kimler?" diye sorduklarında `get_completed(student_name: string, assignment: int, current_status: string)` isimli fonksiyon çağrılır.
 
-- **Creating Structured Data**. Users can take a block of text or CSV and use the LLM to extract important information from it. For example, a student can convert a Wikipedia article about peace agreements to create AI flashcards. This can be done by using a function called `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
+- **Yapılandırılmış Veri Oluşturma**. Kullanıcılar bir metin bloğu veya CSV’yi kullanarak LLM’den önemli bilgileri çıkarabilir. Örneğin bir öğrenci barış anlaşmalarıyla ilgili bir Wikipedia makalesini yapay zeka flash kartları oluşturmak için dönüştürebilir. Bu, `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)` adında bir fonksiyon kullanılarak yapılabilir.
 
-## Creating Your First Function Call
+## İlk Fonksiyon Çağrınızı Oluşturma
 
-The process of creating a function call includes 3 main steps:
+Fonksiyon çağrısı oluşturma işlemi 3 ana adımdan oluşur:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. Fonksiyonlarınızın (araçların) listesini ve kullanıcı mesajını kullanarak Responses API'yi **çağırmak**.
+2. Modelin yanıtını okuyup bir eylem yapmak, yani bir fonksiyon veya API çağrısı **yapmak**.
+3. Fonksiyonunuzun yanıtı ile Responses API’ye tekrar bir çağrı yapıp bu bilgiyi kullanarak kullanıcıya cevap oluşturmak.
 
-![LLM Flow](../../../translated_images/LLM-Flow.7df9f166be50aa324705f2ccddc04a27cfc7b87e57b1fbe65eb534059a3b8b66.tr.png)
+![LLM Akışı](../../../translated_images/tr/LLM-Flow.3285ed8caf4796d7.webp)
 
-### Step 1 - creating messages
+### 1. Adım - mesajları oluşturma
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+İlk adım, bir kullanıcı mesajı oluşturmaktır. Bu, bir metin girdi değerini alarak dinamik atanabilir veya burada bir değer atanabilir. Eğer Responses API ile ilk kez çalışıyorsanız, mesajın `role` ve `content` alanlarını tanımlamanız gerekir.
 
-The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` ve bir örnek soru gibi değerler görüyoruz.
+`role`, `system` (kuralları oluşturma), `assistant` (model) veya `user` (son kullanıcı) olabilir. Fonksiyon çağrısı için bunu `user` olarak atayacağız ve örnek bir soru belirteceğiz.
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Farklı roller atanarak, LLM'ye bir şey söyleyenin sistem mi yoksa kullanıcı mı olduğu net bir şekilde belirtilir, bu da LLM'nin üzerine inşa edebileceği bir konuşma geçmişi oluşturmaya yardımcı olur.
+Farklı roller atayarak, LLM’ye bunların sistemden mi yoksa kullanıcıdan mı geldiği açıklanmış olur ve LLM üzerine inşa edebileceği bir sohbet geçmişi oluşturabilir.
 
-### Adım 2 - fonksiyonlar oluşturmak
+### 2. Adım - fonksiyonları oluşturma
 
-Sonra bir fonksiyon ve o fonksiyonun parametrelerini tanımlayacağız. Burada sadece `search_courses` but you can create multiple functions.
+Sonraki olarak, bir fonksiyonu ve fonksiyon parametrelerini tanımlayacağız. Burada sadece `search_courses` adında bir fonksiyon kullanacağız ama birden fazla fonksiyon da oluşturabilirsiniz.
 
-> **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
+> **Önemli**: Fonksiyonlar sistem mesajında LLM’ye dahil edilir ve kullanılabilir token sayınıza dahil olur.
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters` adlı bir fonksiyon kullanacağız:
+Aşağıda, fonksiyonları bir dizi nesne olarak oluşturuyoruz. Her bir nesne, `type`, `name`, `description` ve `parameters` özelliklerine sahip, düz Responses API formatında bir araçtır:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -252,75 +249,76 @@ functions = [
 ]
 ```
 
-Her bir fonksiyon örneğini daha ayrıntılı olarak aşağıda açıklayalım:
+Her bir fonksiyon örneğini aşağıda daha ayrıntılı tanımlayalım:
 
-- `name` - The name of the function that we want to have called.
-- `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
-  1.  `type` - The data type of the properties will be stored in.
-  1.  `properties` - List of the specific values that the model will use for its response
-      1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
-      1. `type` - The data type of this property, for example, `string`.
-      1. `description` - Description of the specific property.
+- `name` - Çağrılmasını istediğimiz fonksiyonun adı.
+- `description` - Fonksiyonun nasıl çalıştığını açıklayan açıklama. Burada spesifik ve net olmak önemlidir.
+- `parameters` - Modelin yanıtında üretmesini istediğiniz değerler ve formattan oluşan liste. `parameters` dizisi aşağıdaki özelliklere sahip öğelerden oluşur:
+  1. `type` - Özelliklerin saklanacağı veri tipi.
+  1. `properties` - Modelin yanıtında kullanacağı belirli değerlerin listesi
+      1. `name` - Anahtar, modelin biçimlendirilmiş yanıtında kullanacağı özellik adı, örneğin `product`.
+      1. `type` - Bu özelliğin veri tipi, örneğin `string`.
+      1. `description` - Belirli özelliğin açıklaması.
 
-There's also an optional property `required` - required property for the function call to be completed.
+Ayrıca isteğe bağlı `required` özelliği vardır - fonksiyon çağrısının tamamlanması için gerekli alan.
 
-### Step 3 - Making the function call
+### 3. Adım - fonksiyon çağrısı yapmak
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+Fonksiyon tanımlandıktan sonra bunu Responses API çağrısına dahil etmek gerekiyor. Bunu istek parametrelerine `tools` ekleyerek yaparız. Bu durumda `tools=functions` olur.
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+Ayrıca `tool_choice` değerini `auto` olarak ayarlamak mümkündür. Bu, fonksiyon çağrısını kendimizin atamak yerine LLM’nin kullanıcı mesajına göre hangi fonksiyonu çağıracağını kendisinin belirlemesi demektir.
 
-Here's some code below where we call `ChatCompletion.create`, note how we set `functions=functions` and `function_call="auto"` ve böylece LLM'ye sağladığımız fonksiyonları ne zaman çağıracağını seçme hakkı veriyoruz:
+Aşağıda, `client.responses.create` çağırdığımız kod örneği vardır. `tools=functions` ve `tool_choice="auto"` ayarlandığını görebilirsiniz; böylece LLM’ye hangi fonksiyonu ne zaman çağıracağına karar verme seçeneği verilmiş olur:
 
 ```python
-response = client.chat.completions.create(model=deployment,
-                                        messages=messages,
-                                        functions=functions,
-                                        function_call="auto")
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-print(response.choices[0].message)
+print(response.output)
 ```
 
-Geri dönen yanıt şu şekilde görünüyor:
+Dönen yanıtta `response.output` içinde şöyle görünen bir `function_call` öğesi vardır:
 
 ```json
 {
-  "role": "assistant",
-  "function_call": {
-    "name": "search_courses",
-    "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
-  }
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
 }
 ```
 
-Burada `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+Burada `search_courses` fonksiyonunun hangi argümanlarla çağrıldığı, JSON yanıtındaki `arguments` özelliğinde listelenmiştir.
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` değerini nasıl kullandığını görebiliyoruz:
+LLM, `input` parametresine verilen değerden veriyi çıkardığı için fonksiyonun argümanlarına uyacak veriyi bulabilmiştir. Aşağıda `messages` değerinin hatırlatması bulunmaktadır:
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Gördüğünüz gibi, `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+Gördüğünüz gibi `student`, `Azure` ve `beginner` `messages`’tan çıkarılmış ve fonksiyon girdisi olarak ayarlanmıştır. Fonksiyonları bu şekilde kullanmak, hem bir istemciyi bilgi çıkarmak hem de LLM’ye yapı sağlamak ve yeniden kullanılabilir fonksiyonellik oluşturmak için harika bir yoldur.
 
-Next, we need to see how we can use this in our app.
+Şimdi, bunu uygulamamızda nasıl kullanacağımızı görelim.
 
-## Integrating Function Calls into an Application
+## Fonksiyon Çağrılarının Bir Uygulamaya Entegrasyonu
 
-After we have tested the formatted response from the LLM, we can now integrate this into an application.
+LLM’den yapılandırılmış yanıtı test ettikten sonra, bunu bir uygulamaya entegre edebiliriz.
 
-### Managing the flow
+### Akışı yönetmek
 
-To integrate this into our application, let's take the following steps:
+Uygulamamıza entegre etmek için şu adımları izleyelim:
 
-1. First, let's make the call to the OpenAI services and store the message in a variable called `response_message`.
+1. Önce OpenAI servislerine çağrı yapalım ve yanıtın `output` içinden fonksiyon çağrısı öğelerini çıkaralım.
 
    ```python
-   response_message = response.choices[0].message
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
    ```
 
-1. Şimdi Microsoft Learn API'sini çağırarak bir kurs listesi almak için fonksiyonu tanımlayacağız:
+1. Şimdi Microsoft Learn API’yi çağırıp kurs listesini alacak fonksiyonu tanımlayalım:
 
    ```python
    import requests
@@ -342,65 +340,57 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   Artık `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   Şimdi `functions` değişkeninde tanımlı fonksiyon isimlerine eşleşen gerçek bir Python fonksiyonu oluşturduğumuza dikkat edin. Ayrıca dış API çağrıları ile gerekli veriyi çekiyoruz. Bu örnekte Microsoft Learn API’sini kullanarak eğitim modülleri aranıyor.
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+Tamam, `functions` değişkenlerini ve karşılık gelen Python fonksiyonunu oluşturduk, LLM’ye bu ikisini nasıl eşleştireceğimizi nasıl söyleriz ki Python fonksiyonumuz çağrılabilsin?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call` içinde yer alan ve belirtilen fonksiyonu çağıran bir Python fonksiyonu oluşturduğumuza dikkat edin. İşte aşağıda belirtilen kontrolü nasıl yapabileceğiniz:
+1. Python fonksiyonunu çağırmamız gerekip gerekmediğini anlamak için LLM yanıtına bakıp `function_call` öğesinin olup olmadığını kontrol etmeli ve işaret edilen fonksiyonu çağırmalıyız. Aşağıda bu kontrolü nasıl yapabileceğiniz gösterilmiştir:
 
    ```python
-   # Check if the model wants to call a function
-   if response_message.function_call.name:
-    print("Recommended Function call:")
-    print(response_message.function_call.name)
-    print()
+   # Modelin bir fonksiyonu çağırmak isteyip istemediğini kontrol et
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
 
-    # Call the function.
-    function_name = response_message.function_call.name
+     # Fonksiyonu çağır.
+     function_name = tool_call.name
 
-    available_functions = {
-            "search_courses": search_courses,
-    }
-    function_to_call = available_functions[function_name]
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
 
-    function_args = json.loads(response_message.function_call.arguments)
-    function_response = function_to_call(**function_args)
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
-    print(function_response)
-    print(type(function_response))
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
 
-
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
-        {
-            "role": response_message.role,
-            "function_call": {
-                "name": function_name,
-                "arguments": response_message.function_call.arguments,
-            },
-            "content": None
-        }
-    )
-    messages.append( # adding function response to messages
-        {
-            "role": "function",
-            "name": function_name,
-            "content":function_response,
-        }
-    )
+     # Fonksiyon çağrısını ve sonucunu konuşmaya tekrar ekle.
+     # Modelin function_call öğesi çıktısından önce eklenmelidir.
+     messages.append(tool_call)  # asistanın function_call öğesi
+     messages.append( # fonksiyon sonucu
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
    ```
 
-   Bu üç satır, fonksiyon adını, argümanları çıkarmamızı ve çağrıyı yapmamızı sağlar:
+   Bu üç satır fonksiyonun adını çıkarır, argümanları alır ve çağrıyı yapar:
 
    ```python
    function_to_call = available_functions[function_name]
 
-   function_args = json.loads(response_message.function_call.arguments)
+   function_args = json.loads(tool_call.arguments)
    function_response = function_to_call(**function_args)
    ```
 
-   Kodumuzu çalıştırdıktan sonra çıkan sonuç aşağıdadır:
+   Aşağıda kodumuzun çıktısı bulunmaktadır:
 
    **Çıktı**
 
@@ -421,50 +411,60 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. Şimdi güncellenmiş mesajı `messages` LLM'ye göndereceğiz, böylece API JSON formatında bir yanıt yerine doğal dilde bir yanıt alabiliriz.
+1. Güncellenen mesaj `messages` ile LLM’ye tekrar gönderim yapalım böylece doğal dil yanıtı alalım, API JSON formatında yanıt yerine.
 
    ```python
    print("Messages in next request:")
    print(messages)
    print()
 
-   second_response = client.chat.completions.create(
-      messages=messages,
+   second_response = client.responses.create(
+      input=messages,
       model=deployment,
-      function_call="auto",
-      functions=functions,
-      temperature=0
-         )  # get a new response from GPT where it can see the function response
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # fonksiyon yanıtını görebildiği modelden yeni bir yanıt alın
 
 
-   print(second_response.choices[0].message)
+   print(second_response.output_text)
    ```
 
    **Çıktı**
 
-   ```python
-   {
-     "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
-   }
+   ```text
+   I found some good courses for beginner students to learn Azure:
 
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
    ```
 
 ## Ödev
 
-Azure OpenAI Fonksiyon Çağrımı öğreniminizi sürdürmek için şunları yapabilirsiniz:
+Azure OpenAI Fonksiyon Çağrısı öğrenmenize devam etmek için şu geliştirmeleri yapabilirsiniz:
 
-- Öğrencilerin daha fazla kurs bulmasına yardımcı olabilecek daha fazla fonksiyon parametresi.
-- Öğrencinin ana dili gibi daha fazla bilgi alan başka bir fonksiyon çağrısı oluşturun.
-- Fonksiyon çağrısı ve/veya API çağrısı uygun kurslar döndürmediğinde hata işleme oluşturun.
+- Öğrencilerin daha fazla kurs bulmasına yardımcı olabilecek fonksiyonun daha fazla parametresi.
 
-İpucu: Bu verilerin nasıl ve nerede mevcut olduğunu görmek için [Learn API referans belgeleri](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) sayfasını takip edin.
+- Öğrencinin ana dili gibi daha fazla bilgi alan başka bir fonksiyon çağrısı oluşturun
+- Fonksiyon çağrısı ve/veya API çağrısı uygun kursları döndürmediğinde hata işleme oluşturun
 
-## Harika İş! Yolculuğa Devam Edin
+İpucu: Bu verilerin nasıl ve nerede mevcut olduğunu görmek için [Learn API referans dokümantasyonunu](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) takip edin.
 
-Bu dersi tamamladıktan sonra, Generative AI bilginizi artırmak için [Generative AI Öğrenme koleksiyonumuzu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) inceleyin!
+## Harika İş! Yolculuğa Devam Et
 
-AI uygulamaları için nasıl [UX tasarlayacağımızı](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst) inceleyeceğimiz 12. Derse geçin!
+Bu dersi tamamladıktan sonra, Generative AI bilginizi artırmaya devam etmek için [Generative AI Öğrenme koleksiyonumuza](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) göz atın!
 
-**Feragatname**: 
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+AI uygulamaları için [UX tasarlamaya nasıl bakacağımızı](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst) göreceğimiz 12. Dersi ziyaret edin!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

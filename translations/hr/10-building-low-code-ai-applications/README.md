@@ -1,180 +1,282 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "f5ff3b6204a695a117d6f452403c95f7",
-  "translation_date": "2025-05-19T21:13:28+00:00",
-  "source_file": "10-building-low-code-ai-applications/README.md",
-  "language_code": "hr"
-}
--->
-# Izgradnja aplikacija s niskim kodom uz AI
+# Izrada AI aplikacija s malo koda
+
+[![Izrada AI aplikacija s malo koda](../../../translated_images/hr/10-lesson-banner.a01ac8fe3fd86310.webp)](https://youtu.be/1vzq3Nd8GBA?si=h6LHWJXdmqf6mhDg)
+
+> _(Kliknite na gornju sliku za pregled video lekcije)_
 
 ## Uvod
 
-Sada kada smo naučili kako izraditi aplikacije za generiranje slika, razgovarajmo o niskom kodu. Generativna AI može se koristiti u raznim područjima, uključujući niski kod, ali što je točno niski kod i kako mu možemo dodati AI?
+Sada kada smo naučili kako izgraditi aplikacije za generiranje slika, razgovarajmo o low code pristupu. Generativna AI može se koristiti u različitim područjima, uključujući low code, ali što je low code i kako u njega možemo dodati AI?
 
-Izgradnja aplikacija i rješenja postala je lakša za tradicionalne programere i ne-programere kroz upotrebu platformi za razvoj s niskim kodom. Platforme za razvoj s niskim kodom omogućuju vam izradu aplikacija i rješenja s malo ili nimalo koda. To se postiže pružanjem vizualnog razvojnog okruženja koje omogućuje povlačenje i ispuštanje komponenti za izradu aplikacija i rješenja. Ovo vam omogućuje bržu izradu aplikacija i rješenja uz manje resursa. U ovoj lekciji detaljno ćemo istražiti kako koristiti niski kod i kako unaprijediti razvoj s niskim kodom uz AI koristeći Power Platform.
+Izrada aplikacija i rješenja postala je jednostavnija za tradicionalne programere i one bez iskustva u programiranju korištenjem platformi za razvoj s malo koda (Low Code Development Platforms). Platforme za razvoj s malo koda omogućuju izgradnju aplikacija i rješenja s malo ili nimalo koda. To se postiže pružanjem vizualnog razvojog okruženja koje omogućuje povuci-i-pusti komponente za izgradnju aplikacija i rješenja. Ovo omogućuje bržu izradu aplikacija i rješenja s manje resursa. U ovoj lekciji detaljno istražujemo kako koristiti low code i kako poboljšati razvoj s malo koda pomoću AI koristeći Power Platform.
 
-Power Platform pruža organizacijama priliku da osnaže svoje timove za izradu vlastitih rješenja kroz intuitivno okruženje s niskim ili nikakvim kodom. Ovo okruženje pojednostavljuje proces izrade rješenja. Uz Power Platform, rješenja se mogu izgraditi u danima ili tjednima umjesto mjesecima ili godinama. Power Platform se sastoji od pet ključnih proizvoda: Power Apps, Power Automate, Power BI, Power Pages i Copilot Studio.
+Power Platform pruža organizacijama priliku da osnaže svoje timove da sami grade rješenja kroz intuitivno okruženje s malo koda ili bez koda. Ovo okruženje pojednostavljuje proces izgradnje rješenja. S Power Platformom, rješenja se mogu izgraditi u danima ili tjednima umjesto mjesecima ili godinama. Power Platform sastoji se od pet ključnih proizvoda: Power Apps, Power Automate, Power BI, Power Pages i Copilot Studio.
 
 Ova lekcija pokriva:
 
 - Uvod u generativnu AI u Power Platform
 - Uvod u Copilot i kako ga koristiti
 - Korištenje generativne AI za izradu aplikacija i tijekova u Power Platform
-- Razumijevanje AI modela u Power Platform uz AI Builder
+- Razumijevanje AI modela u Power Platform pomoću AI Buildera
+- Izrada inteligentnih agenata s Microsoft Copilot Studiom
 
 ## Ciljevi učenja
 
-Na kraju ove lekcije moći ćete:
+Do kraja ove lekcije moći ćete:
 
 - Razumjeti kako Copilot radi u Power Platform.
 
-- Izraditi aplikaciju za praćenje studentskih zadataka za naš startup u obrazovanju.
+- Izgraditi aplikaciju za praćenje školskih zadataka za naš start-up u obrazovanju.
 
-- Izraditi tijek obrade faktura koji koristi AI za izvlačenje informacija iz faktura.
+- Izgraditi tijek za obradu računa koji koristi AI za izvlačenje informacija iz računa.
 
-- Primijeniti najbolje prakse pri korištenju modela Create Text s GPT AI.
+- Primijeniti najbolje prakse pri korištenju AI modela Create Text with GPT.
+
+- Shvatiti što je Microsoft Copilot Studio i kako s njim izraditi inteligentne agente.
 
 Alati i tehnologije koje ćete koristiti u ovoj lekciji su:
 
-- **Power Apps**, za aplikaciju za praćenje studentskih zadataka, koja pruža razvojno okruženje s niskim kodom za izradu aplikacija za praćenje, upravljanje i interakciju s podacima.
+- **Power Apps**, za aplikaciju Student Assignment Tracker, koja pruža razvojno okruženje s malo koda za izgradnju aplikacija koje prate, upravljaju i komuniciraju s podacima.
 
-- **Dataverse**, za pohranu podataka za aplikaciju za praćenje studentskih zadataka gdje će Dataverse pružiti platformu za pohranu podataka s niskim kodom za pohranu podataka aplikacije.
+- **Dataverse**, za pohranu podataka aplikacije Student Assignment Tracker gdje Dataverse pruža platformu s malo koda za pohranu podataka aplikacije.
 
-- **Power Automate**, za tijek obrade faktura gdje ćete imati razvojno okruženje s niskim kodom za izradu tijekova rada za automatizaciju procesa obrade faktura.
+- **Power Automate**, za tijek obrade računa gdje imate razvojno okruženje s malo koda za izradu tijekova rada koji automatiziraju proces obrade računa.
 
-- **AI Builder**, za AI model obrade faktura gdje ćete koristiti unaprijed izgrađene AI modele za obradu faktura za naš startup.
+- **AI Builder**, za AI model obrade računa gdje ćete koristiti unaprijed izgrađene AI modele za obradu računa za naš start-up.
 
 ## Generativna AI u Power Platform
 
-Unapređenje razvoja i aplikacija s niskim kodom uz generativnu AI ključna je fokusna točka za Power Platform. Cilj je omogućiti svima izradu aplikacija, stranica, nadzornih ploča i automatizaciju procesa s AI, _bez potrebe za stručnim znanjem o znanosti o podacima_. Ovaj cilj postiže se integriranjem generativne AI u iskustvo razvoja s niskim kodom u Power Platform u obliku Copilot i AI Builder.
+Unapređenje razvoja i aplikacija s malo koda generativnom AI ključan je fokus Power Platform. Cilj je omogućiti svima izradu aplikacija, web-mjesta, nadzornih ploča i automatizaciju procesa pomoću AI-a, _bez potrebe za stručnjacima za podatkovnu znanost_. Ovaj cilj postiže se integriranjem generativne AI u iskustvo razvoja s malo koda u Power Platformu u obliku Copilota i AI Buildera.
 
 ### Kako to funkcionira?
 
-Copilot je AI asistent koji vam omogućuje izradu rješenja u Power Platform opisivanjem vaših zahtjeva u nizu razgovornih koraka koristeći prirodni jezik. Na primjer, možete uputiti svog AI asistenta da navede koja će polja vaša aplikacija koristiti i on će stvoriti i aplikaciju i temeljni model podataka ili možete specificirati kako postaviti tijek u Power Automate.
+Copilot je AI asistent koji vam omogućuje izgradnju rješenja u Power Platformu opisivanjem vaših zahtjeva kroz niz konverzacijskih koraka koristeći prirodni jezik. Na primjer, možete zatražiti od AI asistenta da navede koja polja će vaša aplikacija koristiti i on će stvoriti i aplikaciju i osnovni podatkovni model, ili možete specificirati kako postaviti tijek u Power Automate.
 
-Funkcionalnosti vođene Copilotom možete koristiti kao značajku na zaslonima vaše aplikacije kako biste omogućili korisnicima otkrivanje uvida kroz razgovornu interakciju.
+Copilot-driven funkcionalnosti možete koristiti kao značajku na zaslonima aplikacije kako biste korisnicima omogućili otkrivanje uvida putem konverzacijskih interakcija.
 
-AI Builder je mogućnost AI-a s niskim kodom dostupna u Power Platform koja vam omogućuje korištenje AI modela za pomoć u automatizaciji procesa i predviđanju ishoda. Uz AI Builder možete donijeti AI u svoje aplikacije i tijekove koji se povezuju s vašim podacima u Dataverse ili u raznim oblacima izvora podataka, kao što su SharePoint, OneDrive ili Azure.
+AI Builder je AI mogućnost s malo koda dostupna u Power Platform koja vam omogućuje korištenje AI modela za automatizaciju procesa i predviđanje ishoda. S AI Builderom možete donijeti AI u svoje aplikacije i tijekove koji se povezuju s podacima u Dataverseu ili u različitim oblačnim izvorima podataka, kao što su SharePoint, OneDrive ili Azure.
 
-Copilot je dostupan u svim proizvodima Power Platform: Power Apps, Power Automate, Power BI, Power Pages i Power Virtual Agents. AI Builder je dostupan u Power Apps i Power Automate. U ovoj lekciji fokusirat ćemo se na korištenje Copilot i AI Builder u Power Apps i Power Automate za izradu rješenja za naš startup u obrazovanju.
+Copilot je dostupan u svim proizvodima Power Platforme: Power Apps, Power Automate, Power BI, Power Pages i Copilot Studio (ranije Power Virtual Agents). AI Builder je dostupan u Power Apps i Power Automate. U ovoj lekciji usredotočit ćemo se na korištenje Copilota i AI Buildera u Power Apps i Power Automate kako bismo izgradili rješenje za naš start-up u obrazovanju.
 
 ### Copilot u Power Apps
 
-Kao dio Power Platform, Power Apps pruža razvojno okruženje s niskim kodom za izradu aplikacija za praćenje, upravljanje i interakciju s podacima. To je skup usluga za razvoj aplikacija s platformom podataka koja se može skalirati i mogućnošću povezivanja s oblačnim uslugama i podacima na licu mjesta. Power Apps omogućuje izradu aplikacija koje rade na preglednicima, tabletima i telefonima, i mogu se dijeliti s suradnicima. Power Apps olakšava korisnicima razvoj aplikacija jednostavnim sučeljem, tako da svaki poslovni korisnik ili profesionalni programer može izraditi prilagođene aplikacije. Iskustvo razvoja aplikacija također je unaprijeđeno s generativnom AI kroz Copilot.
+Kao dio Power Platforme, Power Apps pruža razvojno okruženje s malo koda za izgradnju aplikacija za praćenje, upravljanje i interakciju s podacima. To je skup usluga za razvoj aplikacija s skalabilnom podatkovnom platformom i mogućnošću povezivanja na oblačne usluge i lokalne podatke. Power Apps omogućuje izgradnju aplikacija koje se mogu koristiti u preglednicima, na tabletima i telefonima, te se dijele s kolegama. Power Apps olakšava korisnicima izradu aplikacija putem jednostavnog sučelja, tako da svaki poslovni korisnik ili profesionalni programer može izraditi prilagođene aplikacije. Iskustvo razvoja aplikacija dodatno je unaprijeđeno generativnom AI putem Copilota.
 
-Značajka AI asistenta Copilot u Power Apps omogućuje vam opisivanje kakvu vrstu aplikacije trebate i koje informacije želite da vaša aplikacija prati, prikuplja ili prikazuje. Copilot tada generira responzivnu Canvas aplikaciju na temelju vašeg opisa. Možete zatim prilagoditi aplikaciju kako bi zadovoljila vaše potrebe. AI Copilot također generira i predlaže Dataverse tablicu s poljima koja trebate za pohranu podataka koje želite pratiti i neke uzorke podataka. Kasnije ćemo u ovoj lekciji pogledati što je Dataverse i kako ga možete koristiti u Power Apps. Možete zatim prilagoditi tablicu kako bi zadovoljila vaše potrebe koristeći značajku AI Copilot asistenta kroz razgovorne korake. Ova značajka je odmah dostupna s početnog zaslona Power Apps.
+Značajka AI asistenta Copilota u Power Apps omogućuje vam da opišete kakvu aplikaciju trebate i koje informacije želite da aplikacija prati, prikuplja ili prikazuje. Copilot zatim generira responzivnu Canvas aplikaciju na osnovi vašeg opisa. Nakon toga možete prilagoditi aplikaciju prema svojim potrebama. AI Copilot također generira i predlaže Dataverse tablicu s poljima potrebnim za pohranu podataka koje želite pratiti, uključujući i neke primjere podataka. O Dataverseu ćemo kasnije u ovoj lekciji saznati više i kako ga koristiti u Power Apps. Tablicu možete zatim prilagoditi prema svojim potrebama koristeći AI Copilot asistenta kroz konverzacijske korake. Ova značajka je lako dostupna s početnog zaslona Power Apps.
 
 ### Copilot u Power Automate
 
-Kao dio Power Platform, Power Automate omogućuje korisnicima izradu automatiziranih tijekova rada između aplikacija i usluga. Pomaže automatizirati ponavljajuće poslovne procese kao što su komunikacija, prikupljanje podataka i odobravanje odluka. Njegovo jednostavno sučelje omogućuje korisnicima sa svakom tehničkom kompetencijom (od početnika do iskusnih programera) automatizaciju radnih zadataka. Iskustvo razvoja tijeka rada također je unaprijeđeno s generativnom AI kroz Copilot.
+Kao dio Power Platforme, Power Automate omogućuje korisnicima izradu automatiziranih tijekova između aplikacija i usluga. Pomaže automatizirati ponavljajuće poslovne procese poput komunikacije, prikupljanja podataka i odobrenja odluka. Njegovo jednostavno sučelje omogućuje korisnicima svih tehničkih razina (od početnika do iskusnih programera) automatizaciju radnih zadataka. Iskustvo razvoja tijekova dodatno je unaprijeđeno generativnom AI putem Copilota.
 
-Značajka AI asistenta Copilot u Power Automate omogućuje vam opisivanje kakvu vrstu tijeka trebate i koje radnje želite da vaš tijek obavlja. Copilot tada generira tijek na temelju vašeg opisa. Možete zatim prilagoditi tijek kako bi zadovoljio vaše potrebe. AI Copilot također generira i predlaže radnje koje trebate obaviti za zadatak koji želite automatizirati. Kasnije ćemo u ovoj lekciji pogledati što su tijekovi i kako ih možete koristiti u Power Automate. Možete zatim prilagoditi radnje kako bi zadovoljile vaše potrebe koristeći značajku AI Copilot asistenta kroz razgovorne korake. Ova značajka je odmah dostupna s početnog zaslona Power Automate.
+Značajka AI asistenta Copilota u Power Automate omogućuje vam da opišete kakav tijek trebate i koje radnje želite da tijek izvrši. Copilot zatim generira tijek na osnovi vašeg opisa. Nakon toga možete prilagoditi tijek prema svojim potrebama. AI Copilot također generira i predlaže radnje potrebne za izvršenje zadanog zadatka automatizacije. O tijekovima i njihovoj upotrebi u Power Automate saznat ćemo više kasnije u ovoj lekciji. Radnje možete prilagoditi prema svojim potrebama koristeći AI Copilot asistenta kroz konverzacijske korake. Ova značajka lako je dostupna s početnog zaslona Power Automate.
 
-## Zadaci: Upravljanje studentskim zadacima i fakturama za naš startup, koristeći Copilot
+## Izrada inteligentnih agenata s Microsoft Copilot Studiom
 
-Naš startup pruža online tečajeve studentima. Startup je brzo rastao i sada se bori s potražnjom za svojim tečajevima. Startup vas je angažirao kao Power Platform developera kako biste im pomogli izgraditi rješenje s niskim kodom koje će im pomoći u upravljanju studentskim zadacima i fakturama. Njihovo rješenje trebalo bi im pomoći u praćenju i upravljanju studentskim zadacima kroz aplikaciju i automatizaciji procesa obrade faktura kroz tijek rada. Zatraženo je da koristite generativnu AI za razvoj rješenja.
+[Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio?WT.mc_id=academic-105485-koreyst) (ranije Power Virtual Agents) je član Power Platforme s malo koda za izradu **AI agenata** — konverzacijskih copilota koji mogu odgovarati na pitanja, poduzeti radnje i automatizirati zadatke u ime vaših korisnika. Kao i ostatak Power Platforme, ove agente izrađujete u vizualnom, prirodnim jezikom vođenom iskustvu: opisujete što želite da agent radi, a Copilot Studio pomaže u oblikovanju njegovih uputa, znanja i radnji.
 
-Kada započinjete s korištenjem Copilot, možete koristiti [Power Platform Copilot Prompt Library](https://github.com/pnp/powerplatform-prompts?WT.mc_id=academic-109639-somelezediko) kako biste započeli s promptovima. Ova biblioteka sadrži popis promptova koje možete koristiti za izradu aplikacija i tijekova s Copilot. Također možete koristiti promptove u biblioteci kako biste dobili ideju kako opisati svoje zahtjeve Copilot.
+Za naš start-up u obrazovanju, mogli biste izraditi agenta koji odgovara na studentska pitanja o tečajevima, provjerava rokove zadataka i čak šalje e-poštu nastavniku — sve bez pisanja koda.
 
-### Izradite aplikaciju za praćenje studentskih zadataka za naš startup
+Evo nekih od najnovijih mogućnosti koje postaju Copilot Studio moćnim:
 
-Edukatori u našem startupu bore se s praćenjem studentskih zadataka. Koristili su proračunsku tablicu za praćenje zadataka, ali to je postalo teško upravljati kako se broj studenata povećao. Zatražili su vas da izradite aplikaciju koja će im pomoći u praćenju i upravljanju studentskim zadacima. Aplikacija bi im trebala omogućiti dodavanje novih zadataka, pregled zadataka, ažuriranje zadataka i brisanje zadataka. Aplikacija bi također trebala omogućiti edukatorima i studentima pregled zadataka koji su ocijenjeni i onih koji nisu ocijenjeni.
+- **Generativni odgovori iz vašeg znanja**. Umjesto ručnog kreiranja svakog razgovora, možete povezati **izvore znanja** — javne web stranice, SharePoint, OneDrive, Dataverse, prenesene datoteke ili poslovne podatke preko konektora — i agent generira utemeljene odgovore iz njih.
 
-Izradit ćete aplikaciju koristeći Copilot u Power Apps slijedeći korake u nastavku:
+- **Generativna orkestracija**. Umjesto oslanjanja na rigidne okidačke fraze, agent koristi AI za razumijevanje zahtjeva i dinamički odlučuje koje znanje, teme i radnje kombinirati za izvršenje, uključujući povezivanje nekoliko koraka zajedno.
 
-1. Navigirajte na početni zaslon [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst).
+- **Radnje i konektori**. Agenti mogu *izvoditi* radnje, ne samo razgovarati. Možete im dati radnje poduprte s preko 1.500 unaprijed izgrađenih Power Platform konektora, Power Automate tijekova, prilagođenih REST API-ja, upita ili **Model Context Protocol (MCP)** poslužitelja.
 
-1. Koristite tekstualno područje na početnom zaslonu kako biste opisali aplikaciju koju želite izraditi. Na primjer, **_Želim izraditi aplikaciju za praćenje i upravljanje studentskim zadacima_**. Kliknite na gumb **Pošalji** kako biste poslali prompt AI Copilot.
+- **Autonomni agenti**. Agenti nisu ograničeni na odgovaranje u chat prozoru. Možete izgraditi **autonomne agente** kojima se okidači događaju događajima — poput nove e-pošte, novog zapisa u Dataverseu ili prijenosa datoteke — i koji zatim u pozadini izvršavaju zadatak.
 
-1. AI Copilot će predložiti Dataverse tablicu s poljima koja trebate za pohranu podataka koje želite pratiti i uzorke podataka. Možete zatim prilagoditi tablicu kako bi zadovoljila vaše potrebe koristeći značajku AI Copilot asistenta kroz razgovorne korake.
+- **Orkestracija više agenata**. Agenti mogu pozivati druge agente. Copilot Studio agent može prepustiti ili biti proširen drugim agentima, uključujući agente objavljene u Microsoft 365 Copilotu i agente izgrađene u Microsoft Foundry.
 
-   > **Važno**: Dataverse je temeljna platforma podataka za Power Platform. To je platforma podataka s niskim kodom za pohranu podataka aplikacije. To je potpuno upravljana usluga koja sigurno pohranjuje podatke u Microsoft Cloud i dodjeljuje se unutar vašeg Power Platform okruženja. Dolazi s ugrađenim mogućnostima upravljanja podacima, kao što su klasifikacija podataka, linija podataka, fino kontrolirani pristup i više. Više o Dataverse možete saznati [ovdje](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
+- **Izbor modela**. Osim ugrađenih modela, možete koristiti modele iz Microsoft Foundry kataloga modela da prilagodite način na koji vaš agent razmišlja i odgovara.
 
-1. Edukatori žele slati e-poštu studentima koji su predali svoje zadatke kako bi ih obavijestili o napretku njihovih zadataka. Možete koristiti Copilot za dodavanje novog polja u tablicu za pohranu e-pošte studenta. Na primjer, možete koristiti sljedeći prompt za dodavanje novog polja u tablicu: **_Želim dodati stupac za pohranu e-pošte studenta_**. Kliknite na gumb **Pošalji** kako biste poslali prompt AI Copilot.
+- **Objavljivanje bilo gdje**. Nakon izgradnje, agent se može objaviti na više kanala — Microsoft Teams, Microsoft 365 Copilot, web stranici ili prilagođenoj aplikaciji i drugdje — s upravljanjem sigurnosti, autentifikacijom i analizom kroz administrativno sučelje Power Platforme.
 
-1. AI Copilot će generirati novo polje i možete zatim prilagoditi polje kako bi zadovoljilo vaše potrebe.
+Možete započeti izradu svog prvog agenta na [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com?WT.mc_id=academic-105485-koreyst) i saznati više u [dokumentaciji Microsoft Copilot Studija](https://learn.microsoft.com/microsoft-copilot-studio/?WT.mc_id=academic-105485-koreyst).
 
-1. Kada završite s tablicom, kliknite na gumb **Izradi aplikaciju** kako biste izradili aplikaciju.
+## Zadatak: Upravljanje studentskim zadacima i računima za naš start-up koristeći Copilot
 
-1. AI Copilot će generirati responzivnu Canvas aplikaciju na temelju vašeg opisa. Možete zatim prilagoditi aplikaciju kako bi zadovoljila vaše potrebe.
+Naš start-up nudi online tečajeve studentima. Start-up je brzo rastao i sada mu je teško pratiti potražnju za tečajevima. Angažirali su vas kao Power Platform programera da im pomognete izgraditi rješenje s malo koda za upravljanje zadacima studenata i računima. Rješenje bi trebalo omogućiti praćenje i upravljanje studentskim zadacima putem aplikacije te automatizirati proces obrade računa putem tijekova rada. Zamolili su vas da koristite generativnu AI za razvoj rješenja.
 
-1. Kako bi edukatori mogli slati e-poštu studentima, možete koristiti Copilot za dodavanje novog zaslona u aplikaciju. Na primjer, možete koristiti sljedeći prompt za dodavanje novog zaslona u aplikaciju: **_Želim dodati zaslon za slanje e-pošte studentima_**. Kliknite na gumb **Pošalji** kako biste poslali prompt AI Copilot.
+Kada počinjete koristiti Copilot, možete koristiti [Power Platform Copilot Prompt Library](https://github.com/pnp/powerplatform-prompts?WT.mc_id=academic-109639-somelezediko) za početak s upitima. Ova biblioteka sadrži popis upita koje možete koristiti za izgradnju aplikacija i tijekova s Copilotom. Također možete koristiti upite u biblioteci da dobijete ideju kako opisati svoje zahtjeve Copilotu.
 
-1. AI Copilot će generirati novi zaslon i možete zatim prilagoditi zaslon kako bi zadovoljio vaše potrebe.
+### Izradite aplikaciju Student Assignment Tracker za naš start-up
 
-1. Kada završite s aplikacijom, kliknite na gumb **Spremi** kako biste spremili aplikaciju.
+Nastavnici u našem start-upu imaju problema s praćenjem studentskih zadataka. Koristili su tablicu za praćenje zadataka, ali to je postalo teško upravljati kako se broj studenata povećao. Zamolili su vas da izgradite aplikaciju koja će im pomoći pratiti i upravljati studentskim zadatcima. Aplikacija bi trebala omogućiti dodavanje novih zadataka, pregled zadataka, ažuriranje zadataka i brisanje zadataka. Također bi trebala omogućiti nastavnicima i studentima pregled zadataka koji su ocijenjeni i onih koji nisu ocijenjeni.
 
-1. Kako biste podijelili aplikaciju s edukatorima, kliknite na gumb **Podijeli** i zatim ponovno kliknite na gumb **Podijeli**. Možete zatim podijeliti aplikaciju s edukatorima unosom njihovih e-mail adresa.
+Aplikaciju ćete izgraditi koristeći Copilot u Power Apps slijedeći upute u nastavku:
 
-> **Vaša domaća zadaća**: Aplikacija koju ste upravo izradili je dobar početak, ali može se poboljšati. S funkcijom e-pošte, edukatori mogu slati e-poštu studentima samo ručno, morajući unijeti njihove e-mail adrese. Možete li koristiti Copilot za izgradnju automatizacije koja će omogućiti edukatorima automatsko slanje e-pošte studentima kada predaju svoje zadatke? Vaš trag je da s pravim promptom možete koristiti Copilot u Power Automate za izradu ovog.
+1. Idite na [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) početni zaslon.
 
-### Izradite tablicu informacija o fakturama za naš startup
+1. Koristite tekstni prostor na početnom zaslonu da opišete aplikaciju koju želite izgraditi. Na primjer, **_Želim izgraditi aplikaciju za praćenje i upravljanje studentskim zadacima_**. Kliknite na gumb **Pošalji** da pošaljete upit AI Copilotu.
 
-Financijski tim našeg startupa bori se s praćenjem faktura. Koristili su proračunsku tablicu za praćenje faktura, ali to je postalo teško upravljati kako se broj faktura povećao. Zatražili su vas da izradite tablicu koja će im pomoći u pohrani, praćenju i upravljanju informacijama o primljenim fakturama. Tablica bi trebala biti korištena za izradu automatizacije koja će izvući sve informacije o fakturama i pohraniti ih u tablicu. Tablica bi također trebala omogućiti financijskom timu pregled faktura koje su plaćene i onih koje nisu plaćene.
+![Opišite aplikaciju koju želite izgraditi](../../../translated_images/hr/copilot-chat-prompt-powerapps.84250f341d060830.webp)
 
-Power Platform ima temeljnu platformu podataka pod nazivom Dataverse koja vam omogućuje pohranu podataka za vaše aplikacije i rješenja. Dataverse pruža platformu podataka s niskim kodom za pohranu podataka aplikacije. To je potpuno upravljana usluga koja sigurno pohranjuje podatke u Microsoft Cloud i dodjeljuje se unutar vašeg Power Platform okruženja. Dolazi s ugrađenim mogućnostima upravljanja podacima, kao što su klasifikacija podataka, linija podataka, fino kontrolirani pristup i više. Više o Dataverse možete saznati [ovdje](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
+1. AI Copilot će predložiti Dataverse tablicu s poljima potrebnim za pohranu podataka koje želite pratiti i s nekim primjerima podataka. Tablicu zatim možete prilagoditi prema svojim potrebama koristeći AI Copilot asistenta kroz konverzacijske korake.
 
-Zašto bismo trebali koristiti Dataverse za naš startup? Standardne i prilagođene tablice unutar Dataverse pružaju sigurnu i oblačnu opciju pohrane za vaše podatke. Tablice vam omogućuju pohranu različitih vrsta podataka, slično kao što biste koristili više radnih listova u jednoj Excel radnoj knjizi. Možete koristiti tablice za pohranu podataka specifičnih za vaše organizacijske ili poslovne potrebe. Neke od prednosti koje naš startup dobiva korištenjem Dataverse uključuju, ali nisu ograničene na:
+   > **Važno**: Dataverse je osnovna podatkovna platforma Power Platforme. To je platforma s malo koda za pohranu podataka aplikacije. To je potpuno upravljana usluga koja sigurno pohranjuje podatke u Microsoft oblaku i dostupna je unutar vašeg Power Platform okruženja. Dolazi s ugrađenim mogućnostima upravljanja podacima, poput klasifikacije podataka, praćenja podrijetla podataka, precizne kontrole pristupa i još mnogo toga. Više o Dataverseu možete saznati [ovdje](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
 
-- **Jednostavno za upravljanje**: I metapodaci i podaci pohranjuju se u oblaku, tako da ne morate brinuti o detaljima kako su pohranjeni ili upravljani. Možete se usredotočiti na izradu svojih aplikacija i rješenja.
+   ![Predložena polja u vašoj novoj tablici](../../../translated_images/hr/copilot-dataverse-table-powerapps.f4cc07b5d5f9327b.webp)
 
-- **Sigurno**: Dataverse pruža sigurnu i oblačnu opciju pohrane za vaše podatke. Možete kontrolirati tko ima pristup podacima u vašim tablicama i kako im može pristupiti koristeći sigurnost temeljenu na ulogama.
+1. Nastavnici žele slati e-poruke studentima koji su predali zadatke kako bi ih obavijestili o napretku njihovih zadataka. Možete koristiti Copilot da dodate novo polje u tablicu za pohranu e-adresa studenata. Na primjer, možete upotrijebiti sljedeći upit za dodavanje novog polja u tablicu: **_Želim dodati stupac za pohranu studentske e-pošte_**. Kliknite na gumb **Pošalji** da pošaljete upit AI Copilotu.
 
-- **Bogati metapodaci**: Tipovi podataka i odnosi koriste se izravno unutar Power Apps
+![Dodavanje novog polja](../../../translated_images/hr/copilot-new-column.35e15ff21acaf274.webp)
 
-- **Logika i validacija**: Možete koristiti poslovna pravila, izračunata polja i pravila validacije za provedbu poslovne logike i održavanje točnosti podataka.
+1. AI Copilot će generirati novo polje, a zatim ga možete prilagoditi kako bi odgovarao vašim potrebama.
 
-Sada kada znate što je Dataverse i zašto biste ga trebali koristiti, pogledajmo kako možete koristiti Copilot za izradu tablice u Dataverse kako biste zadovoljili zahtjeve našeg financijskog tima.
 
-> **Napomena**: Ovu tablicu ćete koristiti u sljedećem odjeljku za izradu automatizacije koja će izvući sve informacije o fakturama i pohraniti ih u tablicu. Da biste izradili tablicu u Dataverse koristeći Copilot, slijedite korake u nastavku: 1. Navigirajte na početni zaslon [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst). 2. Na lijevoj navigacijskoj traci odaberite **Tablice** i zatim kliknite na **Opišite novu tablicu**. 1. Na zas
-a tekst. - **Analiza sentimenta**: Ovaj model detektira pozitivan, negativan, neutralan ili miješani sentiment u tekstu. - **Čitač poslovnih kartica**: Ovaj model izvlači informacije s poslovnih kartica. - **Prepoznavanje teksta**: Ovaj model izvlači tekst iz slika. - **Detekcija objekata**: Ovaj model detektira i izvlači objekte iz slika. - **Obrada dokumenata**: Ovaj model izvlači informacije iz obrazaca. - **Obrada faktura**: Ovaj model izvlači informacije iz faktura. S prilagođenim AI modelima možete unijeti svoj vlastiti model u AI Builder kako bi funkcionirao kao bilo koji prilagođeni model AI Buildera, omogućujući vam treniranje modela koristeći vlastite podatke. Možete koristiti ove modele za automatizaciju procesa i predviđanje ishoda u Power Apps i Power Automate. Kada koristite vlastiti model, postoje ograničenja koja se primjenjuju. Pročitajte više o ovim [ograničenjima](https://learn.microsoft.com/ai-builder/byo-model#limitations?WT.mc_id=academic-105485-koreyst). ![AI builder modeli](../../../translated_images/ai-builder-models.f3ee8c064873d55cdfbcc9c633cdd8cf00843954019ad500795832eee420448e.hr.png) 
+1. Kada završite s tablicom, kliknite na gumb **Create app** za stvaranje aplikacije.
 
-## Zadatak #2 - Izradite tijek obrade faktura za naš startup
+1. AI Copilot će generirati responzivnu Canvas aplikaciju na temelju vašeg opisa. Zatim možete prilagoditi aplikaciju prema svojim potrebama.
 
-Financijski tim ima poteškoća s obradom faktura. Koristili su proračunsku tablicu za praćenje faktura, ali to je postalo teško upravljati kako se broj faktura povećao. Zamolili su vas da izradite tijek rada koji će im pomoći u obradi faktura koristeći AI. Tijek rada trebao bi im omogućiti da izvuku informacije iz faktura i pohrane informacije u Dataverse tablicu. Tijek rada trebao bi im također omogućiti slanje e-pošte financijskom timu s izvučenim informacijama. Sada kada znate što je AI Builder i zašto biste ga trebali koristiti, pogledajmo kako možete koristiti AI model za obradu faktura u AI Builderu, koji smo ranije pokrili, kako biste izgradili tijek rada koji će pomoći financijskom timu u obradi faktura. Da biste izgradili tijek rada koji će pomoći financijskom timu u obradi faktura koristeći AI model za obradu faktura u AI Builderu, slijedite korake u nastavku:
+1. Za nastavnike koji žele slati e-poštu učenicima, možete koristiti Copilot za dodavanje novog zaslona u aplikaciju. Na primjer, možete koristiti sljedeći upit za dodavanje novog zaslona u aplikaciju: **_I want to add a screen to send emails to students_**. Kliknite na gumb **Send** da pošaljete upit AI Copilotu.
 
-1. Idite na početni ekran [Power Automate](https://make.powerautomate.com?WT.mc_id=academic-105485-koreyst).
-2. Koristite tekstualno područje na početnom ekranu da opišete tijek rada koji želite izgraditi. Na primjer, **_Obradi fakturu kada stigne u moju poštu_**. Kliknite na gumb **Pošalji** da pošaljete upit AI Copilotu. ![Copilot power automate](../../../translated_images/copilot-chat-prompt-powerautomate.0a21031a7ae6b1fb5dd61ce5c09d530454a93ee65c166b5c286e49c1a9312039.hr.png)
-3. AI Copilot će predložiti radnje koje trebate izvršiti za zadatak koji želite automatizirati. Možete kliknuti na gumb **Dalje** da biste prošli kroz sljedeće korake.
-4. U sljedećem koraku, Power Automate će vas zatražiti da postavite veze potrebne za tijek. Kada završite, kliknite na gumb **Kreiraj tijek** da biste kreirali tijek.
-5. AI Copilot će generirati tijek i tada možete prilagoditi tijek kako bi odgovarao vašim potrebama.
-6. Ažurirajte okidač tijeka i postavite **Mapu** na mapu gdje će fakture biti pohranjene. Na primjer, možete postaviti mapu na **Inbox**. Kliknite na **Prikaži napredne opcije** i postavite **Samo s prilozima** na **Da**. To će osigurati da se tijek pokrene samo kada se u mapi primi e-pošta s prilogom.
-7. Uklonite sljedeće radnje iz tijeka: **HTML u tekst**, **Sastavi**, **Sastavi 2**, **Sastavi 3** i **Sastavi 4** jer ih nećete koristiti.
-8. Uklonite radnju **Uvjet** iz tijeka jer je nećete koristiti. Trebalo bi izgledati kao na sljedećem snimku zaslona: ![power automate, ukloni radnje](../../../translated_images/powerautomate-remove-actions.ea4e8386e075a56b2b6a87ccbcb2484f146e869ba4273948abee6acdb3567c09.hr.png)
-9. Kliknite na gumb **Dodaj radnju** i potražite **Dataverse**. Odaberite radnju **Dodaj novi redak**.
-10. Na radnji **Izvuci informacije iz faktura**, ažurirajte **Datoteku fakture** da pokazuje na **Sadržaj priloga** iz e-pošte. To će osigurati da tijek izvlači informacije iz priloga fakture.
-11. Odaberite **Tablicu** koju ste ranije kreirali. Na primjer, možete odabrati tablicu **Informacije o fakturi**. Odaberite dinamički sadržaj iz prethodne radnje da popunite sljedeća polja: 
-- ID 
-- Iznos 
-- Datum 
-- Ime 
-- Status 
-- Postavite **Status** na **Na čekanju**. 
-- E-mail dobavljača 
-- Koristite dinamički sadržaj **Od** iz okidača **Kada stigne nova e-pošta**. ![power automate dodaj redak](../../../translated_images/powerautomate-add-row.d27c9166313cb7b3683e45f3059c13f9435e8257b357c0150652d60523dab3e9.hr.png)
-12. Kada završite s tijekom, kliknite na gumb **Spremi** da biste spremili tijek. Tada možete testirati tijek slanjem e-pošte s fakturom u mapu koju ste naveli u okidaču.
+![Adding a new screen via a prompt instruction](../../../translated_images/hr/copilot-new-screen.2e0bef7132a17392.webp)
 
-> **Vaša domaća zadaća**: Tijek koji ste upravo izgradili je dobar početak, sada trebate razmisliti o tome kako možete izgraditi automatizaciju koja će omogućiti našem financijskom timu da pošalje e-mail dobavljaču kako bi ih obavijestili o trenutnom statusu njihove fakture. Vaša naznaka: tijek mora biti pokrenut kada se status fakture promijeni.
+1. AI Copilot će generirati novi zaslon i zatim ga možete prilagoditi kako bi odgovarao vašim potrebama.
 
-## Koristite AI model za generiranje teksta u Power Automate
+1. Kada završite s aplikacijom, kliknite na gumb **Save** za spremanje aplikacije.
 
-AI model za kreiranje teksta s GPT u AI Builderu omogućuje vam generiranje teksta na temelju upita i pokreće ga Microsoft Azure OpenAI Service. S ovom mogućnošću, možete integrirati GPT (Generativni unaprijed trenirani transformator) tehnologiju u svoje aplikacije i tijekove kako biste izgradili razne automatizirane tijekove i informativne aplikacije.
+1. Za dijeljenje aplikacije s nastavnicima, kliknite na gumb **Share**, a zatim ponovo kliknite na gumb **Share**. Zatim možete podijeliti aplikaciju s nastavnicima unošenjem njihovih e-mail adresa.
 
-GPT modeli prolaze opsežnu obuku na velikim količinama podataka, omogućujući im proizvodnju teksta koji blisko nalikuje ljudskom jeziku kada im se pruži upit. Kada se integriraju s automatizacijom tijeka rada, AI modeli poput GPT-a mogu se iskoristiti za pojednostavljenje i automatizaciju širokog spektra zadataka.
+> **Vaš domaći zadatak**: Aplikacija koju ste upravo izgradili dobar je početak, ali može se poboljšati. Uz funkciju e-pošte, nastavnici mogu slati e-poruke učenicima samo ručno, morajući unositi njihove e-mail adrese. Možete li koristiti Copilot za izgradnju automatizacije koja će omogućiti nastavnicima da automatski šalju e-poštu učenicima kada predaju svoje zadatke? Vaš savjet je da s pravim upitom možete koristiti Copilot u Power Automate za to.
 
-Na primjer, možete izgraditi tijekove za automatsko generiranje teksta za razne primjene, kao što su: nacrti e-pošte, opisi proizvoda i više. Također možete koristiti model za generiranje teksta za razne aplikacije, kao što su chatbotovi i aplikacije za korisničku podršku koje omogućuju agentima za korisničku podršku da učinkovito i efikasno odgovore na upite korisnika.
+### Izradite tablicu podataka o računima za naš startup
 
-![kreiraj upit](../../../translated_images/create-prompt-gpt.dd95b0323841a7be30684e4a48445f063209ea7ebb81e5f7f56787b12cf9c04b.hr.png)
+Financijski tim našeg startupa imao je problema s praćenjem računa. Koristili su proračunsku tablicu za praćenje računa, ali to je postalo teško za upravljanje kako se broj računa povećavao. Zamolili su vas da izradite tablicu koja će im pomoći pohraniti, pratiti i upravljati informacijama o primljenim računima. Tablica bi trebala služiti za izgradnju automatizacije koja će izvući sve informacije o računima i pohraniti ih u tablicu. Također, tablica bi trebala omogućiti financijskom timu pregled računa koji su plaćeni i onih koji nisu.
 
-Da biste naučili kako koristiti ovaj AI model u Power Automate, pregledajte modul [Dodajte inteligenciju s AI Builderom i GPT](https://learn.microsoft.com/training/modules/ai-builder-text-generation/?WT.mc_id=academic-109639-somelezediko).
+Power Platforma ima osnovnu podatkovnu platformu zvanu Dataverse koja vam omogućuje pohranu podataka za vaše aplikacije i rješenja. Dataverse pruža platformu s malo koda za pohranu podataka aplikacije. To je potpuno upravljana usluga koja sigurno pohranjuje podatke u Microsoftovom oblaku i postavljena je unutar vaše Power Platform okoline. Dolazi s ugrađenim mogućnostima upravljanja podacima, poput klasifikacije podataka, praćenja podataka, precizne kontrole pristupa i drugih. Više možete saznati [o Dataverse ovdje](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
 
-## Odličan rad! Nastavite s učenjem
+Zašto bismo trebali koristiti Dataverse za naš startup? Standardne i prilagođene tablice unutar Dataverse pružaju sigurnu i oblačnu opciju pohrane za vaše podatke. Tablice vam omogućuju pohranu različitih tipova podataka, slično kao što biste mogli koristiti više radnih listova u jednoj Excel radnoj knjizi. Možete koristiti tablice za pohranu podataka specifičnih za vašu organizaciju ili poslovne potrebe. Neke od prednosti koje će naš startup imati korištenjem Dataverse uključuju, ali nisu ograničene na:
 
-Nakon što završite ovu lekciju, pogledajte našu [kolekciju za učenje generativne AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) kako biste nastavili podizati svoje znanje o generativnoj AI!
+- **Jednostavno za upravljanje**: Metadata i podaci pohranjuju se u oblaku, tako da ne morate brinuti o detaljima kako su pohranjeni ili upravljani. Možete se usredotočiti na izgradnju vaših aplikacija i rješenja.
 
-Idite na Lekciju 11 gdje ćemo pogledati kako [integrirati generativnu AI s pozivanjem funkcija](../11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst)!
+- **Sigurno**: Dataverse pruža sigurnu i oblačnu opciju pohrane za vaše podatke. Možete kontrolirati tko ima pristup podacima u vašim tablicama i kako ih mogu koristiti koristeći sigurnost baziranu na ulogama.
 
-**Izjava o odricanju odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge prevođenja [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo preciznosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za kritične informacije preporučuje se profesionalni prijevod od strane čovjeka. Ne odgovaramo za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+- **Bogata metadata**: Tipovi podataka i odnosi direktno se koriste u Power Apps
+
+- **Logika i validacija**: Možete koristiti poslovna pravila, izračunate stupce i pravila validacije za provođenje poslovne logike i održavanje točnosti podataka.
+
+Sada kada znate što je Dataverse i zašto ga trebate koristiti, pogledajmo kako možete koristiti Copilot za izradu tablice u Dataverse koja će zadovoljiti zahtjeve našeg financijskog tima.
+
+> **Napomena** : Ovu tablicu ćete koristiti u sljedećem dijelu za izgradnju automatizacije koja će izvući sve informacije o računima i pohraniti ih u tablicu.
+
+Za izradu tablice u Dataverse koristeći Copilot, slijedite korake u nastavku:
+
+1. Otvorite [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) početni zaslon.
+
+2. Na lijevoj navigacijskoj traci odaberite **Tables**, a zatim kliknite na **Describe the new Table**.
+
+![Select new table](../../../translated_images/hr/describe-new-table.0792373eb757281e.webp)
+
+1. Na zaslonu **Describe the new Table** koristite tekstualni okvir za opis tablice koju želite napraviti. Na primjer, **_I want to create a table to store invoice information_**. Kliknite na gumb **Send** da pošaljete upit AI Copilotu.
+
+![Describe the table](../../../translated_images/hr/copilot-chat-prompt-dataverse.feb2f81e5872b9d2.webp)
+
+1. AI Copilot će predložiti Dataverse tablicu s poljima koje trebate za pohranu podataka koje želite pratiti, zajedno s primjerom podataka. Zatim možete prilagoditi tablicu prema vašim potrebama koristeći funkciju AI Copilota kroz konverzacijske korake.
+
+![Suggested Dataverse table](../../../translated_images/hr/copilot-dataverse-table.b3bc936091324d9d.webp)
+
+1. Financijski tim želi poslati e-poštu dobavljaču da ga obavijesti o trenutnom statusu njihovog računa. Možete koristiti Copilot za dodavanje novog polja u tablicu za pohranu e-mail adrese dobavljača. Na primjer, možete koristiti sljedeći upit za dodavanje novog stupca u tablicu: **_I want to add a column to store supplier email_**. Kliknite na gumb **Send** da pošaljete upit AI Copilotu.
+
+1. AI Copilot će generirati novo polje i onda ga možete prilagoditi prema vašim potrebama.
+
+1. Kada završite s tablicom, kliknite na gumb **Create** za izradu tablice.
+
+## AI modeli u Power Platformi s AI Builderom
+
+AI Builder je AI mogućnost s malo koda dostupna u Power Platformi koja vam omogućuje korištenje AI modela za automatizaciju procesa i predviđanje ishoda. Uz AI Builder možete uključiti AI u vaše aplikacije i tokove rada koji se povezuju s podacima u Dataverse ili u raznim oblačnim izvorima podataka, poput SharePointa, OneDrivea ili Azurea.
+
+## Gotovi AI modeli vs. Prilagođeni AI modeli
+
+AI Builder pruža dvije vrste AI modela: Gotove AI modele i Prilagođene AI modele. Gotovi AI modeli su spremni za upotrebu, trenirani od strane Microsofta i dostupni u Power Platformi. Oni vam pomažu dodati inteligenciju u vaše aplikacije i tokove rada bez potrebe za prikupljanjem podataka i izradom, treniranjem i objavljivanjem vlastitih modela. Ove modele možete koristiti za automatizaciju procesa i predviđanje ishoda.
+
+Neki od gotovih AI modela dostupnih u Power Platformi uključuju:
+
+- **Ekstrakcija ključnih fraza**: Ovaj model izvlači ključne fraze iz teksta.
+- **Detekcija jezika**: Ovaj model prepoznaje jezik teksta.
+- **Analiza sentimenta**: Ovaj model prepoznaje pozitivan, negativan, neutralan ili miješani sentiment u tekstu.
+- **Čitač vizitki**: Ovaj model izvlači informacije iz vizitki.
+- **Prepoznavanje teksta**: Ovaj model izvlači tekst iz slika.
+- **Prepoznavanje objekata**: Ovaj model prepoznaje i izvlači objekte iz slika.
+- **Obrada dokumenata**: Ovaj model izvlači informacije iz obrazaca.
+- **Obrada računa**: Ovaj model izvlači informacije iz računa.
+
+S prilagođenim AI modelima možete unijeti vlastiti model u AI Builder tako da može funkcionirati kao bilo koji prilagođeni model iz AI Buildera, omogućujući vam treniranje modela korištenjem vlastitih podataka. Ove modele možete koristiti za automatizaciju procesa i predviđanje ishoda u Power Apps i Power Automate. Pri korištenju vlastitog modela postoje primjenjiva ograničenja. Više o njima pročitajte [ovdje](https://learn.microsoft.com/ai-builder/byo-model#limitations?WT.mc_id=academic-105485-koreyst).
+
+![AI builder models](../../../translated_images/hr/ai-builder-models.8069423b84cfc47f.webp)
+
+## Zadatak #2 - Izradite tok obrade računa za naš startup
+
+Financijski tim ima poteškoće s obradom računa. Koristili su proračunsku tablicu za praćenje računa, ali to je postalo teško za upravljanje kako je broj računa rastao. Zamolili su vas da izradite tijek rada koji će im pomoći obraditi račune korištenjem AI. Tijek rada treba omogućiti izvlačenje informacija iz računa i pohranu tih informacija u Dataverse tablicu. Također, treba im omogućiti slanje e-pošte financijskom timu s izvučenim informacijama.
+
+Sada kada znate što je AI Builder i zašto ga koristiti, pogledajmo kako možete upotrijebiti AI model za obradu računa u AI Builderu, koji smo ranije spomenuli, za izgradnju tijeka rada koji će pomoći financijskom timu obraditi račune.
+
+Za izradu tijeka rada koji će pomoći financijskom timu u obradi računa koristeći AI model za obradu računa u AI Builderu, slijedite ove korake:
+
+1. Otvorite [Power Automate](https://make.powerautomate.com?WT.mc_id=academic-105485-koreyst) početni zaslon.
+
+2. Koristite tekstualni okvir na početnom zaslonu za opis tijeka rada koji želite izgraditi. Na primjer, **_Process an invoice when it arrives in my mailbox_**. Kliknite na gumb **Send** da pošaljete upit AI Copilotu.
+
+   ![Copilot power automate](../../../translated_images/hr/copilot-chat-prompt-powerautomate.f377e478cc8412de.webp)
+
+3. AI Copilot će predložiti korake koje trebate poduzeti za zadatak koji želite automatizirati. Možete kliknuti na gumb **Next** da prođete kroz sljedeće korake.
+
+4. U sljedećem koraku, Power Automate će tražiti da postavite potrebne veze za tok rada. Kada završite, kliknite na gumb **Create flow** za stvaranje toka rada.
+
+5. AI Copilot će generirati tok rada i zatim ga možete prilagoditi prema svojim potrebama.
+
+6. Ažurirajte okidač toka rada i postavite **Folder** na mapu gdje će računi biti pohranjeni. Na primjer, postavite mapu na **Inbox**. Kliknite na **Show advanced options** i postavite **Only with Attachments** na **Yes**. Ovo osigurava da tok rada radi samo kada se u mapu primi e-pošta s privitkom.
+
+7. Uklonite sljedeće korake iz toka rada: **HTML to text**, **Compose**, **Compose 2**, **Compose 3** i **Compose 4** jer ih nećete koristiti.
+
+8. Uklonite korak **Condition** iz toka jer ga nećete koristiti. Trebalo bi izgledati kao na sljedećoj snimci zaslona:
+
+   ![power automate, remove actions](../../../translated_images/hr/powerautomate-remove-actions.7216392fe684ceba.webp)
+
+9. Kliknite na gumb **Add an action** i potražite **Dataverse**. Odaberite akciju **Add a new row**.
+
+10. U akciji **Extract Information from invoices**, ažurirajte **Invoice File** da pokazuje na **Attachment Content** iz e-pošte. Ovo osigurava da tok izvlači informacije iz privitka računa.
+
+11. Odaberite tablicu koju ste ranije izradili. Na primjer, možete odabrati tablicu **Invoice Information**. Izaberite dinamički sadržaj iz prethodne akcije za popunjavanje sljedećih polja:
+
+    - ID
+    - Iznos
+    - Datum
+    - Naziv
+    - Status - Postavite **Status** na **Pending** (Na čekanju).
+    - Supplier Email - Koristite dinamički sadržaj **From** iz okidača **When a new email arrives**.
+
+    ![power automate add row](../../../translated_images/hr/powerautomate-add-row.5edce45e5dd3d51e.webp)
+
+12. Kada završite s tokom, kliknite na gumb **Save** za spremanje toka. Zatim možete testirati tok slanjem e-pošte s računom u mapu koju ste naveli u okidaču.
+
+> **Vaš domaći zadatak**: Tok koji ste upravo izgradili dobar je početak, sada morate razmisliti kako možete izraditi automatizaciju koja će našem financijskom timu omogućiti slanje e-pošte dobavljaču s ažuriranjem trenutnog statusa njihovog računa. Vaš savjet: tok se mora pokrenuti kada se status računa promijeni.
+
+## Upotreba AI modela za generiranje teksta u Power Automate
+
+AI model Create Text with GPT u AI Builderu omogućuje vam generiranje teksta na temelju upita, a pokreće ga Microsoft Azure OpenAI Service. Uz ovu mogućnost možete uključiti GPT (Generative Pre-Trained Transformer) tehnologiju u svoje aplikacije i tokove rada za izradu različitih automatiziranih tijekova i informativnih aplikacija.
+
+GPT modeli prolaze kroz opsežnu obuku na ogromnim količinama podataka, što im omogućuje generiranje teksta koji je vrlo sličan ljudskom jeziku kada im se postavi upit. Kada se integriraju s automatizacijom tijekova rada, AI modeli poput GPT mogu se koristiti za pojednostavljenje i automatizaciju širokog spektra zadataka.
+
+Na primjer, možete izraditi tokove koji automatski generiraju tekst za različite potrebe, poput: nacrta e-pošte, opisa proizvoda i slično. Također možete koristiti model za generiranje teksta za razne aplikacije, poput chatbotova i aplikacija za korisničku podršku koje omogućuju agentima korisničke podrške da učinkovito i brzo odgovaraju na upite korisnika.
+
+![create a prompt](../../../translated_images/hr/create-prompt-gpt.69d429300c2e870a.webp)
+
+
+Za učenje kako koristiti ovaj AI model u Power Automate, proučite modul [Dodajte inteligenciju s AI Builder i GPT](https://learn.microsoft.com/training/modules/ai-builder-text-generation/?WT.mc_id=academic-109639-somelezediko).
+
+## Sjajan posao! Nastavite s učenjem
+
+Nakon dovršetka ove lekcije, pogledajte našu [kolekciju Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) da nastavite unapređivati svoje znanje o Generativnoj AI!
+
+Želite li prilagoditi i izvući više iz Copilota? Istražite [Awesome Copilot](https://github.com/github/awesome-copilot?WT.mc_id=academic-105485-koreyst) — kolekciju uputa, agenata, vještina i konfiguracija koje je pridonijela zajednica, kako biste što bolje iskoristili GitHub Copilot.
+
+Uputite se na Lekciju 11 gdje ćemo pogledati kako [integrirati Generativnu AI s Function Calling](../11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst)!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Napomena**:
+Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati greške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporuča se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

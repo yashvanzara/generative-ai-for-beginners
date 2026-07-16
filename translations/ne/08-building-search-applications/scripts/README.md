@@ -1,43 +1,34 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0d69f2d5814a698d3de5d0235940b5ae",
-  "translation_date": "2025-05-19T18:48:46+00:00",
-  "source_file": "08-building-search-applications/scripts/README.md",
-  "language_code": "ne"
-}
--->
-# ट्रान्सक्रिप्शन डेटा तयारी
+# ट्रान्सक्रिप्सन डेटा तयारी
 
-ट्रान्सक्रिप्शन डेटा तयारी स्क्रिप्टहरूले युट्युब भिडियो ट्रान्सक्रिप्टहरू डाउनलोड गर्छन् र तिनीहरूलाई सेमान्टिक सर्च विथ ओपनएआई एम्बेडिङ्स र फङ्सनहरू नमूनासँग प्रयोग गर्नका लागि तयार पार्छन्।
+ट्रान्सक्रिप्सन डेटा तयारी स्क्रिप्टहरूले यूट्यूब भिडियो ट्रान्सक्रिप्टहरू डाउनलोड गर्छन् र तिनीहरूलाई Semantic Search with OpenAI Embeddings and Functions नमुनासँग प्रयोग गर्न तयार पार्छन्।
 
-ट्रान्सक्रिप्शन डेटा तयारी स्क्रिप्टहरूले पछिल्लो संस्करणहरूमा परीक्षण गरिएका छन्: Windows 11, macOS Ventura र Ubuntu 22.04 (र माथि)।
+ट्रान्सक्रिप्सन डेटा तयारी स्क्रिप्टहरूलाई नवीनतम रिलिजहरू Windows 11, macOS Ventura र Ubuntu 22.04 (वा माथि) मा परीक्षण गरिएको छ।
 
-## आवश्यक Azure OpenAI सेवा स्रोतहरू बनाउनुहोस्
+## आवश्यक Azure OpenAI सेवा स्रोतहरू सिर्जना गर्नुहोस्
 
 > [!IMPORTANT]
-> हामी सुझाव दिन्छौं कि तपाईंले OpenAI सँगको अनुकूलता सुनिश्चित गर्नको लागि Azure CLI लाई पछिल्लो संस्करणमा अद्यावधिक गर्नुहोस्
-> [डकुमेन्टेशन](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst) हेर्नुहोस्
+> हामी तपाईँलाई Azure CLI लाई OpenAI सँगको अनुकूलन सुनिश्चित गर्न नवीनतम संस्करणमा अपडेट गर्न सुझाव दिन्छौं
+> हेर्नुहोस् [Documentation](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
-1. एक स्रोत समूह बनाउनुहोस्
+1. एक रिसोर्स समूह सिर्जना गर्नुहोस्
 
 > [!NOTE]
-> यी निर्देशनहरूका लागि हामी East US मा "semantic-video-search" नामको स्रोत समूह प्रयोग गर्दैछौं।
-> तपाईं स्रोत समूहको नाम परिवर्तन गर्न सक्नुहुन्छ, तर स्रोतहरूको स्थान परिवर्तन गर्दा, 
-> [मोडेल उपलब्धता तालिका](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst) जाँच गर्नुहोस्।
+> यी निर्देशनहरूको लागि हामीले East US मा "semantic-video-search" नामक रिसोर्स समूह प्रयोग गर्दैछौं।
+> तपाईं रिसोर्स समूहको नाम परिवर्तन गर्न सक्नुहुन्छ, तर स्रोतहरूको स्थान परिवर्तन गर्दा,
+> [model availability table](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst) जाँच गर्नुहोस्।
 
 ```console
 az group create --name semantic-video-search --location eastus
 ```
 
-1. Azure OpenAI सेवा स्रोत बनाउनुहोस्।
+1. एक Azure OpenAI सेवा स्रोत सिर्जना गर्नुहोस्।
 
 ```console
 az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. यस अनुप्रयोगमा प्रयोगका लागि अन्तिम बिन्दु र कुञ्जीहरू प्राप्त गर्नुहोस्
+1. यस अनुप्रयोगमा प्रयोगका लागि endpoint र कुञ्जीहरू प्राप्त गर्नुहोस्
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -46,9 +37,9 @@ az cognitiveservices account keys list --name semantic-video-openai \
    --resource-group semantic-video-search | jq -r .key1
 ```
 
-1. निम्न मोडेलहरू तैनाथ गर्नुहोस्:
-   - `text-embedding-ada-002` version `2` or greater, named `text-embedding-ada-002`
-   - `gpt-35-turbo` version `0613` or greater, named `gpt-35-turbo`
+1. तलका मोडेलहरू तैनाथ गर्नुहोस्:
+   - `text-embedding-ada-002` संस्करण `2` वा माथि, नाम `text-embedding-ada-002`
+   - `gpt-4o-mini` नाम `gpt-4o-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -62,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-4o-mini \
+    --model-name gpt-4o-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -72,16 +62,16 @@ az cognitiveservices account deployment create \
 
 ## आवश्यक सफ्टवेयर
 
-- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) वा उच्च संस्करण
+- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) वा माथि
 
-## वातावरणीय भेरिएबलहरू
+## वातावरण चरहरू
 
-YouTube ट्रान्सक्रिप्शन डेटा तयारी स्क्रिप्टहरू चलाउन निम्न वातावरणीय भेरिएबलहरू आवश्यक छन्।
+यूट्यूब ट्रान्सक्रिप्सन डेटा तयारी स्क्रिप्टहरू चलाउन तलका वातावरण चरहरू आवश्यक छन्।
 
-### Windows मा
+### विन्डोजमा
 
-तपाईंको `user` environment variables.
-`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` for [USER] > `New` मा भेरिएबलहरू थप्न सिफारिस गरिन्छ।
+तपाईको `user` वातावरण चरहरूमा यी चरहरू थप्न सिफारिस गरिन्छ।
+`Windows Start` > `Edit the system environment variables` > `Environment Variables` > [USER] को `User variables` > `New`।
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -90,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
-### Linux र macOS मा
+<!-- तपाईं यी वातावरण चरहरूलाई आफ्नो PowerShell प्रोफाइलमा थप्न सक्नुहुन्छ।
 
-तपाईंको `~/.bashrc` or `~/.zshrc` फाइलमा निम्न निर्यातहरू थप्न सिफारिस गरिन्छ।
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<your Azure OpenAI Service API key>"
+$env:AZURE_OPENAI_ENDPOINT = "<your Azure OpenAI Service endpoint>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<your Azure OpenAI Service model deployment name>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<your Google developer API key>"
+``` -->
+
+### लिनक्स र macOS मा
+
+तलका exports लाई तपाईँको `~/.bashrc` वा `~/.zshrc` फाइलमा थप्न सिफारिस गरिन्छ।
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -101,10 +100,10 @@ export AZURE_OPENAI_MODEL_DEPLOYMENT_NAME=<your Azure OpenAI Service model deplo
 export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ```
 
-## आवश्यक Python पुस्तकालयहरू स्थापना गर्नुहोस्
+## आवश्यक Python पुस्तकालयहरू इन्स्टल गर्नुहोस्
 
-1. [git क्लाइन्ट](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) स्थापना गर्नुहोस् यदि यो पहिले नै स्थापना गरिएको छैन भने।
-1. `Terminal` विन्डोबाट, नमूनालाई तपाईंको मनपर्ने रिपो फोल्डरमा क्लोन गर्नुहोस्।
+1. [git client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) इन्स्टल छैन भने इन्स्टल गर्नुहोस्।
+1. एक `Terminal` विन्डोबाट, नमुनालाई तपाईंको मनपर्ने रिपो फोल्डरमा क्लोन गर्नुहोस्।
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -116,15 +115,15 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    cd semanic-search-openai-embeddings-functions/src/data_prep
    ```
 
-1. Python भर्चुअल वातावरण बनाउनुहोस्।
+1. एक Python भर्चुअल वातावरण सिर्जना गर्नुहोस्।
 
-    Windows मा:
+    विन्डोजमा:
 
     ```powershell
     python -m venv .venv
     ```
 
-    macOS र Linux मा:
+    macOS र लिनक्समा:
 
     ```bash
     python3 -m venv .venv
@@ -132,45 +131,49 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Python भर्चुअल वातावरण सक्रिय गर्नुहोस्।
 
-   Windows मा:
+   विन्डोजमा:
 
    ```powershell
    .venv\Scripts\activate
    ```
 
-   macOS र Linux मा:
+   macOS र लिनक्समा:
 
    ```bash
    source .venv/bin/activate
    ```
 
-1. आवश्यक पुस्तकालयहरू स्थापना गर्नुहोस्।
+1. आवश्यक पुस्तकालयहरू इन्स्टल गर्नुहोस्।
 
-   Windows मा:
+   विन्डोजमा:
 
    ```powershell
    pip install -r requirements.txt
    ```
 
-   macOS र Linux मा:
+   macOS र लिनक्समा:
 
    ```bash
    pip3 install -r requirements.txt
    ```
 
-## YouTube ट्रान्सक्रिप्शन डेटा तयारी स्क्रिप्टहरू चलाउनुहोस्
+## यूट्यूब ट्रान्सक्रिप्सन डेटा तयारी स्क्रिप्टहरू चलाउनुहोस्
 
-### Windows मा
+### विन्डोजमा
 
 ```powershell
 .\transcripts_prepare.ps1
 ```
 
-### macOS र Linux मा
+### macOS र लिनक्समा
 
 ```bash
 ./transcripts_prepare.sh
 ```
 
-**अस्वीकरण**:  
-यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) को प्रयोग गरी अनुवाद गरिएको हो। हामी यथासम्भव शुद्धताको लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धिहरू हुन सक्छन्। यसको मूल भाषा मा रहेको दस्तावेजलाई आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीको लागि, पेशेवर मानव अनुवादको सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न हुने कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार हुनेछैनौं।
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**अस्वीकरण**:
+यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी सही हुन प्रयास गर्छौं, तर कृपया जानकार हुनुस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुन सक्छन्। मूल दस्तावेज़ यसको मूल भाषामा आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलत बुझाइ वा त्रुटिको लागि हामी जिम्मेवार छैनौं।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,75 +1,66 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ea4bbe640847aafbbba14dae4625e9af",
-  "translation_date": "2025-05-19T17:48:42+00:00",
-  "source_file": "07-building-chat-applications/README.md",
-  "language_code": "tr"
-}
--->
-# Üretici Yapay Zeka Destekli Sohbet Uygulamaları Geliştirme
+# Üretken AI Destekli Sohbet Uygulamaları Geliştirme
 
-[![Üretici Yapay Zeka Destekli Sohbet Uygulamaları Geliştirme](../../../translated_images/07-lesson-banner.0f61145112d724a50d32abfb0b1841777f3ecec301d6f96a0b7f9d6b0e4756b9.tr.png)](https://aka.ms/gen-ai-lessons7-gh?WT.mc_id=academic-105485-koreyst)
+[![Üretken AI Destekli Sohbet Uygulamaları Geliştirme](../../../translated_images/tr/07-lesson-banner.a279b937f2843833.webp)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
 
-> _(Bu dersi izlemek için yukarıdaki resme tıklayın)_
+> _(Bu dersin videosunu izlemek için yukarıdaki görsele tıklayın)_
 
-Metin üretim uygulamalarını nasıl oluşturabileceğimizi gördüğümüze göre, şimdi sohbet uygulamalarına bakalım.
+Artık metin üretimi uygulamalarını nasıl inşa edebileceğimizi gördüğümüze göre, sohbet uygulamalarına göz atalım.
 
-Sohbet uygulamaları günlük hayatımızın bir parçası haline geldi ve sadece gündelik konuşma aracı olmaktan fazlasını sunuyor. Müşteri hizmetleri, teknik destek ve hatta gelişmiş danışmanlık sistemlerinin ayrılmaz parçalarıdır. Muhtemelen yakın zamanda bir sohbet uygulamasından yardım almışsınızdır. Bu platformlara üretici yapay zeka gibi daha gelişmiş teknolojileri entegre ettikçe, karmaşıklık artıyor ve zorluklar da artıyor.
+Sohbet uygulamaları, yalnızca gündelik konuşma aracı olmaktan öteye geçerek günlük hayatımıza entegre oldu. Müşteri hizmetleri, teknik destek ve hatta sofistike danışmanlık sistemlerinin ayrılmaz parçaları haline geldiler. Muhtemelen çok uzun zaman olmadan bir sohbet uygulamasından yardım aldınız. Bu platformlara üretken AI gibi daha gelişmiş teknolojileri entegre ettikçe, karmaşıklık ve beraberinde zorluklar da artar.
 
-Cevaplanması gereken bazı sorular şunlardır:
+Cevaplandırmamız gereken bazı sorular şunlardır:
 
-- **Uygulamayı oluşturma**. Bu yapay zeka destekli uygulamaları belirli kullanım durumları için verimli bir şekilde nasıl oluşturur ve sorunsuz bir şekilde entegre ederiz?
-- **İzleme**. Dağıtıldıktan sonra, uygulamaların hem işlevsellik açısından hem de [sorumlu yapay zeka ilkelerine](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) uygun olarak en yüksek kalite seviyesinde çalıştığını nasıl izleyebilir ve sağlayabiliriz?
+- **Uygulama geliştirme.** Bu AI destekli uygulamaları belirli kullanım durumları için nasıl verimli ve sorunsuz bir şekilde inşa edip entegre edebiliriz?
+- **İzleme.** Dağıtım sonrası, uygulamaların işlevsellik ve [sorumlu AI'nın altı prensibine](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) uyum açısından en yüksek kalite düzeyinde çalıştığını nasıl izleyip garanti altına alabiliriz?
 
-Otomasyon ve sorunsuz insan-makine etkileşimleri ile tanımlanan bir çağa doğru ilerlerken, üretici yapay zekanın sohbet uygulamalarının kapsamını, derinliğini ve uyarlanabilirliğini nasıl dönüştürdüğünü anlamak önem kazanıyor. Bu ders, bu karmaşık sistemleri destekleyen mimari yönleri inceleyecek, alan odaklı görevler için ince ayar yapma metodolojilerini araştıracak ve sorumlu yapay zeka dağıtımını sağlamak için ilgili ölçütleri ve değerlendirmeleri değerlendirecektir.
+Otomasyon ve sorunsuz insan-makine etkileşimlerinin şekillendirdiği bir çağda ilerlerken, üretken AI'nın sohbet uygulamalarının kapsamını, derinliğini ve uyarlanabilirliğini nasıl dönüştürdüğünü anlamak zorunlu hale geliyor. Bu ders, bu karmaşık sistemleri destekleyen mimari yönleri inceleyecek, alan-spesifik görevler için ince ayar metodolojilerine değinecek ve sorumlu AI dağıtımını sağlamak için ilgili metrikleri ve değerlendirme kriterlerini ele alacak.
 
 ## Giriş
 
 Bu ders şunları kapsar:
 
-- Sohbet uygulamalarını verimli bir şekilde oluşturma ve entegre etme teknikleri.
-- Uygulamalara özelleştirme ve ince ayar uygulama yöntemleri.
-- Sohbet uygulamalarını etkili bir şekilde izlemek için stratejiler ve değerlendirmeler.
+- Sohbet uygulamalarını verimli şekilde inşa etme ve entegre etme teknikleri.
+- Uygulamalara özelleştirme ve ince ayar yapma yöntemleri.
+- Sohbet uygulamalarını etkili bir şekilde izlemek için stratejiler ve dikkate alınması gerekenler.
 
 ## Öğrenme Hedefleri
 
-Bu dersin sonunda:
+Bu dersin sonunda, şunları yapabilmeniz beklenir:
 
-- Mevcut sistemlere sohbet uygulamaları entegre etmek için dikkate alınması gereken hususları tanımlayabileceksiniz.
-- Belirli kullanım durumları için sohbet uygulamalarını özelleştirebileceksiniz.
-- Yapay zeka destekli sohbet uygulamalarının kalitesini etkili bir şekilde izlemek ve sürdürmek için önemli ölçütleri ve değerlendirmeleri tanımlayabileceksiniz.
-- Sohbet uygulamalarının yapay zekayı sorumlu bir şekilde kullanmasını sağlayabileceksiniz.
+- Sohbet uygulamalarını mevcut sistemlere entegre ederken dikkat edilmesi gerekenleri tanımlayabilmek.
+- Sohbet uygulamalarını özel kullanım durumları için özelleştirebilmek.
+- AI destekli sohbet uygulamalarının kalitesini etkili şekilde izlemek ve korumak için temel metrikleri ve değerlendirme kriterlerini belirleyebilmek.
+- Sohbet uygulamalarında AI'nın sorumlu şekilde kullanılmasını sağlayabilmek.
 
-## Üretici Yapay Zekayı Sohbet Uygulamalarına Entegre Etme
+## Üretken AI'nın Sohbet Uygulamalarına Entegrasyonu
 
-Üretici yapay zeka ile sohbet uygulamalarını geliştirmek sadece onları daha akıllı hale getirmekle ilgili değil; mimarilerini, performanslarını ve kullanıcı arayüzlerini optimize ederek kaliteli bir kullanıcı deneyimi sunmakla ilgilidir. Bu, mimari temelleri, API entegrasyonlarını ve kullanıcı arayüzü değerlendirmelerini incelemeyi içerir. Bu bölüm, ister mevcut sistemlere entegre ediyor olun, ister bağımsız platformlar olarak inşa ediyor olun, bu karmaşık alanlarda gezinmek için kapsamlı bir yol haritası sunmayı amaçlamaktadır.
+Sohbet uygulamalarını üretken AI ile geliştirmek yalnızca onları daha akıllı yapmakla ilgili değildir; mimari yapılarını, performanslarını ve kullanıcı arayüzlerini optimize ederek kaliteli bir kullanıcı deneyimi sunmakla ilgilidir. Bu, mimari temellerin, API entegrasyonlarının ve kullanıcı arayüzü hususlarının araştırılmasını kapsar. Bu bölüm, ister mevcut sistemlere entegre ediyor olun, ister bağımsız platformlar olarak inşa edin, bu karmaşık alanlarda size kapsamlı bir rehberlik sunmayı amaçlamaktadır.
 
-Bu bölümün sonunda, sohbet uygulamalarını verimli bir şekilde oluşturmak ve entegre etmek için gereken uzmanlığa sahip olacaksınız.
+Bölüm sonunda, sohbet uygulamalarını verimli şekilde inşa etme ve entegre etme konusunda uzmanlığa sahip olacaksınız.
 
-### Sohbet Botu mu, Sohbet Uygulaması mı?
+### Sohbet Botu (Chatbot) mu, Sohbet Uygulaması mı?
 
-Sohbet uygulamaları oluşturmaya başlamadan önce, 'sohbet botları' ile 'yapay zeka destekli sohbet uygulamaları'nı karşılaştıralım; bunlar farklı roller ve işlevler sunar. Bir sohbet botunun ana amacı, sıkça sorulan soruları yanıtlamak veya bir paketi takip etmek gibi belirli konuşma görevlerini otomatikleştirmektir. Genellikle kural tabanlı mantık veya karmaşık yapay zeka algoritmaları tarafından yönetilir. Buna karşılık, yapay zeka destekli bir sohbet uygulaması, insan kullanıcılar arasında metin, ses ve video sohbetleri gibi çeşitli dijital iletişim biçimlerini kolaylaştırmak için tasarlanmış çok daha geniş bir ortamdır. Tanımlayıcı özelliği, geniş bir girdi ve bağlamsal ipuçları yelpazesine dayalı olarak yanıtlar üreten, insan benzeri konuşmaları simüle eden üretici bir yapay zeka modelinin entegrasyonudur. Üretici yapay zeka destekli bir sohbet uygulaması, açık alan tartışmalarına katılabilir, gelişen konuşma bağlamlarına uyum sağlayabilir ve hatta yaratıcı veya karmaşık diyaloglar üretebilir.
+Sohbet uygulamalarını inşa etmeye dalmadan önce, farklı roller ve işlevlere sahip olan ‘chatbotlar’ ile ‘AI destekli sohbet uygulamalarını’ karşılaştıralım. Bir chatbotun ana amacı, sık sorulan soruları yanıtlamak veya bir paketin takibini yapmak gibi belirli konuşma görevlerinin otomasyonudur. Genellikle kural tabanlı mantık veya karmaşık AI algoritmaları tarafından yönetilir. Buna karşılık, AI destekli sohbet uygulaması, insan kullanıcılar arasında metin, ses ve video sohbetleri gibi çeşitli dijital iletişim biçimlerini kolaylaştırmak üzere tasarlanmış çok daha geniş kapsamlı bir ortamdır. Ayırt edici özelliği, çok çeşitli girdi ve bağlamsal ipuçlarına dayanarak yanıtlar üreten, ince detaylı insan benzeri sohbetleri taklit eden üretken AI modelinin entegrasyonudur. Üretken AI destekli sohbet uygulaması, açık alan tartışmalarına katılabilir, gelişen sohbet bağlamlarına uyum sağlayabilir ve hatta yaratıcı ya da karmaşık diyaloglar oluşturabilir.
 
-Aşağıdaki tablo, dijital iletişimdeki benzersiz rollerini anlamamıza yardımcı olmak için temel farkları ve benzerlikleri özetlemektedir.
+Aşağıdaki tablo, benzersiz dijital iletişim rollerini anlamamıza yardımcı olmak için temel farkları ve benzerlikleri özetlemektedir.
 
-| Sohbet Botu                         | Üretici Yapay Zeka Destekli Sohbet Uygulaması |
-| ----------------------------------- | --------------------------------------------- |
-| Görev Odaklı ve kural tabanlı       | Bağlam farkındalığı                           |
-| Daha büyük sistemlere entegre edilebilir | Bir veya birden fazla sohbet botunu barındırabilir |
-| Programlanmış işlevlerle sınırlı    | Üretici yapay zeka modellerini içerir         |
-| Uzmanlaşmış ve yapılandırılmış etkileşimler | Açık alan tartışmalarına katılabilir          |
+| Chatbot                               | Üretken AI Destekli Sohbet Uygulaması      |
+| ------------------------------------- | -------------------------------------- |
+| Görev Odaklı ve kural bazlı           | Bağlam farkındalığına sahip              |
+| Çoğu zaman daha büyük sistemlere entegre  | Bir veya birden fazla chatbot barındırabilir   |
+| Programlanmış işlevlerle sınırlı        | Üretken AI modellerini içerir            |
+| Uzmanlaşmış ve yapılandırılmış etkileşimler | Açık alan tartışmalarına uygun          |
 
-### SDK'lar ve API'ler ile önceden oluşturulmuş işlevleri kullanma
+### SDK ve API ile önceden oluşturulmuş işlevleri kullanmak
 
-Bir sohbet uygulaması oluştururken, mevcut olanı değerlendirmek iyi bir ilk adımdır. Sohbet uygulamaları oluşturmak için SDK'lar ve API'ler kullanmak çeşitli nedenlerle avantajlı bir stratejidir. İyi belgelenmiş SDK'lar ve API'ler entegre ederek, uygulamanızı uzun vadeli başarı için stratejik olarak konumlandırıyorsunuz, ölçeklenebilirlik ve bakım endişelerini ele alıyorsunuz.
+Bir sohbet uygulaması geliştirirken, mevcut olanları değerlendirmek iyi bir ilk adımdır. Sohbet uygulamalarını SDK ve API kullanarak oluşturmak çeşitli avantajlara sahiptir. İyi dokümante edilmiş SDK ve API'leri entegre ederek, uygulamanızın uzun vadeli başarısı için stratejik bir konum elde etmiş olursunuz ve ölçeklenebilirlik ile bakım endişelerini yönetirsiniz.
 
-- **Geliştirme sürecini hızlandırır ve genel yükü azaltır**: Kendi başınıza oluşturma sürecinin pahalı olması yerine önceden oluşturulmuş işlevlere güvenmek, uygulamanızın daha önemli bulabileceğiniz diğer yönlerine odaklanmanıza olanak tanır, örneğin iş mantığı.
-- **Daha iyi performans**: İşlevselliği sıfırdan oluştururken, sonunda kendinize "Nasıl ölçeklenir? Bu uygulama ani bir kullanıcı akışını karşılayabilir mi?" diye soracaksınız. İyi bakımı yapılan SDK ve API'ler genellikle bu endişeler için yerleşik çözümler sunar.
-- **Daha kolay bakım**: Güncellemeler ve iyileştirmeler daha kolay yönetilir çünkü çoğu API ve SDK, yeni bir sürüm yayınlandığında kütüphanenin güncellenmesini gerektirir.
-- **En son teknolojiye erişim**: Geniş veri setleri üzerinde ince ayar yapılmış ve eğitilmiş modellerden yararlanmak, uygulamanıza doğal dil yetenekleri sağlar.
+- **Geliştirme sürecini hızlandırır ve yükü azaltır**: Önceden oluşturulmuş işlevlere güvenmek, bunları kendiniz kurarken harcanacak maliyeti azaltır ve böylece iş uygulamanızın daha önemli olarak gördüğünüz diğer alanlarına (örneğin iş mantığı) odaklanmanızı sağlar.
+- **Daha iyi performans**: İşlevleri sıfırdan geliştirirken sonunda "Nasıl ölçeklendirilir? Bu uygulama ani kullanıcı artışlarını kaldırabilir mi?" sorularını sorarsınız. İyi yönetilen SDK ve API'lerde bu endişelere yönelik yerleşik çözümler bulunur.
+- **Bakımı kolaydır**: Çoğu API ve SDK, yeni sürüm yayinlandığında sadece kütüphanenin güncellenmesini gerektirdiği için güncellemeler ve iyileştirmeler kolayca yapılabilir.
+- **En yeni teknolojilere erişim**: Geniş veri setleri üzerinde ince ayar yapılmış ve eğitilmiş modelleri kullanmak, uygulamanıza doğal dil yetenekleri kazandırır.
 
-Bir SDK veya API'nin işlevselliğine erişmek genellikle sağlanan hizmetleri kullanma izni almayı içerir, bu genellikle benzersiz bir anahtar veya kimlik doğrulama belirteci aracılığıyla olur. OpenAI Python Kütüphanesini kullanarak bunun nasıl göründüğünü keşfedeceğiz. Bu dersi kendiniz de [OpenAI not defterinde](../../../07-building-chat-applications/python/oai-assignment.ipynb) veya [Azure OpenAI Hizmetleri not defterinde](../../../07-building-chat-applications/python/aoai-assignment.ipynb) deneyebilirsiniz.
+Bir SDK veya API işlevselliğine erişim genellikle benzersiz bir anahtar veya kimlik doğrulama belirteci kullanarak sağlanır. Bunu keşfetmek için OpenAI Python Kütüphanesini kullanacağız. Ayrıca bu dersi kendi başınıza deneyimlemek için aşağıdaki [OpenAI için not defteri](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) veya [Azure OpenAI Hizmetleri için not defteri](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) mevcuttur.
 
 ```python
 import os
@@ -81,90 +72,122 @@ client = OpenAI(
     api_key=API_KEY
     )
 
-chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Suggest two titles for an instructional lesson on chat applications for generative AI."}])
+response = client.responses.create(model="gpt-4o-mini", input="Suggest two titles for an instructional lesson on chat applications for generative AI.", store=False)
+print(response.output_text)
 ```
 
-Yukarıdaki örnek, istemi tamamlamak için GPT-3.5 Turbo modelini kullanır, ancak API anahtarının bunu yapmadan önce ayarlandığını fark edin. Anahtarı ayarlamazsanız bir hata alırsınız.
+Yukarıdaki örnek, yanıta tamamlamak üzere GPT-4o mini modelini Responses API ile kullanır, ancak API anahtarı önceden ayarlanmıştır. Anahtar ayarlanmazsa hata alırsınız.
 
 ## Kullanıcı Deneyimi (UX)
 
-Genel UX ilkeleri sohbet uygulamaları için geçerlidir, ancak makine öğrenimi bileşenleri nedeniyle özellikle önemli hale gelen bazı ek değerlendirmeler vardır.
+Genel UX prensipleri sohbet uygulamalarına uygulanır, ancak burada makine öğrenimi bileşenleri nedeniyle özellikle önemli bazı ek hususlar vardır.
 
-- **Belirsizliği ele alma mekanizması**: Üretici yapay zeka modelleri bazen belirsiz yanıtlar üretebilir. Kullanıcıların bu sorunu yaşadıklarında açıklama istemelerine olanak tanıyan bir özellik yardımcı olabilir.
-- **Bağlamın korunması**: Gelişmiş üretici yapay zeka modelleri, bir konuşma içinde bağlamı hatırlama yeteneğine sahiptir, bu da kullanıcı deneyimi için gerekli bir varlık olabilir. Kullanıcılara bağlamı kontrol etme ve yönetme yeteneği vermek, kullanıcı deneyimini geliştirir, ancak hassas kullanıcı bilgilerini saklama riskini de beraberinde getirir. Bu bilgilerin ne kadar süre saklandığına dair değerlendirmeler, örneğin bir saklama politikası tanıtmak, bağlam ihtiyacını gizlilikle dengeleyebilir.
-- **Kişiselleştirme**: Öğrenme ve uyum sağlama yeteneği ile yapay zeka modelleri kullanıcı için bireyselleştirilmiş bir deneyim sunar. Kullanıcı profilleri gibi özelliklerle kullanıcı deneyimini kişiselleştirmek, kullanıcıyı anlaşıldığını hissettirmekle kalmaz, aynı zamanda belirli yanıtları bulma çabalarını da destekler, daha verimli ve tatmin edici bir etkileşim yaratır.
+- **Belirsizliği giderme mekanizması**: Üretken AI modelleri zaman zaman belirsiz cevaplar üretebilir. Kullanıcıların açıklama istemesine izin veren bir özellik bu sorunun üstesinden gelmede yardımcı olabilir.
+- **Bağlamın korunması**: Gelişmiş üretken AI modellerinin bir konuşma içindeki bağlamı hatırlayabilme yeteneği vardır ve bu kullanıcı deneyimi için gerekli bir varlık olabilir. Kullanıcıların bağlamı kontrol edip yönetebilmesi deneyimi iyileştirir, ancak hassas kullanıcı bilgilerini tutma riski doğurur. Bilginin ne kadar süre saklanacağı gibi hususlar (örneğin, saklama politikaları getirerek) bağlama duyulan ihtiyaç ile gizlilik arasındaki dengeyi sağlar.
+- **Kişiselleştirme**: Öğrenip uyum sağlama yeteneğine sahip AI modelleri, kullanıcıya özel bir deneyim sunar. Kullanıcı profilleri gibi özelliklerle deneyimin kişiselleştirilmesi, kullanıcının anlaşıldığını hissetmesini sağlamakla kalmaz, aynı zamanda spesifik cevapları bulmasını kolaylaştırır ve etkileşimi daha verimli ve tatmin edici hale getirir.
 
-Kişiselleştirme örneklerinden biri, OpenAI'nin ChatGPT'sindeki "Özel talimatlar" ayarlarıdır. Bu, istemleriniz için önemli olabilecek bağlam hakkında kendinizle ilgili bilgi sağlamanıza olanak tanır. İşte özel bir talimat örneği.
+Kişiselleştirmeye bir örnek olarak OpenAI'nin ChatGPT'sindeki "Özel talimatlar" ayarları gösterilebilir. Buradan, istemleriniz için önemli olabilecek sizinle ilgili bilgileri girebilirsiniz. İşte bir özel talimat örneği.
 
-![ChatGPT'de Özel Talimatlar Ayarları](../../../translated_images/custom-instructions.950e3bf1d66f052ff5c50cd6722f1fcb532089abe33d833c190a3796f4a09827.tr.png)
+![ChatGPT Özel Talimatlar Ayarları](../../../translated_images/tr/custom-instructions.b96f59aa69356fcf.webp)
 
-Bu "profil", ChatGPT'yi bağlı listeler hakkında bir ders planı oluşturması için yönlendirir. ChatGPT'nin, kullanıcının deneyimine dayalı olarak daha derinlemesine bir ders planı isteyebileceğini dikkate aldığını fark edin.
+Bu "profil", ChatGPT'ye bağlı listeler hakkında bir ders planı oluşturmasını söyler. ChatGPT’nin kullanıcının deneyimine dayanarak daha ayrıntılı bir ders planı isteyebileceğini dikkate aldığını fark edin.
 
-![ChatGPT'de bağlı listeler hakkında bir ders planı istemi](../../../translated_images/lesson-plan-prompt.23083d9c80ec7670b3aaf3b093d79a13ed42920da81b851b29f6167b6150aae9.tr.png)
+![ChatGPT'de bağlı listeler hakkında bir ders planı için istem](../../../translated_images/tr/lesson-plan-prompt.cc47c488cf1343df.webp)
 
-### Microsoft'un Büyük Dil Modelleri için Sistem Mesajı Çerçevesi
+### Büyük Dil Modelleri için Microsoft Sistem Mesaj Çerçevesi
 
-[Microsoft,](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) LLM'lerden yanıtlar üretirken etkili sistem mesajları yazma konusunda dört alana ayrılmış rehberlik sağlamıştır:
+[Microsoft, LLM'lerden yanıt üretirken etkili sistem mesajları yazılması için rehberlik sağlamıştır](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst), bu rehber dört alana ayrılmıştır:
 
-1. Modelin kim için olduğunu, yeteneklerini ve sınırlamalarını tanımlamak.
-2. Modelin çıktı formatını tanımlamak.
-3. Modelin amaçlanan davranışını gösteren belirli örnekler sağlamak.
-4. Ek davranışsal koruyucu önlemler sağlamak.
+1. Modelin kim için olduğu ve yetenekleri ile sınırlamalarının tanımlanması.
+2. Modelin çıktı formatının belirlenmesi.
+3. Modelin amaçlanan davranışını gösteren spesifik örneklerin sağlanması.
+4. Ek davranışsal koruyucu önlemlerin sağlanması.
 
 ### Erişilebilirlik
 
-Bir kullanıcının görsel, işitsel, motor veya bilişsel engelleri olsun, iyi tasarlanmış bir sohbet uygulaması herkes tarafından kullanılabilir olmalıdır. Aşağıdaki liste, çeşitli kullanıcı engelleri için erişilebilirliği artırmayı amaçlayan belirli özellikleri açıklar.
+Kullanıcı görsel, işitsel, motor veya bilişsel engellere sahip olsun, iyi tasarlanmış bir sohbet uygulaması herkes tarafından kullanılabilir olmalıdır. Aşağıdaki liste, çeşitli kullanıcı engellerine yönelik erişilebilirliği artırmak için tasarlanmış özellikleri detaylandırır.
 
-- **Görsel Engellilik için Özellikler**: Yüksek kontrastlı temalar ve yeniden boyutlandırılabilir metin, ekran okuyucu uyumluluğu.
-- **İşitsel Engellilik için Özellikler**: Metin-okuma ve konuşma-metin işlevleri, sesli bildirimler için görsel ipuçları.
-- **Motor Engellilik için Özellikler**: Klavye navigasyon desteği, sesli komutlar.
-- **Bilişsel Engellilik için Özellikler**: Basitleştirilmiş dil seçenekleri.
+- **Görme Engeli için Özellikler**: Yüksek kontrast temalar ve yeniden boyutlandırılabilir metin, ekran okuyucu uyumluluğu.
+- **İşitme Engeli için Özellikler**: Metinden sese ve sesten metne işlevleri, ses bildirimleri için görsel ipuçları.
+- **Motor Engeli için Özellikler**: Klavye navigasyon desteği, sesli komutlar.
+- **Bilişsel Engeli için Özellikler**: Basitleştirilmiş dil seçenekleri.
 
-## Alan Özel Dil Modelleri için Özelleştirme ve İnce Ayar
+## Alan-Spesifik Dil Modelleri için Özelleştirme ve İnce Ayar
 
-Şirketinizin jargonunu anlayan ve kullanıcı tabanının genellikle sahip olduğu belirli sorguları önceden tahmin eden bir sohbet uygulaması hayal edin. Bahsetmeye değer birkaç yaklaşım vardır:
+Şirketinizin jargonunu anlayan ve kullanıcılarının sıkça sorduğu belirli soruları önceden tahmin eden bir sohbet uygulamasını hayal edin. Bahsetmeye değer birkaç yaklaşım vardır:
 
-- **DSL modellerinden yararlanma**. DSL, alan özel dil anlamına gelir. Belirli bir alanda eğitilmiş bir DSL modelinden yararlanarak, o alanın kavramlarını ve senaryolarını anlayabilirsiniz.
-- **İnce ayar uygulama**. İnce ayar, modelinizi belirli verilerle daha fazla eğitme sürecidir.
+- **DSL modellerinden yararlanma**. DSL, alan-spesifik dil anlamına gelir. Belirli bir alan için eğitilmiş bir DSL modeli, o alanın kavramlarını ve senaryolarını anlamak üzere kullanılabilir.
+- **İnce ayar uygulama**. İnce ayar, modelinizi özel verilerle daha ileriye taşıma işlemidir.
 
-## Özelleştirme: Bir DSL Kullanma
+## Özelleştirme: Bir DSL Kullanmak
 
-Alan özel dil modellerinden (DSL Modelleri) yararlanmak, kullanıcı etkileşimini artırabilir ve uzmanlaşmış, bağlamsal olarak alakalı etkileşimler sağlayabilir. Belirli bir alan, endüstri veya konu ile ilgili metinleri anlamak ve üretmek üzere eğitilmiş veya ince ayar yapılmış bir modeldir. Bir DSL modeli kullanma seçenekleri, birini sıfırdan eğitmekten, SDK'lar ve API'ler aracılığıyla önceden var olanları kullanmaya kadar değişebilir. Bir başka seçenek de ince ayar yapmaktır, bu, mevcut bir önceden eğitilmiş modeli belirli bir alan için uyarlamayı içerir.
+Alan-spesifik dil modellerinden (DSL Modelleri) yararlanmak, uzmanlaşmış ve bağlamsal olarak ilgili etkileşimler sağlayarak kullanıcı bağlılığını artırabilir. Bu, belirli bir alan, sektör veya konuya ilişkin metni anlamak ve üretmek üzere eğitilen veya ince ayar yapılan bir modeldir. Bir DSL modeli kullanma seçenekleri sıfırdan eğitmeyi, SDK ve API'ler yoluyla mevcut modelleri kullanmayı içerebilir. Diğer bir seçenek ise, önceden eğitilmiş bir modeli alıp belirli bir alan için uyarlamak olan ince ayardır.
 
 ## Özelleştirme: İnce Ayar Uygulama
 
-Önceden eğitilmiş bir model, uzmanlaşmış bir alanda veya belirli bir görevde yetersiz kaldığında ince ayar genellikle dikkate alınır.
+İnce ayar, önceden eğitilmiş bir modelin uzman bir alan veya belirli bir görev için yetersiz kaldığı durumlarda sıklıkla düşünülür.
 
-Örneğin, tıbbi sorgular karmaşıktır ve çok fazla bağlam gerektirir. Bir tıp uzmanı, bir hastayı teşhis ederken yaşam tarzı veya önceden var olan koşullar gibi çeşitli faktörlere dayanır ve teşhislerini doğrulamak için son tıbbi dergileri bile kullanabilir. Bu gibi karmaşık senaryolarda, genel amaçlı bir yapay zeka sohbet uygulaması güvenilir bir kaynak olamaz.
+Örneğin, tıbbi sorular karmaşıktır ve çok bağlam gerektirir. Bir sağlık profesyonelinin hastayı teşhis etmesi, yaşam tarzı veya önceden var olan durumlar gibi çeşitli faktörlere dayanabilir ve teşhisini doğrulamak için güncel tıbbi dergilere başvurabilir. Böyle nüanslı senaryolarda, genel amaçlı AI sohbet uygulaması güvenilir bir kaynak olamaz.
 
-### Senaryo: Bir tıbbi uygulama
+### Senaryo: bir tıbbi uygulama
 
-Tıp uzmanlarına tedavi kılavuzlarına, ilaç etkileşimlerine veya son araştırma bulgularına hızlı referanslar sağlayarak yardımcı olmak üzere tasarlanmış bir sohbet uygulamasını düşünün.
+Tedavi rehberlerine, ilaç etkileşimlerine veya güncel araştırma bulgularına hızlı referans sağlamak amacıyla tasarlanmış bir sohbet uygulamasını düşünün.
 
-Genel amaçlı bir model, temel tıbbi soruları yanıtlamak veya genel tavsiyeler sağlamak için yeterli olabilir, ancak şu konularda zorlanabilir:
+Temel tıbbi soruları yanıtlamak veya genel tavsiye vermek için genel amaçlı bir model yeterli olabilir, ancak aşağıdaki konularda zorlanabilir:
 
-- **Çok özel veya karmaşık vakalar**. Örneğin, bir nörolog uygulamaya "Pediatrik hastalarda ilaca dirençli epilepsiyi yönetmek için mevcut en iyi uygulamalar nelerdir?" diye sorabilir.
-- **Son gelişmelerin eksikliği**. Genel amaçlı bir model, nöroloji ve farmakolojideki en son gelişmeleri içeren güncel bir yanıt sağlamakta zorlanabilir.
+- **Çok özel veya karmaşık vakalar**. Örneğin, bir nörolog uygulamaya "Pediatrik hastalarda ilaç direncine sahip epilepsinin yönetiminde güncel en iyi uygulamalar nelerdir?" diye sorabilir.
+- **Son gelişmelerden yoksunluk**. Genel amaçlı model, nöroloji ve farmakolojideki en son gelişmeleri içeren güncel cevapları vermekte zorlanabilir.
 
-Bu gibi durumlarda, modeli özel bir tıbbi veri seti ile ince ayar yapmak, bu karmaşık tıbbi sorguları daha doğru ve güvenilir bir şekilde ele alma yeteneğini önemli ölçüde artırabilir. Bu, ele alınması gereken alan özel zorlukları ve soruları temsil eden geniş ve ilgili bir veri setine erişimi gerektirir.
+Bu gibi durumlarda, özel tıbbi bir veri setiyle modeli ince ayar yapmak, bu karmaşık tıbbi soruları daha doğru ve güvenilir şekilde yanıtlayabilme yeteneğini önemli ölçüde artırabilir. Bu, alan-spesifik zorlukları ve çözülmesi gereken soruları temsil eden büyük ve ilgili bir veri setine erişim gerektirir.
 
-## Yüksek Kaliteli Yapay Zeka Destekli Sohbet Deneyimi İçin Değerlendirmeler
+## Yüksek Kaliteli AI Destekli Sohbet Deneyimi için Dikkat Edilmesi Gerekenler
 
-Bu bölüm, "yüksek kaliteli" sohbet uygulamaları için kriterleri özetler, bu kriterler arasında eyleme geçirilebilir metriklerin yakalanması ve yapay zeka teknolojisini sorumlu bir şekilde kullanmayı sağlayan bir çerçeveye uyum yer alır.
+Bu bölüm, "yüksek kaliteli" sohbet uygulamaları için kriterleri özetler; bu kriterler hem uygulanabilir metriklerin yakalanmasını hem de AI teknolojisinin sorumlu kullanımını sağlayan bir çerçeveye uyumu içerir.
 
-### Anahtar Metrikler
+### Temel Metrikler
 
-Bir uygulamanın yüksek kaliteli performansını sürdürmek için, anahtar metrikleri ve değerlendirmeleri izlemek önemlidir. Bu ölçümler, uygulamanın işlevselliğini sağlamakla kalmaz, aynı zamanda yapay zeka modelinin ve kullanıcı deneyiminin kalitesini de değerlendirir. Aşağıda, dikkate alınması gereken temel, yapay zeka ve kullanıcı deneyimi metriklerini kapsayan bir liste bulunmaktadır.
+Uygulamanın yüksek kaliteli performansını sürdürmek için temel metrikler ve değerlendirme kriterlerini takip etmek önemlidir. Bu ölçümler sadece uygulamanın işlevselliğini garanti etmekle kalmaz, aynı zamanda AI modelinin ve kullanıcı deneyiminin kalitesini de değerlendirir. Aşağıda göz önünde bulundurmanız gereken temel, AI ve kullanıcı deneyimi metriklerinin bir listesi bulunmaktadır.
 
-| Metrik                        | Tanım                                                                                                             | Sohbet Geliştiricisi İçin Değerlendirmeler                                         |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **Çalışma Süresi**            | Uygulamanın çalışır durumda olduğu ve kullanıcılar tarafından erişilebilir olduğu zamanı ölçer.                   | Kesinti süresini nasıl minimize edeceksiniz?                                       |
-| **Yanıt Süresi**              | Uygulamanın bir kullanıcının sorgusuna yanıt verme süresi.                                                        | Sorgu işleme süresini optimize ederek yanıt süresini nasıl iyileştirebilirsiniz?   |
-| **Doğruluk**                  | Gerçek pozitif tahminlerin toplam pozitif tahminlere oranı                                                        | Modelinizin doğruluğunu nasıl doğrulayacaksınız?                                   |
-| **Hassasiyet (Recall)**       | Gerçek pozitif tahminlerin gerçek pozitif sayısına oranı                                                          | Hassasiyeti nasıl ölçer ve iyileştirirsiniz?                                       |
-| **F1 Skoru**                  | Doğruluk ve hassasiyet arasındaki dengeyi sağlayan harmonik ortalama.                                             | Hedef F1 Skorunuz nedir? Doğruluk ve hassasiyeti nasıl dengeleyeceksiniz?          |
-| **Karmaşıklık (Perplexity)** | Modelin tahmin ettiği olasılık dağılımının, verilerin gerçek dağılımıyla ne kadar iyi örtüştüğünü ölçer.            | Karmaşıklığı nasıl minimize edeceksiniz?                                           |
-| **Kullanıcı Memnuniyeti Metrikleri** | Kullanıcının uygulama hakkındaki algısını ölçer. Genellikle anketlerle elde edilir.                               | Kullanıcı geri bildirimlerini
+| Metrik                      | Tanım                                                                                                               | Sohbet Geliştiricisi için Dikkat Edilecekler                    |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------|
+| **Çalışır Durum Süresi (Uptime)** | Uygulamanın kullanıcılar tarafından erişilebilir ve çalışır olduğu süreyi ölçer.                                    | Kesinti süresini nasıl minimize edeceksiniz?                     |
+| **Yanıt Süresi**             | Uygulamanın kullanıcının sorgusuna yanıt vermesi için geçen süre.                                                    | Yanıt süresini iyileştirmek için sorgu işleme optimizasyonu nasıl yapılır? |
+| **Doğruluk (Precision)**     | Gerçek pozitif tahminlerin toplam pozitif tahminlere oranı.                                                           | Modelinizin doğruluğunu nasıl doğrulayacaksınız?                 |
+| **Duyarlılık (Recall, Sensitivity)** | Gerçek pozitif tahminlerin gerçek pozitiflerin toplamına oranı.                                                     | Duyarlılığı nasıl ölçecek ve artıracaksınız?                     |
+| **F1 Skoru**                | Doğruluk ve duyarlılığın dengelendiği harmonik ortalama.                                                             | Hedef F1 skorunuz nedir? Doğruluk ve duyarlılık arasında nasıl denge kuracaksınız? |
+| **Karışıklık (Perplexity)** | Modelin tahmin ettiği olasılık dağılımının veri kümesinin gerçek dağılımıyla ne kadar iyi eşleştiğini ölçer.           | Karışıklığı nasıl minimize edeceksiniz?                          |
+| **Kullanıcı Memnuniyeti Metrikleri** | Kullanıcının uygulama algısını ölçer. Genellikle anket yoluyla toplanır.                                            | Ne sıklıkla kullanıcı geri bildirimi toplayacaksınız? Buna göre nasıl uyum sağlayacaksınız? |
+| **Hata Oranı**              | Modelin anlamada veya çıktı üretiminde yaptığı hataların oranı.                                                        | Hata oranlarını azaltmak için hangi stratejilere sahipsiniz?    |
+| **Yeniden Eğitim Döngüleri** | Modelin yeni veri ve bilgilerle güncellenme sıklığı.                                                                   | Modeli ne sıklıkla yeniden eğiteceksiniz? Yeniden eğitim döngüsünü ne tetikleyecek? |
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki versiyonu, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlama veya yanlış yorumlamalardan sorumlu değiliz.
+| **Anomali Tespiti**         | Beklenen davranışa uymayan olağandışı kalıpları tanımlamak için araçlar ve teknikler.                        | Anomalilere nasıl yanıt vereceksiniz?                                        |
+
+### Sohbet Uygulamalarında Sorumlu Yapay Zeka Uygulamalarını Gerçekleştirmek
+
+Microsoft'un Sorumlu Yapay Zeka yaklaşımı, yapay zeka geliştirme ve kullanımını yönlendirmesi gereken altı ilkeyi belirlemiştir. Aşağıda ilkeler, tanımları ve bir sohbet geliştiricisinin dikkate alması gereken hususlar ile neden ciddi almaları gerektiği yer almaktadır.
+
+| İlkeler               | Microsoft’un Tanımı                                | Sohbet Geliştiricisinin Dikkat Etmesi Gerekenler                       | Neden Önemlidir                                                                     |
+| ---------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Adillik               | Yapay zeka sistemleri tüm insanlara adil davranmalıdır.            | Sohbet uygulamasının kullanıcı verilerine dayanarak ayrımcılık yapmamasını sağla.  | Kullanıcılar arasında güven ve kapsayıcılık oluşturmak için; yasal sonuçlardan kaçınmak.                |
+| Güvenilirlik ve Güvenlik | Yapay zeka sistemleri güvenilir ve güvenli performans göstermelidir.        | Hataları ve riskleri en aza indirmek için test ve hata önleme mekanizmaları uygula.         | Kullanıcı memnuniyetini sağlamak ve potansiyel zararları önlemek için.                                 |
+| Gizlilik ve Güvenlik   | Yapay zeka sistemleri güvenli olmalı ve gizliliğe saygı duymalıdır.      | Güçlü şifreleme ve veri koruma önlemleri uygula.              | Hassas kullanıcı verilerini korumak ve gizlilik yasalarına uymak için.                         |
+| Kapsayıcılık          | Yapay zeka sistemleri herkesi güçlendirmeli ve insanları dahil etmelidir. | Farklı kitleler için erişilebilir ve kullanımı kolay bir UI/UX tasarla. | Uygulamayı daha geniş bir yelpazede insanın etkin şekilde kullanmasını sağlar.                   |
+| Şeffaflık           | Yapay zeka sistemleri anlaşılır olmalıdır.                  | Yapay zeka yanıtlarının net belgelenmesini ve mantığını sağla.            | Kararların nasıl alındığını anlayabiliyorlarsa kullanıcılar bir sisteme daha çok güvenir. |
+| Hesap Verebilirlik         | İnsanlar yapay zeka sistemleri için hesap verebilir olmalıdır.          | Yapay zeka kararlarının denetlenmesi ve geliştirilmesi için net bir süreç oluştur.     | Hatalar durumunda sürekli iyileştirme ve düzeltici önlemler alınmasını sağlar.               |
+
+## Ödev
+
+[Ödeve](../../../07-building-chat-applications/python) bakın. İlk sohbet istemlerinizi çalıştırmaktan, metin sınıflandırma ve özetlemeye kadar bir dizi alıştırmadan geçirecek. Ödevlerin farklı programlama dillerinde mevcut olduğunu fark edin!
+
+## Harika İş! Yolculuğa Devam Et
+
+Bu dersi tamamladıktan sonra, Jeneratif Yapay Zeka bilginizi geliştirmeye devam etmek için [Jeneratif Yapay Zeka Öğrenme koleksiyonumuzu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) inceleyin!
+
+Arama uygulamaları geliştirmeye nasıl başlayabileceğinizi görmek için Ders 8’e geçin [arama uygulamaları inşa etme](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

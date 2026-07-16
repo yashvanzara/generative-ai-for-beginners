@@ -1,98 +1,94 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "27a5347a5022d5ef0a72ab029b03526a",
-  "translation_date": "2025-05-19T23:27:21+00:00",
-  "source_file": "14-the-generative-ai-application-lifecycle/README.md",
-  "language_code": "tr"
-}
--->
-[![Fonksiyon çağırma ile entegrasyon](../../../translated_images/14-lesson-banner.0b85d0b37979269e80a18bb1e758e1ccca0a2195b426a0af666c8ad14aee60b0.tr.png)](https://aka.ms/gen-ai-lesson14-gh?WT.mc_id=academic-105485-koreyst)
+[![Fonksiyon çağrımı ile entegrasyon](../../../translated_images/tr/14-lesson-banner.066d74a31727ac12.webp)](https://youtu.be/ewtQY_RJrzs?si=dyJ2bjiljH7UUHCh)
 
 # Üretken AI Uygulama Yaşam Döngüsü
 
-Tüm AI uygulamaları için önemli bir soru, AI özelliklerinin alaka düzeyidir. AI hızlı gelişen bir alan olduğundan, uygulamanızın alakalı, güvenilir ve sağlam kalmasını sağlamak için sürekli olarak izlemeli, değerlendirmeli ve iyileştirmelisiniz. İşte bu noktada üretken AI yaşam döngüsü devreye girer.
+Tüm AI uygulamaları için önemli bir soru, AI özelliklerinin alaka düzeyidir; çünkü AI hızla gelişen bir alandır. Uygulamanızın ilgili, güvenilir ve sağlam kalmasını sağlamak için sürekli izlemeniz, değerlendirmeniz ve iyileştirmeniz gerekir. İşte bu noktada üretken AI yaşam döngüsü devreye girer.
 
-Üretken AI yaşam döngüsü, bir üretken AI uygulamasını geliştirme, dağıtma ve sürdürme aşamalarında size rehberlik eden bir çerçevedir. Hedeflerinizi tanımlamanıza, performansınızı ölçmenize, zorluklarınızı belirlemenize ve çözümlerinizi uygulamanıza yardımcı olur. Ayrıca, uygulamanızı alanınızın ve paydaşlarınızın etik ve yasal standartlarıyla uyumlu hale getirmenize yardımcı olur. Üretken AI yaşam döngüsünü takip ederek, uygulamanızın her zaman değer sunduğundan ve kullanıcılarınızı tatmin ettiğinden emin olabilirsiniz.
+Üretken AI yaşam döngüsü, üretken AI uygulamasını geliştirme, dağıtma ve bakım aşamalarında size rehberlik eden bir çerçevedir. Hedeflerinizi tanımlamanıza, performansınızı ölçmenize, zorluklarınızı belirlemenize ve çözümlerinizi uygulamanıza yardımcı olur. Ayrıca uygulamanızı alanınızın etik ve yasal standartları ile paydaşlarınızın beklentilerine uyumlu hale getirmenize de yardımcı olur. Üretken AI yaşam döngüsünü takip ederek, uygulamanızın her zaman değer sağlamasını ve kullanıcılarınızı memnun etmesini sağlayabilirsiniz.
 
 ## Giriş
 
-Bu bölümde:
+Bu bölümde şunları yapacaksınız:
 
-- MLOps'tan LLMOps'a Paradigma Değişimini Anlayın
+- MLOps'tan LLMOps'a Paradigma Değişimini Anlamak
 - LLM Yaşam Döngüsü
 - Yaşam Döngüsü Araçları
-- Yaşam Döngüsü Ölçümleme ve Değerlendirme
+- Yaşam Döngüsü Ölçütlendirme ve Değerlendirme
 
-## MLOps'tan LLMOps'a Paradigma Değişimini Anlayın
+## MLOps'tan LLMOps'a Paradigma Değişimini Anlamak
 
-LLM'ler, Yapay Zeka cephaneliğinde yeni bir araçtır. Uygulamalar için analiz ve üretim görevlerinde inanılmaz derecede güçlüdürler. Ancak, bu güç, AI ve Klasik Makine Öğrenimi görevlerini nasıl kolaylaştırdığımız konusunda bazı sonuçlar doğurur.
+LLM'ler, Yapay Zeka cephesinde yeni bir araçtır; analiz ve üretim görevlerinde inanılmaz güçlüdürler, ancak bu güç AI ve Klasik Makine Öğrenimi görevlerini nasıl kolaylaştırdığımız konusunda bazı sonuçlar doğurur.
 
-Bununla birlikte, bu aracı dinamik bir şekilde, doğru teşviklerle uyarlamak için yeni bir Paradigmaya ihtiyacımız var. Eski AI uygulamalarını "ML Uygulamaları" ve daha yeni AI Uygulamalarını "GenAI Uygulamaları" veya sadece "AI Uygulamaları" olarak kategorize edebiliriz. Bu, o dönemde kullanılan ana akım teknoloji ve teknikleri yansıtır. Bu, anlatımızı birden çok şekilde değiştirir, aşağıdaki karşılaştırmaya bakın.
+Bununla birlikte, bu aracı dinamik bir şekilde ve doğru teşviklerle adapte etmek için yeni bir Paradigma’ya ihtiyacımız var. Eski AI uygulamalarını "ML Uygulamaları" olarak ve yeni AI uygulamalarını "GenAI Uygulamaları" ya da sadece "AI Uygulamaları" olarak kategorize edebiliriz; bu, o dönemde kullanılan ana teknoloji ve teknikleri yansıtır. Bu anlatımızı birçok şekilde değiştirir, aşağıdaki karşılaştırmaya bakın.
 
-![LLMOps ve MLOps karşılaştırması](../../../translated_images/01-llmops-shift.82d7bf6eb2d98a01e35f234df654e9aa4ebec89792f274695a5da8dc3f388084.tr.png)
+![LLMOps ve MLOps karşılaştırması](../../../translated_images/tr/01-llmops-shift.29bc933cb3bb0080.webp)
 
-LLMOps'ta, uygulama geliştiricilere daha fazla odaklandığımızı, entegrasyonları anahtar bir nokta olarak kullandığımızı, "Hizmet Olarak Modeller" kullandığımızı ve metrikler için aşağıdaki noktalarda düşündüğümüzü unutmayın.
+Dikkat edin LLMOps'ta, daha çok Uygulama Geliştiricilere odaklanıyoruz, entegrasyonları önemli bir nokta olarak kullanıyor, "Hizmet olarak Modeller" kullanıyor ve metrikler için şu noktalara odaklanıyoruz.
 
 - Kalite: Yanıt kalitesi
-- Zarar: Sorumlu AI
-- Dürüstlük: Yanıtın temellendirilmesi (Mantıklı mı? Doğru mu?)
-- Maliyet: Çözüm bütçesi
-- Gecikme: Jeton yanıtı için ortalama süre
+- Zararlı Etki: Sorumlu AI
+- Doğruluk: Yanıtın dayanağı (Mantıklı mı? Doğru mu?)
+- Maliyet: Çözüm Bütçesi
+- Gecikme: Ortalama token yanıt süresi
 
 ## LLM Yaşam Döngüsü
 
-Öncelikle, yaşam döngüsünü ve değişikliklerini anlamak için bir sonraki infografiğe dikkat edelim.
+Öncelikle yaşam döngüsünü ve yapılan değişiklikleri anlamak için bir sonraki infografike bakalım.
 
-![LLMOps infografik](../../../translated_images/02-llmops.287de964b5ce9577678b7f053efb3a3c92adf0852c882c5bae94c11b7563e4db.tr.png)
+![LLMOps infografiği](../../../translated_images/tr/02-llmops.70a942ead05a7645.webp)
 
-Görüldüğü gibi, bu MLOps'tan alışılmış yaşam döngülerinden farklıdır. LLM'lerin, Prompting, kaliteyi artırmak için farklı teknikler (İnce Ayar, RAG, Meta-Prompts), sorumlu AI ile farklı değerlendirme ve sorumluluk, son olarak yeni değerlendirme metrikleri (Kalite, Zarar, Dürüstlük, Maliyet ve Gecikme) gibi birçok yeni gereksinimi vardır.
+Gördüğünüz gibi, bu klasik MLOps yaşam döngülerinden farklıdır. LLM'lerin birçok yeni gereksinimi vardır, örneğin Prompting, kaliteyi artırmak için farklı teknikler (İnce Ayar, RAG, Meta-Promptlar), sorumluluk ve Sorumlu AI ile farklı değerlendirme ve nihayetinde yeni değerlendirme metrikleri (Kalite, Zararlı Etki, Doğruluk, Maliyet ve Gecikme).
 
-Örneğin, nasıl fikir ürettiğimize bakın. Hipotezlerinin doğru olup olmadığını test etmek için çeşitli LLM'lerle deney yapmak için prompt mühendisliğini kullanarak olasılıkları keşfetmek.
+Örneğin, nasıl fikir oluşturduğumuza bakın. Hipotezlerinin doğru olup olamayacağını test etmek için çeşitli LLM'lerde denemeler yapmak amacıyla prompt mühendisliği kullanıyoruz.
 
-Bu, doğrusal değil, entegre döngüler, yinelemeli ve kapsayıcı bir döngü ile yapılır.
+Bunun doğrusal değil, entegre döngüler, yinelemeli ve kapsamlı bir döngü olduğunu unutmayın.
 
-Bu adımları nasıl keşfedebiliriz? Bir yaşam döngüsü nasıl oluşturabileceğimize dair ayrıntılara bakalım.
+Bu adımları nasıl keşfedebiliriz? Bir yaşam döngüsü nasıl kurarız detayına inelim.
 
-![LLMOps İş Akışı](../../../translated_images/03-llm-stage-flows.f3b87c210c1fe37084a7b7408877ff1688e2dc565694789820ec259e76d4ed05.tr.png)
+![LLMOps İş Akışı](../../../translated_images/tr/03-llm-stage-flows.3a1e1c401235a6cf.webp)
 
 Bu biraz karmaşık görünebilir, önce üç büyük adıma odaklanalım.
 
-1. Fikir Üretme/Keşfetme: Keşif, burada iş ihtiyaçlarımıza göre keşif yapabiliriz. Prototip oluşturma, bir [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) oluşturma ve Hipotezimiz için yeterince verimli olup olmadığını test etme.
-2. İnşa Etme/Artırma: Uygulama, şimdi daha büyük veri kümeleri için değerlendirmeye başlıyoruz, çözümümüzün sağlamlığını kontrol etmek için İnce Ayar ve RAG gibi teknikleri uyguluyoruz. Eğer değilse, yeniden uygulamak, akışımıza yeni adımlar eklemek veya verileri yeniden yapılandırmak yardımcı olabilir. Akışımızı ve ölçeğimizi test ettikten sonra, çalışırsa ve metriklerimizi kontrol edersek, bir sonraki adım için hazırdır.
-3. Operasyonelleştirme: Entegrasyon, şimdi sistemimize İzleme ve Uyarı Sistemleri ekleyerek, dağıtım ve uygulama entegrasyonu yaparak Uygulamamıza entegrasyon sağlıyoruz.
+1. Fikir Üretme/Keşfetme: Keşif, burada iş ihtiyaçlarımıza göre keşif yapabiliriz. Prototipleme, bir [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) oluşturup hipotezimiz için yeterince verimli olup olmadığını test etmek.
+1. İnşa Etme/Geliştirme: Uygulama, şimdi daha büyük veri setleri için değerlendiriyoruz, ince ayar ve RAG gibi teknikleri uygulayarak çözümümüzün sağlamlığını kontrol ediyoruz. Eğer sağlam değilse, akışı yeniden uygulamak, yeni adımlar eklemek veya veriyi yeniden yapılandırmak yardımcı olabilir. Akışımızı ve ölçeğimizi test ettikten ve metriklerimizi kontrol ettikten sonra bir sonraki adıma hazırdır.
+1. Operasyonlaştırma: Entegrasyon, şimdi sistemimize İzleme ve Uyarı Sistemleri ekliyor, dağıtım yapıyor ve Uygulamamıza uygulama entegrasyonu sağlıyoruz.
 
-Sonra, güvenlik, uyumluluk ve yönetişime odaklanan genel bir Yönetim döngümüz var.
+Ardından, güvenlik, uyumluluk ve yönetim üzerine odaklanan kapsamlı bir Yönetim döngümüz var.
 
-Tebrikler, şimdi AI Uygulamanız kullanıma hazır ve operasyonel. Uygulamalı bir deneyim için [Contoso Chat Demo](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreys)'ya göz atın.
+Tebrikler, artık AI Uygulamanız hazır ve çalışır durumda. Pratik deneyim için [Contoso Chat Demo.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst) adresine göz atabilirsiniz.
 
-Peki, hangi araçları kullanabiliriz?
+Şimdi, hangi araçları kullanabiliriz?
 
 ## Yaşam Döngüsü Araçları
 
-Araçlar için, Microsoft [Azure AI Platformu](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys) ve [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) sunarak yaşam döngünüzü uygulamayı ve kullanıma hazır hale getirmeyi kolaylaştırır.
+Araçlar için, Microsoft [Azure AI Platformu](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) ve [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst), döngünüzü kolayca uygulamanızı ve hazırlamanızı sağlar.
 
-[Azure AI Platformu](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys), [AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreys) kullanmanızı sağlar. AI Studio, modelleri, örnekleri ve araçları keşfetmenize olanak tanıyan bir web portalıdır. Kaynaklarınızı yönetmek, UI geliştirme akışları ve Kod-İlk geliştirme için SDK/CLI seçeneklerini yönetmek.
+[Azure AI Platformu](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst), [Microsoft Foundry](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst) kullanımına olanak tanır. Microsoft Foundry (eski adıyla Azure AI Studio), modelleri, örnekleri ve araçları keşfetmenizi, kaynaklarınızı yönetmenizi, UI geliştirme akışlarını ve Kod-Öncelikli geliştirme için SDK/CLI seçeneklerini kullanmanızı sağlayan bir web portalıdır.
 
-![Azure AI olanakları](../../../translated_images/04-azure-ai-platform.bf903e8cdf00f73896d804bd8e6bea62f5280498c998271bd5629c1efa8b466f.tr.png)
+![Azure AI olanakları](../../../translated_images/tr/04-azure-ai-platform.80203baf03a12fa8.webp)
 
-Azure AI, operasyonlarınızı, hizmetlerinizi, projelerinizi, vektör arama ve veri tabanları ihtiyaçlarınızı yönetmek için birden fazla kaynak kullanmanıza olanak tanır.
+Azure AI, operasyonlarınızı, servislerinizi, projelerinizi, vektör araması ve veritabanı ihtiyaçlarınızı yönetmek için birden fazla kaynağı kullanmanıza olanak tanır.
 
-![Azure AI ile LLMOps](../../../translated_images/05-llm-azure-ai-prompt.dc29c0d74b1dd939f7c6cbf28b1fee54b9a846ba04d4068c40134e2627cb7232.tr.png)
+![Azure AI ile LLMOps](../../../translated_images/tr/05-llm-azure-ai-prompt.a5ce85cdbb494bdf.webp)
 
-Proof-of-Concept'ten (POC) büyük ölçekli uygulamalara kadar PromptFlow ile inşa edin:
+PromptFlow ile Kavram Kanıtından (POC) büyük ölçekli uygulamalara kadar:
 
-- VS Code'dan, görsel ve işlevsel araçlarla uygulamalar tasarlayın ve oluşturun
-- Uygulamalarınızı kolayca kaliteli AI için test edin ve ince ayarlayın.
-- Azure AI Studio'yu kullanarak bulutla entegre edin ve yineleyin, hızlı entegrasyon için Push ve Deploy yapın.
+- Görsel ve işlevsel araçlarla VS Code'dan uygulamalar tasarla ve oluştur
+- AI kalitesi için uygulamalarını kolayca test et ve ince ayar yap
+- Hızlı entegrasyon için Microsoft Foundry kullanarak Bulut ile Entegre et ve yinele, Push ve dağıt
 
-![PromptFlow ile LLMOps](../../../translated_images/06-llm-promptflow.8f0a6fcbea793a042a3db89ca1db1aa8fd540526958c97b5e894748fb4a87edd.tr.png)
+![PromptFlow ile LLMOps](../../../translated_images/tr/06-llm-promptflow.a183eba07a3a7fdf.webp)
 
-## Harika! Öğrenmeye Devam Edin!
+## Harika! Öğrenmeye Devam Et!
 
-Harika, şimdi [Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst) ile bu kavramları kullanmak için bir uygulamayı nasıl yapılandırdığımızı öğrenin, Cloud Advocacy'nin bu kavramları gösterimlerde nasıl eklediğini kontrol edin. Daha fazla içerik için [Ignite breakout oturumuna](https://www.youtube.com/watch?v=DdOylyrTOWg) göz atın!
+Muhteşem, şimdi [Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst) ile kavramları kullanarak uygulamanın nasıl yapılandırıldığını daha fazla öğren, Bulut Savunuculuğunun bu kavramları gösterimlere nasıl eklediğini kontrol et. Daha fazla içerik için, [Ignite etkinlik oturumumuzu] inceleyin!
+](https://www.youtube.com/watch?v=DdOylyrTOWg)
 
-Şimdi, [Retrieval Augmented Generation ve Vektör Veritabanları](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst)'nın Üretken AI üzerindeki etkisini ve daha ilgi çekici Uygulamalar yapmayı anlamak için 15. Derse göz atın!
+Şimdi, üretken AI'yı nasıl etkilediğini anlamak için [Retrieval Augmented Generation ve Vektör Veritabanlarına](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) ilişkin Ders 15'e göz atın ve daha etkileyici Uygulamalar oluşturun!
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki hali yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

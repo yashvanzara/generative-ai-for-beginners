@@ -1,43 +1,34 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0d69f2d5814a698d3de5d0235940b5ae",
-  "translation_date": "2025-05-19T18:53:58+00:00",
-  "source_file": "08-building-search-applications/scripts/README.md",
-  "language_code": "hu"
-}
--->
-# Átirat adat-előkészítés
+# Átiratadat előkészítés
 
-Az átirat adat-előkészítő szkriptek letöltik a YouTube videók átiratait, és előkészítik azokat a Semantikus keresés OpenAI Beágyazásokkal és Funkciókkal minta használatához.
+Az átiratadat előkészítő szkriptek YouTube videó átiratokat töltenek le, és készítik elő őket a Semantic Search with OpenAI Embeddings and Functions minta használatához.
 
-Az átirat adat-előkészítő szkripteket tesztelték a legújabb Windows 11, macOS Ventura és Ubuntu 22.04 (és újabb) kiadásokon.
+Az átiratadat előkészítő szkriptek a Windows 11, macOS Ventura és Ubuntu 22.04 (és újabb) legfrissebb kiadásain lettek tesztelve.
 
-## Szükséges Azure OpenAI Szolgáltatás erőforrások létrehozása
+## Szükséges Azure OpenAI Service erőforrások létrehozása
 
 > [!IMPORTANT]
-> Javasoljuk, hogy frissítse az Azure CLI-t a legújabb verzióra a kompatibilitás biztosítása érdekében az OpenAI-val.
-> Lásd [Dokumentáció](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
+> Ajánljuk, hogy frissítse az Azure CLI-t a legújabb verzióra az OpenAI kompatibilitás biztosítása érdekében
+> Lásd: [Dokumentáció](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
 1. Hozzon létre egy erőforráscsoportot
 
 > [!NOTE]
-> Ezekhez az utasításokhoz az "semantic-video-search" nevű erőforráscsoportot használjuk Kelet-USA-ban.
-> Megváltoztathatja az erőforráscsoport nevét, de amikor az erőforrások helyét változtatja, 
+> Ezekhez az utasításokhoz az "semantic-video-search" nevű erőforráscsoportot használjuk az East US régióban.
+> Megváltoztathatja az erőforráscsoport nevét, de az erőforrások helyének megváltoztatásakor 
 > ellenőrizze a [modell elérhetőségi táblázatot](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
 ```
 
-1. Hozzon létre egy Azure OpenAI Szolgáltatás erőforrást.
+1. Hozzon létre egy Azure OpenAI Service erőforrást.
 
 ```console
 az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. Szerezze be a végpontot és a kulcsokat az alkalmazás használatához
+1. Szerezze meg az alkalmazásban való használathoz az endpointot és a kulcsokat
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -47,8 +38,8 @@ az cognitiveservices account keys list --name semantic-video-openai \
 ```
 
 1. Telepítse a következő modelleket:
-   - `text-embedding-ada-002` version `2` or greater, named `text-embedding-ada-002`
-   - `gpt-35-turbo` version `0613` or greater, named `gpt-35-turbo`
+   - `text-embedding-ada-002` verzió `2` vagy újabb, `text-embedding-ada-002` néven
+   - `gpt-4o-mini` `gpt-4o-mini` néven
 
 ```console
 az cognitiveservices account deployment create \
@@ -62,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-4o-mini \
+    --model-name gpt-4o-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -76,12 +66,12 @@ az cognitiveservices account deployment create \
 
 ## Környezeti változók
 
-A következő környezeti változók szükségesek a YouTube átirat adat-előkészítő szkriptek futtatásához.
+Az alábbi környezeti változók szükségesek az átiratadat előkészítő szkriptek futtatásához.
 
-### Windows-on
+### Windows alatt
 
-Javasoljuk, hogy adja hozzá a változókat a `user` environment variables.
-`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` for [USER] > `New`.
+Ajánlott ezeket a változókat a `user` környezeti változókhoz hozzáadni.
+`Windows Start` > `A rendszer környezeti változóinak szerkesztése` > `Környezeti változók` > `Felhasználói változók` a [FELHASZNÁLÓ] számára > `Új`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -90,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
-### Linux és macOS esetén
+<!-- A környezeti változókat hozzáadhatja a PowerShell profiljához is.
 
-Javasoljuk, hogy adja hozzá a következő exportokat a `~/.bashrc` or `~/.zshrc` fájlhoz.
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<az Azure OpenAI Service API kulcsa>"
+$env:AZURE_OPENAI_ENDPOINT = "<az Azure OpenAI Service végpontja>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<az Azure OpenAI Service modellkiszolgáló neve>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<a Google fejlesztői API kulcs>"
+``` -->
+
+### Linux és macOS alatt
+
+Ajánlott a következő exportokat hozzáadni a `~/.bashrc` vagy `~/.zshrc` fájlhoz.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -101,10 +100,10 @@ export AZURE_OPENAI_MODEL_DEPLOYMENT_NAME=<your Azure OpenAI Service model deplo
 export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ```
 
-## A szükséges Python könyvtárak telepítése
+## Telepítse a szükséges Python könyvtárakat
 
 1. Telepítse a [git klienst](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst), ha még nincs telepítve.
-1. Egy `Terminál` ablakból klónozza a mintát a preferált repo mappájába.
+1. Egy `Terminál` ablakból klónozza a mintát a kívánt repo mappába.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -118,13 +117,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Hozzon létre egy Python virtuális környezetet.
 
-    Windows-on:
+    Windows alatt:
 
     ```powershell
     python -m venv .venv
     ```
 
-    macOS és Linux esetén:
+    macOS és Linux alatt:
 
     ```bash
     python3 -m venv .venv
@@ -132,13 +131,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Aktiválja a Python virtuális környezetet.
 
-   Windows-on:
+   Windows alatt:
 
    ```powershell
    .venv\Scripts\activate
    ```
 
-   macOS és Linux esetén:
+   macOS és Linux alatt:
 
    ```bash
    source .venv/bin/activate
@@ -146,31 +145,35 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Telepítse a szükséges könyvtárakat.
 
-   Windows-on:
+   Windows alatt:
 
    ```powershell
    pip install -r requirements.txt
    ```
 
-   macOS és Linux esetén:
+   macOS és Linux alatt:
 
    ```bash
    pip3 install -r requirements.txt
    ```
 
-## A YouTube átirat adat-előkészítő szkriptek futtatása
+## Futtassa a YouTube átiratadat előkészítő szkripteket
 
-### Windows-on
+### Windows alatt
 
 ```powershell
 .\transcripts_prepare.ps1
 ```
 
-### macOS és Linux esetén
+### macOS és Linux alatt
 
 ```bash
 ./transcripts_prepare.sh
 ```
 
-**Felelősség kizárása**:  
-Ezt a dokumentumot az AI fordítási szolgáltatással, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő a hiteles forrásnak. Fontos információk esetén javasolt a professzionális emberi fordítás. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félremagyarázásokért.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

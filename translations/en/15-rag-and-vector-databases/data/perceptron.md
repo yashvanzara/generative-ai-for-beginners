@@ -1,31 +1,22 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "59021c5f419d3feda19075910a74280a",
-  "translation_date": "2025-05-20T02:28:52+00:00",
-  "source_file": "15-rag-and-vector-databases/data/perceptron.md",
-  "language_code": "en"
-}
--->
 # Introduction to Neural Networks: Perceptron
 
-One of the first attempts to implement something similar to a modern neural network was made by Frank Rosenblatt from Cornell Aeronautical Laboratory in 1957. It was a hardware implementation called "Mark-1", designed to recognize basic geometric shapes, such as triangles, squares, and circles.
+One of the earliest attempts to create something similar to a modern neural network was made by Frank Rosenblatt at the Cornell Aeronautical Laboratory in 1957. It was a hardware implementation called "Mark-1," designed to recognize simple geometric shapes like triangles, squares, and circles.
 
 |      |      |
 |--------------|-----------|
-|<img src='images/Rosenblatt-wikipedia.jpg' alt='Frank Rosenblatt'/> | <img src='images/Mark_I_perceptron_wikipedia.jpg' alt='The Mark 1 Perceptron' />|
+|<img src='../../../../translated_images/en/Rosenblatt-wikipedia.1d205667acda28c0.webp' alt='Frank Rosenblatt'/> | <img src='../../../../translated_images/en/Mark_I_perceptron_wikipedia.434e46ca39e2be80.webp' alt='The Mark 1 Perceptron' />|
 
 > Images from Wikipedia
 
-An input image was represented by a 20x20 photocell array, so the neural network had 400 inputs and one binary output. A simple network contained one neuron, also called a **threshold logic unit**. Neural network weights acted like potentiometers that required manual adjustment during the training phase.
+An input image was represented by a 20x20 photocell array, so the neural network had 400 inputs and one binary output. The simple network consisted of a single neuron, also known as a **threshold logic unit**. The neural network’s weights acted like potentiometers that had to be manually adjusted during training.
 
-> ✅ A potentiometer is a device that allows the user to adjust the resistance of a circuit.
+> ✅ A potentiometer is a device that lets the user adjust the resistance in a circuit.
 
-> The New York Times wrote about the perceptron at that time: *the embryo of an electronic computer that [the Navy] expects will be able to walk, talk, see, write, reproduce itself, and be conscious of its existence.*
+> At the time, The New York Times described the perceptron as *the embryo of an electronic computer that [the Navy] expects will be able to walk, talk, see, write, reproduce itself and be aware of its own existence.*
 
 ## Perceptron Model
 
-Suppose we have N features in our model, in which case the input vector would be a vector of size N. A perceptron is a **binary classification** model, i.e., it can distinguish between two classes of input data. We will assume that for each input vector x, the output of our perceptron would be either +1 or -1, depending on the class. The output will be computed using the formula:
+Let’s say our model has N features, so the input vector is of size N. A perceptron is a **binary classification** model, meaning it can distinguish between two classes of input data. We assume that for each input vector x, the perceptron’s output will be either +1 or -1, depending on the class. The output is calculated using the formula:
 
 y(x) = f(w<sup>T</sup>x)
 
@@ -33,24 +24,24 @@ where f is a step activation function
 
 ## Training the Perceptron
 
-To train a perceptron, we need to find a weights vector w that classifies most of the values correctly, i.e., results in the smallest **error**. This error is defined by the **perceptron criterion** in the following manner:
+To train a perceptron, we need to find a weight vector w that correctly classifies most of the data, minimizing the **error**. This error is defined by the **perceptron criterion** as follows:
 
 E(w) = -∑w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
 
 where:
 
-* the sum is taken on those training data points i that result in the wrong classification
-* x<sub>i</sub> is the input data, and t<sub>i</sub> is either -1 or +1 for negative and positive examples accordingly.
+* the sum is taken over those training data points i that are misclassified
+* x<sub>i</sub> is the input data, and t<sub>i</sub> is either -1 or +1 for negative and positive examples, respectively.
 
-This criterion is considered as a function of weights w, and we need to minimize it. Often, a method called **gradient descent** is used, in which we start with some initial weights w<sup>(0)</sup>, and then at each step update the weights according to the formula:
+This criterion is treated as a function of the weights w, and our goal is to minimize it. A common method used is **gradient descent**, where we start with some initial weights w<sup>(0)</sup>, and at each step update the weights using the formula:
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> - η∇E(w)
 
-Here η is the so-called **learning rate**, and ∇E(w) denotes the **gradient** of E. After we calculate the gradient, we end up with
+Here, η is the **learning rate**, and ∇E(w) is the **gradient** of E. After calculating the gradient, the update rule becomes:
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> + ∑ηx<sub>i</sub>t<sub>i</sub>
 
-The algorithm in Python looks like this:
+The Python implementation of this algorithm looks like this:
 
 ```python
 def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
@@ -74,24 +65,24 @@ def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
 
 ## Conclusion
 
-In this lesson, you learned about a perceptron, which is a binary classification model, and how to train it by using a weights vector.
+In this lesson, you learned about the perceptron, a binary classification model, and how to train it by adjusting a weight vector.
 
 ## 🚀 Challenge
 
-If you'd like to try building your own perceptron, try this lab on Microsoft Learn, which uses the Azure ML designer.
+If you want to try building your own perceptron, check out this lab on Microsoft Learn that uses the Azure ML designer.
 
 ## Review & Self Study
 
-To see how we can use a perceptron to solve a toy problem as well as real-life problems, and to continue learning, go to the Perceptron notebook.
+To see how perceptrons can be used to solve both simple and real-world problems, and to continue your learning, visit the Perceptron notebook.
 
-Here's an interesting article about perceptrons as well.
+Here’s also an interesting article about perceptrons.
 
 ## Assignment
 
-In this lesson, we have implemented a perceptron for a binary classification task, and we have used it to classify between two handwritten digits. In this lab, you are asked to solve the problem of digit classification entirely, i.e., determine which digit is most likely to correspond to a given image.
+In this lesson, we implemented a perceptron for a binary classification task and used it to distinguish between two handwritten digits. In this lab, you will solve the full digit classification problem, determining which digit most likely corresponds to a given image.
 
 * Instructions
 * Notebook
 
 **Disclaimer**:  
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.

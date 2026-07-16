@@ -1,85 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77a48a201447be19aa7560706d6f93a0",
-  "translation_date": "2025-05-19T21:36:02+00:00",
-  "source_file": "11-integrating-with-function-calling/README.md",
-  "language_code": "hu"
-}
--->
-# Funkcióhívás integrálása
+# Integráció függvényhívással
 
-[![Funkcióhívás integrálása](../../../translated_images/11-lesson-banner.5da178a9bf0c61125724b82872e87e5530d352453ec40cb59a13e27f9346c41e.hu.png)](https://aka.ms/gen-ai-lesson11-gh?WT.mc_id=academic-105485-koreyst)
+[![Integráció függvényhívással](../../../translated_images/hu/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-Eddig már sok mindent megtanultál az előző leckékben. Azonban még tovább tudunk fejlődni. Néhány dolgot, amiket kezelhetünk, az, hogyan kaphatunk egy egységesebb válaszformátumot, hogy könnyebb legyen a válaszokkal dolgozni a későbbi feldolgozás során. Emellett lehet, hogy szeretnénk más forrásokból származó adatokat hozzáadni, hogy tovább gazdagítsuk alkalmazásunkat.
+Eddig meglehetősen sokat tanultál a korábbi leckékben. Azonban tovább tudunk fejlődni. Néhány dolgot érinthetünk, mint például hogy hogyan érhetünk el következetesebb válaszformátumot, hogy könnyebbé tegyük a válasz feldolgozását később. Emellett szeretnénk adatokat hozzáadni más forrásokból, hogy még gazdagabbá tegyük az alkalmazásunkat.
 
-A fent említett problémákat igyekszik ez a fejezet kezelni.
+A fent említett problémákat ez a fejezet kívánja megoldani.
 
 ## Bevezetés
 
-Ez a lecke foglalkozik:
+Ez a lecke a következőket tárgyalja:
 
-- Megmagyarázni, mi a funkcióhívás és milyen esetekben használható.
-- Funkcióhívás létrehozása az Azure OpenAI segítségével.
-- Hogyan integráljunk egy funkcióhívást egy alkalmazásba.
+- Megmagyarázza, mi az a függvényhívás és milyen esetekben használjuk.
+- Függvényhívás létrehozása Azure OpenAI használatával.
+- Hogyan integráljunk egy függvényhívást egy alkalmazásba.
 
 ## Tanulási célok
 
 A lecke végére képes leszel:
 
-- Megmagyarázni a funkcióhívás használatának célját.
-- Funkcióhívás beállítása az Azure OpenAI Szolgáltatás használatával.
-- Hatékony funkcióhívások tervezése az alkalmazásod céljára.
+- Megmagyarázni a függvényhívás használatának célját.
+- Beállítani a Függvényhívást az Azure OpenAI Szolgáltatás használatával.
+- Hatékony függvényhívásokat tervezni az alkalmazás felhasználási esetére.
 
-## Szcenárió: Chatbotunk fejlesztése funkciókkal
+## Forgatókönyv: Chatbotunk fejlesztése funkciókkal
 
-Ebben a leckében szeretnénk létrehozni egy funkciót oktatási startupunk számára, amely lehetővé teszi a felhasználók számára, hogy chatbotot használjanak technikai kurzusok megtalálásához. Ajánlunk majd kurzusokat, amelyek megfelelnek a felhasználó készségszintjének, jelenlegi szerepének és érdeklődési technológiájának.
+Ebben a leckében egy olyan funkciót szeretnénk építeni oktatási startupunk számára, amely lehetővé teszi a felhasználóknak, hogy chatbot segítségével technikai kurzusokat találjanak. Olyan kurzusokat ajánlunk, amelyek megfelelnek a készségszintjüknek, aktuális szerepüknek és érdeklődési technológiájuknak.
 
-A szcenárió teljesítéséhez a következőket használjuk:
+Ehhez a forgatókönyvhöz a következő kombinációt fogjuk használni:
 
 - `Azure OpenAI` a chat élmény létrehozásához a felhasználó számára.
-- `Microsoft Learn Catalog API` a kurzusok megtalálásának segítésére a felhasználói kérés alapján.
-- `Function Calling` a felhasználói kérés továbbítására egy funkcióhoz, hogy API kérés történjen.
+- `Microsoft Learn Catalog API`, hogy segítsen a felhasználóknak megtalálni a kéréseiknek megfelelő kurzusokat.
+- `Függvényhívás` a felhasználói lekérdezés átvételéhez és egy függvényhez küldéséhez az API kéréshez.
 
-Kezdjük azzal, hogy megnézzük, miért is szeretnénk használni a funkcióhívást:
+Kezdjük azzal, hogy megnézzük, miért is érdemes először használni a függvényhívást:
 
-## Miért Funkcióhívás
+## Miért Függvényhívás
 
-A funkcióhívás előtt az LLM válaszai struktúrálatlanok és következetlenek voltak. A fejlesztőknek bonyolult validációs kódot kellett írniuk, hogy biztosítsák a válaszok különböző változatainak kezelését. A felhasználók nem kaphattak olyan válaszokat, mint "Mi a jelenlegi időjárás Stockholmban?". Ennek oka, hogy a modellek korlátozottak voltak az adatok képzésének időpontjára.
+A függvényhívás előtt az LLM-ek válaszai strukturálatlanok és következetlenek voltak. A fejlesztőknek bonyolult validációs kódokat kellett írniuk, hogy minden válaszvariációt kezelni tudjanak. A felhasználók nem kaphattak válaszokat például arra, hogy "Mi a jelenlegi időjárás Stockholmban?". Ennek oka, hogy a modellek csak a tanított adatok időpontjáig voltak korlátozva.
 
-A Funkcióhívás az Azure OpenAI Szolgáltatás egyik funkciója, amely a következő korlátokat hivatott leküzdeni:
+A függvényhívás az Azure OpenAI Szolgáltatás egy funkciója, amellyel a következő korlátokat hidalhatjuk át:
 
-- **Konzisztens válaszformátum**. Ha jobban tudjuk irányítani a válaszformátumot, könnyebben integrálhatjuk a választ más rendszerekbe.
-- **Külső adatok**. Képesség arra, hogy más alkalmazásokból származó adatokat használjunk chat kontextusban.
+- **Következetes válaszformátum**. Ha jobban tudjuk kontrollálni a válasz formátumát, könnyebben integrálhatjuk azt más rendszerekbe.
+- **Külső adatok**. Képesség arra, hogy az alkalmazás más forrásaiból származó adatokat használjunk chat kontextusban.
 
-## A probléma illusztrálása egy szcenárióval
+## A probléma szemléltetése egy példán keresztül
 
-> Javasoljuk, hogy használja a [mellékelt notebookot](../../../11-integrating-with-function-calling/python/aoai-assignment.ipynb), ha futtatni szeretné az alábbi szcenáriót. Olvashatja is, ahogy megpróbálunk egy problémát illusztrálni, ahol a funkciók segíthetnek a probléma megoldásában.
+> Javasoljuk, hogy használd a [mellékelt notebookot](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst), ha szeretnéd lefuttatni az alábbi forgatókönyvet. De egyszerűen olvashatod is, miközben megpróbálunk egy problémát bemutatni, amelyen a függvények segíthetnek.
 
-Nézzük meg a példát, amely a válaszformátum problémáját illusztrálja:
+Nézzük meg egy példát, amely illusztrálja a válasz formátum problémáját:
 
-Tegyük fel, hogy létre akarunk hozni egy adatbázist a diákok adatairól, hogy a megfelelő kurzust javasolhassuk nekik. Az alábbiakban két leírást találunk a diákokról, amelyek nagyon hasonlóak az általuk tartalmazott adatokban.
+Tegyük fel, hogy szeretnénk létrehozni egy diákadatbázist, hogy megfelelő kurzust javasoljunk nekik. Lent két diák leírása található, amelyek nagyon hasonló adatokat tartalmaznak.
 
-1. Kapcsolat létrehozása az Azure OpenAI erőforrásunkkal:
+1. Hozz létre kapcsolatot az Azure OpenAI erőforrásunkhoz:
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # A Responses API az Azure OpenAI (Microsoft Foundry) v1 végpontjáról szolgál ki,
+   # ezért az OpenAI klienst a <your-endpoint>/openai/v1/ címre irányítjuk.
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   Az alábbiakban néhány Python kódot találunk az Azure OpenAI-hoz való kapcsolatunk konfigurálásához, ahol beállítjuk `api_type`, `api_base`, `api_version` and `api_key`.
+   Az alábbi Python kód az Azure OpenAI-hoz való kapcsolat konfigurálására szolgál. Mivel az v1 végpontot használjuk, csak az `api_key` és a `base_url` beállítása szükséges (nem kell `api_version`).
 
-1. Creating two student descriptions using variables `student_1_description` and `student_2_description`.
+1. Két diák leírásának létrehozása a `student_1_description` és `student_2_description` változókban.
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -87,9 +81,9 @@ Tegyük fel, hogy létre akarunk hozni egy adatbázist a diákok adatairól, hog
    student_2_description = "Michael Lee is a sophomore majoring in computer science at Stanford University. He has a 3.8 GPA. Michael is known for his programming skills and is an active member of the university's Robotics Club. He hopes to pursue a career in artificial intelligence after finishing his studies."
    ```
 
-   Szeretnénk elküldeni a fenti diák leírásokat egy LLM-nek, hogy elemezze az adatokat. Ezeket az adatokat később felhasználhatjuk az alkalmazásunkban, és elküldhetjük egy API-hoz vagy tárolhatjuk egy adatbázisban.
+   A fent említett diákleírásokat az LLM-nek küldjük feldolgozásra. Ezek az adatok később használhatók az alkalmazásban, API-nak küldhetők vagy adatbázisban tárolhatók.
 
-1. Készítsünk két azonos promptot, amelyekben utasítjuk az LLM-et, hogy milyen információk érdekelnek minket:
+1. Készítsünk két azonos promptot, melyekben utasítjuk az LLM-et, hogy milyen információkra vagyunk kíváncsiak:
 
    ```python
    prompt1 = f'''
@@ -119,37 +113,39 @@ Tegyük fel, hogy létre akarunk hozni egy adatbázist a diákok adatairól, hog
    '''
    ```
 
-   A fenti promptok utasítják az LLM-et, hogy vonja ki az információkat és adja vissza a választ JSON formátumban.
+   A fenti promptok utasítják az LLM-et, hogy az információkat dolgozza fel, és JSON formátumban adja vissza a választ.
 
-1. Miután beállítottuk a promptokat és a kapcsolatot az Azure OpenAI-hoz, most elküldjük a promptokat az LLM-nek az `openai.ChatCompletion`. We store the prompt in the `messages` variable and assign the role to `user` használatával. Ez a felhasználói üzenet chatbotba írásának szimulálására szolgál.
+1. A promptok és a kapcsolat beállítása után a `client.responses.create` metódussal elküldjük a promptokat az LLM-nek. A promptot az `input` változóba tesszük, szerepként `user`-t adva, hogy utánozzuk egy felhasználói üzenetet a chatbotban.
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # válasz az első promptból
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # válasz a második promptból
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-Most elküldhetjük mindkét kérést az LLM-nek, és megvizsgálhatjuk a kapott választ, úgy hogy megtaláljuk mint `openai_response1['choices'][0]['message']['content']`.
+Most elküldhetjük mindkét kérést az LLM-nek és megvizsgálhatjuk a választ, például így: `openai_response1.output_text`.
 
-1. Lastly, we can convert the response to JSON format by calling `json.loads`:
+1. Végül alakítsuk át a választ JSON formátummá a `json.loads` hívásával:
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # A válasz betöltése JSON objektumként
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
-   Válasz 1:
+   1. válasz:
 
    ```json
    {
@@ -161,7 +157,7 @@ Most elküldhetjük mindkét kérést az LLM-nek, és megvizsgálhatjuk a kapott
    }
    ```
 
-   Válasz 2:
+   2. válasz:
 
    ```json
    {
@@ -173,59 +169,60 @@ Most elküldhetjük mindkét kérést az LLM-nek, és megvizsgálhatjuk a kapott
    }
    ```
 
-   Annak ellenére, hogy a promptok ugyanazok és a leírások hasonlóak, látjuk a `Grades` property formatted differently, as we can sometimes get the format `3.7` or `3.7 GPA` for example.
+   Bár a promptok ugyanazok és a leírások is hasonlóak, a `Grades` tulajdonság értékei eltérően vannak formázva, néha például `3.7`, máskor `3.7 GPA`.
 
-   This result is because the LLM takes unstructured data in the form of the written prompt and returns also unstructured data. We need to have a structured format so that we know what to expect when storing or using this data
+   Ez azért van, mert az LLM a strukturálatlan adatokról (a megírt prompt formájában) strukturálatlan adatokat ad vissza. Szükségünk van egy strukturált formátumra, hogy tudjuk, mire számítsunk az adat tárolásakor vagy használatakor.
 
-So how do we solve the formatting problem then? By using functional calling, we can make sure that we receive structured data back. When using function calling, the LLM does not actually call or run any functions. Instead, we create a structure for the LLM to follow for its responses. We then use those structured responses to know what function to run in our applications.
+Hogyan oldjuk meg tehát a formázási problémákat? A függvényhívás használatával biztosak lehetünk benne, hogy visszakapjuk a strukturált adatot. A függvényhívásnál az LLM valójában nem hív meg vagy futtat függvényeket. Ehelyett létrehozunk egy struktúrát, amelyet az LLM követni fog a válaszai során. Ezekből a strukturált válaszokból tudjuk, hogy melyik függvényt hajtsuk végre az alkalmazásban.
 
-![function flow](../../../translated_images/Function-Flow.01a723a374f79e5856d9915c39e16c59fa2a00c113698b22a28e616224f407e1.hu.png)
+![function flow](../../../translated_images/hu/Function-Flow.083875364af4f4bb.webp)
 
-We can then take what is returned from the function and send this back to the LLM. The LLM will then respond using natural language to answer the user's query.
+Ezt követően a függvénytől kapott eredményt visszaküldjük az LLM-nek, amely természetes nyelven válaszol a felhasználói kérdésre.
 
-## Use Cases for using function calls
+## Függvényhívási esetek
 
-There are many different use cases where function calls can improve your app like:
+Számos esetben javíthatják az alkalmazásodat a függvényhívások, például:
 
-- **Calling External Tools**. Chatbots are great at providing answers to questions from users. By using function calling, the chatbots can use messages from users to complete certain tasks. For example, a student can ask the chatbot to "Send an email to my instructor saying I need more assistance with this subject". This can make a function call to `send_email(to: string, body: string)`
+- **Külső eszközök hívása**. A chatbotok kiválóak a felhasználók kérdéseinek megválaszolásában. A függvényhívás használatával a chatbotok képesek bizonyos feladatokat elvégezni a felhasználói üzenetek alapján. Például egy diák megkérheti a chatbotot, hogy "Küldj egy emailt az oktatómnak, hogy segítségre van szükségem ebben a témában". Ez egy olyan függvényhíváshoz vezethet, mint `send_email(to: string, body: string)`.
 
-- **Create API or Database Queries**. Users can find information using natural language that gets converted into a formatted query or API request. An example of this could be a teacher who requests "Who are the students that completed the last assignment" which could call a function named `get_completed(student_name: string, assignment: int, current_status: string)`
+- **API vagy adatbázis lekérdezések készítése**. A felhasználók természetes nyelven kereshetnek információt, amelyet a rendszer formázott lekérdezéssé vagy API kérésé alakít. Például egy tanár megkérdezheti, "Kik azok a diákok, akik teljesítették az utolsó feladatot", és ez egy `get_completed(student_name: string, assignment: int, current_status: string)` nevű függvényt hívhat meg.
 
-- **Creating Structured Data**. Users can take a block of text or CSV and use the LLM to extract important information from it. For example, a student can convert a Wikipedia article about peace agreements to create AI flashcards. This can be done by using a function called `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
+- **Strukturált adat létrehozása**. A felhasználók szövegrészeket vagy CSV adatokat adhatnak meg, amelyből az LLM fontos információkat von ki. Például egy diák átalakíthat egy Wikipedia cikket a békemegállapodásokról AI-alapú tanulókártyák létrehozásához. Ez egy olyan függvényhívással történhet, mint `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`.
 
-## Creating Your First Function Call
+## Első függvényhívás létrehozása
 
-The process of creating a function call includes 3 main steps:
+A függvényhívás létrehozásának folyamata három fő lépésből áll:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. **Hívás** a Responses API-nak egy függvények listájával (eszközökkel) és egy felhasználói üzenettel.
+2. **A modell válaszának elolvasása**, hogy egy művelet végrehajtásához – például egy függvény vagy API hívás indításához – döntést hozzunk.
+3. **Egy másik hívás végrehajtása** a Responses API-nak a függvény válaszával, hogy az alapján választ adjunk a felhasználónak.
 
-![LLM Flow](../../../translated_images/LLM-Flow.7df9f166be50aa324705f2ccddc04a27cfc7b87e57b1fbe65eb534059a3b8b66.hu.png)
+![LLM Flow](../../../translated_images/hu/LLM-Flow.3285ed8caf4796d7.webp)
 
-### Step 1 - creating messages
+### 1. lépés – üzenetek létrehozása
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+Az első lépés egy felhasználói üzenet létrehozása. Ezt dinamikusan is hozzárendelhetjük egy szövegbeviteli érték alapján, vagy itt is megadhatjuk. Ha először használjuk a Responses API-t, meg kell adnunk az `role` és a `content` értékeket.
 
-The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` és egy példa kérdés értékeit.
+A `role` lehet `system` (szabályokat hoz létre), `assistant` (a modell) vagy `user` (a végfelhasználó). Függvényhívás esetén `user` szerepkört adunk, egy kérdéssel példaként.
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Különböző szerepek hozzárendelésével világossá válik az LLM számára, hogy a rendszer mond valamit vagy a felhasználó, ami segít a beszélgetési történelem felépítésében, amit az LLM tovább építhet.
+A különböző szerepkörök hozzárendelésével tisztázzuk az LLM számára, hogy a rendszer vagy a felhasználó mond-e valamit, ami segít a párbeszéd előzmények építésében.
 
-### 2. lépés - funkciók létrehozása
+### 2. lépés – függvények létrehozása
 
-Ezután definiálunk egy funkciót és annak paramétereit. Csak egy funkciót fogunk használni itt, amelyet `search_courses` but you can create multiple functions.
+Ezután definiálunk egy függvényt és a paramétereit. Itt csak egy függvényt használunk, `search_courses` néven, de több függvényt is létrehozhatsz.
 
-> **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
+> **Fontos** : A függvények benne vannak a rendszerüzenetben az LLM-nek, és beleszámítanak az elérhető tokenek mennyiségébe.
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters`-nek nevezünk:
+Lent egy tömböt hozunk létre, amelyben minden elem egy eszköz a flat Responses API formátumában, a következő tulajdonságokkal: `type`, `name`, `description` és `parameters`:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -252,75 +249,76 @@ functions = [
 ]
 ```
 
-Az alábbiakban részletesebben leírjuk az egyes funkció példányokat:
+Íme az egyes függvények részletesebb leírása:
 
-- `name` - The name of the function that we want to have called.
-- `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
-  1.  `type` - The data type of the properties will be stored in.
-  1.  `properties` - List of the specific values that the model will use for its response
-      1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
-      1. `type` - The data type of this property, for example, `string`.
-      1. `description` - Description of the specific property.
+- `name` - A függvény neve, amelyet hívni akarunk.
+- `description` - A függvény működésének leírása. Itt fontos, hogy pontos és világos legyen.
+- `parameters` - Egy lista azoknak az értékeknek és formátumoknak, amelyeket a modell válaszként előállít. A `parameters` lista elemei a következő tulajdonságokkal rendelkeznek:
+  1. `type` - Az adattípus, amelybe az értékek kerülnek.
+  1. `properties` - A pontos értékek listája, amelyeket a modell a válaszában használ.
+      1. `name` - Az adott tulajdonság neve, amelyet a modell a formázott válaszban használ, pl. `product`.
+      1. `type` - A tulajdonság adattípusa, például `string`.
+      1. `description` - A konkrét tulajdonság leírása.
 
-There's also an optional property `required` - required property for the function call to be completed.
+Opcionálisan szerepelhet egy `required` tulajdonság is – ez megadja, mely mezők kötelezőek a függvényhívás sikeréhez.
 
-### Step 3 - Making the function call
+### 3. lépés – a függvényhívás megvalósítása
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+A függvény definiálása után be kell építenünk a hívásba a Responses API felé az `tools` beállítást, amelyre `tools=functions` értéket adunk.
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+Opcióként beállíthatjuk a `tool_choice` értékét `auto`-ra, így az LLM döntheti el, mikor hívja meg a függvényeket a felhasználói üzenet alapján, nem nekünk kell kijelölni.
 
-Here's some code below where we call `ChatCompletion.create`, note how we set `functions=functions` and `function_call="auto"` és így az LLM-nek adva a választást, mikor hívja meg az általunk biztosított funkciókat:
+Lent egy példa kód, amelyben a `client.responses.create` metódust hívjuk meg, `tools=functions` és `tool_choice="auto"` beállítással, így az LLM maga dönt, mikor hívja meg a megadott függvényeket:
 
 ```python
-response = client.chat.completions.create(model=deployment,
-                                        messages=messages,
-                                        functions=functions,
-                                        function_call="auto")
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-print(response.choices[0].message)
+print(response.output)
 ```
 
-A visszaérkező válasz most így néz ki:
+A válaszban most megjelenik a `function_call` elem a `response.output` részen, így néz ki:
 
 ```json
 {
-  "role": "assistant",
-  "function_call": {
-    "name": "search_courses",
-    "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
-  }
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
 }
 ```
 
-Itt láthatjuk, hogyan hívja meg a `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+Itt látható, hogy a `search_courses` függvény lett meghívva, és milyen argumentumokkal, amelyek a JSON válasz `arguments` tulajdonságában találhatók.
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` értékű funkciót:
+Az következtetés, hogy az LLM megtalálta az adatokat az argumentumokhoz, mivel azokat az `input` paraméter értékéből vonta ki a Responses API hívásában. Lent láthatod a `messages` változó értékét:
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Ahogy látod, `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+Ahogy látod, a `student`, `Azure` és `beginner` értékeket kivonta a `messages`-ból és bemeneti paraméterként átadta a függvénynek. A függvények ilyen használata nagyszerű módja annak, hogy információt nyerjünk ki egy promptból, valamint hogy az LLM számára struktúrát biztosítsunk és újrafelhasználható funkciókat hozzunk létre.
 
-Next, we need to see how we can use this in our app.
+Most nézzük meg, hogyan használhatjuk ezt az alkalmazásunkban.
 
-## Integrating Function Calls into an Application
+## Függvényhívások integrálása egy alkalmazásba
 
-After we have tested the formatted response from the LLM, we can now integrate this into an application.
+Miután teszteltük az LLM által formázott választ, integrálhatjuk az alkalmazásba.
 
-### Managing the flow
+### A folyamat kezelése
 
-To integrate this into our application, let's take the following steps:
+Az alkalmazásba integrálás lépései:
 
-1. First, let's make the call to the OpenAI services and store the message in a variable called `response_message`.
+1. Először hívjuk meg az OpenAI szolgáltatásokat, és vonjuk ki a függvényhívásokat tartalmazó elemeket a válasz `output` részéből.
 
    ```python
-   response_message = response.choices[0].message
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
    ```
 
-1. Most definiáljuk a funkciót, amely a Microsoft Learn API-t fogja hívni, hogy kurzusok listáját kapja:
+1. Most definiáljuk azt a függvényt, amely a Microsoft Learn API-t hívja meg a kurzusok listájának lekéréséhez:
 
    ```python
    import requests
@@ -342,67 +340,59 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   Figyeld meg, hogyan hozunk létre egy tényleges Python funkciót, amely a `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   Figyeld meg, hogy egy valódi Python függvényt hozunk létre, amely megfelel a `functions` változóban definiált függvényeknek. Továbbá valós külső API hívásokat hajtunk végre az adatok lekéréséhez. Ebben az esetben a Microsoft Learn API-t használjuk az oktatási modulok keresésére.
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+Oké, létrehoztuk a `functions` változókat és a megfelelő Python függvényt, hogyan mondjuk meg az LLM-nek, hogy ezeket hogyan kösse össze, hogy a Python függvényünket hívja meg?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call` része, és meghívja a kijelölt funkciót. Így teheted meg az említett ellenőrzést alább:
+1. Ahhoz, hogy lássuk, meg kell-e hívnunk egy Python függvényt, meg kell néznünk az LLM válaszát, hogy van-e benne `function_call` rész, és ha igen, akkor meghívjuk a megjelölt függvényt. Íme, hogyan végezheted el ezt az ellenőrzést:
 
    ```python
-   # Check if the model wants to call a function
-   if response_message.function_call.name:
-    print("Recommended Function call:")
-    print(response_message.function_call.name)
-    print()
+   # Ellenőrizze, hogy a modell szeretne-e függvényt hívni
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
 
-    # Call the function.
-    function_name = response_message.function_call.name
+     # Hívja meg a függvényt.
+     function_name = tool_call.name
 
-    available_functions = {
-            "search_courses": search_courses,
-    }
-    function_to_call = available_functions[function_name]
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
 
-    function_args = json.loads(response_message.function_call.arguments)
-    function_response = function_to_call(**function_args)
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
-    print(function_response)
-    print(type(function_response))
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
 
-
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
-        {
-            "role": response_message.role,
-            "function_call": {
-                "name": function_name,
-                "arguments": response_message.function_call.arguments,
-            },
-            "content": None
-        }
-    )
-    messages.append( # adding function response to messages
-        {
-            "role": "function",
-            "name": function_name,
-            "content":function_response,
-        }
-    )
+     # Adja hozzá a függvényhívást és annak eredményét a beszélgetéshez.
+     # A modell function_call elemét a kimenet előtt kell hozzáfűzni.
+     messages.append(tool_call)  # a segéd function_call eleme
+     messages.append( # a függvény eredménye
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
    ```
 
-   Ez a három sor biztosítja, hogy kinyerjük a funkció nevét, az argumentumokat, és végrehajtjuk a hívást:
+   Ez a három sor biztosítja, hogy kivonjuk a függvény nevét, az argumentumokat és végrehajtjuk a hívást:
 
    ```python
    function_to_call = available_functions[function_name]
 
-   function_args = json.loads(response_message.function_call.arguments)
+   function_args = json.loads(tool_call.arguments)
    function_response = function_to_call(**function_args)
    ```
 
-   Az alábbiakban látható a kódunk futtatásának kimenete:
+   Lent a kód futtatásának eredménye látható:
 
-   **Kimenet**
+**Kimenet**
 
    ```Recommended Function call:
    {
@@ -421,50 +411,60 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. Most elküldjük a frissített üzenetet, `messages`, az LLM-nek, hogy természetes nyelvi választ kapjunk API JSON formátumú válasz helyett.
+1. Most elküldjük a frissített `messages` üzenetet az LLM-nek, hogy természetes nyelvű választ kapjunk egy API JSON formátumú helyett.
 
    ```python
    print("Messages in next request:")
    print(messages)
    print()
 
-   second_response = client.chat.completions.create(
-      messages=messages,
+   second_response = client.responses.create(
+      input=messages,
       model=deployment,
-      function_call="auto",
-      functions=functions,
-      temperature=0
-         )  # get a new response from GPT where it can see the function response
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # szerezzen egy új választ a modelltől, ahol láthatja a függvény választ
 
 
-   print(second_response.choices[0].message)
+   print(second_response.output_text)
    ```
 
-   **Kimenet**
+**Kimenet**
 
-   ```python
-   {
-     "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
-   }
+   ```text
+   I found some good courses for beginner students to learn Azure:
 
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
    ```
 
 ## Feladat
 
-Az Azure OpenAI Funkcióhívás tanulásának folytatásához létrehozhatsz:
+Az Azure OpenAI Function Calling tanulás folytatásához építhetsz:
 
-- Több paramétert a funkcióhoz, amelyek segíthetnek a tanulóknak több kurzus megtalálásában.
-- Hozz létre egy másik funkcióhívást, amely több információt vesz fel a tanulótól, például az anyanyelvét.
-- Hozz létre hibakezelést, ha a funkcióhívás és/vagy API hívás nem ad vissza megfelelő kurzusokat.
+- Több paramétert a függvényhez, amely segíthet a tanulóknak még több kurzus megtalálásában.
 
-Tipp: Kövesd a [Learn API referencia dokumentáció](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) oldalt, hogy láthasd, hogyan és hol érhetők el ezek az adatok.
+- Hozz létre egy másik függvényhívást, amely több információt vesz fel a tanulótól, például az anyanyelvét
+- Hozz létre hibakezelést arra az esetre, ha a függvényhívás és/vagy az API hívás nem ad vissza megfelelő tanfolyamokat
 
-## Nagyszerű munka! Folytasd az utazást
+Tipp: Kövesd a [Learn API referencia dokumentációját](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst), hogy lásd, hogyan és hol érhető el ez az adat.
 
-A lecke elvégzése után nézd meg a [Generatív AI Tanulási gyűjteményünket](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy tovább növeld generatív AI tudásodat!
+## Nagyszerű munka! Folytasd az utat
 
-Látogass el a 12. leckére, ahol megnézzük, hogyan [tervezhetünk UX-et AI alkalmazásokhoz](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+A lecke befejezése után nézd meg a [Generative AI Learning gyűjteményünket](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy tovább fejleszd a Generatív AI tudásodat!
 
-**Felelősség kizárása**:  
-Ezt a dokumentumot AI fordítási szolgáltatással, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordították le. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum saját nyelvén tekintendő a hiteles forrásnak. Kritikus információk esetén professzionális emberi fordítást ajánlunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félremagyarázásokért.
+Lépj tovább a 12. leckéhez, ahol megnézzük, hogyan lehet [UX-et tervezni AI alkalmazásokhoz](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

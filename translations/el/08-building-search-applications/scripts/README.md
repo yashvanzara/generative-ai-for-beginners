@@ -1,29 +1,20 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0d69f2d5814a698d3de5d0235940b5ae",
-  "translation_date": "2025-05-19T18:50:26+00:00",
-  "source_file": "08-building-search-applications/scripts/README.md",
-  "language_code": "el"
-}
--->
 # Προετοιμασία δεδομένων μεταγραφής
 
-Τα σενάρια προετοιμασίας δεδομένων μεταγραφής κατεβάζουν μεταγραφές βίντεο από το YouTube και τα προετοιμάζουν για χρήση με το δείγμα Αναζήτησης Σημασιολογικού περιεχομένου με OpenAI Embeddings και Functions.
+Τα σενάρια προετοιμασίας δεδομένων μεταγραφής κατεβάζουν μεταγραφές βίντεο από το YouTube και τις προετοιμάζουν για χρήση με το δείγμα Semantic Search with OpenAI Embeddings and Functions.
 
-Τα σενάρια προετοιμασίας δεδομένων μεταγραφής έχουν δοκιμαστεί στις τελευταίες εκδόσεις Windows 11, macOS Ventura και Ubuntu 22.04 (και άνω).
+Τα σενάρια προετοιμασίας δεδομένων μεταγραφής έχουν δοκιμαστεί στις τελευταίες εκδόσεις των Windows 11, macOS Ventura και Ubuntu 22.04 (και νεότερα).
 
 ## Δημιουργία απαιτούμενων πόρων Azure OpenAI Service
 
 > [!IMPORTANT]
-> Προτείνουμε να ενημερώσετε το Azure CLI στην τελευταία έκδοση για να εξασφαλίσετε συμβατότητα με το OpenAI
-> Δείτε [Τεκμηρίωση](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
+> Προτείνουμε να ενημερώσετε το Azure CLI στην πιο πρόσφατη έκδοση για να διασφαλίσετε τη συμβατότητα με το OpenAI
+> Δείτε την [Τεκμηρίωση](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
 1. Δημιουργήστε μια ομάδα πόρων
 
 > [!NOTE]
-> Για αυτές τις οδηγίες χρησιμοποιούμε την ομάδα πόρων με το όνομα "semantic-video-search" στην Ανατολική ΗΠΑ.
-> Μπορείτε να αλλάξετε το όνομα της ομάδας πόρων, αλλά όταν αλλάζετε την τοποθεσία για τους πόρους, 
+> Για αυτές τις οδηγίες χρησιμοποιούμε την ομάδα πόρων με όνομα "semantic-video-search" στην περιοχή East US.
+> Μπορείτε να αλλάξετε το όνομα της ομάδας πόρων, αλλά όταν αλλάζετε την τοποθεσία για τους πόρους,
 > ελέγξτε τον [πίνακα διαθεσιμότητας μοντέλων](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
@@ -37,7 +28,7 @@ az cognitiveservices account create --name semantic-video-openai --resource-grou
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. Αποκτήστε το endpoint και τα κλειδιά για χρήση σε αυτήν την εφαρμογή
+1. Πάρτε το endpoint και τα κλειδιά για χρήση σε αυτή την εφαρμογή
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -46,9 +37,9 @@ az cognitiveservices account keys list --name semantic-video-openai \
    --resource-group semantic-video-search | jq -r .key1
 ```
 
-1. Αναπτύξτε τα ακόλουθα μοντέλα:
-   - `text-embedding-ada-002` version `2` or greater, named `text-embedding-ada-002`
-   - `gpt-35-turbo` version `0613` or greater, named `gpt-35-turbo`
+1. Αναπτύξτε τα παρακάτω μοντέλα:
+   - `text-embedding-ada-002` έκδοση `2` ή μεγαλύτερη, με όνομα `text-embedding-ada-002`
+   - `gpt-4o-mini` με όνομα `gpt-4o-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -62,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-4o-mini \
+    --model-name gpt-4o-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -72,16 +62,16 @@ az cognitiveservices account deployment create \
 
 ## Απαιτούμενο λογισμικό
 
-- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) ή νεότερη
+- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) ή νεότερο
 
 ## Μεταβλητές περιβάλλοντος
 
-Οι ακόλουθες μεταβλητές περιβάλλοντος απαιτούνται για να εκτελέσετε τα σενάρια προετοιμασίας δεδομένων μεταγραφής YouTube.
+Οι ακόλουθες μεταβλητές περιβάλλοντος είναι απαραίτητες για την εκτέλεση των σεναρίων προετοιμασίας δεδομένων μεταγραφής YouTube.
 
-### Στα Windows
+### Σε Windows
 
-Συνιστούμε να προσθέσετε τις μεταβλητές στον `user` environment variables.
-`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` for [USER] > `New`.
+Συνιστάται να προσθέσετε τις μεταβλητές στα περιβάλλοντα μεταβλητά `user`.
+`Έναρξη Windows` > `Επεξεργασία μεταβλητών συστήματος` > `Μεταβλητές Περιβάλλοντος` > `Μεταβλητές χρήστη` για [USER] > `Νέο`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -90,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
+<!-- Μπορείτε να προσθέσετε τις μεταβλητές περιβάλλοντος στο προφίλ PowerShell σας.
+
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<το κλειδί API της υπηρεσίας Azure OpenAI>"
+$env:AZURE_OPENAI_ENDPOINT = "<το endpoint της υπηρεσίας Azure OpenAI>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<το όνομα ανάπτυξης μοντέλου της υπηρεσίας Azure OpenAI>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<το κλειδί API προγραμματιστή Google>"
+``` -->
+
 ### Σε Linux και macOS
 
-Συνιστούμε να προσθέσετε τις ακόλουθες εντολές export στο αρχείο σας `~/.bashrc` or `~/.zshrc`.
+Συνιστάται να προσθέσετε τα παρακάτω exports στο αρχείο `~/.bashrc` ή `~/.zshrc`.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -103,8 +102,8 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 ## Εγκατάσταση των απαιτούμενων βιβλιοθηκών Python
 
-1. Εγκαταστήστε τον [πελάτη git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) αν δεν είναι ήδη εγκατεστημένος.
-1. Από ένα παράθυρο `Terminal`, κλωνοποιήστε το δείγμα στο φάκελο αποθετηρίου της επιλογής σας.
+1. Εγκαταστήστε τον [git client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) εάν δεν είναι ήδη εγκατεστημένος.
+1. Από ένα παράθυρο `Τερματικού`, κλωνοποιήστε το δείγμα στο προτιμώμενο φάκελο αποθετηρίου σας.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -118,7 +117,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Δημιουργήστε ένα εικονικό περιβάλλον Python.
 
-    Στα Windows:
+    Σε Windows:
 
     ```powershell
     python -m venv .venv
@@ -132,7 +131,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Ενεργοποιήστε το εικονικό περιβάλλον Python.
 
-   Στα Windows:
+   Σε Windows:
 
    ```powershell
    .venv\Scripts\activate
@@ -146,7 +145,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Εγκαταστήστε τις απαιτούμενες βιβλιοθήκες.
 
-   Στα Windows:
+   Σε Windows:
 
    ```powershell
    pip install -r requirements.txt
@@ -160,7 +159,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 ## Εκτέλεση των σεναρίων προετοιμασίας δεδομένων μεταγραφής YouTube
 
-### Στα Windows
+### Σε Windows
 
 ```powershell
 .\transcripts_prepare.ps1
@@ -172,5 +171,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ./transcripts_prepare.sh
 ```
 
-**Αποποίηση Ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που επιδιώκουμε την ακρίβεια, παρακαλούμε να γνωρίζετε ότι οι αυτόματες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του θα πρέπει να θεωρείται η έγκυρη πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή παρερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

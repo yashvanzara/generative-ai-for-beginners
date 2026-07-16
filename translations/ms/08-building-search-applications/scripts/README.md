@@ -1,30 +1,21 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0d69f2d5814a698d3de5d0235940b5ae",
-  "translation_date": "2025-05-19T18:53:18+00:00",
-  "source_file": "08-building-search-applications/scripts/README.md",
-  "language_code": "ms"
-}
--->
-# Persediaan Data Transkripsi
+# Persiapan data transkripsi
 
-Skrip persediaan data transkripsi memuat turun transkrip video YouTube dan mempersiapkannya untuk digunakan dengan Pencarian Semantik dengan OpenAI Embeddings dan contoh Fungsi.
+Skrip persiapan data transkripsi memuat turun transkrip video YouTube dan menyediakan mereka untuk digunakan dengan contoh Cari Semantik dengan OpenAI Embeddings dan Fungsi.
 
-Skrip persediaan data transkripsi telah diuji pada versi terbaru Windows 11, macOS Ventura dan Ubuntu 22.04 (dan ke atas).
+Skrip persiapan data transkripsi telah diuji pada keluaran terkini Windows 11, macOS Ventura dan Ubuntu 22.04 (dan ke atas).
 
 ## Cipta sumber Azure OpenAI Service yang diperlukan
 
 > [!IMPORTANT]
-> Kami menyarankan anda mengemas kini Azure CLI kepada versi terkini untuk memastikan keserasian dengan OpenAI
+> Kami mencadangkan anda mengemas kini Azure CLI ke versi terkini untuk memastikan keserasian dengan OpenAI
 > Lihat [Dokumentasi](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
 1. Cipta kumpulan sumber
 
 > [!NOTE]
 > Untuk arahan ini kami menggunakan kumpulan sumber bernama "semantic-video-search" di East US.
-> Anda boleh menukar nama kumpulan sumber, tetapi apabila menukar lokasi untuk sumber,
-> periksa [jadual ketersediaan model](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
+> Anda boleh menukar nama kumpulan sumber, tetapi apabila menukar lokasi untuk sumber, 
+> semak [jadual ketersediaan model](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
@@ -37,7 +28,7 @@ az cognitiveservices account create --name semantic-video-openai --resource-grou
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. Dapatkan titik akhir dan kunci untuk digunakan dalam aplikasi ini
+1. Dapatkan titik akhir dan kunci untuk penggunaan dalam aplikasi ini
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -46,9 +37,9 @@ az cognitiveservices account keys list --name semantic-video-openai \
    --resource-group semantic-video-search | jq -r .key1
 ```
 
-1. Sediakan model berikut:
-   - `text-embedding-ada-002` version `2` or greater, named `text-embedding-ada-002`
-   - `gpt-35-turbo` version `0613` or greater, named `gpt-35-turbo`
+1. Sebarkan model berikut:
+   - `text-embedding-ada-002` versi `2` atau lebih tinggi, bernama `text-embedding-ada-002`
+   - `gpt-4o-mini` bernama `gpt-4o-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -62,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-4o-mini \
+    --model-name gpt-4o-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -76,12 +66,12 @@ az cognitiveservices account deployment create \
 
 ## Pembolehubah persekitaran
 
-Pembolehubah persekitaran berikut diperlukan untuk menjalankan skrip persediaan data transkripsi YouTube.
+Pembolehubah persekitaran berikut diperlukan untuk menjalankan skrip persiapan data transkripsi YouTube.
 
 ### Pada Windows
 
-Disarankan menambah pembolehubah kepada `user` environment variables.
-`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` for [USER] > `New`.
+Disyorkan untuk menambah pembolehubah ke dalam pembolehubah persekitaran `user` anda.
+`Mula Windows` > `Edit system environment variables` > `Environment Variables` > `User variables` untuk [USER] > `New`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -90,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
+<!-- Anda boleh menambah pembolehubah persekitaran ke profil PowerShell anda.
+
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<kunci API Azure OpenAI Service anda>"
+$env:AZURE_OPENAI_ENDPOINT = "<titik akhir Azure OpenAI Service anda>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<nama penyebaran model Azure OpenAI Service anda>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<kunci API pembangun Google anda>"
+``` -->
+
 ### Pada Linux dan macOS
 
-Disarankan menambah eksport berikut kepada fail `~/.bashrc` or `~/.zshrc`.
+Disyorkan menambah eksport berikut ke dalam fail `~/.bashrc` atau `~/.zshrc` anda.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -104,13 +103,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ## Pasang perpustakaan Python yang diperlukan
 
 1. Pasang [klien git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) jika belum dipasang.
-1. Dari tingkap `Terminal`, klon sampel ke folder repo pilihan anda.
+1. Dari tetingkap `Terminal`, klon contoh ke folder repo pilihan anda.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
     ```
 
-1. Pergi ke folder `data_prep`.
+1. Navigasi ke folder `data_prep`.
 
    ```bash
    cd semanic-search-openai-embeddings-functions/src/data_prep
@@ -146,7 +145,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Pasang perpustakaan yang diperlukan.
 
-   Pada Windows:
+   Pada windows:
 
    ```powershell
    pip install -r requirements.txt
@@ -158,9 +157,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    pip3 install -r requirements.txt
    ```
 
-## Jalankan skrip persediaan data transkripsi YouTube
+## Jalankan skrip persiapan data transkripsi YouTube
 
-### Pada Windows
+### Pada windows
 
 ```powershell
 .\transcripts_prepare.ps1
@@ -172,5 +171,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ./transcripts_prepare.sh
 ```
 
-**Penafian**: 
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

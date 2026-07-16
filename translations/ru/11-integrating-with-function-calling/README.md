@@ -1,25 +1,16 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77a48a201447be19aa7560706d6f93a0",
-  "translation_date": "2025-05-19T21:19:33+00:00",
-  "source_file": "11-integrating-with-function-calling/README.md",
-  "language_code": "ru"
-}
--->
 # Интеграция с вызовом функций
 
-[![Интеграция с вызовом функций](../../../translated_images/11-lesson-banner.5da178a9bf0c61125724b82872e87e5530d352453ec40cb59a13e27f9346c41e.ru.png)](https://aka.ms/gen-ai-lesson11-gh?WT.mc_id=academic-105485-koreyst)
+[![Интеграция с вызовом функций](../../../translated_images/ru/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-Вы уже узнали немало из предыдущих уроков. Однако, мы можем улучшить еще больше. Некоторые вопросы, которые мы можем решить, касаются того, как получить более последовательный формат ответа, чтобы было проще работать с ним в дальнейшем. Также, возможно, мы захотим добавить данные из других источников для дальнейшего обогащения нашего приложения.
+Вы уже многое узнали на предыдущих уроках. Однако мы можем улучшить процесс еще больше. Некоторые задачи, которые мы можем решить, — это как получить более последовательный формат ответа, чтобы облегчить работу с ответом на следующем этапе. Кроме того, мы можем захотеть добавить данные из других источников, чтобы дополнительно обогатить наше приложение.
 
-Эти проблемы рассматриваются в данной главе.
+Описанные выше проблемы — это то, что рассматривается в этой главе.
 
 ## Введение
 
-Этот урок охватывает:
+Этот урок охватит:
 
-- Объяснение, что такое вызов функций и его варианты использования.
+- Объяснение, что такое вызов функций и его сценарии использования.
 - Создание вызова функции с использованием Azure OpenAI.
 - Как интегрировать вызов функции в приложение.
 
@@ -27,59 +18,62 @@ CO_OP_TRANSLATOR_METADATA:
 
 К концу этого урока вы сможете:
 
-- Объяснить цель использования вызова функций.
-- Настроить вызов функции с помощью Azure OpenAI Service.
-- Разрабатывать эффективные вызовы функций для вашего приложения.
+- Объяснять цель использования вызова функций.
+- Настроить вызов функций с помощью службы Azure OpenAI.
+- Проектировать эффективные вызовы функций для нужд вашего приложения.
 
-## Сценарий: Улучшение нашего чат-бота с помощью функций
+## Сценарий: Улучшение нашего чатбота с помощью функций
 
-В этом уроке мы хотим создать функцию для нашего образовательного стартапа, которая позволит пользователям использовать чат-бота для поиска технических курсов. Мы будем рекомендовать курсы, соответствующие их уровню навыков, текущей роли и интересующей технологии.
+Для этого урока мы хотим создать функцию для нашего образовательного стартапа, которая позволит пользователям использовать чатбот для поиска технических курсов. Мы будем рекомендовать курсы, соответствующие их уровню навыков, текущей роли и интересующей технологии.
 
-Для выполнения этого сценария мы будем использовать комбинацию:
+Чтобы выполнить этот сценарий, мы используем комбинацию:
 
-- `Azure OpenAI` для создания чата с пользователем.
-- `Microsoft Learn Catalog API` для помощи пользователям в поиске курсов на основе их запроса.
-- `Function Calling` для получения запроса пользователя и отправки его в функцию для выполнения API-запроса.
+- `Azure OpenAI` для создания чат-интерфейса для пользователя.
+- `Microsoft Learn Catalog API` для помощи пользователям в поиске курсов на основе запроса пользователя.
+- `Function Calling` для обработки запроса пользователя и отправки его функции, делающей запрос к API.
 
-Чтобы начать, давайте рассмотрим, почему мы вообще хотим использовать вызов функций:
+Для начала давайте посмотрим, зачем нам вообще нужен вызов функций:
 
 ## Зачем нужен вызов функций
 
-До вызова функций ответы от LLM были неструктурированными и непоследовательными. Разработчикам приходилось писать сложный код проверки, чтобы убедиться, что они могут обрабатывать каждую вариацию ответа. Пользователи не могли получать ответы, такие как "Какова текущая погода в Стокгольме?". Это потому, что модели ограничены временем, на которое были обучены данные.
+До появления вызова функций ответы от LLM были неструктурированными и непоследовательными. Разработчикам приходилось писать сложный код валидации, чтобы корректно обрабатывать каждое возможное изменение в ответе. Пользователи не могли получить ответы на вопросы вроде «Какая сейчас погода в Стокгольме?», поскольку модели были ограничены временными рамками данных, на которых их обучали.
 
-Вызов функций - это функция Azure OpenAI Service, чтобы преодолеть следующие ограничения:
+Вызов функций — это функция службы Azure OpenAI, позволяющая преодолеть следующие ограничения:
 
 - **Последовательный формат ответа**. Если мы можем лучше контролировать формат ответа, мы можем легче интегрировать ответ в другие системы.
-- **Внешние данные**. Возможность использования данных из других источников приложения в контексте чата.
+- **Внешние данные**. Возможность использовать данные из других источников приложения в контексте чата.
 
-## Иллюстрация проблемы через сценарий
+## Иллюстрация проблемы на примере сценария
 
-> Мы рекомендуем вам использовать [включенный ноутбук](../../../11-integrating-with-function-calling/python/aoai-assignment.ipynb), если вы хотите запустить приведенный ниже сценарий. Вы также можете просто прочитать, так как мы пытаемся проиллюстрировать проблему, которую функции могут помочь решить.
+> Рекомендуем использовать [включенную тетрадь](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst), если вы хотите запустить приведенный ниже сценарий. Вы также можете просто читать дальше, так как мы пытаемся проиллюстрировать проблему, которую можно решить с помощью функций.
 
-Давайте рассмотрим пример, иллюстрирующий проблему с форматом ответа:
+Рассмотрим пример, иллюстрирующий проблему формата ответа:
 
-Предположим, мы хотим создать базу данных данных студентов, чтобы мы могли предложить им подходящий курс. Ниже у нас есть два описания студентов, которые очень похожи по содержанию данных.
+Допустим, мы хотим создать базу данных с информацией о студентах, чтобы предлагать им подходящие курсы. Ниже приведены два описания студентов, которые очень похожи по содержанию данных.
 
-1. Создайте соединение с нашим ресурсом Azure OpenAI:
+1. Создайте подключение к нашему ресурсу Azure OpenAI:
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # API ответов обслуживается через Azure OpenAI (Microsoft Foundry) версии v1
+   # конечную точку, поэтому мы указываем клиенту OpenAI <your-endpoint>/openai/v1/.
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   Ниже приведен код на Python для настройки нашего соединения с Azure OpenAI, где мы устанавливаем `api_type`, `api_base`, `api_version` and `api_key`.
+   Ниже представлен Python-код для настройки подключения к Azure OpenAI. Поскольку мы используем конечную точку v1, нужно только указать `api_key` и `base_url` (параметр `api_version` не требуется).
 
-1. Creating two student descriptions using variables `student_1_description` and `student_2_description`.
+1. Создание двух описаний студентов с помощью переменных `student_1_description` и `student_2_description`.
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -87,9 +81,9 @@ CO_OP_TRANSLATOR_METADATA:
    student_2_description = "Michael Lee is a sophomore majoring in computer science at Stanford University. He has a 3.8 GPA. Michael is known for his programming skills and is an active member of the university's Robotics Club. He hopes to pursue a career in artificial intelligence after finishing his studies."
    ```
 
-   Мы хотим отправить вышеупомянутые описания студентов в LLM для разбора данных. Эти данные позже могут быть использованы в нашем приложении и отправлены в API или сохранены в базе данных.
+   Мы хотим отправить приведенные выше описания студентов LLM для разбора данных. Эти данные впоследствии можно использовать в приложении, отправлять в API или хранить в базе данных.
 
-1. Давайте создадим два идентичных запроса, в которых мы инструктируем LLM, какая информация нас интересует:
+1. Создадим два одинаковых запроса, в которых укажем LLM, какая информация нас интересует:
 
    ```python
    prompt1 = f'''
@@ -119,33 +113,35 @@ CO_OP_TRANSLATOR_METADATA:
    '''
    ```
 
-   Вышеприведенные запросы инструктируют LLM извлечь информацию и вернуть ответ в формате JSON.
+   Указанные выше запросы инструктируют LLM извлечь информацию и вернуть ответ в формате JSON.
 
-1. После настройки запросов и соединения с Azure OpenAI, мы теперь отправим запросы в LLM, используя `openai.ChatCompletion`. We store the prompt in the `messages` variable and assign the role to `user`. Это имитирует сообщение от пользователя, написанное в чат-боте.
+1. После настройки запросов и подключения к Azure OpenAI мы отправим запросы LLM с помощью `client.responses.create`. Мы сохраняем запрос в переменной `input` и назначаем роль `user`. Это имитирует сообщение пользователя, написанное в чатбот.
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # ответ на первый запрос
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # ответ на второй запрос
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-Теперь мы можем отправить оба запроса в LLM и изучить полученный ответ, найдя его следующим образом `openai_response1['choices'][0]['message']['content']`.
+Теперь мы можем отправить оба запроса LLM и проверить полученный ответ, обратившись к нему так: `openai_response1.output_text`.
 
-1. Lastly, we can convert the response to JSON format by calling `json.loads`:
+1. Наконец, мы можем преобразовать ответ в формат JSON, вызвав `json.loads`:
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # Загрузка ответа в виде объекта JSON
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
@@ -173,59 +169,60 @@ CO_OP_TRANSLATOR_METADATA:
    }
    ```
 
-   Хотя запросы одинаковы и описания схожи, мы видим значения `Grades` property formatted differently, as we can sometimes get the format `3.7` or `3.7 GPA` for example.
+   Несмотря на то, что запросы идентичны, а описания похожи, мы видим, что значения свойства `Grades` форматируются по-разному: иногда в формате `3.7`, иногда как `3.7 GPA`.
 
-   This result is because the LLM takes unstructured data in the form of the written prompt and returns also unstructured data. We need to have a structured format so that we know what to expect when storing or using this data
+   Такой результат обусловлен тем, что LLM воспринимает неструктурированные данные в виде письменного запроса и тоже возвращает неструктурированные данные. Нам нужен структурированный формат, чтобы понимать, что ожидать при хранении или использовании этих данных.
 
-So how do we solve the formatting problem then? By using functional calling, we can make sure that we receive structured data back. When using function calling, the LLM does not actually call or run any functions. Instead, we create a structure for the LLM to follow for its responses. We then use those structured responses to know what function to run in our applications.
+Значит, как решить проблему с форматированием? Используя вызов функций, мы можем быть уверены, что получаем структурированные данные. При использовании вызова функции LLM не вызывает и не выполняет никаких функций. Вместо этого мы создаем структуру, которой LLM должен следовать в своих ответах. Затем мы используем эти структурированные ответы, чтобы знать, какую функцию нужно вызвать в нашем приложении.
 
-![function flow](../../../translated_images/Function-Flow.01a723a374f79e5856d9915c39e16c59fa2a00c113698b22a28e616224f407e1.ru.png)
+![function flow](../../../translated_images/ru/Function-Flow.083875364af4f4bb.webp)
 
-We can then take what is returned from the function and send this back to the LLM. The LLM will then respond using natural language to answer the user's query.
+Далее мы можем взять результат из функции и отправить его обратно в LLM. LLM ответит на запрос пользователя в естественном языке.
 
-## Use Cases for using function calls
+## Сценарии использования вызова функций
 
-There are many different use cases where function calls can improve your app like:
+Существуют различные случаи, когда вызовы функций могут улучшить ваше приложение, например:
 
-- **Calling External Tools**. Chatbots are great at providing answers to questions from users. By using function calling, the chatbots can use messages from users to complete certain tasks. For example, a student can ask the chatbot to "Send an email to my instructor saying I need more assistance with this subject". This can make a function call to `send_email(to: string, body: string)`
+- **Вызов внешних инструментов**. Чатботы отлично отвечают на вопросы пользователей. С помощью вызова функций чатботы могут выполнять определенные задачи по сообщениям от пользователей. Например, студент может попросить чатбота «Отправить письмо моему преподавателю с просьбой о дополнительной помощи по этому предмету». В этом случае можно сделать вызов функции `send_email(to: string, body: string)`.
 
-- **Create API or Database Queries**. Users can find information using natural language that gets converted into a formatted query or API request. An example of this could be a teacher who requests "Who are the students that completed the last assignment" which could call a function named `get_completed(student_name: string, assignment: int, current_status: string)`
+- **Создание запросов к API или базе данных**. Пользователи могут находить информацию, используя естественный язык, который преобразуется в отформатированный запрос или API-вызов. Например, учитель может запросить «Кто выполнил последнее задание», что вызовет функцию `get_completed(student_name: string, assignment: int, current_status: string)`.
 
-- **Creating Structured Data**. Users can take a block of text or CSV and use the LLM to extract important information from it. For example, a student can convert a Wikipedia article about peace agreements to create AI flashcards. This can be done by using a function called `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
+- **Создание структурированных данных**. Пользователи могут взять блок текста или CSV и использовать LLM для извлечения важной информации. Например, студент может преобразовать статью из Википедии о мирных соглашениях, чтобы создать карточки для запоминания с помощью ИИ. Это можно сделать, используя функцию `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`.
 
-## Creating Your First Function Call
+## Создание первого вызова функции
 
-The process of creating a function call includes 3 main steps:
+Процесс создания вызова функции включает три основных шага:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. **Вызов** Responses API с перечнем ваших функций (инструментов) и сообщением пользователя.
+2. **Чтение** ответа модели для выполнения действия, т.е. вызова функции или API.
+3. **Выполнение** повторного вызова Responses API с ответом из вашей функции, чтобы использовать эту информацию для создания ответа пользователю.
 
-![LLM Flow](../../../translated_images/LLM-Flow.7df9f166be50aa324705f2ccddc04a27cfc7b87e57b1fbe65eb534059a3b8b66.ru.png)
+![LLM Flow](../../../translated_images/ru/LLM-Flow.3285ed8caf4796d7.webp)
 
-### Step 1 - creating messages
+### Шаг 1 - создание сообщений
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+Первый шаг — создать сообщение пользователя. Это может быть динамически задано путем получения значения из текстового ввода или присвоения значения здесь. Если вы впервые работаете с Responses API, нужно определить `role` и `content` сообщения.
 
-The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` и пример вопроса.
+`role` может быть `system` (создание правил), `assistant` (модель) или `user` (конечный пользователь). Для вызова функций мы назначим его `user` и приведем пример вопроса.
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Назначая различные роли, становится ясно для LLM, говорит ли что-то система или пользователь, что помогает создать историю разговора, на которой LLM может основываться.
+Назначая разные роли, мы ясно показываем LLM, говорит ли что-то система или пользователь, что помогает строить историю разговора, на которой модель может основываться.
 
 ### Шаг 2 - создание функций
 
-Далее мы определим функцию и параметры этой функции. Мы будем использовать всего одну функцию здесь, называемую `search_courses` but you can create multiple functions.
+Далее мы определим функцию и ее параметры. Здесь мы используем одну функцию с именем `search_courses`, но вы можете создать несколько функций.
 
-> **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
+> **Важно** : Функции включаются в системное сообщение для LLM и учитываются в количестве доступных токенов.
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters`:
+Ниже мы создаем функции в виде массива элементов. Каждый элемент — это инструмент в плоском формате Responses API с свойствами `type`, `name`, `description` и `parameters`:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -252,75 +249,76 @@ functions = [
 ]
 ```
 
-Давайте подробнее опишем каждый экземпляр функции ниже:
+Давайте подробнее рассмотрим каждое свойство функции:
 
-- `name` - The name of the function that we want to have called.
-- `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
-  1.  `type` - The data type of the properties will be stored in.
-  1.  `properties` - List of the specific values that the model will use for its response
-      1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
-      1. `type` - The data type of this property, for example, `string`.
-      1. `description` - Description of the specific property.
+- `name` — имя функции, которую мы хотим вызвать.
+- `description` — описание работы функции. Здесь важно быть конкретным и ясным.
+- `parameters` — список значений и форматов, которые вы хотите получить в ответе от модели. Массив параметров состоит из элементов со следующими свойствами:
+  1. `type` — тип данных свойства.
+  2. `properties` — список конкретных значений, которые модель использует в ответе
+      1. `name` — ключ — имя свойства, которое модель будет использовать в отформатированном ответе, например, `product`.
+      1. `type` — тип данных этого свойства, например, `string`.
+      1. `description` — описание конкретного свойства.
 
-There's also an optional property `required` - required property for the function call to be completed.
+Существует также необязательное свойство `required` — обязательное для вызова функции.
 
-### Step 3 - Making the function call
+### Шаг 3 - выполнение вызова функции
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+Определив функцию, теперь нужно включить ее в вызов Responses API. Для этого добавляем `tools` в запрос. В нашем случае это `tools=functions`.
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+Также можно задать `tool_choice` в `auto`. Это означает, что мы позволяем LLM решить, какую функцию вызвать на основе сообщения пользователя, а не назначаем это вручную.
 
-Here's some code below where we call `ChatCompletion.create`, note how we set `functions=functions` and `function_call="auto"` и, таким образом, даем LLM выбор, когда вызывать предоставленные нами функции:
+Ниже код, в котором мы вызываем `client.responses.create`, обратите внимание, как установлен `tools=functions` и `tool_choice="auto"`, предоставляя LLM возможность решать, когда вызывать предоставленные функции:
 
 ```python
-response = client.chat.completions.create(model=deployment,
-                                        messages=messages,
-                                        functions=functions,
-                                        function_call="auto")
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-print(response.choices[0].message)
+print(response.output)
 ```
 
-Ответ, который приходит обратно, выглядит следующим образом:
+Ответ теперь включает элемент `function_call` в `response.output`, который выглядит так:
 
 ```json
 {
-  "role": "assistant",
-  "function_call": {
-    "name": "search_courses",
-    "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
-  }
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
 }
 ```
 
-Здесь мы можем увидеть, как функция `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+Здесь мы видим, что функция `search_courses` была вызвана с аргументами, указанными в свойстве `arguments` JSON-ответа.
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` значение:
+LLM пришел к выводу, что смог найти данные, соответствующие аргументам функции, так как извлек их из значения, переданного в параметр `input` вызова Responses API. Ниже напоминание значения `messages`:
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Как вы видите, `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+Как видите, из `messages` извлечены `student`, `Azure` и `beginner`, которые передаются в функцию в качестве входных данных. Такой подход с функциями — отличный способ извлечения информации из запроса, а также для придания структуры LLM и создания многократно используемого функционала.
 
-Next, we need to see how we can use this in our app.
+Далее рассмотрим, как использовать это в приложении.
 
-## Integrating Function Calls into an Application
+## Интеграция вызова функций в приложение
 
-After we have tested the formatted response from the LLM, we can now integrate this into an application.
+После успешного тестирования форматированного ответа LLM, теперь можно интегрировать его в приложение.
 
-### Managing the flow
+### Управление потоком
 
-To integrate this into our application, let's take the following steps:
+Для интеграции в приложение выполним следующие шаги:
 
-1. First, let's make the call to the OpenAI services and store the message in a variable called `response_message`.
+1. Сначала сделаем вызов к сервисам OpenAI и извлечем элементы `function_call` из ответа `output`.
 
    ```python
-   response_message = response.choices[0].message
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
    ```
 
-1. Теперь мы определим функцию, которая будет вызывать Microsoft Learn API для получения списка курсов:
+1. Затем определим функцию, которая будет вызывать Microsoft Learn API для получения списка курсов:
 
    ```python
    import requests
@@ -342,65 +340,57 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   Обратите внимание, как мы теперь создаем фактическую функцию на Python, которая соответствует именам функций, введенным в `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   Обратите внимание, что теперь мы создаем реальную Python-функцию, соответствующую имени из переменной `functions`. Также осуществляем реальные внешние запросы к API для получения данных. В данном случае обращаемся к Microsoft Learn API для поиска обучающих модулей.
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+Хорошо, мы создали переменную `functions` и соответствующую Python-функцию — как сообщить LLM, как их связать, чтобы вызвать нашу Python-функцию?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call`, и является частью этого, и вызываем указанную функцию. Вот как вы можете сделать упомянутую проверку ниже:
+1. Чтобы понять, нужно ли вызвать Python-функцию, мы смотрим, есть ли в ответе LLM элемент `function_call`, и вызываем указанную функцию. Ниже пример, как выполнить эту проверку:
 
    ```python
-   # Check if the model wants to call a function
-   if response_message.function_call.name:
-    print("Recommended Function call:")
-    print(response_message.function_call.name)
-    print()
+   # Проверьте, хочет ли модель вызвать функцию
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
 
-    # Call the function.
-    function_name = response_message.function_call.name
+     # Вызовите функцию.
+     function_name = tool_call.name
 
-    available_functions = {
-            "search_courses": search_courses,
-    }
-    function_to_call = available_functions[function_name]
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
 
-    function_args = json.loads(response_message.function_call.arguments)
-    function_response = function_to_call(**function_args)
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
-    print(function_response)
-    print(type(function_response))
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
 
-
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
-        {
-            "role": response_message.role,
-            "function_call": {
-                "name": function_name,
-                "arguments": response_message.function_call.arguments,
-            },
-            "content": None
-        }
-    )
-    messages.append( # adding function response to messages
-        {
-            "role": "function",
-            "name": function_name,
-            "content":function_response,
-        }
-    )
+     # Добавьте вызов функции и его результат обратно в разговор.
+     # элемент function_call модели должен быть добавлен перед её выводом.
+     messages.append(tool_call)  # элемент function_call ассистента
+     messages.append( # результат функции
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
    ```
 
-   Эти три строки обеспечивают извлечение имени функции, аргументов и выполнение вызова:
+   Эти три строки обеспечивают извлечение имени функции, аргументов и вызов функции:
 
    ```python
    function_to_call = available_functions[function_name]
 
-   function_args = json.loads(response_message.function_call.arguments)
+   function_args = json.loads(tool_call.arguments)
    function_response = function_to_call(**function_args)
    ```
 
-   Ниже приведен вывод из выполнения нашего кода:
+   Ниже показан вывод после запуска кода:
 
    **Вывод**
 
@@ -421,50 +411,60 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. Теперь мы отправим обновленное сообщение, `messages`, в LLM, чтобы мы могли получить ответ на естественном языке вместо ответа в формате JSON API.
+1. Теперь отправим обновленное сообщение `messages` LLM, чтобы получить ответ в естественном языке, а не в формате JSON API.
 
    ```python
    print("Messages in next request:")
    print(messages)
    print()
 
-   second_response = client.chat.completions.create(
-      messages=messages,
+   second_response = client.responses.create(
+      input=messages,
       model=deployment,
-      function_call="auto",
-      functions=functions,
-      temperature=0
-         )  # get a new response from GPT where it can see the function response
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # получить новый ответ от модели, где она может видеть ответ функции
 
 
-   print(second_response.choices[0].message)
+   print(second_response.output_text)
    ```
 
    **Вывод**
 
-   ```python
-   {
-     "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
-   }
+   ```text
+   I found some good courses for beginner students to learn Azure:
 
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
    ```
 
-## Задание
+## Домашнее задание
 
-Чтобы продолжить изучение вызова функций Azure OpenAI, вы можете создать:
+Чтобы продолжить изучение вызова функций Azure OpenAI, вы можете построить:
 
-- Больше параметров функции, которые могут помочь учащимся найти больше курсов.
-- Создать другой вызов функции, который принимает больше информации от учащегося, например, его родной язык.
-- Создать обработку ошибок, когда вызов функции и/или API не возвращает подходящих курсов.
+- Больше параметров функции, которые могут помочь учащимся находить больше курсов.
 
-Подсказка: следуйте [документации по API](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst), чтобы увидеть, как и где доступны эти данные.
+- Создайте еще один вызов функции, который будет получать больше информации от учащегося, например, их родной язык
+- Реализуйте обработку ошибок на случай, если вызов функции и/или API не возвращает подходящих курсов
+
+Подсказка: Ознакомьтесь со страницей [Learn API reference documentation](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst), чтобы узнать, как и где доступны эти данные.
 
 ## Отличная работа! Продолжайте путешествие
 
-После завершения этого урока ознакомьтесь с нашей [коллекцией обучения генеративному ИИ](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), чтобы продолжить повышение своих знаний о генеративном ИИ!
+После завершения этого урока ознакомьтесь с нашей [коллекцией по обучению Генеративному ИИ](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), чтобы продолжать повышать свои знания в области Генеративного ИИ!
 
-Перейдите к уроку 12, где мы рассмотрим, как [разрабатывать UX для AI приложений](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Перейдите к Уроку 12, где мы рассмотрим, как [разрабатывать UX для ИИ-приложений](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
-**Отказ от ответственности**:  
-Этот документ был переведен с помощью службы автоматического перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Хотя мы стремимся к точности, имейте в виду, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на родном языке следует считать авторитетным источником. Для получения критически важной информации рекомендуется профессиональный перевод человеком. Мы не несем ответственности за любые недоразумения или неправильные интерпретации, возникшие в результате использования этого перевода.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Отказ от ответственности**:
+Этот документ был переведен с использованием сервиса машинного перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Несмотря на наши усилия по обеспечению точности, имейте в виду, что автоматический перевод может содержать ошибки или неточности. Оригинальный документ на его исходном языке следует считать авторитетным источником. Для получения критически важной информации рекомендуется обратиться к профессиональному человеческому переводу. Мы не несем ответственности за любые недоразумения или неправильные толкования, возникшие в результате использования этого перевода.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

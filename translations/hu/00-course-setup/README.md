@@ -1,163 +1,171 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9f4785899ee92500f524b4acb26e3bb3",
-  "translation_date": "2025-05-19T12:34:36+00:00",
-  "source_file": "00-course-setup/README.md",
-  "language_code": "hu"
-}
--->
-# Kezdés ezzel a kurzussal
+# Kezdés ezzel a tanfolyammal
 
-Nagyon izgatottak vagyunk, hogy elkezded ezt a kurzust, és látjuk, mi mindent inspirál téged az építésre a Generatív MI-vel!
+Nagyon izgatottak vagyunk, hogy elkezded ezt a tanfolyamot, és meglátod, milyen inspiráló dolgokat tudsz létrehozni generatív MI-vel!
 
-A sikered érdekében ez az oldal felvázolja a beállítási lépéseket, a technikai követelményeket, és hogy hol kérhetsz segítséget, ha szükséges.
+A sikered érdekében ez az oldal ismerteti a telepítési lépéseket, a műszaki követelményeket, és azt, hogy hol kérhetsz segítséget, ha szükséges.
 
-## Beállítási lépések
+## Telepítési lépések
 
-A kurzus megkezdéséhez a következő lépéseket kell végrehajtanod.
+A tanfolyam elkezdéséhez el kell végezned az alábbi lépéseket.
 
-### 1. Forkold ezt a repót
+### 1. Repozitórium fork-olása
 
-[Forkold az egész repót](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) a saját GitHub fiókodba, hogy megváltoztathasd a kódot és teljesíthesd a kihívásokat. Emellett [csillagozhatod (🌟) is ezt a repót](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars?WT.mc_id=academic-105485-koreyst), hogy könnyebben megtaláld ezt és a kapcsolódó repókat.
+[Fork-old ezt a teljes repót](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) a saját GitHub fiókodba, hogy módosítani tudd a kódot és teljesíthesd a feladatokat. Emellett [meg is jelölheted csillaggal (🌟) ezt a repót](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars?WT.mc_id=academic-105485-koreyst), hogy könnyebben megtaláld, valamint kapcsolódó repókat.
 
 ### 2. Hozz létre egy codespace-t
 
-A kódfuttatás közbeni függőségi problémák elkerülése érdekében javasoljuk, hogy ezt a kurzust [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=academic-105485-koreyst) használatával futtasd.
+A kód futtatásakor felmerülő függőségi problémák elkerülése érdekében javasoljuk, hogy ebben a tanfolyamban a [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=academic-105485-koreyst) használatával dolgozz.
 
-Ez létrehozható, ha a forkolt repódban kiválasztod a `Code` opciót, majd a **Codespaces** lehetőséget.
+A saját forkodban: **Code -> Codespaces -> New on main**
 
-![Párbeszédablak, amely a codespace létrehozásához szükséges gombokat mutatja](../../../00-course-setup/images/who-will-pay.webp)
+![Dialógus, amely a codespace létrehozásához szükséges gombokat mutatja](../../../translated_images/hu/who-will-pay.4c0609b1c7780f44.webp)
 
-### 3. API kulcsok tárolása
+#### 2.1 Adj hozzá egy titkot
 
-Az API kulcsok biztonságos tárolása fontos bármilyen alkalmazás építésekor. Javasoljuk, hogy ne tárold közvetlenül a kódodban az API kulcsokat. Ha ezeket az adatokat egy nyilvános repóba kötelezed, az biztonsági problémákat okozhat, és nem kívánt költségeket is eredményezhet, ha egy rosszindulatú szereplő használja fel őket.
-Íme egy lépésről-lépésre útmutató, hogyan hozz létre egy `.env` fájlt Pythonhoz és add hozzá a `GITHUB_TOKEN`:
+1. ⚙️ Fogaskerék ikon -> Command Pallete-> Codespaces : Manage user secret -> Add a new secret.
+2. Nevezd el OPENAI_API_KEY-nek, illeszd be a kulcsodat, és mentsd el.
 
-1. **Navigálj a projekt könyvtáradba**: Nyisd meg a terminálodat vagy a parancssort, és navigálj a projekt gyökérkönyvtárába, ahol létre szeretnéd hozni a `.env` fájlt.
+### 3. Mi a következő lépés?
 
-   ```bash
-   cd path/to/your/project
-   ```
+| Szeretném…          | Ugrás ide…                                                              |
+|---------------------|-------------------------------------------------------------------------|
+| Kezdeni az 1. leckét | [`01-introduction-to-genai`](../01-introduction-to-genai/README.md)     |
+| Offline dolgozni    | [`setup-local.md`](02-setup-local.md)                                   |
+| LLM szolgáltatót beállítani | [`providers.md`](03-providers.md)                                    |
+| Megismerkedni más tanulókkal | [Csatlakozz a Discordunkhoz](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)   |
 
-2. **Hozd létre a `.env` fájlt**: Használd a kedvenc szövegszerkesztődet egy új fájl létrehozásához, amelynek neve `.env`. Ha a parancssort használod, használhatod a `touch` (on Unix-based systems) or `echo` parancsot (Windows-on):
+## Hibakeresés
+
+
+| Tünet                                     | Megoldás                                                        |
+|-------------------------------------------|-----------------------------------------------------------------|
+| A konténer építése > 10 percig fennakad   | **Codespaces ➜ „Rebuild Container”**                            |
+| `python: command not found`                 | A terminál nem csatlakozott; kattints a **+** ➜ *bash*          |
+| `401 Unauthorized` az OpenAI-tól            | Hibás vagy lejárt `OPENAI_API_KEY`                              |
+| VS Code „Dev container mounting…” üzenetet mutat | Frissítsd a böngészőfület – a Codespaces néha elveszíti a kapcsolatot |
+| Hiányzik a notebook kernel                 | Notebook menü ➜ **Kernel ▸ Select Kernel ▸ Python 3**           |
 
    Unix-alapú rendszerek:
+
    ```bash
    touch .env
    ```
 
    Windows:
+
    ```cmd
    echo . > .env
    ```
 
-3. **Szerkeszd a `.env` fájlt**: Nyisd meg a `.env` fájlt egy szövegszerkesztőben (pl. VS Code, Notepad++ vagy bármely más szerkesztő). Add hozzá a következő sort a fájlhoz, cserélve a `your_github_token_here` értéket a saját GitHub tokenedre:
+3. **Szerkeszd a `.env` fájlt**: Nyisd meg a `.env` fájlt egy szövegszerkesztőben (pl. VS Code, Notepad++ vagy bármilyen más szerkesztő). Add hozzá az alábbi sorokat, helyettesítve a helykitöltőket a valódi Microsoft Foundry Models végpontoddal és kulcsoddal (lásd a [`providers.md`](03-providers.md) fájlt, hogyan szerezheted be ezeket):
+
+   > **Megjegyzés:** A GitHub Models (és az ehhez tartozó `GITHUB_TOKEN` változó) 2026 július végén megszűnik. Ehelyett használd a [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) szolgáltatást.
 
    ```env
-   GITHUB_TOKEN=your_github_token_here
+   AZURE_INFERENCE_ENDPOINT=your_foundry_endpoint_here
+   AZURE_INFERENCE_CREDENTIAL=your_foundry_api_key_here
    ```
 
-4. **Mentés**: Mentsd el a változtatásokat és zárd be a szövegszerkesztőt.
+4. **Mentsd el a fájlt**: Mentsd el a módosításokat, majd zárd be a szerkesztőt.
 
-5. **Telepítsd a `python-dotenv`**: If you haven't already, you'll need to install the `python-dotenv` csomagot, hogy betöltsd a környezeti változókat a `.env` fájlból a Python alkalmazásodba. Telepítheted a `pip` használatával:
+5. **Telepítsd a `python-dotenv` csomagot**: Ha még nem telepítetted, telepítened kell a `python-dotenv` csomagot, hogy a `.env` fájlból betölthesd a környezeti változókat a Python alkalmazásodba. Telepítheted `pip` segítségével:
 
    ```bash
    pip install python-dotenv
    ```
 
-6. **Környezeti változók betöltése a Python szkriptedben**: A Python szkriptedben használd a `python-dotenv` csomagot, hogy betöltsd a környezeti változókat a `.env` fájlból:
+6. **Környezeti változók betöltése a Python szkriptben**: A Python szkriptedben használd a `python-dotenv` csomagot, hogy betöltsd a `.env` fájlban tárolt környezeti változókat:
 
    ```python
    from dotenv import load_dotenv
    import os
 
-   # Load environment variables from .env file
+   # Környezeti változók betöltése a .env fájlból
    load_dotenv()
 
-   # Access the GITHUB_TOKEN variable
-   github_token = os.getenv("GITHUB_TOKEN")
+   # Hozzáférés a Microsoft Foundry Models változókhoz
+   endpoint = os.getenv("AZURE_INFERENCE_ENDPOINT")
+   token = os.getenv("AZURE_INFERENCE_CREDENTIAL")
 
-   print(github_token)
+   print(endpoint)
    ```
 
-Ennyi! Sikeresen létrehoztad a `.env` fájlt, hozzáadtad a GitHub tokened, és betöltötted a Python alkalmazásodba.
+Ennyi az egész! Sikeresen létrehoztad a `.env` fájlt, hozzáadtad a Microsoft Foundry Models hitelesítő adataidat, és betöltötted őket a Python alkalmazásodba.
 
-## Hogyan futtasd helyileg a számítógépeden
+## Hogyan futtatható helyileg a számítógépeden
 
-Ahhoz, hogy a kódot helyileg futtasd a számítógépeden, szükséged lesz valamilyen verzióra a [Python telepítve](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst).
+A kód helyi futtatásához a számítógépeden szükséged lesz valamilyen [Python verzió telepítésére](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst).
 
-Ezután, hogy használd a repót, klónoznod kell azt:
+Ezt követően le kell klónoznod a repót:
 
 ```shell
 git clone https://github.com/microsoft/generative-ai-for-beginners
 cd generative-ai-for-beginners
 ```
 
-Ha mindent ellenőriztél, kezdheted is!
+Ha mindent letöltöttél, kezdhetsz is dolgozni!
 
 ## Opcionális lépések
 
 ### Miniconda telepítése
 
-A [Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) egy könnyű telepítő a [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst), a Python, valamint néhány csomag telepítésére.
-A Conda maga egy csomagkezelő, amely megkönnyíti a különböző Python [**virtuális környezetek**](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) és csomagok beállítását és váltását. Emellett hasznos lehet olyan csomagok telepítésére, amelyek nem érhetők el `pip`.
+A [Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) egy könnyű telepítő a [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst), a Python és néhány csomag telepítéséhez.
+Maga a Conda csomagkezelő, amely megkönnyíti különböző Python [**virtuális környezetek**](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) és csomagok beállítását és váltását. Hasznos továbbá kevésbé elterjedt csomagok telepítéséhez, amelyek nem érhetők el `pip` segítségével.
 
-You can follow the [MiniConda installation guide](https://docs.anaconda.com/free/miniconda/#quick-command-line-install?WT.mc_id=academic-105485-koreyst) to set it up.
+Kövesd a [Miniconda telepítési útmutatóját](https://docs.anaconda.com/free/miniconda/#quick-command-line-install?WT.mc_id=academic-105485-koreyst) a telepítéshez.
 
-With Miniconda installed, you need to clone the [repository](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) (if you haven't already)
+Ha telepítetted a Minicondát, klónozd le a [tárolót](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) (ha még nem tetted meg).
 
-Next, you need to create a virtual environment. To do this with Conda, go ahead and create a new environment file (_environment.yml_). If you are following along using Codespaces, create this within the `.devcontainer` directory, thus `.devcontainer/environment.yml` által.
+Ezután létre kell hoznod egy virtuális környezetet. Conda használata esetén hozz létre egy új környezeti fájlt (_environment.yml_). Ha Codespaces-ben dolgozol, helyezd el ezt a `.devcontainer` mappában, azaz `.devcontainer/environment.yml` fájlként.
 
-Töltsd fel a környezeti fájlodat az alábbi kódrészlettel:
+Töltsd fel a környezeti fájlt a lenti példával:
 
 ```yml
 name: <environment-name>
 channels:
- - defaults
- - microsoft
+  - defaults
+  - microsoft
 dependencies:
-- python=<python-version>
-- openai
-- python-dotenv
-- pip
-- pip:
-    - azure-ai-ml
-
+  - python=<python-version>
+  - openai
+  - python-dotenv
+  - pip
+  - pip:
+      - azure-ai-ml
 ```
 
-Ha hibákat tapasztalsz a conda használata során, manuálisan is telepítheted a Microsoft AI Könyvtárakat a következő parancs használatával a terminálban.
+Ha conda használata közben hibákat tapasztalsz, manuálisan is telepítheted a Microsoft AI Könyvtárakat az alábbi parancs futtatásával egy terminálban.
 
 ```
 conda install -c microsoft azure-ai-ml
 ```
 
-A környezeti fájl meghatározza a szükséges függőségeket. `<environment-name>` refers to the name you would like to use for your Conda environment, and `<python-version>` is the version of Python you would like to use, for example, `3` a Python legújabb fő verziója.
+A környezeti fájl tartalmazza a szükséges függőségeket. A `<environment-name>` helyére írd a Conda környezet kívánt nevét, a `<python-version>` helyére pedig a kívánt Python verziót, például a `3` a legújabb fő verzió.
 
-Ezek után létrehozhatod a Conda környezeted az alábbi parancsok futtatásával a parancssorban/terminálban
+Ezután létrehozhatod a Conda környezeted a következő parancsok lefuttatásával a parancssorban/terminálban:
 
 ```bash
-conda env create --name ai4beg --file .devcontainer/environment.yml # .devcontainer sub path applies to only Codespace setups
+conda env create --name ai4beg --file .devcontainer/environment.yml # A .devcontainer alkönyvtár csak a Codespace beállításokra érvényes
 conda activate ai4beg
 ```
 
-Ha problémákba ütközöl, tekintsd meg a [Conda környezetek útmutatót](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html?WT.mc_id=academic-105485-koreyst).
+Ha problémába ütközöl, nézd meg a [Conda környezeti útmutatóját](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html?WT.mc_id=academic-105485-koreyst).
 
-### Visual Studio Code használata a Python támogatási bővítménnyel
+### Visual Studio Code használata Python támogatással
 
-Javasoljuk a [Visual Studio Code (VS Code)](https://code.visualstudio.com/?WT.mc_id=academic-105485-koreyst) szerkesztő használatát a [Python támogatási bővítménnyel](https://marketplace.visualstudio.com/items?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) telepítve ehhez a kurzushoz. Ez azonban inkább ajánlás, nem pedig kötelező követelmény.
+Javasoljuk, hogy ehhez a tanfolyamhoz a [Visual Studio Code (VS Code)](https://code.visualstudio.com/?WT.mc_id=academic-105485-koreyst) szerkesztőt használd a [Python támogatást nyújtó bővítménnyel](https://marketplace.visualstudio.com/items?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst). Ez azonban inkább ajánlás, nem kötelező.
 
-> **Megjegyzés**: Ha megnyitod a kurzus repóját a VS Code-ban, lehetőséged van a projekt beállítására egy konténeren belül. Ez a kurzus repójában található [különleges `.devcontainer`](https://code.visualstudio.com/docs/devcontainers/containers?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) könyvtár miatt van. Erről később bővebben.
+> **Megjegyzés**: Ha megnyitod a tanfolyam repóját VS Code-ban, lehetőséged van a projektet konténerben is beállítani. Ez az oka a [különleges `.devcontainer`](https://code.visualstudio.com/docs/devcontainers/containers?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) mappának a repóban. Erről később lesz szó.
 
-> **Megjegyzés**: Miután klónoztad és megnyitottad a könyvtárat a VS Code-ban, automatikusan javasolni fogja, hogy telepíts egy Python támogatási bővítményt.
+> **Megjegyzés**: Amint leklónozod és megnyitod a mappát VS Code-ban, az automatikusan felajánlja a Python támogatású bővítmény telepítését.
 
-> **Megjegyzés**: Ha a VS Code javasolja, hogy nyisd meg a repót egy konténerben, utasítsd el ezt a kérést, hogy a helyileg telepített Python verziót használd.
+> **Megjegyzés**: Ha a VS Code azt javasolja, hogy nyisd újra a repót konténerben, akkor ezt utasítsd el, ha a helyileg telepített Python verziót szeretnéd használni.
 
-### Jupyter használata a böngészőben
+### Jupyter használata böngészőben
 
-A projektet a [Jupyter környezet](https://jupyter.org?WT.mc_id=academic-105485-koreyst) használatával is dolgozhatod a böngésződben. Mind a klasszikus Jupyter, mind a [Jupyter Hub](https://jupyter.org/hub?WT.mc_id=academic-105485-koreyst) kellemes fejlesztési környezetet biztosít olyan funkciókkal, mint az automatikus kiegészítés, kódkiemelés stb.
+A projektet a [Jupyter környezetben](https://jupyter.org?WT.mc_id=academic-105485-koreyst) is fejlesztheted közvetlenül a böngészőből. Mind a klasszikus Jupyter, mind a [Jupyter Hub](https://jupyter.org/hub?WT.mc_id=academic-105485-koreyst) kellemes fejlesztési élményt nyújt, például automatikus kiegészítést, kódkiemelést és egyebeket.
 
-A Jupyter helyi indításához nyisd meg a terminált/parancssort, navigálj a kurzus könyvtárába, és futtasd:
+A helyi indításhoz menj a terminálba/parancssorba, navigálj a tanfolyam könyvtárába, és futtasd:
 
 ```bash
 jupyter notebook
@@ -169,57 +177,63 @@ vagy
 jupyterhub
 ```
 
-Ez elindít egy Jupyter példányt, és a hozzáférési URL megjelenik a parancssor ablakában.
+Ez elindít egy Jupyter példányt, és a hozzáférés URL-je megjelenik a parancssor ablakában.
 
-Miután hozzáférsz az URL-hez, látnod kell a kurzus felépítését, és navigálhatsz bármely `*.ipynb` file. For example, `08-building-search-applications/python/oai-solution.ipynb`.
+Amint elérted az URL-t, látnod kell a tanfolyam vázlatát és navigálhatsz bármely `*.ipynb` fájlhoz. Például: `08-building-search-applications/python/oai-solution.ipynb`.
 
-### Running in a container
+### Futtatás konténerben
 
-An alternative to setting everything up on your computer or Codespace is to use a [container](https://en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst). The special `.devcontainer` folder within the course repository makes it possible for VS Code to set up the project within a container. Outside of Codespaces, this will require the installation of Docker, and quite frankly, it involves a bit of work, so we recommend this only to those with experience working with containers.
+Az alternatíva a saját gépen vagy Codespace-ben való beállítás helyett az, hogy egy [konténert](../../../00-course-setup/<https:/en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst>) használsz. A tanfolyam repójában található különleges `.devcontainer` mappa lehetővé teszi, hogy a VS Code projektet konténerben állítsa be. Codespaces-en kívül ehhez Docker telepítése szükséges, ami egy kissé bonyolult, ezért csak konténerekkel tapasztalattal rendelkezőknek ajánljuk.
 
-One of the best ways to keep your API keys secure when using GitHub Codespaces is by using Codespace Secrets. Please follow the [Codespaces secrets management](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-secrets-for-your-codespaces?WT.mc_id=academic-105485-koreyst) guide to learn more about this.
+Az API kulcsaid biztonságos tárolásának egyik legjobb módja GitHub Codespaces esetén a Codespace Secrets használata. Erről a [Codespaces titkok kezeléséről](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-secrets-for-your-codespaces?WT.mc_id=academic-105485-koreyst) találhatsz útmutatót.
 
-## Lessons and Technical Requirements
 
-The course has 6 concept lessons and 6 coding lessons.
+## Leckék és technikai követelmények
 
-For the coding lessons, we are using the Azure OpenAI Service. You will need access to the Azure OpenAI service and an API key to run this code. You can apply to get access by [completing this application](https://azure.microsoft.com/products/ai-services/openai-service?WT.mc_id=academic-105485-koreyst).
+A tanfolyam 6 elméleti és 6 programozási leckéből áll.
 
-While you wait for your application to be processed, each coding lesson also includes a `README.md` fájlhoz, ahol megtekintheted a kódot és a kimeneteket.
+A programozási leckékhez az Azure OpenAI szolgáltatást használjuk. Ehhez szükséged lesz hozzáférésre az Azure OpenAI szolgáltatáshoz és API kulcsra. Hozzáférést az [űrlap kitöltésével igényelhetsz](https://azure.microsoft.com/products/ai-services/openai-service?WT.mc_id=academic-105485-koreyst).
 
-## Az Azure OpenAI Szolgáltatás első használata
+Amíg a kérelmed feldolgozás alatt áll, a programozási leckékhez mellékelt `README.md` fájlokból megtekintheted a kódot és az eredményeket.
 
-Ha ez az első alkalom, hogy az Azure OpenAI szolgáltatással dolgozol, kérjük, kövesd ezt az útmutatót az [Azure OpenAI Szolgáltatás erőforrás létrehozásához és telepítéséhez.](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)
+## Azure OpenAI szolgáltatás első használata
 
-## Az OpenAI API első használata
+Ha először használod az Azure OpenAI szolgáltatást, kérjük, kövesd ezt az útmutatót a [szolgáltatás létrehozásához és telepítéséhez](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst).
 
-Ha ez az első alkalom, hogy az OpenAI API-val dolgozol, kérjük, kövesd az útmutatót az [Interfész létrehozásához és használatához.](https://platform.openai.com/docs/quickstart?context=pythont&WT.mc_id=academic-105485-koreyst)
+## OpenAI API első használata
 
-## Találkozz más tanulókkal
+Ha először dolgozol az OpenAI API-val, kérjük, kövesd a [gyors kezdő útmutatót az interfész használatához](https://platform.openai.com/docs/quickstart?context=pythont&WT.mc_id=academic-105485-koreyst).
 
-Létrehoztunk csatornákat a hivatalos [AI Közösségi Discord szerverünkön](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst) más tanulókkal való találkozásra. Ez nagyszerű módja annak, hogy kapcsolatba lépj más hasonló gondolkodású vállalkozókkal, építőkkel, diákokkal, és bárkivel, aki szeretné fejleszteni a tudását a Generatív MI területén.
+## Ismerkedj meg más tanulókkal
 
-[![Csatlakozz a Discord csatornához](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
+Létrehoztunk csatornákat az [AI Community Discord szerverünkön](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst), ahol találkozhatsz más tanulókkal. Ez remek lehetőség, hogy kapcsolatokat építs más hasonló gondolkodású vállalkozókkal, fejlesztőkkel, diákokkal, és mindenkivel, aki fejlődni szeretne a generatív MI terén.
 
-A projekt csapata szintén jelen lesz ezen a Discord szerveren, hogy segítsen a tanulóknak.
+[![Csatlakozás a discord csatornához](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
 
-## Hozzájárulás
+A projekt csapata is jelen lesz ezen a Discord szerveren, hogy segítsen a tanulóknak.
 
-Ez a kurzus egy nyílt forráskódú kezdeményezés. Ha látsz javítandó területeket vagy problémákat, kérjük, hozz létre egy [Pull Requestet](https://github.com/microsoft/generative-ai-for-beginners/pulls?WT.mc_id=academic-105485-koreyst) vagy jelents egy [GitHub problémát](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst).
+## Közreműködés
 
-A projekt csapata követni fogja az összes hozzájárulást. A nyílt forráskódhoz való hozzájárulás nagyszerű módja annak, hogy építsd a karriered a Generatív MI területén.
+Ez a tanfolyam nyílt forráskódú kezdeményezés. Ha javítási lehetőségeket vagy hibákat találsz, kérjük, hozz létre egy [Pull Request-et](https://github.com/microsoft/generative-ai-for-beginners/pulls?WT.mc_id=academic-105485-koreyst) vagy jelents hibát a [GitHub issue-k között](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst).
 
-A legtöbb hozzájárulás megköveteli, hogy elfogadj egy Hozzájárulói Licencszerződést (CLA), amely kijelenti, hogy jogod van és ténylegesen megadod nekünk a jogot a hozzájárulásod használatára. Részletekért látogasd meg a [CLA, Hozzájárulói Licencszerződés weboldalt](https://cla.microsoft.com?WT.mc_id=academic-105485-koreyst).
+A projekt csapata figyelemmel kíséri az összes hozzájárulást. A nyílt forráskódhoz való hozzájárulás remek módja annak, hogy karriert építs a generatív MI területén.
 
-Fontos: amikor fordítást végzel ebben a repóban, kérjük, biztosítsd, hogy ne használj gépi fordítást. A fordításokat a közösség fogja ellenőrizni, ezért kérjük, csak olyan nyelvekre vállalkozz, amelyekben jártas vagy.
+A legtöbb hozzájáruláshoz el kell fogadnod egy Contributor License Agreement (CLA) licencmegállapodást, amelyben kijelented, hogy jogod van hozzájárulni, és valóban megadod számunkra a jogokat a használathoz. Részletekért látogass el a [CLA, Contributor License Agreement weboldalára](https://cla.microsoft.com?WT.mc_id=academic-105485-koreyst).
 
-Amikor beküldesz egy pull requestet, egy CLA-bot automatikusan meghatározza, hogy szükséges-e CLA-t biztosítanod, és ennek megfelelően megjelöli a PR-t (pl. címke, megjegyzés). Egyszerűen kövesd a bot által adott utasításokat. Ezt csak egyszer kell megtenned az összes repó esetében, amely a CLA-t használja.
+Fontos: ebben a repóban szöveg fordításakor kérjük, kerüld a gépi fordítást. A fordításokat közösségi ellenőrzésnek vetjük alá, ezért csak olyan nyelvek esetén támogasd a fordítást, amelyekben jártas vagy.
 
-Ez a projekt a [Microsoft Nyílt Forráskódú Magatartási Kódexét](https://opensource.microsoft.com/codeofconduct/?WT.mc_id=academic-105485-koreyst) fogadta el. További információkért olvasd el a Magatartási Kódex GYIK-ját vagy lépj kapcsolatba az [Email opencode](opencode@microsoft.com) címre bármilyen további kérdéssel vagy megjegyzéssel.
+Amikor pull request-et nyújtasz be, a CLA-bot automatikusan eldönti, hogy szükséges-e CLA-t benyújtanod, és ennek megfelelően jelöli meg a PR-t (címke, megjegyzés). Csak egyszer kell ezt megtenned az összes repót érintően, amely a CLA-t használja.
 
-## Kezdjük el
 
-Most, hogy elvégezted a szükséges lépéseket a kurzus teljesítéséhez, kezdjük el egy [bevezetővel a Generatív MI-ről és LLM-ekről](../01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst).
+Ez a projekt elfogadta a [Microsoft Nyílt Forráskódú Magatartási Kódexét](https://opensource.microsoft.com/codeofconduct/?WT.mc_id=academic-105485-koreyst). További információkért olvassa el a Magatartási Kódex GYIK-jét, vagy forduljon az [opencode e-mail címhez](opencode@microsoft.com) további kérdésekkel vagy észrevételekkel.
 
-**Felelősség kizárása**:  
-Ezt a dokumentumot az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk le. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt a professzionális emberi fordítás. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félremagyarázásokért.
+## Kezdjünk hozzá
+
+Most, hogy elvégezte a tanfolyam befejezéséhez szükséges lépéseket, kezdjük azzal, hogy megismerkedünk a [Generatív mesterséges intelligencia és nagy nyelvi modellek bevezetésével](../01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst).
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

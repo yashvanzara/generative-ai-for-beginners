@@ -1,42 +1,34 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0d69f2d5814a698d3de5d0235940b5ae",
-  "translation_date": "2025-05-19T18:56:04+00:00",
-  "source_file": "08-building-search-applications/scripts/README.md",
-  "language_code": "sl"
-}
--->
-# تيار البيانات لتحضير النسخ
+# Priprava podatkov za prepisovanje
 
-تنزل سكريبتات تحضير بيانات النسخ نصوص فيديوهات يوتيوب وتجهزها للاستخدام مع مثال البحث الدلالي باستخدام OpenAI Embeddings وFunctions.
+Skripte za pripravo podatkov za prepisovanje prenesejo prepise videoposnetkov s YouTuba in jih pripravijo za uporabo s primerom semantičnega iskanja z OpenAI vdelavami in funkcijami.
 
-تم اختبار سكريبتات تحضير بيانات النسخ على أحدث الإصدارات من Windows 11 وmacOS Ventura وUbuntu 22.04 (وما فوقها).
+Skripte za pripravo podatkov za prepisovanje so bile preizkušene na najnovejših različicah Windows 11, macOS Ventura in Ubuntu 22.04 (in novejših).
 
-## إنشاء الموارد المطلوبة لخدمة Azure OpenAI
+## Ustvarite zahtevane vire storitve Azure OpenAI
 
 > [!IMPORTANT]
-> نوصي بتحديث Azure CLI إلى أحدث إصدار لضمان التوافق مع OpenAI
-> انظر [التوثيق](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
+> Priporočamo, da posodobite Azure CLI na najnovejšo različico, da zagotovite združljivost z OpenAI
+> Oglejte si [Dokumentacijo](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
-1. إنشاء مجموعة موارد
+1. Ustvarite skupino virov
 
 > [!NOTE]
-> في هذه التعليمات نستخدم مجموعة الموارد المسماة "semantic-video-search" في شرق الولايات المتحدة.
-> يمكنك تغيير اسم مجموعة الموارد، ولكن عند تغيير موقع الموارد، تحقق من [جدول توافر النموذج](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
+> Za ta navodila uporabljamo skupino virov z imenom "semantic-video-search" v regiji East US.
+> Ime skupine virov lahko spremenite, vendar pri spremembi lokacije virov,
+> preverite [tabelo razpoložljivosti modelov](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
 ```
 
-1. إنشاء مورد لخدمة Azure OpenAI.
+1. Ustvarite vir storitve Azure OpenAI.
 
 ```console
 az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. احصل على نقطة النهاية والمفاتيح لاستخدامها في هذا التطبيق
+1. Pridobite končno točko in ključe za uporabo v tej aplikaciji
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -45,9 +37,9 @@ az cognitiveservices account keys list --name semantic-video-openai \
    --resource-group semantic-video-search | jq -r .key1
 ```
 
-1. انشر النماذج التالية:
-   - `text-embedding-ada-002` version `2` or greater, named `text-embedding-ada-002`
-   - `gpt-35-turbo` version `0613` or greater, named `gpt-35-turbo`
+1. Namestite naslednje modele:
+   - `text-embedding-ada-002` različica `2` ali novejša, z imenom `text-embedding-ada-002`
+   - `gpt-4o-mini` z imenom `gpt-4o-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -61,26 +53,25 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-4o-mini \
+    --model-name gpt-4o-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
 ```
 
-## البرامج المطلوبة
+## Potrebna programska oprema
 
-- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) أو أحدث
+- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) ali novejša
 
-## متغيرات البيئة
+## Spremenljivke okolja
 
-تتطلب سكريبتات تحضير بيانات نسخ يوتيوب المتغيرات البيئية التالية.
+Za zagon skriptov za pripravo podatkov za prepisovanje YouTube so potrebne naslednje spremenljivke okolja.
 
-### على Windows
+### Na Windows
 
-نوصي بإضافة المتغيرات إلى `user` environment variables.
-`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` for [USER] > `New`.
+Priporočamo, da spremenljivke dodate v uporabniške spremenljivke okolja.
+`Windows Start` > `Uredi sistemske spremenljivke okolja` > `Spremenljivke okolja` > `Uporabniške spremenljivke` za [USER] > `Novo`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -89,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
-### على Linux وmacOS
+<!-- Spremenljivke okolja lahko dodate v svoj PowerShell profil.
 
-نوصي بإضافة التصديرات التالية إلى ملف `~/.bashrc` or `~/.zshrc`.
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<vaš Azure OpenAI Service API ključ>"
+$env:AZURE_OPENAI_ENDPOINT = "<vaša Azure OpenAI Service končna točka>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<ime nameščanja modela Azure OpenAI Service>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<vaš Google razvijalski API ključ>"
+``` -->
+
+### Na Linux in macOS
+
+Priporočamo, da dodate naslednje izvoze v datoteko `~/.bashrc` ali `~/.zshrc`.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -100,76 +100,80 @@ export AZURE_OPENAI_MODEL_DEPLOYMENT_NAME=<your Azure OpenAI Service model deplo
 export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ```
 
-## تثبيت مكتبات بايثون المطلوبة
+## Namestite zahtevane Python knjižnice
 
-1. قم بتثبيت [عميل git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) إذا لم يكن مثبتًا بالفعل.
-1. من نافذة `Terminal`، استنسخ المثال إلى مجلد المستودع المفضل لديك.
+1. Namestite [git odjemalca](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst), če še ni nameščen.
+1. V oknu `Terminal` klonirajte primer v svojo želeno mapo repozitorija.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
     ```
 
-1. انتقل إلى مجلد `data_prep`.
+1. Pomaknite se v mapo `data_prep`.
 
    ```bash
    cd semanic-search-openai-embeddings-functions/src/data_prep
    ```
 
-1. إنشاء بيئة افتراضية لبايثون.
+1. Ustvarite virtualno Python okolje.
 
-    على Windows:
+    Na Windows:
 
     ```powershell
     python -m venv .venv
     ```
 
-    على macOS وLinux:
+    Na macOS in Linux:
 
     ```bash
     python3 -m venv .venv
     ```
 
-1. تفعيل البيئة الافتراضية لبايثون.
+1. Aktivirajte virtualno Python okolje.
 
-   على Windows:
+   Na Windows:
 
    ```powershell
    .venv\Scripts\activate
    ```
 
-   على macOS وLinux:
+   Na macOS in Linux:
 
    ```bash
    source .venv/bin/activate
    ```
 
-1. تثبيت المكتبات المطلوبة.
+1. Namestite zahtevane knjižnice.
 
-   على windows:
+   Na Windows:
 
    ```powershell
    pip install -r requirements.txt
    ```
 
-   على macOS وLinux:
+   Na macOS in Linux:
 
    ```bash
    pip3 install -r requirements.txt
    ```
 
-## تشغيل سكريبتات تحضير بيانات نسخ يوتيوب
+## Zaženite skripte za pripravo podatkov za prepisovanje YouTube
 
-### على windows
+### Na Windows
 
 ```powershell
 .\transcripts_prepare.ps1
 ```
 
-### على macOS وLinux
+### Na macOS in Linux
 
 ```bash
 ./transcripts_prepare.sh
 ```
 
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Omejitev odgovornosti**:
-Ta dokument je bil preveden z uporabo storitve AI za prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku bi moral biti obravnavan kot avtoritativni vir. Za ključne informacije se priporoča profesionalni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

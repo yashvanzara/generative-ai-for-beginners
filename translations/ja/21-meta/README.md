@@ -1,67 +1,61 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4c2a0b0c738b649ef049fb99a23be661",
-  "translation_date": "2025-05-20T11:07:50+00:00",
-  "source_file": "21-meta/README.md",
-  "language_code": "ja"
-}
--->
 # Metaファミリーモデルでの構築
 
 ## はじめに
 
-このレッスンでは以下をカバーします：
+このレッスンでは以下を扱います：
 
-- 主なMetaファミリーモデル2つ、Llama 3.1とLlama 3.2の探索
+- Metaファミリーの主要な2つのモデル - Llama 3.1とLlama 3.2 の探求
 - 各モデルのユースケースとシナリオの理解
-- 各モデルのユニークな特徴を示すコードサンプル
+- 各モデルの独自機能を示すコードサンプル
+
 
 ## Metaファミリーのモデル
 
-このレッスンでは、Metaファミリーまたは「Llama Herd」からLlama 3.1とLlama 3.2の2つのモデルを探ります。
+このレッスンでは、Metaファミリー、または「Llama Herd」から2つのモデル - Llama 3.1 と Llama 3.2 を探ります。
 
-これらのモデルはさまざまなバリアントがあり、GitHub Modelマーケットプレイスで利用可能です。GitHub Modelsを使用して[AIモデルでプロトタイプを作成する](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst)方法の詳細はこちらをご覧ください。
+これらのモデルはさまざまなバリエーションがあり、[Microsoft Foundry Models catalog](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst)で利用可能です。
 
-モデルバリアント：
+> **注意:** GitHub Modelsは2026年7月末に終了します。AIモデルのプロトタイピングに [Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) を使用する詳細はこちらをご覧ください。
+
+モデルバリエーション：
 - Llama 3.1 - 70B Instruct
 - Llama 3.1 - 405B Instruct
 - Llama 3.2 - 11B Vision Instruct
 - Llama 3.2 - 90B Vision Instruct
 
-*注：Llama 3もGitHub Modelsで利用可能ですが、このレッスンでは取り上げません*
+*注意：Llama 3もMicrosoft Foundry Modelsで利用可能ですが、本レッスンでは扱いません*
 
 ## Llama 3.1
 
-4050億パラメータを持つLlama 3.1は、オープンソースLLMカテゴリに属します。
+4050億パラメータで、Llama 3.1はオープンソースLLMカテゴリに属します。
 
-このモデルは以前のリリースであるLlama 3のアップグレード版であり、以下を提供します：
+このモデルは以前のリリースであるLlama 3のアップグレード版であり、以下の特徴を提供します：
 
 - より大きなコンテキストウィンドウ - 128kトークン対8kトークン
-- より大きな最大出力トークン - 4096対2048
-- より良い多言語サポート - トレーニングトークンの増加による
+- より大きな最大出力トークン数 - 4096対2048
+- より良い多言語対応 - トレーニングトークンの増加による
 
-これにより、Llama 3.1はGenAIアプリケーションの構築時により複雑なユースケースを処理できるようになります：
+これにより、Llama 3.1はGenAIアプリケーション構築時により複雑なユースケースに対応可能になります。例えば：
 - ネイティブ関数呼び出し - LLMワークフロー外の外部ツールや関数を呼び出す能力
-- より良いRAGパフォーマンス - より高いコンテキストウィンドウのおかげ
-- 合成データ生成 - 微調整などのタスクに効果的なデータを作成する能力
+- より良いRAGパフォーマンス - より大きなコンテキストウィンドウによる
+- 合成データ生成 - ファインチューニングなどのタスクのための効果的なデータを作成する能力
 
 ### ネイティブ関数呼び出し
 
-Llama 3.1は、関数やツールの呼び出しをより効果的に行うように微調整されています。また、ユーザーのプロンプトに基づいて使用が必要と認識される2つの組み込みツールを持っています。これらのツールは：
+Llama 3.1は関数やツールの呼び出しをより効果的に行うようファインチューニングされています。また、ユーザーのプロンプトに基づいて使用が必要と判断される2つの組み込みツールがあります。これらのツールは：
 
-- **Brave Search** - 天気のような最新情報を得るためにウェブ検索を行うことができる
-- **Wolfram Alpha** - より複雑な数学的計算を行うために使用でき、独自の関数を書く必要がありません。
+- **Brave Search** - Web検索を行い、天気などの最新情報を取得可能
+- **Wolfram Alpha** - より複雑な数学的計算に使用でき、自作関数を書く必要がありません
 
-LLMが呼び出すカスタムツールを作成することもできます。
+また、LLMが呼び出せる独自のカスタムツールも作成できます。
 
 以下のコード例では：
 
-- 利用可能なツール（brave_search、wolfram_alpha）をシステムプロンプトで定義します。
-- 特定の都市の天気について尋ねるユーザープロンプトを送信します。
-- LLMはBrave Searchツールへのツール呼び出しで応答し、それは次のようになります`<|python_tag|>brave_search.call(query="Stockholm weather")`
+- システムプロンプト内で利用可能なツール（brave_search, wolfram_alpha）を定義しています。
+- ある都市の天気について問い合わせるユーザープロンプトを送信します。
+- LLMはBrave Searchツールの呼び出しで応答し、 `<|python_tag|>brave_search.call(query="Stockholm weather")` のようになります。
 
-*注：この例ではツール呼び出しのみを行います。結果を得たい場合は、Brave APIページで無料アカウントを作成し、関数自体を定義する必要があります*
+*注意：この例はツール呼び出しのみを行います。結果を得るには、Brave APIページで無料アカウントを作成し、関数自体を定義する必要があります。
 
 ```python 
 import os
@@ -69,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# これらは Microsoft Foundry プロジェクトの「概要」ページから取得してください
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -103,13 +98,14 @@ print(response.choices[0].message.content)
 
 ## Llama 3.2
 
-LLMであるにもかかわらず、Llama 3.1にはマルチモダリティという制限があります。つまり、画像などの異なるタイプの入力をプロンプトとして使用し、応答を提供する能力です。この能力はLlama 3.2の主な特徴の一つです。これらの特徴には以下も含まれます：
+Llama 3.1はLLMであるものの、多様な入力（画像など）をプロンプトとして使用し応答を返すことができないという制限があります。この機能はLlama 3.2の主な特徴のひとつです。他の特徴には以下が含まれます：
 
-- マルチモダリティ - テキストと画像プロンプトの両方を評価する能力
-- 小から中サイズのバリエーション（11Bと90B） - 柔軟なデプロイメントオプションを提供
-- テキストのみのバリエーション（1Bと3B） - モデルをエッジ/モバイルデバイスにデプロイし、低遅延を提供
+- マルチモーダリティ - テキストおよび画像の両方のプロンプトを評価可能
+- 小規模から中規模のバリエーション（11Bと90B） - 柔軟な展開オプションを提供
+- テキストのみバリエーション（1Bと3B） - エッジ/モバイルデバイスへの展開や低レイテンシを実現
 
-マルチモーダルサポートはオープンソースモデルの世界における大きな進歩を表しています。以下のコード例は、Llama 3.2 90Bから画像の分析を得るために画像とテキストプロンプトの両方を取ります。
+マルチモーダルサポートはオープンソースモデルの世界で大きな進歩を示します。以下のコード例では、画像とテキストのプロンプトの両方を使用して、Llama 3.2 90Bによる画像の分析を行います。
+
 
 ### Llama 3.2によるマルチモーダルサポート
 
@@ -126,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# これらはMicrosoft Foundryプロジェクトの「概要」ページから取得します
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -158,9 +155,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## 学習はここで止まりません。旅を続けましょう
+## 学習はここで終わらない、旅を続けよう
 
-このレッスンを完了した後は、[Generative AI Learningコレクション](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)をチェックして、Generative AIの知識をさらに深めていきましょう！
+このレッスンを終えたら、[Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)をチェックして、生成AIの知識をさらにレベルアップしましょう！
 
-**免責事項**:  
-この文書はAI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確さを追求していますが、自動翻訳には誤りや不正確さが含まれる場合がありますのでご注意ください。元の文書がその言語での権威ある情報源とみなされるべきです。重要な情報については、プロの人間による翻訳をお勧めします。この翻訳の使用に起因する誤解や誤解については責任を負いません。
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

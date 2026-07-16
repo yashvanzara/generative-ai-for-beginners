@@ -1,67 +1,61 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4c2a0b0c738b649ef049fb99a23be661",
-  "translation_date": "2025-05-20T11:13:17+00:00",
-  "source_file": "21-meta/README.md",
-  "language_code": "nl"
-}
--->
-# Bouwen met de Meta Familie Modellen
+# Bouwen met de Meta Familie Modellen 
 
-## Inleiding
+## Introductie 
 
-Deze les behandelt:
+Deze les behandelt: 
 
-- Het verkennen van de twee belangrijkste Meta familie modellen - Llama 3.1 en Llama 3.2
-- Het begrijpen van de gebruiksscenario's voor elk model
-- Een codevoorbeeld om de unieke kenmerken van elk model te laten zien
+- Het verkennen van de twee belangrijkste Meta familiemodellen - Llama 3.1 en Llama 3.2 
+- Begrijpen van de gebruiksscenario's voor elk model 
+- Voorbeeldcode om de unieke kenmerken van elk model te tonen 
 
-## De Meta Familie van Modellen
 
-In deze les verkennen we 2 modellen uit de Meta familie of "Llama Kudde" - Llama 3.1 en Llama 3.2
+## De Meta Familie van Modellen 
 
-Deze modellen komen in verschillende varianten en zijn beschikbaar op de GitHub Model marktplaats. Hier zijn meer details over het gebruik van GitHub Modellen om te [prototypen met AI-modellen](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+In deze les verkennen we 2 modellen uit de Meta familie of "Llama Herd" - Llama 3.1 en Llama 3.2.
 
-Modelvarianten:
-- Llama 3.1 - 70B Instruct
-- Llama 3.1 - 405B Instruct
-- Llama 3.2 - 11B Vision Instruct
-- Llama 3.2 - 90B Vision Instruct
+Deze modellen zijn er in verschillende varianten en zijn beschikbaar in de [Microsoft Foundry Models catalogus](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
 
-*Opmerking: Llama 3 is ook beschikbaar op GitHub Modellen maar zal niet in deze les worden behandeld*
+> **Notitie:** GitHub Models wordt uitgefaseerd eind juli 2026. Hier zijn meer details over het gebruik van [Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) om te prototypen met AI-modellen.
 
-## Llama 3.1
+Modelvarianten: 
+- Llama 3.1 - 70B Instruct 
+- Llama 3.1 - 405B Instruct 
+- Llama 3.2 - 11B Vision Instruct 
+- Llama 3.2 - 90B Vision Instruct 
 
-Met 405 miljard parameters valt Llama 3.1 in de open source LLM categorie.
+*Opmerking: Llama 3 is ook beschikbaar in Microsoft Foundry Models maar zal niet behandeld worden in deze les*
 
-De modus is een upgrade van de eerdere release Llama 3 door het bieden van:
+## Llama 3.1 
 
-- Groter contextvenster - 128k tokens vs 8k tokens
-- Grotere Max Output Tokens - 4096 vs 2048
-- Betere meertalige ondersteuning - door toename in training tokens
+Met 405 miljard parameters valt Llama 3.1 in de categorie open source LLM. 
 
-Dit stelt Llama 3.1 in staat om complexere gebruiksscenario's aan te pakken bij het bouwen van GenAI-toepassingen, waaronder:
-- Native Function Calling - de mogelijkheid om externe tools en functies buiten de LLM workflow aan te roepen
-- Betere RAG-prestaties - dankzij het grotere contextvenster
-- Synthese van gegevens - de mogelijkheid om effectieve gegevens te creëren voor taken zoals fine-tuning
+Het model is een upgrade ten opzichte van de eerdere release Llama 3 door te bieden: 
 
-### Native Function Calling
+- Groter contextvenster - 128k tokens versus 8k tokens 
+- Groter max aantal output tokens - 4096 versus 2048 
+- Betere meertalige ondersteuning - dankzij toename in training tokens 
 
-Llama 3.1 is verfijnd om effectiever te zijn in het maken van functie- of tooloproepen. Het heeft ook twee ingebouwde tools die het model kan identificeren als nodig om te worden gebruikt op basis van de prompt van de gebruiker. Deze tools zijn:
+Deze maken het mogelijk voor Llama 3.1 om meer complexe use cases aan te pakken bij het bouwen van GenAI-toepassingen, waaronder: 
+- Native Function Calling - de mogelijkheid om externe tools en functies buiten de LLM-workflow aan te roepen
+- Betere RAG-prestaties - dankzij het grotere contextvenster 
+- Synthese van data - de mogelijkheid om effectieve data te creëren voor taken zoals fine-tuning 
 
-- **Brave Search** - Kan worden gebruikt om actuele informatie zoals het weer te verkrijgen door een webzoekopdracht uit te voeren
-- **Wolfram Alpha** - Kan worden gebruikt voor complexere wiskundige berekeningen, zodat het schrijven van je eigen functies niet nodig is.
+### Native Function Calling 
 
-Je kunt ook je eigen aangepaste tools maken die LLM kan aanroepen.
+Llama 3.1 is fijn afgestemd om effectiever te zijn in het maken van functie- of toolaanroepen. Het heeft ook twee ingebouwde tools die het model kan identificeren als nodig om te gebruiken op basis van de prompt van de gebruiker. Deze tools zijn: 
 
-In het codevoorbeeld hieronder:
+- **Brave Search** - Kan worden gebruikt om up-to-date informatie te verkrijgen zoals het weer door een webzoekopdracht uit te voeren 
+- **Wolfram Alpha** - Kan worden gebruikt voor complexere wiskundige berekeningen zodat je geen eigen functies hoeft te schrijven. 
 
-- We definiëren de beschikbare tools (brave_search, wolfram_alpha) in de systeemprompt.
-- Stuur een gebruikersprompt die vraagt naar het weer in een bepaalde stad.
-- De LLM zal reageren met een tooloproep naar de Brave Search tool die er als volgt uitziet `<|python_tag|>brave_search.call(query="Stockholm weather")`
+Je kunt ook je eigen aangepaste tools maken die de LLM kan aanroepen. 
 
-*Opmerking: Dit voorbeeld maakt alleen de tooloproep, als je de resultaten wilt krijgen, moet je een gratis account aanmaken op de Brave API-pagina en de functie zelf definiëren*
+In het onderstaande codevoorbeeld: 
+
+- Definiëren we de beschikbare tools (brave_search, wolfram_alpha) in de systeem prompt. 
+- Versturen we een gebruikersprompt die vraagt naar het weer in een bepaalde stad. 
+- Zal de LLM reageren met een toolaanroep naar de Brave Search-tool die er zo uit zal zien `<|python_tag|>brave_search.call(query="Stockholm weather")` 
+
+*Opmerking: Dit voorbeeld maakt alleen de toolaanroep, als je de resultaten wilt krijgen, moet je een gratis account aanmaken op de Brave API-pagina en de functie zelf definiëren.*
 
 ```python 
 import os
@@ -69,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Verkrijg deze van de "Overzicht" pagina van je Microsoft Foundry-project
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -101,15 +96,16 @@ response = client.complete(messages=messages, model=model_name)
 print(response.choices[0].message.content)
 ```
 
-## Llama 3.2
+## Llama 3.2 
 
-Ondanks dat het een LLM is, heeft Llama 3.1 een beperking op het gebied van multimodaliteit. Dat wil zeggen, het kunnen gebruiken van verschillende soorten invoer zoals afbeeldingen als prompts en het geven van antwoorden. Deze mogelijkheid is een van de belangrijkste kenmerken van Llama 3.2. Deze kenmerken omvatten ook:
+Ondanks dat het een LLM is, is een beperking van Llama 3.1 het ontbreken van multimodaliteit. Dat wil zeggen, het onvermogen om verschillende soorten input te gebruiken zoals afbeeldingen als prompts en daarop te antwoorden. Deze mogelijkheid is een van de belangrijkste kenmerken van Llama 3.2. Deze kenmerken omvatten ook: 
 
-- Multimodaliteit - heeft de mogelijkheid om zowel tekst- als afbeeldingsprompts te evalueren
-- Kleine tot middelgrote variaties (11B en 90B) - dit biedt flexibele implementatie-opties,
-- Alleen tekstvariaties (1B en 3B) - dit stelt het model in staat om op rand- / mobiele apparaten te worden ingezet en biedt lage latentie
+- Multimodaliteit - heeft de mogelijkheid om zowel tekst- als afbeeldingsprompts te evalueren 
+- Kleine tot middelgrote varianten (11B en 90B) - dit biedt flexibele inzetopties, 
+- Alleen-tekst varianten (1B en 3B) - hiermee kan het model op edge / mobiele apparaten worden ingezet en biedt het lage latency 
 
-De multimodale ondersteuning vertegenwoordigt een grote stap in de wereld van open source modellen. Het codevoorbeeld hieronder neemt zowel een afbeelding als een tekstprompt om een analyse van de afbeelding te krijgen van Llama 3.2 90B.
+De multimodale ondersteuning vertegenwoordigt een grote stap in de wereld van open source modellen. Het onderstaande codevoorbeeld neemt zowel een afbeelding als tekstprompt om een analyse van de afbeelding te krijgen van Llama 3.2 90B. 
+
 
 ### Multimodale Ondersteuning met Llama 3.2
 
@@ -126,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Haal deze op van de "Overzicht"-pagina van je Microsoft Foundry-project
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -158,9 +155,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## Het leren stopt hier niet, vervolg de Reis
+## Leren stopt hier niet, ga verder op de reis
 
-Na het voltooien van deze les, bekijk onze [Generative AI Learning collectie](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) om je kennis van Generatieve AI verder uit te breiden!
+Na het voltooien van deze les, bekijk onze [Generatieve AI Leercollectie](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) om je kennis van Generatieve AI verder te vergroten!
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we ons best doen voor nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

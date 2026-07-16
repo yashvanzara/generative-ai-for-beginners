@@ -1,83 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77a48a201447be19aa7560706d6f93a0",
-  "translation_date": "2025-05-19T21:35:33+00:00",
-  "source_file": "11-integrating-with-function-calling/README.md",
-  "language_code": "sw"
-}
--->
-# Kujumuisha na kupiga simu kwa kazi
+# Kuingiza pamoja na kupiga simu za kazi
 
-Umejifunza mengi hadi sasa katika masomo yaliyopita. Hata hivyo, tunaweza kuboresha zaidi. Baadhi ya mambo tunayotaka kushughulikia ni jinsi tunavyoweza kupata muundo wa majibu ulio thabiti zaidi ili iwe rahisi kufanya kazi na majibu hayo. Pia, tunaweza kutaka kuongeza data kutoka vyanzo vingine ili kuboresha programu yetu.
+[![Kuingiza pamoja na kupiga simu za kazi](../../../translated_images/sw/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-Masuala yaliyotajwa hapo juu ni yale sura hii inataka kushughulikia.
+Umejifunza mambo mengi hadi sasa katika masomo ya awali. Hata hivyo, tunaweza kuboresha zaidi. Mambo fulani tunayoweza kushughulikia ni jinsi tunavyoweza kupata muundo wa jibu unaoendelea zaidi ili kurahisisha kufanya kazi na jibu hapo baadaye. Pia, tungependa kuongeza data kutoka vyanzo vingine ili kufanya maombi yetu kuwa ya kina zaidi.
+
+Matatizo yaliyojadiliwa hapo juu ndiyo msingi wa sura hii kujaribu kuyatatua.
 
 ## Utangulizi
 
-Somu hili litaangazia:
+Somo hili litajumuisha:
 
-- Eleza nini kinachoitwa kupiga simu kwa kazi na matumizi yake.
-- Kuunda simu ya kazi kutumia Azure OpenAI.
-- Jinsi ya kuunganisha simu ya kazi katika programu.
+- Eleza ni nini kupiga simu za kazi na matumizi yake.
+- Kuunda simu ya kazi kwa kutumia Azure OpenAI.
+- Jinsi ya kuingiza simu ya kazi ndani ya programu.
 
 ## Malengo ya Kujifunza
 
-Mwisho wa somo hili, utaweza:
+Mwishoni mwa somo hili, utaweza:
 
-- Eleza madhumuni ya kutumia kupiga simu kwa kazi.
-- Seti Simu ya Kazi kutumia Huduma ya Azure OpenAI.
-- Buni simu za kazi zinazofaa kwa matumizi ya programu yako.
+- Eleza madhumuni ya kutumia kupiga simu za kazi.
+- Sanidi Simu ya Kazi kwa kutumia Huduma ya Azure OpenAI.
+- Tengeneza simu za kazi madhubuti kwa ajili ya matumizi ya programu yako.
 
-## Muktadha: Kuboresha chatbot yetu na kazi
+## Hali Halisi: Kuboresha chatbot yetu na kazi
 
-Kwa somo hili, tunataka kujenga kipengele kwa kuanza kwetu kwa elimu kinachoruhusu watumiaji kutumia chatbot kutafuta kozi za kiufundi. Tutapendekeza kozi zinazofaa kiwango chao cha ujuzi, jukumu lao la sasa na teknolojia wanayovutiwa nayo.
+Kwa somo hili, tunataka kujenga kipengele kwa ajili ya kampuni yetu ya elimu kinachomruhusu mtumiaji kutumia chatbot kupata kozi za kiufundi. Tutapendekeza kozi zinazofaa kiwango chao cha ujuzi, nafasi ya kazi walizonayo na teknolojia wanayovutiwa nayo.
 
-Kukamilisha muktadha huu, tutatumia mchanganyiko wa:
+Ili kukamilisha hali hii, tutatumia mchanganyiko wa:
 
 - `Azure OpenAI` kuunda uzoefu wa mazungumzo kwa mtumiaji.
-- `Microsoft Learn Catalog API` kusaidia watumiaji kutafuta kozi kulingana na ombi la mtumiaji.
-- `Function Calling` kuchukua swali la mtumiaji na kupeleka kwenye kazi ili kufanya ombi la API.
+- `Microsoft Learn Catalog API` kusaidia watumiaji kupata kozi kulingana na ombi lao.
+- `Function Calling` kuichukua swali la mtumiaji na kuituma kwa function kufanya ombi la API.
 
-Ili kuanza, hebu tuangalie kwa nini tungependa kutumia kupiga simu kwa kazi:
+Ili kuanza, tuchunguze kwa nini tungependa kutumia kupiga simu za kazi kwanza:
 
-## Kwa nini Kupiga Simu kwa Kazi
+## Kwa Nini Kupiga Simu za Kazi
 
-Kabla ya kupiga simu kwa kazi, majibu kutoka LLM hayakuwa na muundo na hayakuwa thabiti. Waendelezaji walihitajika kuandika kanuni ngumu za kuthibitisha ili kuhakikisha wanaweza kushughulikia kila tofauti ya jibu. Watumiaji hawakuweza kupata majibu kama "Hali ya hewa ya sasa huko Stockholm ni ipi?". Hii ni kwa sababu mifano ilikuwa imewekewa kikomo kwa wakati data ilipofunzwa.
+Kabla ya kupiga simu za kazi, majibu kutoka kwa LLM yalikuwa yasiyo na muundo na hayakuwa ya kuaminika. Waendelezaji walilazimika kuandika nambari ngumu za uthibitishaji kuhakikisha wanaweza kushughulikia kila tofauti ya jibu. Watumiaji hawawezi kupata majibu kama "Mna hali gani ya hewa sasa Stockholm?". Hii ni kwa sababu mifano ilikuwa na vikwazo kwa wakati ambayo data ilifundishwa.
 
-Kupiga Simu kwa Kazi ni kipengele cha Huduma ya Azure OpenAI kushinda vikwazo vifuatavyo:
+Kupiga Simu za Kazi ni kipengele cha Huduma ya Azure OpenAI kushinda vikwazo vifuatavyo:
 
-- **Muundo wa majibu thabiti**. Ikiwa tunaweza kudhibiti vyema muundo wa majibu tunaweza kuunganisha majibu hayo kwa urahisi zaidi kwenye mifumo mingine.
-- **Data ya nje**. Uwezo wa kutumia data kutoka vyanzo vingine vya programu katika muktadha wa mazungumzo.
+- **Muundo wa jibu unaoendelea**. Ikiwa tunaweza kudhibiti vizuri muundo wa jibu tunaweza kuunganisha kwa urahisi majibu haya kwa mifumo mingine.
+- **Data ya Nje**. Uwezo wa kutumia data kutoka vyanzo vingine vya programu katika muktadha wa mazungumzo.
 
-## Kuonyesha tatizo kupitia muktadha
+## Kuonyesha tatizo kupitia hali halisi
 
-> Tunapendekeza utumie [notebook iliyojumuishwa](../../../11-integrating-with-function-calling/python/aoai-assignment.ipynb) ikiwa unataka kuendesha muktadha ulio chini. Unaweza pia kusoma tu kama tunavyojaribu kuonyesha tatizo ambapo kazi zinaweza kusaidia kushughulikia tatizo.
+> Tunapendekeza utumie [daftari lililoambatanishwa](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) ikiwa unataka kuendesha hali iliyo chini. Unaweza pia kusoma tu tunapojaribu kuonyesha tatizo ambapo kazi zinaweza kusaidia kutatua tatizo hilo.
 
-Hebu tuangalie mfano unaoonyesha tatizo la muundo wa majibu:
+Tuchunguze mfano unaoonyesha tatizo la muundo wa jibu:
 
-Tuseme tunataka kuunda hifadhidata ya data ya wanafunzi ili tuweze kupendekeza kozi sahihi kwao. Hapo chini tuna maelezo mawili ya wanafunzi ambayo yanafanana sana katika data wanayo.
+Tuseme tunataka kuunda hifadhidata ya data za wanafunzi ili tuweze kupendekeza kozi sahihi kwao. Hapa chini tuna maelezo mawili ya wanafunzi ambayo ni sawa sana kwa data wanayo nayo.
 
 1. Unda muunganisho kwa rasilimali yetu ya Azure OpenAI:
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # API ya Majibu inatolewa kutoka kwenye Azure OpenAI (Microsoft Foundry) v1
+   # mwisho wa njia, hivyo tunamwelekeza mteja wa OpenAI kwa <your-endpoint>/openai/v1/.
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   Hapo chini kuna baadhi ya kanuni za Python za kusanidi muunganisho wetu na Azure OpenAI ambapo tunaset `api_type`, `api_base`, `api_version` and `api_key`.
+   Hapa chini ni baadhi ya nambari za Python za kusanidi muunganisho wetu wa Azure OpenAI. Kwa kuwa tunatumia kiungo cha v1, tunahitaji tu kuweka `api_key` na `base_url` (hapana `api_version` inahitajika).
 
-1. Creating two student descriptions using variables `student_1_description` and `student_2_description`.
+1. Kuunda maelezo mawili ya wanafunzi kwa kutumia vigezo `student_1_description` na `student_2_description`.
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -87,7 +83,7 @@ Tuseme tunataka kuunda hifadhidata ya data ya wanafunzi ili tuweze kupendekeza k
 
    Tunataka kutuma maelezo ya wanafunzi hapo juu kwa LLM ili kuchambua data. Data hii inaweza kutumika baadaye katika programu yetu na kutumwa kwa API au kuhifadhiwa katika hifadhidata.
 
-1. Hebu tuunde maombi mawili yanayofanana ambapo tunamwagiza LLM kuhusu taarifa tunazovutiwa nazo:
+1. Tufanye viamsha sawa viwili ambapo tunaelekeza LLM habari ambazo tunavutiwa nazo:
 
    ```python
    prompt1 = f'''
@@ -117,33 +113,35 @@ Tuseme tunataka kuunda hifadhidata ya data ya wanafunzi ili tuweze kupendekeza k
    '''
    ```
 
-   Maombi hapo juu yanamwagiza LLM kutoa taarifa na kurudisha majibu katika muundo wa JSON.
+   Viamsha hapo juu vinaelekeza LLM kutoa taarifa na kurudisha majibu kwa muundo wa JSON.
 
-1. Baada ya kusanidi maombi na muunganisho na Azure OpenAI, sasa tutatuma maombi kwa LLM kwa kutumia `openai.ChatCompletion`. We store the prompt in the `messages` variable and assign the role to `user`. Hii ni kuiga ujumbe kutoka kwa mtumiaji unaoandikwa kwa chatbot.
+1. Baada ya kuandaa viamsha na muunganisho kwa Azure OpenAI, sasa tutatuma viamsha kwa LLM kwa kutumia `client.responses.create`. Tunahifadhi kiamsha kwa `input` na kuteua jukumu `user`. Hii ni kuiga ujumbe kutoka kwa mtumiaji unaoandikwa kwenye chatbot.
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # jibu kutoka kwa amri ya kwanza
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # jibu kutoka kwa amri ya pili
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-Sasa tunaweza kutuma maombi yote mawili kwa LLM na kuchunguza majibu tunayopokea kwa kuyapata kama `openai_response1['choices'][0]['message']['content']`.
+Sasa tunaweza kutuma maombi yote mawili kwa LLM na kuchunguza jibu tunalopokea kwa kuutafuta kwa njia hii `openai_response1.output_text`.
 
-1. Lastly, we can convert the response to JSON format by calling `json.loads`:
+1. Mwishowe, tunaweza kubadilisha jibu kuwa muundo wa JSON kwa kutumia `json.loads`:
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # Kupakia majibu kama kitu cha JSON
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
@@ -171,59 +169,60 @@ Sasa tunaweza kutuma maombi yote mawili kwa LLM na kuchunguza majibu tunayopokea
    }
    ```
 
-   Ingawa maombi ni sawa na maelezo yanafanana, tunaona thamani za `Grades` property formatted differently, as we can sometimes get the format `3.7` or `3.7 GPA` for example.
+   Ingawa viamsha ni sawa na maelezo ni fanane, tunaona thamani za mali ya `Grades` zimetengenezwa katika mitindo tofauti, kama vile mara nyingine tunaweza kupata muundo `3.7` au `3.7 GPA` kwa mfano.
 
-   This result is because the LLM takes unstructured data in the form of the written prompt and returns also unstructured data. We need to have a structured format so that we know what to expect when storing or using this data
+   Matokeo haya ni kwa sababu LLM inachukua data isiyo na muundo katika muundo wa kiamsha kilichoandikwa na kurudisha pia data isiyo na muundo. Tunahitaji kuwa na muundo uliopangwa ili tujue nini cha kutarajia tunapohifadhi au kutumia data hii
 
-So how do we solve the formatting problem then? By using functional calling, we can make sure that we receive structured data back. When using function calling, the LLM does not actually call or run any functions. Instead, we create a structure for the LLM to follow for its responses. We then use those structured responses to know what function to run in our applications.
+Basi tunatatuaje tatizo la muundo? Kwa kutumia kupiga simu za kazi, tunaweza kuhakikisha tunarudisha data yenye muundo. Tunapotumia kupiga simu za kazi, LLM haipigi au kuendesha kazi yoyote. Badala yake, tunaunda muundo wa LLM kufuata kwa majibu yake. Kisha tunatumia majibu yaliyopangwa yale kujua ni kazi gani itakayotekelezwa katika programu zetu.
 
-![function flow](../../../translated_images/Function-Flow.01a723a374f79e5856d9915c39e16c59fa2a00c113698b22a28e616224f407e1.sw.png)
+![mtiririko wa kazi](../../../translated_images/sw/Function-Flow.083875364af4f4bb.webp)
 
-We can then take what is returned from the function and send this back to the LLM. The LLM will then respond using natural language to answer the user's query.
+Kisha tunaweza kuchukua kile kinachorudiwa kutoka kwa kazi na kurudisha hii kwenye LLM. LLM itajibu kwa kutumia lugha ya kawaida kujibu swali la mtumiaji.
 
-## Use Cases for using function calls
+## Matumizi ya Kupiga Simu za Kazi
 
-There are many different use cases where function calls can improve your app like:
+Kuna matumizi mengi tofauti ambapo kupiga simu za kazi kunaweza kuboresha programu yako kama vile:
 
-- **Calling External Tools**. Chatbots are great at providing answers to questions from users. By using function calling, the chatbots can use messages from users to complete certain tasks. For example, a student can ask the chatbot to "Send an email to my instructor saying I need more assistance with this subject". This can make a function call to `send_email(to: string, body: string)`
+- **Kupigia Simu Vifaa vya Nje**. Chatbot ni nzuri kutoa majibu kwa maswali kutoka kwa watumiaji. Kwa kutumia kupiga simu za kazi, chatbot zinaweza kutumia ujumbe kutoka kwa watumiaji kumaliza kazi fulani. Kwa mfano, mwanafunzi anaweza kumuomba chatbot "Tuma barua pepe kwa mwalimu wangu nikisema ninahitaji msaada zaidi kwa somo hili". Hii inaweza kufanya simu kwa kazi `send_email(to: string, body: string)`
 
-- **Create API or Database Queries**. Users can find information using natural language that gets converted into a formatted query or API request. An example of this could be a teacher who requests "Who are the students that completed the last assignment" which could call a function named `get_completed(student_name: string, assignment: int, current_status: string)`
+- **Kuunda Maswali ya API au Hifadhidata**. Watumiaji wanaweza kupata taarifa kwa kutumia lugha ya kawaida ambayo hubadilishwa kuwa swali lililopangwa au ombi la API. Mfano wa hili ni mwalimu anayeuliza "Ni nani wanafunzi waliomaliza kazi ya mwisho" ambayo inaweza kupiga simu kwa kazi inayoitwa `get_completed(student_name: string, assignment: int, current_status: string)`
 
-- **Creating Structured Data**. Users can take a block of text or CSV and use the LLM to extract important information from it. For example, a student can convert a Wikipedia article about peace agreements to create AI flashcards. This can be done by using a function called `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
+- **Kuunda Data Yenye Muundo**. Watumiaji wanaweza kuchukua kipande cha maandishi au CSV na kutumia LLM kutoa taarifa muhimu kutoka kwake. Kwa mfano, mwanafunzi anaweza kubadilisha makala ya Wikipedia kuhusu makubaliano ya amani kuunda kadi za kumbukumbu za AI. Hii inaweza kufanyika kwa kutumia kazi inayoitwa `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
 
-## Creating Your First Function Call
+## Kuunda Simu Yako ya Kwanza ya Kazi
 
-The process of creating a function call includes 3 main steps:
+Mchakato wa kuunda simu ya kazi unajumuisha hatua kuu 3:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. **Kupiga simu** kwa API ya Majibu na orodha ya kazi zako (zana) na ujumbe wa mtumiaji.
+2. **Kusoma** jibu la mfano kufanya kitendo mfano kuendesha kazi au simu ya API.
+3. **Kufanya** simu nyingine kwa API ya Majibu na jibu kutoka kwa kazi yako kutumia taarifa hiyo kuunda jibu kwa mtumiaji.
 
-![LLM Flow](../../../translated_images/LLM-Flow.7df9f166be50aa324705f2ccddc04a27cfc7b87e57b1fbe65eb534059a3b8b66.sw.png)
+![Mtiririko wa LLM](../../../translated_images/sw/LLM-Flow.3285ed8caf4796d7.webp)
 
-### Step 1 - creating messages
+### Hatua ya 1 - kuunda ujumbe
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+Hatua ya kwanza ni kuunda ujumbe wa mtumiaji. Huu unaweza kupewa thamani kwa njia ya mtiririko kwa kuchukua thamani ya kiingilio cha maandishi au unaweza kupatia thamani hapa. Ikiwa hii ni mara yako ya kwanza kutumia API ya Majibu, tunahitaji kufafanua `role` na `content` ya ujumbe.
 
-The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` na swali la mfano.
+`role` inaweza kuwa `system` (kuunda sheria), `assistant` (mfano) au `user` (mtumiaji wa mwisho). Kwa kupiga simu za kazi, tutateua hii kama `user` na swali la mfano.
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Kwa kugawa majukumu tofauti, inakuwa wazi kwa LLM ikiwa ni mfumo unaosema kitu au mtumiaji, ambayo husaidia kujenga historia ya mazungumzo ambayo LLM inaweza kujenga juu yake.
+Kwa kuteua majukumu tofauti, inafanya iwe wazi kwa LLM kama ni mfumo unasema kitu au mtumiaji, ambacho husaidia kujenga historia ya mazungumzo ambayo LLM inaweza kujenga juu yake.
 
 ### Hatua ya 2 - kuunda kazi
 
-Ifuatayo, tutafafanua kazi na vigezo vya kazi hiyo. Tutatumia kazi moja tu hapa inayoitwa `search_courses` but you can create multiple functions.
+Ifuatayo, tutaeleza kazi na vigezo vya kazi hiyo. Tutatumia kazi moja hapa inayoitwa `search_courses` lakini unaweza kuunda kazi nyingi.
 
-> **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
+> **Muhimu** : Kazi zinajumuishwa katika ujumbe wa mfumo kwa LLM na zitahesabiwa katika tokes zinazopatikana.
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters`:
+Hapa chini, tunaunda kazi kama safu ya vitu. Kila kipengee ni zana katika muundo wa API ya Majibu ulio wima, na mali `type`, `name`, `description` na `parameters`:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -250,75 +249,76 @@ functions = [
 ]
 ```
 
-Hebu tueleze kila tukio la kazi kwa undani zaidi hapa chini:
+Tueleze kila mfano wa kazi kwa undani zaidi hapa chini:
 
-- `name` - The name of the function that we want to have called.
-- `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
-  1.  `type` - The data type of the properties will be stored in.
-  1.  `properties` - List of the specific values that the model will use for its response
-      1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
-      1. `type` - The data type of this property, for example, `string`.
-      1. `description` - Description of the specific property.
+- `name` - Jina la kazi tunayotaka iitwe.
+- `description` - Huu ni maelezo ya jinsi kazi inavyofanya kazi. Hapa ni muhimu kuwa maalum na wazi.
+- `parameters` - Orodha ya thamani na muundo unaotaka mfano utengeneze katika jibu lake. Safu ya vigezo ina vitu ambapo vitu vina mali zifuatazo:
+  1.  `type` - Aina ya data ambapo mali zitahifadhiwa.
+  1.  `properties` - Orodha ya thamani maalum ambazo mfano atatumia kwa jibu lake
+      1. `name` - Funguo ni jina la mali ambayo mfano atatumia katika jibu lake lililotengenezwa, kwa mfano, `product`.
+      1. `type` - Aina ya data ya mali hii, kwa mfano, `string`.
+      1. `description` - Maelezo ya mali hiyo maalum.
 
-There's also an optional property `required` - required property for the function call to be completed.
+Pia kuna mali chaguo `required` - mali inayohitajika kwa simu ya kazi kukamilika.
 
-### Step 3 - Making the function call
+### Hatua ya 3 - Kufanya simu ya kazi
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+Baada ya kufafanua kazi, sasa tunahitaji kuingiza kwa simu ya API ya Majibu. Tunafanya hivi kwa kuongeza `tools` kwenye ombi. Katika kesi hii `tools=functions`.
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+Pia kuna chaguo la kuweka `tool_choice` kuwa `auto`. Hii ina maana tutamruhusu LLM kuchagua ni kazi gani iitwe kulingana na ujumbe wa mtumiaji badala ya kuitoa sisi wenyewe.
 
-Here's some code below where we call `ChatCompletion.create`, note how we set `functions=functions` and `function_call="auto"` na hivyo kumpa LLM chaguo wakati wa kupiga simu kazi tunazompa:
+Hapa chini ni nambari ambapo tunaita `client.responses.create`, angalia jinsi tunavyoweka `tools=functions` na `tool_choice="auto"` na hivyo kuipa LLM haki ya kuchagua lini kupiga simu za kazi tunazompatia:
 
 ```python
-response = client.chat.completions.create(model=deployment,
-                                        messages=messages,
-                                        functions=functions,
-                                        function_call="auto")
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-print(response.choices[0].message)
+print(response.output)
 ```
 
-Majibu yanayorudi sasa yanaonekana kama hivi:
+Jibu linarudi sasa linajumuisha kipengee cha `function_call` katika `response.output` kinavyoonekana hivi:
 
 ```json
 {
-  "role": "assistant",
-  "function_call": {
-    "name": "search_courses",
-    "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
-  }
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
 }
 ```
 
-Hapa tunaweza kuona jinsi kazi `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+Hapa tunaweza kuona jinsi kazi `search_courses` ilivyopigiwa simu na kwa hoja gani, kama zilivyoorodheshwa katika mali `arguments` katika jibu la JSON.
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` thamani:
+Hitimisho ni kwamba LLM iliweza kupata data za kufaa kwa hoja za kazi hiyo kama ilivyotumia thamani iliyotolewa kwa parameta ya `input` katika simu ya API ya Majibu. Hapa chini ni ukumbusho wa thamani za `messages`:
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Kama unavyoona, `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+Kama unavyoona, `student`, `Azure` na `beginner` zilichukuliwa kutoka `messages` na kuwekwa kama ingizo kwa kazi. Kutumia kazi kwa njia hii ni njia nzuri ya kutoa taarifa kutoka kwa kiamsha lakini pia kutoa muundo kwa LLM na kuwa na utendaji unaoweza kutumika tena.
 
-Next, we need to see how we can use this in our app.
+Ifuatayo, tunahitaji kuona jinsi tunavyoweza kutumia hii katika programu yetu.
 
-## Integrating Function Calls into an Application
+## Kuingiza Piga Simu za Kazi ndani ya Programu
 
-After we have tested the formatted response from the LLM, we can now integrate this into an application.
+Baada ya kushiriki jibu lililopangwa kutoka kwa LLM, sasa tunaweza kuingiza hii ndani ya programu.
 
-### Managing the flow
+### Kusimamia mtiririko
 
-To integrate this into our application, let's take the following steps:
+Ili kuingiza hii ndani ya programu yetu, chukua hatua zifuatazo:
 
-1. First, let's make the call to the OpenAI services and store the message in a variable called `response_message`.
+1. Kwanza, fanya simu kwa huduma za OpenAI na toa vipengee vya simu za kazi kutoka kwa jibu `output`.
 
    ```python
-   response_message = response.choices[0].message
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
    ```
 
-1. Sasa tutafafanua kazi itakayopiga simu kwa Microsoft Learn API kupata orodha ya kozi:
+1. Sasa tutaeleza kazi itakayopiga API ya Microsoft Learn kupata orodha ya kozi:
 
    ```python
    import requests
@@ -340,65 +340,57 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   Angalia jinsi tunavyounda kazi halisi ya Python inayolingana na majina ya kazi yaliyotambulishwa katika `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   Angalia jinsi tunavyounda kazi halisi ya Python inayofanana na majina ya kazi yaliyoainishwa katika `functions`. Pia tunafanya simu halisi za API za nje kupata data tunayohitaji. Katika kesi hii, tunapiga API ya Microsoft Learn kutafuta moduli za mafunzo.
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+Sawa, tumeunda vigezo `functions` na kazi inayolingana ya Python, tunasemaje kwa LLM jinsi ya kuunganisha hizi mbili ili kazi yetu ya Python ipigwe simu?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call` ni sehemu yake na kupiga simu kazi iliyotajwa. Hivi ndivyo unavyoweza kufanya ukaguzi ulioonyeshwa hapa chini:
+1. Ili kuona ikiwa tunahitaji kupiga simu ya kazi ya Python, tunahitaji kuchunguza jibu la LLM kuona kama kuna kipengee cha `function_call` na kupiga kazi iliyotajwa. Hapa chini ni jinsi unavyoweza kufanya ukaguzi huo:
 
    ```python
-   # Check if the model wants to call a function
-   if response_message.function_call.name:
-    print("Recommended Function call:")
-    print(response_message.function_call.name)
-    print()
+   # Angalia ikiwa mfano unataka kuita kazi
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
 
-    # Call the function.
-    function_name = response_message.function_call.name
+     # Ita kazi.
+     function_name = tool_call.name
 
-    available_functions = {
-            "search_courses": search_courses,
-    }
-    function_to_call = available_functions[function_name]
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
 
-    function_args = json.loads(response_message.function_call.arguments)
-    function_response = function_to_call(**function_args)
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
-    print(function_response)
-    print(type(function_response))
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
 
-
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
-        {
-            "role": response_message.role,
-            "function_call": {
-                "name": function_name,
-                "arguments": response_message.function_call.arguments,
-            },
-            "content": None
-        }
-    )
-    messages.append( # adding function response to messages
-        {
-            "role": "function",
-            "name": function_name,
-            "content":function_response,
-        }
-    )
+     # Ongeza wito wa kazi na matokeo yake tena kwenye mazungumzo.
+     # Kipengee cha function_call cha mfano kinapaswa kuongezwa kabla ya matokeo yake.
+     messages.append(tool_call)  # kipengee cha function_call cha msaidizi
+     messages.append( # matokeo ya kazi
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
    ```
 
-   Mistari hii mitatu, inahakikisha tunatoa jina la kazi, hoja na kupiga simu:
+   Mistari hii mitatu, inahakikisha tunaondoa jina la kazi, hoja na kufanya simu:
 
    ```python
    function_to_call = available_functions[function_name]
 
-   function_args = json.loads(response_message.function_call.arguments)
+   function_args = json.loads(tool_call.arguments)
    function_response = function_to_call(**function_args)
    ```
 
-   Hapo chini ni matokeo kutoka kuendesha kanuni yetu:
+   Hapa chini ni matokeo ya kuendesha nambari yetu:
 
    **Matokeo**
 
@@ -419,50 +411,60 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. Sasa tutatuma ujumbe uliosasishwa, `messages` kwa LLM ili tuweze kupokea majibu ya lugha asili badala ya majibu ya muundo wa API JSON.
+1. Sasa tutatuma ujumbe ulio sasishwa, `messages` kwa LLM ili tupate jibu kwa lugha ya kawaida badala ya jibu la API lililopangwa JSON.
 
    ```python
    print("Messages in next request:")
    print(messages)
    print()
 
-   second_response = client.chat.completions.create(
-      messages=messages,
+   second_response = client.responses.create(
+      input=messages,
       model=deployment,
-      function_call="auto",
-      functions=functions,
-      temperature=0
-         )  # get a new response from GPT where it can see the function response
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # pata jibu jipya kutoka kwa mfano ambapo unaweza kuona jibu la kazi
 
 
-   print(second_response.choices[0].message)
+   print(second_response.output_text)
    ```
 
    **Matokeo**
 
-   ```python
-   {
-     "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
-   }
+   ```text
+   I found some good courses for beginner students to learn Azure:
 
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
    ```
 
-## Kazi
+## Kufanya Zoezi
 
-Ili kuendelea kujifunza Kupiga Simu kwa Kazi ya Azure OpenAI unaweza kujenga:
+Ili kuendelea na kujifunza kwa Kupiga Simu za Kazi za Azure OpenAI unaweza kujenga:
 
 - Vigezo zaidi vya kazi ambavyo vinaweza kusaidia wanafunzi kupata kozi zaidi.
-- Unda simu nyingine ya kazi inayochukua taarifa zaidi kutoka kwa mwanafunzi kama lugha yao ya asili
-- Unda utunzaji wa makosa wakati simu ya kazi na/au simu ya API hairudishi kozi zinazofaa
 
-Kidokezo: Fuata ukurasa wa [Learn API reference documentation](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) ili kuona jinsi na wapi data hii inapatikana.
+- Tengeneza wito mwingine wa kazi unaochukua habari zaidi kutoka kwa mwanafunzi kama lugha yao ya asili
+- Tengeneza usimamizi wa makosa wakati wito wa kazi na/au wito wa API hauzurudishi kozi zinazofaa
 
-## Kazi Nzuri! Endelea na Safari
+Vidokezo: Fuata ukurasa wa [Learn API reference documentation](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) kuona jinsi na wapi data hii inapatikana.
 
-Baada ya kukamilisha somo hili, angalia mkusanyiko wetu wa [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ili kuendelea kuongeza maarifa yako ya Generative AI!
+## Kazi Kuu! Endelea Safari
 
-Nenda kwenye Somo la 12, ambapo tutatazama jinsi ya [kubuni UX kwa programu za AI](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Baada ya kumaliza somo hili, angalia [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) yetu kuendelea kuongeza ujuzi wako wa Generative AI!
 
-**Kanusho**: 
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asili katika lugha yake ya asili inapaswa kuchukuliwa kuwa chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutoelewana au kutafsiri vibaya kunakotokana na matumizi ya tafsiri hii.
+Nenda kwenye Somo la 12, ambapo tutaangalia jinsi ya [kubuni UX kwa programu za AI](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

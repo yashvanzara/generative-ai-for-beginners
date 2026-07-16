@@ -1,19 +1,10 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b918f72764505b503a4c2889a438b8d7",
-  "translation_date": "2025-05-20T11:17:36+00:00",
-  "source_file": "docs/_navbar.md",
-  "language_code": "en"
-}
--->
 * Select Language
 
     * [English](../../../../../../..)
-    * [Simplified Chinese](../../../../../../../translations/cn)
+    * [Simplified Chinese](../../../../../../../translations/zh)
     * [Traditional Chinese](../../../../../../../translations/tw)
-    * [Portuguese](../../../../../../../translations/pt-br)
-    * [Japanese](../../../../../../../translations/ja-jp)
+    * [Portuguese](../../../../../../../translations/pt)
+    * [Japanese](../../../../../../../translations/ja)
     * [Korean](../../../../../../../translations/ko)
 
 **Disclaimer**:  

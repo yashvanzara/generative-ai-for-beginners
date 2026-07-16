@@ -1,71 +1,62 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "11f03c81f190d9cbafd0f977dcbede6c",
-  "translation_date": "2025-05-20T07:27:54+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "vi"
-}
--->
-[![Open Source Models](../../../translated_images/17-lesson-banner.85938ffe06e157e1dfc9ae2fcf0de326892e71c463f62b397291ad54bd8e9602.vi.png)](https://aka.ms/gen-ai-lesson17-gh?WT.mc_id=academic-105485-koreyst)
+[![Open Source Models](../../../translated_images/vi/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## Giới thiệu
 
-Các tác nhân AI đại diện cho một phát triển thú vị trong Generative AI, cho phép các Mô hình Ngôn ngữ Lớn (LLMs) tiến hóa từ trợ lý thành các tác nhân có khả năng thực hiện hành động. Các khung tác nhân AI cho phép nhà phát triển tạo ra ứng dụng cung cấp cho LLMs quyền truy cập vào công cụ và quản lý trạng thái. Những khung này cũng cải thiện khả năng hiển thị, cho phép người dùng và nhà phát triển theo dõi các hành động được LLMs lên kế hoạch, từ đó cải thiện quản lý trải nghiệm.
+AI Agents đại diện cho một bước phát triển thú vị trong Generative AI, cho phép Các Mô Hình Ngôn Ngữ Lớn (LLMs) tiến hóa từ trợ lý thành các đại lý có khả năng thực hiện các hành động. Các khung AI Agent cho phép các nhà phát triển tạo ra ứng dụng mà LLMs có thể truy cập các công cụ và quản lý trạng thái. Các khung này cũng nâng cao khả năng hiển thị, cho phép người dùng và nhà phát triển giám sát các hành động được LLMs lên kế hoạch, từ đó cải thiện quản lý trải nghiệm.
 
 Bài học sẽ bao gồm các lĩnh vực sau:
 
-- Hiểu rõ tác nhân AI là gì - Chính xác thì tác nhân AI là gì?
-- Khám phá bốn khung tác nhân AI khác nhau - Điều gì làm cho chúng độc đáo?
-- Áp dụng những tác nhân AI này vào các trường hợp sử dụng khác nhau - Khi nào nên sử dụng tác nhân AI?
+- Hiểu AI Agent là gì - AI Agent thực sự là gì?
+- Khám phá năm khung AI Agent khác nhau - Điều gì làm chúng trở nên độc đáo?
+- Áp dụng các AI Agent này vào các trường hợp sử dụng khác nhau - Khi nào chúng ta nên dùng AI Agents?
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành bài học này, bạn sẽ có thể:
 
-- Giải thích tác nhân AI là gì và cách chúng có thể được sử dụng.
-- Hiểu sự khác biệt giữa một số khung tác nhân AI phổ biến và cách chúng khác nhau.
-- Hiểu cách tác nhân AI hoạt động để xây dựng ứng dụng với chúng.
+- Giải thích AI Agents là gì và cách chúng có thể được sử dụng.
+- Hiểu được sự khác biệt giữa một số Khung AI Agent phổ biến và cách chúng khác nhau.
+- Hiểu cách AI Agents hoạt động để xây dựng ứng dụng với chúng.
 
-## Tác nhân AI là gì?
+## AI Agents là gì?
 
-Tác nhân AI là một lĩnh vực rất thú vị trong thế giới Generative AI. Với sự hứng thú này đôi khi có sự nhầm lẫn về thuật ngữ và ứng dụng của chúng. Để giữ mọi thứ đơn giản và bao gồm hầu hết các công cụ liên quan đến tác nhân AI, chúng ta sẽ sử dụng định nghĩa này:
+AI Agents là một lĩnh vực rất thú vị trong thế giới Generative AI. Cùng với sự hứng khởi này đôi khi cũng có sự nhầm lẫn về thuật ngữ và ứng dụng của chúng. Để giữ mọi thứ đơn giản và bao quát các công cụ thường gọi là AI Agents, chúng ta sẽ sử dụng định nghĩa sau:
 
-Tác nhân AI cho phép các Mô hình Ngôn ngữ Lớn (LLMs) thực hiện nhiệm vụ bằng cách cung cấp cho chúng quyền truy cập vào một **trạng thái** và **công cụ**.
+AI Agents cho phép Các Mô Hình Ngôn Ngữ Lớn (LLMs) thực hiện nhiệm vụ bằng cách cung cấp cho chúng truy cập tới **trạng thái** và **công cụ**.
 
-![Agent Model](../../../translated_images/what-agent.61a7315e4b722e06561f6c93e682a51357308b53884f00af289b5a81e3e65242.vi.png)
+![Agent Model](../../../translated_images/vi/what-agent.21f2893bdfd01e6a.webp)
 
-Hãy định nghĩa những thuật ngữ này:
+Hãy định nghĩa các thuật ngữ này:
 
-**Mô hình Ngôn ngữ Lớn** - Đây là các mô hình được đề cập trong suốt khóa học này như GPT-3.5, GPT-4, Llama-2, v.v.
+**Large Language Models** - Đây là các mô hình được nhắc đến trong suốt khóa học này như GPT-3.5, GPT-4, Llama-2, v.v.
 
-**Trạng thái** - Điều này đề cập đến ngữ cảnh mà LLM đang làm việc trong. LLM sử dụng ngữ cảnh của các hành động trước đó và ngữ cảnh hiện tại, hướng dẫn quyết định của nó cho các hành động tiếp theo. Các khung tác nhân AI cho phép nhà phát triển duy trì ngữ cảnh này dễ dàng hơn.
+**Trạng thái** - Đây là ngữ cảnh mà LLM đang hoạt động. LLM sử dụng ngữ cảnh của các hành động trước đó và ngữ cảnh hiện tại để định hướng quyết định cho các hành động tiếp theo. Các khung AI Agent giúp nhà phát triển duy trì ngữ cảnh này dễ dàng hơn.
 
-**Công cụ** - Để hoàn thành nhiệm vụ mà người dùng đã yêu cầu và LLM đã lên kế hoạch, LLM cần quyền truy cập vào công cụ. Một số ví dụ về công cụ có thể là cơ sở dữ liệu, API, ứng dụng bên ngoài hoặc thậm chí là một LLM khác!
+**Công cụ** - Để hoàn thành nhiệm vụ người dùng yêu cầu và LLM đã lên kế hoạch, LLM cần truy cập vào các công cụ. Một số ví dụ về công cụ có thể là cơ sở dữ liệu, API, ứng dụng bên ngoài hoặc thậm chí một LLM khác!
 
-Những định nghĩa này hy vọng sẽ giúp bạn có nền tảng tốt khi chúng ta xem xét cách chúng được triển khai. Hãy khám phá một vài khung tác nhân AI khác nhau:
+Những định nghĩa này hy vọng sẽ giúp bạn hiểu rõ hơn khi chúng ta xem cách các thuật ngữ đó được triển khai. Hãy khám phá một vài khung AI Agent khác nhau:
 
 ## LangChain Agents
 
-[LangChain Agents](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) là một triển khai của các định nghĩa chúng ta đã cung cấp ở trên.
+[LangChain Agents](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) là một hiện thực của các định nghĩa mà chúng ta đã đưa ra ở trên.
 
-Để quản lý **trạng thái**, nó sử dụng một hàm tích hợp gọi là `AgentExecutor`. Hàm này chấp nhận `agent` đã định nghĩa và `tools` có sẵn cho nó.
+Để quản lý **trạng thái**, nó sử dụng một chức năng tích hợp gọi là `AgentExecutor`. Chức năng này nhận vào `agent` đã được định nghĩa cùng với các `tools` có sẵn cho nó.
 
-`Agent Executor` cũng lưu trữ lịch sử trò chuyện để cung cấp ngữ cảnh của cuộc trò chuyện.
+`AgentExecutor` cũng lưu trữ lịch sử cuộc trò chuyện để cung cấp ngữ cảnh cho cuộc hội thoại.
 
-![Langchain Agents](../../../translated_images/langchain-agents.4709b559c14be8903a59abf4ebef43916a23fac43924b133a7552121ff5e6730.vi.png)
+![Langchain Agents](../../../translated_images/vi/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChain cung cấp một [danh mục công cụ](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) có thể được nhập vào ứng dụng của bạn mà LLM có thể truy cập. Những công cụ này được tạo ra bởi cộng đồng và đội ngũ LangChain.
 
-Bạn có thể định nghĩa những công cụ này và chuyển chúng cho `Agent Executor`.
+Bạn có thể định nghĩa các công cụ này và truyền chúng vào `AgentExecutor`.
 
-Khả năng hiển thị là một khía cạnh quan trọng khác khi nói về tác nhân AI. Điều quan trọng đối với nhà phát triển ứng dụng là hiểu công cụ nào LLM đang sử dụng và lý do. Để làm điều đó, đội ngũ tại LangChain đã phát triển LangSmith.
+Khả năng hiển thị là một khía cạnh quan trọng khác khi nói về AI Agents. Điều quan trọng là các nhà phát triển ứng dụng hiểu công cụ nào LLM đang sử dụng và lý do vì sao. Vì vậy, nhóm LangChain đã phát triển LangSmith.
 
 ## AutoGen
 
-Khung tác nhân AI tiếp theo chúng ta sẽ thảo luận là [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). Trọng tâm chính của AutoGen là các cuộc trò chuyện. Các tác nhân đều **có khả năng trò chuyện** và **có thể tùy chỉnh**.
+Khung AI Agent tiếp theo mà chúng ta sẽ thảo luận là [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). Trọng tâm chính của AutoGen là các cuộc hội thoại. Các Agent vừa **có thể trò chuyện** vừa **tuỳ chỉnh được**.
 
-**Có khả năng trò chuyện -** LLMs có thể bắt đầu và tiếp tục cuộc trò chuyện với một LLM khác để hoàn thành nhiệm vụ. Điều này được thực hiện bằng cách tạo `AssistantAgents` và cung cấp cho chúng một thông điệp hệ thống cụ thể.
+**Có thể trò chuyện -** LLMs có thể bắt đầu và tiếp tục cuộc trò chuyện với một LLM khác để hoàn thành nhiệm vụ. Điều này được thực hiện bằng cách tạo các `AssistantAgents` và cung cấp cho chúng một tin nhắn hệ thống cụ thể.
 
 ```python
 
@@ -73,7 +64,7 @@ autogen.AssistantAgent( name="Coder", llm_config=llm_config, ) pm = autogen.Assi
 
 ```
 
-**Có thể tùy chỉnh** - Các tác nhân có thể được định nghĩa không chỉ là LLMs mà còn là người dùng hoặc công cụ. Là một nhà phát triển, bạn có thể định nghĩa `UserProxyAgent` chịu trách nhiệm tương tác với người dùng để lấy phản hồi trong việc hoàn thành nhiệm vụ. Phản hồi này có thể tiếp tục thực hiện nhiệm vụ hoặc dừng lại.
+**Tuỳ chỉnh** - Các agent không chỉ có thể được định nghĩa là LLM mà còn có thể là người dùng hoặc công cụ. Là nhà phát triển, bạn có thể định nghĩa `UserProxyAgent` chịu trách nhiệm tương tác với người dùng để nhận phản hồi trong việc hoàn thành nhiệm vụ. Phản hồi này có thể tiếp tục thực hiện nhiệm vụ hoặc dừng lại.
 
 ```python
 user_proxy = UserProxyAgent(name="user_proxy")
@@ -81,30 +72,30 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 ### Trạng thái và Công cụ
 
-Để thay đổi và quản lý trạng thái, một tác nhân trợ lý tạo mã Python để hoàn thành nhiệm vụ.
+Để thay đổi và quản lý trạng thái, một trợ lý Agent tạo ra mã Python để hoàn thành nhiệm vụ.
 
-Dưới đây là một ví dụ về quy trình:
+Đây là một ví dụ của quá trình:
 
-![AutoGen](../../../translated_images/autogen.8ac57409019150ec5a17c6381a92863116b19acce02604b4bf5681225dee62eb.vi.png)
+![AutoGen](../../../translated_images/vi/autogen.dee9a25a45fde584.webp)
 
-#### LLM Được Định Nghĩa với Thông Điệp Hệ Thống
+#### LLM được định nghĩa với tin nhắn hệ thống
 
 ```python
 system_message="For weather related tasks, only use the functions you have been provided with. Reply TERMINATE when the task is done."
 ```
 
-Thông điệp hệ thống này hướng dẫn LLM cụ thể này đến những chức năng nào có liên quan đến nhiệm vụ của nó. Hãy nhớ rằng, với AutoGen, bạn có thể có nhiều AssistantAgents được định nghĩa với các thông điệp hệ thống khác nhau.
+Tin nhắn hệ thống này hướng dẫn LLM cụ thể này về các chức năng liên quan đến nhiệm vụ của nó. Hãy nhớ rằng, với AutoGen bạn có thể có nhiều AssistantAgents được định nghĩa với các tin nhắn hệ thống khác nhau.
 
-#### Cuộc Trò Chuyện Được Khởi Tạo Bởi Người Dùng
+#### Cuộc trò chuyện được bắt đầu bởi người dùng
 
 ```python
 user_proxy.initiate_chat( chatbot, message="I am planning a trip to NYC next week, can you help me pick out what to wear? ", )
 
 ```
 
-Thông điệp từ user_proxy (Con người) là điều sẽ bắt đầu quá trình của Tác nhân để khám phá các chức năng có thể mà nó nên thực hiện.
+Tin nhắn này từ user_proxy (con người) chính là thứ sẽ khởi đầu quá trình của Agent để khám phá các chức năng có thể cần thực thi.
 
-#### Chức Năng Được Thực Thi
+#### Chức năng được thực thi
 
 ```bash
 chatbot (to user_proxy):
@@ -115,59 +106,145 @@ chatbot (to user_proxy):
 
 ```
 
-Khi cuộc trò chuyện ban đầu được xử lý, Tác nhân sẽ gửi công cụ gợi ý để gọi. Trong trường hợp này, đó là một chức năng gọi là `get_weather`. Depending on your configuration, this function can be automatically executed and read by the Agent or can be executed based on user input.
+Sau khi cuộc trò chuyện ban đầu được xử lý, Agent sẽ gửi công cụ được đề xuất để gọi. Trong trường hợp này là một chức năng gọi là `get_weather`. Tùy thuộc vào cấu hình của bạn, chức năng này có thể được tự động thực thi và đọc bởi Agent hoặc được thực thi dựa trên đầu vào của người dùng.
 
-You can find a list of [AutoGen code samples](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) to further explore how to get started building.
+Bạn có thể tìm danh sách [mẫu mã AutoGen](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) để khám phá thêm cách bắt đầu xây dựng.
+
+## Microsoft Agent Framework
+
+[Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst) là SDK mã nguồn mở của Microsoft để xây dựng AI Agents và các hệ thống đa agent trong cả **Python** và **.NET**. Nó kết hợp sức mạnh của hai dự án trước đó của Microsoft — các tính năng doanh nghiệp của **Semantic Kernel** và sự điều phối đa agent của **AutoGen** — vào một khung hỗ trợ duy nhất. Nếu bạn bắt đầu một dự án agent mới ngày hôm nay, đây là sự kế thừa được khuyên dùng của AutoGen.
+
+Khung này mở rộng từ một **chat agent** đơn lẻ cho đến các **quy trình làm việc đa agent** phức tạp, và tích hợp trực tiếp với Microsoft Foundry, Azure OpenAI, và OpenAI. Nó cũng cung cấp khả năng quan sát tích hợp qua OpenTelemetry để bạn có thể theo dõi chính xác những gì các agent của bạn đang làm.
+
+### Trạng thái và Công cụ
+
+**Trạng thái** - Khung làm việc quản lý ngữ cảnh cuộc trò chuyện cho bạn thông qua **luồng**. Một agent giữ lịch sử tin nhắn (yêu cầu người dùng, các cuộc gọi công cụ, và kết quả của chúng), vì vậy mỗi lượt tiếp theo được xây dựng dựa trên những lượt trước đó. Các luồng cũng có thể được lưu trữ, cho phép cuộc trò chuyện được tạm dừng và tiếp tục sau.
+
+**Công cụ** - Bạn cung cấp cho agent các công cụ bằng cách truyền các hàm Python đơn giản. Các tham số được đánh dấu kiểu tự động được chuyển thành một schema, vì thế mô hình biết cách và khi nào gọi chúng (gọi hàm). Khung làm việc cũng hỗ trợ máy chủ Model Context Protocol (MCP) và các công cụ lưu trữ như trình thông dịch mã.
+
+Dưới đây là một ví dụ về một agent đơn với một công cụ tùy chỉnh:
+
+```python
+import asyncio
+from typing import Annotated
+
+from pydantic import Field
+from agent_framework import Agent
+from agent_framework.openai import OpenAIChatClient
+
+
+def get_weather(
+    location: Annotated[str, Field(description="The location to get the weather for.")],
+) -> str:
+    """Get the weather for a given location."""
+    return f"The weather in {location} is sunny with a high of 22°C."
+
+
+async def main():
+    agent = Agent(
+        client=OpenAIChatClient(),
+        instructions="You are a helpful assistant that can answer weather questions.",
+        tools=[get_weather],
+    )
+
+    response = await agent.run("What's the weather in Amsterdam?")
+    print(response)
+
+
+asyncio.run(main())
+```
+
+Để kết nối với Azure OpenAI trong Microsoft Foundry thay vào đó, bạn truyền endpoint và thông tin đăng nhập cho client:
+
+```python
+from azure.identity.aio import AzureCliCredential
+from agent_framework.openai import OpenAIChatClient
+
+client = OpenAIChatClient(
+    model="my-gpt-4o-deployment",
+    azure_endpoint="https://my-resource.openai.azure.com",
+    credential=AzureCliCredential(),
+)
+```
+
+### Quy trình làm việc đa agent
+
+Điểm nổi bật của khung này là khả năng điều phối nhiều agent cùng lúc. Ví dụ, bạn có thể chạy các agent lần lượt (mỗi agent truyền ngữ cảnh của nó sang agent tiếp theo) hoặc phân tán ra nhiều agent song song và tổng hợp kết quả của chúng:
+
+```python
+from agent_framework.orchestrations import SequentialBuilder, ConcurrentBuilder
+
+# Chạy các tác nhân theo tuần tự, truyền ngữ cảnh cuộc trò chuyện dọc theo chuỗi
+sequential = SequentialBuilder(participants=[researcher, writer, editor]).build()
+
+# Phân phối đến các tác nhân song song, sau đó tổng hợp các phản hồi của họ
+concurrent = ConcurrentBuilder(participants=[analyst_a, analyst_b, analyst_c]).build()
+```
+
+Để cài đặt khung và bắt đầu:
+
+```bash
+pip install agent-framework-core
+# Tích hợp tùy chọn
+pip install agent-framework-openai       # OpenAI và Azure OpenAI
+pip install agent-framework-foundry      # Microsoft Foundry
+```
+
+Bạn có thể khám phá thêm trong [kho Microsoft Agent Framework](https://github.com/microsoft/agent-framework?WT.mc_id=academic-105485-koreyst) và [tài liệu chính thức](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst).
 
 ## Taskweaver
 
-The next agent framework we will explore is [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). It is known as a "code-first" agent because instead of working strictly with `strings` , it can work with DataFrames in Python. This becomes extremely useful for data analysis and generation tasks. This can be things like creating graphs and charts or generating random numbers.
+Khung agent tiếp theo chúng ta sẽ khám phá là [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). Nó được biết đến như một agent "code-first" bởi vì thay vì làm việc chỉ với `strings` , nó có thể làm việc với DataFrames trong Python. Điều này trở nên cực kỳ hữu ích cho các nhiệm vụ phân tích và tạo dữ liệu. Chẳng hạn như tạo biểu đồ hoặc tạo số ngẫu nhiên.
 
-### State and Tools
+### Trạng thái và Công cụ
 
-To manage the state of the conversation, TaskWeaver uses the concept of a `Planner`. The `Planner` is a LLM that takes the request from the users and maps out the tasks that need to be completed to fulfill this request.
+Để quản lý trạng thái của cuộc trò chuyện, TaskWeaver sử dụng khái niệm `Planner`. `Planner` là một LLM nhận yêu cầu từ người dùng và lập sơ đồ các nhiệm vụ cần hoàn thành để đáp ứng yêu cầu này.
 
-To complete the tasks the `Planner` is exposed to the collection of tools called `Plugins`. Điều này có thể là các lớp Python hoặc một trình thông dịch mã chung. Những plugin này được lưu trữ dưới dạng nhúng để LLM có thể tìm kiếm plugin đúng cách hơn.
+Để hoàn thành nhiệm vụ, `Planner` được truy cập bộ công cụ gọi là `Plugins`. Đây có thể là các lớp Python hoặc một trình thông dịch mã chung. Các plugin này được lưu trữ dưới dạng embeddings để LLM có thể tìm kiếm chính xác plugin phù hợp.
 
-![Taskweaver](../../../translated_images/taskweaver.c0997002a3df51572f6cad019c41202b7c2110cbfcccc4af2e5d6a0ace4b4545.vi.png)
+![Taskweaver](../../../translated_images/vi/taskweaver.da8559999267715a.webp)
 
-Dưới đây là một ví dụ về một plugin để xử lý phát hiện dị thường:
+Đây là ví dụ một plugin để xử lý phát hiện dị thường:
 
 ```python
 class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_col_name: str, value_col_name: str):
 ```
 
-Mã được xác minh trước khi thực thi. Một tính năng khác để quản lý ngữ cảnh trong Taskweaver là `experience`. Experience allows for the context of a conversation to be stored over to the long term in a YAML file. This can be configured so that the LLM improves over time on certain tasks given that it is exposed to prior conversations.
+Mã được kiểm tra trước khi thực thi. Một tính năng khác để quản lý ngữ cảnh trong Taskweaver là `experience`. Experience cho phép ngữ cảnh của cuộc trò chuyện được lưu trữ lâu dài trong một tệp YAML. Điều này có thể được cấu hình để LLM cải thiện theo thời gian trong một số nhiệm vụ khi được tiếp xúc với các cuộc hội thoại trước đó.
 
 ## JARVIS
 
-The last agent framework we will explore is [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). What makes JARVIS unique is that it uses an LLM to manage the `state` của cuộc trò chuyện và `tools` là các mô hình AI khác. Mỗi mô hình AI là mô hình chuyên biệt thực hiện các nhiệm vụ nhất định như phát hiện đối tượng, chuyển biên hoặc chú thích hình ảnh.
+Khung agent cuối cùng chúng ta sẽ khám phá là [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file&WT.mc_id=academic-105485-koreyst). Điều làm JARVIS độc đáo là nó sử dụng một LLM để quản lý `trạng thái` của cuộc hội thoại và các `công cụ` là các mô hình AI khác. Mỗi mô hình AI là một mô hình chuyên biệt thực hiện các nhiệm vụ như phát hiện đối tượng, phiên âm, hoặc chú thích ảnh.
 
-![JARVIS](../../../translated_images/jarvis.d41d7c4c81bf015bd7ced7f1108abdec56b312472aaf3f63b5b0e82a5f4fb395.vi.png)
+![JARVIS](../../../translated_images/vi/jarvis.762ddbadbd1a3a33.webp)
 
-LLM, là một mô hình đa dụng, nhận yêu cầu từ người dùng và xác định nhiệm vụ cụ thể và bất kỳ đối số/dữ liệu nào cần thiết để hoàn thành nhiệm vụ.
+LLM, là một mô hình đa năng, nhận yêu cầu từ người dùng và xác định nhiệm vụ cụ thể cùng các đối số/dữ liệu cần thiết để hoàn thành nhiệm vụ.
 
 ```python
 [{"task": "object-detection", "id": 0, "dep": [-1], "args": {"image": "e1.jpg" }}]
 ```
 
-Sau đó, LLM định dạng yêu cầu theo cách mà mô hình AI chuyên biệt có thể hiểu được, chẳng hạn như JSON. Khi mô hình AI đã trả lại dự đoán của nó dựa trên nhiệm vụ, LLM nhận phản hồi.
+LLM sau đó định dạng yêu cầu theo cách mà mô hình AI chuyên biệt có thể hiểu, như JSON. Khi mô hình AI trả về dự đoán dựa trên nhiệm vụ, LLM nhận kết quả phản hồi.
 
-Nếu cần nhiều mô hình để hoàn thành nhiệm vụ, nó cũng sẽ diễn giải phản hồi từ các mô hình đó trước khi kết hợp chúng để tạo ra phản hồi cho người dùng.
+Nếu cần nhiều mô hình để hoàn thành nhiệm vụ, nó cũng sẽ giải thích các phản hồi từ các mô hình đó trước khi kết hợp lại để tạo ra câu trả lời cho người dùng.
 
-Ví dụ dưới đây cho thấy cách điều này sẽ hoạt động khi người dùng yêu cầu mô tả và đếm các đối tượng trong một bức tranh:
+Ví dụ dưới đây minh họa cách làm việc khi người dùng yêu cầu mô tả và đếm các đối tượng trong một bức ảnh:
 
 ## Bài tập
 
-Để tiếp tục học tập về tác nhân AI, bạn có thể xây dựng với AutoGen:
+Để tiếp tục học tập về AI Agents bạn có thể xây dựng với Microsoft Agent Framework:
 
 - Một ứng dụng mô phỏng cuộc họp kinh doanh với các phòng ban khác nhau của một startup giáo dục.
-- Tạo thông điệp hệ thống hướng dẫn LLMs hiểu các nhân vật và ưu tiên khác nhau, và cho phép người dùng trình bày ý tưởng sản phẩm mới.
-- LLM sau đó sẽ tạo câu hỏi tiếp theo từ mỗi phòng ban để tinh chỉnh và cải thiện ý tưởng sản phẩm và sản phẩm.
+- Tạo các tin nhắn hệ thống hướng dẫn LLM hiểu các nhân vật và ưu tiên khác nhau, và cho phép người dùng thuyết trình ý tưởng sản phẩm mới.
+- LLM sau đó nên tạo các câu hỏi tiếp theo từ mỗi phòng ban để cải thiện và hoàn thiện ý tưởng thuyết trình và sản phẩm.
 
-## Học tập không dừng lại ở đây, tiếp tục hành trình
+## Học tập không kết thúc tại đây, hãy tiếp tục hành trình
 
-Sau khi hoàn thành bài học này, hãy xem bộ sưu tập [Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) của chúng tôi để tiếp tục nâng cao kiến thức Generative AI của bạn!
+Sau khi hoàn thành bài học này, hãy xem bộ sưu tập [Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) của chúng tôi để tiếp tục nâng cao kiến thức về Generative AI của bạn!
 
-**Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn đáng tin cậy. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

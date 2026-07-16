@@ -1,85 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77a48a201447be19aa7560706d6f93a0",
-  "translation_date": "2025-05-19T21:32:04+00:00",
-  "source_file": "11-integrating-with-function-calling/README.md",
-  "language_code": "fi"
-}
--->
-# Integrointi funktiokutsujen kanssa
+# Integrointi funktiokutsuun
 
-[![Integrointi funktiokutsujen kanssa](../../../translated_images/11-lesson-banner.5da178a9bf0c61125724b82872e87e5530d352453ec40cb59a13e27f9346c41e.fi.png)](https://aka.ms/gen-ai-lesson11-gh?WT.mc_id=academic-105485-koreyst)
+[![Integrointi funktiokutsuun](../../../translated_images/fi/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-Olet oppinut jo melko paljon edellisissä luvuissa. Voimme kuitenkin parantaa edelleen. Joitakin asioita, joita voimme käsitellä, ovat miten voimme saada johdonmukaisemman vastausmuodon, jotta vastausta olisi helpompi käsitellä jatkossa. Lisäksi saatamme haluta lisätä tietoa muista lähteistä rikastuttaaksemme sovellustamme.
+Olet oppinut tähän mennessä melko paljon edellisissä oppitunneissa. Voimme kuitenkin parantaa vielä lisää. Jotkut asiat, joita voimme käsitellä, ovat kuinka voimme saada johdonmukaisemman vastausformaatin, jotta vastauksen käsittely jälkikäteen olisi helpompaa. Lisäksi voimme haluta lisätä dataa muista lähteistä sovelluksemme rikastamiseksi.
 
-Edellä mainitut ongelmat ovat tämän luvun aiheena.
+Edellä mainitut ongelmat ovat tämän luvun käsittelyn kohteena.
 
 ## Johdanto
 
-Tässä luvussa käsitellään:
+Tässä oppitunnissa käsittelemme:
 
-- Selitetään, mitä funktiokutsu on ja sen käyttötapaukset.
+- Selitetään, mitä funktiokutsu tarkoittaa ja sen käyttötapaukset.
 - Funktiokutsun luominen Azure OpenAI:lla.
-- Miten integroida funktiokutsu sovellukseen.
+- Kuinka integroida funktiokutsu sovellukseen.
 
 ## Oppimistavoitteet
 
-Tämän luvun lopussa osaat:
+Oppitunnin lopussa osaat:
 
-- Selittää funktiokutsujen käyttötarkoituksen.
-- Asettaa Funktiokutsun Azure OpenAI -palvelun avulla.
-- Suunnitella tehokkaita funktiokutsuja sovelluksesi käyttötapaukseen.
+- Selittää, miksi funktiokutsua käytetään.
+- Määrittää Funktiokutsu Azure OpenAI -palvelussa.
+- Suunnitella tehokkaita funktiokutsuja sovelluksesi käyttötarkoitukseen.
 
-## Skenaario: Chatbotin parantaminen funktioilla
+## Tilanne: Parannetaan chatbotiamme funktioilla
 
-Tässä luvussa haluamme rakentaa ominaisuuden koulutusstartupillemme, joka sallii käyttäjien käyttää chatbotia teknisten kurssien löytämiseen. Suosittelemme kursseja, jotka sopivat heidän taitotasolleen, nykyiselle roolilleen ja kiinnostuksen kohteena olevalle teknologialle.
+Tässä oppitunnissa rakennamme ominaisuuden koulutusstartup-sovellukseemme, jonka avulla käyttäjät voivat käyttää chatbotia löytääkseen teknisiä kursseja. Suositamme kursseja, jotka sopivat heidän taitotasoonsa, nykyiseen rooliinsa ja kiinnostuksen kohteisiin teknologiassa.
 
-Tämän skenaarion suorittamiseksi käytämme yhdistelmää:
+Tämän tilanteen suorittamiseen käytämme yhdistelmää:
 
-- `Azure OpenAI` luodaksemme keskustelukokemuksen käyttäjälle.
-- `Microsoft Learn Catalog API` auttamaan käyttäjiä löytämään kursseja käyttäjän pyynnön perusteella.
-- `Function Calling` ottamaan käyttäjän kyselyn ja lähettämään sen funktiolle API-pyynnön tekemiseksi.
+- `Azure OpenAI`:ta luodaksemme käyttäjälle chat-kokemuksen.
+- `Microsoft Learn Catalog API`:a auttamaan käyttäjiä löytämään kursseja käyttäjän pyynnön perusteella.
+- `Function Calling`:ia käyttääksemme käyttäjän kyselyn ja lähettääksemme sen funktiolle API-kutsun tekemiseksi.
 
-Aloittaaksemme katsotaan, miksi haluaisimme käyttää funktiokutsuja alun perin:
+Aloitetaan katsomalla, miksi haluamme käyttää funktiokutsua ylipäätään:
 
-## Miksi Funktiokutsut
+## Miksi Funktiokutsu
 
-Ennen funktiokutsuja LLM:ien vastaukset olivat rakenteettomia ja epäjohdonmukaisia. Kehittäjien piti kirjoittaa monimutkaista validointikoodia varmistaakseen, että he pystyivät käsittelemään vastauksen jokaista muunnelmaa. Käyttäjät eivät voineet saada vastauksia kuten "Mikä on tämänhetkinen sää Tukholmassa?". Tämä johtuu siitä, että mallit olivat rajallisia siihen aikaan, jolloin data koulutettiin.
+Ennen funktiokutsua LLM:n vastaukset olivat jäsentämättömiä ja epäjohdonmukaisia. Kehittäjien täytyi kirjoittaa monimutkaista validointikoodia varmistaakseen, että he pystyivät käsittelemään kaikki vastausvaihtoehdot. Käyttäjät eivät voineet saada vastauksia esimerkiksi kysymykseen "Mikä on tämänhetkinen sää Tukholmassa?". Tämä johtui siitä, että mallit olivat koulutettujen tietojen aikarajoitettuja.
 
-Funktiokutsu on Azure OpenAI -palvelun ominaisuus, joka ylittää seuraavat rajoitukset:
+Funktiokutsu on Azure OpenAI -palvelun ominaisuus, joka ratkaisee seuraavat rajoitukset:
 
-- **Johdonmukainen vastausmuoto**. Jos voimme paremmin hallita vastausmuotoa, voimme helpommin integroida vastauksen muihin järjestelmiin.
-- **Ulkoinen data**. Mahdollisuus käyttää sovelluksen muita tietolähteitä keskusteluyhteydessä.
+- **Johdonmukainen vastausformaatio.** Jos voimme paremmin hallita vastausformaatia, voimme helpommin integroida vastauksen muihin järjestelmiin.
+- **Ulkoinen data.** Kyky käyttää dataa sovelluksen muista lähteistä chat-kontekstissa.
 
-## Ongelman havainnollistaminen skenaarion kautta
+## Ongelman havainnollistaminen esimerkin kautta
 
-> Suosittelemme käyttämään [mukana olevaa muistikirjaa](../../../11-integrating-with-function-calling/python/aoai-assignment.ipynb), jos haluat suorittaa alla olevan skenaarion. Voit myös vain lukea mukana, kun yritämme havainnollistaa ongelmaa, jossa funktiot voivat auttaa ratkaisemaan ongelman.
+> Suosittelemme käyttämään [sisällytettyä muistikirjaa](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst), jos haluat suorittaa alla olevan skenaarion. Voit myös vain lukea, kun yritämme havainnollistaa ongelmaa, johon funktiot voivat auttaa.
 
-Katsotaanpa esimerkkiä, joka havainnollistaa vastausmuoto-ongelmaa:
+Tarkastellaan esimerkkiä, joka havainnollistaa vastausformaatin ongelmaa:
 
-Sanotaan, että haluamme luoda tietokannan opiskelijatiedoista, jotta voimme suositella heille oikeaa kurssia. Alla on kaksi kuvausta opiskelijoista, jotka ovat hyvin samanlaisia sisältämänsä datan osalta.
+Oletetaan, että haluamme luoda opiskelijatietokannan, jotta voimme ehdottaa heille sopivaa kurssia. Alla on kaksi kuvausta opiskelijoista, jotka ovat hyvin samankaltaisia sisällöltään.
 
 1. Luo yhteys Azure OpenAI -resurssiimme:
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # Responses API palvellaan Azure OpenAI (Microsoft Foundry) v1 -päätepisteestä
+   # joten osoitamme OpenAI-asiakkaan osoitteeseen <your-endpoint>/openai/v1/.
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   Alla on Python-koodia, joka määrittää yhteytemme Azure OpenAI:hin, jossa asetamme `api_type`, `api_base`, `api_version` and `api_key`.
+   Alla on Python-koodia, jolla konfiguroidaan yhteys Azure OpenAI:hin. Koska käytämme v1-päätepistettä, meidän tarvitsee määrittää vain `api_key` ja `base_url` (ei tarvita `api_version`ia).
 
-1. Creating two student descriptions using variables `student_1_description` and `student_2_description`.
+1. Tehdään kaksi opiskelijakuvausta muuttujilla `student_1_description` ja `student_2_description`.
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -87,9 +81,9 @@ Sanotaan, että haluamme luoda tietokannan opiskelijatiedoista, jotta voimme suo
    student_2_description = "Michael Lee is a sophomore majoring in computer science at Stanford University. He has a 3.8 GPA. Michael is known for his programming skills and is an active member of the university's Robotics Club. He hopes to pursue a career in artificial intelligence after finishing his studies."
    ```
 
-   Haluamme lähettää yllä olevat opiskelijakuvaukset LLM:lle tietojen jäsentämiseksi. Näitä tietoja voidaan myöhemmin käyttää sovelluksessamme ja lähettää API:lle tai tallentaa tietokantaan.
+   Haluamme lähettää yllä olevat opiskelijakuvaukset LLM:lle datan jäsentämistä varten. Tätä dataa voidaan myöhemmin käyttää sovelluksessa ja lähettää API:lle tai tallentaa tietokantaan.
 
-1. Luodaan kaksi identtistä kehotetta, joissa ohjeistamme LLM:ää siitä, mitä tietoja olemme kiinnostuneita:
+1. Luodaan kaksi identtistä kehotetta, joissa annetaan LLM:lle ohjeet siitä, mitä tietoja haluamme:
 
    ```python
    prompt1 = f'''
@@ -119,33 +113,35 @@ Sanotaan, että haluamme luoda tietokannan opiskelijatiedoista, jotta voimme suo
    '''
    ```
 
-   Yllä olevat kehotteet ohjeistavat LLM:ää erottamaan tiedot ja palauttamaan vastauksen JSON-muodossa.
+   Yllä olevat kehotteet ohjeistavat LLM:ää poimimaan tiedot ja palauttamaan vastauksen JSON-muodossa.
 
-1. Kehotteiden ja Azure OpenAI -yhteyden asettamisen jälkeen lähetämme kehotteet LLM:lle käyttämällä `openai.ChatCompletion`. We store the prompt in the `messages` variable and assign the role to `user`. Tämä jäljittelee käyttäjän kirjoittamaa viestiä chatbotille.
+1. Kun kehotteet ja yhteys Azure OpenAI:hin on asetettu, lähetämme kehotteet LLM:lle käyttämällä `client.responses.create`. Tallennamme kehotteen `input`-muuttujaan ja määritämme roolin `user`:ksi. Tämä jäljittelee käyttäjän kirjoittamaa viestiä chatbotille.
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # vastaus kehotteeseen yksi
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # vastaus kehotteeseen kaksi
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-Nyt voimme lähettää molemmat pyynnöt LLM:lle ja tarkastella saamaamme vastausta löytämällä se näin `openai_response1['choices'][0]['message']['content']`.
+Nyt voimme lähettää molemmat pyynnöt LLM:lle ja tarkastella saamamme vastauksen, joka löytyy kohdasta `openai_response1.output_text`.
 
-1. Lastly, we can convert the response to JSON format by calling `json.loads`:
+1. Lopuksi voimme muuntaa vastauksen JSON-muotoon kutsumalla `json.loads`:
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # Ladataan vastaus JSON-objektina
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
@@ -173,59 +169,60 @@ Nyt voimme lähettää molemmat pyynnöt LLM:lle ja tarkastella saamaamme vastau
    }
    ```
 
-   Vaikka kehotteet ovat samat ja kuvaukset ovat samanlaisia, näemme arvoja `Grades` property formatted differently, as we can sometimes get the format `3.7` or `3.7 GPA` for example.
+   Vaikka kehotteet ovat samat ja kuvaukset samankaltaiset, näemme `Grades`-ominaisuuden arvot muotoiltuina eri tavoin, esimerkiksi joskus saamme arvon `3.7` tai `3.7 GPA`.
 
-   This result is because the LLM takes unstructured data in the form of the written prompt and returns also unstructured data. We need to have a structured format so that we know what to expect when storing or using this data
+   Tämä tulos johtuu siitä, että LLM ottaa vastaan rakenteettoman datan kirjoitetussa kehotteessa ja myös palauttaa rakenteetonta dataa. Tarvitsemme jäsennellyn formaatin, jotta tiedämme mitä odottaa tietojen tallennukselta tai käytöltä.
 
-So how do we solve the formatting problem then? By using functional calling, we can make sure that we receive structured data back. When using function calling, the LLM does not actually call or run any functions. Instead, we create a structure for the LLM to follow for its responses. We then use those structured responses to know what function to run in our applications.
+Joten, miten ratkaistaan muotoiluongelma? Käyttämällä funktiokutsua varmistamme, että saamme jäsenneltyä dataa takaisin. Funktiokutsua käytettäessä LLM ei itse asiassa kutsu tai suorita mitään funktioita. Sen sijaan luomme rakenteen, jota LLM seuraa vastauksissaan. Käytämme sitten näitä jäsenneltyjä vastauksia tietääksemme, mitä funktiota ajaa sovelluksissamme.
 
-![function flow](../../../translated_images/Function-Flow.01a723a374f79e5856d9915c39e16c59fa2a00c113698b22a28e616224f407e1.fi.png)
+![function flow](../../../translated_images/fi/Function-Flow.083875364af4f4bb.webp)
 
-We can then take what is returned from the function and send this back to the LLM. The LLM will then respond using natural language to answer the user's query.
+Voimme sitten ottaa funktiosta saadun vastauksen ja lähettää sen takaisin LLM:lle. LLM vastaa luonnollisella kielellä käyttäjän kyselyyn.
 
-## Use Cases for using function calls
+## Funktiokutsujen käyttötapaukset
 
-There are many different use cases where function calls can improve your app like:
+On monia erilaisia käyttötapauksia, joissa funktiokutsut voivat parantaa sovellustasi, kuten:
 
-- **Calling External Tools**. Chatbots are great at providing answers to questions from users. By using function calling, the chatbots can use messages from users to complete certain tasks. For example, a student can ask the chatbot to "Send an email to my instructor saying I need more assistance with this subject". This can make a function call to `send_email(to: string, body: string)`
+- **Ulkoisten työkalujen kutsuminen.** Chatbotit ovat hyviä vastaamaan käyttäjien kysymyksiin. Funktiokutsun avulla chatbot voi käyttää käyttäjän viestejä suorittaakseen tiettyjä tehtäviä. Esimerkiksi opiskelija voi pyytää chatbotia "Lähettämään sähköpostin ohjaajalleni, jossa sanotaan, että tarvitsen lisää apua aiheessa". Tämä voi kutsua funktion `send_email(to: string, body: string)`
 
-- **Create API or Database Queries**. Users can find information using natural language that gets converted into a formatted query or API request. An example of this could be a teacher who requests "Who are the students that completed the last assignment" which could call a function named `get_completed(student_name: string, assignment: int, current_status: string)`
+- **API- tai tietokantakyselyjen luominen.** Käyttäjät voivat hakea tietoa luonnollisella kielellä, joka muunnetaan muotoilluksi kyselyksi tai API-pyynnöksi. Esimerkkinä on opettaja, joka pyytää "Ketkä opiskelijat suorittivat viimeisen tehtävän", mikä voisi kutsua funktion nimeltä `get_completed(student_name: string, assignment: int, current_status: string)`
 
-- **Creating Structured Data**. Users can take a block of text or CSV and use the LLM to extract important information from it. For example, a student can convert a Wikipedia article about peace agreements to create AI flashcards. This can be done by using a function called `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
+- **Jäsennellyn datan luominen.** Käyttäjät voivat ottaa tekstiblokin tai CSV-tiedoston ja käyttää LLM:ää tärkeän tiedon poimimiseen siitä. Esimerkiksi opiskelija voi muuntaa Wikipedia-artikkelin rauhansopimuksista luodakseen tekoälymuistilappuja. Tämä onnistuu käyttäen funktiota `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
 
-## Creating Your First Function Call
+## Ensimmäisen funktiokutsun luominen
 
-The process of creating a function call includes 3 main steps:
+Funktiokutsun luomisprosessi sisältää kolme päävaihetta:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. **Soitto** Responses-API:lle, jossa on luettelo toiminnoistasi (työkaluista) ja käyttäjän viesti.
+2. **Mallin vastauksen lukeminen** ja toiminnon eli funktion tai API-kutsun suorittaminen.
+3. **Toisen kutsun tekeminen** Responses-API:lle funktion vastauksella, jotta tämä tieto voidaan käyttää vastauksen luomiseksi käyttäjälle.
 
-![LLM Flow](../../../translated_images/LLM-Flow.7df9f166be50aa324705f2ccddc04a27cfc7b87e57b1fbe65eb534059a3b8b66.fi.png)
+![LLM Flow](../../../translated_images/fi/LLM-Flow.3285ed8caf4796d7.webp)
 
-### Step 1 - creating messages
+### Vaihe 1 - viestien luominen
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+Ensimmäinen vaihe on luoda käyttäjän viesti. Tämä voidaan määrittää dynaamisesti ottamalla esimerkiksi tekstikentän arvo tai voit määrittää arvon tässä. Jos tämä on ensimmäinen kerta, kun työskentelet Responses API:n kanssa, meidän tulee määrittää viestin `role` ja `content`.
 
-The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` ja esimerkkikysymys.
+`role` voi olla `system` (sääntöjen luominen), `assistant` (malli) tai `user` (loppukäyttäjä). Funktiokutsua varten määritämme tämän arvoksi `user` ja annamme esimerkkinä kysymyksen.
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Antamalla eri rooleja tehdään LLM:lle selväksi, onko järjestelmä sanomassa jotain vai käyttäjä, mikä auttaa rakentamaan keskusteluhistoriaa, johon LLM voi perustaa.
+Roolien määrittely tekee LLM:lle selväksi, onko viestin lähettäjä järjestelmä vai käyttäjä, mikä auttaa rakentamaan keskusteluhistoriaa, jonka LLM voi käyttää.
 
 ### Vaihe 2 - funktioiden luominen
 
-Seuraavaksi määrittelemme funktion ja sen parametrit. Käytämme vain yhtä funktiota täällä nimeltä `search_courses` but you can create multiple functions.
+Seuraavaksi määrittelemme funktion ja sen parametrit. Käytämme vain yhtä funktiota nimeltä `search_courses`, mutta voit luoda myös useita funktioita.
 
-> **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
+> **Tärkeää** : Funktiot sisällytetään järjestelmäviestiin LLM:lle, ja ne lasketaan saatavilla olevien tokenien määrään.
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters`:
+Alla luomme funktiot taulukoksi. Jokainen osa on työkalu Responses API:n tasaisessa muodossa, jossa on ominaisuudet `type`, `name`, `description` ja `parameters`:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -252,75 +249,76 @@ functions = [
 ]
 ```
 
-Kuvataan jokainen funktioinstanssi tarkemmin alla:
+Kuvataan kunkin funktion osa tarkemmin alla:
 
-- `name` - The name of the function that we want to have called.
-- `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
-  1.  `type` - The data type of the properties will be stored in.
-  1.  `properties` - List of the specific values that the model will use for its response
-      1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
-      1. `type` - The data type of this property, for example, `string`.
-      1. `description` - Description of the specific property.
+- `name` - funktion nimi, jota haluamme kutsuttavan.
+- `description` - kuvaus siitä, miten funktio toimii. Täällä on tärkeää olla täsmällinen ja selkeä.
+- `parameters` - luettelo arvoista ja muodosta, jonka haluat mallin tuottavan vastauksessaan. Parametritaulukko sisältää kohtia, joilla on seuraavat ominaisuudet:
+  1. `type` - ominaisuuden tietotyyppi.
+  1. `properties` - lista erityisistä arvoista, joita malli käyttää vastauksessaan
+      1. `name` - avain on ominaisuuden nimi, jota malli käyttää muotoillussa vastauksessa, esimerkiksi `product`.
+      1. `type` - ominaisuuden tietotyyppi, esimerkiksi `string`.
+      1. `description` - erityisen ominaisuuden kuvaus.
 
-There's also an optional property `required` - required property for the function call to be completed.
+On myös valinnainen ominaisuus `required` - vaadittu ominaisuus funktion kutsun suorittamiseksi.
 
-### Step 3 - Making the function call
+### Vaihe 3 - Funktiokutsun tekeminen
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+Kun olemme määrittäneet funktion, meidän täytyy nyt sisällyttää se kutsuun Responses API:lle. Teemme tämän lisäämällä pyynnön `tools`-parametriin. Tällä kertaa `tools=functions`.
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+On myös vaihtoehto asettaa `tool_choice` arvoksi `auto`. Tämä tarkoittaa, että annamme LLM:n päättää, mitä funktiota kutsutaan käyttäjän viestin perusteella sen sijaan, että määrittäisimme sen itse.
 
-Here's some code below where we call `ChatCompletion.create`, note how we set `functions=functions` and `function_call="auto"` ja siten antaa LLM:lle mahdollisuus päättää, milloin kutsua antamiamme funktioita:
+Alla on koodia, jossa kutsutaan `client.responses.create`. Huomaa, että asetamme `tools=functions` ja `tool_choice="auto"`, antaen LLM:lle valinnan milloin kutsua tarjoamiamme funktioita:
 
 ```python
-response = client.chat.completions.create(model=deployment,
-                                        messages=messages,
-                                        functions=functions,
-                                        function_call="auto")
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-print(response.choices[0].message)
+print(response.output)
 ```
 
-Vastaus, joka tulee takaisin, näyttää nyt tältä:
+Vastauksessa on nyt mukana `function_call`-kohta kohdassa `response.output`, joka näyttää tältä:
 
 ```json
 {
-  "role": "assistant",
-  "function_call": {
-    "name": "search_courses",
-    "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
-  }
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
 }
 ```
 
-Tässä näemme, kuinka funktio `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+Tässä näemme, miten funktio `search_courses` kutsuttiin ja millä argumenteilla, jotka ovat `arguments`-ominaisuudessa JSON-vastauksessa.
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` arvo:
+Johtopäätös on, että LLM pystyi löytämään tiedot, jotka vastaavat funktion argumentteja, kun se poimi ne arvoista, jotka annettiin `input`-parametrille Responses API -kutsussa. Alla muistutus `messages`-arvosta:
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Kuten näet, `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+Kuten näet, `student`, `Azure` ja `beginner` poimittiin `messages`-kohdasta ja asetettiin funktion syötteeksi. Funktioiden käyttäminen tällä tavalla on hyvä tapa poimia tietoa kehotteesta, mutta myös tarjota LLM:lle rakenne ja uudelleenkäytettävä toiminnallisuus.
 
-Next, we need to see how we can use this in our app.
+Seuraavaksi katsomme, kuinka tätä voidaan käyttää sovelluksessamme.
 
-## Integrating Function Calls into an Application
+## Funktiokutsujen integrointi sovellukseen
 
-After we have tested the formatted response from the LLM, we can now integrate this into an application.
+Kun olemme testanneet jäsennetyn vastauksen LLM:ltä, voimme nyt integroida sen sovellukseen.
 
-### Managing the flow
+### Virran hallinta
 
-To integrate this into our application, let's take the following steps:
+Integroidaksemme tämän sovellukseen, teemme seuraavat vaiheet:
 
-1. First, let's make the call to the OpenAI services and store the message in a variable called `response_message`.
+1. Ensin tehdään kutsu OpenAI-palveluihin ja poimitaan funktiokutsu-vastaukset vastauksen `output`-kohdasta.
 
    ```python
-   response_message = response.choices[0].message
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
    ```
 
-1. Määrittelemme nyt funktion, joka kutsuu Microsoft Learn API:ta saadakseen kurssilistan:
+1. Nyt määrittelemme funktion, joka kutsuu Microsoft Learn API:a saadakseen listan kursseista:
 
    ```python
    import requests
@@ -342,65 +340,57 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   Huomaa, kuinka nyt luomme varsinaisen Python-funktion, joka vastaa `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   Huomaa, että luomme nyt varsinaisen Python-funktion, joka vastaa `functions`-muuttujassa määritettyjä funktioita. Teemme myös oikeita ulkoisia API-kutsuja saadaksemme tarvitsemaamme dataa. Tässä tapauksessa kutsumme Microsoft Learn API:a hakeaksemme koulutusmoduuleja.
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+Okei, olemme luoneet `functions`-muuttujan ja vastaavan Python-funktion, miten kerromme LLM:lle, miten nämä yhdistetään siten, että Python-funktiota kutsutaan?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call` -osassa esiteltyjä funktioiden nimiä ja kutsuu osoitettua funktiota. Näin voit tehdä mainitun tarkistuksen alla:
+1. Nähtäväksi, pitääkö kutsua Python-funktiota, katsomme LLM:n vastauksesta löytyykö sieltä `function_call`-kohta ja kutsumme osoitettua funktiota. Näin teet mainitun tarkastuksen:
 
    ```python
-   # Check if the model wants to call a function
-   if response_message.function_call.name:
-    print("Recommended Function call:")
-    print(response_message.function_call.name)
-    print()
+   # Tarkista, haluaako malli kutsua funktiota
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
 
-    # Call the function.
-    function_name = response_message.function_call.name
+     # Kutsu funktiota.
+     function_name = tool_call.name
 
-    available_functions = {
-            "search_courses": search_courses,
-    }
-    function_to_call = available_functions[function_name]
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
 
-    function_args = json.loads(response_message.function_call.arguments)
-    function_response = function_to_call(**function_args)
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
-    print(function_response)
-    print(type(function_response))
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
 
-
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
-        {
-            "role": response_message.role,
-            "function_call": {
-                "name": function_name,
-                "arguments": response_message.function_call.arguments,
-            },
-            "content": None
-        }
-    )
-    messages.append( # adding function response to messages
-        {
-            "role": "function",
-            "name": function_name,
-            "content":function_response,
-        }
-    )
+     # Lisää funktiokutsu ja sen tulos takaisin keskusteluun.
+     # Mallin function_call-kohde on liitettävä sen tuloksen ennen.
+     messages.append(tool_call)  # avustajan function_call-kohde
+     messages.append( # funktion tulos
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
    ```
 
-   Nämä kolme riviä varmistavat, että poimimme funktion nimen, argumentit ja teemme kutsun:
+   Nämä kolme riviä varmistavat, että saamme funktion nimen, argumentit ja teemme kutsun:
 
    ```python
    function_to_call = available_functions[function_name]
 
-   function_args = json.loads(response_message.function_call.arguments)
+   function_args = json.loads(tool_call.arguments)
    function_response = function_to_call(**function_args)
    ```
 
-   Alla on tulos koodimme ajamisesta:
+   Alla on tuloste suorituksestamme:
 
    **Tuloste**
 
@@ -421,50 +411,60 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. Lähetämme nyt päivitetyn viestin, `messages`, LLM:lle, jotta voimme saada luonnollisen kielen vastauksen API:n JSON-muotoisen vastauksen sijaan.
+1. Lähetämme nyt päivitetyn viestin, `messages` LLM:lle, jotta voimme saada luonnolliskielisen vastauksen API:n JSON-vastauksen sijaan.
 
    ```python
    print("Messages in next request:")
    print(messages)
    print()
 
-   second_response = client.chat.completions.create(
-      messages=messages,
+   second_response = client.responses.create(
+      input=messages,
       model=deployment,
-      function_call="auto",
-      functions=functions,
-      temperature=0
-         )  # get a new response from GPT where it can see the function response
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # hae uusi vastaus mallilta, jossa se voi nähdä funktiovastauksen
 
 
-   print(second_response.choices[0].message)
+   print(second_response.output_text)
    ```
 
    **Tuloste**
 
-   ```python
-   {
-     "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
-   }
+   ```text
+   I found some good courses for beginner students to learn Azure:
 
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
    ```
 
 ## Tehtävä
 
-Jatkaaksesi Azure OpenAI Funktiokutsun oppimista voit rakentaa:
+Jatkaaksesi oppimista Azure OpenAI Funktiokutsusta voit rakentaa:
 
-- Lisää funktion parametreja, jotka saattavat auttaa oppijoita löytämään enemmän kursseja.
-- Luo toinen funktiokutsu, joka ottaa enemmän tietoa oppijalta, kuten heidän äidinkielensä.
-- Luo virheenkäsittely, kun funktiokutsu ja/tai API-kutsu ei palauta sopivia kursseja.
+- Lisää parametreja funktiolle, jotka voivat auttaa oppijoita löytämään lisää kursseja.
 
-Vinkki: Seuraa [Learn API -viitedokumentaatiota](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) nähdäksesi, miten ja missä tämä data on saatavilla.
+- Luo toinen funktiokutsu, joka ottaa oppijalta lisää tietoa, kuten heidän äidinkielensä
+- Luo virheenkäsittely, kun funktiokutsu ja/tai API-kutsu ei palauta sopivia kursseja
+
+Vihje: Seuraa [Learn API reference documentation](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) -sivua nähdäksesi, miten ja mistä nämä tiedot ovat saatavilla.
 
 ## Hienoa työtä! Jatka matkaa
 
-Tämän luvun suorittamisen jälkeen tutustu [Generatiivinen AI -oppimiskokoelmaamme](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) jatkaaksesi generatiivisen AI:n tietämyksesi kehittämistä!
+Tämän oppitunnin suorittamisen jälkeen tutustu [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) -kokoelmaamme jatkaaksesi generatiivisen tekoälyn osaamisesi kehittämistä!
 
-Siirry lukuun 12, jossa tarkastelemme, miten [suunnitella UX AI-sovelluksille](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Siirry oppitunnille 12, jossa tarkastelemme, kuinka [suunnitella UX:ää tekoälysovelluksille](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
-**Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä AI-käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta ole tietoinen siitä, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää auktoritatiivisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

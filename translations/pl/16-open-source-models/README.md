@@ -1,89 +1,86 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0bba96e53ab841d99db731892a51fab8",
-  "translation_date": "2025-05-20T06:54:53+00:00",
-  "source_file": "16-open-source-models/README.md",
-  "language_code": "pl"
-}
--->
-[![Open Source Models](../../../translated_images/16-lesson-banner.7b9ebf8cdea6669d74be8212360e99a5653b0cd3ec513f50f12693ffec984ff1.pl.png)](https://aka.ms/gen-ai-lesson16-gh?WT.mc_id=academic-105485-koreyst)
+[![Modele Open Source](../../../translated_images/pl/16-lesson-banner.6b56555e8404fda1.webp)](https://youtu.be/CuICgfuHFSg?si=x8SpFRUsIxM9dohN)
 
 ## Wprowadzenie
 
-Świat otwartoźródłowych LLM jest ekscytujący i nieustannie się rozwija. Ta lekcja ma na celu dostarczenie dogłębnego spojrzenia na modele open source. Jeśli szukasz informacji o tym, jak modele zastrzeżone porównują się do modeli open source, przejdź do lekcji ["Badanie i porównywanie różnych LLM"](../02-exploring-and-comparing-different-llms/README.md?WT.mc_id=academic-105485-koreyst). Ta lekcja obejmie również temat dostrajania, ale bardziej szczegółowe wyjaśnienie można znaleźć w lekcji ["Dostrajanie LLM"](../18-fine-tuning/README.md?WT.mc_id=academic-105485-koreyst).
+Świat otwartych modeli LLM jest ekscytujący i nieustannie się rozwija. Ta lekcja ma na celu zapewnienie dogłębnego spojrzenia na modele open source. Jeśli szukasz informacji na temat porównania modeli własnościowych z modelami otwartymi, przejdź do lekcji ["Eksploracja i porównanie różnych LLM"](../02-exploring-and-comparing-different-llms/README.md?WT.mc_id=academic-105485-koreyst). Ta lekcja również poruszy temat fine-tuningu, ale bardziej szczegółowe wyjaśnienie znajdziesz w lekcji ["Fine-Tuning LLM"](../18-fine-tuning/README.md?WT.mc_id=academic-105485-koreyst).
 
 ## Cele nauki
 
-- Zrozumienie modeli open source
-- Zrozumienie korzyści z pracy z modelami open source
-- Badanie dostępnych modeli otwartych na platformach Hugging Face i Azure AI Studio
+- Zdobycie wiedzy na temat modeli open source
+- Zrozumienie korzyści płynących z pracy z modelami open source
+- Eksploracja dostępnych modeli open na Hugging Face oraz katalogu modeli Microsoft Foundry
 
-## Czym są modele open source?
+## Czym są modele Open Source?
 
-Oprogramowanie open source odegrało kluczową rolę w rozwoju technologii w różnych dziedzinach. Inicjatywa Open Source (OSI) zdefiniowała [10 kryteriów dla oprogramowania](https://web.archive.org/web/20241126001143/https://opensource.org/osd?WT.mc_id=academic-105485-koreyst), aby mogło być klasyfikowane jako open source. Kod źródłowy musi być otwarcie udostępniony na licencji zatwierdzonej przez OSI.
+Oprogramowanie open source odegrało kluczową rolę w rozwoju technologii w różnych dziedzinach. Inicjatywa Open Source (OSI) zdefiniowała [10 kryteriów dla oprogramowania](https://web.archive.org/web/20241126001143/https://opensource.org/osd?WT.mc_id=academic-105485-koreyst), które kwalifikuje je jako otwarte. Kod źródłowy musi być publicznie udostępniony na licencji zatwierdzonej przez OSI.
 
-Chociaż rozwój LLM ma podobne elementy do rozwijania oprogramowania, proces nie jest dokładnie taki sam. Wywołało to wiele dyskusji w społeczności na temat definicji open source w kontekście LLM. Aby model był zgodny z tradycyjną definicją open source, powinny być publicznie dostępne następujące informacje:
+Chociaż proces tworzenia LLM ma podobne elementy do tworzenia oprogramowania, nie jest on dokładnie taki sam. Powoduje to wiele dyskusji w społeczności na temat definicji open source w kontekście LLM. Aby model był zgodny z tradycyjną definicją open source, następujące informacje powinny być publicznie dostępne:
 
-- Zbiory danych używane do trenowania modelu.
+- Zbiory danych użyte do trenowania modelu.
 - Pełne wagi modelu jako część treningu.
-- Kod oceny.
-- Kod dostrajania.
-- Pełne wagi modelu i metryki treningowe.
+- Kod do ewaluacji.
+- Kod do fine-tuningu.
+- Pełne wagi modelu i metryki treningu.
 
-Obecnie istnieje tylko kilka modeli, które spełniają te kryteria. [Model OLMo stworzony przez Allen Institute for Artificial Intelligence (AllenAI)](https://huggingface.co/allenai/OLMo-7B?WT.mc_id=academic-105485-koreyst) jest jednym z nich.
+Obecnie istnieje tylko kilka modeli spełniających te kryteria. [Model OLMo stworzony przez Allen Institute for Artificial Intelligence (AllenAI)](https://huggingface.co/allenai/OLMo-7B?WT.mc_id=academic-105485-koreyst) jest jednym z nich.
 
-Na potrzeby tej lekcji będziemy dalej odnosić się do modeli jako "modele otwarte", ponieważ mogą one nie spełniać powyższych kryteriów w momencie pisania.
+W tej lekcji będziemy odnosić się do modeli jako "otwarte modele", ponieważ mogą one nie spełniać powyższych kryteriów w chwili pisania.
 
 ## Korzyści z modeli otwartych
 
-**Wysoka możliwość dostosowania** - Ponieważ modele otwarte są wydawane z szczegółowymi informacjami o treningu, badacze i deweloperzy mogą modyfikować wnętrze modelu. To umożliwia tworzenie wysoko wyspecjalizowanych modeli, które są dostrojone do konkretnego zadania lub obszaru badań. Przykłady obejmują generowanie kodu, operacje matematyczne i biologię.
+**Wysoka konfigurowalność** - Ponieważ otwarte modele są udostępniane z szczegółowymi informacjami dotyczącymi treningu, badacze i deweloperzy mogą modyfikować ich wnętrze. Umożliwia to tworzenie wysoce wyspecjalizowanych modeli dostrojonych do konkretnego zadania lub dziedziny nauki. Przykładami są generowanie kodu, operacje matematyczne i biologia.
 
-**Koszt** - Koszt na token za użycie i wdrożenie tych modeli jest niższy niż modeli zastrzeżonych. Przy budowaniu aplikacji Generative AI, warto rozważyć wydajność w stosunku do ceny podczas pracy z tymi modelami w przypadku użycia.
+**Koszt** - Koszt za token przy używaniu i wdrażaniu tych modeli jest niższy niż w przypadku modeli własnościowych. Budując aplikacje Generative AI, warto rozważyć wydajność względem ceny dla swojego konkretnego przypadku użycia.
 
-![Koszt modelu](../../../translated_images/model-price.bf4c17ebea0f13045f3c10fb8615e171c6a664837cb2f4107c312552149ae88d.pl.png) Źródło: Artificial Analysis
+![Koszt modelu](../../../translated_images/pl/model-price.3f5a3e4d32ae00b4.webp)
+Źródło: Artificial Analysis
 
-**Elastyczność** - Praca z modelami otwartymi pozwala na elastyczność w zakresie używania różnych modeli lub ich łączenia. Przykładem jest [HuggingChat Assistants](https://huggingface.co/chat?WT.mc_id=academic-105485-koreyst), gdzie użytkownik może wybrać model używany bezpośrednio w interfejsie użytkownika:
+**Elastyczność** - Praca z otwartymi modelami daje elastyczność w zakresie używania różnych modeli lub ich łączenia. Przykładem są [Asystenci HuggingChat](https://huggingface.co/chat?WT.mc_id=academic-105485-koreyst), gdzie użytkownik może wybrać model bezpośrednio w interfejsie:
 
-![Wybierz model](../../../translated_images/choose-model.1f574fd269d66a894a92f8b8a1c4c3e7cf9e2d9ece5fc66c7d95efdc5d01501d.pl.png)
+![Wybierz model](../../../translated_images/pl/choose-model.f095d15bbac92214.webp)
 
-## Badanie różnych modeli otwartych
+## Eksploracja różnych modeli otwartych
 
 ### Llama 2
 
-[LLama2](https://huggingface.co/meta-llama?WT.mc_id=academic-105485-koreyst), opracowany przez Meta, jest modelem otwartym zoptymalizowanym dla aplikacji opartych na czacie. Jest to wynikiem metody dostrajania, która obejmowała dużą ilość dialogów i opinii ludzkich. Dzięki tej metodzie model generuje więcej wyników zgodnych z oczekiwaniami ludzkimi, co zapewnia lepsze doświadczenie użytkownika.
+[Llama2](https://huggingface.co/meta-llama?WT.mc_id=academic-105485-koreyst), opracowany przez Meta, to otwarty model zoptymalizowany do zastosowań czatowych. Jest to możliwe dzięki metodzie fine-tuningu, która obejmowała dużą ilość dialogów i feedback od ludzi. Dzięki temu model generuje wyniki bardziej zgodne z oczekiwaniami użytkowników, co poprawia doświadczenie użytkownika.
 
-Przykłady dostrojonych wersji Llama obejmują [Japanese Llama](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b?WT.mc_id=academic-105485-koreyst), który specjalizuje się w języku japońskim oraz [Llama Pro](https://huggingface.co/TencentARC/LLaMA-Pro-8B?WT.mc_id=academic-105485-koreyst), który jest ulepszoną wersją modelu podstawowego.
+Przykładami wersji fine-tuningu Llamy są [Japanese Llama](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b?WT.mc_id=academic-105485-koreyst), specjalizująca się w japońskim, oraz [Llama Pro](https://huggingface.co/TencentARC/LLaMA-Pro-8B?WT.mc_id=academic-105485-koreyst), będąca ulepszoną wersją modelu bazowego.
 
 ### Mistral
 
-[Mistral](https://huggingface.co/mistralai?WT.mc_id=academic-105485-koreyst) jest modelem otwartym o silnym nacisku na wysoką wydajność i efektywność. Wykorzystuje podejście Mixture-of-Experts, które łączy grupę wyspecjalizowanych modeli ekspertów w jeden system, gdzie w zależności od wejścia, wybierane są określone modele do użycia. Dzięki temu obliczenia są bardziej efektywne, ponieważ modele zajmują się tylko tymi wejściami, w których się specjalizują.
+[Mistral](https://huggingface.co/mistralai?WT.mc_id=academic-105485-koreyst) to otwarty model z silnym naciskiem na wysoką wydajność i efektywność. Wykorzystuje podejście Mixture-of-Experts, które łączy grupę wyspecjalizowanych modeli ekspertów w jeden system, gdzie w zależności od wejścia są wybierane odpowiednie modele do użycia. Sprawia to, że obliczenia są bardziej efektywne, gdyż modele odpowiadają tylko na te dane wejściowe, w których są wyspecjalizowane.
 
-Przykłady dostrojonych wersji Mistral obejmują [BioMistral](https://huggingface.co/BioMistral/BioMistral-7B?text=Mon+nom+est+Thomas+et+mon+principal?WT.mc_id=academic-105485-koreyst), który skupia się na dziedzinie medycznej, oraz [OpenMath Mistral](https://huggingface.co/nvidia/OpenMath-Mistral-7B-v0.1-hf?WT.mc_id=academic-105485-koreyst), który wykonuje obliczenia matematyczne.
+Przykładami wersji fine-tuned Mistrala są [BioMistral](https://huggingface.co/BioMistral/BioMistral-7B?text=Mon+nom+est+Thomas+et+mon+principal?WT.mc_id=academic-105485-koreyst), skupiający się na medycynie, oraz [OpenMath Mistral](https://huggingface.co/nvidia/OpenMath-Mistral-7B-v0.1-hf?WT.mc_id=academic-105485-koreyst), służący do obliczeń matematycznych.
 
 ### Falcon
 
-[Falcon](https://huggingface.co/tiiuae?WT.mc_id=academic-105485-koreyst) to LLM stworzony przez Instytut Innowacji Technologicznych (**TII**). Falcon-40B został wytrenowany na 40 miliardach parametrów, co pokazało, że przewyższa GPT-3 przy mniejszym budżecie obliczeniowym. Jest to możliwe dzięki zastosowaniu algorytmu FlashAttention i wielozapytaniowej uwagi, które pozwalają zmniejszyć wymagania pamięciowe w czasie inferencji. Dzięki skróconemu czasowi inferencji, Falcon-40B nadaje się do aplikacji czatowych.
+[Falcon](https://huggingface.co/tiiuae?WT.mc_id=academic-105485-koreyst) to LLM stworzony przez Technology Innovation Institute (**TII**). Falcon-40B był trenowany na 40 miliardach parametrów i wykazał się lepszą wydajnością niż GPT-3 przy mniejszym budżecie obliczeniowym. To zasługa użycia algorytmu FlashAttention i multiquery attention, które zmniejszają wymagania pamięciowe podczas inferencji. Dzięki krótszemu czasowi inferencji Falcon-40B nadaje się do zastosowań czatowych.
 
-Przykłady dostrojonych wersji Falcon obejmują [OpenAssistant](https://huggingface.co/OpenAssistant/falcon-40b-sft-top1-560?WT.mc_id=academic-105485-koreyst), asystenta zbudowanego na otwartych modelach oraz [GPT4ALL](https://huggingface.co/nomic-ai/gpt4all-falcon?WT.mc_id=academic-105485-koreyst), który dostarcza wyższą wydajność niż model podstawowy.
+Przykładami wersji fine-tuned Falcona są [OpenAssistant](https://huggingface.co/OpenAssistant/falcon-40b-sft-top1-560?WT.mc_id=academic-105485-koreyst), asystent zbudowany na otwartych modelach, oraz [GPT4ALL](https://huggingface.co/nomic-ai/gpt4all-falcon?WT.mc_id=academic-105485-koreyst), który zapewnia wyższą wydajność niż model bazowy.
 
 ## Jak wybrać
 
-Nie ma jednej odpowiedzi na pytanie, jak wybrać model otwarty. Dobrym miejscem na początek jest skorzystanie z funkcji filtrowania według zadania w Azure AI Studio. Pomoże to zrozumieć, do jakich typów zadań model został wytrenowany. Hugging Face utrzymuje również LLM Leaderboard, który pokazuje najlepsze modele w oparciu o określone metryki.
+Nie ma jednej odpowiedzi na wybór otwartego modelu. Dobrym miejscem na start jest użycie filtra według zadania w katalogu modeli Microsoft Foundry. Pomoże to zrozumieć, do jakich zadań model był trenowany. Hugging Face utrzymuje również LLM Leaderboard, który pokazuje najlepsze modele na podstawie określonych metryk.
 
-Podczas porównywania LLM w różnych typach, [Artificial Analysis](https://artificialanalysis.ai/?WT.mc_id=academic-105485-koreyst) to kolejny świetny zasób:
+Jeśli chcesz porównać LLM w różnych kategoriach, [Artificial Analysis](https://artificialanalysis.ai/?WT.mc_id=academic-105485-koreyst) to kolejne świetne źródło:
 
-![Jakość modelu](../../../translated_images/model-quality.10696c659e8e327352b6c2352d000092a0a91abb31a1ffd337fb16a9edcb7d9c.pl.png) Źródło: Artificial Analysis
+![Jakość modelu](../../../translated_images/pl/model-quality.aaae1c22e00f7ee1.webp)
+Źródło: Artificial Analysis
 
-Jeśli pracujesz nad konkretnym przypadkiem użycia, skuteczne może być wyszukiwanie dostrojonych wersji skupionych na tym samym obszarze. Eksperymentowanie z wieloma otwartymi modelami, aby zobaczyć, jak spełniają one oczekiwania twoje i użytkowników, to kolejna dobra praktyka.
+Jeśli pracujesz nad konkretnym przypadkiem użycia, efektywne może być poszukiwanie wersji fine-tuningu skoncentrowanych na tej samej dziedzinie. Eksperymentowanie z wieloma otwartymi modelami, aby zobaczyć, jak działają zgodnie z Twoimi i oczekiwaniami użytkowników, to kolejna dobra praktyka.
 
 ## Następne kroki
 
-Najlepszą częścią modeli otwartych jest to, że można szybko zacząć z nimi pracować. Sprawdź [Katalog modeli Azure AI Studio](https://ai.azure.com?WT.mc_id=academic-105485-koreyst), który zawiera konkretną kolekcję Hugging Face z omawianymi tutaj modelami.
+Najlepsze w modelach otwartych jest to, że możesz zacząć z nimi pracować dość szybko. Sprawdź [katalog modeli Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst), który zawiera specjalną kolekcję Hugging Face z modelami omówionymi tutaj.
 
-## Nauka nie kończy się tutaj, kontynuuj podróż
+## Nauka na tym się nie kończy, kontynuuj podróż
 
-Po ukończeniu tej lekcji, sprawdź naszą [kolekcję nauki o AI generatywnej](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby kontynuować podnoszenie swojej wiedzy o AI generatywnej!
+Po ukończeniu tej lekcji sprawdź naszą [kolekcję nauki Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby dalej podnosić swoje umiejętności w dziedzinie Generative AI!
 
-**Zrzeczenie się odpowiedzialności**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uważany za źródło autorytatywne. W przypadku informacji krytycznych zaleca się profesjonalne tłumaczenie przez człowieka. Nie ponosimy odpowiedzialności za wszelkie nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,71 +1,62 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "df98b2c59f87d8543135301e87969f70",
-  "translation_date": "2025-05-20T02:11:10+00:00",
-  "source_file": "15-rag-and-vector-databases/data/own_framework.md",
-  "language_code": "de"
-}
--->
-# Einführung in neuronale Netze. Mehrschichtiges Perzeptron
+# Einführung in Neuronale Netze. Mehrschichtiger Perzeptron
 
-Im vorherigen Abschnitt haben Sie das einfachste Modell eines neuronalen Netzes kennengelernt - das einlagige Perzeptron, ein lineares Zwei-Klassen-Klassifikationsmodell.
+Im vorherigen Abschnitt hast du das einfachste Modell eines neuronalen Netzes kennengelernt – den einlagigen Perzeptron, ein lineares Zwei-Klassen-Klassifikationsmodell.
 
-In diesem Abschnitt werden wir dieses Modell in ein flexibleres Framework erweitern, das es uns ermöglicht:
+In diesem Abschnitt erweitern wir dieses Modell zu einem flexibleren Rahmen, der es uns ermöglicht:
 
-* **Mehrklassenklassifikation** zusätzlich zur Zwei-Klassen-Klassifikation durchzuführen
-* **Regressionsprobleme** zusätzlich zur Klassifikation zu lösen
+* neben der Zwei-Klassen-Klassifikation auch **Mehrklassenklassifikation** durchzuführen
+* neben Klassifikationsproblemen auch **Regressionsprobleme** zu lösen
 * Klassen zu trennen, die nicht linear separierbar sind
 
-Wir werden auch unser eigenes modulares Framework in Python entwickeln, das es uns ermöglicht, verschiedene Architekturen von neuronalen Netzen zu konstruieren.
+Außerdem entwickeln wir unser eigenes modulares Framework in Python, mit dem wir verschiedene Architekturen neuronaler Netze aufbauen können.
 
-## Formalisierung des maschinellen Lernens
+## Formalisierung des Machine Learning
 
-Beginnen wir mit der Formalisierung des Problems des maschinellen Lernens. Angenommen, wir haben einen Trainingsdatensatz **X** mit Labels **Y**, und wir müssen ein Modell *f* erstellen, das die genauesten Vorhersagen trifft. Die Qualität der Vorhersagen wird durch die **Verlustfunktion** ℒ gemessen. Die folgenden Verlustfunktionen werden häufig verwendet:
+Beginnen wir mit der Formalisierung des Machine-Learning-Problems. Angenommen, wir haben einen Trainingsdatensatz **X** mit Labels **Y** und müssen ein Modell *f* erstellen, das möglichst genaue Vorhersagen trifft. Die Qualität der Vorhersagen wird durch die **Loss-Funktion** ℒ gemessen. Häufig verwendete Loss-Funktionen sind:
 
-* Für Regressionsprobleme, wenn wir eine Zahl vorhersagen müssen, können wir den **absoluten Fehler** ∑<sub>i</sub>|f(x<sup>(i)</sup>)-y<sup>(i)</sup>| oder den **quadratischen Fehler** ∑<sub>i</sub>(f(x<sup>(i)</sup>)-y<sup>(i)</sup>)<sup>2</sup> verwenden
-* Für die Klassifikation verwenden wir den **0-1-Verlust** (was im Wesentlichen dasselbe ist wie die **Genauigkeit** des Modells) oder den **logistischen Verlust**.
+* Für Regressionsprobleme, bei denen eine Zahl vorhergesagt werden soll, können wir den **absoluten Fehler** ∑<sub>i</sub>|f(x<sup>(i)</sup>)-y<sup>(i)</sup>| oder den **quadratischen Fehler** ∑<sub>i</sub>(f(x<sup>(i)</sup>)-y<sup>(i)</sup>)<sup>2</sup> verwenden
+* Für Klassifikation nutzen wir die **0-1-Loss** (die im Grunde der **Genauigkeit** des Modells entspricht) oder die **logistische Loss**
 
-Für das einlagige Perzeptron wurde die Funktion *f* als lineare Funktion *f(x)=wx+b* definiert (hier ist *w* die Gewichtsmatrix, *x* ist der Vektor der Eingabefeatures und *b* ist der Bias-Vektor). Für verschiedene Architekturen von neuronalen Netzen kann diese Funktion eine komplexere Form annehmen.
+Für den einlagigen Perzeptron wurde die Funktion *f* als lineare Funktion *f(x)=wx+b* definiert (wobei *w* die Gewichtsmatrix, *x* der Vektor der Eingabemerkmale und *b* der Bias-Vektor ist). Für verschiedene Architekturen neuronaler Netze kann diese Funktion komplexer sein.
 
-> Im Fall der Klassifikation ist es oft wünschenswert, Wahrscheinlichkeiten der entsprechenden Klassen als Netzwerkausgabe zu erhalten. Um beliebige Zahlen in Wahrscheinlichkeiten umzuwandeln (z.B. um die Ausgabe zu normalisieren), verwenden wir oft die **Softmax-Funktion** σ, und die Funktion *f* wird zu *f(x)=σ(wx+b)*
+> Im Fall der Klassifikation ist es oft wünschenswert, Wahrscheinlichkeiten der jeweiligen Klassen als Netzwerkausgabe zu erhalten. Um beliebige Zahlen in Wahrscheinlichkeiten umzuwandeln (z.B. zur Normalisierung der Ausgabe), verwenden wir häufig die **softmax**-Funktion σ, wodurch die Funktion *f* zu *f(x)=σ(wx+b)* wird.
 
-In der Definition von *f* oben werden *w* und *b* als **Parameter** θ=⟨*w,b*⟩ bezeichnet. Angesichts des Datensatzes ⟨**X**,**Y**⟩ können wir einen Gesamten Fehler für den gesamten Datensatz als Funktion der Parameter θ berechnen.
+In der obigen Definition von *f* werden *w* und *b* als **Parameter** θ=⟨*w,b*⟩ bezeichnet. Gegeben den Datensatz ⟨**X**,**Y**⟩, können wir den Gesamtfehler über den gesamten Datensatz als Funktion der Parameter θ berechnen.
 
-> ✅ **Das Ziel des Trainings von neuronalen Netzen ist es, den Fehler durch Variation der Parameter θ zu minimieren**
+> ✅ **Das Ziel des Trainings eines neuronalen Netzes ist es, den Fehler durch Variation der Parameter θ zu minimieren**
 
-## Gradient-Abstiegsoptimierung
+## Gradient Descent Optimierung
 
-Es gibt eine bekannte Methode der Funktionsoptimierung namens **Gradientenabstieg**. Die Idee ist, dass wir eine Ableitung (im mehrdimensionalen Fall **Gradient** genannt) der Verlustfunktion bezüglich der Parameter berechnen können und die Parameter so variieren, dass der Fehler abnimmt. Dies kann wie folgt formalisiert werden:
+Es gibt eine bekannte Methode zur Optimierung von Funktionen, die **Gradient Descent** genannt wird. Die Idee ist, dass wir die Ableitung (im mehrdimensionalen Fall den **Gradienten**) der Loss-Funktion bezüglich der Parameter berechnen können und die Parameter so anpassen, dass der Fehler abnimmt. Formal lässt sich das so ausdrücken:
 
-* Initialisieren Sie die Parameter mit einigen Zufallswerten w<sup>(0)</sup>, b<sup>(0)</sup>
-* Wiederholen Sie den folgenden Schritt viele Male:
-    - w<sup>(i+1)</sup> = w<sup>(i)</sup>-η∂ℒ/∂w
-    - b<sup>(i+1)</sup> = b<sup>(i)</sup>-η∂ℒ/∂b
+* Initialisiere die Parameter mit zufälligen Werten w<sup>(0)</sup>, b<sup>(0)</sup>
+* Wiederhole den folgenden Schritt viele Male:
+    - w<sup>(i+1)</sup> = w<sup>(i)</sup> - η ∂ℒ/∂w
+    - b<sup>(i+1)</sup> = b<sup>(i)</sup> - η ∂ℒ/∂b
 
-Während des Trainings sollen die Optimierungsschritte unter Berücksichtigung des gesamten Datensatzes berechnet werden (denken Sie daran, dass der Verlust als Summe über alle Trainingsproben berechnet wird). In der Realität nehmen wir jedoch kleine Teile des Datensatzes, sogenannte **Minibatches**, und berechnen die Gradienten basierend auf einem Teil der Daten. Da der Teil jedes Mal zufällig gewählt wird, wird diese Methode als **stochastischer Gradientenabstieg** (SGD) bezeichnet.
+Während des Trainings werden die Optimierungsschritte eigentlich unter Berücksichtigung des gesamten Datensatzes berechnet (denk daran, dass der Loss als Summe über alle Trainingsbeispiele berechnet wird). In der Praxis nehmen wir jedoch kleine Teilmengen des Datensatzes, sogenannte **Minibatches**, und berechnen die Gradienten nur auf Basis dieser Teilmenge. Da die Teilmenge jedes Mal zufällig gewählt wird, nennt man diese Methode **stochastischer Gradient Descent** (SGD).
 
 ## Mehrschichtige Perzeptrons und Backpropagation
 
-Ein einlagiges Netzwerk, wie wir oben gesehen haben, ist in der Lage, linear separierbare Klassen zu klassifizieren. Um ein reichhaltigeres Modell zu erstellen, können wir mehrere Schichten des Netzwerks kombinieren. Mathematisch würde dies bedeuten, dass die Funktion *f* eine komplexere Form hat und in mehreren Schritten berechnet wird:
-* z<sub>1</sub>=w<sub>1</sub>x+b<sub>1</sub>
-* z<sub>2</sub>=w<sub>2</sub>α(z<sub>1</sub>)+b<sub>2</sub>
+Ein einlagiges Netzwerk, wie oben gezeigt, kann linear separierbare Klassen klassifizieren. Um ein komplexeres Modell zu bauen, können wir mehrere Schichten des Netzwerks kombinieren. Mathematisch bedeutet das, dass die Funktion *f* eine komplexere Form annimmt und in mehreren Schritten berechnet wird:
+* z<sub>1</sub> = w<sub>1</sub>x + b<sub>1</sub>
+* z<sub>2</sub> = w<sub>2</sub> α(z<sub>1</sub>) + b<sub>2</sub>
 * f = σ(z<sub>2</sub>)
 
-Hier ist α eine **nichtlineare Aktivierungsfunktion**, σ ist eine Softmax-Funktion und die Parameter θ=<*w<sub>1</sub>,b<sub>1</sub>,w<sub>2</sub>,b<sub>2</sub>*>.
+Hierbei ist α eine **nichtlineare Aktivierungsfunktion**, σ die softmax-Funktion, und die Parameter sind θ = ⟨*w<sub>1</sub>, b<sub>1</sub>, w<sub>2</sub>, b<sub>2</sub>*⟩.
 
-Der Gradientenabstiegsalgorithmus würde gleich bleiben, aber es wäre schwieriger, die Gradienten zu berechnen. Angesichts der Kettenregel der Differentiation können wir die Ableitungen wie folgt berechnen:
+Der Gradient-Descent-Algorithmus bleibt gleich, aber die Berechnung der Gradienten wird komplexer. Mithilfe der Kettenregel der Differentiation können wir die Ableitungen folgendermaßen berechnen:
 
 * ∂ℒ/∂w<sub>2</sub> = (∂ℒ/∂σ)(∂σ/∂z<sub>2</sub>)(∂z<sub>2</sub>/∂w<sub>2</sub>)
 * ∂ℒ/∂w<sub>1</sub> = (∂ℒ/∂σ)(∂σ/∂z<sub>2</sub>)(∂z<sub>2</sub>/∂α)(∂α/∂z<sub>1</sub>)(∂z<sub>1</sub>/∂w<sub>1</sub>)
 
-> ✅ Die Kettenregel der Differentiation wird verwendet, um die Ableitungen der Verlustfunktion bezüglich der Parameter zu berechnen.
+> ✅ Die Kettenregel wird verwendet, um die Ableitungen der Loss-Funktion bezüglich der Parameter zu berechnen.
 
-Beachten Sie, dass der linke Teil all dieser Ausdrücke gleich ist und wir daher die Ableitungen effektiv berechnen können, indem wir von der Verlustfunktion aus "rückwärts" durch den Berechnungsgraphen gehen. Daher wird die Methode des Trainings eines mehrschichtigen Perzeptrons als **Backpropagation** oder 'Backprop' bezeichnet.
+Beachte, dass der linkeste Teil all dieser Ausdrücke gleich ist, sodass wir die Ableitungen effektiv ausgehend von der Loss-Funktion „rückwärts“ durch den Berechnungsgraphen berechnen können. Daher wird die Methode zum Training eines mehrschichtigen Perzeptrons **Backpropagation** oder kurz „Backprop“ genannt.
 
-> TODO: Bildzitat
+> TODO: Bildquelle
 
-> ✅ Wir werden Backprop in unserem Notebook-Beispiel viel detaillierter behandeln.  
+> ✅ Wir werden Backpropagation in unserem Notebook-Beispiel noch viel ausführlicher behandeln.
 
 ## Fazit
 
@@ -73,20 +64,20 @@ In dieser Lektion haben wir unsere eigene Bibliothek für neuronale Netze erstel
 
 ## 🚀 Herausforderung
 
-Im begleitenden Notebook werden Sie Ihr eigenes Framework für den Bau und das Training mehrschichtiger Perzeptrons implementieren. Sie werden im Detail sehen können, wie moderne neuronale Netze arbeiten.
+Im begleitenden Notebook wirst du dein eigenes Framework zum Aufbau und Training mehrschichtiger Perzeptrons implementieren. Du wirst im Detail sehen, wie moderne neuronale Netze funktionieren.
 
-Gehen Sie zum OwnFramework-Notebook und arbeiten Sie es durch.
+Gehe zum OwnFramework-Notebook und arbeite es durch.
 
-## Überprüfung & Selbststudium
+## Rückblick & Selbststudium
 
-Backpropagation ist ein häufig verwendeter Algorithmus in KI und ML, der es wert ist, im Detail studiert zu werden.
+Backpropagation ist ein gängiger Algorithmus in KI und ML, der es wert ist, genauer studiert zu werden.
 
 ## Aufgabe
 
-In diesem Labor werden Sie aufgefordert, das Framework, das Sie in dieser Lektion erstellt haben, zur Lösung der MNIST-Handschriftenerkennung zu verwenden.
+In diesem Labor sollst du das in dieser Lektion erstellte Framework verwenden, um die Klassifikation handgeschriebener Ziffern aus dem MNIST-Datensatz zu lösen.
 
 * Anweisungen
 * Notebook
 
 **Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.

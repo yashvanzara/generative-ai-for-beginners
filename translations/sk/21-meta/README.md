@@ -1,67 +1,61 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4c2a0b0c738b649ef049fb99a23be661",
-  "translation_date": "2025-05-20T11:15:54+00:00",
-  "source_file": "21-meta/README.md",
-  "language_code": "sk"
-}
--->
-# Budovanie s modelmi Meta Family
+# Práca s modelmi rodiny Meta 
 
-## Úvod
+## Úvod 
 
-Táto lekcia pokryje:
+Táto lekcia pokryje: 
 
-- Preskúmanie dvoch hlavných modelov Meta family - Llama 3.1 a Llama 3.2
-- Pochopenie prípadov použitia a scenárov pre každý model
-- Ukážka kódu, ktorá zobrazuje jedinečné vlastnosti každého modelu
+- Preskúmanie dvoch hlavných modelov rodiny Meta - Llama 3.1 a Llama 3.2 
+- Pochopenie prípadov použitia a scénarov pre každý model 
+- Ukážka kódu na demonštráciu jedinečných funkcií každého modelu 
 
-## Meta Family of Models
 
-V tejto lekcii preskúmame 2 modely z rodiny Meta alebo "Llama Herd" - Llama 3.1 a Llama 3.2
+## Rodina modelov Meta 
 
-Tieto modely sú dostupné v rôznych variantoch a sú dostupné na GitHub Model marketplace. Tu sú podrobnosti o používaní GitHub Models na [prototypovanie s AI modelmi](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+V tejto lekcii preskúmame 2 modely z rodiny Meta alebo „Llama stádo“ - Llama 3.1 a Llama 3.2.
 
-Varianty modelov:
-- Llama 3.1 - 70B Instruct
-- Llama 3.1 - 405B Instruct
-- Llama 3.2 - 11B Vision Instruct
-- Llama 3.2 - 90B Vision Instruct
+Tieto modely prichádzajú v rôznych variantoch a sú dostupné v katalógu [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
 
-*Poznámka: Llama 3 je tiež dostupná na GitHub Models, ale nebude pokrytá v tejto lekcii*
+> **Poznámka:** GitHub Models bude ukončený koncom júla 2026. Tu sú ďalšie podrobnosti o používaní [Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) na prototypovanie s AI modelmi.
 
-## Llama 3.1
+Varianty modelov: 
+- Llama 3.1 - 70B Instruct 
+- Llama 3.1 - 405B Instruct 
+- Llama 3.2 - 11B Vision Instruct 
+- Llama 3.2 - 90B Vision Instruct 
 
-S 405 miliardami parametrov, Llama 3.1 sa radí do kategórie open source LLM.
+*Poznámka: Llama 3 je tiež dostupná v Microsoft Foundry Models, ale nebude pokrytá v tejto lekcii*
 
-Model je vylepšením skoršej verzie Llama 3 tým, že ponúka:
+## Llama 3.1 
 
-- Väčšie okno kontextu - 128k tokenov oproti 8k tokenom
-- Väčšie Max Output Tokens - 4096 oproti 2048
-- Lepšiu podporu viacerých jazykov - vďaka zvýšeniu počtu tréningových tokenov
+S 405 miliardami parametrov patrí Llama 3.1 do kategórie open source LLM. 
 
-Tieto vlastnosti umožňujú Llama 3.1 zvládať zložitejšie prípady použitia pri budovaní GenAI aplikácií vrátane:
-- Natívne volanie funkcií - schopnosť volať externé nástroje a funkcie mimo pracovného toku LLM
-- Lepší výkon RAG - vďaka vyššiemu oknu kontextu
-- Generovanie syntetických dát - schopnosť vytvárať efektívne dáta pre úlohy ako jemné doladenie
+Model je vylepšením oproti skoršiemu vydaniu Llama 3 tým, že ponúka: 
 
-### Natívne volanie funkcií
+- Väčšie kontextové okno - 128k tokenov vs 8k tokenov 
+- Väčší maximálny počet výstupných tokenov - 4096 vs 2048 
+- Lepšiu podporu viacjazyčnosti - vďaka zvýšeniu počtu trénovacích tokenov 
 
-Llama 3.1 bola jemne doladená, aby bola efektívnejšia pri volaní funkcií alebo nástrojov. Má tiež dva vstavané nástroje, ktoré model dokáže identifikovať ako potrebné na použitie na základe výzvy od používateľa. Tieto nástroje sú:
+Tieto schopnosti umožňujú Llama 3.1 zvládať zložitejšie prípady použitia pri budovaní aplikácií GenAI vrátane: 
+- Nativne volanie funkcií - schopnosť volať externé nástroje a funkcie mimo toku LLM
+- Lepší výkon RAG - vďaka väčšiemu kontextovému oknu 
+- Generovanie syntetických dát - schopnosť vytvárať efektívne dáta pre úlohy ako jemné doladenie 
 
-- **Brave Search** - Môže byť použitý na získanie aktuálnych informácií, ako je počasie, vykonaním webového vyhľadávania
-- **Wolfram Alpha** - Môže byť použitý na zložitejšie matematické výpočty, takže nie je potrebné písať vlastné funkcie.
+### Nativne volanie funkcií 
 
-Môžete tiež vytvoriť vlastné nástroje, ktoré LLM môže volať.
+Llama 3.1 bola doladená tak, aby bola efektívnejšia pri volaní funkcií alebo nástrojov. Má tiež dva vstavané nástroje, ktoré model môže identifikovať ako potrebné použiť na základe výzvy od používateľa. Tieto nástroje sú: 
 
-V ukážke kódu nižšie:
+- **Brave Search** - Môže byť použitý na získanie aktuálnych informácií, napríklad počasie, vykonaním vyhľadávania na webe 
+- **Wolfram Alpha** - Môže byť použitý na komplikovanejšie matematické výpočty, takže nie je potrebné písať vlastné funkcie. 
 
-- Definujeme dostupné nástroje (brave_search, wolfram_alpha) v systémovej výzve.
-- Pošleme výzvu používateľa, ktorá sa pýta na počasie v určitom meste.
-- LLM odpovie volaním nástroja Brave Search, ktoré bude vyzerať takto `<|python_tag|>brave_search.call(query="Stockholm weather")`
+Môžete tiež vytvoriť svoje vlastné vlastné nástroje, ktoré môže LLM volať. 
 
-*Poznámka: Táto ukážka len vykonáva volanie nástroja, ak by ste chceli získať výsledky, budete potrebovať vytvoriť bezplatný účet na stránke Brave API a definovať samotnú funkciu*
+V príklade kódu nižšie: 
+
+- Definujeme dostupné nástroje (brave_search, wolfram_alpha) v systémovej výzve. 
+- Posielame používateľskú výzvu, ktorá sa pýta na počasie v určitom meste. 
+- LLM odpovie volaním nástroja Brave Search, ktoré bude vyzerať takto `<|python_tag|>brave_search.call(query="Stockholm weather")` 
+
+*Poznámka: Tento príklad iba vykonáva volanie nástroja, ak chcete získať výsledky, budete si musieť vytvoriť bezplatný účet na stránke Brave API a definovať samotnú funkciu.
 
 ```python 
 import os
@@ -69,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Získajte ich z stránky "Prehľad" vášho projektu Microsoft Foundry
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -101,17 +96,18 @@ response = client.complete(messages=messages, model=model_name)
 print(response.choices[0].message.content)
 ```
 
-## Llama 3.2
+## Llama 3.2 
 
-Aj keď je LLM, jedným z obmedzení Llama 3.1 je multimodalita. To znamená, schopnosť používať rôzne typy vstupov, ako sú obrázky ako výzvy a poskytovať odpovede. Táto schopnosť je jednou z hlavných vlastností Llama 3.2. Tieto vlastnosti zahŕňajú:
+Napriek tomu, že je LLM, jedným obmedzením Llama 3.1 je jej nedostatok multimodality. To znamená neschopnosť použiť rôzne typy vstupov, ako sú obrázky vo výzvach, a poskytovať odpovede. Táto schopnosť je jednou z hlavných funkcií Llama 3.2. Tieto funkcie tiež zahŕňajú: 
 
-- Multimodalita - má schopnosť hodnotiť textové aj obrazové výzvy
-- Malé až stredné veľkostné varianty (11B a 90B) - to poskytuje flexibilné možnosti nasadenia,
-- Varianty iba textové (1B a 3B) - to umožňuje modelu byť nasadený na okrajových / mobilných zariadeniach a poskytuje nízku latenciu
+- Multimodalita - schopnosť hodnotiť textové aj obrazové výzvy 
+- Variácie menšej až strednej veľkosti (11B a 90B) - ktoré poskytujú flexibilné možnosti nasadenia, 
+- Výhradne textové variácie (1B a 3B) - umožňujú nasadenie modelu na edge/mobilných zariadeniach a poskytujú nízku latenciu 
 
-Podpora multimodality predstavuje veľký krok v oblasti open source modelov. Ukážka kódu nižšie berie ako vstup obraz a textovú výzvu, aby získala analýzu obrazu od Llama 3.2 90B.
+Podpora multimodality predstavuje veľký krok vo svete open source modelov. Príklad kódu nižšie berie ako vstup obrázok aj textovú výzvu na získanie analýzy obrázka od Llama 3.2 90B. 
 
-### Multimodálna podpora s Llama 3.2
+
+### Podpora multimodality s Llama 3.2
 
 ```python 
 import os
@@ -126,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Získajte ich z stránky "Prehľad" vášho projektu Microsoft Foundry
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -158,9 +155,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## Učenie nekončí tu, pokračujte v ceste
+## Učenie tu nekončí, pokračujte v ceste
 
-Po dokončení tejto lekcie si pozrite našu [Generative AI Learning kolekciu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) a pokračujte v rozširovaní vašich znalostí o Generative AI!
+Po dokončení tejto lekcie si pozrite našu [zbierku pre učenie Generatívnej AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby ste pokračovali vo zvyšovaní svojich vedomostí o Generatívnej AI!
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím uvedomte si, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,92 +1,85 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "df98b2c59f87d8543135301e87969f70",
-  "translation_date": "2025-05-20T02:27:33+00:00",
-  "source_file": "15-rag-and-vector-databases/data/own_framework.md",
-  "language_code": "sr"
-}
--->
-# Uvod u Neuronske Mreže. Višeslojni Perceptron
+# Увод у неуронске мреже. Вишеслојни перцептрон
 
-U prethodnom delu, naučili ste o najjednostavnijem modelu neuronske mreže - jednoslojnom perceptronu, linearnom modelu za klasifikaciju sa dve klase.
+У претходном делу сте научили о најједноставнијем моделу неуронске мреже - једнослојном перцептрону, линеарном моделу за класификацију у две класе.
 
-U ovom delu proširićemo ovaj model u fleksibilniji okvir, koji nam omogućava da:
+У овом делу ћемо проширити овај модел у флексибилнији оквир који нам омогућава да:
 
-* izvodimo **klasifikaciju sa više klasa** pored klasifikacije sa dve klase
-* rešavamo **probleme regresije** pored klasifikacije
-* razdvojimo klase koje nisu linearno razdvojive
+* изводимо **класификацију више класа** поред класификације у две класе
+* решавамо **проблеме регресије** поред класификације
+* раздвајамо класе које нису линеарно раздвојиве
 
-Takođe ćemo razviti sopstveni modularni okvir u Python-u koji će nam omogućiti konstruisanje različitih arhitektura neuronskih mreža.
+Такође ћемо развити свој модуларни оквир у Python-у који ће нам омогућити да конструишемо различите архитектуре неуронских мрежа.
 
-## Formalizacija Mašinskog Učenja
+## Формализација машинског учења
 
-Počnimo sa formalizacijom problema Mašinskog Učenja. Pretpostavimo da imamo trening skup podataka **X** sa etiketama **Y**, i da treba da izgradimo model *f* koji će davati što tačnija predviđanja. Kvalitet predviđanja meri se pomoću **funkcije gubitka** ℒ. Sledeće funkcije gubitka se često koriste:
+Хајде да почнемо са формализацијом проблема машинског учења. Претпоставимо да имамо скуп података за учење **X** са ознакама **Y**, и да треба да направимо модел *f* који ће правити што прецизније предикције. Квалитет предикција мери се помоћу **функције губитка** ℒ. Често коришћене функције губитка су:
 
-* Za problem regresije, kada treba da predvidimo broj, možemo koristiti **apsolutnu grešku** ∑<sub>i</sub>|f(x<sup>(i)</sup>)-y<sup>(i)</sup>|, ili **kvadratnu grešku** ∑<sub>i</sub>(f(x<sup>(i)</sup>)-y<sup>(i)</sup>)<sup>2</sup>
-* Za klasifikaciju, koristimo **0-1 gubitak** (što je u suštini isto kao i **tačnost** modela), ili **logistički gubitak**.
+* За проблем регресије, када треба предвидети број, можемо користити **апсолутну грешку** ∑<sub>i</sub>|f(x<sup>(i)</sup>)-y<sup>(i)</sup>|, или **квадратну грешку** ∑<sub>i</sub>(f(x<sup>(i)</sup>)-y<sup>(i)</sup>)<sup>2</sup>
+* За класификацију користимо **0-1 губитак** (што је у суштини исто као **тачност** модела), или **логистичку функцију губитка**.
 
-Za jednoslojni perceptron, funkcija *f* je definisana kao linearna funkcija *f(x)=wx+b* (ovde je *w* matrica težina, *x* je vektor ulaznih karakteristika, a *b* je vektor pristrasnosti). Za različite arhitekture neuronskih mreža, ova funkcija može imati složeniji oblik.
+За једнослојни перцептрон, функција *f* је дефинисана као линеарна функција *f(x)=wx+b* (овде је *w* матрица тежина, *x* вектор улазних карактеристика, а *b* вектор помака). За различите архитектуре неуронских мрежа, ова функција може имати сложенији облик.
 
-> U slučaju klasifikacije, često je poželjno dobiti verovatnoće odgovarajućih klasa kao izlaz mreže. Da bismo pretvorili proizvoljne brojeve u verovatnoće (npr. da normalizujemo izlaz), često koristimo **softmax** funkciju σ, i funkcija *f* postaje *f(x)=σ(wx+b)*
+> У случају класификације, често је пожељно да излаз мреже буду вероватноће одговарајућих класа. Да бисмо претворили произвољне бројеве у вероватноће (нпр. да нормализујемо излаз), често користимо **softmax** функцију σ, и функција *f* постаје *f(x)=σ(wx+b)*
 
-U definiciji *f* iznad, *w* i *b* se nazivaju **parametri** θ=⟨*w,b*⟩. Dati skup podataka ⟨**X**,**Y**⟩, možemo izračunati ukupnu grešku na celom skupu podataka kao funkciju parametara θ.
+У дефиницији *f* изнад, *w* и *b* се називају **параметри** θ=⟨*w,b*⟩. За дати скуп података ⟨**X**,**Y**⟩, можемо израчунати укупну грешку на целом скупу као функцију параметара θ.
 
-> ✅ **Cilj obuke neuronske mreže je da minimizira grešku variranjem parametara θ**
+> ✅ **Циљ тренинга неуронске мреже је да се минимизира грешка варирањем параметара θ**
 
-## Optimizacija Gradijentnim Spuštanjem
+## Оптимизација градијентним спуштањем
 
-Postoji dobro poznata metoda optimizacije funkcije zvana **gradijentno spuštanje**. Ideja je da možemo izračunati derivat (u višedimenzionalnom slučaju zvan **gradijent**) funkcije gubitka u odnosu na parametre, i menjati parametre na takav način da se greška smanjuje. Ovo se može formalizovati na sledeći način:
+Постоји добро позната метода оптимизације функција која се зове **градијентно спуштање**. Идеја је да можемо израчунати извод (у вишедимензионалном случају се назива **градијент**) функције губитка у односу на параметре, и мењати параметре тако да грешка опада. Ово се формализује на следећи начин:
 
-* Inicijalizujte parametre nekim slučajnim vrednostima w<sup>(0)</sup>, b<sup>(0)</sup>
-* Ponavljajte sledeći korak mnogo puta:
+* Иницијализујемо параметре неким случајним вредностима w<sup>(0)</sup>, b<sup>(0)</sup>
+* Понављамо следећи корак више пута:
     - w<sup>(i+1)</sup> = w<sup>(i)</sup>-η∂ℒ/∂w
     - b<sup>(i+1)</sup> = b<sup>(i)</sup>-η∂ℒ/∂b
 
-Tokom obuke, koraci optimizacije bi trebalo da se računaju uzimajući u obzir ceo skup podataka (setite se da se gubitak računa kao zbir kroz sve uzorke obuke). Međutim, u stvarnom životu uzimamo male delove skupa podataka zvane **minibatchevi**, i računamo gradijente na osnovu podskupa podataka. Pošto se podskup uzima nasumično svaki put, takva metoda se naziva **stohastičko gradijentno spuštanje** (SGD).
+Током тренинга, кораци оптимизације се обично рачунају узимајући у обзир цео скуп података (подсетите се да се губитак рачуна као збир кроз све узорке за учење). Међутим, у пракси узимамо мале делове скупа података који се зову **минибатцхеви**, и рачунамо градијенте на основу подскупа података. Пошто се подскуп узима насумично сваки пут, ова метода се назива **стохастичко градијентно спуштање** (SGD).
 
-## Višeslojni Perceptroni i Unazadna Propagacija
+## Вишеслојни перцептрони и бацкпропагација
 
-Jednoslojna mreža, kao što smo videli iznad, je sposobna da klasifikuje linearno razdvojive klase. Da bismo izgradili bogatiji model, možemo kombinovati nekoliko slojeva mreže. Matematički to bi značilo da funkcija *f* ima složeniji oblik i da će se računati u nekoliko koraka:
+Једнослојна мрежа, као што смо видели, може да класификује линеарно раздвојиве класе. Да бисмо направили богатији модел, можемо комбиновати више слојева мреже. Математички, то значи да функција *f* има сложенији облик и рачуна се у неколико корака:
 * z<sub>1</sub>=w<sub>1</sub>x+b<sub>1</sub>
 * z<sub>2</sub>=w<sub>2</sub>α(z<sub>1</sub>)+b<sub>2</sub>
 * f = σ(z<sub>2</sub>)
 
-Ovde je α **nelinearna aktivaciona funkcija**, σ je softmax funkcija, a parametri θ=<*w<sub>1</sub>,b<sub>1</sub>,w<sub>2</sub>,b<sub>2</sub>*>.
+Овде је α **нелинеарна активациона функција**, σ је softmax функција, а параметри θ=<*w<sub>1</sub>,b<sub>1</sub>,w<sub>2</sub>,b<sub>2</sub>*>.
 
-Algoritam gradijentnog spuštanja bi ostao isti, ali bi bilo teže izračunati gradijente. Dato pravilo diferencijacije lanca, možemo izračunati derivate kao:
+Алгоритам градијентног спуштања остаје исти, али је рачунање градијената сложеније. Уз правилo ланчаног извођења, можемо израчунати изводе као:
 
 * ∂ℒ/∂w<sub>2</sub> = (∂ℒ/∂σ)(∂σ/∂z<sub>2</sub>)(∂z<sub>2</sub>/∂w<sub>2</sub>)
 * ∂ℒ/∂w<sub>1</sub> = (∂ℒ/∂σ)(∂σ/∂z<sub>2</sub>)(∂z<sub>2</sub>/∂α)(∂α/∂z<sub>1</sub>)(∂z<sub>1</sub>/∂w<sub>1</sub>)
 
-> ✅ Pravilo diferencijacije lanca se koristi za izračunavanje derivata funkcije gubitka u odnosu na parametre.
+> ✅ Правило ланчаног извођења користи се за израчунавање изводa функције губитка у односу на параметре.
 
-Napomena da je levi deo svih tih izraza isti, i tako možemo efikasno izračunati derivate počevši od funkcije gubitka i idući "unazad" kroz računsku mrežu. Stoga se metoda obuke višeslojnog perceptrona naziva **unazadna propagacija**, ili 'backprop'.
+Имајте у виду да је леви део свих ових израза исти, па можемо ефикасно израчунати изводе крећући се од функције губитка и идући "унатраг" кроз рачунски граф. Због тога се метода тренинга вишеслојног перцептрона назива **бацкпропагација**, или скраћено 'backprop'.
 
-> TODO: citiranje slike
 
-> ✅ Pokrićemo unazadnu propagaciju mnogo detaljnije u našem primeru u beležnici.
 
-## Zaključak
+> TODO: цитат слике
 
-U ovoj lekciji, izgradili smo sopstvenu biblioteku neuronskih mreža i koristili smo je za jednostavan dvodimenzionalni zadatak klasifikacije.
+> ✅ Бацкпропагацију ћемо детаљније обрадити у нашем примеру у свесци.
 
-## 🚀 Izazov
+## Закључак
 
-U pratećoj beležnici, implementiraćete sopstveni okvir za izgradnju i obuku višeslojnih perceptrona. Moći ćete detaljno videti kako funkcionišu moderne neuronske mreže.
+У овој лекцији смо направили своју библиотеку за неуронске мреже и користили је за једноставан задатак класификације у две димензије.
 
-Pređite na beležnicu OwnFramework i radite kroz nju.
+## 🚀 Изазов
 
-## Pregled i Samostalno Učenje
+У пратећој свесци имплементираћете свој оквир за конструисање и тренирање вишеслојних перцептрона. Можете детаљно видети како модерне неуронске мреже функционишу.
 
-Unazadna propagacija je uobičajen algoritam korišćen u AI i ML, vredan je detaljnijeg proučavanja.
+Наставите на OwnFramework свеску и радите кроз њу.
 
-## Zadatak
+## Преглед и самостално учење
 
-U ovoj laboratoriji, traži se da koristite okvir koji ste konstruisali u ovoj lekciji da rešite klasifikaciju rukom pisanih cifara iz MNIST skupa podataka.
+Бацкпропагација је уобичајен алгоритам који се користи у вештачкој интелигенцији и машинском учењу, вреди га детаљније проучити.
 
-* Uputstva
-* Beležnica
+## Задатак
+
+У овом лабораторијском задатку треба да употребите оквир који сте направили у овој лекцији да решите класификацију рукописних цифара MNIST.
+
+* Упутства
+* Свеска
 
 **Одрицање од одговорности**:  
-Овај документ је преведен коришћењем услуге превођења уз помоћ вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да постигнемо тачност, молимо вас да будете свесни да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације, препоручује се професионални људски превод. Не сносимо одговорност за било каква погрешна схватања или погрешна тумачења која произилазе из употребе овог превода.
+Овај документ је преведен коришћењем AI услуге за превођење [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да превод буде тачан, молимо вас да имате у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитетним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.

@@ -1,85 +1,94 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "27a5347a5022d5ef0a72ab029b03526a",
-  "translation_date": "2025-05-20T00:55:18+00:00",
-  "source_file": "14-the-generative-ai-application-lifecycle/README.md",
-  "language_code": "cs"
-}
--->
+[![Integrace s voláním funkcí](../../../translated_images/cs/14-lesson-banner.066d74a31727ac12.webp)](https://youtu.be/ewtQY_RJrzs?si=dyJ2bjiljH7UUHCh)
+
 # Životní cyklus generativní AI aplikace
 
-Důležitou otázkou pro všechny AI aplikace je relevance AI funkcí, protože AI je rychle se vyvíjející oblast. Aby vaše aplikace zůstala relevantní, spolehlivá a robustní, je třeba ji neustále monitorovat, vyhodnocovat a zlepšovat. Zde přichází na řadu životní cyklus generativní AI.
+Důležitou otázkou pro všechny AI aplikace je relevance AI funkcí, protože AI je rychle se vyvíjející oblast, a abyste zajistili, že vaše aplikace zůstane relevantní, spolehlivá a robustní, je potřeba ji neustále sledovat, hodnotit a vylepšovat. Právě zde přichází na řadu životní cyklus generativní AI.
 
-Životní cyklus generativní AI je rámec, který vás provede fázemi vývoje, nasazení a údržby generativní AI aplikace. Pomáhá vám definovat vaše cíle, měřit výkon, identifikovat výzvy a implementovat řešení. Také vám pomáhá sladit vaši aplikaci s etickými a právními standardy vašeho oboru a vašich zainteresovaných stran. Dodržováním životního cyklu generativní AI můžete zajistit, že vaše aplikace vždy přináší hodnotu a uspokojuje vaše uživatele.
+Životní cyklus generativní AI je rámec, který vás provází jednotlivými fázemi vývoje, nasazení a údržby generativní AI aplikace. Pomáhá vám definovat vaše cíle, měřit výkon, identifikovat výzvy a zavádět řešení. Také vám pomáhá sladit vaši aplikaci s etickými a právními standardy vaší oblasti a vašich zainteresovaných stran. Díky sledování životního cyklu generativní AI můžete zajistit, že vaše aplikace vždy přináší hodnotu a uspokojuje uživatele.
 
 ## Úvod
 
 V této kapitole se naučíte:
 
-- Pochopit posun paradigmatu z MLOps na LLMOps
+- Porozumět změně paradigmatu od MLOps k LLMOps
 - Životní cyklus LLM
 - Nástroje pro životní cyklus
-- Měření a vyhodnocení životního cyklu
+- Metrifikace a hodnocení životního cyklu
 
-## Pochopit posun paradigmatu z MLOps na LLMOps
+## Porozumět změně paradigmatu od MLOps k LLMOps
 
-LLM jsou nový nástroj v arzenálu umělé inteligence, jsou neuvěřitelně silné v úlohách analýzy a generování pro aplikace, avšak tato síla má určité důsledky pro to, jak zefektivňujeme úlohy AI a klasického strojového učení.
+LLM jsou novým nástrojem v arzenálu umělé inteligence, jsou nesmírně silné v analytických a generativních úlohách pro aplikace, avšak tato síla má důsledky pro způsob, jakým zefektivňujeme úkoly AI a klasického strojového učení.
 
-K tomu potřebujeme nové paradigma, které přizpůsobí tento nástroj dynamicky a se správnými podněty. Starší AI aplikace můžeme kategorizovat jako "ML aplikace" a novější AI aplikace jako "GenAI aplikace" nebo prostě "AI aplikace", což odráží hlavní technologie a techniky používané v dané době. To posouvá náš příběh v několika ohledech, podívejte se na následující srovnání.
+S tím potřebujeme nové paradigma, které tento nástroj adaptuje dynamicky, s odpovídajícími pobídkami. Starší AI aplikace můžeme kategorizovat jako "ML aplikace" a novější AI aplikace jako "GenAI aplikace" nebo prostě "AI aplikace", což odráží mainstreamové technologie a techniky používané v dané době. Toto mění náš narativ v několika směrech, podívejte se na následující srovnání.
 
-V LLMOps se více zaměřujeme na vývojáře aplikací, používáme integrace jako klíčový bod, využíváme "Modely jako službu" a přemýšlíme o následujících bodech pro metriky.
+![Srovnání LLMOps vs. MLOps](../../../translated_images/cs/01-llmops-shift.29bc933cb3bb0080.webp)
 
-- Kvalita: Kvalita odpovědí
-- Škoda: Odpovědná AI
-- Upřímnost: Základ odpovědí (Dává to smysl? Je to správné?)
-- Náklady: Rozpočet na řešení
-- Latence: Průměrný čas pro odpověď na token
+Všimněte si, že v LLMOps se více zaměřujeme na vývojáře aplikací, používáme integrace jako klíčový prvek, využíváme „Modely jako službu“ a uvažujeme o následujících bodech pro metriky.
+
+- Kvalita: Kvalita odpovědi
+- Škoda: Zodpovědná AI
+- Poctivost: Opodstatněnost odpovědi (Dává to smysl? Je to správné?)
+- Náklady: Rozpočet řešení
+- Latence: Průměrný čas na odpověď tokenu
 
 ## Životní cyklus LLM
 
-Nejprve, abychom pochopili životní cyklus a úpravy, podívejme se na následující infografiku.
+Nejprve, abychom pochopili životní cyklus a změny, podívejme se na následující infografiku.
 
-Jak můžete vidět, to se liší od obvyklých životních cyklů MLOps. LLM mají mnoho nových požadavků, jako je Prompting, různé techniky pro zlepšení kvality (Fine-Tuning, RAG, Meta-Prompts), různé hodnocení a zodpovědnost s odpovědnou AI, a nakonec nové metriky hodnocení (Kvalita, Škoda, Upřímnost, Náklady a Latence).
+![Infografika LLMOps](../../../translated_images/cs/02-llmops.70a942ead05a7645.webp)
 
-Například se podívejte, jak ideujeme. Používáme návrh podnětů k experimentování s různými LLM, abychom prozkoumali možnosti a ověřili, zda jejich hypotéza může být správná.
+Jak si možná všimnete, tento životní cyklus se liší od obvyklých životních cyklů MLOps. LLM mají mnoho nových požadavků, jako je promptování, různé techniky ke zlepšení kvality (Fine-Tuning, RAG, Meta-Prompts), jiné hodnocení a odpovědnost v rámci zodpovědné AI, nakonec nové hodnotící metriky (Kvalita, Škoda, Poctivost, Náklady a Latence).
 
-Uvědomte si, že to není lineární, ale integrované smyčky, iterativní a s celkovým cyklem.
+Například se podívejte, jak vymýšlíme nápady. Používáme prompt engineering k experimentování s různými LLM, abychom prozkoumali možnosti a otestovali, zda by jejich hypotéza mohla být správná.
 
-Jak bychom mohli prozkoumat tyto kroky? Pojďme se podrobněji podívat, jak bychom mohli postavit životní cyklus.
+Upozorňujeme, že to není lineární, ale integrované smyčky, iterativní a s nadřazeným cyklem.
 
-To může vypadat trochu složitě, zaměřme se nejprve na tři velké kroky.
+Jak můžeme tyto kroky prozkoumat? Pojďme si podrobněji ukázat, jak lze životní cyklus postavit.
 
-1. Ideace/Průzkum: Průzkum, zde můžeme prozkoumávat podle našich obchodních potřeb. Prototypování, vytváření [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) a testování, zda je dostatečně efektivní pro naši hypotézu.
-2. Budování/Rozšiřování: Implementace, nyní začínáme vyhodnocovat pro větší datové sady, implementujeme techniky, jako je Fine-tuning a RAG, abychom ověřili robustnost našeho řešení. Pokud ne, může pomoci opětovná implementace, přidání nových kroků do našeho toku nebo restrukturalizace dat. Po testování našeho toku a naší škály, pokud to funguje a zkontrolujeme naše metriky, je připraveno na další krok.
-3. Operationalizace: Integrace, nyní přidáváme monitorovací a výstražné systémy do našeho systému, nasazení a integraci aplikace do naší aplikace.
+![Pracovní tok LLMOps](../../../translated_images/cs/03-llm-stage-flows.3a1e1c401235a6cf.webp)
 
-Pak máme celkový cyklus managementu, zaměřující se na bezpečnost, shodu a řízení.
+Toto může vypadat trochu složitě, zaměřme se nejprve na tři hlavní kroky.
 
-Gratulujeme, nyní máte svou AI aplikaci připravenou a funkční. Pro praktickou zkušenost se podívejte na [Contoso Chat Demo.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreys)
+1. Nápad/Průzkum: Průzkum, zde můžeme zkoumat podle našich obchodních potřeb. Prototypování, vytváření [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) a testování, zda je dostatečně efektivní pro naši hypotézu.
+1. Budování/Doplňování: Implementace, nyní začínáme hodnotit na větších sadách dat, zavádíme techniky jako fine-tuning a RAG, abychom ověřili robustnost našeho řešení. Pokud nefunguje, přeimplementování, přidání nových kroků do našeho toku nebo restrukturalizace dat může pomoci. Po otestování našeho toku a rozsahu, pokud to funguje a zkontrolujeme metriky, je připraveno na další krok.
+1. Provozování: Integrace, nyní přidáme monitorovací a výstražné systémy do našeho systému, nasazení a integraci aplikace do naší aplikace.
 
-Jaké nástroje bychom mohli použít?
+Pak máme nadřazený cyklus správy, zaměřený na bezpečnost, soulad a řízení.
 
-## Nástroje pro životní cyklus
+Gratulujeme, nyní máte svou AI aplikaci připravenou k provozu. Pro praktickou zkušenost se podívejte na [Contoso Chat Demo.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst)
 
-Pro nástroje Microsoft poskytuje [Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys) a [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst), které usnadňují a zjednodušují implementaci vašeho cyklu.
+A jaké nástroje můžeme použít?
 
-[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys) vám umožňuje používat [AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreys). AI Studio je webový portál, který vám umožňuje prozkoumávat modely, vzorky a nástroje. Spravuje vaše zdroje, UI vývojové toky a SDK/CLI možnosti pro vývoj orientovaný na kód.
+## Nástroje životního cyklu
 
-Azure AI vám umožňuje používat více zdrojů k řízení vašich operací, služeb, projektů, potřeb pro vyhledávání vektoru a databází.
+Microsoft poskytuje [Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) a [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst), které usnadňují a umožňují snadné zavedení vašeho životního cyklu.
 
-Vytvářejte od Proof-of-Concept (POC) až po velké aplikace s PromptFlow:
+[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) vám umožňuje využívat [Microsoft Foundry](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst). Microsoft Foundry (dříve Azure AI Studio) je webový portál, který umožňuje prozkoumávat modely, ukázky a nástroje, spravovat vaše zdroje a používat uživatelské vývojové toky stejně jako SDK/CLI možnosti pro kódování.
 
-- Navrhujte a vytvářejte aplikace z VS Code s vizuálními a funkčními nástroji
-- Testujte a dolaďujte své aplikace pro kvalitní AI snadno.
-- Používejte Azure AI Studio k integraci a iteraci s cloudem, nasazujte a integrujte rychle.
+![Možnosti Azure AI](../../../translated_images/cs/04-azure-ai-platform.80203baf03a12fa8.webp)
+
+Azure AI umožňuje používat různé zdroje pro správu provozu, služeb, projektů, vyhledávání vektorů a databázových potřeb.
+
+![LLMOps s Azure AI](../../../translated_images/cs/05-llm-azure-ai-prompt.a5ce85cdbb494bdf.webp)
+
+Konstrukce od proof-of-concept (POC) až po aplikace ve velkém měřítku pomocí PromptFlow:
+
+- Navrhněte a vytvořte aplikace z VS Code, se vizuálními a funkčními nástroji
+- Testujte a dolaďte své aplikace pro kvalitní AI snadno.
+- Používejte Microsoft Foundry pro integraci a iteraci s cloudem, push a deploy pro rychlou integraci.
+
+![LLMOps s PromptFlow](../../../translated_images/cs/06-llm-promptflow.a183eba07a3a7fdf.webp)
 
 ## Skvělé! Pokračujte ve svém učení!
 
-Úžasné, nyní se dozvíte více o tom, jak strukturovat aplikaci pro použití konceptů s [Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst), abyste zjistili, jak Cloud Advocacy přidává tyto koncepty v ukázkách. Pro více obsahu se podívejte na naši [Ignite breakout session!
+Úžasné, nyní se naučte více o tom, jak strukturovat aplikaci tak, abyste mohli použít koncepty s [Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst), a podívejte se, jak Cloud Advocacy začleňuje tyto koncepty do demonstrací. Pro více obsahu se podívejte na naši [Ignite breakout session!
 ](https://www.youtube.com/watch?v=DdOylyrTOWg)
 
-Nyní se podívejte na Lekci 15, abyste pochopili, jak [Retrieval Augmented Generation a vektorové databáze](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) ovlivňují generativní AI a jak vytvářet více zapojující aplikace!
+Nyní si prohlédněte Lekci 15, abyste pochopili, jak [Retrieval Augmented Generation and Vector Databases](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) ovlivňují generativní AI a jak vytvářet poutavější aplikace!
 
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí AI překladové služby [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoliv usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nenese odpovědnost za jakékoli nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

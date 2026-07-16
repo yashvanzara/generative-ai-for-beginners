@@ -1,109 +1,107 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "68664f7e754a892ae1d8d5e2b7bd2081",
-  "translation_date": "2025-05-20T07:56:09+00:00",
-  "source_file": "18-fine-tuning/README.md",
-  "language_code": "hu"
-}
--->
-[![Open Source Models](../../../translated_images/18-lesson-banner.8487555c3e3225eefc1dc84e72c8e00bce1ee76db867a080628fb0fbb04aa0d2.hu.png)](https://aka.ms/gen-ai-lesson18-gh?WT.mc_id=academic-105485-koreyst)
+[![Nyílt Forráskódú Modellek](../../../translated_images/hu/18-lesson-banner.f30176815b1a5074.webp)](https://youtu.be/6UAwhL9Q-TQ?si=5jJd8yeQsCfJ97em)
 
-# Az LLM finomhangolása
+# LLM finomhangolása
 
-A generatív AI alkalmazások létrehozása nagy nyelvi modellek segítségével új kihívásokat jelent. Az egyik fő probléma a válaszok minőségének (pontosság és relevancia) biztosítása a modell által generált tartalom esetében egy adott felhasználói kérésre. Az előző leckékben olyan technikákat tárgyaltunk, mint a prompt mérnökség és a visszakereséssel bővített generáció, amelyek a problémát azzal próbálják megoldani, hogy _módosítják a meglévő modell bemeneti kérését_.
+Nagy nyelvi modellek használata generatív MI alkalmazások építéséhez új kihívásokat hoz magával. Egy kulcsfontosságú kérdés a válaszok minőségének (pontosság és relevancia) biztosítása az adott felhasználói kérésre a modell által generált tartalomban. Az előző leckékben olyan technikákat beszéltünk meg, mint a prompt tervezés és a visszakereséssel kiegészített generálás, amelyek megpróbálják a problémát a meglévő modell bemenetének _módosításával_ megoldani.
 
-A mai leckében egy harmadik technikát, a **finomhangolást** tárgyaljuk, amely a kihívást azzal próbálja megoldani, hogy _újra betanítja magát a modellt_ további adatokkal. Nézzük meg a részleteket.
+A mai leckében egy harmadik technikát, a **finomhangolást** tárgyaljuk, amely a kihívást azáltal próbálja kezelni, hogy a modellt _magát újratanítja_ kiegészítő adatokkal. Mélyedjünk el a részletekben.
 
 ## Tanulási célok
 
-Ez a lecke bevezeti a finomhangolás fogalmát az előre betanított nyelvi modellek esetében, megvizsgálja ennek az eljárásnak az előnyeit és kihívásait, valamint útmutatást ad arra vonatkozóan, hogy mikor és hogyan érdemes finomhangolást alkalmazni a generatív AI modellek teljesítményének javítása érdekében.
+Ez a lecke bevezeti a finomhangolás fogalmát az előre betanított nyelvi modellek esetében, megvizsgálja a megközelítés előnyeit és kihívásait, valamint útmutatást ad arra, mikor és hogyan érdemes finomhangolást alkalmazni generatív MI modelljei teljesítményének javítására.
 
-A lecke végére képesnek kell lenned megválaszolni a következő kérdéseket:
+A lecke végére képes leszel megválaszolni a következő kérdéseket:
 
 - Mi a finomhangolás a nyelvi modellek esetében?
 - Mikor és miért hasznos a finomhangolás?
-- Hogyan tudom finomhangolni az előre betanított modellt?
-- Mik a finomhangolás korlátai?
+- Hogyan tudok egy előre betanított modellt finomhangolni?
+- Milyen korlátai vannak a finomhangolásnak?
 
-Készen állsz? Kezdjük el.
+Készen állsz? Kezdjük.
 
 ## Illusztrált útmutató
 
-Szeretnél átfogó képet kapni arról, amit tárgyalni fogunk, mielőtt belemerülünk a részletekbe? Nézd meg ezt az illusztrált útmutatót, amely bemutatja a tanulási folyamatot ebben a leckében - a finomhangolás alapvető fogalmainak és motivációjának megismerésétől kezdve a folyamat és a legjobb gyakorlatok megértéséig a finomhangolási feladat végrehajtásához. Ez egy izgalmas téma a felfedezéshez, ezért ne felejtsd el megnézni a [Források](./RESOURCES.md?WT.mc_id=academic-105485-koreyst) oldalt, ahol további linkeket találsz az önálló tanulási utad támogatásához!
+Szeretnéd átlátni a főbb témákat, mielőtt belevágunk? Nézd meg ezt az illusztrált útmutatót, amely leírja a tanulási utat a finomhangolás főfogalmaitól és motivációjától kezdve a folyamat és a bevált gyakorlatok megértéséig. Ez egy lenyűgöző téma a felfedezésre, ezért ne felejtsd el felkeresni a [Források](./RESOURCES.md?WT.mc_id=academic-105485-koreyst) oldalt további, önálló tanulást támogató anyagokért!
 
-![Illusztrált útmutató a nyelvi modellek finomhangolásához](../../../translated_images/18-fine-tuning-sketchnote.92733966235199dd260184b1aae3a84b877c7496bc872d8e63ad6fa2dd96bafc.hu.png)
+![Illusztrált útmutató a nyelvi modellek finomhangolásához](../../../translated_images/hu/18-fine-tuning-sketchnote.11b21f9ec8a70346.webp)
 
 ## Mi a finomhangolás a nyelvi modellek esetében?
 
-Definíció szerint a nagy nyelvi modellek _előre betanítottak_ nagy mennyiségű, különböző forrásokból, köztük az internetről származó szövegeken. Ahogy az előző leckékben megtanultuk, olyan technikákra van szükségünk, mint a _prompt mérnökség_ és a _visszakereséssel bővített generáció_, hogy javítsuk a modell válaszainak minőségét a felhasználói kérdésekre ("prompts").
+Definíció szerint a nagy nyelvi modelleket _előre betanítják_ nagy mennyiségű szövegre, amely különféle forrásokból, például az internetről származik. Ahogy az előző leckékből megtanultuk, szükségünk van olyan technikákra, mint a _prompt tervezés_ és a _visszakereséssel kiegészített generálás_, hogy javítsuk a modell válaszainak minőségét a felhasználói kérdésekre ("promptokra").
 
-Egy népszerű prompt mérnökségi technika az, hogy a modellnek több útmutatást adunk arra vonatkozóan, hogy mi várható a válaszban, akár _utasítások_ (explicit útmutatás) adásával, akár _néhány példa_ bemutatásával (implicit útmutatás). Ezt _few-shot tanulásnak_ nevezik, de két korlátja van:
+Egy népszerű prompt tervezési technika az, hogy a modell számára több útmutatást adunk arról, mit várunk el a válaszban, akár _utasításokkal_ (explicit útmutatás), akár _néhány példával_ (implicit útmutatás). Ezt nevezik _few-shot tanulásnak_, de ennek két korlátja van:
 
-- A modell token korlátai korlátozhatják a megadható példák számát, és csökkenthetik a hatékonyságot.
-- A modell token költségei drágává tehetik a példák hozzáadását minden kéréshez, és korlátozhatják a rugalmasságot.
+- A modell felhasználható token limitek korlátozhatják, hány példát adhatsz meg, és csökkenthetik a hatékonyságot.
+- A tokenköltségek miatt drága lehet minden prompthoz példákat hozzáadni, ami korlátozza a rugalmasságot.
 
-A finomhangolás egy gyakori gyakorlat a gépi tanulási rendszerekben, amikor egy előre betanított modellt új adatokkal újra betanítunk, hogy javítsuk a teljesítményét egy adott feladaton. A nyelvi modellek kontextusában a finomhangolás során a _kiválasztott példák egy készletét használjuk egy adott feladatra vagy alkalmazási területre_, hogy létrehozzunk egy **egyedi modellt**, amely pontosabb és relevánsabb lehet az adott feladathoz vagy területhez. A finomhangolás egyik mellékhatása az is lehet, hogy csökkenti a szükséges példák számát a few-shot tanuláshoz - csökkentve a token használatot és a kapcsolódó költségeket.
+A finomhangolás egy gyakori gyakorlat a gépi tanulásban, amikor egy előre betanított modellt új adatokkal újratanítunk, hogy javítsuk a teljesítményét egy adott feladaton. A nyelvi modellek esetében finomhangolhatjuk az előre betanított modellt _egy adott feladathoz vagy alkalmazási területhez kiválasztott példák halmazával_, hogy létrehozzunk egy **egyedi modellt**, amely az adott feladat vagy terület számára pontosabb és relevánsabb lehet. A finomhangolás mellékhatásaként csökkentheti a few-shot tanuláshoz szükséges példák számát is – ezáltal csökkentve a tokenhasználatot és a költségeket.
 
-## Mikor és miért kell finomhangolni a modelleket?
+## Mikor és miért érdemes finomhangolni a modelleket?
 
-Ebben a kontextusban, amikor a finomhangolásról beszélünk, a **felügyelt** finomhangolásra utalunk, ahol az újratanítás **új adatok hozzáadásával** történik, amelyek nem voltak részei az eredeti tanító adathalmaznak. Ez eltér az ellenőrizetlen finomhangolási megközelítéstől, ahol a modellt az eredeti adatokon újratanítják, de más hiperparaméterekkel.
+Ebben a _kontextusban_, amikor finomhangolásról beszélünk, az **felügyelt** finomhangolásra gondolunk, ahol az újratanítás az eredeti tanítóadatok részét nem képező **új adatok hozzáadásával** történik. Ez eltér a felügyelet nélküli finomhangolástól, amikor a modellt az eredeti adatokon újratanítják, de eltérő hiperparaméterekkel.
 
-A legfontosabb, amit meg kell jegyezni, hogy a finomhangolás egy fejlett technika, amely bizonyos szintű szakértelmet igényel a kívánt eredmények eléréséhez. Ha nem megfelelően hajtják végre, akkor nem biztos, hogy a várt javulásokat hozza, sőt, akár ronthatja is a modell teljesítményét a célzott területen.
+A legfontosabb emlékezni rá, hogy a finomhangolás egy fejlett technika, amely bizonyos szintű szakértelmet igényel a kívánt eredmények eléréséhez. Helytelen végrehajtás esetén nem biztos, hogy hozza a várt javulásokat, sőt ronthatja is a modell teljesítményét a célozni kívánt területen.
 
-Tehát mielőtt megtanulnád, "hogyan" kell finomhangolni a nyelvi modelleket, tudnod kell, "miért" kell ezt az utat választani, és "mikor" kell elkezdeni a finomhangolási folyamatot. Kezdd azzal, hogy felteszed magadnak ezeket a kérdéseket:
+Ezért mielőtt megtanulnád "hogyan" finomhangold a nyelvi modelleket, tudnod kell, "miért" érdemes ezt az utat választani, és "mikor" érdemes elkezdeni a finomhangolási folyamatot. Kezdd azzal, hogy megválaszolod magadnak ezeket a kérdéseket:
 
-- **Felhasználási eset**: Mi a _felhasználási eseted_ a finomhangolásra? Milyen szempontot szeretnél javítani a jelenlegi előre betanított modellen?
-- **Alternatívák**: Próbáltál más technikákat a kívánt eredmények eléréséhez? Használd őket összehasonlítási alapként.
-  - Prompt mérnökség: Próbálj ki technikákat, mint például a few-shot kérdezés releváns válasz példákkal. Értékeld a válaszok minőségét.
-  - Visszakereséssel bővített generáció: Próbáld meg kiegészíteni a kérdéseket a keresési adatok által visszakeresett eredményekkel. Értékeld a válaszok minőségét.
+- **Használati eset**: Mi a finomhangolás _használati esete_? Melyik aspektusát akarod javítani a jelenlegi előre betanított modellnek?
+- **Alternatívák**: Próbáltál _más technikákat_ a kívánt eredmények elérésére? Használd őket az összehasonlításhoz.
+  - Prompt tervezés: Próbáld ki például a few-shot promptokat releváns válaszpéldákkal. Értékeld a válaszok minőségét.
+  - Visszakereséssel kiegészített generálás: Próbáld ki a promptok kiegészítését olyan lekérdezési eredményekkel, amelyeket az adataid keresésével nyersz. Értékeld a válaszok minőségét.
 - **Költségek**: Azonosítottad a finomhangolás költségeit?
-  - Hangolhatóság - elérhető-e az előre betanított modell finomhangolásra?
-  - Erőfeszítés - a tanító adatok előkészítésére, a modell értékelésére és finomítására.
-  - Számítás - a finomhangolási feladatok futtatására és a finomhangolt modell telepítésére
-  - Adatok - hozzáférés elegendő minőségű példákhoz a finomhangolási hatás érdekében
+  - Hangolhatóság - elérhető az előre betanított modell finomhangolásra?
+  - Erőfeszítés - az adatok előkészítéséhez, a modell értékeléséhez és finomításához
+  - Számítási kapacitás - a finomhangolási feladatok futtatásához és a finomhangolt modell üzemeltetéséhez
+  - Adatok - elegendő és megfelelő minőségű példa a finomhangoláshoz
 - **Előnyök**: Megerősítetted a finomhangolás előnyeit?
-  - Minőség - túlszárnyalta-e a finomhangolt modell az alapmodellt?
-  - Költség - csökkenti-e a token használatot az egyszerűsített kérdésekkel?
-  - Kiterjeszthetőség - újra felhasználható-e az alapmodell új területekre?
+  - Minőség - a finomhangolt modell felülmúlta az alapmodellt?
+  - Költség - csökkenti-e a tokenhasználatot az egyszerűsített promptokkal?
+  - Kiterjeszthetőség - új területekre tudod-e áthangolni az alapmodellt?
 
-Ezekre a kérdésekre válaszolva el tudod dönteni, hogy a finomhangolás megfelelő megközelítés-e a felhasználási esetedhez. Ideális esetben a megközelítés csak akkor érvényes, ha az előnyök meghaladják a költségeket. Miután eldöntötted, hogy folytatod, itt az ideje, hogy gondolkodj azon, _hogyan_ tudod finomhangolni az előre betanított modellt.
+Ezekre a kérdésekre válaszolva eldöntheted, hogy a finomhangolás a megfelelő megközelítés-e az adott használati esetedhez. Ideális esetben a megközelítés csak akkor érvényes, ha az előnyök meghaladják a költségeket. Ha eldöntöd, hogy folytatod, ideje elgondolkodni azon, _hogyan_ tudod finomhangolni az előre betanított modellt.
 
-Szeretnél több betekintést kapni a döntéshozatali folyamatba? Nézd meg a [Finomhangolni vagy nem finomhangolni](https://www.youtube.com/watch?v=0Jo-z-MFxJs) című videót.
+Több információt szeretnél a döntéshozatali folyamatról? Nézd meg a [Finomhangolni vagy nem finomhangolni](https://www.youtube.com/watch?v=0Jo-z-MFxJs) videót.
 
-## Hogyan tudjuk finomhangolni az előre betanított modellt?
+## Hogyan tudunk finomhangolni egy előre betanított modellt?
 
-Az előre betanított modell finomhangolásához szükséged lesz:
+Az előre betanított modell finomhangolásához szükséged van:
 
-- egy előre betanított modellre, amelyet finomhangolhatsz
-- egy adathalmazra, amelyet a finomhangoláshoz használhatsz
-- egy képzési környezetre a finomhangolási feladat futtatásához
-- egy hosztoló környezetre a finomhangolt modell telepítéséhez
+- egy előre betanított modellre, amit finomhangolhatsz
+- egy adathalmazra, amit a finomhangoláshoz használsz
+- egy tanulási környezetre, ahol a finomhangolási feladat futtatható
+- egy hoszting környezetre, ahol a finomhangolt modellt deployolhatod
 
-## Finomhangolás akcióban
+## Finomhangolás a gyakorlatban
 
-Az alábbi források lépésről-lépésre bemutatják, hogyan végezhetsz el egy valós példát egy kiválasztott modell és egy gondosan összeállított adathalmaz segítségével. A bemutatók végrehajtásához szükséged lesz egy fiókra a konkrét szolgáltatónál, valamint hozzáférésre a releváns modellhez és adathalmazokhoz.
+> **Megjegyzés:** A `gpt-35-turbo` / `gpt-3.5-turbo`, amelyet az alábbi oktatóanyagokban hivatkoznak, lekerült a forgalomból mind az inferencia, mind a finomhangolás területén. Ha ma kezdesz új finomhangolási munkát, célzottan egy jelenleg támogatott modellt válassz – például a `gpt-4o-mini` vagy a `gpt-4.1-mini` modellek valamelyikét. Lásd a [Finomhangolható modellek listája](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?WT.mc_id=academic-105485-koreyst#fine-tuning-models) oldalát a jelenleg elérhető finomhangolható modellekért. A koncepciók és lépések ezekben az oktatóanyagokban továbbra is érvényesek.
 
-| Szolgáltató  | Bemutató                                                                                                                                                                       | Leírás                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI       | [Hogyan finomhangoljuk a chat modelleket](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_finetune_chat_models.ipynb?WT.mc_id=academic-105485-koreyst)                | Tanuld meg, hogyan finomhangolj egy `gpt-35-turbo` modellt egy adott területre ("recept asszisztens") azzal, hogy előkészíted a tanító adatokat, futtatod a finomhangolási feladatot, és használod a finomhangolt modellt az előrejelzéshez.                                                                                                                                                                                                                                              |
-| Azure OpenAI | [GPT 3.5 Turbo finomhangolási bemutató](https://learn.microsoft.com/azure/ai-services/openai/tutorials/fine-tune?tabs=python-new%2Ccommand-line?WT.mc_id=academic-105485-koreyst) | Tanuld meg, hogyan finomhangolj egy `gpt-35-turbo-0613` modellt **az Azure-on** azzal, hogy lépéseket teszel a tanító adatok létrehozására és feltöltésére, futtatod a finomhangolási feladatot. Telepítsd és használd az új modellt.                                                                                                                                                                                                                                                                 |
-| Hugging Face | [LLM-ek finomhangolása a Hugging Face-szel](https://www.philschmid.de/fine-tune-llms-in-2024-with-trl?WT.mc_id=academic-105485-koreyst)                                               | Ez a blogbejegyzés bemutatja, hogyan finomhangolj egy _nyílt LLM-et_ (például: `CodeLlama 7B`) a [transformers](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) könyvtár és a [Transformer Reinforcement Learning (TRL)](https://huggingface.co/docs/trl/index?WT.mc_id=academic-105485-koreyst]) segítségével, nyílt [adathalmazok](https://huggingface.co/docs/datasets/index?WT.mc_id=academic-105485-koreyst) felhasználásával a Hugging Face-en. |
-|              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| 🤗 AutoTrain | [LLM-ek finomhangolása az AutoTrain-nal](https://github.com/huggingface/autotrain-advanced/?WT.mc_id=academic-105485-koreyst)                                                         | Az AutoTrain (vagy AutoTrain Advanced) egy Python könyvtár, amelyet a Hugging Face fejlesztett ki, és amely lehetővé teszi a finomhangolást sokféle feladatra, beleértve az LLM finomhangolást. Az AutoTrain egy kódmentes megoldás, és a finomhangolás elvégezhető saját felhőben, a Hugging Face Spaces-en vagy helyileg. Támogatja mind a webalapú GUI-t, mind a CLI-t, valamint a yaml konfigurációs fájlokkal történő képzést.                                                                               |
-|              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+Az alábbi források lépésről lépésre vezetnek végig egy valós példán, ahol egy kiválasztott modellt finomhangolunk egy kiválogatott adathalmazon. Ezeknek az oktatóanyagoknak az elvégzéséhez szükséged lesz egy adott szolgáltatónál regisztrált fiókra, valamint hozzáférésre a releváns modellekhez és adathalmazokhoz.
 
+| Szolgáltató  | Oktatóanyag                                                                                                                                                                   | Leírás                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenAI       | [Hogyan finomhangoljuk a chat modelleket](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_finetune_chat_models.ipynb?WT.mc_id=academic-105485-koreyst)        | Tanulj meg finomhangolni egy `gpt-35-turbo` modellt egy adott területre („recept asszisztens”) azzal, hogy elkészíted a tanító adatokat, lefuttatod a finomhangolási feladatot, és használod a finomhangolt modellt az inferenciához.                                                                                                                                                                                         |
+| Azure OpenAI | [GPT 3.5 Turbo finomhangolási oktatóanyag](https://learn.microsoft.com/azure/ai-services/openai/tutorials/fine-tune?tabs=python-new%2Ccommand-line&WT.mc_id=academic-105485-koreyst) | Tanulj meg finomhangolni egy `gpt-35-turbo-0613` modellt **az Azure-on**, lépésről lépésre létrehozva és feltöltve a tanító adatokat, lefuttatva a finomhangolási munkát. Telepítsd és használd az új modelledet.                                                                                                                                                                                                                         |
+| Hugging Face | [LLM-ek finomhangolása a Hugging Face segítségével](https://www.philschmid.de/fine-tune-llms-in-2024-with-trl?WT.mc_id=academic-105485-koreyst)                               | Ez a blogposzt végigvezet az _open LLM_ (pl.: `CodeLlama 7B`) finomhangolásán a [transformers](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) könyvtárral és a [Transformer Reinforcement Learning (TRL)](https://huggingface.co/docs/trl/index?WT.mc_id=academic-105485-koreyst) használatával, nyílt [adathalmazokon](https://huggingface.co/docs/datasets/index?WT.mc_id=academic-105485-koreyst) a Hugging Face-en.                    |
+|              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 🤗 AutoTrain | [LLM-ek finomhangolása az AutoTrain-nel](https://github.com/huggingface/autotrain-advanced/?WT.mc_id=academic-105485-koreyst)                                                   | Az AutoTrain (vagy AutoTrain Advanced) egy Python könyvtár a Hugging Face fejlesztése, amely sokféle feladathoz teszi lehetővé a finomhangolást, beleértve az LLM finomhangolást is. Az AutoTrain kódmentes megoldás, és a finomhangolás végezhető a saját felhődben, a Hugging Face Spaces-en vagy helyben. Támogatja a webes GUI-t, parancssort és yaml konfigurációs fájlokat a képzéshez.                                                                 |
+|              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 🦥 Unsloth  | [LLM-ek finomhangolása az Unsloth segítségével](https://github.com/unslothai/unsloth?WT.mc_id=academic-105485-koreyst)                                                         | Az Unsloth egy nyílt forráskódú keretrendszer, amely támogatja az LLM-ek finomhangolását és megerősítéses tanulást (RL). Az Unsloth egyszerűsíti a helyi tanítást, értékelést és telepítést előre elkészített [notebookokkal](https://github.com/unslothai/notebooks?WT.mc_id=academic-105485-koreyst). Támogat szövegfelolvasást (TTS), BERT-et és multimodális modelleket is. Kezdj a lépésről lépésre [Finomhangolási Útmutatójukban](https://docs.unsloth.ai/get-started/fine-tuning-llms-guide). |
+|              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                               |
 ## Feladat
 
-Válassz ki egyet a fenti bemutatók közül, és dolgozd végig őket. _Lehet, hogy ezeknek a bemutatóknak egy változatát Jupyter Notebookokban is megismételjük ebben a repóban, csak hivatkozási célból. Kérjük, közvetlenül az eredeti forrásokat használd, hogy a legfrissebb verziókat kapd meg_.
+Válassz ki egyet a fenti oktatóanyagok közül és haladj végig rajta. _Előfordulhat, hogy ezekből oktatóanyagokból egy verziót reprodukálunk Jupyter Notebookokban ebben a tárházban csak referenciaként. Kérjük, a legfrissebb verziókért közvetlenül az eredeti forrásokat használd!_
 
-## Remek munka! Folytasd a tanulást.
+## Szép munka! Folytasd a tanulást.
 
-A lecke befejezése után nézd meg a [Generatív AI Tanulási gyűjteményünket](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy tovább fejleszd a Generatív AI tudásodat!
+A lecke elvégzése után nézd meg a [Generatív MI tanulási gyűjteményünket](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy tovább fejleszd a generatív MI tudásodat!
 
-Gratulálunk!! Befejezted a kurzus v2 sorozatának utolsó leckéjét! Ne hagyd abba a tanulást és az építést. **Nézd meg a [FORRÁSOK](RESOURCES.md?WT.mc_id=academic-105485-koreyst) oldalt, ahol további javaslatokat találsz erre a témára.
+Gratulálunk!! Teljesítetted ennek a tanfolyamnak a v2-es sorozatából az utolsó leckét! Ne állj meg a tanulásban és az építésben. \*\*Nézd meg a [FORRÁSOK](RESOURCES.md?WT.mc_id=academic-105485-koreyst) oldalt további javaslatokért kizárólag erre a témára.
 
-A v1 sorozat leckéi is frissültek több feladattal és koncepcióval. Szánj egy percet a tudásod felfrissítésére - és kérjük, [oszd meg kérdéseidet és visszajelzéseidet](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst), hogy segíts nekünk javítani ezeket a leckéket a közösség számára.
+A v1-es sorozatunkat is frissítettük további feladatokkal és fogalmakkal. Szánj egy percet a tudásod felfrissítésére – és kérjük, [oszd meg kérdéseidet és visszajelzéseidet](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst), hogy a közösség érdekében tovább fejlesszük ezeket a leckéket.
 
-**Jogi nyilatkozat**:  
-Ezt a dokumentumot az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével fordítottuk le. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt a professzionális emberi fordítás. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

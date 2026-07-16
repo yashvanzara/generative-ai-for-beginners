@@ -1,91 +1,101 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "7a655f30d1dcbdfe6eff2558eff249af",
-  "translation_date": "2025-05-19T19:05:59+00:00",
-  "source_file": "09-building-image-applications/README.md",
-  "language_code": "pa"
-}
--->
-# ਇਮੇਜ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ
+# ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ
 
-LLMs ਵਿੱਚ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਤੋਂ ਵੱਧ ਕੁਝ ਹੈ। ਇਹ ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਨਾ ਵੀ ਸੰਭਵ ਹੈ। ਮੋਡੈਲਿਟੀ ਵਜੋਂ ਤਸਵੀਰਾਂ ਹੋਣ ਨਾਲ ਕਈ ਖੇਤਰਾਂ ਵਿੱਚ ਬਹੁਤ ਲਾਭਦਾਇਕ ਹੋ ਸਕਦਾ ਹੈ ਜਿਵੇਂ ਕਿ ਮੈਡਟੈਕ, ਆਰਕੀਟੈਕਚਰ, ਟੂਰਿਜ਼ਮ, ਗੇਮ ਵਿਕਾਸ ਅਤੇ ਹੋਰ। ਇਸ ਅਧਿਆਇ ਵਿੱਚ, ਅਸੀਂ ਦੋ ਸਭ ਤੋਂ ਪ੍ਰਸਿੱਧ ਇਮੇਜ ਜਨਰੇਸ਼ਨ ਮਾਡਲਾਂ, DALL-E ਅਤੇ Midjourney ਦੇਖਾਂਗੇ।
+[![ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ](../../../translated_images/pa/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
 
-## ਪਰੀਚਿਆ
+LLMs ਸਿਰਫ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਤੱਕ ਸੀਮਤ ਨਹੀਂ ਹਨ। ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਚਿੱਤਰ ਬਣਾਉਣਾ ਵੀ ਸੰਭਵ ਹੈ। ਚਿੱਤਰਾਂ ਨੂੰ ਇੱਕ ਮਾਡੈਲਿਟੀ ਵਜੋਂ ਰੱਖਣਾ ਕਈ ਖੇਤਰਾਂ ਲਈ ਬਹੁਤ ਲਾਭਦਾਇਕ ਹੋ ਸਕਦਾ ਹੈ ਜਿਵੇਂ ਕਿ MedTech, ਵਾਸਤੁਕਲਾ, ਸੈਲਾਨੀ, ਖੇਡ ਵਿਕਾਸ ਅਤੇ ਹੋਰ। ਇਸ ਅਧਿਆਇ ਵਿੱਚ, ਅਸੀਂ ਦੋ ਸਭ ਤੋਂ ਲੋਕਪ੍ਰਿਯ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਮਾਡਲਾਂ, DALL-E ਅਤੇ Midjourney ਨੂੰ ਵੇਖਾਂਗੇ।
+
+## ਪਰਿਚਯ
 
 ਇਸ ਪਾਠ ਵਿੱਚ, ਅਸੀਂ ਕਵਰ ਕਰਾਂਗੇ:
 
-- ਤਸਵੀਰ ਜਨਰੇਸ਼ਨ ਅਤੇ ਇਹ ਕਿਉਂ ਲਾਭਦਾਇਕ ਹੈ।
-- DALL-E ਅਤੇ Midjourney, ਇਹ ਕੀ ਹਨ, ਅਤੇ ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦੇ ਹਨ।
-- ਤੁਸੀਂ ਕਿਵੇਂ ਇੱਕ ਇਮੇਜ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਉਗੇ।
+- ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਅਤੇ ਇਸਦੇ ਫਾਇਦੇ।
+- DALL-E ਅਤੇ Midjourney, ਉਹ ਕੀ ਹਨ ਅਤੇ ਕਿਵੇਂ ਕੰਮ ਕਰਦੇ ਹਨ।
+- ਇੱਕ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਉਣ ਦਾ ਤਰੀਕਾ।
 
-## ਸਿੱਖਣ ਦੇ ਲਕਸ਼
+## ਸਿੱਖਣ ਦੇ ਲਕੜ
 
-ਇਸ ਪਾਠ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਤੁਸੀਂ ਸਮਰਥ ਹੋਵੋਗੇ:
+ਇਸ ਪਾਠ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਤੁਸੀਂ ਸਮਰੱਥ ਹੋਵੋਗੇ:
 
-- ਇੱਕ ਇਮੇਜ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ।
-- ਆਪਣੇ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਮੈਟਾ ਪ੍ਰੋੰਪਟਸ ਨਾਲ ਸੀਮਾਵਾਂ ਪਰਿਭਾਸ਼ਿਤ ਕਰੋ।
-- DALL-E ਅਤੇ Midjourney ਨਾਲ ਕੰਮ ਕਰੋ।
+- ਇੱਕ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣ ਲਈ।
+- ਆਪਣੇ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਮੈਟਾ ਪ੍ਰਾਂਪਟਸ ਨਾਲ ਹੱਦਾਂ ਨਿਰਧਾਰਤ ਕਰਨ ਲਈ।
+- DALL-E ਅਤੇ Midjourney ਨਾਲ ਕੰਮ ਕਰਨ ਲਈ।
 
-## ਇੱਕ ਇਮੇਜ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਕਿਉਂ ਬਣਾਉਣਾ?
+## ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਉਣ ਦਾ ਕਾਰਨ ਕੀ ਹੈ?
 
-ਤਸਵੀਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਜਨਰੇਟਿਵ AI ਦੀ ਸਮਰਥਾ ਦੀ ਜਾਂਚ ਕਰਨ ਦਾ ਇੱਕ ਵਧੀਆ ਤਰੀਕਾ ਹਨ। ਇਹਨਾਂ ਨੂੰ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ, ਉਦਾਹਰਣ ਵਜੋਂ:
+ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪ ਆਮ ਤੌਰ 'ਤੇ Generative AI ਦੀ ਸਮਰੱਥਾ ਨੂੰ ਪਰਖਣ ਲਈ ਬਹੁਤ ਵਧੀਆ ਢੰਗ ਹਨ। ਇਹ ਇਸ ਤਰ੍ਹਾਂ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ:
 
-- **ਤਸਵੀਰ ਸੰਪਾਦਨ ਅਤੇ ਸਿੰਥੇਸਿਸ**। ਤੁਸੀਂ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰ ਸਕਦੇ ਹੋ ਵੱਖ-ਵੱਖ ਵਰਤੋਂ ਦੇ ਕੇਸਾਂ ਲਈ, ਜਿਵੇਂ ਕਿ ਤਸਵੀਰ ਸੰਪਾਦਨ ਅਤੇ ਤਸਵੀਰ ਸਿੰਥੇਸਿਸ।
+- **ਚਿੱਤਰ ਸੰਪਾਦਨ ਅਤੇ ਸੰਸਲੇਸ਼ਣ**. ਤੁਸੀਂ ਚਿੱਤਰ ਸੰਪਾਦਨ ਅਤੇ ਚਿੱਤਰ ਸੰਸਲੇਸ਼ਣ ਵਰਗੇ ਕਈ ਉਪਯੋਗ ਖੇਤਰਾਂ ਲਈ ਚਿੱਤਰ ਸਿਰਜ ਸਕਦੇ ਹੋ।
 
-- **ਵੱਖ-ਵੱਖ ਉਦਯੋਗਾਂ ਵਿੱਚ ਲਾਗੂ ਕੀਤਾ ਗਿਆ**। ਇਹਨਾਂ ਨੂੰ ਮੈਡਟੈਕ, ਟੂਰਿਜ਼ਮ, ਗੇਮ ਵਿਕਾਸ ਅਤੇ ਹੋਰ ਜਿਵੇਂ ਵੱਖ-ਵੱਖ ਉਦਯੋਗਾਂ ਲਈ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵੀ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।
+- **ਹੁਣੀਕਿਆਂ ਦੇ ਕਈ ਉਦਯੋਗਾਂ 'ਚ ਵਰਤੋਂ**. ਇਹ Medtech, ਟੂਰਿਜ਼ਮ, ਖੇਡ ਵਿਕਾਸ ਅਤੇ ਹੋਰ ਉਦਯੋਗਾਂ ਲਈ ਚਿੱਤਰ ਵੀ ਬਣਾਉਂਦੇ ਹਨ।
 
-## ਪ੍ਰਸੰਗ: Edu4All
+## ਪਰਿਵੇਸ਼: Edu4All
 
-ਇਸ ਪਾਠ ਦੇ ਹਿੱਸੇ ਵਜੋਂ, ਅਸੀਂ ਇਸ ਪਾਠ ਵਿੱਚ ਆਪਣੇ ਸਟਾਰਟਅਪ, Edu4All ਨਾਲ ਕੰਮ ਕਰਨਾ ਜਾਰੀ ਰੱਖਾਂਗੇ। ਵਿਦਿਆਰਥੀ ਆਪਣੀਆਂ ਮੁਲਾਂਕਣਾਂ ਲਈ ਤਸਵੀਰਾਂ ਬਣਾਉਣਗੇ, ਅਸਲ ਵਿੱਚ ਕਿਹੜੀਆਂ ਤਸਵੀਰਾਂ ਹਨ ਇਹ ਵਿਦਿਆਰਥੀਆਂ 'ਤੇ ਨਿਰਭਰ ਕਰਦਾ ਹੈ, ਪਰ ਉਹ ਆਪਣੇ ਆਪਣੇ ਪ੍ਰਿੰਸ ਦੀ ਕਹਾਣੀ ਲਈ ਚਿੱਤਰਾਂ ਹੋ ਸਕਦੇ ਹਨ ਜਾਂ ਆਪਣੀ ਕਹਾਣੀ ਲਈ ਨਵਾਂ ਪਾਤਰ ਬਣਾਉਣ ਜਾਂ ਆਪਣੇ ਵਿਚਾਰਾਂ ਅਤੇ ਧਾਰਨਾਵਾਂ ਨੂੰ ਦਰਸਾਉਣ ਵਿੱਚ ਮਦਦ ਕਰ ਸਕਦੇ ਹਨ।
+ਇਸ ਪਾਠ ਦੇ ਹਿੱਸੇ ਵਜੋਂ, ਅਸੀਂ ਆਪਣੇ ਸਟਾਰਟਅਪ Edu4All ਨਾਲ ਕੰਮ ਜਾਰੀ ਰੱਖਾਂਗੇ। ਵਿਦਿਆਰਥੀ ਆਪਣੇ ਅਸੈਸਮੈਂਟ ਲਈ ਚਿੱਤਰ ਬਣਾਉਣਗੇ, ਕਿ ਕਿਹੜੇ ਚਿੱਤਰ ਬਣਾਣੇ ਹਨ ਇਹ ਵਿਦਿਆਰਥੀਆਂ ਦੀ ਆਪਣੀ ਪਸੰਦ ਤੇ منحصر ਹੈ, ਪਰ ਉਹ ਆਪਣੇ ਸੁਪਨਿਆਂ ਦੀਆਂ ਕਹਾਣੀਆਂ ਲਈ ਇਲਾਸਟ੍ਰੇਸ਼ਨ ਟਯਾਰ ਕਰ ਸਕਦੇ ਹਨ ਜਾਂ ਆਪਣੀ ਕਹਾਣੀ ਲਈ ਨਵੀਂ ਪਾਤਰ ਸਿਰਜ ਸਕਦੇ ਹਨ ਜਾਂ ਆਪਣੇ ਵਿਸ਼ਯਾਂ ਅਤੇ ਧਾਰਣਾਵਾਂ ਨੂੰ ਦ੍ਰਿਸ਼ਟੀਗਤ ਕਰ ਸਕਦੇ ਹਨ।
 
-ਇਹ ਹੈ ਕਿ ਜੇਕਰ ਉਹ ਕਲਾਸ ਵਿੱਚ ਸਮਾਰਕਾਂ 'ਤੇ ਕੰਮ ਕਰ ਰਹੇ ਹਨ ਤਾਂ Edu4All ਦੇ ਵਿਦਿਆਰਥੀ ਉਦਾਹਰਣ ਲਈ ਕੀ ਜਨਰੇਟ ਕਰ ਸਕਦੇ ਹਨ:
+ਜੇ ਕਰ ਕੇ Edu4All ਦੇ ਵਿਦਿਆਰਥੀ ਕਲਾਸ ਵਿੱਚ ਸਥਾਨਕਾਂ ਲਈ ਕੰਮ ਕਰ ਰਹੇ ਹੋਣ ਤਾਂ ਉਹ ਇਸ ਤਰ੍ਹਾਂ ਕੁਝ ਚਿੱਤਰ ਬਣਾ ਸਕਦੇ ਹਨ:
 
-"ਸਵੇਰੇ ਦੀ ਰੌਸ਼ਨੀ ਵਿੱਚ ਐਫਲ ਟਾਵਰ ਦੇ ਕੋਲ ਕੁੱਤਾ" ਵਰਗੇ ਪ੍ਰੋੰਪਟ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ
+![Edu4All startup, class on monuments, Eiffel Tower](../../../translated_images/pa/startup.94d6b79cc4bb3f5a.webp)
+
+ਇਸ ਤਰ੍ਹਾਂ ਦੇ ਪ੍ਰਾਂਪਟ ਨਾਲ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ
+
+> "ਡੌਗ ਲਗਭਗ ਐਫਲ ਟਾਵਰ ਦੇ ਕੋਲ ਸਵੇਰੇ ਸੂਰਜੀ ਰੌਸ਼ਨੀ ਵਿੱਚ"
 
 ## DALL-E ਅਤੇ Midjourney ਕੀ ਹਨ?
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) ਅਤੇ [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) ਦੋ ਸਭ ਤੋਂ ਪ੍ਰਸਿੱਧ ਇਮੇਜ ਜਨਰੇਸ਼ਨ ਮਾਡਲ ਹਨ, ਇਹ ਤੁਹਾਨੂੰ ਪ੍ਰੋੰਪਟਸ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿੰਦੇ ਹਨ।
+[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) ਅਤੇ [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) ਦੋ ਸਭ ਤੋਂ ਪ੍ਰਸਿੱਧ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਮਾਡਲ ਹਨ, ਜੋ ਪ੍ਰਾਂਪਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਚਿੱਤਰ ਬਣਾਉਂਦੇ ਹਨ।
 
 ### DALL-E
 
-ਆਓ DALL-E ਨਾਲ ਸ਼ੁਰੂ ਕਰੀਏ, ਜੋ ਕਿ ਇੱਕ ਜਨਰੇਟਿਵ AI ਮਾਡਲ ਹੈ ਜੋ ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਦਾ ਹੈ।
+ਆਓ DALL-E ਨਾਲ ਸ਼ੁਰੂ ਕਰੀਏ, ਜੋ ਇਕ Generative AI ਮਾਡਲ ਹੈ ਜੋ ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਚਿੱਤਰ ਬਣਾਉਂਦਾ ਹੈ।
 
-- **CLIP**, ਇੱਕ ਮਾਡਲ ਹੈ ਜੋ ਇਮੇਜ ਅਤੇ ਟੈਕਸਟ ਤੋਂ ਅੰਕੀ ਪ੍ਰਸਤੁਤੀਆਂ, ਜੋ ਕਿ ਅੰਕੜੇ ਦੀਆਂ ਗਿਣਤੀ ਪ੍ਰਸਤੁਤੀਆਂ ਹੁੰਦੀਆਂ ਹਨ, ਬਣਾਉਂਦਾ ਹੈ।
+> [DALL-E ਦੋ ਮਾਡਲਾਂ, CLIP ਅਤੇ diffused attention ਦੇ ਮਿਲਾਪ ਦਾ ਨਤੀਜਾ ਹੈ](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst)।
 
-- **ਡਿਫਿਊਜ਼ਡ ਅਟੈਂਸ਼ਨ**, ਇੱਕ ਮਾਡਲ ਹੈ ਜੋ ਅੰਕੜੇ ਤੋਂ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਦਾ ਹੈ। DALL-E ਨੂੰ ਤਸਵੀਰਾਂ ਅਤੇ ਟੈਕਸਟ ਦੇ ਡਾਟਾਸੇਟ 'ਤੇ ਸਿਖਲਾਈ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ ਅਤੇ ਇਸ ਨੂੰ ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ। ਉਦਾਹਰਣ ਲਈ, DALL-E ਨੂੰ ਇੱਕ ਟੋਪੀ ਵਿੱਚ ਬਿੱਲੀ ਜਾਂ ਮੋਹਾਕ ਨਾਲ ਕੁੱਤੇ ਦੀ ਤਸਵੀਰ ਬਣਾਉਣ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।
+- **CLIP**, ਇੱਕ ਮਾਡਲ ਹੈ ਜੋ ਚਿੱਤਰਾਂ ਅਤੇ ਟੈਕਸਟ ਤੋਂ ਐम्बੈਡਿੰਗਸ (ਦਾਤਾ ਦੇ ਗਿਣਤੀਵਾੜੇ ਪ੍ਰਤੀਕਾਂ) ਬਣਾਉਂਦਾ ਹੈ।
+
+- **Diffused attention**, ਇੱਕ ਮਾਡਲ ਹੈ ਜੋ ਐम्बੈਡਿੰਗਸ ਤੋਂ ਚਿੱਤਰ ਬਣਾਉਂਦਾ ਹੈ। DALL-E ਚਿੱਤਰਾਂ ਅਤੇ ਟੈਕਸਟ ਦੇ ਡੇਟਾਸੈੱਟ 'ਤੇ ਟ੍ਰੇਨ ਕੀਤਾ ਗਿਆ ਹੈ ਅਤੇ ਇਹ ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਚਿੱਤਰ ਬਣਾਉਣ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ। ਉਦਾਹਰਣ ਵਜੋਂ, DALL-E ਬਿੱਲੀ ਦੇ ਟੋਪੀ ਵਾਲੇ ਚਿੱਤਰ ਜਾਂ ਮੋਹੌਕ ਵਾਲੇ ਕੁੱਤੇ ਦੇ ਚਿੱਤਰ ਬਣਾਉਣ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।
 
 ### Midjourney
 
-Midjourney DALL-E ਦੀ ਤਰ੍ਹਾਂ ਹੀ ਕੰਮ ਕਰਦਾ ਹੈ, ਇਹ ਟੈਕਸਟ ਪ੍ਰੋੰਪਟਸ ਤੋਂ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਦਾ ਹੈ। Midjourney ਨੂੰ "ਟੋਪੀ ਵਿੱਚ ਬਿੱਲੀ" ਜਾਂ "ਮੋਹਾਕ ਨਾਲ ਕੁੱਤਾ" ਵਰਗੇ ਪ੍ਰੋੰਪਟਸ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵੀ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।
+Midjourney ਵੀ DALL-E ਵਰਗੇ ਹੀ ਕੰਮ ਕਰਦਾ ਹੈ, ਇਹ ਟੈਕਸਟ ਪ੍ਰਾਂਪਟਸ ਤੋਂ ਚਿੱਤਰ ਬਣਾਉਂਦਾ ਹੈ। Midjourney ਨਾਲ ਵੀ "ਟੋਪੀ ਵਾਲੀ ਬਿੱਲੀ" ਜਾਂ "ਮੋਹੌਕ ਵਾਲੇ ਕੁੱਤੇ" ਵਾਲੇ ਪ੍ਰਾਂਪਟ ਨਾਲ ਚਿੱਤਰ ਬਣਾਏ ਜਾ ਸਕਦੇ ਹਨ।
+
+![Midjourney ਵੱਲੋਂ ਬਣਾਇਆ ਗਇਆ ਚਿੱਤਰ, ਮਕੈਨਿਕਲ ਕਬੂਤਰ](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
+_ਚਿੱਤਰ ਸ੍ਰੋਤ ਵਿਕੀਪੀਡੀਆ, Midjourney ਵੱਲੋਂ ਬਣਾਇਆ ਗਇਆ_
 
 ## DALL-E ਅਤੇ Midjourney ਕਿਵੇਂ ਕੰਮ ਕਰਦੇ ਹਨ
 
-ਪਹਿਲਾਂ, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst)। DALL-E ਇੱਕ ਜਨਰੇਟਿਵ AI ਮਾਡਲ ਹੈ ਜੋ ਟ੍ਰਾਂਸਫਾਰਮਰ ਆਰਕੀਟੈਕਚਰ 'ਤੇ ਅਧਾਰਿਤ ਹੈ ਜਿਸ ਵਿੱਚ ਇੱਕ _ਆਟੋਰੇਗਰੈਸੀਵ ਟ੍ਰਾਂਸਫਾਰਮਰ_ ਹੈ।
+ਸਭ ਤੋਂ ਪਹਿਲਾਂ, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst)। DALL-E ਇੱਕ Generative AI ਮਾਡਲ ਹੈ ਜੋ ਟ੍ਰਾਂਸਫਾਰਮਰ ਆਰਕੀਟੈਕਚਰ ਤੇ ਆਧਾਰਿਤ ਹੈ ਜਿਸ ਵਿੱਚ _autoregressive transformer_ ਸ਼ਾਮਲ ਹੈ।
 
-ਇੱਕ _ਆਟੋਰੇਗਰੈਸੀਵ ਟ੍ਰਾਂਸਫਾਰਮਰ_ ਇਹ ਪਰਿਭਾਸ਼ਿਤ ਕਰਦਾ ਹੈ ਕਿ ਇੱਕ ਮਾਡਲ ਕਿਵੇਂ ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰਦਾ ਹੈ, ਇਹ ਇੱਕ ਸਮੇਂ ਵਿੱਚ ਇੱਕ ਪਿਕਸਲ ਜਨਰੇਟ ਕਰਦਾ ਹੈ, ਅਤੇ ਫਿਰ ਅਗਲਾ ਪਿਕਸਲ ਜਨਰੇਟ ਕਰਨ ਲਈ ਜਨਰੇਟ ਕੀਤੇ ਪਿਕਸਲਾਂ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ। ਇੱਕ ਨਿਊਰਲ ਨੈਟਵਰਕ ਵਿੱਚ ਕਈ ਪਰਤਾਂ ਵਿੱਚੋਂ ਲੰਘਦਾ ਹੈ, ਜਦੋਂ ਤੱਕ ਕਿ ਤਸਵੀਰ ਪੂਰੀ ਨਹੀਂ ਹੋ ਜਾਂਦੀ।
+ਇੱਕ _autoregressive transformer_ ਮਾਡਲ ਦੱਸਦਾ ਹੈ ਕਿ ਕਿਵੇਂ ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਚਿੱਤਰ ਬਣਾਉਂਦੇ ਹਨ, ਇਹ ਇੱਕ ਵਾਰੀ ਵਿੱਚ ਇੱਕ ਪਿੱਛਲGenerates generates a pixel generate pixels generate generates pixels next generate pixels generates pixels next generates pixels generates pixels pixels generates pixels generates pixels generates pixels generates pixels generates pixels generates generates generate generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates genera generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates generates pixels Generates pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels Generates pixels generates pixels generates pixels generates pixels generates pixels generates pixels generates pixels generates pixels generates pixels generate pixels pixels generates pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels generates pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels generates pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels pixels ਪੱਤਰ ਵਹੀ ਜੀਨਾਂਜ਼ਾ ਸ਼ਮਿਲ ਹੈ, ਹੁਣ ਚਿੱਤਰ ਪੂਰਾ ਹੋਣ ਤੱਕ ਨਿਊਰਲ ਨੈੱਟਵਰਕ ਦੀ ਕਈ ਪਰਤਾਂ ਨੂੰ ਪਾਰ ਕਰਦਾ ਹੈ।
 
-ਇਸ ਪ੍ਰਕਿਰਿਆ ਨਾਲ, DALL-E, ਤਸਵੀਰ ਵਿੱਚ ਲੱਛਣ, ਵਸਤੂਆਂ, ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ, ਅਤੇ ਹੋਰ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ ਜੋ ਇਹ ਜਨਰੇਟ ਕਰਦਾ ਹੈ। ਹਾਲਾਂਕਿ, DALL-E 2 ਅਤੇ 3 ਜਨਰੇਟ ਕੀਤੀ ਗਈ ਤਸਵੀਰ 'ਤੇ ਵੱਧ ਨਿਯੰਤਰਣ ਕਰਦੇ ਹਨ।
+ਇਸ ਪ੍ਰਕਿਰਿਆ ਨਾਲ, DALL-E ਚਿੱਤਰ ਵਿੱਚ ਗੁਣ, ਵਸਤੂਆਂ, ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਅਤੇ ਹੋਰ ਉਪ੍ਰੰਤ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ। ਫਿਰ ਵੀ, DALL-E 2 ਅਤੇ 3 ਨੇ ਬਣਾਏ ਗਏ ਚਿੱਤਰਾਂ 'ਤੇ ਵੱਧ ਨਿਯੰਤਰਣ ਰੱਖਦੇ ਹਨ।
 
-## ਆਪਣੀ ਪਹਿਲੀ ਇਮੇਜ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ
+## ਆਪਣਾ ਪਹਿਲਾ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ
 
-ਇੱਕ ਇਮੇਜ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣ ਲਈ ਤੁਹਾਨੂੰ ਕੀ ਚਾਹੀਦਾ ਹੈ? ਤੁਹਾਨੂੰ ਹੇਠ ਲਿਖੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਦੀ ਲੋੜ ਹੈ:
+ਤਾਂ ਫਿਰ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਉਣ ਲਈ ਕੀ ਚਾਹੀਦਾ ਹੈ? ਤੁਹਾਨੂੰ ਹੇਠ ਲਿਖੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਦੀ ਲੋੜ ਹੈ:
 
-- **python-dotenv**, ਤੁਹਾਨੂੰ ਆਪਣੀਆਂ ਸਿਕਰਟਸ ਨੂੰ ਕੋਡ ਤੋਂ ਦੂਰ _.env_ ਫਾਈਲ ਵਿੱਚ ਰੱਖਣ ਲਈ ਇਸ ਲਾਇਬ੍ਰੇਰੀ ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।
-- **openai**, ਇਹ ਲਾਇਬ੍ਰੇਰੀ ਹੈ ਜੋ ਤੁਸੀਂ OpenAI API ਨਾਲ ਗੱਲਬਾਤ ਕਰਨ ਲਈ ਵਰਤੋਂ ਕਰੋਂਗੇ।
-- **pillow**, ਪਾਇਥਨ ਵਿੱਚ ਤਸਵੀਰਾਂ ਨਾਲ ਕੰਮ ਕਰਨ ਲਈ।
-- **requests**, HTTP ਬੇਨਤੀਆਂ ਕਰਨ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ।
+- **python-dotenv**, ਇਸ ਲਾਇਬ੍ਰੇਰੀ ਦੀ ਵਰਤੋਂ ਕਰਨ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਤਾਂ ਜੋ ਆਪਣੇ ਗੁਪਤ ਜਾਣਕਾਰੀਆਂ _.env_ ਫਾਈਲ ਵਿੱਚ ਰੱਖ ਸਕੋ ਜਿਸਨੂੰ ਕੋਡ ਤੋਂ ਦੂਰ ਰੱਖਿਆ ਜਾ ਸਕੇ।
+- **openai**, ਇਹ ਲਾਇਬ੍ਰੇਰੀ ਹੈ ਜਿਸ ਨਾਲ ਤੁਸੀਂ OpenAI API ਨਾਲ ਇੰਟਰੈੱਕਟ ਕਰੋਂਗੇ।
+- **pillow**, Python ਵਿੱਚ ਚਿੱਤਰਾਂ ਨਾਲ ਕੰਮ ਕਰਨ ਲਈ।
+- **requests**, HTTP ਬੇਨਤੀਆਂ ਬਣਾਉਣ ਵਿੱਚ ਮਦਦ ਲਈ।
 
-1. ਹੇਠ ਲਿਖੀ ਸਮੱਗਰੀ ਨਾਲ _.env_ ਫਾਈਲ ਬਣਾਓ:
+## Azure OpenAI ਮਾਡਲ ਬਣਾਓ ਅਤੇ ਤੈਅਨਾਤ ਕਰੋ
+
+ਜੇਕਰ ਇਹ ਪਹਿਲਾਂ ਨਹੀਂ ਕੀਤਾ ਤਾਂ, [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) ਪੰਨਾ ਤੇ ਦਿੱਤੇ ਹੁਕਮਾਂ ਦਾ ਪਾਲਣ ਕਰੋ
+Azure OpenAI ਸਰੋਤ ਅਤੇ ਮਾਡਲ ਬਣਾਉਣ ਲਈ। ਮਾਡਲ ਵਜੋਂ **gpt-image-1** ਚੁਣੋ (ਮੌਜੂਦਾ Azure OpenAI ਚਿੱਤਰ ਮਾਡਲ; DALL-E 3 ਪੁਰਾਣਾ ਹੈ ਅਤੇ ਨਵੀਆਂ ਤੈਅਨਾਤੀਆਂ ਲਈ ਉਪਲੱਬਧ ਨਹੀਂ)।
+
+## ਐਪ ਬਣਾਉ
+
+1. _.env_ ਫਾਈਲ ਬਣਾਓ ਜਿਸ ਵਿਚ ਹੇਠਾਂ ਦਿੱਤੇ ਸਮੱਗਰੀ ਹੋਵੇ:
 
    ```text
    AZURE_OPENAI_ENDPOINT=<your endpoint>
    AZURE_OPENAI_API_KEY=<your key>
+   AZURE_OPENAI_DEPLOYMENT="gpt-image-1"
    ```
 
-   ਆਪਣੇ ਸਰੋਤ ਲਈ "ਕੁੰਜੀਆਂ ਅਤੇ ਐਂਡਪੋਇੰਟ" ਭਾਗ ਵਿੱਚ ਅਜ਼ੂਰ ਪੋਰਟਲ ਵਿੱਚ ਇਸ ਜਾਣਕਾਰੀ ਨੂੰ ਲੱਭੋ।
+   ਇਹ ਜਾਣਕਾਰੀ ਆਪਣੇ ਸਰੋਤ ਲਈ Azure OpenAI Foundry ਪੋਰਟਲ ਦੇ "Deployments" ਹਿੱਸੇ ਵਿੱਚ ਲੱਭੋ।
 
-1. ਉੱਪਰ ਦਿੱਤੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ ਇੱਕ ਫਾਈਲ _requirements.txt_ ਵਿੱਚ ਇਕੱਠਾ ਕਰੋ ਇਸ ਤਰ੍ਹਾਂ:
+1. ਉਪਰ ਦਿੱਤੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ ਇਕ ਫਾਈਲ _requirements.txt_ ਵਿੱਚ ਇਕੱਠਾ ਕਰੋ:
 
    ```text
    python-dotenv
@@ -94,7 +104,7 @@ Midjourney DALL-E ਦੀ ਤਰ੍ਹਾਂ ਹੀ ਕੰਮ ਕਰਦਾ ਹੈ
    requests
    ```
 
-1. ਅਗਲੇ, ਵਰਚੁਅਲ ਵਾਤਾਵਰਣ ਬਣਾਓ ਅਤੇ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ ਸਥਾਪਿਤ ਕਰੋ:
+1. ਅਗਲੇ, ਵਰਚੁਅਲ ਇਨਵਾਇਰਨਮੈਂਟ ਬਣਾਓ ਅਤੇ ਲਾਇਬ੍ਰੇਰੀਆਂ ਇੰਸਟਾਲ ਕਰੋ:
 
    ```bash
    python3 -m venv venv
@@ -102,71 +112,68 @@ Midjourney DALL-E ਦੀ ਤਰ੍ਹਾਂ ਹੀ ਕੰਮ ਕਰਦਾ ਹੈ
    pip install -r requirements.txt
    ```
 
-   ਵਿਂਡੋਜ਼ ਲਈ, ਆਪਣੇ ਵਰਚੁਅਲ ਵਾਤਾਵਰਣ ਨੂੰ ਬਣਾਉਣ ਅਤੇ ਸਰਗਰਮ ਕਰਨ ਲਈ ਹੇਠ ਲਿਖੀਆਂ ਕਮਾਂਡਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ:
+   Windows ਲਈ, ਇਸ ਕਮਾਂਡ ਨਾਲ ਆਪਣੇ ਵਰਚੁਅਲ ਇਨਵਾਇਰਨਮੈਂਟ ਨੂੰ ਬਣਾਉ ਅਤੇ ਚਾਲੂ ਕਰੋ:
 
    ```bash
    python3 -m venv venv
    venv\Scripts\activate.bat
    ```
 
-1. _app.py_ ਨਾਮਕ ਫਾਈਲ ਵਿੱਚ ਹੇਠ ਲਿਖਿਆ ਕੋਡ ਸ਼ਾਮਲ ਕਰੋ:
+1. _app.py_ ਨਾਮ ਦੀ ਫਾਈਲ ਵਿੱਚ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਕੋਡ ਲਾਈਨਾਂ ਸ਼ਾਮਲ ਕਰੋ:
 
-   ```python
-   import openai
-   import os
-   import requests
-   from PIL import Image
-   import dotenv
+    ```python
+    import openai
+    import os
+    import requests
+    from PIL import Image
+    import dotenv
+    from openai import OpenAI, AzureOpenAI
+    
+    # dotenv ਨੂੰ ਆਯਾਤ ਕਰੋ
+    dotenv.load_dotenv()
+    
+    # Azure OpenAI ਸੇਵਾ ਕਲਾਇੰਟ ਨੂੰ ਸੰਰਚਿਤ ਕਰੋ
+    client = AzureOpenAI(
+      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
+      api_key=os.environ['AZURE_OPENAI_API_KEY'],
+      api_version = "2024-10-21"
+      )
+    try:
+        # ਇਮੇਜ ਜਨਰੇਸ਼ਨ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਚਿੱਤਰ ਬਣਾਓ
+        generation_response = client.images.generate(
+                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+                                size='1024x1024', n=1,
+                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
+                              )
 
-   # import dotenv
-   dotenv.load_dotenv()
+        # ਸਟੋਰ ਕੀਤੇ ਚਿੱਤਰ ਲਈ ਡਾਇਰੈਕਟਰੀ ਸੈੱਟ ਕਰੋ
+        image_dir = os.path.join(os.curdir, 'images')
 
-   # Get endpoint and key from environment variables
-   openai.api_base = os.environ['AZURE_OPENAI_ENDPOINT']
-   openai.api_key = os.environ['AZURE_OPENAI_API_KEY']
+        # ਜੇ ਡਾਇਰੈਕਟਰੀ ਮੌਜੂਦ ਨਹੀਂ ਹੈ, ਤਾਂ ਇਸਨੂੰ ਬਣਾਓ
+        if not os.path.isdir(image_dir):
+            os.mkdir(image_dir)
 
-   # Assign the API version (DALL-E is currently supported for the 2023-06-01-preview API version only)
-   openai.api_version = '2023-06-01-preview'
-   openai.api_type = 'azure'
+        # ਚਿੱਤਰ ਦਾ ਰਸਤਾ ਸ਼ੁਰੂ ਕਰੋ (ਦਿਆਨ ਦਿਓ ਕਿ ਫਾਇਲ ਪ੍ਰਕਾਰ png ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ)
+        image_path = os.path.join(image_dir, 'generated-image.png')
 
+        # ਬਣਾਇਆ ਗਿਆ ਚਿੱਤਰ ਪ੍ਰਾਪਤ ਕਰੋ
+        image_url = generation_response.data[0].url  # ਜਵਾਬ ਵਿੱਚੋਂ ਚਿੱਤਰ URL ਨਿਕਾਲੋ
+        generated_image = requests.get(image_url).content  # ਚਿੱਤਰ ਡਾਊਨਲੋਡ ਕਰੋ
+        with open(image_path, "wb") as image_file:
+            image_file.write(generated_image)
 
-   try:
-       # Create an image by using the image generation API
-       generation_response = openai.Image.create(
-           prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-           size='1024x1024',
-           n=2,
-           temperature=0,
-       )
-       # Set the directory for the stored image
-       image_dir = os.path.join(os.curdir, 'images')
+        # ਡਿਫਾਲਟ ਚਿੱਤਰ ਦਰਸ਼ਕ ਵਿੱਚ ਚਿੱਤਰ ਦਿਖਾਓ
+        image = Image.open(image_path)
+        image.show()
 
-       # If the directory doesn't exist, create it
-       if not os.path.isdir(image_dir):
-           os.mkdir(image_dir)
-
-       # Initialize the image path (note the filetype should be png)
-       image_path = os.path.join(image_dir, 'generated-image.png')
-
-       # Retrieve the generated image
-       image_url = generation_response["data"][0]["url"]  # extract image URL from response
-       generated_image = requests.get(image_url).content  # download the image
-       with open(image_path, "wb") as image_file:
-           image_file.write(generated_image)
-
-       # Display the image in the default image viewer
-       image = Image.open(image_path)
-       image.show()
-
-   # catch exceptions
-   except openai.InvalidRequestError as err:
-       print(err)
-
+    # ਐਕਸਪਸ਼ਨਾਂ ਨੂੰ ਫੜੋ
+    except openai.BadRequestError as err:
+        print(err)
    ```
 
-ਆਓ ਇਸ ਕੋਡ ਨੂੰ ਸਮਝਾਈਏ:
+ਆਓ ਇਸ ਕੋਡ ਨੂੰ ਸਮਝੀਏ:
 
-- ਪਹਿਲਾਂ, ਅਸੀਂ ਲੋੜੀਂਦੇ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ ਇੰਪੋਰਟ ਕਰਦੇ ਹਾਂ, ਜਿਸ ਵਿੱਚ OpenAI ਲਾਇਬ੍ਰੇਰੀ, dotenv ਲਾਇਬ੍ਰੇਰੀ, requests ਲਾਇਬ੍ਰੇਰੀ, ਅਤੇ Pillow ਲਾਇਬ੍ਰੇਰੀ ਸ਼ਾਮਲ ਹਨ।
+- ਸਭ ਤੋਂ ਪਹਿਲਾਂ, ਅਸੀਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ ਇੰਪੋਰਟ ਕਰਦੇ ਹਾਂ, ਜਿਸ ਵਿਚ OpenAI ਲਾਇਬ੍ਰੇਰੀ, dotenv ਲਾਇਬ੍ਰੇਰੀ, requests ਲਾਇਬ੍ਰੇਰੀ ਅਤੇ Pillow ਲਾਇਬ੍ਰੇਰੀ ਸ਼ਾਮਲ ਹਨ।
 
   ```python
   import openai
@@ -176,144 +183,302 @@ Midjourney DALL-E ਦੀ ਤਰ੍ਹਾਂ ਹੀ ਕੰਮ ਕਰਦਾ ਹੈ
   import dotenv
   ```
 
-- ਅਗਲੇ, ਅਸੀਂ _.env_ ਫਾਈਲ ਤੋਂ ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲਾਂ ਨੂੰ ਲੋਡ ਕਰਦੇ ਹਾਂ।
+- ਫਿਰ, ਅਸੀਂ _.env_ ਫਾਈਲ ਤੋਂ ENV ਵੈਰੀਏਬਲ ਲੋਡ ਕਰਦੇ ਹਾਂ।
 
   ```python
-  # import dotenv
+  # ਡੌਟਐਨਵੀ ਨੂੰ ਇੰਪੋਰਟ ਕਰੋ
   dotenv.load_dotenv()
   ```
 
-- ਉਸ ਤੋਂ ਬਾਅਦ, ਅਸੀਂ OpenAI API ਲਈ ਐਂਡਪੋਇੰਟ, ਕੁੰਜੀ, ਵਰਜਨ ਅਤੇ ਕਿਸਮ ਸੈੱਟ ਕਰਦੇ ਹਾਂ।
+- ਉਸ ਤੋਂ ਬਾਅਦ, ਅਸੀਂ Azure OpenAI ਸੇਵਾ ਕਲਾਇੰਟ ਨੂੰ ਸੰਰਚਿਤ ਕਰਦੇ ਹਾਂ 
 
   ```python
-  # Get endpoint and key from environment variables
-  openai.api_base = os.environ['AZURE_OPENAI_ENDPOINT']
-  openai.api_key = os.environ['AZURE_OPENAI_API_KEY']
-
-  # add version and type, Azure specific
-  openai.api_version = '2023-06-01-preview'
-  openai.api_type = 'azure'
+  # ਇਨਵਾਇਰਨਮੈਂਟ ਵੇਰੀਏਬਲਸ ਤੋਂ ਐਂਡਪਵਾਇੰਟ ਅਤੇ ਕੀ ਪ੍ਰਾਪਤ ਕਰੋ
+  client = AzureOpenAI(
+      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
+      api_key=os.environ['AZURE_OPENAI_API_KEY'],
+      api_version = "2024-10-21"
+      )
   ```
 
-- ਅਗਲੇ, ਅਸੀਂ ਤਸਵੀਰ ਜਨਰੇਟ ਕਰਦੇ ਹਾਂ:
+- ਫਿਰ, ਅਸੀਂ ਚਿੱਤਰ ਬਣਾਉਂਦੇ ਹਾਂ:
 
   ```python
-  # Create an image by using the image generation API
-  generation_response = openai.Image.create(
-      prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-      size='1024x1024',
-      n=2,
-      temperature=0,
-  )
+  # ਇਮੇਜ ਜਨਰੇਸ਼ਨ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਚਿੱਤਰ ਬਣਾਓ
+  generation_response = client.images.generate(
+                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+                        size='1024x1024', n=1,
+                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
+                      )
   ```
 
-  ਉੱਪਰ ਦਿੱਤਾ ਕੋਡ ਇੱਕ JSON ਵਸਤੂ ਨਾਲ ਜਵਾਬ ਦਿੰਦਾ ਹੈ ਜਿਸ ਵਿੱਚ ਜਨਰੇਟ ਕੀਤੀ ਗਈ ਤਸਵੀਰ ਦਾ URL ਹੁੰਦਾ ਹੈ। ਅਸੀਂ ਤਸਵੀਰ ਡਾਊਨਲੋਡ ਕਰਨ ਅਤੇ ਇਸਨੂੰ ਫਾਈਲ ਵਿੱਚ ਸੇਵ ਕਰਨ ਲਈ URL ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹਾਂ।
+  ਉਪਰੋਕਤ ਕੋਡ JSON ਵਸਤੂ ਨਾਲ ਜਵਾਬ ਦਿੰਦਾ ਹੈ ਜਿਸ ਵਿੱਚ ਬਣਾਏ ਗਏ ਚਿੱਤਰ URL ਹੁੰਦਾ ਹੈ। ਅਸੀਂ ਇਸ URL ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਕੇ ਇੱਕ ਫਾਈਲ ਵਿੱਚ ਸੇਵ ਕਰ ਸਕਦੇ ਹਾਂ।
 
-- ਆਖ਼ਰਕਾਰ, ਅਸੀਂ ਤਸਵੀਰ ਖੋਲ੍ਹਦੇ ਹਾਂ ਅਤੇ ਇਸਨੂੰ ਪ੍ਰਮਾਣਿਤ ਤਸਵੀਰ ਦਰਸ਼ਕ ਨਾਲ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਦੇ ਹਾਂ:
+- ਆਖ਼ਰੀ ਵਿੱਚ, ਅਸੀਂ ਚਿੱਤਰ ਖੋਲ੍ਹਦੇ ਹਾਂ ਅਤੇ ਇਹ ਚਿੱਤਰ ਸਧਾਰਣ ਚਿੱਤਰ ਵਿਖਾਵਣ ਵਾਲੇ ਵਿੱਚ ਦਿਖਾਉਂਦੇ ਹਾਂ:
 
   ```python
   image = Image.open(image_path)
   image.show()
   ```
 
-### ਤਸਵੀਰ ਜਨਰੇਟ ਕਰਨ ਬਾਰੇ ਹੋਰ ਵਿਸਥਾਰ
+### ਚਿੱਤਰ ਬਣਾਉਣ ਉੱਤੇ ਹੋਰ ਵੇਰਵੇ
 
-ਆਓ ਇਸ ਕੋਡ ਨੂੰ ਵੇਖੀਏ ਜੋ ਤਸਵੀਰ ਜਨਰੇਟ ਕਰਦਾ ਹੈ:
+ਆਓ ਇਸ ਕੋਡ ਨੂੰ 자세히 ਵੇਖੀਏ ਜੋ ਚਿੱਤਰ ਬਣਾਉਂਦਾ ਹੈ:
 
-```python
-generation_response = openai.Image.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0,
-    )
-```
+   ```python
+     generation_response = client.images.generate(
+                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+                               size='1024x1024', n=1,
+                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
+                           )
+   ```
 
-- **prompt**, ਉਹ ਟੈਕਸਟ ਪ੍ਰੋੰਪਟ ਹੈ ਜੋ ਤਸਵੀਰ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ। ਇਸ ਮਾਮਲੇ ਵਿੱਚ, ਅਸੀਂ ਪ੍ਰੋੰਪਟ "ਘੋੜੇ 'ਤੇ ਖਰਗੋਸ਼, ਚੂਪਾ ਚੂਪਸ ਫੜਿਆ ਹੋਇਆ, ਧੁੰਦਲੇ ਘਾਸ ਦੇ ਮੈਦਾਨ ਵਿੱਚ ਜਿੱਥੇ ਡੈਫੋਡਿਲਸ ਉੱਗਦੇ ਹਨ" ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹਾਂ।
-- **size**, ਜਨਰੇਟ ਕੀਤੀ ਗਈ ਤਸਵੀਰ ਦਾ ਆਕਾਰ ਹੈ। ਇਸ ਮਾਮਲੇ ਵਿੱਚ, ਅਸੀਂ ਇੱਕ ਤਸਵੀਰ ਜਨਰੇਟ ਕਰ ਰਹੇ ਹਾਂ ਜੋ 1024x1024 ਪਿਕਸਲ ਹੈ।
-- **n**, ਜਨਰੇਟ ਕੀਤੀਆਂ ਤਸਵੀਰਾਂ ਦੀ ਗਿਣਤੀ ਹੈ। ਇਸ ਮਾਮਲੇ ਵਿੱਚ, ਅਸੀਂ ਦੋ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰ ਰਹੇ ਹਾਂ।
-- **temperature**, ਇੱਕ ਪੈਰਾਮੀਟਰ ਹੈ ਜੋ ਜਨਰੇਟਿਵ AI ਮਾਡਲ ਦੇ ਨਤੀਜੇ ਦੀ ਬੇਤਰਤੀਬੀ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ। ਤਾਪਮਾਨ 0 ਅਤੇ 1 ਦੇ ਵਿਚਕਾਰ ਇੱਕ ਮੁੱਲ ਹੈ ਜਿੱਥੇ 0 ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਨਤੀਜਾ ਨਿਰਧਾਰਤ ਹੈ ਅਤੇ 1 ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਨਤੀਜਾ ਬੇਤਰਤੀਬ ਹੈ। ਡਿਫੌਲਟ ਮੁੱਲ 0.7 ਹੈ।
+- **prompt**, ਉਹ ਟੈਕਸਟ ਪ੍ਰਾਂਪਟ ਹੈ ਜਿਸ ਦੀ ਵਰਤੋਂ ਚਿੱਤਰ ਬਣਾਉਣ ਲਈ ਹੁੰਦੀ ਹੈ। ਇਸ ਉਦਾਹਰਣ ਵਿੱਚ, ਅਸੀਂ ਪ੍ਰਾਂਪਟ "ਘੋੜੇ ਤੇ ਖਰਗੋਸ਼, ਲੋਲਲੀਪੌਪ ਫੜ੍ਹੀ ਹੋਈ, ਧੁੰਦਲਾਈ ਨਾਲ ਢਕੀ ਘਾਸ ਵਾਲੀ ਖੇਤ ਜਿੱਥੇ ਡੈਫੋਡਿਲ ਕਲ੍ਹਦੇ ਹਨ" ਵਰਤ ਰਹੇ ਹਾਂ।
+- **size**, ਉਸ ਚਿੱਤਰ ਦਾ ਆਕਾਰ ਹੈ ਜੋ ਬਣਾਇਆ ਜਾਂਦਾ ਹੈ। ਇਸ ਉਦਾਹਰਣ ਵਿੱਚ, ਅਸੀਂ 1024x1024 ਪਿਕਸਲ ਦੇ ਚਿੱਤਰ ਬਣਾਉਂਦੇ ਹਾਂ।
+- **n**, ਇਹ ਬਣਾਏ ਜਾਣ ਵਾਲੇ ਚਿੱਤਰਾਂ ਦੀ ਸੰਖਿਆ ਹੈ। ਇਸ ਕિસੇ ਲਈ, ਅਸੀਂ ਦੋ ਚਿੱਤਰ ਬਣਉਂਦੇ ਹਾਂ।
+- **temperature**, ਇੱਕ ਪੈਰਾਮੀਟਰ ਹੈ ਜੋ Generative AI ਮਾਡਲ ਦੇ ਆਊਟਪੁੱਟ ਦੀ ਯਾਦਰਚਛਿਤਾ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ। ਟემਪਰੇਚਰ 0 ਤੋਂ 1 ਦਰਮਿਆਨ ਹੁੰਦਾ ਹੈ ਜਿੱਥੇ 0 ਮਤਲਬ ਨਤੀਜਾ ਨਿਸ਼ਚਿਤ (ਡਿਟਰਮਿਨਿਸਟਿਕ) ਹੈ ਅਤੇ 1 ਮਤਲਬ ਨਤੀਜਾ ਯਾਦਰਚਛਿਤ (ਰੈਂਡਮ) ਹੈ। ਡਿਫਾਲਟ ਮੁੱਲ 0.7 ਹੈ।
 
-ਤਸਵੀਰਾਂ ਨਾਲ ਹੋਰ ਵੀ ਚੀਜ਼ਾਂ ਹਨ ਜੋ ਅਸੀਂ ਅਗਲੇ ਭਾਗ ਵਿੱਚ ਕਵਰ ਕਰਾਂਗੇ।
+ਹੋਰ ਵੀ ਚੀਜ਼ਾਂ ਹਨ ਜੋ ਤੁਸੀਂ ਚਿੱਤਰਾਂ ਨਾਲ ਕਰ ਸਕਦੇ ਹੋ ਜੋ ਅਸੀਂ ਅਗਲੇ ਭਾਗ ਵਿੱਚ ਕਵਰ ਕਰਾਂਗੇ।
 
-## ਤਸਵੀਰ ਜਨਰੇਸ਼ਨ ਦੀ ਵਾਧੂ ਸਮਰਥਾ
+## ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਦੀ ਹੋਰ ਯੋਗਤਾਵਾਂ
 
-ਤੁਸੀਂ ਹੁਣ ਤੱਕ ਦੇਖਿਆ ਹੈ ਕਿ ਅਸੀਂ ਪਾਇਥਨ ਵਿੱਚ ਕੁਝ ਲਾਈਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਤਸਵੀਰ ਕਿਵੇਂ ਜਨਰੇਟ ਕਰਨ ਵਿੱਚ ਸਮਰਥ ਹੋਏ। ਹਾਲਾਂਕਿ, ਤਸਵੀਰਾਂ ਨਾਲ ਹੋਰ ਵੀ ਚੀਜ਼ਾਂ ਹਨ ਜੋ ਤੁਸੀਂ ਕਰ ਸਕਦੇ ਹੋ।
+ਤੁਸੀਂ ਹੁਣ ਤੱਕ ਦੇਖ ਚੁੱਕੇ ਹੋ ਕਿ ਅਸੀਂ ਕੁਝ ਕਤਾਰਾਂ ਵਿੱਚ ਪਾਇਥਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਚਿੱਤਰ ਕਿਵੇਂ ਬਣਾਉਂਦੇ ਹਾਂ। ਪਰ ਹੋਰ ਵੀ ਚੀਜ਼ਾਂ ਮੌਜੂਦ ਹਨ ਜੋ ਤੁਸੀਂ ਚਿੱਤਰਾਂ ਨਾਲ ਕਰ ਸਕਦੇ ਹੋ।
 
-ਤੁਸੀਂ ਹੇਠ ਲਿਖੀਆਂ ਚੀਜ਼ਾਂ ਵੀ ਕਰ ਸਕਦੇ ਹੋ:
+ਤੁਸੀਂ ਇਹ ਵੀ ਕਰ ਸਕਦੇ ਹੋ:
 
-- **ਸੰਪਾਦਨ ਕਰੋ**। ਮੌਜੂਦਾ ਤਸਵੀਰ, ਇੱਕ ਮਾਸਕ ਅਤੇ ਇੱਕ ਪ੍ਰੋੰਪਟ ਪ੍ਰਦਾਨ ਕਰਕੇ, ਤੁਸੀਂ ਇੱਕ ਤਸਵੀਰ ਨੂੰ ਬਦਲ ਸਕਦੇ ਹੋ। ਉਦਾਹਰਣ ਲਈ, ਤੁਸੀਂ ਤਸਵੀਰ ਦੇ ਇੱਕ ਹਿੱਸੇ ਵਿੱਚ ਕੁਝ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ। ਕਲਪਨਾ ਕਰੋ ਸਾਡੀ ਖਰਗੋਸ਼ ਦੀ ਤਸਵੀਰ, ਤੁਸੀਂ ਖਰਗੋਸ਼ ਨੂੰ ਇੱਕ ਟੋਪੀ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ। ਤੁਸੀਂ ਇਹ ਕਿਵੇਂ ਕਰੋਗੇ ਇਹ ਤਸਵੀਰ, ਇੱਕ ਮਾਸਕ (ਬਦਲਾਅ ਲਈ ਖੇਤਰ ਦੇ ਹਿੱਸੇ ਦੀ ਪਛਾਣ ਕਰਨਾ) ਅਤੇ ਇੱਕ ਟੈਕਸਟ ਪ੍ਰੋੰਪਟ ਪ੍ਰਦਾਨ ਕਰਕੇ ਹੈ ਕਿ ਕੀ ਕੀਤਾ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ।
+- **ਸੰਪਾਦਨ ਕਰੋ**. ਮੌਜੂਦਾ ਚਿੱਤਰ, ਮਾਸਕ ਅਤੇ ਪ੍ਰਾਂਪਟ ਦੇ ਕੇ ਤੁਸੀਂ ਚਿੱਤਰ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰ ਸਕਦੇ ਹੋ। ਉਦਾਹਰਣ ਵਜੋਂ, ਤੁਸੀਂ ਬਨੀ ਚਿੱਤਰ ਵਿੱਚ ਟੋਪੀ ਜੋੜ ਸਕਦੇ ਹੋ। ਇਹ ਕਰਨ ਲਈ ਤੁਸੀਂ ਚਿੱਤਰ, ਮਾਸਕ (ਨੌਕਰੇਸ਼ਤਰ ਲਈ ਹਿੱਸਾ ਦਰਸਾਉਂਦਾ) ਅਤੇ ਟੈਕਸਟ ਪ੍ਰਾਂਪਟ ਦਿੰਦੇ ਹੋ ਜੋ ਕਹਿੰਦਾ ਹੈ ਕਿ ਕੀ ਬਦਲਣਾ ਹੈ।
+> ਨੋਟ: ਇਹ DALL-E 3 ਵਿੱਚ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ।
+ 
+ਜੀਪੀਟੀ ਇਮેજ ਵਰਤ ਕੇ ਇੱਕ ਉਦਾਹਰਣ:
+
+   ```python
+   response = client.images.edit(
+       model="gpt-image-1",
+       image=open("sunlit_lounge.png", "rb"),
+       mask=open("mask.png", "rb"),
+       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
+   )
+   image_url = response.data[0].url
+   ```
+
+  ਬੇਸ ਚਿੱਤਰ ਵਿੱਚ ਸਿਰਫ ਲਾਂਜ ਅਤੇ ਪੂਲ ਸ਼ਾਮਲ ਹੁੰਦੇ ਹਨ ਪਰ ਆਖ਼ਰੀ ਚਿੱਤਰ ਵਿੱਚ ਇੱਕ ਫਲੇਮਿੰਗੋ ਹੋਵੇਗਾ:
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+  <img src="../../../translated_images/pa/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
+  <img src="../../../translated_images/pa/mask.1b2976ccec9e011e.webp" style="width: 30%; max-width: 200px; height: auto;">
+  <img src="../../../translated_images/pa/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
+</div>
+
+
+- **ਵੈਰੀਏਸ਼ਨ ਬਣਾਓ**. ਇਸ ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਤੁਸੀਂ ਮੌਜੂਦਾ ਚਿੱਤਰ ਲੈਂਦੇ ਹੋ ਅਤੇ ਵੱਖ-ਵੱਖ ਵੈਰੀਏਸ਼ਨ ਬਣਾਉਣ ਚਾਹੁੰਦੇ ਹੋ। ਇੱਕ ਵੈਰੀਏਸ਼ਨ ਬਣਾਉਣ ਲਈ, ਤੁਸੀਂ ਚਿੱਤਰ ਅਤੇ ਟੈਕਸਟ ਪ੍ਰਾਂਪਟ ਦਿੰਦੇ ਹੋ ਅਤੇ ਹੇਠਾਂ ਦਿੱਤੇ ਕੋਡ ਵਰਗਾ ਕੁਝ ਚਲਾਉਂਦੇ ਹੋ:
 
   ```python
-  response = openai.Image.create_edit(
-    image=open("base_image.png", "rb"),
-    mask=open("mask.png", "rb"),
-    prompt="An image of a rabbit with a hat on its head.",
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  ਬੇਸ ਤਸਵੀਰ ਵਿੱਚ ਸਿਰਫ਼ ਖਰਗੋਸ਼ ਹੀ ਸ਼ਾਮਲ ਹੋਵੇਗਾ ਪਰ ਆਖਰੀ ਤਸਵੀਰ ਵਿੱਚ ਖਰਗੋਸ਼ 'ਤੇ ਟੋਪੀ ਹੋਵੇਗੀ।
-
-- **ਵੈਰੀਏਸ਼ਨ ਬਣਾਓ**। ਵਿਚਾਰ ਇਹ ਹੈ ਕਿ ਤੁਸੀਂ ਇੱਕ ਮੌਜੂਦਾ ਤਸਵੀਰ ਲੈਂਦੇ ਹੋ ਅਤੇ ਮੰਗਦੇ ਹੋ ਕਿ ਵੈਰੀਏਸ਼ਨ ਬਣਾਏ ਜਾਣ। ਇੱਕ ਵੈਰੀਏਸ਼ਨ ਬਣਾਉਣ ਲਈ, ਤੁਸੀਂ ਇੱਕ ਤਸਵੀਰ ਅਤੇ ਇੱਕ ਟੈਕਸਟ ਪ੍ਰੋੰਪਟ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹੋ ਅਤੇ ਕੋਡ ਇਸ ਤਰ੍ਹਾਂ:
-
-  ```python
-  response = openai.Image.create_variation(
+  response = client.images.create_variation(
     image=open("bunny-lollipop.png", "rb"),
     n=1,
     size="1024x1024"
   )
-  image_url = response['data'][0]['url']
+  image_url = response.data[0].url
   ```
 
-  > ਨੋਟ ਕਰੋ, ਇਹ ਸਿਰਫ਼ OpenAI 'ਤੇ ਸਮਰਥਿਤ ਹੈ
+  > ਨੋਟ, ਇਹ ਸਿਰਫ OpenAI ਦੇ DALL-E 2 ਮਾਡਲ 'ਤੇ ਹੀ ਸਮਰਥਿਤ ਹੈ, gpt-image-1 'ਤੇ ਨਹੀਂ
 
-## ਤਾਪਮਾਨ
+## ਟੈਮਪਰੇਚਰ
 
-ਤਾਪਮਾਨ ਇੱਕ ਪੈਰਾਮੀਟਰ ਹੈ ਜੋ ਜਨਰੇਟਿਵ AI ਮਾਡਲ ਦੇ ਨਤੀਜੇ ਦੀ ਬੇਤਰਤੀਬੀ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ। ਤਾਪਮਾਨ 0 ਅਤੇ 1 ਦੇ ਵਿਚਕਾਰ ਇੱਕ ਮੁੱਲ ਹੈ ਜਿੱਥੇ 0 ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਨਤੀਜਾ ਨਿਰਧਾਰਤ ਹੈ ਅਤੇ 1 ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਨਤੀਜਾ ਬੇਤਰਤੀਬ ਹੈ। ਡਿਫੌਲਟ ਮੁੱਲ 0.7 ਹੈ।
+ਟੈਮਪਰੇਚਰ ਇੱਕ ਪੈਰਾਮੀਟਰ ਹੈ ਜੋ Generative AI ਮਾਡਲ ਦੇ ਨਤੀਜੇ ਦੀ ਯਾਦਰਚਛਿਤਾ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ। ਟੈਮਪਰੇਚਰ ਦਾ ਮੁੱਲ 0 ਤੋਂ 1 ਦਰਮਿਆਨ ਹੁੰਦਾ ਹੈ ਜਿੱਥੇ 0 ਮਤਲਬ ਨਤੀਜਾ ਨਿਸ਼ਚਿਤ ਅਤੇ 1 ਮਤਲਬ ਨਤੀਜਾ ਯਾਦਰਚਛਿਤ ਹੈ। ਡਿਫਾਲਟ ਮੁੱਲ 0.7 ਹੈ।
 
-ਆਓ ਦੇਖੀਏ ਕਿ ਤਾਪਮਾਨ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ, ਇਸ ਪ੍ਰੋੰਪਟ ਨੂੰ ਦੋ ਵਾਰ ਚਲਾਕੇ:
+ਆਓ ਇੱਕ ਉਦਾਹਰਣ ਦੇਖੀਏ ਕਿ ਟੈਮਪਰੇਚਰ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ, ਇਸ ਪ੍ਰਾਂਪਟ ਨੂੰ ਦੋ ਵਾਰੀ ਚਲਾਕੇ:
 
-> ਪ੍ਰੋੰਪਟ: "ਘੋੜੇ 'ਤੇ ਖਰਗੋਸ਼, ਚੂਪਾ ਚੂਪਸ ਫੜਿਆ ਹੋਇਆ, ਧੁੰਦਲੇ ਘਾਸ ਦੇ ਮੈਦਾਨ ਵਿੱਚ ਜਿੱਥੇ ਡੈਫੋਡਿਲਸ ਉੱਗਦੇ ਹਨ"
+> ਪ੍ਰਾਂਪਟ : "ਘੋੜੇ ਤੇ ਖਰਗੋਸ਼, ਲੋਲਲੀਪੌਪ ਫੜ੍ਹੀ ਹੋਈ, ਧੁੰਦਲਾਈ ਨਾਲ ਢਕੀ ਘਾਸ ਵਾਲੀ ਖੇਤ ਜਿੱਥੇ ਡੈਫੋਡਿਲ ਕਲ੍ਹਦੇ ਹਨ"
 
-ਹੁਣ ਆਓ ਉਸੇ ਪ੍ਰੋੰਪਟ ਨੂੰ ਚਲਾਈਏ ਸਿਰਫ਼ ਇਹ ਵੇਖਣ ਲਈ ਕਿ ਸਾਨੂੰ ਦੋ ਵਾਰ ਇੱਕੋ ਤਸਵੀਰ ਨਹੀਂ ਮਿਲੇਗੀ:
+![ਘੋੜੇ ਤੇ ਖਰਗੋਸ਼ ਲੋਲਲੀਪੌਪ ਫੜ੍ਹੀ ਹੋਈ, ਸੰਸਕਰਨ 1](../../../translated_images/pa/v1-generated-image.a295cfcffa3c13c2.webp)
 
-ਜਿਵੇਂ ਤੁਸੀਂ ਦੇਖ ਸਕਦੇ ਹੋ, ਤਸਵੀਰਾਂ ਇੱਕੋ ਜਿਹੀਆਂ ਹਨ, ਪਰ ਇਕੋ ਨਹੀਂ। ਆਓ ਤਾਪਮਾਨ ਮੁੱਲ ਨੂੰ 0.1 'ਤੇ ਬਦਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੀਏ ਅਤੇ ਵੇਖੀਏ ਕਿ ਕੀ ਹੁੰਦਾ ਹੈ:
+ਹੁਣ ਜੇ ਅਸੀਂ ਉਹੀ ਪ੍ਰਾਂਪਟ ਇਕ ਵਾਰੀ ਹੋਰ ਚਲਾਈਏ ਤਾਂ ਇਹ ਯਕੀਨੀ ਬਣਾਉਣ ਲਈ ਕਿ ਸਾਡੇ ਕੋਲ ਬਿਲਕੁਲ ਉਹੋ ਜਿਹਾ ਚਿੱਤਰ ਨਹੀਂ ਆਊਂਦਾ:
+
+![ਘੋੜੇ ਤੇ ਖਰਗੋਸ਼ ਦਾ ਜਨਰੇਟਡ ਚਿੱਤਰ](../../../translated_images/pa/v2-generated-image.33f55a3714efe61d.webp)
+
+ਤੁਸੀਂ ਦੇਖ ਸਕਦੇ ਹੋ ਕਿ ਚਿੱਤਰ ਮਿਲਦੇ-ਜੁਲਦੇ ਹਨ ਪਰ ਇਕੋ ਜਿਹੇ ਨਹੀਂ ਹਨ। ਆਉਂਦੇ ਹਾਂ ਟੈਮਪਰੇਚਰ ਦਾ ਮੁੱਲ 0.1 ਕਰਕੇ ਦੇਖੀਏ ਤਾਂ ਕੀ ਹੁੰਦਾ ਹੈ:
 
 ```python
- generation_response = openai.Image.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
+ generation_response = client.images.generate(
+        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # ਇੱਥੇ ਆਪਣਾ ਪ੍ਰੋੰਪਟ ਟੈਕਸਟ ਦਰਜ ਕਰੋ
         size='1024x1024',
         n=2
     )
 ```
 
-### ਤਾਪਮਾਨ ਬਦਲਣਾ
+### ਟੈਮਪਰੇਚਰ ਨੂੰ ਬਦਲਣਾ
 
-ਤਾਂ ਆਓ ਜਵਾਬ ਨੂੰ ਵੱਧ ਨਿਰਧਾਰਤ ਬਣਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੀਏ। ਅਸੀਂ ਜਨਰੇਟ ਕੀਤੀਆਂ ਦੋ ਤਸਵੀਰਾਂ ਤੋਂ ਅਨੁਮਾਨ ਲਗਾ ਸਕਦੇ ਹਾਂ ਕਿ ਪਹਿਲੀ ਤਸਵੀਰ ਵਿੱਚ ਇੱਕ ਖਰਗੋਸ਼ ਹੈ ਅਤੇ ਦੂਜੀ ਤਸਵੀਰ ਵਿੱਚ ਇੱਕ ਘੋੜਾ ਹੈ, ਇਸ ਲਈ ਤਸਵੀਰਾਂ ਬਹੁਤ ਵੱਧ ਬਦਲ ਰਹੀਆਂ ਹਨ।
+ਤਾਂ ਚੱਲੋ ਨਤੀਜੇ ਨੂੰ ਹੋਰ ਨਿਸ਼ਚਿਤ ਬਣਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੀਏ। ਅਸੀਂ ਦੋ ਤਸਵੀਰਾਂ ਵਿੱਚ ਦੇਖਿਆ ਕਿ ਪਹਿਲੀ ਵਿੱਚ ਖਰਗੋਸ਼ ਹੈ ਅਤੇ ਦੂਜੀ ਵਿੱਚ ਘੋੜਾ, ਇਸ ਲਈ ਚਿੱਤਰ ਬਹੁਤ ਵੱਖਰੇ ਹਨ।
 
-ਇਸ ਲਈ ਆਓ ਆਪਣਾ ਕੋਡ ਬਦਲੋ ਅਤੇ ਤਾਪਮਾਨ ਨੂੰ 0 'ਤੇ ਸੈੱਟ ਕਰੋ, ਇਸ ਤਰ੍ਹਾਂ:
+ਇਸ ਲਈ ਸਾਡਾ ਕੋਡ ਬਦਲ ਕੇ ਟੈਮਪਰੇਚਰ 0 ਕਰ ਦਿਉ, ਐਸਾ:
 
 ```python
-generation_response = openai.Image.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
+generation_response = client.images.generate(
+        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # ਆਪਣਾ ਪ੍ਰੰਪਟ ਟੈਕਸਟ ਇੱਥੇ ਦਾਖਲ ਕਰੋ
         size='1024x1024',
         n=2,
         temperature=0
     )
 ```
 
-ਹੁਣ ਜਦੋਂ ਤੁਸੀਂ ਇਹ ਕੋਡ ਚਲਾਉਂਦੇ ਹੋ, ਤੁਹਾਨੂੰ ਇਹ ਦੋ ਤਸਵੀਰਾਂ ਮਿਲਦੀਆਂ ਹਨ:
+ਹੁਣ ਜਦੋਂ ਤੁਸੀਂ ਇਹ ਕੋਡ ਚਲਾਉਂਦੇ ਹੋ ਤਾਂ ਤੁਹਾਨੂੰ ਇਹ ਦੋ ਚਿੱਤਰ ਮਿਲਣਗੇ:
 
-ਇੱਥੇ ਤੁਸੀਂ ਸਪੱਸ਼ਟ ਤੌਰ 'ਤੇ ਦੇਖ ਸਕਦੇ ਹੋ ਕਿ ਤਸਵੀਰਾਂ ਇੱਕ ਦੂਜੇ ਨਾਲ ਵੱਧ ਮਿਲਦੀਆਂ ਹਨ।
+- ![ਟੈਮਪਰੇਚਰ 0, ਸੰਸਕਰਨ 1](../../../translated_images/pa/v1-temp-generated-image.a4346e1d2360a056.webp)
+- ![ਟੈਮਪਰੇਚਰ 0, ਸੰਸਕਰਨ 2](../../../translated_images/pa/v2-temp-generated-image.871d0c920dbfb0f1.webp)
 
-## ਮੈਟਾਪ੍ਰੋੰਪਟਸ ਨਾਲ ਆਪਣੇ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਸੀਮਾਵਾਂ ਕਿਵੇਂ ਪਰਿਭਾਸ਼ਿਤ ਕਰਨੀ ਹੈ
+ਇੱਥੇ ਤੁਸੀਂ ਸਾਫ਼ ਤੌਰ 'ਤੇ ਵੇਖ ਸਕਦੇ ਹੋ ਕਿ ਚਿੱਤਰ ਇੱਕ ਦੂਜੇ ਨਾਲ ਵੱਧ ਮਿਲਦੇ ਹਾਂ।
 
-ਸਾਡੇ ਡੈਮੋ ਨਾਲ, ਅਸੀਂ ਪਹਿਲਾਂ ਹੀ ਆਪਣੇ ਗਾਹਕਾਂ ਲਈ ਤਸਵੀਰਾਂ ਜਨਰੇਟ ਕਰ ਸਕਦੇ ਹਾਂ। ਹਾਲਾਂਕਿ, ਸਾਨੂੰ ਆਪਣੇ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਕੁਝ ਸੀਮਾਵਾਂ ਬਣਾਉਣ ਦੀ ਲੋੜ ਹੈ।
+## ਆਪਣੇ ਐਪ ਲਈ ਹੱਦਬੰਦੀ ਕਰਨਾ ਮੈਟਾਪ੍ਰਾਂਪਟਸ ਨਾਲ
 
-ਉਦਾਹਰਣ ਲਈ, ਅਸੀਂ ਨਹੀਂ ਚਾਹੁੰਦੇ ਕਿ ਅਜ
+ਸਾਡੇ ਡੈਮੋ ਨਾਲ, ਅਸੀਂ ਪਹਿਲਾਂ ਹੀ ਗਾਹਕਾਂ ਲਈ ਚਿੱਤਰ ਬਣਾਉਂਦੇ ਹਾਂ। ਪਰ ਸਾਨੂੰ ਆਪਣੇ ਐਪ ਲਈ ਹੱਦਾਂ ਬਣਾਉਣੀਆਂ ਪੈਂਦੀਆਂ ਹਨ।
 
-**ਅਸਵੀਕਰਤੀ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸਹੀ ਹੋਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁੱਤੀਜਨਕਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਮੌਜੂਦ ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਪ੍ਰਮਾਣਿਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਈ ਕਿਸੇ ਵੀ ਗਲਤ ਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+ਉਦਾਹਰਣ ਵਜੋਂ, ਅਸੀਂ ਐਸੇ ਚਿੱਤਰ ਨਹੀਂ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਜੋ ਕੰਮ ਲਈ ਅਣੁਕੂਲ ਨਾ ਹੋਣ ਜਾਂ ਜੋ ਬੱਚਿਆਂ ਲਈ ਮਾਨਯੋਗ ਨਾ ਹੋਣ।
+
+ਅਸੀਂ ਇਹ _metaprompts_ ਨਾਲ ਕਰ ਸਕਦੇ ਹਾਂ। ਮੈਟਾਪ੍ਰਾਂਪਟਸ ਏਹ ਟੈਕਸਟ ਪ੍ਰਾਂਪਟ ਹੁੰਦੇ ਹਨ ਜੋ Generative AI ਮਾਡਲ ਦੇ ਨਤੀਜੇ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਨ ਲਈ ਵਰਤੋਂ ਵਿੱਚ ਆਉਂਦੇ ਹਨ। ਉਦਾਹਰਣ ਵਜੋਂ, ਅਸੀਂ ਮੈਟਾਪ੍ਰਾਂਪਟਸ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇਹ ਯਕੀਨੀ ਬਣਾ ਸਕਦੇ ਹਾਂ ਕਿ ਬਣਾਏ ਗਏ ਚਿੱਤਰ ਕੰਮ ਲਈ ਸੁਰੱਖਿਅਤ ਹਨ ਜਾਂ ਬੱਚਿਆਂ ਲਈ ਢੁਕਵੇਂ ਹਨ।
+
+### ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ?
+
+ਹੁਣ, ਮੈਟਾਪ੍ਰਾਂਪਟਸ ਕਿਵੇਂ ਕੰਮ ਕਰਦੇ ਹਨ?
+
+ਮੈਟਾਪ੍ਰਾਂਪਟਸ ਉਹ ਟੈਕਸਟ ਪ੍ਰਾਂਪਟ ਹੁੰਦੇ ਹਨ ਜੋ Generative AI ਮਾਡਲ ਦੇ ਨਤੀਜੇ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਨ ਲਈ ਵਰਤਿਆਂ ਜਾਂਦੇ ਹਨ, ਇਹ ਟੈਕਸਟ ਪ੍ਰਾਂਪਟ ਤੋਂ ਪਹਿਲਾਂ ਰੱਖੇ ਜਾਂਦੇ ਹਨ ਅਤੇ ਮਾਡਲ ਦੇ ਨਤੀਜੇ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਨ ਵਾਲੇ ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਐਂਬੈਡ ਕੀਤੇ ਜਾਂਦੇ ਹਨ। ਇਹ ਪ੍ਰਾਂਪਟ ਇਨਪੁੱਟ ਅਤੇ ਮੈਟਾਪ੍ਰਾਂਪਟ ਇਨਪੁੱਟ ਇੱਕ ਸਿੰਗਲ ਟੈਕਸਟ ਪ੍ਰਾਂਪਟ ਵਿੱਚ ਸਮਾਇਆ ਜਾਂਦਾ ਹੈ।
+
+ਇਕ ਮੈਟਾਪ੍ਰਾਂਪਟ ਦਾ ਉਦਾਹਰਣ ਹੁਣ ਵੇਖੀਏ:
+
+```text
+You are an assistant designer that creates images for children.
+
+The image needs to be safe for work and appropriate for children.
+
+The image needs to be in color.
+
+The image needs to be in landscape orientation.
+
+The image needs to be in a 16:9 aspect ratio.
+
+Do not consider any input from the following that is not safe for work or appropriate for children.
+
+(Input)
+
+```
+
+ਹੁਣ, ਆਓ ਵੇਖੀਏ ਕਿ ਸਾਡੇ ਡੈਮੋ ਵਿੱਚ ਮੈਟਾਪ੍ਰਾਂਪਟਸ ਕਿਵੇਂ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ।
+
+```python
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+
+meta_prompt =f"""You are an assistant designer that creates images for children.
+
+The image needs to be safe for work and appropriate for children.
+
+The image needs to be in color.
+
+The image needs to be in landscape orientation.
+
+The image needs to be in a 16:9 aspect ratio.
+
+Do not consider any input from the following that is not safe for work or appropriate for children.
+{disallow_list}
+"""
+
+prompt = f"{meta_prompt}
+Create an image of a bunny on a horse, holding a lollipop"
+
+# TODO ਚਿੱਤਰ ਬਣਾਉਣ ਲਈ ਬੇਨਤੀ ਜੋੜੋ
+```
+
+ਉਪਰੋਕਤ ਪ੍ਰਾਂਪਟ ਤੋਂ, ਤੁਸੀਂ ਵੇਖ ਸਕਦੇ ਹੋ ਕਿ ਬਣਾਈਆਂ ਗਈਆਂ ਸਭ ਚਿੱਤਰ ਮੈਟਾਪ੍ਰਾਂਪਟ ਨੂੰ ਧਿਆਨ ਵਿੱਚ ਰੱਖਦੀਆਂ ਹਨ।
+
+## ਅਸਾਈਨਮੈਂਟ - ਆਓ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਸਮਰੱਥ ਬਣਾਈਏ
+
+ਅਸੀਂ ਇਸ ਪਾਠ ਦੀ ਸ਼ੁਰੂਆਤ ਵਿੱਚ Edu4All ਨੂੰ ਪੇਸ਼ ਕੀਤਾ ਸੀ। ਹੁਣ ਸਮਾਂ ਹੈ ਕਿ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਆਪਣੇ ਅਸੈਸਮੈਂਟ ਲਈ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਦੀ ਸਮਰੱਥਾ ਦਿੱਤੀ ਜਾਵੇ।
+
+
+ਵਿਦਿਆਰਥੀ ਆਪਣੇ ਅੰਕਾਂ ਲਈ ਇੱਕ ਚਿੱਤਰ ਬਣਾਉਣਗੇ ਜਿਸ ਵਿੱਚ ਸਮਾਰਕ ਹੋਣਗੇ, ਕਿਹੜੇ ਸਮਾਰਕ ਹਨ ਇਹ ਵਿਦਿਆਰਥੀਆਂ 'ਤੇ ਨਿਰਭਰ ਕਰਦਾ ਹੈ। ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਇਸ ਕੰਮ ਵਿੱਚ ਆਪਣੀ ਰਚਨਾਤਮਕਤਾ ਵਰਤਣ ਲਈ ਕਿਹਾ ਗਿਆ ਹੈ ਕਿ ਉਹ ਇਹ ਸਮਾਰਕ ਵੱਖ-ਵੱਖ ਸੰਦਰਭਾਂ ਵਿੱਚ ਰੱਖਣ।
+
+## ਹੱਲ
+
+ਇੱਥੇ ਇੱਕ ਸੰਭਵ ਹੱਲ ਦਿੱਤਾ ਗਿਆ ਹੈ:
+
+```python
+import openai
+import os
+import requests
+from PIL import Image
+import dotenv
+from openai import AzureOpenAI
+# dotenv ਨੂੰ ਇੰਪੋਰਟ ਕਰੋ
+dotenv.load_dotenv()
+
+# ਮਾਹੌਲੀ ਵੈਰੀਏਬਲਾਂ ਤੋਂ ਐਂਡਪੌਇੰਟ ਅਤੇ ਕੁੰਜੀ ਪ੍ਰਾਪਤ ਕਰੋ
+client = AzureOpenAI(
+  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
+  api_key=os.environ['AZURE_OPENAI_API_KEY'],
+  api_version = "2024-10-21"
+  )
+
+
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+
+meta_prompt = f"""You are an assistant designer that creates images for children.
+
+The image needs to be safe for work and appropriate for children.
+
+The image needs to be in color.
+
+The image needs to be in landscape orientation.
+
+The image needs to be in a 16:9 aspect ratio.
+
+Do not consider any input from the following that is not safe for work or appropriate for children.
+{disallow_list}
+"""
+
+prompt = f"""{meta_prompt}
+Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
+"""
+
+try:
+    # ਇਮੇਜ ਜਨਰੇਸ਼ਨ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਚਿੱਤਰ ਬਣਾਓ
+    generation_response = client.images.generate(
+        prompt=prompt,    # ਆਪਣੇ ਪ੍ਰਾਂਪਟ ਟੈਕਸਟ ਇੱਥੇ ਦਰਜ ਕਰੋ
+        size='1024x1024',
+        n=1,
+    )
+    # ਸਟੋਰ ਕੀਤੇ ਚਿੱਤਰ ਲਈ ਡਾਇਰੈਕਟਰੀ ਸੈੱਟ ਕਰੋ
+    image_dir = os.path.join(os.curdir, 'images')
+
+    # ਜੇ ਡਾਇਰੈਕਟਰੀ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਤਾਂ ਇਸਨੂੰ ਬਣਾਓ
+    if not os.path.isdir(image_dir):
+        os.mkdir(image_dir)
+
+    # ਚਿੱਤਰ ਪਥ ਸ਼ੁਰੂ ਕਰੋ (ਨੋਟ ਕਰੋ ਕਿ ਫਾਇਲ ਟਾਈਪ png ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ)
+    image_path = os.path.join(image_dir, 'generated-image.png')
+
+    # ਤਿਆਰ ਕੀਤੇ ਚਿੱਤਰ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰੋ
+    image_url = generation_response.data[0].url  # ਜਵਾਬ ਤੋਂ ਚਿੱਤਰ URL ਕੱੱਢੋ
+    generated_image = requests.get(image_url).content  # ਚਿੱਤਰ ਡਾਊਨਲੋਡ ਕਰੋ
+    with open(image_path, "wb") as image_file:
+        image_file.write(generated_image)
+
+    # ਡਿਫਾਲਟ ਚਿੱਤਰ ਦਰਸ਼ਕ ਵਿੱਚ ਚਿੱਤਰ ਦਿਖਾਓ
+    image = Image.open(image_path)
+    image.show()
+
+# ਅਪਵਾਦਾਂ ਨੂੰ ਫੜੋ
+except openai.BadRequestError as err:
+    print(err)
+```
+
+## ਸ਼ਾਨਦਾਰ ਕੰਮ! ਆਪਣੀ ਸਿੱਖਿਆ ਜਾਰੀ ਰੱਖੋ
+
+ਇਸ ਪਾਠ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਸਾਡੇ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ਨੂੰ ਵੇਖੋ ਤਾਂ ਜੋ ਤੁਸੀਂ ਆਪਣੀ Generative AI ਗਿਆਨ ਨੂੰ ਅੱਗੇ ਵਧਾ ਸਕੋ!
+
+ਪਾਠ 10 ਵੱਲ ਜਾਓ ਜਿੱਥੇ ਅਸੀਂ ਦੇਖਾਂਗੇ ਕਿ ਕਿਵੇਂ [low-code ਦੇ ਨਾਲ AI ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਈਏ](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,109 +1,107 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "68664f7e754a892ae1d8d5e2b7bd2081",
-  "translation_date": "2025-05-20T07:47:29+00:00",
-  "source_file": "18-fine-tuning/README.md",
-  "language_code": "tr"
-}
--->
-[![Açık Kaynak Modeller](../../../translated_images/18-lesson-banner.8487555c3e3225eefc1dc84e72c8e00bce1ee76db867a080628fb0fbb04aa0d2.tr.png)](https://aka.ms/gen-ai-lesson18-gh?WT.mc_id=academic-105485-koreyst)
+[![Open Source Models](../../../translated_images/tr/18-lesson-banner.f30176815b1a5074.webp)](https://youtu.be/6UAwhL9Q-TQ?si=5jJd8yeQsCfJ97em)
 
 # LLM'inizi İnce Ayarlama
 
-Büyük dil modellerini kullanarak üretken yapay zeka uygulamaları geliştirmek yeni zorlukları beraberinde getirir. Ana sorun, model tarafından belirli bir kullanıcı isteği için üretilen içeriğin yanıt kalitesini (doğruluk ve alaka düzeyi) sağlamaktır. Önceki derslerde, mevcut modele verilen istem girdisini _değiştirerek_ sorunu çözmeye çalışan istem mühendisliği ve alma-ile zenginleştirilmiş üretim gibi teknikleri tartıştık.
+Büyük dil modellerini üretken yapay zeka uygulamaları oluşturmak için kullanmak yeni zorlukları beraberinde getirir. Ana mesele, modelin belirli bir kullanıcı isteği için oluşturduğu içeriğin yanıt kalitesini (doğruluk ve alaka) sağlamaktır. Önceki derslerde, var olan modele _girdi olarak verilen istemi değiştirerek_ problemi çözmeye çalışan istem mühendisliği ve bilgi artırımlı üretim gibi teknikleri tartıştık.
 
-Bugünkü derste, _modeli kendisini_ ek verilerle yeniden eğiterek zorluğun üstesinden gelmeye çalışan üçüncü bir teknik olan **ince ayarlamayı** tartışıyoruz. Detaylara dalalım.
+Bugünün dersinde, bu zorluğu _modeli kendisini ek verilerle yeniden eğiterek_ ele almaya çalışan üçüncü bir teknik olan **ince ayarlamayı** ele alıyoruz. Detaylara dalalım.
 
 ## Öğrenme Hedefleri
 
-Bu ders, önceden eğitilmiş dil modelleri için ince ayarlama kavramını tanıtıyor, bu yaklaşımın faydalarını ve zorluklarını araştırıyor ve üretken yapay zeka modellerinizin performansını artırmak için ince ayarlamayı ne zaman ve nasıl kullanacağınız konusunda rehberlik sunuyor.
+Bu ders, önceden eğitilmiş dil modelleri için ince ayarlama kavramını tanıtır, bu yaklaşımın faydalarını ve zorluklarını inceler ve jeneratif yapay zeka modellerinizin performansını artırmak için ince ayarlamayı ne zaman ve nasıl kullanacağınıza dair rehberlik sağlar.
 
-Bu dersin sonunda aşağıdaki soruları cevaplayabilmelisiniz:
+Bu dersin sonunda aşağıdaki soruları yanıtlayabilecek duruma gelmelisiniz:
 
-- Dil modelleri için ince ayarlama nedir?
+- Dil modellerinde ince ayarlama nedir?
 - İnce ayarlama ne zaman ve neden faydalıdır?
-- Önceden eğitilmiş bir modeli nasıl ince ayarlayabilirim?
+- Önceden eğitilmiş bir modeli nasıl ince ayar yapabilirim?
 - İnce ayarlamanın sınırlamaları nelerdir?
 
-Hazır mısınız? Başlayalım.
+Hazır mısınız? Hadi başlayalım.
 
-## Resimli Kılavuz
+## Görselleştirilmiş Rehber
 
-Detaylara dalmadan önce neyi ele alacağımızı genel olarak görmek ister misiniz? Bu ders için öğrenme yolculuğunu tanımlayan resimli kılavuzu inceleyin - ince ayarlama için temel kavramları ve motivasyonu öğrenmekten, ince ayarlama görevini yürütme sürecini ve en iyi uygulamaları anlamaya kadar. Bu keşif için büyüleyici bir konu, bu yüzden kendi kendine öğrenme yolculuğunuzu desteklemek için ek bağlantılar içeren [Kaynaklar](./RESOURCES.md?WT.mc_id=academic-105485-koreyst) sayfasını incelemeyi unutmayın!
+Derse başlamadan önce genel resmi görmek ister misiniz? Bu görselleştirilmiş rehbere göz atın; bu rehber, ince ayarlamanın temel kavramlarını ve motivasyonunu öğrenmekten, ince ayarlama görevini yürütmenin süreç ve en iyi uygulamalarını anlamaya kadar öğrenme yolculuğunu anlatır. Bu keşif için büyüleyici bir konudur, bu yüzden kendi başınıza öğrenme yolculuğunuzu desteklemek için ek bağlantılar içeren [Kaynaklar](./RESOURCES.md?WT.mc_id=academic-105485-koreyst) sayfasını unutmayın!
 
-![Dil Modellerini İnce Ayarlama İçin Resimli Kılavuz](../../../translated_images/18-fine-tuning-sketchnote.92733966235199dd260184b1aae3a84b877c7496bc872d8e63ad6fa2dd96bafc.tr.png)
+![Dil Modellerinin İnce Ayarlanmasına Görsel Rehber](../../../translated_images/tr/18-fine-tuning-sketchnote.11b21f9ec8a70346.webp)
 
-## Dil modelleri için ince ayarlama nedir?
+## Dil modellerinde ince ayarlama nedir?
 
-Tanım gereği, büyük dil modelleri internet dahil çeşitli kaynaklardan elde edilen büyük miktarda metin üzerinde _önceden eğitilmiştir_. Önceki derslerde öğrendiğimiz gibi, kullanıcının sorularına ("istemler") modelin yanıtlarının kalitesini artırmak için _istem mühendisliği_ ve _alma-ile zenginleştirilmiş üretim_ gibi tekniklere ihtiyacımız var.
+Tanım olarak, büyük dil modelleri internet de dahil olmak üzere çeşitli kaynaklardan alınan büyük miktarda metin üzerinde _önceden eğitilmiştir_. Önceki derslerde öğrendiğimiz gibi, modelin kullanıcının sorularına ("istemlere") verdiği yanıtların kalitesini artırmak için _istem mühendisliği_ ve _bilgi artırımlı üretim_ gibi tekniklere ihtiyacımız vardır.
 
-Popüler bir istem mühendisliği tekniği, modelin yanıtında beklenen şey hakkında daha fazla rehberlik sağlamak için ya _talimatlar_ (açık rehberlik) sağlayarak ya da _birkaç örnek vererek_ (örtük rehberlik) modelin yanıtına rehberlik etmeyi içerir. Bu, _az örnekli öğrenme_ olarak adlandırılır, ancak iki sınırlaması vardır:
+Popüler bir istem mühendisliği tekniği, modele yanıtın ne olması gerektiği konusunda daha fazla rehberlik vermek için _talimatlar_ (açık rehberlik) sağlamak veya _birkaç örnek vermektir_ (örtük rehberlik). Buna _birkac atışta öğrenme_ denir ancak iki sınırı vardır:
 
-- Model token sınırları verebileceğiniz örnek sayısını sınırlayabilir ve etkinliği sınırlayabilir.
-- Model token maliyetleri, her isteme örnek eklemeyi pahalı hale getirebilir ve esnekliği sınırlayabilir.
+- Model belirteç (token) sınırları, verebileceğiniz örnek sayısını kısıtlayabilir ve etkinliği azaltabilir.
+- Model belirteç maliyetleri, her isteme örnek eklemeyi pahalı hale getirebilir ve esnekliği sınırlar.
 
-İnce ayarlama, önceden eğitilmiş bir modeli alıp belirli bir görevde performansını artırmak için yeni verilerle yeniden eğittiğimiz makine öğrenme sistemlerinde yaygın bir uygulamadır. Dil modelleri bağlamında, önceden eğitilmiş modeli _belirli bir görev veya uygulama alanı için özenle seçilmiş bir örnek setiyle_ ince ayarlayarak, belirli görev veya alan için daha doğru ve ilgili olabilecek **özel bir model** oluşturabiliriz. İnce ayarlamanın yan faydası, az örnekli öğrenme için gereken örnek sayısını azaltarak token kullanımını ve ilgili maliyetleri azaltabilmesidir.
+İnce ayarlama, önceden eğitilmiş bir modeli alıp, belirli bir görevdeki performansını geliştirmek amacıyla yeni verilerle yeniden eğitmek olan makine öğrenimi sistemlerinde yaygın bir uygulamadır. Dil modelleri bağlamında, önceden eğitilmiş modeli _belirli bir görev veya uygulama alanı için özenle seçilmiş örneklerle_ ince ayarlayabiliriz ve böylece o belirli görev veya alan için daha doğru ve alakalı olabilecek **özel bir model** oluşturabiliriz. İnce ayarlamanın yan faydalarından biri de, birkaç atışta öğrenme için gereken örnek sayısını azaltarak belirteç kullanımını ve ilişkili maliyetleri düşürmesidir.
 
 ## Modelleri ne zaman ve neden ince ayarlamalıyız?
 
-_Bu_ bağlamda, ince ayarlamadan bahsettiğimizde, yeniden eğitimin **orijinal eğitim veri setinin bir parçası olmayan yeni veriler eklenerek** yapıldığı **denetimli** ince ayarlamayı kastediyoruz. Bu, modelin orijinal veriler üzerinde farklı hiperparametrelerle yeniden eğitildiği denetimsiz ince ayarlama yaklaşımından farklıdır.
+_Buradaki_ bağlamda, ince ayarlamadan bahsederken, yeniden eğitimin **orijinal eğitim veri setinde yer almayan yeni veriler eklenerek yapılan denetimli** ince ayarlama olduğunu kastediyoruz. Bu, modelin orijinal veriler üzerinde farklı hiperparametrelerle yeniden eğitildiği denetimsiz ince ayarlamadan farklıdır.
 
-Hatırlanması gereken önemli şey, ince ayarlamanın istenen sonuçları elde etmek için belirli bir uzmanlık düzeyi gerektiren ileri bir teknik olduğudur. Yanlış yapıldığında, beklenen iyileştirmeleri sağlamayabilir ve hedeflediğiniz alan için modelin performansını bile düşürebilir.
+Unutulmaması gereken önemli nokta, ince ayarlamanın istenen sonuçları almak için belirli bir uzmanlık seviyesi gerektiren gelişmiş bir teknik olduğudur. Yanlış yapıldığında beklenen iyileştirmeleri sağlamayabilir ve hedeflediğiniz alan için model performansını düşürebilir.
 
-Bu yüzden dil modellerini nasıl ince ayarlayacağınızı öğrenmeden önce, neden bu yolu seçmeniz gerektiğini ve ince ayarlama sürecine ne zaman başlamanız gerektiğini bilmelisiniz. Kendinize şu soruları sormaya başlayın:
+Bu yüzden dil modellerini "nasıl" ince ayarlayacağınızı öğrenmeden önce, bu yolu "neden" seçmeniz gerektiğini ve ince ayarlama sürecine "ne zaman" başlamanız gerektiğini bilmelisiniz. Kendinize şu soruları sorun:
 
 - **Kullanım Durumu**: İnce ayarlama için _kullanım durumunuz_ nedir? Mevcut önceden eğitilmiş modelin hangi yönünü geliştirmek istiyorsunuz?
-- **Alternatifler**: İstenen sonuçları elde etmek için _diğer teknikleri_ denediniz mi? Karşılaştırma için bir temel oluşturmak için onları kullanın.
-  - İstem mühendisliği: İlgili istem yanıtları örnekleriyle az örnekli istemleme gibi teknikleri deneyin. Yanıtların kalitesini değerlendirin.
-  - Alma-ile Zenginleştirilmiş Üretim: Verilerinizi arayarak elde edilen sorgu sonuçlarıyla istemleri zenginleştirmeyi deneyin. Yanıtların kalitesini değerlendirin.
-- **Maliyetler**: İnce ayarlama için maliyetleri belirlediniz mi?
-  - Ayarlanabilirlik - önceden eğitilmiş model ince ayarlama için uygun mu?
-  - Çaba - eğitim verilerini hazırlama, modeli değerlendirme ve iyileştirme için.
-  - Hesaplama - ince ayarlama işleri yürütmek ve ince ayarlanmış modeli dağıtmak için.
-  - Veri - ince ayarlama etkisi için yeterli kaliteli örneklere erişim
-- **Faydalar**: İnce ayarlama için faydaları doğruladınız mı?
-  - Kalite - ince ayarlanmış model temel performansı aştı mı?
-  - Maliyet - istemleri basitleştirerek token kullanımını azaltıyor mu?
+- **Alternatifler**: İstenen sonuçlara ulaşmak için _başka teknikler_ denediniz mi? Bunları karşılaştırma için bir temel oluşturmak üzere kullanın.
+  - İstem mühendisliği: İlgili istem yanıtlarının örnekleriyle birkaç atışta istem tekniklerini deneyin. Yanıt kalitesini değerlendirin.
+  - Bilgi Artırımlı Üretim: Verilerinizi arama yoluyla alınan sorgu sonuçlarıyla istemleri artırmayı deneyin. Yanıt kalitesini değerlendirin.
+- **Maliyetler**: İnce ayarlama maliyetlerini belirlediniz mi?
+  - İncelenebilirlik - önceden eğitilmiş model ince ayarlamaya uygun mu?
+  - Çaba - eğitim verisini hazırlama, modeli değerlendirme ve iyileştirme için gereken emek.
+  - Hesaplama - ince ayarlama işleri yürütmek ve ince ayarlanmış modeli dağıtmak için gereken işlem gücü.
+  - Veri - ince ayarlamanın etkisi için yeterli kalitede örneklere erişim.
+- **Faydalar**: İnce ayarlamanın faydalarını doğruladınız mı?
+  - Kalite - ince ayarlanmış model temel modeli geçti mi?
+  - Maliyet - istemleri basitleştirerek belirteç kullanımını azaltıyor mu?
   - Genişletilebilirlik - temel modeli yeni alanlar için yeniden kullanabilir misiniz?
 
-Bu soruları yanıtlayarak ince ayarlamanın kullanım durumunuz için doğru yaklaşım olup olmadığını belirleyebilirsiniz. İdeal olarak, yaklaşım yalnızca faydalar maliyetlerden ağır basarsa geçerlidir. Devam etmeye karar verdiğinizde, önceden eğitilmiş modeli _nasıl_ ince ayarlayabileceğinizi düşünmenin zamanı gelmiştir.
+Bu soruları yanıtlayarak, ince ayarlamanın kullanım durumunuz için uygun olup olmadığına karar verebilirsiniz. İdeal olarak, faydalar maliyetlerden fazla olduğu sürece yaklaşım geçerlidir. Devam etmeye karar verdiğinizde, önceden eğitilmiş modeli _nasıl_ ince ayarlayacağınıza odaklanma zamanı gelmiştir.
 
-Karar verme süreci hakkında daha fazla bilgi mi almak istiyorsunuz? [İnce ayarlamak mı yoksa ince ayarlamamak mı](https://www.youtube.com/watch?v=0Jo-z-MFxJs) izleyin.
+Karar verme süreci hakkında daha fazla bilgi edinmek ister misiniz? [İnce ayar yapmalı mı yoksa yapmamalı mı?](https://www.youtube.com/watch?v=0Jo-z-MFxJs) videosunu izleyin.
 
 ## Önceden eğitilmiş bir modeli nasıl ince ayarlayabiliriz?
 
-Önceden eğitilmiş bir modeli ince ayarlamak için ihtiyacınız olanlar:
+Önceden eğitilmiş bir modeli ince ayarlamak için şunlara ihtiyacınız vardır:
 
-- ince ayarlamak için önceden eğitilmiş bir model
-- ince ayarlama için kullanılacak bir veri seti
-- ince ayarlama işini yürütmek için bir eğitim ortamı
-- ince ayarlanmış modeli dağıtmak için bir barındırma ortamı
+- İnce ayar yapılacak önceden eğitilmiş model
+- İnce ayarlama için kullanılacak veri kümesi
+- İnce ayarlama işini çalıştırmak için eğitim ortamı
+- İnce ayarlanmış modeli dağıtmak için barındırma ortamı
 
-## İnce Ayarlama Eylemde
+## İnce Ayarlama Uygulamada
 
-Aşağıdaki kaynaklar, seçilmiş bir model ve özenle seçilmiş bir veri seti kullanarak gerçek bir örneği adım adım öğretici ile yürütmeniz için rehberlik sağlar. Bu öğreticilerde çalışmak için belirli sağlayıcıda bir hesaba ve ilgili model ve veri setlerine erişime ihtiyacınız vardır.
+> **Not:** Aşağıdaki bazı eğitimlerde referans verilen `gpt-35-turbo` / `gpt-3.5-turbo`, çıkarım ve ince ayar için emekliye ayrılmıştır. Bugün yeni bir ince ayarlama işi başlatıyorsanız, bunun yerine şu an desteklenen bir modeli hedefleyin - örneğin `gpt-4o-mini` veya `gpt-4.1-mini`. Güncel ince ayarlanabilir modeller listesini görmek için [İnce Ayarlama Modelleri Listesine](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?WT.mc_id=academic-105485-koreyst#fine-tuning-models) bakabilirsiniz. Bu eğitimlerdeki kavramlar ve adımlar hala geçerlidir.
 
-| Sağlayıcı    | Öğretici                                                                                                                                                                       | Açıklama                                                                                                                                                                                                                                                                                                                                                                                                                        |
+Aşağıdaki kaynaklar, seçilmiş bir model ve özenle seçilmiş bir veri kümesi kullanarak gerçek bir örnek üzerinden adım adım eğitimler sağlar. Bu eğitimleri uygulamak için, belirli sağlayıcıda hesap sahibi olmanız ve ilgili model ile veri kümelerine erişiminiz olmalıdır.
+
+| Sağlayıcı     | Eğitim                                                                                                                                                                       | Açıklama                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI       | [Sohbet modellerini nasıl ince ayarlayabilirsiniz](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_finetune_chat_models.ipynb?WT.mc_id=academic-105485-koreyst)                | Eğitim verilerini hazırlayarak, ince ayarlama işini yürüterek ve ince ayarlanmış modeli çıkarım için kullanarak belirli bir alan ("tarif asistanı") için `gpt-35-turbo` ince ayarlamayı öğrenin.                                                                                                                                                                                                                                              |
-| Azure OpenAI | [GPT 3.5 Turbo ince ayarlama öğretici](https://learn.microsoft.com/azure/ai-services/openai/tutorials/fine-tune?tabs=python-new%2Ccommand-line?WT.mc_id=academic-105485-koreyst) | Eğitim verilerini oluşturma ve yükleme adımlarını atarak ince ayarlama işini yürütme, yeni modeli dağıtma ve kullanma adımlarını **Azure üzerinde** `gpt-35-turbo-0613` modelini ince ayarlamayı öğrenin.                                                                                                                                                                                                                                                                 |
-| Hugging Face | [Hugging Face ile LLM'leri ince ayarlama](https://www.philschmid.de/fine-tune-llms-in-2024-with-trl?WT.mc_id=academic-105485-koreyst)                                               | Bu blog yazısı, [transformers](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) kütüphanesi ve [Transformer Reinforcement Learning (TRL)](https://huggingface.co/docs/trl/index?WT.mc_id=academic-105485-koreyst]) ile açık [veri setleri](https://huggingface.co/docs/datasets/index?WT.mc_id=academic-105485-koreyst) kullanarak _açık LLM_ (ör: `CodeLlama 7B`) ince ayarlamayı size adım adım anlatır. |
+| OpenAI       | [Sohbet modellerini nasıl ince ayarlarım](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_finetune_chat_models.ipynb?WT.mc_id=academic-105485-koreyst)                | Belirli bir alan ("tarif asistanı") için `gpt-35-turbo` modelini eğitimi için veri hazırlayıp ince ayar işini başlatmayı ve ince ayarlanmış modeli çıkarım için kullanmayı öğrenin.                                                                                                                                                                                                                                              |
+| Azure OpenAI | [GPT 3.5 Turbo ince ayar eğitimi](https://learn.microsoft.com/azure/ai-services/openai/tutorials/fine-tune?tabs=python-new%2Ccommand-line&WT.mc_id=academic-105485-koreyst) | **Azure üzerinde** `gpt-35-turbo-0613` modelini ince ayarlamak için eğitim verisi oluşturup yükleme, ince ayar işini yürütme adımlarını öğrenin. Yeni modeli dağıtın ve kullanın.                                                                                                                                                                                                                                                                 |
+| Hugging Face | [Hugging Face ile LLM ince ayarı](https://www.philschmid.de/fine-tune-llms-in-2024-with-trl?WT.mc_id=academic-105485-koreyst)                                               | Bu blog yazısı, [transformers](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) kütüphanesi ve [Transformer Pekiştirmeli Öğrenme (TRL)](https://huggingface.co/docs/trl/index?WT.mc_id=academic-105485-koreyst) kullanarak Hugging Face üzerinde açık bir LLM'nin (örneğin: `CodeLlama 7B`) nasıl ince ayar yapıldığını anlatır. Ayrıca açık [veri setleri](https://huggingface.co/docs/datasets/index?WT.mc_id=academic-105485-koreyst) de kullanılmaktadır. |
 |              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| 🤗 AutoTrain | [AutoTrain ile LLM'leri ince ayarlama](https://github.com/huggingface/autotrain-advanced/?WT.mc_id=academic-105485-koreyst)                                                         | AutoTrain (veya AutoTrain Advanced), Hugging Face tarafından geliştirilen ve LLM ince ayarlama dahil birçok farklı görev için ince ayarlamayı sağlayan bir python kütüphanesidir. AutoTrain kodsuz bir çözüm olup, ince ayarlama kendi bulutunuzda, Hugging Face Spaces üzerinde veya yerel olarak yapılabilir. Hem web tabanlı bir GUI, CLI ve yaml yapılandırma dosyaları aracılığıyla eğitim destekler.                                                                               |
+| 🤗 AutoTrain | [AutoTrain ile LLM ince ayarı](https://github.com/huggingface/autotrain-advanced/?WT.mc_id=academic-105485-koreyst)                                                         | AutoTrain (veya AutoTrain Advanced), Hugging Face tarafından geliştirilen ve LLM ince ayarı dahil birçok görev için ince ayar yapılmasını sağlayan python kütüphanesidir. AutoTrain, kod yazmadan bir çözümdür ve ince ayar kendi bulut ortamınızda, Hugging Face Spaces'te veya lokalde yapılabilir. Web tabanlı GUI, CLI ve yaml konfigürasyon dosyaları ile eğitim desteklenir.                                                                               |
 |              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-
+| 🦥 Unsloth | [Unsloth ile LLM ince ayarı](https://github.com/unslothai/unsloth?WT.mc_id=academic-105485-koreyst)                                                         | Unsloth, LLM ince ayarı ve pekiştirmeli öğrenmeyi (RL) destekleyen açık kaynaklı bir çerçevedir. Unsloth, hazır [notebook'lar](https://github.com/unslothai/notebooks?WT.mc_id=academic-105485-koreyst) ile yerel eğitim, değerlendirme ve dağıtımı kolaylaştırır. Ayrıca metin-konuşma (TTS), BERT ve multimodal modelleri destekler. Başlamak için adım adım [LLM İnce Ayar Kılavuzunu](https://docs.unsloth.ai/get-started/fine-tuning-llms-guide) okuyun.                                                                          |
+|              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 ## Ödev
 
-Yukarıdaki öğreticilerden birini seçin ve adım adım ilerleyin. _Bu öğreticilerin bir versiyonunu referans için yalnızca bu depoda Jupyter Notebooks'ta çoğaltabiliriz. En son versiyonları almak için lütfen doğrudan orijinal kaynakları kullanın_.
+Yukarıdaki eğitimlerden birini seçin ve üzerinden geçin. _Bu eğitimlerin bir versiyonunu yalnızca referans amaçlı olarak bu depo içinde Jupyter Notebook'larda çoğaltabiliriz. En güncel sürümleri doğrudan orijinal kaynaklardan kullanınız_.
 
 ## Harika İş! Öğrenmeye Devam Edin.
 
-Bu dersi tamamladıktan sonra, Üretken Yapay Zeka bilginizi artırmak için [Üretken Yapay Zeka Öğrenme koleksiyonumuzu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) inceleyin!
+Bu dersi tamamladıktan sonra, jeneratif yapay zeka bilginizi geliştirmeye devam etmek için [Jeneratif AI Öğrenme koleksiyonumuza](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) göz atın!
 
-Tebrikler!! Bu kurs için v2 serisinin son dersini tamamladınız! Öğrenmeyi ve inşa etmeyi bırakmayın. \*\*Sadece bu konu için ek öneriler listesi içeren [KAYNAKLAR](RESOURCES.md?WT.mc_id=academic-105485-koreyst) sayfasını inceleyin.
+Tebrikler!! Bu kursun v2 serisindeki son dersi de tamamladınız! Öğrenmeyi ve inşa etmeyi bırakmayın. \*\*Bu konu için ek öneriler listesine ulaşmak için [KAYNAKLAR](RESOURCES.md?WT.mc_id=academic-105485-koreyst) sayfasına göz atın.
 
-Derslerin v1 serisi de daha fazla ödev ve kavramlarla güncellendi. Bilginizi tazelemek için bir dakikanızı ayırın - ve lütfen bu dersleri topluluk için geliştirmemize yardımcı olmak için [sorularınızı ve geri bildirimlerinizi paylaşın](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst).
+v1 ders serimiz de daha fazla ödev ve kavram ile güncellendi. Bilginizi tazelemek için bir dakikanızı ayırın ve lütfen [sorularınızı ve geri bildirimlerinizi paylaşarak](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst) bu derslerin topluluk için geliştirilmesine yardımcı olun.
 
-**Feragatname**:  
-Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

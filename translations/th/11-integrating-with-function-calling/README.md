@@ -1,83 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77a48a201447be19aa7560706d6f93a0",
-  "translation_date": "2025-05-19T21:29:49+00:00",
-  "source_file": "11-integrating-with-function-calling/README.md",
-  "language_code": "th"
-}
--->
-# การผสานรวมกับการเรียกใช้ฟังก์ชัน
+# การรวมเข้ากับการเรียกฟังก์ชัน
 
-คุณได้เรียนรู้มากมายจากบทเรียนก่อนหน้านี้ อย่างไรก็ตาม เรายังสามารถปรับปรุงเพิ่มเติมได้ สิ่งที่เราสามารถแก้ไขได้คือวิธีที่เราจะได้รูปแบบการตอบสนองที่สม่ำเสมอมากขึ้นเพื่อให้ง่ายต่อการทำงานกับการตอบสนองในภายหลัง นอกจากนี้ เราอาจต้องการเพิ่มข้อมูลจากแหล่งอื่นเพื่อเพิ่มคุณค่าของแอปพลิเคชันของเรา
+[![Integrating with function calling](../../../translated_images/th/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-ปัญหาที่กล่าวถึงข้างต้นคือสิ่งที่บทนี้พยายามแก้ไข
+คุณได้เรียนรู้มาอย่างมากในบทเรียนก่อนหน้านี้ อย่างไรก็ตาม เรายังสามารถพัฒนาได้อีก บางอย่างที่เราต้องจัดการคือ วิธีที่เราจะได้รับรูปแบบการตอบกลับที่สม่ำเสมอยิ่งขึ้นเพื่อให้ง่ายต่อการทำงานกับการตอบกลับในขั้นตอนถัดไป นอกจากนี้เราอาจต้องการเพิ่มข้อมูลจากแหล่งอื่นเพื่อเพิ่มคุณค่าให้กับแอปพลิเคชันของเรา
+
+ปัญหาที่กล่าวมาเป็นสิ่งที่บทนี้ตั้งใจจะแก้ไข
 
 ## บทนำ
 
 บทเรียนนี้จะครอบคลุม:
 
-- อธิบายว่า Function Calling คืออะไรและกรณีการใช้งาน
+- อธิบายว่าการเรียกฟังก์ชันคืออะไรและกรณีการใช้งานของมัน
 - การสร้างการเรียกฟังก์ชันโดยใช้ Azure OpenAI
-- วิธีการผสานรวมการเรียกฟังก์ชันในแอปพลิเคชัน
+- วิธีการรวมการเรียกฟังก์ชันเข้ากับแอปพลิเคชัน
 
 ## เป้าหมายการเรียนรู้
 
-เมื่อจบบทเรียนนี้ คุณจะสามารถ:
+เมื่อสิ้นสุดบทเรียนนี้ คุณจะสามารถ:
 
 - อธิบายวัตถุประสงค์ของการใช้การเรียกฟังก์ชัน
-- ตั้งค่าการเรียกฟังก์ชันโดยใช้ Azure OpenAI Service
-- ออกแบบการเรียกฟังก์ชันที่มีประสิทธิภาพสำหรับกรณีการใช้งานแอปพลิเคชันของคุณ
+- ตั้งค่าการเรียกฟังก์ชันโดยใช้บริการ Azure OpenAI
+- ออกแบบการเรียกฟังก์ชันที่มีประสิทธิภาพสำหรับกรณีการใช้งานของแอปพลิเคชันของคุณ
 
 ## สถานการณ์: การปรับปรุงแชทบอทของเราด้วยฟังก์ชัน
 
-สำหรับบทเรียนนี้ เราต้องการสร้างฟีเจอร์สำหรับสตาร์ทอัพด้านการศึกษาของเราที่อนุญาตให้ผู้ใช้ใช้แชทบอทเพื่อค้นหาหลักสูตรเทคนิค เราจะแนะนำหลักสูตรที่เหมาะกับระดับทักษะของพวกเขา บทบาทปัจจุบัน และเทคโนโลยีที่สนใจ
+สำหรับบทเรียนนี้ เราต้องการสร้างคุณสมบัติสำหรับสตาร์ทอัปด้านการศึกษาของเรา ที่อนุญาตให้ผู้ใช้ใช้แชทบอทเพื่อค้นหาหลักสูตรเทคนิค เราจะให้คำแนะนำหลักสูตรที่เหมาะสมกับระดับทักษะ บทบาทปัจจุบัน และเทคโนโลยีที่สนใจ
 
-เพื่อให้บรรลุสถานการณ์นี้ เราจะใช้การผสมผสานของ:
+ในการทำสถานการณ์นี้ให้เสร็จสิ้น เราจะใช้การผสมผสานของ:
 
-- `Azure OpenAI` เพื่อสร้างประสบการณ์การแชทสำหรับผู้ใช้
+- `Azure OpenAI` เพื่อสร้างประสบการณ์แชทสำหรับผู้ใช้
 - `Microsoft Learn Catalog API` เพื่อช่วยให้ผู้ใช้ค้นหาหลักสูตรตามคำขอของผู้ใช้
-- `Function Calling` เพื่อนำคำถามของผู้ใช้และส่งไปยังฟังก์ชันเพื่อทำการร้องขอ API
+- `Function Calling` เพื่อนำคำค้นหาของผู้ใช้และส่งไปยังฟังก์ชันเพื่อดำเนินการร้องขอ API
 
-มาเริ่มกันเลย มาดูกันว่าทำไมเราถึงต้องการใช้การเรียกฟังก์ชันตั้งแต่แรก:
+เพื่อเริ่มต้น มาดูกันว่าทำไมเราถึงต้องการใช้การเรียกฟังก์ชันในตอนแรก:
 
 ## ทำไมต้องเรียกฟังก์ชัน
 
-ก่อนการเรียกฟังก์ชัน การตอบสนองจาก LLM ไม่ได้มีโครงสร้างและไม่สม่ำเสมอ นักพัฒนาต้องเขียนโค้ดการตรวจสอบที่ซับซ้อนเพื่อให้แน่ใจว่าสามารถจัดการกับแต่ละรูปแบบของการตอบสนองได้ ผู้ใช้ไม่สามารถได้รับคำตอบเช่น "สภาพอากาศปัจจุบันในสตอกโฮล์มเป็นอย่างไร?" เนื่องจากโมเดลมีข้อจำกัดในเวลาที่ข้อมูลได้รับการฝึกฝน
+ก่อนการเรียกฟังก์ชัน การตอบกลับจาก LLM ไม่มีโครงสร้างและไม่สม่ำเสมอ นักพัฒนาต้องเขียนโค้ดตรวจสอบที่ซับซ้อนเพื่อให้แน่ใจว่าสามารถจัดการกับความแปรปรวนของการตอบกลับได้ ผู้ใช้ไม่สามารถรับคำตอบเช่น "สภาพอากาศปัจจุบันในสตอกโฮล์มเป็นอย่างไร?" เพราะโมเดลถูกจำกัดด้วยข้อมูลที่ฝึกสอนในช่วงเวลาหนึ่ง
 
-Function Calling เป็นฟีเจอร์ของ Azure OpenAI Service ที่จะเอาชนะข้อจำกัดต่อไปนี้:
+การเรียกฟังก์ชันเป็นคุณสมบัติของบริการ Azure OpenAI เพื่อแก้ไขข้อจำกัดดังต่อไปนี้:
 
-- **รูปแบบการตอบสนองที่สม่ำเสมอ**. หากเราสามารถควบคุมรูปแบบการตอบสนองได้ดีขึ้น เราสามารถผสานรวมการตอบสนองได้ง่ายขึ้นกับระบบอื่นๆ
-- **ข้อมูลภายนอก**. ความสามารถในการใช้ข้อมูลจากแหล่งอื่นของแอปพลิเคชันในบริบทของการแชท
+- **รูปแบบการตอบกลับที่สม่ำเสมอ** ถ้าเราสามารถควบคุมรูปแบบการตอบกลับได้ดีขึ้น เราจะรวมการตอบกลับเข้ากับระบบอื่นได้ง่ายขึ้น
+- **ข้อมูลภายนอก** ความสามารถในการใช้ข้อมูลจากแหล่งอื่นของแอปพลิเคชันในบริบทของการสนทนา
 
-## การแสดงปัญหาผ่านสถานการณ์
+## อธิบายปัญหาผ่านสถานการณ์
 
-> เราแนะนำให้คุณใช้ [โน้ตบุ๊กที่รวมอยู่](../../../11-integrating-with-function-calling/python/aoai-assignment.ipynb) หากคุณต้องการรันสถานการณ์ด้านล่าง คุณยังสามารถอ่านไปพร้อมกับเราในขณะที่เราพยายามแสดงปัญหาที่ฟังก์ชันสามารถช่วยแก้ไขได้
+> เราขอแนะนำให้ใช้ [สมุดบันทึกที่แนบมา](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) หากคุณต้องการรันสถานการณ์ด้านล่าง คุณยังสามารถอ่านตามไปด้วยในขณะที่เราพยายามอธิบายปัญหาที่ฟังก์ชันช่วยแก้ได้
 
-มาดูตัวอย่างที่แสดงปัญหารูปแบบการตอบสนอง:
+มาดูตัวอย่างที่แสดงปัญหารูปแบบการตอบกลับ:
 
-สมมติว่าเราต้องการสร้างฐานข้อมูลของข้อมูลนักเรียนเพื่อให้เราสามารถแนะนำหลักสูตรที่เหมาะสมกับพวกเขาได้ ด้านล่างเรามีคำอธิบายของนักเรียนสองคนที่มีข้อมูลคล้ายกันมาก
+สมมติว่าเราต้องการสร้างฐานข้อมูลข้อมูลนักเรียนเพื่อที่จะเสนอหลักสูตรที่เหมาะสมแก่พวกเขา ด้านล่างนี้เรามีคำอธิบายสองรายการของนักเรียนที่เกือบเหมือนกันในข้อมูลที่พวกเขามี
 
-1. สร้างการเชื่อมต่อกับทรัพยากร Azure OpenAI ของเรา:
+1. สร้างการเชื่อมต่อไปยังทรัพยากร Azure OpenAI ของเรา:
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # API ตอบกลับให้บริการจาก Azure OpenAI (Microsoft Foundry) v1
+   # จุดเชื่อมต่อ ดังนั้นเราจึงชี้ไคลเอนต์ OpenAI ไปที่ <your-endpoint>/openai/v1/.
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   ด้านล่างเป็นโค้ด Python สำหรับการกำหนดค่าการเชื่อมต่อของเรากับ Azure OpenAI ที่เราตั้งค่า `api_type`, `api_base`, `api_version` and `api_key`.
+   ด้านล่างนี้เป็นโค้ด Python สำหรับกำหนดค่าการเชื่อมต่อของเราไปยัง Azure OpenAI เนื่องจากเราใช้ปลายทาง v1 เราจึงเพียงตั้งค่า `api_key` และ `base_url` เท่านั้น (ไม่ต้องตั้งค่า `api_version`)
 
-1. Creating two student descriptions using variables `student_1_description` and `student_2_description`
+1. สร้างคำอธิบายนักเรียนสองคนโดยใช้ตัวแปร `student_1_description` และ `student_2_description`
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -85,9 +81,9 @@ Function Calling เป็นฟีเจอร์ของ Azure OpenAI Service
    student_2_description = "Michael Lee is a sophomore majoring in computer science at Stanford University. He has a 3.8 GPA. Michael is known for his programming skills and is an active member of the university's Robotics Club. He hopes to pursue a career in artificial intelligence after finishing his studies."
    ```
 
-   เราต้องการส่งคำอธิบายของนักเรียนข้างต้นไปยัง LLM เพื่อแยกวิเคราะห์ข้อมูล ข้อมูลนี้สามารถใช้ในแอปพลิเคชันของเราและส่งไปยัง API หรือเก็บในฐานข้อมูล
+   เราต้องการส่งคำอธิบายของนักเรียนข้างต้นไปยัง LLM เพื่อวิเคราะห์ข้อมูล ข้อมูลนี้สามารถใช้ในแอปพลิเคชันของเราและส่งไปยัง API หรือเก็บในฐานข้อมูลได้
 
-1. มาสร้างคำกระตุ้นสองคำที่เหมือนกันซึ่งเราบอก LLM ว่าเราสนใจข้อมูลอะไร:
+1. สร้างพรอมต์สองตัวเหมือนกันซึ่งเราสั่งให้ LLM ว่าสิ่งที่เราสนใจคืออะไร:
 
    ```python
    prompt1 = f'''
@@ -117,37 +113,39 @@ Function Calling เป็นฟีเจอร์ของ Azure OpenAI Service
    '''
    ```
 
-   คำกระตุ้นข้างต้นบอก LLM ให้แยกข้อมูลและคืนการตอบสนองในรูปแบบ JSON
+   พรอมต์ด้านบนสั่งให้ LLM ดึงข้อมูลและส่งกลับการตอบสนองในรูปแบบ JSON
 
-1. หลังจากตั้งค่าคำกระตุ้นและการเชื่อมต่อกับ Azure OpenAI แล้ว เราจะส่งคำกระตุ้นไปยัง LLM โดยใช้ `openai.ChatCompletion`. We store the prompt in the `messages` variable and assign the role to `user` นี่เป็นการเลียนแบบข้อความจากผู้ใช้ที่เขียนไปยังแชทบอท
+1. หลังจากตั้งค่าพรอมต์และการเชื่อมต่อไปยัง Azure OpenAI แล้ว เราจะส่งพรอมต์ไปยัง LLM โดยใช้ `client.responses.create` เราจัดเก็บพรอมต์ในตัวแปร `input` และกำหนดบทบาทเป็น `user` เพื่อเลียนแบบข้อความที่ผู้ใช้เขียนให้แชทบอท
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # การตอบกลับจากพรอมต์หนึ่ง
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # การตอบกลับจากพรอมต์สอง
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-ตอนนี้เราสามารถส่งคำขอทั้งสองไปยัง LLM และตรวจสอบการตอบสนองที่เราได้รับโดยค้นหาดังนี้ `openai_response1['choices'][0]['message']['content']`.
+ตอนนี้เราสามารถส่งคำขอทั้งสองไปยัง LLM และตรวจสอบการตอบกลับที่ได้รับโดยการค้นหาเช่น `openai_response1.output_text`
 
-1. Lastly, we can convert the response to JSON format by calling `json.loads`:
+1. สุดท้าย เราสามารถแปลงการตอบกลับเป็นรูปแบบ JSON โดยเรียกใช้ `json.loads`:
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # กำลังโหลดการตอบสนองในรูปแบบวัตถุ JSON
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
-   การตอบสนอง 1:
+   การตอบกลับ 1:
 
    ```json
    {
@@ -159,7 +157,7 @@ Function Calling เป็นฟีเจอร์ของ Azure OpenAI Service
    }
    ```
 
-   การตอบสนอง 2:
+   การตอบกลับ 2:
 
    ```json
    {
@@ -171,59 +169,60 @@ Function Calling เป็นฟีเจอร์ของ Azure OpenAI Service
    }
    ```
 
-   แม้ว่าคำกระตุ้นจะเหมือนกันและคำอธิบายจะคล้ายกัน แต่เราก็เห็นค่าของ `Grades` property formatted differently, as we can sometimes get the format `3.7` or `3.7 GPA` for example.
+   แม้ว่าพรอมต์จะเหมือนกันและคำอธิบายจะคล้ายกัน แต่เราจะเห็นค่าของคุณสมบัติ `Grades` ที่มีรูปแบบต่างกัน บางครั้งเราอาจได้รูปแบบ `3.7` หรือ `3.7 GPA` เป็นตัวอย่าง
 
-   This result is because the LLM takes unstructured data in the form of the written prompt and returns also unstructured data. We need to have a structured format so that we know what to expect when storing or using this data
+   ผลลัพธ์นี้เกิดจาก LLM รับข้อมูลที่ไม่มีโครงสร้างในรูปแบบของพรอมต์ที่เขียน แล้วส่งกลับข้อมูลที่ไม่มีโครงสร้างเช่นกัน เราจำเป็นต้องมีรูปแบบที่มีโครงสร้างเพื่อให้ทราบว่าจะคาดหวังอะไรเมื่อเก็บหรือใช้งานข้อมูลนี้
 
-So how do we solve the formatting problem then? By using functional calling, we can make sure that we receive structured data back. When using function calling, the LLM does not actually call or run any functions. Instead, we create a structure for the LLM to follow for its responses. We then use those structured responses to know what function to run in our applications.
+แล้วเราจะแก้ปัญหารูปแบบนี้อย่างไร? โดยใช้การเรียกฟังก์ชัน เราสามารถมั่นใจว่าได้รับข้อมูลที่มีโครงสร้างกลับมา เมื่อใช้การเรียกฟังก์ชัน LLM จะไม่ได้เรียกใช้หรือลงมือทำฟังก์ชันใด ๆ จริง ๆ แต่เราสร้างโครงสร้างให้ LLM เป็นแนวทางสำหรับการตอบกลับ จากนั้นเราใช้การตอบกลับที่มีโครงสร้างเหล่านั้นเพื่อทราบว่าควรเรียกใช้ฟังก์ชันใดในแอปพลิเคชันของเรา
 
-![function flow](../../../translated_images/Function-Flow.01a723a374f79e5856d9915c39e16c59fa2a00c113698b22a28e616224f407e1.th.png)
+![function flow](../../../translated_images/th/Function-Flow.083875364af4f4bb.webp)
 
-We can then take what is returned from the function and send this back to the LLM. The LLM will then respond using natural language to answer the user's query.
+จากนั้นเราสามารถนำสิ่งที่ได้รับจากฟังก์ชันนั้นไปส่งกลับไปยัง LLM ได้ LLM จะตอบกลับโดยใช้ภาษาธรรมชาติเพื่อตอบสนองคำถามของผู้ใช้
 
-## Use Cases for using function calls
+## กรณีการใช้งานของการใช้การเรียกฟังก์ชัน
 
-There are many different use cases where function calls can improve your app like:
+มีกรณีการใช้งานหลายกรณีที่การเรียกฟังก์ชันสามารถปรับปรุงแอปของคุณได้ เช่น:
 
-- **Calling External Tools**. Chatbots are great at providing answers to questions from users. By using function calling, the chatbots can use messages from users to complete certain tasks. For example, a student can ask the chatbot to "Send an email to my instructor saying I need more assistance with this subject". This can make a function call to `send_email(to: string, body: string)`
+- **การเรียกเครื่องมือภายนอก** แชทบอทมีความสามารถดีในการให้คำตอบต่อคำถามของผู้ใช้ ด้วยการใช้การเรียกฟังก์ชัน แชทบอทสามารถใช้ข้อความจากผู้ใช้เพื่อตอบสนองงานบางอย่าง เช่น นักเรียนอาจขอให้แชทบอท "ส่งอีเมลถึงผู้สอนของฉันว่า ฉันต้องการความช่วยเหลือเพิ่มเติมในวิชานี้" ซึ่งจะทำการเรียกฟังก์ชัน `send_email(to: string, body: string)`
 
-- **Create API or Database Queries**. Users can find information using natural language that gets converted into a formatted query or API request. An example of this could be a teacher who requests "Who are the students that completed the last assignment" which could call a function named `get_completed(student_name: string, assignment: int, current_status: string)`
+- **สร้างคำขอ API หรือฐานข้อมูล** ผู้ใช้สามารถค้นหาข้อมูลโดยใช้ภาษาธรรมชาติที่ถูกแปลงเป็นคำค้นหรือคำขอ API ที่มีรูปแบบ ตัวอย่างเช่น ครูที่ร้องขอว่า "ใครเป็นนักเรียนที่ส่งงานล่าสุดแล้ว" ซึ่งอาจทำการเรียกฟังก์ชันที่ชื่อ `get_completed(student_name: string, assignment: int, current_status: string)`
 
-- **Creating Structured Data**. Users can take a block of text or CSV and use the LLM to extract important information from it. For example, a student can convert a Wikipedia article about peace agreements to create AI flashcards. This can be done by using a function called `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
+- **การสร้างข้อมูลที่มีโครงสร้าง** ผู้ใช้สามารถนำข้อความหรือ CSV และใช้ LLM เพื่อดึงข้อมูลสำคัญ ตัวอย่างเช่น นักเรียนสามารถแปลงบทความวิกิพีเดียเกี่ยวกับข้อตกลงสันติภาพเพื่อสร้างแฟลชการ์ด AI ได้ ซึ่งสามารถทำได้โดยใช้ฟังก์ชัน `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
 
-## Creating Your First Function Call
+## การสร้างการเรียกฟังก์ชันครั้งแรกของคุณ
 
-The process of creating a function call includes 3 main steps:
+กระบวนการสร้างการเรียกฟังก์ชันประกอบด้วย 3 ขั้นตอนหลัก:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. **เรียกใช้** Responses API พร้อมรายการของฟังก์ชัน (เครื่องมือ) และข้อความจากผู้ใช้
+2. **อ่าน** การตอบกลับของโมเดลเพื่อดำเนินการ เช่น การเรียกฟังก์ชันหรือการเรียก API
+3. **ทำ** การเรียกอีกครั้งหนึ่งไปยัง Responses API โดยใช้ผลลัพธ์จากการทำงานของฟังก์ชันเพื่อใช้ข้อมูลนั้นสร้างการตอบกลับให้กับผู้ใช้
 
-![LLM Flow](../../../translated_images/LLM-Flow.7df9f166be50aa324705f2ccddc04a27cfc7b87e57b1fbe65eb534059a3b8b66.th.png)
+![LLM Flow](../../../translated_images/th/LLM-Flow.3285ed8caf4796d7.webp)
 
-### Step 1 - creating messages
+### ขั้นตอนที่ 1 - การสร้างข้อความ
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+ขั้นตอนแรกคือการสร้างข้อความผู้ใช้ ข้อความนี้อาจถูกกำหนดแบบไดนามิกโดยการรับค่าจากอินพุตข้อความ หรือคุณสามารถกำหนดค่าได้ที่นี่ หากนี่เป็นครั้งแรกที่คุณทำงานกับ Responses API คุณต้องกำหนด `role` และ `content` ของข้อความ
 
-The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` และตัวอย่างคำถาม
+`role` สามารถเป็น `system` (สร้างกฎ), `assistant` (โมเดล) หรือ `user` (ผู้ใช้ปลายทาง) สำหรับการเรียกฟังก์ชัน เราจะกำหนดเป็น `user` และถามคำถามตัวอย่าง
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-โดยการกำหนดบทบาทที่แตกต่างกัน จะทำให้ LLM ชัดเจนว่าระบบพูดอะไรหรือผู้ใช้พูดอะไร ซึ่งช่วยสร้างประวัติการสนทนาที่ LLM สามารถสร้างขึ้นได้
+โดยการกำหนดบทบาทต่างกัน ทำให้ LLM รับรู้ว่าข้อความมาจากระบบหรือผู้ใช้ ซึ่งช่วยสร้างประวัติการสนทนาให้ LLM สามารถใช้ต่อยอดได้
 
 ### ขั้นตอนที่ 2 - การสร้างฟังก์ชัน
 
-ถัดไป เราจะกำหนดฟังก์ชันและพารามิเตอร์ของฟังก์ชันนั้น เราจะใช้เพียงฟังก์ชันเดียวที่นี่เรียกว่า `search_courses` but you can create multiple functions.
+ต่อไปเราจะกำหนดฟังก์ชันและพารามิเตอร์ของฟังก์ชันนั้น ที่นี่เราใช้ฟังก์ชันเดียวชื่อ `search_courses` แต่คุณสามารถสร้างหลายฟังก์ชันได้
 
-> **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
+> **สำคัญ**: ฟังก์ชันจะถูกรวมในข้อความระบบถึง LLM และจะนับรวมในจำนวนโทเคนที่คุณมีใช้งาน
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters`:
+ด้านล่างนี้ เราสร้างฟังก์ชันเป็นอาร์เรย์ของรายการ แต่ละรายการเป็นเครื่องมือในรูปแบบ Responses API แบบง่าย โดยมีคุณสมบัติ `type`, `name`, `description` และ `parameters`:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -250,75 +249,76 @@ functions = [
 ]
 ```
 
-มาดูรายละเอียดฟังก์ชันแต่ละตัวมากขึ้นด้านล่าง:
+มาดูรายละเอียดของแต่ละอินสแตนซ์ของฟังก์ชันด้านล่าง:
 
-- `name` - The name of the function that we want to have called.
-- `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
-  1.  `type` - The data type of the properties will be stored in.
-  1.  `properties` - List of the specific values that the model will use for its response
-      1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
-      1. `type` - The data type of this property, for example, `string`.
-      1. `description` - Description of the specific property.
+- `name` - ชื่อของฟังก์ชันที่ต้องการให้เรียกใช้
+- `description` - คำอธิบายว่าฟังก์ชันทำงานอย่างไร ซึ่งควรชัดเจนและเฉพาะเจาะจง
+- `parameters` - รายการของค่าที่ต้องการและรูปแบบที่ต้องการให้โมเดลสร้างในการตอบกลับ อาร์เรย์นี้ประกอบด้วยรายการที่มีคุณสมบัติดังนี้:
+  1.  `type` - ประเภทข้อมูลของคุณสมบัติที่จะจัดเก็บ
+  1.  `properties` - รายการของค่าที่เจาะจงที่โมเดลจะใช้ในการตอบกลับ
+      1. `name` - กุญแจเป็นชื่อคุณสมบัติที่โมเดลจะใช้ในรูปแบบที่จัดเรียง เช่น `product`
+      1. `type` - ประเภทข้อมูลของคุณสมบัตินี้ เช่น `string`
+      1. `description` - คำอธิบายของคุณสมบัติเฉพาะ
 
-There's also an optional property `required` - required property for the function call to be completed.
+ยังมีคุณสมบัติเสริม `required` - คุณสมบัติที่จำเป็นสำหรับการเรียกฟังก์ชันให้สำเร็จ
 
-### Step 3 - Making the function call
+### ขั้นตอนที่ 3 - การเรียกใช้ฟังก์ชัน
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+หลังจากกำหนดฟังก์ชันเสร็จแล้ว เราต้องใส่ฟังก์ชันนั้นในการเรียก Responses API โดยเพิ่ม `tools` เข้าไปในคำขอ ในกรณีนี้คือ `tools=functions`
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+นอกจากนี้ยังมีตัวเลือกกำหนด `tool_choice` เป็น `auto` ซึ่งหมายความว่าเราจะปล่อยให้ LLM ตัดสินใจว่าเมื่อใดควรเรียกฟังก์ชันตามข้อความของผู้ใช้แทนที่จะกำหนดเอง
 
-Here's some code below where we call `ChatCompletion.create`, note how we set `functions=functions` and `function_call="auto"` และให้ LLM เลือกเมื่อจะเรียกใช้ฟังก์ชันที่เรามีให้:
+นี่คือตัวอย่างโค้ดที่เรียก `client.responses.create` สังเกตวิธีตั้งค่า `tools=functions` และ `tool_choice="auto"` เพื่อให้ LLM เลือกว่าจะเรียกฟังก์ชันเมื่อใดที่เราจัดเตรียมให้:
 
 ```python
-response = client.chat.completions.create(model=deployment,
-                                        messages=messages,
-                                        functions=functions,
-                                        function_call="auto")
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-print(response.choices[0].message)
+print(response.output)
 ```
 
-การตอบสนองที่กลับมาดูเหมือนดังนี้:
+การตอบกลับที่ได้รับตอนนี้มีรายการ `function_call` ใน `response.output` ที่มีลักษณะดังนี้:
 
 ```json
 {
-  "role": "assistant",
-  "function_call": {
-    "name": "search_courses",
-    "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
-  }
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
 }
 ```
 
-ที่นี่เราจะเห็นว่าฟังก์ชัน `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+ที่นี่เราจะเห็นว่าฟังก์ชัน `search_courses` ถูกเรียกใช้พร้อมกับอาร์กิวเมนต์อะไรบ้าง ที่ระบุในคุณสมบัติ `arguments` ในการตอบกลับ JSON
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` มีค่า:
+ข้อสรุปคือ LLM สามารถค้นหาข้อมูลที่เหมาะสมกับอาร์กิวเมนต์ของฟังก์ชันได้ เนื่องจากมันดึงข้อมูลจากค่าที่ส่งเข้าพารามิเตอร์ `input` ในการเรียก Responses API ด้านล่างนี้เป็นการเตือนความจำของค่า `messages`:
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-ดังที่คุณเห็น `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+อย่างที่เห็นว่า `student`, `Azure` และ `beginner` ถูกดึงมาจาก `messages` และตั้งเป็นอินพุตของฟังก์ชัน การใช้ฟังก์ชันแบบนี้เป็นวิธีที่ดีในการดึงข้อมูลจากพรอมต์แต่ยังช่วยให้มีโครงสร้างแก่ LLM และทำให้มีฟังก์ชันการใช้งานที่นำกลับมาใช้ใหม่ได้
 
-Next, we need to see how we can use this in our app.
+ต่อไป เราต้องดูวิธีใช้งานสิ่งนี้ในแอปของเรา
 
-## Integrating Function Calls into an Application
+## การรวมการเรียกฟังก์ชันเข้ากับแอปพลิเคชัน
 
-After we have tested the formatted response from the LLM, we can now integrate this into an application.
+หลังจากเราทดสอบการตอบกลับที่มีรูปแบบจาก LLM แล้ว เราสามารถรวมสิ่งนี้เข้ากับแอปพลิเคชันได้
 
-### Managing the flow
+### การจัดการลำดับงาน
 
-To integrate this into our application, let's take the following steps:
+เพื่อรวมสิ่งนี้เข้ากับแอปพลิเคชันของเรา ให้ทำตามขั้นตอนต่อไปนี้:
 
-1. First, let's make the call to the OpenAI services and store the message in a variable called `response_message`
+1. ขั้นแรก ให้เรียกใช้บริการ OpenAI และดึงรายการการเรียกฟังก์ชันจากการตอบกลับ `output`
 
    ```python
-   response_message = response.choices[0].message
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
    ```
 
-1. ตอนนี้เราจะกำหนดฟังก์ชันที่จะเรียก Microsoft Learn API เพื่อรับรายการหลักสูตร:
+1. ตอนนี้เราจะกำหนดฟังก์ชันที่จะเรียก Microsoft Learn API เพื่อดึงรายการหลักสูตร:
 
    ```python
    import requests
@@ -340,65 +340,57 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   สังเกตว่าเราสร้างฟังก์ชัน Python จริงที่แมปกับชื่อฟังก์ชันที่แนะนำใน `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   สังเกตว่าเราได้สร้างฟังก์ชัน Python จริงที่แมปกับชื่อฟังก์ชันที่กล่าวไว้ในตัวแปร `functions` เราเรียกใช้ API ภายนอกจริง ๆ เพื่อดึงข้อมูลที่เราต้องการ ในกรณีนี้คือค้นหาหลักสูตรฝึกอบรมจาก Microsoft Learn API
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+โอเค ดังนั้นเราสร้างตัวแปร `functions` และกำหนดฟังก์ชันใน Python ที่สอดคล้องกันแล้ว เราจะบอก LLM ให้จับคู่สองสิ่งนี้อย่างไรเพื่อให้ฟังก์ชัน Python ของเราได้ถูกเรียก?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call` เป็นส่วนหนึ่งของมันและเรียกใช้ฟังก์ชันที่ชี้ให้เห็น นี่คือวิธีที่คุณสามารถทำการตรวจสอบที่กล่าวถึงด้านล่าง:
+1. เพื่อดูว่าเราต้องเรียกฟังก์ชัน Python หรือไม่ ให้ดูในการตอบกลับของ LLM ว่ามีรายการ `function_call` หรือไม่ และเรียกใช้ฟังก์ชันที่ถูกชี้ชัด นี่คือวิธีตรวจสอบตามที่กล่าวไว้ด้านล่าง:
 
    ```python
-   # Check if the model wants to call a function
-   if response_message.function_call.name:
-    print("Recommended Function call:")
-    print(response_message.function_call.name)
-    print()
+   # ตรวจสอบว่ารุ่นต้องการเรียกใช้ฟังก์ชันหรือไม่
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
 
-    # Call the function.
-    function_name = response_message.function_call.name
+     # เรียกใช้ฟังก์ชัน
+     function_name = tool_call.name
 
-    available_functions = {
-            "search_courses": search_courses,
-    }
-    function_to_call = available_functions[function_name]
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
 
-    function_args = json.loads(response_message.function_call.arguments)
-    function_response = function_to_call(**function_args)
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
-    print(function_response)
-    print(type(function_response))
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
 
-
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
-        {
-            "role": response_message.role,
-            "function_call": {
-                "name": function_name,
-                "arguments": response_message.function_call.arguments,
-            },
-            "content": None
-        }
-    )
-    messages.append( # adding function response to messages
-        {
-            "role": "function",
-            "name": function_name,
-            "content":function_response,
-        }
-    )
+     # เพิ่มการเรียกใช้ฟังก์ชันและผลลัพธ์กลับไปยังบทสนทนา
+     # รายการ function_call ของรุ่นจะต้องถูกแนบก่อนผลลัพธ์ของมัน
+     messages.append(tool_call)  # รายการ function_call ของผู้ช่วย
+     messages.append( # ผลลัพธ์ของฟังก์ชัน
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
    ```
 
-   บรรทัดสามบรรทัดนี้ ช่วยให้เราสกัดชื่อฟังก์ชัน อาร์กิวเมนต์ และเรียกใช้ฟังก์ชัน:
+   สามบรรทัดนี้ ทำให้แน่ใจว่าเราดึงชื่อฟังก์ชันและอาร์กิวเมนต์ออกมาแล้วเรียกฟังก์ชันนั้น:
 
    ```python
    function_to_call = available_functions[function_name]
 
-   function_args = json.loads(response_message.function_call.arguments)
+   function_args = json.loads(tool_call.arguments)
    function_response = function_to_call(**function_args)
    ```
 
-   ด้านล่างคือผลลัพธ์จากการรันโค้ดของเรา:
+   ด้านล่างนี้เป็นผลลัพธ์จากการรันโค้ดของเรา:
 
    **ผลลัพธ์**
 
@@ -419,50 +411,60 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. ตอนนี้เราจะส่งข้อความที่อัปเดต `messages` ไปยัง LLM เพื่อให้เราสามารถรับการตอบสนองภาษาธรรมชาติแทนที่จะเป็นการตอบสนองในรูปแบบ API JSON
+1. ตอนนี้เราจะส่งข้อความที่อัพเดตแล้ว คือ `messages` ต่อไปยัง LLM เพื่อให้เราได้รับการตอบกลับด้วยภาษาธรรมชาติแทนการตอบกลับในรูปแบบ JSON API
 
    ```python
    print("Messages in next request:")
    print(messages)
    print()
 
-   second_response = client.chat.completions.create(
-      messages=messages,
+   second_response = client.responses.create(
+      input=messages,
       model=deployment,
-      function_call="auto",
-      functions=functions,
-      temperature=0
-         )  # get a new response from GPT where it can see the function response
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # รับการตอบกลับใหม่จากโมเดลที่สามารถเห็นการตอบกลับของฟังก์ชันได้
 
 
-   print(second_response.choices[0].message)
+   print(second_response.output_text)
    ```
 
    **ผลลัพธ์**
 
-   ```python
-   {
-     "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
-   }
+   ```text
+   I found some good courses for beginner students to learn Azure:
 
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
    ```
 
-## การบ้าน
+## แบบฝึกหัด
 
 เพื่อเรียนรู้เพิ่มเติมเกี่ยวกับ Azure OpenAI Function Calling คุณสามารถสร้าง:
 
-- พารามิเตอร์เพิ่มเติมของฟังก์ชันที่อาจช่วยให้ผู้เรียนค้นหาหลักสูตรเพิ่มเติม
-- สร้างการเรียกฟังก์ชันอื่นที่รับข้อมูลเพิ่มเติมจากผู้เรียน เช่น ภาษาพื้นเมืองของพวกเขา
-- สร้างการจัดการข้อผิดพลาดเมื่อการเรียกฟังก์ชันและ/หรือการเรียก API ไม่ส่งคืนหลักสูตรที่เหมาะสม
+- พารามิเตอร์เพิ่มเติมของฟังก์ชันที่อาจช่วยให้ผู้เรียนค้นหาหลักสูตรได้มากขึ้น
 
-คำแนะนำ: ติดตามหน้า [เอกสารอ้างอิง API ของ Learn](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) เพื่อดูว่าข้อมูลนี้มีอยู่ที่ไหนและอย่างไร
+- สร้างฟังก์ชันเรียกใช้งานอีกตัวที่รับข้อมูลเพิ่มเติมจากผู้เรียน เช่น ภาษาแม่ของพวกเขา
+- สร้างการจัดการข้อผิดพลาดเมื่อฟังก์ชันเรียกใช้งานและ/หรือการเรียก API ไม่ส่งคืนหลักสูตรที่เหมาะสม
 
-## ยอดเยี่ยม! เดินหน้าต่อไป
+เคล็ดลับ: ทำตามหน้าของ [เอกสารอ้างอิง API การเรียนรู้](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) เพื่อดูว่าข้อมูลนี้มีให้ที่ไหนและอย่างไร
 
-หลังจากจบบทเรียนนี้ ให้ตรวจสอบ [คอลเล็กชันการเรียนรู้ Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ของเราเพื่อยกระดับความรู้ด้าน Generative AI ของคุณ!
+## งานดีมาก! ดำเนินการเดินทางต่อไป
 
-ไปที่บทเรียน 12 ซึ่งเราจะดูวิธีการ [ออกแบบ UX สำหรับแอปพลิเคชัน AI](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+หลังจากเสร็จบทเรียนนี้แล้ว ลองดูที่ [คอลเลกชันการเรียนรู้ Generative AI ของเรา](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) เพื่อพัฒนาความรู้เกี่ยวกับ Generative AI ให้มากขึ้น!
 
-**คำปฏิเสธความรับผิดชอบ**:  
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามอย่างเต็มที่เพื่อความถูกต้อง โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นฉบับควรถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ ขอแนะนำให้ใช้บริการแปลภาษามนุษย์ที่มีความเชี่ยวชาญ เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดที่เกิดจากการใช้การแปลนี้
+ไปที่บทเรียนที่ 12 ซึ่งเราจะดูวิธี [ออกแบบ UX สำหรับแอปพลิเคชัน AI](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

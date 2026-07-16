@@ -1,67 +1,61 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4c2a0b0c738b649ef049fb99a23be661",
-  "translation_date": "2025-05-20T11:10:35+00:00",
-  "source_file": "21-meta/README.md",
-  "language_code": "it"
-}
--->
-# Costruire con i modelli della famiglia Meta
+# Costruire con i modelli della famiglia Meta 
 
-## Introduzione
+## Introduzione 
 
-Questa lezione coprirà:
+Questa lezione tratterà: 
 
-- Esplorazione dei due principali modelli della famiglia Meta - Llama 3.1 e Llama 3.2
-- Comprensione dei casi d'uso e degli scenari per ciascun modello
-- Esempio di codice per mostrare le caratteristiche uniche di ciascun modello
+- Esplorare i due principali modelli della famiglia Meta - Llama 3.1 e Llama 3.2 
+- Comprendere gli scenari d'uso e i casi per ciascun modello 
+- Esempio di codice per mostrare le caratteristiche uniche di ciascun modello 
 
-## La famiglia di modelli Meta
 
-In questa lezione, esploreremo 2 modelli della famiglia Meta o "Llama Herd" - Llama 3.1 e Llama 3.2
+## La famiglia di modelli Meta 
 
-Questi modelli sono disponibili in diverse varianti e sono disponibili sul marketplace di modelli GitHub. Ecco ulteriori dettagli sull'uso dei modelli GitHub per [prototipare con modelli AI](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+In questa lezione esploreremo 2 modelli della famiglia Meta o "Llama Herd" - Llama 3.1 e Llama 3.2.
 
-Varianti del modello:
-- Llama 3.1 - 70B Instruct
-- Llama 3.1 - 405B Instruct
-- Llama 3.2 - 11B Vision Instruct
-- Llama 3.2 - 90B Vision Instruct
+Questi modelli sono disponibili in diverse varianti e si trovano nel [catalogo Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
 
-*Nota: Llama 3 è anche disponibile su GitHub Models ma non sarà trattato in questa lezione*
+> **Nota:** GitHub Models terminerà il servizio alla fine di luglio 2026. Qui troverai maggiori dettagli su come usare [Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) per prototipare con modelli AI.
 
-## Llama 3.1
+Varianti del modello: 
+- Llama 3.1 - 70B Istruzioni 
+- Llama 3.1 - 405B Istruzioni 
+- Llama 3.2 - 11B Vision Istruzioni 
+- Llama 3.2 - 90B Vision Istruzioni 
 
-Con 405 miliardi di parametri, Llama 3.1 rientra nella categoria degli LLM open source.
+*Nota: Llama 3 è disponibile anche in Microsoft Foundry Models ma non sarà trattato in questa lezione*
 
-Il modello è un aggiornamento rispetto alla precedente versione Llama 3 offrendo:
+## Llama 3.1 
 
-- Finestra di contesto più ampia - 128k token contro 8k token
-- Maggiore numero massimo di token di output - 4096 contro 2048
-- Migliore supporto multilingue - grazie all'aumento dei token di addestramento
+Con 405 miliardi di parametri, Llama 3.1 rientra nella categoria dei LLM open source. 
 
-Questi miglioramenti consentono a Llama 3.1 di gestire casi d'uso più complessi quando si costruiscono applicazioni GenAI, tra cui:
-- Chiamata di funzioni native - la capacità di chiamare strumenti e funzioni esterni al flusso di lavoro LLM
-- Migliore prestazione RAG - grazie alla finestra di contesto più ampia
-- Generazione di dati sintetici - la capacità di creare dati efficaci per compiti come il fine-tuning
+Il modello è un aggiornamento dell'uscita precedente Llama 3 offrendo: 
 
-### Chiamata di funzioni native
+- Finestra di contesto più ampia - 128k token contro 8k token 
+- Max token output più alto - 4096 contro 2048 
+- Miglior supporto multilingue - dovuto all'aumento dei token di addestramento 
 
-Llama 3.1 è stato ottimizzato per essere più efficace nel fare chiamate a funzioni o strumenti. Ha anche due strumenti integrati che il modello può identificare come necessari da utilizzare in base al prompt dell'utente. Questi strumenti sono:
+Queste caratteristiche consentono a Llama 3.1 di gestire casi d'uso più complessi nella costruzione di applicazioni GenAI tra cui: 
+- Richiami di funzione nativi - la capacità di chiamare strumenti e funzioni esterne al workflow LLM
+- Migliore performance RAG - grazie alla finestra di contesto più ampia 
+- Generazione di dati sintetici - la capacità di creare dati efficaci per task come il fine-tuning 
 
-- **Brave Search** - Può essere utilizzato per ottenere informazioni aggiornate come il meteo effettuando una ricerca sul web
-- **Wolfram Alpha** - Può essere utilizzato per calcoli matematici più complessi, quindi non è necessario scrivere le proprie funzioni.
+### Richiami di funzione nativi 
 
-Puoi anche creare i tuoi strumenti personalizzati che LLM può chiamare.
+Llama 3.1 è stato perfezionato per essere più efficace nelle chiamate di funzioni o strumenti. Include inoltre due strumenti integrati che il modello può identificare come necessari da usare basandosi sul prompt dell'utente. Questi strumenti sono: 
 
-Nell'esempio di codice qui sotto:
+- **Brave Search** - Può essere usato per avere informazioni aggiornate come il meteo facendo una ricerca sul web 
+- **Wolfram Alpha** - Può essere usato per calcoli matematici complessi senza dover scrivere funzioni personalizzate. 
 
-- Definiamo gli strumenti disponibili (brave_search, wolfram_alpha) nel prompt di sistema.
-- Inviamo un prompt utente che chiede del meteo in una certa città.
-- L'LLM risponderà con una chiamata allo strumento Brave Search che apparirà così `<|python_tag|>brave_search.call(query="Stockholm weather")`
+Puoi anche creare i tuoi strumenti personalizzati che l'LLM può chiamare. 
 
-*Nota: Questo esempio fa solo la chiamata allo strumento, se desideri ottenere i risultati, dovrai creare un account gratuito sulla pagina API di Brave e definire la funzione stessa*
+Nell'esempio di codice seguente: 
+
+- Definiamo gli strumenti disponibili (brave_search, wolfram_alpha) nel prompt di sistema. 
+- Inviamo un prompt utente che chiede informazioni sul meteo in una certa città. 
+- L'LLM risponderà con una chiamata allo strumento Brave Search che apparirà così `<|python_tag|>brave_search.call(query="Stockholm weather")` 
+
+*Nota: Questo esempio esegue solo la chiamata allo strumento, se vuoi ottenere i risultati devi creare un account gratuito sulla pagina API di Brave e definire la funzione stessa.
 
 ```python 
 import os
@@ -69,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Ottieni questi dalla pagina "Panoramica" del tuo progetto Microsoft Foundry
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -101,15 +96,16 @@ response = client.complete(messages=messages, model=model_name)
 print(response.choices[0].message.content)
 ```
 
-## Llama 3.2
+## Llama 3.2 
 
-Nonostante sia un LLM, una limitazione che Llama 3.1 ha è la multimodalità. Ovvero, la capacità di utilizzare diversi tipi di input come immagini come prompt e fornire risposte. Questa capacità è una delle caratteristiche principali di Llama 3.2. Queste caratteristiche includono anche:
+Nonostante sia un LLM, una limitazione di Llama 3.1 è la mancanza di multimodalità. Cioè, l'incapacità di utilizzare diversi tipi di input come immagini come prompt e fornire risposte. Questa capacità è una delle principali caratteristiche di Llama 3.2. Queste caratteristiche includono anche: 
 
-- Multimodalità - ha la capacità di valutare sia prompt testuali che immagini
-- Varianti di dimensioni piccole e medie (11B e 90B) - ciò offre opzioni di distribuzione flessibili,
-- Varianti solo testuali (1B e 3B) - ciò consente al modello di essere distribuito su dispositivi edge / mobili e offre bassa latenza
+- Multimodalità - ha la capacità di valutare sia prompt testuali sia immagini 
+- Variazioni di piccole e medie dimensioni (11B e 90B) - offre opzioni di distribuzione flessibili, 
+- Variazioni solo testo (1B e 3B) - permette il deploy su dispositivi edge / mobili con bassa latenza 
 
-Il supporto multimodale rappresenta un grande passo nel mondo dei modelli open source. L'esempio di codice qui sotto prende sia un'immagine che un prompt testuale per ottenere un'analisi dell'immagine da Llama 3.2 90B.
+Il supporto multimodale rappresenta un grande passo nel mondo dei modelli open source. L'esempio di codice sotto prende sia un'immagine che un prompt testuale per ottenere un'analisi dell'immagine da Llama 3.2 90B. 
+
 
 ### Supporto multimodale con Llama 3.2
 
@@ -126,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Ottieni questi dalla pagina "Panoramica" del tuo progetto Microsoft Foundry
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -160,7 +157,11 @@ print(response.choices[0].message.content)
 
 ## L'apprendimento non si ferma qui, continua il viaggio
 
-Dopo aver completato questa lezione, dai un'occhiata alla nostra [collezione di apprendimento AI generativa](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) per continuare a migliorare la tua conoscenza sull'AI generativa!
+Dopo aver completato questa lezione, esplora la nostra [collezione di apprendimento sull'AI generativa](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) per continuare a migliorare le tue conoscenze sull'AI generativa!
 
-**Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per l'accuratezza, si prega di essere consapevoli che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale umana. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire la precisione, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall’uso di questa traduzione.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

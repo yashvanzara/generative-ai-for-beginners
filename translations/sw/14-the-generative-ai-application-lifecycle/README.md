@@ -1,99 +1,94 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "27a5347a5022d5ef0a72ab029b03526a",
-  "translation_date": "2025-05-20T00:54:15+00:00",
-  "source_file": "14-the-generative-ai-application-lifecycle/README.md",
-  "language_code": "sw"
-}
--->
-[![Kuingiza na kuitisha kazi ya kifanyikazi](../../../translated_images/14-lesson-banner.0b85d0b37979269e80a18bb1e758e1ccca0a2195b426a0af666c8ad14aee60b0.sw.png)](https://aka.ms/gen-ai-lesson14-gh?WT.mc_id=academic-105485-koreyst)
+[![Kuunganishwa na kuitwa kwa kazi](../../../translated_images/sw/14-lesson-banner.066d74a31727ac12.webp)](https://youtu.be/ewtQY_RJrzs?si=dyJ2bjiljH7UUHCh)
 
-# Mzunguko wa Maisha wa Maombi ya AI Inayotengeneza
+# Mzunguko wa Maisha wa Programu za AI Zinazotengeneza
 
-Swali muhimu kwa maombi yote ya AI ni umuhimu wa vipengele vya AI, kwani AI ni uwanja unaoendelea kwa kasi. Ili kuhakikisha kwamba programu yako inabaki kuwa muhimu, ya kuaminika, na imara, unahitaji kuifuatilia, kuikadiria, na kuiboresha kila wakati. Hapa ndipo mzunguko wa maisha wa AI inayotengeneza unapokuja.
+Swali muhimu kwa programu zote za AI ni umuhimu wa vipengele vya AI, kwani AI ni uwanja unaobadilika kwa kasi, kuhakikisha kuwa programu yako inabaki kuwa ya maana, ya kuaminika, na imara, unahitaji kuifuatilia, kuipima, na kuiboresha endelevu. Hapa ndipo mzunguko wa maisha wa AI inayotengeneza unakuja.
 
-Mzunguko wa maisha wa AI inayotengeneza ni mfumo unaokuongoza kupitia hatua za kuendeleza, kupeleka, na kudumisha programu ya AI inayotengeneza. Hukusaidia kufafanua malengo yako, kupima utendaji wako, kutambua changamoto zako, na kutekeleza suluhisho zako. Pia hukusaidia kulinganisha programu yako na viwango vya maadili na sheria za uwanja wako na wadau wako. Kwa kufuata mzunguko wa maisha wa AI inayotengeneza, unaweza kuhakikisha kuwa programu yako inatoa thamani kila wakati na inaridhisha watumiaji wako.
+Mzunguko wa maisha wa AI inayotengeneza ni mfumo unaokuongoza kupitia hatua za kuunda, kuweka kwenye matumizi, na kudumisha programu ya AI inayotengeneza. Inakusaidia kufafanua malengo yako, kupima utendaji wako, kubaini changamoto zako, na kutekeleza suluhisho zako. Pia inakusaidia kuendana na viwango vya maadili na sheria vya eneo lako na wadau wako. Kwa kufuata mzunguko wa maisha wa AI inayotengeneza, unaweza kuhakikisha kuwa programu yako inatoa thamani kila wakati na kuridhisha watumiaji wako.
 
 ## Utangulizi
 
-Katika sura hii, uta:
+Katika sura hii, utajifunza:
 
-- Elewa Mabadiliko ya Paradigm kutoka MLOps hadi LLMOps
+- Kufahamu Mabadiliko ya Paradigm kutoka MLOps hadi LLMOps
 - Mzunguko wa Maisha wa LLM
 - Zana za Mzunguko wa Maisha
-- Upimaji na Tathmini ya Mzunguko wa Maisha
+- Kupimwa na Tathmini ya Mzunguko wa Maisha
 
-## Elewa Mabadiliko ya Paradigm kutoka MLOps hadi LLMOps
+## Fahamu Mabadiliko ya Paradigm kutoka MLOps hadi LLMOps
 
-LLMs ni chombo kipya katika zana za Akili Bandia, zina nguvu kubwa katika kazi za uchambuzi na uzalishaji kwa maombi, hata hivyo nguvu hii ina matokeo fulani katika jinsi tunavyoruhusu kazi za AI na Ujifunzaji wa Mashine wa Kawaida.
+LLMs ni zana mpya katika silaha ya Akili Bandia, zina nguvu sana katika kazi za uchambuzi na uzalishaji wa programu, hata hivyo nguvu hii ina matokeo katika jinsi tunavyosanyikia kazi za AI na Mashine ya Kufundisha Kawaida.
 
-Kwa hili, tunahitaji Paradigm mpya ili kuendana na chombo hiki kwa njia inayobadilika, kwa motisha sahihi. Tunaweza kuainisha programu za zamani za AI kama "Programu za ML" na Programu mpya za AI kama "Programu za GenAI" au tu "Programu za AI", ikionyesha teknolojia na mbinu kuu zinazotumika wakati huo. Hii inabadilisha hadithi yetu kwa njia nyingi, angalia ulinganisho ufuatao.
+Kwa hili, tunahitaji Paradigm mpya ili kuzuia zana hii kwa njia ya kasi, na vivutio sahihi. Tunaweza kuainisha programu za AI za zamani kama "Programu za ML" na programu mpya za AI kama "Programu za GenAI" au "Programu za AI" tu, zinazoakisi teknolojia kuu na mbinu zinazotumika kwa wakati huo. Hii inabadilisha hadithi yetu kwa njia tofauti, angalia kulinganisha ifuatayo.
 
-![Ulinganisho wa LLMOps vs. MLOps](../../../translated_images/01-llmops-shift.82d7bf6eb2d98a01e35f234df654e9aa4ebec89792f274695a5da8dc3f388084.sw.png)
+![Kulinganisha LLMOps na MLOps](../../../translated_images/sw/01-llmops-shift.29bc933cb3bb0080.webp)
 
-Kumbuka kuwa katika LLMOps, tunazingatia zaidi Waendelezaji wa Programu, kutumia ujumuishaji kama sehemu muhimu, kutumia "Mifano-kama-Huduma" na kufikiria katika vidokezo vifuatavyo kwa vipimo.
+Kumbuka kuwa katika LLMOps, tunazingatia zaidi Waendelezaji wa Programu, tukitumia ushirikiano kama kitovu cha muhimu, tukitumia "Mifano kama Huduma" na kufikiri juu ya pointi zifuatazo za vipimo.
 
 - Ubora: Ubora wa majibu
-- Madhara: AI yenye uwajibikaji
-- Uaminifu: Uhalisia wa majibu (Ina maana? Ni sahihi?)
+- Madhara: AI Inayohusika kwa Uwajibikaji
+- Uaminifu: Msingi wa majibu (Inaeleweka? Ni sahihi?)
 - Gharama: Bajeti ya Suluhisho
-- Muda wa Kusubiri: Wakati wa wastani kwa majibu ya tokeni
+- Muda wa Kusubiri: Muda wa wastani wa jibu la tokeni
 
 ## Mzunguko wa Maisha wa LLM
 
-Kwanza, kuelewa mzunguko wa maisha na marekebisho, wacha tuangalie infographic ifuatayo.
+Kwanza, kuelewa mzunguko wa maisha na mabadiliko, tazama picha ifuatayo.
 
-![Infographic ya LLMOps](../../../translated_images/02-llmops.287de964b5ce9577678b7f053efb3a3c92adf0852c882c5bae94c11b7563e4db.sw.png)
+![Infographics ya LLMOps](../../../translated_images/sw/02-llmops.70a942ead05a7645.webp)
 
-Kama unavyoweza kuona, hii ni tofauti na Mizunguko ya Maisha ya kawaida kutoka MLOps. LLMs zina mahitaji mapya mengi, kama Kutoa Maagizo, mbinu tofauti za kuboresha ubora (Kufanya Kazi Bora, RAG, Meta-Prompts), tathmini tofauti na uwajibikaji na AI yenye uwajibikaji, na mwisho, vipimo vipya vya tathmini (Ubora, Madhara, Uaminifu, Gharama na Muda wa Kusubiri).
+Kama unavyoona, hii ni tofauti na Mizunguko ya Maisha ya kawaida kutoka MLOps. LLMs zina mahitaji mengi mapya, kama Prompting, mbinu tofauti za kuboresha ubora (Fine-Tuning, RAG, Meta-Prompts), tathmini tofauti na uwajibikaji kwa AI inayohusika, na mwisho, vipimo vipya vya tathmini (Ubora, Madhara, Uaminifu, Gharama na Muda wa Kusubiri).
 
-Kwa mfano, angalia jinsi tunavyofikiria. Kutumia uhandisi wa maagizo kujaribu LLMs mbalimbali ili kuchunguza uwezekano wa kujaribu ikiwa Hypothesis yao inaweza kuwa sahihi.
+Kwa mfano, tazama jinsi tunavyopanga mawazo. Kutumia uhandisi wa prompt kujaribu na LLMs mbalimbali kuchunguza uwezekano wa kujaribu kama Dhana zao zinaweza kuwa sahihi.
 
-Kumbuka kuwa hii sio ya mstari, bali ni mizunguko iliyounganishwa, inayorudiwa na yenye mzunguko wa jumla.
+Kumbuka hii si mfululizo wa hatua moja baada ya nyingine, bali ni mizunguko iliyojumuishwa, yenye kurudi-rudi na na mzunguko kuu.
 
-Je, tunawezaje kuchunguza hatua hizo? Wacha tuingie kwa undani jinsi tunaweza kujenga mzunguko wa maisha.
+Tunawezaje kuchunguza hatua hizo? Hebu tuchambue kwa undani jinsi tunavyoweza kujenga mzunguko wa maisha.
 
-![Mfumo wa Kazi wa LLMOps](../../../translated_images/03-llm-stage-flows.f3b87c210c1fe37084a7b7408877ff1688e2dc565694789820ec259e76d4ed05.sw.png)
+![Mtiririko wa Kazi wa LLMOps](../../../translated_images/sw/03-llm-stage-flows.3a1e1c401235a6cf.webp)
 
-Hii inaweza kuonekana kuwa ngumu kidogo, wacha tuzingatie hatua tatu kubwa kwanza.
+Hii inaweza kuonekana ngumu kidogo, hebu tuangalie hatua kubwa tatu kwanza.
 
-1. Kufikiria/Kuchunguza: Uchunguzi, hapa tunaweza kuchunguza kulingana na mahitaji yetu ya biashara. Kuunda prototaipu, kuunda [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) na kujaribu ikiwa ni bora vya kutosha kwa Hypothesis yetu.
-2. Kujenga/Kukuza: Utekelezaji, sasa, tunaanza kutathmini kwa seti kubwa za data kutekeleza mbinu, kama Kufanya Kazi Bora na RAG, ili kuangalia uimara wa suluhisho letu. Ikiwa haifanyi kazi, kuitekeleza upya, kuongeza hatua mpya katika mtiririko wetu au kuunda upya data, inaweza kusaidia. Baada ya kujaribu mtiririko wetu na kiwango chetu, ikiwa inafanya kazi na kuangalia vipimo vyetu, iko tayari kwa hatua inayofuata.
-3. Kufanya Kazi: Ujumuishaji, sasa kuongeza Mifumo ya Ufuatiliaji na Tahadhari kwenye mfumo wetu, kupeleka na ujumuishaji wa programu kwenye Programu yetu.
+1. Kufikiria/Kuchunguza: Uchunguzi, hapa tunaweza kuchunguza kulingana na mahitaji ya biashara yetu. Kutengeneza mfano, kuunda [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) na kupima kama ni bora vya kutosha kwa Dhana yetu.
+1. Kujenga/Kuimarisha: Utekelezaji, sasa, tunaanza kupima kwa seti kubwa za data kutumia mbinu kama Fine-tuning na RAG, kuangalia uimara wa suluhisho letu. Ikiwa haifanyi kazi, kuirekebisha tena, kuongeza hatua mpya katika mzunguko wetu au kurekebisha data, kunaweza kusaidia. Baada ya kupima mtiririko wetu na kiwango chetu, ikiwa inafanya kazi na inaangalia Vipimo vyetu, iko tayari kwa hatua inayofuata.
+1. Kufanya Kazi: Ushirikiano, sasa tunajumuisha Mfumo wa Ufuatiliaji na Alamu kwenye mfumo wetu, usambazaji na ushirikiano wa programu na Programu yetu.
 
-Kisha, tuna mzunguko wa jumla wa Usimamizi, unaozingatia usalama, uzingatiaji na utawala.
+Kisha, tuna mzunguko mkuu wa Usimamizi, ukilenga usalama, ufuataji na utawala.
 
-Hongera, sasa una Programu yako ya AI tayari na inafanya kazi. Kwa uzoefu wa vitendo, angalia [Demo ya Mazungumzo ya Contoso.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreys)
+Hongera, sasa una Programu yako ya AI tayari kuanza na kutumia. Kwa uzoefu wa vitendo, tazama [Maonyesho ya Mazungumzo ya Contoso.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst)
 
 Sasa, ni zana gani tunaweza kutumia?
 
 ## Zana za Mzunguko wa Maisha
 
-Kwa Zana, Microsoft inatoa [Jukwaa la Azure AI](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys) na [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) kuwezesha na kufanya mzunguko wako kuwa rahisi kutekeleza na tayari kwenda.
+Kwa zana, Microsoft hutoa [Jukwaa la Azure AI](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) na [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) hufanya mzunguko wako kuwa rahisi kutekeleza na tayari.
 
-[Jukwaa la Azure AI](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys), hukuruhusu kutumia [AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreys). AI Studio ni lango la wavuti linalokuruhusu Kuchunguza mifano, sampuli na zana. Kusimamia rasilimali zako, mtiririko wa maendeleo ya UI na chaguo za SDK/CLI kwa maendeleo ya Kwanza ya Nambari.
+[Jukwaa la Azure AI](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst), linakuwezesha kutumia [Microsoft Foundry](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst). Microsoft Foundry (awali Azure AI Studio) ni tovuti inayokuruhusu kuchunguza mifano, sampuli na zana, kusimamia rasilimali zako, na kutumia mtiririko wa maendeleo ya UI pamoja na chaguzi za SDK/CLI kwa maendeleo ya Code-First.
 
-![Uwezekano wa Azure AI](../../../translated_images/04-azure-ai-platform.bf903e8cdf00f73896d804bd8e6bea62f5280498c998271bd5629c1efa8b466f.sw.png)
+![Muwezekano wa Azure AI](../../../translated_images/sw/04-azure-ai-platform.80203baf03a12fa8.webp)
 
-Azure AI, inakuruhusu kutumia rasilimali nyingi, kusimamia shughuli zako, huduma, miradi, utaftaji wa vekta na mahitaji ya hifadhidata.
+Azure AI, inakuwezesha kutumia rasilimali nyingi, kusimamia operesheni zako, huduma, miradi, utafutaji wa vector na mahitaji ya hifadhidata.
 
-![LLMOps na Azure AI](../../../translated_images/05-llm-azure-ai-prompt.dc29c0d74b1dd939f7c6cbf28b1fee54b9a846ba04d4068c40134e2627cb7232.sw.png)
+![LLMOps na Azure AI](../../../translated_images/sw/05-llm-azure-ai-prompt.a5ce85cdbb494bdf.webp)
 
-Jenga, kutoka kwa Uthibitisho-wa-Dhana (POC) hadi programu za kiwango kikubwa na PromptFlow:
+Tengeneza, kutoka kwa Ushahidi wa Dhana(POC) hadi programu kubwa kwa PromptFlow:
 
-- Buni na Jenga programu kutoka kwa VS Code, na zana za kuona na kufanya kazi
+- Buni na Jenga programu kutoka VS Code, kwa zana za kuona na kazi
 - Jaribu na boresha programu zako kwa AI bora, kwa urahisi.
-- Tumia Azure AI Studio kujumuisha na kurudia na wingu, Kusukuma na Kupeleka kwa ujumuishaji wa haraka.
+- Tumia Microsoft Foundry kuunganisha na kurudia kazi na wingu, Push na Deploy kwa ushirikiano wa haraka.
 
-![LLMOps na PromptFlow](../../../translated_images/06-llm-promptflow.8f0a6fcbea793a042a3db89ca1db1aa8fd540526958c97b5e894748fb4a87edd.sw.png)
+![LLMOps na PromptFlow](../../../translated_images/sw/06-llm-promptflow.a183eba07a3a7fdf.webp)
 
-## Nzuri! Endelea Kujifunza!
+## Vizuri! Endelea Kujifunza!
 
-Ajabu, sasa jifunze zaidi kuhusu jinsi tunavyounda programu kutumia dhana na [Programu ya Mazungumzo ya Contoso](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst), ili kuangalia jinsi Utetezi wa Wingu unavyoongeza dhana hizo katika maonyesho. Kwa maudhui zaidi, angalia [kipindi cha kuvunja cha Ignite!
+Ajabu, sasa jifunze zaidi kuhusu jinsi tunavyojenga programu kutumia dhana na [Programu ya Mazungumzo ya Contoso](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst), ili kuona jinsi Uhamasishaji wa Wingu unavyoweka dhana hizo katika maonyesho. Kwa maudhui zaidi, angalia kipindi chetu cha [Ignite breakout session!
 ](https://www.youtube.com/watch?v=DdOylyrTOWg)
 
-Sasa, angalia Somo la 15, kuelewa jinsi [Uzalishaji wa Kuzingatia Urejeshaji na Hifadhidata za Vekta](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) zinavyoathiri AI Inayotengeneza na kufanya Maombi ya kuvutia zaidi!
+Sasa, angalia Somo la 15, kuelewa jinsi [Uzalishaji Ulioboreshwa wa Kurejelea na Hifadhidata za Vector](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) unavyoathiri AI Inayotengeneza na kufanya Programu ziwe za kusisimua zaidi!
 
-**Kanusho**: 
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya kibinadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

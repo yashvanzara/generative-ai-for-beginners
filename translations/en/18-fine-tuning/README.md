@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "68664f7e754a892ae1d8d5e2b7bd2081",
-  "translation_date": "2025-05-20T07:33:54+00:00",
-  "source_file": "18-fine-tuning/README.md",
-  "language_code": "en"
-}
--->
-[![Open Source Models](../../../translated_images/18-lesson-banner.8487555c3e3225eefc1dc84e72c8e00bce1ee76db867a080628fb0fbb04aa0d2.en.png)](https://aka.ms/gen-ai-lesson18-gh?WT.mc_id=academic-105485-koreyst)
+[![Open Source Models](../../../translated_images/en/18-lesson-banner.f30176815b1a5074.webp)](https://youtu.be/6UAwhL9Q-TQ?si=5jJd8yeQsCfJ97em)
 
 # Fine-Tuning Your LLM
 
@@ -32,7 +23,7 @@ Ready? Let's get started.
 
 Want to get the big picture of what we'll cover before we dive in? Check out this illustrated guide that describes the learning journey for this lesson - from learning the core concepts and motivation for fine-tuning, to understanding the process and best practices for executing the fine-tuning task. This is a fascinating topic for exploration, so don't forget to check out the [Resources](./RESOURCES.md?WT.mc_id=academic-105485-koreyst) page for additional links to support your self-guided learning journey!
 
-![Illustrated Guide to Fine Tuning Language Models](../../../translated_images/18-fine-tuning-sketchnote.92733966235199dd260184b1aae3a84b877c7496bc872d8e63ad6fa2dd96bafc.en.png)
+![Illustrated Guide to Fine Tuning Language Models](../../../translated_images/en/18-fine-tuning-sketchnote.11b21f9ec8a70346.webp)
 
 ## What is fine-tuning for language models?
 
@@ -87,12 +78,13 @@ The following resources provide step-by-step tutorials to walk you through a rea
 | Provider     | Tutorial                                                                                                                                                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | OpenAI       | [How to fine-tune chat models](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_finetune_chat_models.ipynb?WT.mc_id=academic-105485-koreyst)                | Learn to fine-tune a `gpt-35-turbo` for a specific domain ("recipe assistant") by preparing training data, running the fine-tuning job, and using the fine-tuned model for inference.                                                                                                                                                                                                                                              |
-| Azure OpenAI | [GPT 3.5 Turbo fine-tuning tutorial](https://learn.microsoft.com/azure/ai-services/openai/tutorials/fine-tune?tabs=python-new%2Ccommand-line?WT.mc_id=academic-105485-koreyst) | Learn to fine-tune a `gpt-35-turbo-0613` model **on Azure** by taking steps to create & upload training data, run the fine-tuning job. Deploy & use the new model.                                                                                                                                                                                                                                                                 |
-| Hugging Face | [Fine-tuning LLMs with Hugging Face](https://www.philschmid.de/fine-tune-llms-in-2024-with-trl?WT.mc_id=academic-105485-koreyst)                                               | This blog post walks you fine-tuning an _open LLM_ (ex: `CodeLlama 7B`) using the [transformers](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) library & [Transformer Reinforcement Learning (TRL)](https://huggingface.co/docs/trl/index?WT.mc_id=academic-105485-koreyst]) with open [datasets](https://huggingface.co/docs/datasets/index?WT.mc_id=academic-105485-koreyst) on Hugging Face. |
+| Azure OpenAI | [GPT 3.5 Turbo fine-tuning tutorial](https://learn.microsoft.com/azure/ai-services/openai/tutorials/fine-tune?tabs=python-new%2Ccommand-line&WT.mc_id=academic-105485-koreyst) | Learn to fine-tune a `gpt-35-turbo-0613` model **on Azure** by taking steps to create & upload training data, run the fine-tuning job. Deploy & use the new model.                                                                                                                                                                                                                                                                 |
+| Hugging Face | [Fine-tuning LLMs with Hugging Face](https://www.philschmid.de/fine-tune-llms-in-2024-with-trl?WT.mc_id=academic-105485-koreyst)                                               | This blog post walks you fine-tuning an _open LLM_ (ex: `CodeLlama 7B`) using the [transformers](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) library & [Transformer Reinforcement Learning (TRL)](https://huggingface.co/docs/trl/index?WT.mc_id=academic-105485-koreyst) with open [datasets](https://huggingface.co/docs/datasets/index?WT.mc_id=academic-105485-koreyst) on Hugging Face. |
 |              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | 🤗 AutoTrain | [Fine-tuning LLMs with AutoTrain](https://github.com/huggingface/autotrain-advanced/?WT.mc_id=academic-105485-koreyst)                                                         | AutoTrain (or AutoTrain Advanced) is a python library developed by Hugging Face that allows finetuning for many different tasks including LLM finetuning. AutoTrain is a no-code solution and finetuning can be done in your own cloud, on Hugging Face Spaces or locally. It supports both a web-based GUI, CLI and training via yaml config files.                                                                               |
 |              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-
+| 🦥 Unsloth | [Fine-tuning LLMs with Unsloth](https://github.com/unslothai/unsloth)                                                         | Unsloth is an open-source framework that supports LLM fine-tuning and reinforcement learning (RL). Unsloth streamlines local training, evaluation, and deployment with ready to use [notebooks](https://github.com/unslothai/notebooks). It also supports text-to-speech (TTS), BERT and multimodal models. To get started, read their step-by-step [Fine-tuning LLMs Guide](https://docs.unsloth.ai/get-started/fine-tuning-llms-guide).                                                                          |
+|              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 ## Assignment
 
 Select one of the tutorials above and walk through them. _We may replicate a version of these tutorials in Jupyter Notebooks in this repo for reference only. Please use the original sources directly to get the latest versions_.
@@ -105,5 +97,9 @@ Congratulations!! You have completed the final lesson from the v2 series for thi
 
 Our v1 series of lessons has also been updated with more assignments and concepts. So take a minute to refresh your knowledge - and please [share your questions and feedback](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst) to help us improve these lessons for the community.
 
-**Disclaimer**:  
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
 This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

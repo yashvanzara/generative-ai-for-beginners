@@ -1,75 +1,66 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "ea4bbe640847aafbbba14dae4625e9af",
-  "translation_date": "2025-05-19T18:13:19+00:00",
-  "source_file": "07-building-chat-applications/README.md",
-  "language_code": "sr"
-}
--->
-# Izgradnja chat aplikacija pokretanih generativnom veštačkom inteligencijom
+# Израда апликација за чет са генеративном вештачком интелигенцијом
 
-[![Izgradnja chat aplikacija pokretanih generativnom veštačkom inteligencijom](../../../translated_images/07-lesson-banner.0f61145112d724a50d32abfb0b1841777f3ecec301d6f96a0b7f9d6b0e4756b9.sr.png)](https://aka.ms/gen-ai-lessons7-gh?WT.mc_id=academic-105485-koreyst)
+[![Израда апликација за чет са генеративном вештачком интелигенцијом](../../../translated_images/sr/07-lesson-banner.a279b937f2843833.webp)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
 
-> _(Kliknite na sliku iznad da pogledate video lekciju)_
+> _(Кликните на слику изнад да бисте погледали видео о овој лекцији)_
 
-Sada kada smo videli kako možemo napraviti aplikacije za generisanje teksta, pogledajmo chat aplikacije.
+Сада када смо видели како можемо да правимо апликације за генерисање текста, погледајмо апликације за чет.
 
-Chat aplikacije su postale deo našeg svakodnevnog života, nudeći više od obične neformalne komunikacije. One su integralni delovi korisničke podrške, tehničke podrške, pa čak i sofisticiranih savetodavnih sistema. Verovatno ste nedavno dobili neku pomoć od chat aplikacije. Kako integrišemo naprednije tehnologije poput generativne veštačke inteligencije u ove platforme, kompleksnost raste, kao i izazovi.
+Апликације за чет постале су интегрисани део нашег свакодневног живота, нудећи више од само начина за површи разговор. Оне су интегрални део корисничке подршке, техничке помоћи, па чак и софистицираних саветодавних система. Вероватно сте у последње време добили помоћ од апликације за чет. Како у ове платформе уграђујемо напредније технологије као што је генеративна вештачка интелигенција, расте и сложеност, као и изазови.
 
-Neka pitanja na koja treba da odgovorimo su:
+Нека од питања која треба да разјаснимо су:
 
-- **Izgradnja aplikacije**. Kako efikasno izgraditi i besprekorno integrisati ove AI-pokretane aplikacije za specifične slučajeve upotrebe?
-- **Praćenje**. Kada se implementiraju, kako možemo pratiti i osigurati da aplikacije funkcionišu na najvišem nivou kvaliteta, kako u smislu funkcionalnosti tako i u skladu sa [šest principa odgovorne AI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst)?
+- **Прављење апликације**. Како ефикасно градити и беспрекорно интегрисати ове апликације са вештачком интелигенцијом за специфичне примене?
+- **Надгледање**. Након имплементације, како да пратимо и осигурамо да апликације раде на највишем нивоу квалитета, како у функционалности тако и у складу са [шест принципа одговорне вештачке интелигенције](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst)?
 
-Kako se dalje krećemo u doba definisano automatizacijom i besprekornim interakcijama između ljudi i mašina, razumevanje kako generativna AI transformiše opseg, dubinu i prilagodljivost chat aplikacija postaje ključno. Ova lekcija će istražiti aspekte arhitekture koji podržavaju ove složene sisteme, uroniti u metodologije za njihovo fino podešavanje za zadatke specifične za domenu i proceniti metrike i razmatranja relevantna za osiguranje odgovorne primene AI.
+Како улазимо дубље у доба дефинисано аутоматизацијом и беспрекорном интеракцијом између људи и машина, разумевање како генеративна вештачка интелигенција трансформише домет, дубину и прилагодљивост апликација за чет постаје кључно. Ова лекција ће истражити аспекте архитектуре који подупиру ове сложене системе, упознати методологије за њихово фино подешавање за специфичне домене и оценити метрике и разматрања релевантна за осигурање одговорног коришћења вештачке интелигенције.
 
-## Uvod
+## Увод
 
-Ova lekcija pokriva:
+Ова лекција обухвата:
 
-- Tehnike za efikasnu izgradnju i integraciju chat aplikacija.
-- Kako primeniti prilagođavanje i fino podešavanje na aplikacije.
-- Strategije i razmatranja za efikasno praćenje chat aplikacija.
+- Технике за ефикасно прављење и интеграцију апликација за чет.
+- Како применити прилагођавање и фино подешавање апликација.
+- Стратегије и разматрања за ефикасно праћење апликација за чет.
 
-## Ciljevi učenja
+## Циљеви учења
 
-Na kraju ove lekcije, bićete u mogućnosti da:
+На крају ове лекције моћи ћете:
 
-- Opisujete razmatranja za izgradnju i integraciju chat aplikacija u postojeće sisteme.
-- Prilagodite chat aplikacije za specifične slučajeve upotrebe.
-- Identifikujete ključne metrike i razmatranja za efikasno praćenje i održavanje kvaliteta AI-pokretanih chat aplikacija.
-- Osigurate da chat aplikacije koriste AI odgovorno.
+- Опишите разматрања за креирање и интегрисање апликација за чет у постојеће системе.
+- Прилагодите апликације за чет за специфичне употребе.
+- Идентификовати кључне метрике и разматрања за ефикасно праћење и одржавање квалитета апликација за чет са вештачком интелигенцијом.
+- Осигурати одговорно коришћење вештачке интелигенције у апликацијама за чет.
 
-## Integracija generativne AI u chat aplikacije
+## Интегрисање генеративне вештачке интелигенције у апликације за чет
 
-Poboljšanje chat aplikacija putem generativne AI nije samo usmereno na njihovo činjenje pametnijima; radi se o optimizaciji njihove arhitekture, performansi i korisničkog interfejsa kako bi se pružilo kvalitetno korisničko iskustvo. Ovo uključuje istraživanje arhitektonskih osnova, API integracija i razmatranja korisničkog interfejsa. Ovaj deo ima za cilj da vam ponudi sveobuhvatnu mapu puta za navigaciju ovim složenim okruženjima, bilo da ih povezujete u postojeće sisteme ili ih gradite kao samostalne platforme.
+Подизање апликација за чет кроз генеративну вештачку интелигенцију није само о томе да их учинимо паметнијим; ради се о оптимизацији архитектуре, перформанси и корисничког интерфејса за пружање квалитетног корисничког искуства. Ово укључује испитивање архитектонских основа, интеграције API-ја и разматрања корисничког интерфејса. Овај део има за циљ да вам понуди свеобухватну мапу пута за навигацију овим сложеним пејзажима, било да их повезујете у постојеће системе или градите као самосталне платформе.
 
-Na kraju ovog dela, bićete opremljeni ekspertizom potrebnom za efikasnu izgradnju i inkorporaciju chat aplikacija.
+На крају овог одељка бићете опремљени знањем потребним за ефикасну изградњу и интеграцију апликација за чет.
 
-### Chatbot ili chat aplikacija?
+### Четбот или апликација за чет?
 
-Pre nego što se upustimo u izgradnju chat aplikacija, hajde da uporedimo 'chatbotove' sa 'AI-pokretanim chat aplikacijama', koje služe različitim ulogama i funkcionalnostima. Glavna svrha chatbota je automatizacija specifičnih zadataka u razgovoru, kao što je odgovaranje na često postavljana pitanja ili praćenje paketa. Obično ga upravlja logika zasnovana na pravilima ili složeni AI algoritmi. Nasuprot tome, AI-pokretana chat aplikacija je mnogo šire okruženje dizajnirano da olakša različite oblike digitalne komunikacije, kao što su tekstualni, glasovni i video razgovori među ljudskim korisnicima. Njena definisajuća karakteristika je integracija generativnog AI modela koji simulira nijansirane, ljudske razgovore, generišući odgovore na osnovu širokog spektra ulaza i kontekstualnih znakova. Generativna AI pokretana chat aplikacija može se uključiti u diskusije otvorenog domena, prilagoditi se evoluirajućim kontekstima razgovora, pa čak i proizvesti kreativne ili složene dijaloge.
+Пре него што уђемо у прављење апликација за чет, поредимо 'четботове' са 'апликацијама за чет са вештачком интелигенцијом,' који имају посебне улоге и функционалности. Главна сврха четбота је аутоматизација специфичних разговарачких задатака, као што су одговарање на често постављана питања или праћење пакета. Обично је вођен логиком заснованом на правилима или сложеним алгоритмима вештачке интелигенције. Насупрот томе, апликација за чет са вештачком интелигенцијом је много шира околина дизајнирана да омогући разне облике дигиталне комуникације, као што су текстуални, гласовни и видео четови између људских корисника. Њена дефинишућа карактеристика је интеграција генеративног AI модела који симулира нијансиране, људске разговоре, генеришући одговоре базиране на широком спектру улаза и контекстуалних наговештаја. Апликација за чет са генеративном AI може да учествује у разговорима отвореног домена, прилагоди се развоју контекста у разговору, па чак и произведе креативни или сложени дијалог.
 
-Tabela ispod prikazuje ključne razlike i sličnosti kako bismo bolje razumeli njihove jedinstvene uloge u digitalnoj komunikaciji.
+Табела испод наводи кључне разлике и сличности које нам помажу да разумемо њихове јединствене улоге у дигиталној комуникацији.
 
-| Chatbot                               | Generativna AI-Pokretana Chat Aplikacija |
-| ------------------------------------- | -------------------------------------- |
-| Fokusiran na zadatke i zasnovan na pravilima | Svestan konteksta                       |
-| Često integrisan u veće sisteme       | Može hostovati jedan ili više chatbotova |
-| Ograničen na programirane funkcije    | Uključuje generativne AI modele        |
-| Specijalizovane i strukturirane interakcije | Sposoban za diskusije otvorenog domena |
+| Четбот                              | Апликација за чет са генеративном AI                 |
+| ---------------------------------- | ---------------------------------------------------- |
+| Фокусирана на задатке и заснована на правилима | Свестан контекста                                   |
+| Често интегрисана у веће системе    | Може угостити један или више четботова                |
+| Ограничена на програмиране функције | Укључује генеративне AI моделе                        |
+| Специфичне и структуриране интеракције | Способна за разговоре отвореног домена                |
 
-### Korišćenje unapred izgrađenih funkcionalnosti sa SDK-ovima i API-ima
+### Коришћење унапред изграђених функционалности уз SDK и API-је
 
-Kada gradite chat aplikaciju, dobar prvi korak je proceniti šta je već dostupno. Korišćenje SDK-ova i API-ja za izgradnju chat aplikacija je korisna strategija iz više razloga. Integrisanjem dobro dokumentovanih SDK-ova i API-ja, strateški pozicionirate svoju aplikaciju za dugoročni uspeh, rešavajući probleme skalabilnosti i održavanja.
+При прављењу апликације за чет, добар први корак је процена онога што већ постоји. Коришћење SDK-ова и API-ја за изградњу апликација за чет је повољна стратегија из више разлога. Интеграцијом добро документованих SDK-ова и API-ја, стратешки позиционирате своју апликацију за дугорочан успех, решавајући проблеме скалабилности и одржавања.
 
-- **Ubrzava proces razvoja i smanjuje troškove**: Oslanjanje na unapred izgrađene funkcionalnosti umesto skupog procesa njihove izgradnje omogućava vam da se fokusirate na druge aspekte vaše aplikacije koje smatrate važnijim, kao što je poslovna logika.
-- **Bolje performanse**: Kada gradite funkcionalnost od nule, na kraju ćete se zapitati "Kako to skalira? Da li je ova aplikacija sposobna da podnese iznenadni priliv korisnika?" Dobro održavani SDK-ovi i API-ji često imaju ugrađena rešenja za ove probleme.
-- **Lakše održavanje**: Ažuriranja i poboljšanja su lakša za upravljanje jer većina API-ja i SDK-ova jednostavno zahteva ažuriranje biblioteke kada se izda nova verzija.
-- **Pristup vrhunskoj tehnologiji**: Korišćenje modela koji su fino podešeni i obučeni na opsežnim skupovima podataka pruža vašoj aplikaciji sposobnosti prirodnog jezika.
+- **Убрзава процес развоја и смањује оптерећење**: Ослањање на унапред изграђене функционалности уместо скупог процеса самосталне изградње дозвољава вам да се фокусирате на друге аспекте апликације који вам могу бити важнији, као што је пословна логика.
+- **Боље перформансе**: Када градите функционалност од почетка, на крају се запитате „Како ово скалира? Да ли апликација може да поднесе изненадни прилив корисника?“ Добро одржавани SDK-и и API-ји често имају уграђена решења за ове изазове.
+- **Једноставније одржавање**: Ажурирања и побољшања се лакше управљају јер већина API-ја и SDK-ова захтева само ажурирање библиотеке када изађе нова верзија.
+- **Приступ напредним технологијама**: Коришћење модела који су фино подешени и обучени на опсежним скуповима података пружа вашој апликацији могућности природног језика.
 
-Pristup funkcionalnosti SDK-a ili API-ja obično podrazumeva dobijanje dozvole za korišćenje pruženih usluga, što se često postiže korišćenjem jedinstvenog ključa ili tokena za autentifikaciju. Koristićemo OpenAI Python biblioteku da istražimo kako ovo izgleda. Takođe, možete to isprobati sami u sledećem [notebooku za OpenAI](../../../07-building-chat-applications/python/oai-assignment.ipynb) ili [notebooku za Azure OpenAI Services](../../../07-building-chat-applications/python/aoai-assignment.ipynb) za ovu lekciju.
+Приступ функционалности SDK-а или API-ја обично захтева добијање дозволе за коришћење услуга, што се често остварује коришћењем јединственог кључа или аутентификационог токена. У овом ћемо примеру користити Python библиотеку OpenAI да истражимо како то изгледа. Можете га испробати и сами у следећој [свесци за OpenAI](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) или [свесци за Azure OpenAI Services](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) за ову лекцију.
 
 ```python
 import os
@@ -81,90 +72,122 @@ client = OpenAI(
     api_key=API_KEY
     )
 
-chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Suggest two titles for an instructional lesson on chat applications for generative AI."}])
+response = client.responses.create(model="gpt-4o-mini", input="Suggest two titles for an instructional lesson on chat applications for generative AI.", store=False)
+print(response.output_text)
 ```
 
-Gornji primer koristi GPT-3.5 Turbo model za kompletiranje upita, ali primetite da je API ključ postavljen pre toga. Dobijate grešku ako niste postavili ključ.
+Горе наведени пример користи GPT-4o мини модел са Responses API-јем да заврши упит, али приметите да је API кључ подешен пре тога. Добићете грешку ако га не поставите.
 
-## Korisničko iskustvo (UX)
+## Корисничко искуство (UX)
 
-Opšti UX principi važe za chat aplikacije, ali evo nekih dodatnih razmatranja koja postaju posebno važna zbog komponenti mašinskog učenja.
+Општи принципи UX-а се примењују на апликације за чет, али ево неких додатних разматрања која су посебно важна због компонената машинског учења које су укључене.
 
-- **Mehanizam za rešavanje dvosmislenosti**: Generativni AI modeli povremeno generišu dvosmislene odgovore. Funkcija koja omogućava korisnicima da traže pojašnjenje može biti korisna ako naiđu na ovaj problem.
-- **Zadržavanje konteksta**: Napredni generativni AI modeli imaju sposobnost da pamte kontekst unutar razgovora, što može biti neophodan alat za korisničko iskustvo. Davanje korisnicima mogućnosti da kontrolišu i upravljaju kontekstom poboljšava korisničko iskustvo, ali uvodi rizik od zadržavanja osetljivih korisničkih informacija. Razmatranja o tome koliko dugo se ove informacije čuvaju, kao što je uvođenje politike zadržavanja, mogu balansirati potrebu za kontekstom protiv privatnosti.
-- **Personalizacija**: Sa sposobnošću učenja i prilagođavanja, AI modeli nude individualizovano iskustvo za korisnika. Prilagođavanje korisničkog iskustva putem funkcija kao što su korisnički profili ne samo da čini da se korisnik oseća shvaćenim, već takođe pomaže u njihovoj potrazi za pronalaženjem specifičnih odgovora, stvarajući efikasniju i zadovoljavajuću interakciju.
+- **Механизам за решавање неодређености**: Генеративни AI модели понекад генеришу неодређене одговоре. Карактеристика која омогућава корисницима да затраже појашњење може бити корисна уколико се овај проблем појави.
+- **Задржавање контекста**: Напредни генеративни AI модели могу памтити контекст у разговору, што може бити неопходна предност за корисничко искуство. Омогућавање корисницима да контролишу и управљају контекстом побољшава корисничко искуство, али уводи ризик чувања осетљивих информација о корисницима. Разматрања о времену чувања информација, попут увођења политике задржавања, могу да балансирају потребу за контекстом у односу на приватност.
+- **Персонализација**: Са способношћу учења и прилагођавања, AI модели нуде индивидуализовано искуство за корисника. Прилагођавање корисничког искуства кроз функције као што су кориснички профили не само да чини корисника разумљивим, већ и помаже у проналажењу специфичних одговора, креирајући ефикаснију и задовољавајућу интеракцију.
 
-Jedan takav primer personalizacije su postavke "Custom instructions" u OpenAI-jevom ChatGPT-u. Omogućava vam da pružite informacije o sebi koje mogu biti važan kontekst za vaše upite. Evo primera prilagođenog uputstva.
+Један такав пример персонализације су „Прилагођена упутства“ у подешавањима OpenAI ChatGPT-а. Омогућавају вам да пружите информације о себи које могу бити важан контекст за ваше упите. Ево примера прилагођеног упутства.
 
-![Postavke prilagođenih uputstava u ChatGPT-u](../../../translated_images/custom-instructions.950e3bf1d66f052ff5c50cd6722f1fcb532089abe33d833c190a3796f4a09827.sr.png)
+![Прилагођена упутства у ChatGPT](../../../translated_images/sr/custom-instructions.b96f59aa69356fcf.webp)
 
-Ovaj "profil" podstiče ChatGPT da kreira plan lekcije o povezanima listama. Primetite da ChatGPT uzima u obzir da korisnik može želeti detaljniji plan lekcije na osnovu njenog iskustva.
+Ова „профил“ указује ChatGPT-у да направи план лекције о повезаним листама. Приметите да ChatGPT узима у обзир да корисник може желети детаљнији план лекције на основу свог искуства.
 
-![Upit u ChatGPT-u za plan lekcije o povezanima listama](../../../translated_images/lesson-plan-prompt.23083d9c80ec7670b3aaf3b093d79a13ed42920da81b851b29f6167b6150aae9.sr.png)
+![Упит у ChatGPT за план лекције о повезаним листама](../../../translated_images/sr/lesson-plan-prompt.cc47c488cf1343df.webp)
 
-### Microsoftov okvir za sistemske poruke za velike jezičke modele
+### Microsoft-ов системски оквир за велике језичке моделе
 
-[Microsoft je pružio smernice](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) za pisanje efektivnih sistemskih poruka pri generisanju odgovora iz LLM-ova podeljene u 4 oblasti:
+[Microsoft је обезбедио смернице](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) за писање ефикасних системских порука приликом генерисања одговора из LLM-ова, распоређених у 4 области:
 
-1. Definisanje za koga je model, kao i njegovih sposobnosti i ograničenja.
-2. Definisanje formata izlaza modela.
-3. Pružanje specifičnih primera koji demonstriraju nameravano ponašanje modela.
-4. Pružanje dodatnih sigurnosnih ograda ponašanja.
+1. Дефинисање за кога је модел, као и његових могућности и ограничења.
+2. Дефинисање формата излаза модела.
+3. Пружање специфичних примера који демонстрирају намерно понашање модела.
+4. Пружање додатних понашајних ограничења.
 
-### Pristupačnost
+### Приступачност
 
-Bilo da korisnik ima vizuelne, slušne, motoričke ili kognitivne smetnje, dobro dizajnirana chat aplikacija treba da bude upotrebljiva za sve. Sledeća lista razlaže specifične funkcije usmerene na poboljšanje pristupačnosti za različite korisničke smetnje.
+Без обзира на то да ли корисник има визуелна, слухова, моторна или когнитивна оштећења, добро осмишљена апликација за чет треба да буде употребљива за све. Следећа листа разлаже специфичне функције усмерене на побољшање приступачности за различите врсте корисничких нарушења.
 
-- **Funkcije za vizuelne smetnje**: Tematski prikaz visokog kontrasta i prilagodljivi tekst, kompatibilnost sa čitačima ekrana.
-- **Funkcije za slušne smetnje**: Funkcije za pretvaranje teksta u govor i govora u tekst, vizuelni signali za audio obaveštenja.
-- **Funkcije za motoričke smetnje**: Podrška za navigaciju putem tastature, glasovne komande.
-- **Funkcije za kognitivne smetnje**: Opcije za pojednostavljeni jezik.
+- **Функције за визуелне недостатке**: Теми са високим контрастом и могућност промене величине текста, компатибилност са читачима екрана.
+- **Функције за слушне недостатке**: Текст у говор и говор у текст функције, визуелни сигнали за аудио обавештења.
+- **Функције за моторне недостатке**: Подршка за навигацију тастатуром, гласовне команде.
+- **Функције за когнитивне недостатке**: Опције за поједностављени језик.
 
-## Prilagođavanje i fino podešavanje za jezičke modele specifične za domenu
+## Прилагођавање и фино подешавање језичких модела специфичних за домен
 
-Zamislite chat aplikaciju koja razume žargon vaše kompanije i predviđa specifične upite koje njena korisnička baza obično ima. Postoji nekoliko pristupa vrednih pomena:
+Замислите апликацију за чет која разуме жаргон ваше компаније и предвиђа специфична питања која корисници најчешће постављају. Постоје неки приступи које вреди поменути:
 
-- **Korišćenje DSL modela**. DSL označava jezik specifičan za domenu. Možete koristiti takozvani DSL model obučen na specifičnom domenu da razume njegove pojmove i scenarije.
-- **Primena finog podešavanja**. Fino podešavanje je proces daljeg treniranja vašeg modela sa specifičnim podacima.
+- **Коришћење DSL модела**. DSL је скраћеница за језик специфичан за домен. Можете искористити такозвани DSL модел обучен на специфичном домену да разуме његове концепте и сценарије.
+- **Применити фино подешавање**. Фино подешавање је процес даљег обучавања вашег модела са специфичним подацима.
 
-## Prilagođavanje: Korišćenje DSL-a
+## Прилагођавање: Коришћење DSL модела
 
-Korišćenje modela jezika specifičnog za domenu (DSL modeli) može poboljšati angažman korisnika pružajući specijalizovane, kontekstualno relevantne interakcije. To je model koji je obučen ili fino podešen da razume i generiše tekst vezan za određeno polje, industriju ili temu. Opcije za korišćenje DSL modela mogu varirati od treniranja jednog od nule do korišćenja već postojećih putem SDK-ova i API-ja. Druga opcija je fino podešavanje, što uključuje uzimanje postojećeg unapred obučenog modela i prilagođavanje za specifični domen.
+Коришћење језичких модела специфичних за домен (DSL модели) може побољшати ангажовање корисника пружајући специјализоване, контекстуално релевантне интеракције. То је модел који је обучен или фино подешен да разуме и генерише текст везан за одређено подручје, индустрију или тему. Опције за коришћење DSL модела могу варирати од обуке од почетка до коришћења постојећих путем SDK-ова и API-ја. Друга опција је фино подешавање, што подразумева узимање постојећег претходно обученог модела и прилагођавање за одређени домен.
 
-## Prilagođavanje: Primena finog podešavanja
+## Прилагођавање: Примена финог подешавања
 
-Fino podešavanje se često razmatra kada unapred obučeni model nije dovoljan u specijalizovanom domenu ili specifičnom zadatku.
+Фино подешавање се често разматра када претходно обучени модел није довољно добар у специјализованом домену или специфичном задатку.
 
-Na primer, medicinski upiti su složeni i zahtevaju mnogo konteksta. Kada medicinski profesionalac dijagnostikuje pacijenta, to se zasniva na različitim faktorima kao što su stil života ili postojeći uslovi, i može se čak osloniti na nedavne medicinske časopise kako bi potvrdio svoju dijagnozu. U takvim nijansiranim scenarijima, AI chat aplikacija opšte namene ne može biti pouzdan izvor.
+На пример, медицинска питања су сложена и захтевају много контекста. Када медицински стручњак дијагностикује пацијента, то се заснива на разним факторима као што су начин живота или претходна стања, а може се ослањати и на нове медицинске часописе да потврди дијагнозу. У таквим нијансираним сценаријима, општа AI апликација за чет не може бити поуздан извор.
 
-### Scenario: medicinska aplikacija
+### Сценарио: медицинска апликација
 
-Razmotrite chat aplikaciju dizajniranu da pomaže medicinskim stručnjacima pružajući brze reference na smernice za lečenje, interakcije lekova ili nedavna istraživanja.
+Замислите апликацију за чет дизајнирану да помогне медицинским стручњацима пружајући брзе референце за смернице лечења, интеракције лекова или најновија истраживања.
 
-Model opšte namene može biti adekvatan za odgovaranje na osnovna medicinska pitanja ili pružanje opštih saveta, ali može imati problema sa sledećim:
+Општи модел може бити довољан за одговоре на основна медицинска питања или пружање општих савета, али може имати тешкоћа са следећим:
 
-- **Veoma specifični ili složeni slučajevi**. Na primer, neurolog može pitati aplikaciju: "Koje su trenutne najbolje prakse za upravljanje epilepsijom otpornom na lekove kod pedijatrijskih pacijenata?"
-- **Nedostatak nedavnih dostignuća**. Model opšte namene mogao bi imati problema da pruži trenutni odgovor koji uključuje najnovija dostignuća u neurologiji i farmakologiji.
+- **Веома специфични или сложени случајеви**. На пример, неуролог може питати апликацију: „Које су тренутне најбоље праксе за управљање лековима отпорном епилепсијом код педијатријских пацијената?“
+- **Недостатак најновијих достигнућа**. Општи модел може имати потешкоће да пружи актуелан одговор који укључује најновија достигнућа у неурологији и фармакологији.
 
-U takvim slučajevima, fino podešavanje modela sa specijalizovanim medicinskim skupom podataka može značajno poboljšati njegovu sposobnost da se nosi sa ovim složenim medicinskim upitima preciznije i pouzdanije. Ovo zahteva pristup velikom i relevantnom skupu podataka koji predstavlja izazove i pitanja specifična za domen koja treba rešiti.
+У таквим случајевима, фино подешавање модела са специјалним медицинским скупом података може значајно побољшати његову способност да прецизно и поуздано одговори на ова сложена медицинска питања. Ово захтева приступ великом и релевантном скупу података који представља изазове и питања специфична за домен.
 
-## Razmatranja za visokokvalitetno AI-pokretano chat iskustvo
+## Разматрања за висококвалитетно искуство у чету са AI
 
-Ovaj deo opisuje kriterijume za "visokokvalitetne" chat aplikacije, koje uključuju hvatanje merljivih metrika i pridržavanje okvira koji odgovorno koristi AI tehnologiju.
+Овај одељак наводи критеријуме за „висококвалитетне“ апликације за чет, који укључују прикупљање кључних метрика и придржавање оквира за одговорно коришћење AI технологије.
 
-### Ključne metrike
+### Кључне метрике
 
-Da bi se održale visokokvalitetne performanse aplikacije, ključno je pratiti ključne metrike i razmatranja. Ova merenja ne samo da osiguravaju funkcionalnost aplikacije već i procenjuju kvalitet AI modela i korisničkog iskustva. Ispod je lista koja pokriva osnovne, AI i korisničke iskustvene metrike koje treba razmotriti.
+Да бисте одржали висококвалитетни рад апликације, битно је пратити кључне метрике и разматрања. Ове мере не само да осигуравају функционалност апликације већ и процењују квалитет AI модела и корисничког искуства. Испод је листа која обухвата основне, AI и метрике корисничког искуства које треба размотрити.
 
-| Metrika                        | Definicija                                                                                                             | Razmatranja za razvojnog programera chata                                         |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Dostupnost**                | Meri vreme kada je aplikacija operativna i dostupna korisnicima.                                                        | Kako ćete minimizirati vreme nedostupnosti?                                           |
-| **Vreme odziva**              | Vreme koje je potrebno aplikaciji da odgovori na korisnički upit.                                                       | Kako možete optimizovati obradu upita kako biste poboljšali vreme odziva?           |
-| **Preciznost**                | Odnos tačnih pozitivnih predikcija prema ukupnom broju pozitivnih predikcija                                            | Kako ćete validirati preciznost vašeg modela?                        |
-| **Osetljivost (Recall)**      | Odnos tačnih pozitivnih predikcija prema stvarnom broju pozitivnih slučajeva                                           | Kako ćete meriti i poboljšavati osetljivost?                                  |
-| **F1 Skor**                   | Harmonična sredina preciznosti i osetljivosti koja balansira kompromis između oba.                                     | Koji je vaš ciljani F1 Skor? Kako ćete balansirati preciznost i osetljivost?  |
-| **Perpleksnost**              | Meri koliko se verovatnosna distribucija koju predviđa model poklapa sa stvarnom distribucijom podataka.              | Kako ćete minimizirati perpleksnost?                                         |
-| **Metrike zadovoljstva korisnika** | Meri percepciju korisnika o aplikaciji. Često se prikupljaju putem anketa.                                         | Koliko često ćete prikupljati povratne informacije od korisnika? Kako ćete se pril
+| Метрика                      | Дефиниција                                                                                                            | Разматрања за програмера апликације за чет                        |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **Време рада (Uptime)**      | Мери време док је апликација оперативна и доступна корисницима.                                                       | Како ћете минимизирати прекиде рада?                              |
+| **Време одговора**           | Време које апликацији треба да одговори на корисников упит.                                                           | Како можете оптимизовати обраду упита да убрзате време одговора? |
+| **Прецизност**               | Однос правих позитивних предвиђања у укупном броју позитивних предвиђања                                              | Како ћете валидацију прецизности вашег модела?                     |
+| **Повратак (осетљивост)**    | Однос правих позитивних предвиђања у укупном броју истински позитивних                                             | Како ћете мерити и побољшавати повраћај?                          |
+| **F1 резултат**              | Хармонијска средина прецизности и повратка, која балансира компромис између оба                                      | Који је ваш циљани F1 резултат? Како ћете балансирати прецизност и повратак? |
+| **Перплексија**              | Мери колико добро вероватносна расподела коју прогнозира модел одговара стварној расподели података.                  | Како ћете минимизирати перплексију?                              |
+| **Метрике задовољства корисника** | Мери перцепцију корисника о апликацији. Често се прикупља преко анкета.                                              | Колико често ћете прикупљати повратне информације? Како ћете се прилагођавати? |
+| **Стопа грешака**            | Стопа којом модел прави грешке у разумевању или излазима.                                                             | Које стратегије имате за смањење стопе грешака?                  |
+| **Циклуси поновног учења**   | Учесталост са којом се модел ажурира коришћењем нових података и увида.                                               | Колико често ћете поново обучавати модел? Шта покреће циклус поновног учења? |
 
-**Одричање одговорности**:  
-Овај документ је преведен користећи AI услугу превођења [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да будемо прецизни, молимо вас да будете свесни да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације, препоручује се професионални људски превод. Не преузимамо одговорност за било каква неспоразума или погрешна тумачења која произилазе из употребе овог превода.
+| **Откривање аномалија**     | Алати и технике за идентификовање необичних образаца који не одговарају очекиваном понашању.                     | Како ћете одговорити на аномалије?                                        |
+
+### Имплементација одговорних пракси вештачке интелигенције у апликацијама за чет
+
+Приступ компаније Microsoft одговорној вештачкој интелигенцији идентификовао је шест принципа који треба да воде развој и употребу вештачке интелигенције. Испод су принципи, њихова дефиниција и ствари које би програмер апликација за чет требао да размотре и зашто их треба озбиљно схватити.
+
+| Принципи              | Дефиниција Microsoft-а                                  | Разматрања за програмера апликација за чет                           | Зашто је важно                                                                       |
+| ---------------------- | ----------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Праведност             | Системи вештачке интелигенције треба да третирају све људе праведно. | Осигурати да апликација за чет не дискриминише на основу корисничких података. | За изградњу поверења и инклузивности међу корисницима; избегава правне последице.  |
+| Поузданост и безбедност| Системи вештачке интелигенције треба да раде поуздано и безбедно.  | Имплементирати тестирања и механизме заштите да се минимизирају грешке и ризици. | Обезбеђује задовољство корисника и спречава потенцијалну штету.                     |
+| Приватност и безбедност| Системи вештачке интелигенције треба да буду безбедни и да поштују приватност. | Примeните јаку енкрипцију и мере заштите података.                    | Да би се заштитили осетљиви кориснички подаци и испунили закони о приватности.       |
+| Инклузивност           | Системи вештачке интелигенције треба да оснажују све и укључују људе. | Дизајнирати UI/UX који је приступачан и једноставан за коришћење разноликим публикама. | Обезбеђује да шири круг људи може ефикасно користити апликацију.                    |
+| Прозирност             | Системи вештачке интелигенције треба да буду разумљиви.   | Обезбедити јасну документацију и образложење за одговоре вештачке интелигенције. | Корисници су склонији да верују систему ако могу разумети како су донете одлуке.   |
+| Одговорност            | Људи треба да буду одговорни за системе вештачке интелигенције. | Успоставити јасан процес ревизије и побољшања одлука вештачке интелигенције.  | Омогућава континуирано унапређење и корективне мере у случају грешака.              |
+
+## Задатак
+
+Погледајте [assignment](../../../07-building-chat-applications/python). Проћи ће вас кроз серију вежби од покретања првих чет упита, преко класификације и сумирања текста и још много тога. Обратите пажњу да су задаци доступни у различитим програмским језицима!
+
+## Одличан посао! Наставите путовање
+
+Након завршетка овог часа, погледајте нашу [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) да бисте наставили да унапређујете своје знање о генеративној вештачкој интелигенцији!
+
+Идите на Час 8 да видите како можете почети са [прављењем претраживачких апликација](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Изјава о одрицању одговорности**:
+Овај документ је преведен коришћењем услуге за аутоматски превод [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

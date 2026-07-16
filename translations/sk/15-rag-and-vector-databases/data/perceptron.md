@@ -1,52 +1,43 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "59021c5f419d3feda19075910a74280a",
-  "translation_date": "2025-05-20T06:43:14+00:00",
-  "source_file": "15-rag-and-vector-databases/data/perceptron.md",
-  "language_code": "sk"
-}
--->
-# Úvod do neurónových sietí: Perceptron
+# Úvod do neurónových sietí: Perceptrón
 
-Jedným z prvých pokusov implementovať niečo podobné modernej neurónovej sieti uskutočnil Frank Rosenblatt z Cornell Aeronautical Laboratory v roku 1957. Išlo o hardvérovú implementáciu nazývanú "Mark-1", navrhnutú na rozpoznávanie primitívnych geometrických tvarov, ako sú trojuholníky, štvorce a kruhy.
+Jedným z prvých pokusov o implementáciu niečoho podobného modernej neurónovej sieti urobil Frank Rosenblatt z Cornell Aeronautical Laboratory v roku 1957. Išlo o hardvérovú implementáciu nazvanú "Mark-1", navrhnutú na rozpoznávanie primitívnych geometrických tvarov, ako sú trojuholníky, štvorce a kruhy.
 
 |      |      |
 |--------------|-----------|
-|<img src='images/Rosenblatt-wikipedia.jpg' alt='Frank Rosenblatt'/> | <img src='images/Mark_I_perceptron_wikipedia.jpg' alt='The Mark 1 Perceptron' />|
+|<img src='../../../../translated_images/sk/Rosenblatt-wikipedia.1d205667acda28c0.webp' alt='Frank Rosenblatt'/> | <img src='../../../../translated_images/sk/Mark_I_perceptron_wikipedia.434e46ca39e2be80.webp' alt='The Mark 1 Perceptron' />|
 
 > Obrázky z Wikipédie
 
-Vstupný obraz bol reprezentovaný mriežkou 20x20 fotobuniek, takže neurónová sieť mala 400 vstupov a jeden binárny výstup. Jednoduchá sieť obsahovala jeden neurón, tiež nazývaný **práh logická jednotka**. Váhy neurónovej siete fungovali ako potenciometre, ktoré bolo potrebné manuálne nastaviť počas fázy učenia.
+Vstupný obraz bol reprezentovaný maticou 20x20 fotobuniek, takže neurónová sieť mala 400 vstupov a jeden binárny výstup. Jednoduchá sieť obsahovala jeden neurón, nazývaný aj **prahová logická jednotka**. Váhy neurónovej siete fungovali ako potenciometre, ktoré bolo potrebné manuálne nastavovať počas tréningovej fázy.
 
-> ✅ Potenciometer je zariadenie, ktoré umožňuje užívateľovi nastaviť odpor v obvode.
+> ✅ Potenciometer je zariadenie, ktoré umožňuje používateľovi nastaviť odpor v obvode.
 
-> The New York Times v tom čase napísal o perceptrone: *zárodok elektronického počítača, od ktorého [Námorníctvo] očakáva, že bude schopný chodiť, rozprávať, vidieť, písať, reprodukovať sa a byť si vedomý svojej existencie.*
+> The New York Times v tom čase o perceptróne napísal: *embryo elektronického počítača, ktorý [Námorníctvo] očakáva, že bude schopný chodiť, rozprávať, vidieť, písať, rozmnožovať sa a byť si vedomý svojej existencie.*
 
-## Model perceptronu
+## Model perceptrónu
 
-Predpokladajme, že v našom modeli máme N vlastností, v takom prípade by vstupný vektor bol vektorom veľkosti N. Perceptron je model **binárnej klasifikácie**, t.j. dokáže rozlišovať medzi dvoma triedami vstupných dát. Predpokladáme, že pre každý vstupný vektor x bude výstup nášho perceptronu buď +1 alebo -1, v závislosti od triedy. Výstup sa vypočíta pomocou vzorca:
+Predpokladajme, že v našom modeli máme N vlastností, v takom prípade by vstupný vektor mal veľkosť N. Perceptrón je model **binárnej klasifikácie**, teda dokáže rozlíšiť medzi dvoma triedami vstupných dát. Predpokladáme, že pre každý vstupný vektor x bude výstup nášho perceptrónu buď +1 alebo -1, v závislosti od triedy. Výstup sa vypočíta podľa vzorca:
 
 y(x) = f(w<sup>T</sup>x)
 
-kde f je aktivačná funkcia typu schod
+kde f je prahová aktivačná funkcia
 
-## Tréning perceptronu
+## Tréning perceptrónu
 
-Aby sme perceptron vytrénovali, musíme nájsť vektor váh w, ktorý správne klasifikuje väčšinu hodnôt, t.j. výsledkom je najmenšia **chyba**. Táto chyba je definovaná **perceptronovým kritériom** nasledujúcim spôsobom:
+Na natrénovanie perceptrónu potrebujeme nájsť vektor váh w, ktorý správne klasifikuje väčšinu hodnôt, teda vedie k najmenšej **chybe**. Táto chyba je definovaná pomocou **perceptrónového kritéria** nasledovne:
 
 E(w) = -∑w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
 
 kde:
 
-* súčet sa berie na tých tréningových dátach i, ktoré vedú k nesprávnej klasifikácii
-* x<sub>i</sub> je vstupný údaj a t<sub>i</sub> je buď -1 alebo +1 pre negatívne a pozitívne príklady zodpovedajúco.
+* súčet sa berie cez tie trénovacie dáta i, ktoré vedú k nesprávnej klasifikácii
+* x<sub>i</sub> sú vstupné dáta a t<sub>i</sub> je buď -1 alebo +1 pre negatívne a pozitívne príklady
 
-Toto kritérium je považované za funkciu váh w, a musíme ho minimalizovať. Často sa používa metóda nazývaná **gradientný zostup**, pri ktorej začíname s nejakými počiatočnými váhami w<sup>(0)</sup>, a potom v každom kroku aktualizujeme váhy podľa vzorca:
+Toto kritérium sa považuje za funkciu váh w, ktorú potrebujeme minimalizovať. Často sa používa metóda nazývaná **gradientný zostup**, pri ktorej začíname s nejakými počiatočnými váhami w<sup>(0)</sup> a potom v každom kroku aktualizujeme váhy podľa vzorca:
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> - η∇E(w)
 
-Tu η je tzv. **rýchlosť učenia** a ∇E(w) označuje **gradient** E. Po vypočítaní gradientu skončíme s
+Kde η je tzv. **rýchlosť učenia** a ∇E(w) označuje **gradient** funkcie E. Po výpočte gradientu dostaneme
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> + ∑ηx<sub>i</sub>t<sub>i</sub>
 
@@ -74,24 +65,24 @@ def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
 
 ## Záver
 
-V tejto lekcii ste sa naučili o perceptrone, ktorý je modelom binárnej klasifikácie, a ako ho trénovať pomocou vektora váh.
+V tejto lekcii ste sa naučili o perceptróne, ktorý je modelom binárnej klasifikácie, a ako ho natrénovať pomocou vektora váh.
 
 ## 🚀 Výzva
 
-Ak si chcete vyskúšať vytvoriť vlastný perceptron, vyskúšajte tento laboratórny cvičenie na Microsoft Learn, ktoré používa Azure ML designer.
+Ak by ste si chceli vyskúšať vytvoriť vlastný perceptrón, vyskúšajte tento lab na Microsoft Learn, ktorý používa Azure ML designer.
 
 ## Prehľad a samostatné štúdium
 
-Ak chcete vidieť, ako môžeme použiť perceptron na riešenie jednoduchých aj reálnych problémov a pokračovať v učení, prejdite na poznámkový blok Perceptron.
+Ak chcete vidieť, ako môžeme použiť perceptrón na riešenie jednoduchých aj reálnych problémov a pokračovať v učení, prejdite na Perceptron notebook.
 
-Tu je tiež zaujímavý článok o perceptronoch.
+Tu je tiež zaujímavý článok o perceptrónoch.
 
 ## Zadanie
 
-V tejto lekcii sme implementovali perceptron pre úlohu binárnej klasifikácie a použili sme ho na klasifikáciu medzi dvoma ručne písanými číslicami. V tomto laboratóriu máte za úlohu úplne vyriešiť problém klasifikácie číslic, t.j. určiť, ktorá číslica najpravdepodobnejšie zodpovedá danému obrázku.
+V tejto lekcii sme implementovali perceptrón pre úlohu binárnej klasifikácie a použili sme ho na rozlíšenie medzi dvoma ručne písanými číslicami. V tomto labe máte za úlohu vyriešiť problém klasifikácie číslic úplne, teda určiť, ktorá číslica najpravdepodobnejšie zodpovedá danému obrázku.
 
 * Inštrukcie
-* Poznámkový blok
+* Notebook
 
-**Zrieknutie sa zodpovednosti**:  
-Tento dokument bol preložený pomocou služby AI prekladu [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, uvedomte si, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:  
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, majte na pamäti, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.

@@ -1,12 +1,5 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0bba96e53ab841d99db731892a51fab8",
-  "translation_date": "2025-05-20T06:44:58+00:00",
-  "source_file": "16-open-source-models/README.md",
-  "language_code": "en"
-}
--->
+[![Open Source Models](../../../translated_images/en/16-lesson-banner.6b56555e8404fda1.webp)](https://youtu.be/CuICgfuHFSg?si=x8SpFRUsIxM9dohN)
+
 ## Introduction
 
 The world of open-source LLMs is exciting and constantly evolving. This lesson aims to provide an in-depth look at open source models. If you are looking for information on how proprietary models compare to open source models, go to the ["Exploring and Comparing Different LLMs" lesson](../02-exploring-and-comparing-different-llms/README.md?WT.mc_id=academic-105485-koreyst). This lesson will also cover the topic of fine-tuning but a more detailed explanation can be found in the ["Fine-Tuning LLMs" lesson](../18-fine-tuning/README.md?WT.mc_id=academic-105485-koreyst).
@@ -39,7 +32,12 @@ For this lesson, we will refer to the models as "open models" going forward as t
 
 **Cost** - The cost per token for using and deploying these models is lower than that of proprietary models. When building Generative AI applications, looking at performance vs price when working with these models on your use case should be done.
 
+![Model Cost](../../../translated_images/en/model-price.3f5a3e4d32ae00b4.webp)
+Source: Artificial Analysis
+
 **Flexibility** - Working with open models enables you to be flexible in terms of using different models or combining them. An example of this is the [HuggingChat Assistants ](https://huggingface.co/chat?WT.mc_id=academic-105485-koreyst) where a user can select the model being used directly in the user interface:
+
+![Choose Model](../../../translated_images/en/choose-model.f095d15bbac92214.webp)
 
 ## Exploring Different Open Models
 
@@ -67,15 +65,22 @@ There is no one answer for choosing an open model. A good place to start is by u
 
 When looking to compare LLMs across the different types, [Artificial Analysis](https://artificialanalysis.ai/?WT.mc_id=academic-105485-koreyst) is another great resource:
 
+![Model Quality](../../../translated_images/en/model-quality.aaae1c22e00f7ee1.webp)
+Source: Artificial Analysis
+
 If working on a specific use case, searching for fine-tuned versions that are focused on the same area can be effective. Experimenting with multiple open models to see how they perform according to your and your users' expectations is another good practice
 
 ## Next Steps
 
-The best part about open models is that you can get started working with them pretty quickly. Check out the [Azure AI Studio Model Catalog](https://ai.azure.com?WT.mc_id=academic-105485-koreyst), which features a specific Hugging Face collection with these models we discussed here.
+The best part about open models is that you can get started working with them pretty quickly. Check out the [Azure AI Foundry Model Catalog](https://ai.azure.com?WT.mc_id=academic-105485-koreyst), which features a specific Hugging Face collection with these models we discussed here.
 
 ## Learning does not stop here, continue the Journey
 
 After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
 
-**Disclaimer**:  
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

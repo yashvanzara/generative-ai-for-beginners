@@ -1,22 +1,273 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-05-20T10:23:06+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "sw"
-}
--->
-# Utangulizi wa Mifano Midogo ya Lugha kwa AI Inayozalisha kwa Kompyuta Kompyuta AI inayozalisha ni uwanja wa kuvutia wa akili bandia unaolenga kuunda mifumo inayoweza kuzalisha maudhui mapya. Maudhui haya yanaweza kuanzia maandishi na picha hadi muziki na hata mazingira yote ya virtual. Moja ya matumizi ya kusisimua ya AI inayozalisha ni katika uwanja wa mifano ya lugha. ## Mifano Midogo ya Lugha ni Nini? Mfano Mdogo wa Lugha (SLM) unawakilisha toleo lililopunguzwa la mfano mkubwa wa lugha (LLM), ukitumia kanuni nyingi za usanifu na mbinu za LLM, huku ukiwa na alama ndogo ya kompyuta. SLM ni sehemu ndogo ya mifano ya lugha iliyoundwa kuzalisha maandishi yanayofanana na ya kibinadamu. Tofauti na wenzao wakubwa, kama GPT-4, SLM ni ndogo na yenye ufanisi zaidi, na kuifanya iwe bora kwa matumizi ambapo rasilimali za kompyuta ni chache. Licha ya ukubwa wao mdogo, bado wanaweza kutekeleza kazi mbalimbali. Kwa kawaida, SLM hujengwa kwa kubana au kuchuja LLM, kwa lengo la kuhifadhi sehemu kubwa ya utendakazi wa mfano wa awali na uwezo wa lugha. Kupungua huku kwa ukubwa wa mfano hupunguza ugumu wa jumla, na kufanya SLM kuwa na ufanisi zaidi kwa matumizi ya kumbukumbu na mahitaji ya kompyuta. Licha ya maboresho haya, SLM bado zinaweza kutekeleza kazi mbalimbali za usindikaji wa lugha asilia (NLP): - Uzalishaji wa Maandishi: Kuunda sentensi au aya zinazofaa na zinazofaa kwa muktadha. - Kukamilisha Maandishi: Kutabiri na kukamilisha sentensi kulingana na chochezi lililopewa. - Tafsiri: Kubadilisha maandishi kutoka lugha moja hadi nyingine. - Muhtasari: Kufupisha vipande virefu vya maandishi kuwa muhtasari mfupi na rahisi kuelewa. Ingawa kuna baadhi ya upungufu katika utendaji au kina cha uelewa ikilinganishwa na wenzao wakubwa. ## Mifano Midogo ya Lugha Inafanyaje Kazi? SLM zinafundishwa kwa kiasi kikubwa cha data ya maandishi. Wakati wa mafunzo, zinajifunza mifumo na miundo ya lugha, na kuwawezesha kuzalisha maandishi ambayo ni sahihi kisarufi na yanafaa kwa muktadha. Mchakato wa mafunzo unahusisha: - Ukusanyaji wa Data: Kukusanya seti kubwa za data ya maandishi kutoka vyanzo mbalimbali. - Uchakataji Awali: Kusafisha na kupanga data ili kuifanya iweze kufaa kwa mafunzo. - Mafunzo: Kutumia algorithimu za kujifunza kwa mashine kufundisha mfano jinsi ya kuelewa na kuzalisha maandishi. - Kurekebisha: Kurekebisha mfano ili kuboresha utendaji wake kwenye kazi maalum. Maendeleo ya SLM yanaendana na hitaji linaloongezeka la mifano inayoweza kupelekwa katika mazingira yenye rasilimali chache, kama vile vifaa vya simu au majukwaa ya kompyuta ya ukingo, ambapo LLM kamili inaweza kuwa haifai kutokana na mahitaji yao makubwa ya rasilimali. Kwa kuzingatia ufanisi, SLM husawazisha utendaji na upatikanaji, kuwezesha matumizi mapana katika nyanja mbalimbali. ![slm](../../../translated_images/slm.e63e171d8045c28356253bb772597c333b20c51bc33ce7191b8b38a2e1375614.sw.png) ## Malengo ya Kujifunza Katika somo hili, tunatumaini kuanzisha maarifa ya SLM na kuunganisha na Microsoft Phi-3 kujifunza matukio mbalimbali katika maudhui ya maandishi, maono na MoE. Mwisho wa somo hili, unapaswa kuwa na uwezo wa kujibu maswali yafuatayo: - SLM ni nini - Tofauti kati ya SLM na LLM ni nini - Microsoft Phi-3/3.5 Family ni nini - Jinsi ya kufanya inference ya Microsoft Phi-3/3.5 Family Uko tayari? Hebu tuanze. ## Tofauti kati ya Mifano Mikubwa ya Lugha (LLMs) na Mifano Midogo ya Lugha (SLMs) LLMs na SLMs zote zinajengwa juu ya kanuni za msingi za kujifunza kwa mashine kwa kutumia uwezekano, zikifuata mbinu zinazofanana katika muundo wa usanifu, mbinu za mafunzo, michakato ya uzalishaji wa data, na mbinu za tathmini ya mifano. Hata hivyo, kuna mambo kadhaa muhimu yanayowatofautisha aina hizi mbili za mifano. ## Matumizi ya Mifano Midogo ya Lugha SLM zina matumizi mengi, ikiwemo: - Chatbots: Kutoa msaada kwa wateja na kuingiliana na watumiaji kwa njia ya mazungumzo. - Uundaji wa Maudhui: Kusaidia waandishi kwa kuzalisha mawazo au hata kuandika makala nzima. - Elimu: Kusaidia wanafunzi na kazi za kuandika au kujifunza lugha mpya. - Upatikanaji: Kuunda zana kwa ajili ya watu wenye ulemavu, kama vile mifumo ya maandishi-kwa-hotuba. **Ukubwa** Tofauti ya msingi kati ya LLMs na SLMs iko katika kiwango cha mifano. LLMs, kama vile ChatGPT (GPT-4), inaweza kuwa na takriban vigezo trilioni 1.76, wakati SLMs za chanzo wazi kama Mistral 7B zimeundwa na vigezo vichache zaidi—takriban bilioni 7. Tofauti hii inatokana hasa na tofauti katika usanifu wa mfano na michakato ya mafunzo. Kwa mfano, ChatGPT inatumia utaratibu wa kujitazama ndani ya mfumo wa encoder-decoder, wakati Mistral 7B inatumia umakini wa dirisha linalosonga, ambayo inawezesha mafunzo yenye ufanisi zaidi ndani ya mfano wa decoder tu. Tofauti hii ya usanifu ina athari kubwa kwa ugumu na utendaji wa mifano hii. **Uelewa** SLM kwa kawaida zimeboreshwa kwa utendaji ndani ya nyanja maalum, na kuzifanya ziwe na utaalamu wa juu lakini zinaweza kuwa na ukomo katika uwezo wao wa kutoa uelewa mpana wa muktadha katika nyanja nyingi za maarifa. Kwa upande mwingine, LLMs zinalenga kuiga akili ya kibinadamu kwa kiwango kikubwa zaidi. Zikiwa zimefundishwa kwenye seti kubwa, tofauti za data, LLM zimeundwa kufanya vizuri katika nyanja mbalimbali, zikitoa urahisi na uwezo wa kubadilika zaidi. Kwa hivyo, LLMs zinafaa zaidi kwa anuwai ya kazi za chini, kama vile usindikaji wa lugha asilia na programu. **Kompyuta** Mafunzo na upelekaji wa LLMs ni michakato inayohitaji rasilimali nyingi, mara nyingi ikihitaji miundombinu kubwa ya kompyuta, ikijumuisha makundi makubwa ya GPU. Kwa mfano, kufundisha mfano kama ChatGPT kutoka mwanzo kunaweza kuhitaji maelfu ya GPU kwa muda mrefu. Kwa upande mwingine, SLMs, zikiwa na idadi ndogo ya vigezo, ni rahisi zaidi kwa rasilimali za kompyuta. Mifano kama Mistral 7B inaweza kufundishwa na kuendeshwa kwenye mashine za ndani zilizo na uwezo wa GPU wa wastani, ingawa mafunzo bado yanahitaji masaa kadhaa kwenye GPU nyingi. **Upendeleo** Upendeleo ni tatizo linalojulikana katika LLMs, hasa kutokana na asili ya data ya mafunzo. Mifano hii mara nyingi hutegemea data mbichi, inayopatikana wazi kutoka kwenye mtandao, ambayo inaweza kuwakilisha au kuwakilisha vibaya makundi fulani, kuanzisha uainishaji wa kimakosa, au kuonyesha upendeleo wa lugha unaoathiriwa na lahaja, tofauti za kijiografia, na sheria za kisarufi. Zaidi ya hayo, ugumu wa usanifu wa LLM unaweza kuongeza upendeleo bila kukusudia, ambao unaweza usitambulike bila kurekebishwa kwa uangalifu. Kwa upande mwingine, SLMs, zikiwa zimefundishwa kwenye seti za data zilizozuiliwa zaidi, za kikoa maalum, zinakabiliwa na upendeleo huo kwa kiwango kidogo, ingawa haziko huru kutokana nao. **Inference** Ukubwa uliopunguzwa wa SLM huwapa faida kubwa katika kasi ya inference, na kuwawezesha kuzalisha matokeo kwa ufanisi kwenye vifaa vya ndani bila hitaji la usindikaji sambamba kwa kiasi kikubwa. Kwa upande mwingine, LLMs, kutokana na ukubwa na ugumu wao, mara nyingi huhitaji rasilimali kubwa za kompyuta sambamba kufikia nyakati za inference zinazokubalika. Uwepo wa watumiaji wengi wa wakati mmoja huongeza zaidi nyakati za majibu za LLM, hasa zinapopelekwa kwa kiwango kikubwa. Kwa muhtasari, ingawa LLMs na SLMs zote zinashiriki msingi wa msingi katika kujifunza kwa mashine, zinatofautiana kwa kiasi kikubwa katika suala la ukubwa wa mfano, mahitaji ya rasilimali, uelewa wa muktadha, uwezekano wa upendeleo, na kasi ya inference. Tofauti hizi zinaonyesha usawa wao kwa matumizi tofauti, na LLMs zikiwa na uwezo zaidi lakini zenye mahitaji mengi ya rasilimali, na SLMs zikitoa ufanisi zaidi wa kikoa maalum na mahitaji ya chini ya kompyuta. ***Kumbuka: Katika sura hii, tutatambulisha SLM kwa kutumia Microsoft Phi-3 / 3.5 kama mfano.*** ## Tambulisha Familia ya Phi-3 / Phi-3.5 Familia ya Phi-3 / 3.5 inalenga zaidi matukio ya maombi ya maandishi, maono, na Wakala (MoE): ### Phi-3 / 3.5 Maelekezo Kimsingi kwa uzalishaji wa maandishi, kukamilisha mazungumzo, na uchimbaji wa maudhui ya maudhui, nk. **Phi-3-mini** Mfano wa lugha wa 3.8B unapatikana kwenye Microsoft Azure AI Studio, Hugging Face, na Ollama. Mifano ya Phi-3 inazidi mifano ya lugha ya ukubwa sawa na mkubwa zaidi kwenye viwango muhimu (tazama namba za viwango hapa chini, namba za juu ni bora). Phi-3-mini inazidi mifano mara mbili ya ukubwa wake, wakati Phi-3-ndogo na Phi-3-kati inazidi mifano mikubwa zaidi, ikiwa ni pamoja na GPT-3.5 **Phi-3-ndogo & kati** Kwa vigezo 7B tu, Phi-3-ndogo inazidi GPT-3.5T kwenye aina mbalimbali za lugha, hoja, usimbaji, na viwango vya hesabu. Phi-3-kati yenye vigezo 14B inaendelea na mwenendo huu na inazidi Gemini 1.0 Pro. **Phi-3.5-mini** Tunaweza kuiona kama uboreshaji wa Phi-3-mini. Ingawa vigezo vinabaki bila kubadilika, inaboresha uwezo wa kusaidia lugha nyingi (Inasaidia lugha 20+: Kiarabu, Kichina, Kicheki, Kidenishi, Kiholanzi, Kiingereza, Kifini, Kifaransa, Kijerumani, Kiebrania, Kihungari, Kiitaliano, Kijapani, Kikorea, Kinorwe, Kipolandi, Kireno, Kirusi, Kihispania, Kiswidi, Thai, Kituruki, Kiukreni) na inaongeza msaada mkubwa kwa muktadha mrefu. Phi-3.5-mini yenye vigezo 3.8B inazidi mifano ya lugha ya ukubwa sawa na inalingana na mifano mara mbili ya ukubwa wake. ### Phi-3 / 3.5 Maono Tunaweza kufikiria mfano wa Maelekezo wa Phi-3/3.5 kama uwezo wa Phi wa kuelewa, na Maono ndiyo yanayompa Phi macho ya kuelewa ulimwengu. **Phi-3-Maono** Phi-3-maono, yenye vigezo 4.2B tu, inaendelea na mwenendo huu na inazidi mifano mikubwa zaidi kama Claude-3 Haiku na Gemini 1.0 Pro V kwenye kazi za hoja za maono ya jumla, OCR, na uelewa wa meza na michoro. **Phi-3.5-Maono** Phi-3.5-Maono pia ni uboreshaji wa Phi-3-Maono, ikiongeza msaada kwa picha nyingi. Unaweza kuiona kama uboreshaji wa maono, si tu unaweza kuona picha, bali pia video. Phi-3.5-maono inazidi mifano mikubwa zaidi kama Claude-3.5 Sonnet na Gemini 1.5 Flash katika kazi za OCR, uelewa wa meza na chati na inalingana katika kazi za hoja za maarifa ya maono ya jumla. Inasaidia pembejeo nyingi za fremu, yaani, kufanya hoja kwenye picha nyingi za pembejeo ### Phi-3.5-MoE ***Mchanganyiko wa Wataalam (MoE)*** unawawezesha mifano kufundishwa kabla kwa kompyuta ndogo sana, ambayo inamaanisha unaweza kupanua sana ukubwa wa mfano au seti ya data na bajeti sawa ya kompyuta kama mfano mnene. Hasa, mfano wa MoE unapaswa kufikia ubora sawa na mwenzake mnene haraka zaidi wakati wa mafunzo ya awali. Phi-3.5-MoE inajumuisha moduli za wataalamu 16x3.8B. Phi-3.5-MoE yenye vigezo 6.6B pekee inafikia kiwango sawa cha hoja, uelewa wa lugha, na hesabu kama mifano mikubwa zaidi Tunaweza kutumia mfano wa Familia ya Phi-3/3.5 kulingana na matukio tofauti. Tofauti na LLM, unaweza kupeleka Phi-3/3.5-mini au Phi-3/3.5-Maono kwenye vifaa vya ukingo. ## Jinsi ya kutumia mifano ya Familia ya Phi-3/3.5 Tunatumaini kutumia Phi-3/3.5 katika matukio tofauti. Ifuatayo, tutatumia Phi-3/3.5 kulingana na matukio tofauti. ![phi3](../../../translated_images/phi3.031cf9ca915915dbb4e8bc1e2b8e1e93d4d8a865ec4ea6ecdff5847b027a5113.sw.png) ### Tofauti ya inference API ya Wingu **Mifano ya GitHub** GitHub
-Models ni njia ya moja kwa moja zaidi. Unaweza kufikia haraka modeli ya Phi-3/3.5-Instruct kupitia GitHub Models. Imeunganishwa na Azure AI Inference SDK / OpenAI SDK, unaweza kufikia API kupitia kodi ili kukamilisha wito wa Phi-3/3.5-Instruct. Unaweza pia kujaribu athari tofauti kupitia Playground. - Demo:Ulinganisho wa athari za Phi-3-mini na Phi-3.5-mini katika mazingira ya Kichina ![phi3](../../../translated_images/gh1.33134727688b27f6eaeac67bd84dbef85626e2d8fe452d826d0b3c353e29a472.sw.png) ![phi35](../../../translated_images/gh2.9f09152ff1c8dfdb777bb774f961c9ddf743879fc2fb640597bb413b1f320b8a.sw.png) **Azure AI Studio** Au ikiwa tunataka kutumia modeli za vision na MoE, unaweza kutumia Azure AI Studio kukamilisha wito. Ikiwa una nia, unaweza kusoma Phi-3 Cookbook ili kujifunza jinsi ya kuita Phi-3/3.5 Instruct, Vision, MoE kupitia Azure AI Studio [Bonyeza kiungo hiki](https://github.com/microsoft/Phi-3CookBook/blob/main/md/02.QuickStart/AzureAIStudio_QuickStart.md?WT.mc_id=academic-105485-koreyst) **NVIDIA NIM** Mbali na suluhisho za katalogi za modeli zinazotegemea wingu zinazotolewa na Azure na GitHub, unaweza pia kutumia [Nivida NIM](https://developer.nvidia.com/nim?WT.mc_id=academic-105485-koreyst) kukamilisha miito inayohusiana. Unaweza kutembelea NIVIDA NIM kukamilisha miito ya API ya Familia ya Phi-3/3.5. NVIDIA NIM (NVIDIA Inference Microservices) ni seti ya huduma ndogo za inference zilizoharakishwa zilizoundwa kusaidia watengenezaji kupeleka modeli za AI kwa ufanisi katika mazingira mbalimbali, ikiwa ni pamoja na mawingu, vituo vya data, na vituo vya kazi. Hapa kuna baadhi ya vipengele muhimu vya NVIDIA NIM: - **Urahisi wa Upelekaji:** NIM inaruhusu upelekaji wa modeli za AI kwa amri moja, na kufanya iwe rahisi kuunganisha katika mtiririko wa kazi uliopo. - **Utendaji ulioboreshwa:** Inatumia injini za inference zilizoboreshwa awali za NVIDIA, kama TensorRT na TensorRT-LLM, ili kuhakikisha latency ya chini na kiwango cha juu cha kupitisha. - **Uwezo wa Kupima:** NIM inaunga mkono kupima kiotomatiki kwenye Kubernetes, ikiruhusu kushughulikia mzigo tofauti kwa ufanisi. - **Usalama na Udhibiti:** Mashirika yanaweza kudumisha udhibiti juu ya data na programu zao kwa kujiandikisha huduma ndogo za NIM kwenye miundombinu yao inayosimamiwa. - **API za Kawaida:** NIM hutoa API za kiwango cha tasnia, na kufanya iwe rahisi kujenga na kuunganisha programu za AI kama chatbots, wasaidizi wa AI, na zaidi. NIM ni sehemu ya NVIDIA AI Enterprise, ambayo inakusudia kurahisisha upelekaji na uendeshaji wa modeli za AI, kuhakikisha zinakimbia kwa ufanisi kwenye GPU za NVIDIA. - Demo: Kutumia Nividia NIM kuita Phi-3.5-Vision-API [[Bonyeza kiungo hiki](../../../19-slm/python/Phi-3-Vision-Nividia-NIM.ipynb)] ### Inference Phi-3/3.5 katika mazingira ya ndani Inference kuhusiana na Phi-3, au modeli yoyote ya lugha kama GPT-3, inahusu mchakato wa kuzalisha majibu au utabiri kulingana na pembejeo inayopokea. Unapotoa mwongozo au swali kwa Phi-3, inatumia mtandao wake wa neva uliofunzwa kutabiri majibu yanayowezekana na muhimu zaidi kwa kuchambua mifumo na uhusiano katika data ambayo ilifundishwa. **Hugging Face Transformer** Hugging Face Transformers ni maktaba yenye nguvu iliyoundwa kwa ajili ya usindikaji wa lugha asili (NLP) na majukumu mengine ya kujifunza kwa mashine. Hapa kuna baadhi ya vipengele muhimu kuhusu maktaba hii: 1. **Modeli zilizofunzwa awali**: Inatoa maelfu ya modeli zilizofunzwa awali ambazo zinaweza kutumika kwa majukumu mbalimbali kama uainishaji wa maandishi, utambuzi wa vyombo vilivyotajwa, kujibu maswali, muhtasari, tafsiri, na kizazi cha maandishi. 2. **Ushirikiano wa Muundo**: Maktaba inaunga mkono miundo mingi ya kujifunza kwa kina, ikiwa ni pamoja na PyTorch, TensorFlow, na JAX. Hii inaruhusu kufundisha modeli katika muundo mmoja na kuitumia katika mwingine. 3. **Uwezo wa Multimodal**: Mbali na NLP, Hugging Face Transformers pia inaunga mkono majukumu katika maono ya kompyuta (mfano, uainishaji wa picha, utambuzi wa vitu) na usindikaji wa sauti (mfano, utambuzi wa sauti, uainishaji wa sauti). 4. **Urahisi wa Kutumia**: Maktaba inatoa API na zana za kupakua na kurekebisha modeli kwa urahisi, na kuifanya ipatikane kwa wanaoanza na wataalamu. 5. **Jamii na Rasilimali**: Hugging Face ina jamii yenye nguvu na nyaraka nyingi, mafunzo, na miongozo kusaidia watumiaji kuanza na kutumia maktaba kwa ufanisi. [Nyaraka rasmi](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) au [Hifadhi yao ya GitHub](https://github.com/huggingface/transformers?WT.mc_id=academic-105485-koreyst). Hii ni njia inayotumiwa zaidi, lakini pia inahitaji kasi ya GPU. Baada ya yote, mandhari kama Vision na MoE yanahitaji hesabu nyingi, ambayo itakuwa na vikwazo sana katika CPU ikiwa hazijapunguzwa. - Demo:Kutumia Transformer kuita Phi-3.5-Instuct [Bonyeza kiungo hiki](../../../19-slm/python/phi35-instruct-demo.ipynb) - Demo:Kutumia Transformer kuita Phi-3.5-Vision[Bonyeza kiungo hiki](../../../19-slm/python/phi35-vision-demo.ipynb) - Demo:Kutumia Transformer kuita Phi-3.5-MoE[Bonyeza kiungo hiki](../../../19-slm/python/phi35_moe_demo.ipynb) **Ollama** [Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst) ni jukwaa lililoundwa kufanya iwe rahisi kuendesha modeli kubwa za lugha (LLMs) kwa ndani kwenye mashine yako. Inasaidia modeli mbalimbali kama Llama 3.1, Phi 3, Mistral, na Gemma 2, miongoni mwa zingine. Jukwaa linarahisisha mchakato kwa kubundika uzito wa modeli, usanidi, na data katika kifurushi kimoja, na kufanya iweze kufikiwa zaidi kwa watumiaji kubinafsisha na kuunda modeli zao wenyewe. Ollama inapatikana kwa macOS, Linux, na Windows. Ni zana nzuri ikiwa unatafuta kujaribu au kupeleka LLMs bila kutegemea huduma za wingu. Ollama ni njia ya moja kwa moja zaidi, unahitaji tu kutekeleza taarifa ifuatayo. ```bash
+# Utangulizi wa Mifano Midogo ya Lugha kwa AI Inayozalisha kwa Waanzilishi
+AI inayozalisha ni uwanja wa kuvutia wa akili bandia unaolenga kuunda mifumo inayoweza kuzalisha maudhui mapya. Maudhui haya yanaweza kuwa kutoka maandishi na picha hadi muziki na hata mazingira yote ya kweli ya mtandao. Mojawapo ya matumizi ya kusisimua zaidi ya AI inayozalisha ni katika eneo la mifano ya lugha.
+
+## Mifano Midogo ya Lugha ni Nini?
+
+Mfano Mdogo wa Lugha (SLM) ni toleo lililopunguzwa la mfano mkubwa wa lugha (LLM), likitumia kanuni nyingi za usanifu na mbinu za LLM, huku likionyesha ukingo mdogo wa kompyuta.
+
+SLM ni kundi la mifano ya lugha iliyoundwa kuzalisha maandishi yanayofanana na ya binadamu. Tofauti na wenzao wakubwa, kama GPT-4, SLM ni ndogo na yenye ufanisi zaidi, na kufanya iwe bora kwa matumizi ambapo rasilimali za kompyuta ni finyu. Licha ya ukubwa wao mdogo, bado wanaweza kutekeleza majukumu mbalimbali. Kawaida, SLM hujengwa kwa kusindika au kuchuja LLM, kwa lengo la kuhifadhi sehemu kubwa ya utendaji asilia wa mfano na uwezo wa lugha. Kupunguzwa kwa ukubwa wa mfano kunapunguza ugumu wa jumla, na kufanya SLM ziwe na ufanisi zaidi kwa matumizi ya kumbukumbu na mahitaji ya kompyuta. Licha ya uboreshaji huu, SLM bado inaweza kutekeleza majukumu mbalimbali ya usindikaji wa lugha asilia (NLP):
+
+- Uzalishaji wa Maandishi: Kuunda sentensi au aya zilizo na maana na zinazohusiana na muktadha.
+- Kukamilisha Maandishi: Kubashiri na kukamilisha sentensi kulingana na kauli ya kuanzia.
+- Tafsiri: Kubadilisha maandishi kutoka lugha moja hadi nyingine.
+- Muhtasari: Kupunguza vipande virefu vya maandishi kuwa muhtasari mfupi na rahisi kuelewa.
+
+Ingawa kwa baadhi ya upungufu wa utendaji au kina cha uelewa ikilinganishwa na wenzao wakubwa.
+
+## Mifano Midogo ya Lugha Hufanya Kazi Vipi?
+SLM hujifunza kutoka kwa kiasi kikubwa cha data ya maandishi. Wakati wa mafunzo, hujifunza mifumo na miundo ya lugha, na kuwawezesha kuzalisha maandishi yaliyo sahihi kimsamiati na yanayofaa muktadha. Mchakato wa mafunzo unahusisha:
+
+- Ukusanyaji wa Data: Kukusanya seti kubwa za data za maandishi kutoka vyanzo mbalimbali.
+- Uandeshaji Kabla ya Mafunzo: Kusafisha na kupanga data ili iweze kutumika kwa mafunzo.
+- Mafunzo: Kutumia algorithms za kujifunza mashine kufundisha mfano jinsi ya kuelewa na kuzalisha maandishi.
+- Uboreshaji wa Kabla ya Matumizi: Kurekebisha mfano ili kuboresha utendaji wake kwenye majukumu mahsusi.
+
+Maendeleo ya SLM yanaendana na ongezeko la hitaji la mifano inayoweza kutekelezwa katika mazingira yenye rasilimali finyu, kama vile vifaa vya mkononi au majukwaa ya edge computing, ambapo LLM kamili inaweza kuwa ngumu kwa sababu ya mahitaji makubwa ya rasilimali. Kwa kuzingatia ufanisi, SLM huleta uwiano kati ya utendaji na upatikanaji, kuruhusu matumizi mapana katika nyanja mbalimbali.
+
+![slm](../../../translated_images/sw/slm.4058842744d0444a.webp)
+
+## Malengo ya Kujifunza
+
+Katika somo hili, tunatarajia kuanzisha maarifa ya SLM na kuiyounganisha na Microsoft Phi-3 kujifunza hali tofauti katika maudhui ya maandishi, kuona na MoE.
+
+Mwisho wa somo hili, unapaswa kuwa na uwezo wa kujibu maswali yafuatayo:
+
+- SLM ni nini?
+- Tofauti kati ya SLM na LLM ni ipi?
+- Familia ya Microsoft Phi-3/3.5 ni nini?
+- Jinsi ya kufanya utabiri kwa familia ya Microsoft Phi-3/3.5?
+
+Tayari? Twende kazi.
+
+## Tofauti kati ya Mifano Mikubwa ya Lugha (LLMs) na Mifano Midogo ya Lugha (SLMs)
+
+LLM na SLM zote zinajengwa juu ya misingi ya kujifunza kwa mashine inayotegemea takwimu, zikifuata mbinu sawa katika usanifu wa miundo, mbinu za mafunzo, michakato ya uzalishaji data, na mbinu za tathmini ya mfano. Hata hivyo, kuna mambo kadhaa muhimu yanayotoza aina hizi mbili za mifano.
+
+## Matumizi ya Mifano Midogo ya Lugha
+
+SLM zina matumizi mengi, ikiwa ni pamoja na:
+
+- Chatbots: Kutoa msaada kwa wateja na kuwasiliana na watumiaji kwa mazungumzo.
+- Uundaji wa Maudhui: Kusaidia waandishi kwa kutoa mawazo au hata kuandika makala kamili.
+- Elimu: Kusaidia wanafunzi katika kazi za kuandika au kujifunza lugha mpya.
+- Ufikiaji: Kuunda zana kwa watu wenye ulemavu, kama mifumo ya sauti kutoka kwa maandishi.
+
+**Ukubwa**
+  
+Tofauti kuu kati ya LLM na SLM iko katika kiwango cha mifano. LLM, kama ChatGPT (GPT-4), zina takriban vigezo trilioni 1.76, wakati SLM za chanzo wazi kama Mistral 7B zimeundwa na vigezo vichache sana - takriban bilioni 7. Tofauti hii inatokana hasa na tofauti za usanifu wa mfano na michakato ya mafunzo. Kwa mfano, ChatGPT hutumia utaratibu wa kujizingatia ndani ya muundo wa encoder-decoder, wakati Mistral 7B hutumia utaratibu wa sliding window, unaowezesha mafunzo yenye ufanisi zaidi ndani ya mfano wa decoder pekee. Tofauti hii ya usanifu ina athari kubwa kwa ugumu na utendaji wa mifano hii.
+
+**Uelewa**
+
+SLM kawaida huundwa kwa kuzingatia utendaji katika nyanja za maalum, na kuifanya kuwa maalum sana lakini inaweza kuwa na ukomo katika uwezo wa kutoa uelewa mpana wa muktadha katika nyanja mbalimbali za maarifa. Kwa upande mwingine, LLM linalenga kuiga akili ya binadamu kwa kiwango mpana zaidi. LLM hulindwa kwa seti kubwa na mbalimbali za data, zikiwa na lengo la kufanya vyema katika nyanja mbalimbali, na kutoa utofauti na urekebishaji zaidi. Kwa hivyo, LLM ni bora kwa aina nyingi za majukumu za baada ya mafunzo, kama usindikaji wa lugha asilia na uhusiano.
+
+**Kompyuta**
+
+Mafunzo na uanzishaji wa LLM ni michakato inayotumia rasilimali nyingi, mara nyingi ikihitaji miundombinu kubwa ya kompyuta, ikiwa ni pamoja na vikundi vikubwa vya GPU. Kwa mfano, kufundisha mfano kama ChatGPT kutoka mwanzo kunaweza kuhitaji maelfu ya GPU kwa kipindi kirefu. Kinyume chake, SLM, ikiwa na vigezo vidogo, ina ufikiaji rahisi wa rasilimali za kompyuta. Mifano kama Mistral 7B inaweza kufundishwa na kutumika kwenye mashine za karibu zilizo na uwezo wa GPU wa wastani, ingawa mafundisho bado yanahitaji masaa kadhaa kwa GPU nyingi.
+
+**Mchoyo**
+
+Mchoyo ni tatizo linalojulikana katika LLM, hasa kutokana na asili ya data za mafunzo. Mifano hii mara nyingi hutegemea data mbichi, zinazopatikana wazi mtandaoni, ambazo zinaweza kutoelezea au kuelezea vibaya makundi fulani, kuleta lebo zisizo sahihi, au kuonyesha upendeleo wa lugha unaoathiriwa na lahaja, tofauti za kijiografia, na sheria za sarufi. Zaidi ya hayo, ugumu wa usanifu wa LLM unaweza kuongeza mchoyo usioonekana bila kurekebisha kwa umakini. Kwa upande mwingine, SLM, zinazofundishwa kwa seti za data maalum na zilizopunguzwa, kwa asili ni ngumu zaidi kwa upendeleo huo, ingawa si kinga kamili.
+
+**Utabiri**
+
+Ukubwa mdogo wa SLM unawawezesha kutumia utabiri kwa kasi kubwa, kuruhusu kuzalisha matokeo kwa ufanisi kwenye vifaa vya karibu bila hitaji la usindikaji mkubwa wa sambamba. Kinyume chake, LLM, kwa sababu ya ukubwa na ugumu wake, mara nyingi huhitaji rasilimali kubwa za kompyuta sambamba ili kufanikisha wakati mzuri wa utabiri. Uwepo wa watumiaji wengi sambamba huongeza zaidi ucheleweshaji wa majibu ya LLM, hasa wakati unapotumika kwa wingi.
+
+Kwa muhtasari, ingawa LLM na SLM zote zina msingi sawa katika kujifunza kwa mashine, zinatofautiana sana kwa ukubwa wa mfano, mahitaji ya rasilimali, uelewa wa muktadha, uwezekano wa upendeleo, na kasi ya utabiri. Tofauti hizi zinaonyesha ushawishi wao kwa matumizi tofauti, ambapo LLM ni pana zaidi lakini hutumia rasilimali nyingi, na SLM hutoa ufanisi maalum wa nyanja kwa mahitaji madogo ya kompyuta.
+
+***Kumbuka: Katika somo hili, tutaanzisha SLM kwa kutumia Microsoft Phi-3 / 3.5 kama mfano.***
+
+## Utambulisho wa Familia ya Phi-3 / Phi-3.5
+
+Familia ya Phi-3 / 3.5 inalenga hasa matukio ya matumizi ya maandishi, kuona, na Wakala (MoE):
+
+### Phi-3 / 3.5 Instruct
+
+Kuu kwa ajili ya uzalishaji wa maandishi, kukamilisha mazungumzo, na uchimbaji wa habari za maudhui, n.k.
+
+**Phi-3-mini**
+
+Mfano wa lugha wa 3.8B unapatikana kwenye Microsoft Foundry, Hugging Face, na Ollama. Mifano ya Phi-3 inazidi kwa kiasi cha dhahabu mifano ya lugha sawa na mikubwa kwenye vipimo muhimu (tazama nambari za vipimo hapa chini, nambari kubwa ni bora zaidi). Phi-3-mini huangusha mifano ya mara mbili ya ukubwa wake, wakati Phi-3-small na Phi-3-medium huangusha mifano mikubwa, ikiwemo GPT-3.5.
+
+**Phi-3-small & medium**
+
+Kwa vigezo 7B tu, Phi-3-small huangusha GPT-3.5T kwenye vipimo mbalimbali vya lugha, tafakari, uandishi wa programu, na hisabati.
+
+Phi-3-medium ikiwa na vigezo 14B inaendelea na mwelekeo huu na huangusha Gemini 1.0 Pro.
+
+**Phi-3.5-mini**
+
+Tunaweza kuiona kama sasisho la Phi-3-mini. Ingawa vigezo havijabadilika, inaongeza uwezo wa kusaidia lugha nyingi (inaunga mkono lugha 20+: Kiarabu, Kichina, Kicheki, Kidenmaki, Kiholanzi, Kiingereza, Kifikendi, Kifaransa, Kijerumani, Kiebrania, Kihungari, Kiitaliano, Kijapani, Kikorea, Kinorwe, Kipolandi, Kireno, Kirusi, Kihispania, Kiswidi, Kithai, Kituruki, Kiukraine) na kuongeza msaada madhubuti kwa muktadha mrefu.
+
+Phi-3.5-mini ikiwa na vigezo 3.8B huangusha mifano ya ukubwa sawa na ni sawa na mifano ya mara mbili ya ukubwa wake.
+
+### Phi-3 / 3.5 Vision
+
+Tunaweza kuona mfano wa Instruct wa Phi-3/3.5 kama uwezo wa Phi kuelewa, na Vision ndiyo inayompa Phi macho ya kuelewa dunia.
+
+
+**Phi-3-Vision**
+
+Phi-3-vision, ikiwa na vigezo 4.2B tu, inaendelea mwelekeo huu na huangusha mifano mikubwa kama Claude-3 Haiku na Gemini 1.0 Pro V kwenye majukumu ya jumla ya tafakari ya kuona, OCR, na kuelewa meza na michoro.
+
+
+**Phi-3.5-Vision**
+
+Phi-3.5-Vision pia ni sasisho la Phi-3-Vision, likiongeza msaada kwa picha nyingi. Unaweza kuiona kama uboreshaji wa kuona, si tu unaona picha, bali pia video.
+
+Phi-3.5-vision huangusha mifano mikubwa kama Claude-3.5 Sonnet na Gemini 1.5 Flash katika majukumu ya OCR, kuelewa meza na grafu na ni sawa katika majukumu ya jumla ya maarifa ya kuona. Ina msaada wa pembejeo za fremu nyingi, yaani, kutekeleza tafakari kwenye picha nyingi za pembejeo
+
+
+### Phi-3.5-MoE
+
+***Muunganiko wa Wataalamu (MoE)*** unatumika kuwapa mifano mafunzo ya awali kwa matumizi kidogo ya kompyuta, ambayo inamaanisha unaweza kuongeza ukubwa wa mfano au seti ya data kwa bajeti sawa ya utendaji kama mfano mzito. Hasa, mfano wa MoE unapaswa kufikia ubora sawa na mfano mzito kwa kasi zaidi wakati wa mafunzo ya awali.
+
+Phi-3.5-MoE ina moduli 16 za wataalamu wa 3.8B kila moja. Phi-3.5-MoE ikiwa na vigezo 6.6B tu vinavyoendeshwa huleta kiwango sawa cha tafakari, uelewa wa lugha, na hisabati kama mifano mikubwa zaidi.
+
+Tunaweza kutumia mfano wa Familia ya Phi-3/3.5 kulingana na hali tofauti. Tofauti na LLM, unaweza kutumia Phi-3/3.5-mini au Phi-3/3.5-Vision kwenye vifaa vya edge.
+
+
+## Jinsi ya kutumia mifano ya Familia ya Phi-3/3.5
+
+Tunatarajia kutumia Phi-3/3.5 katika hali mbalimbali. Ifuatayo, tutatumia Phi-3/3.5 kulingana na hali tofauti.
+
+![phi3](../../../translated_images/sw/phi3.655208c3186ae381.webp)
+
+### Utabiri kupitia APIs za Wingu
+
+**Mifano ya Microsoft Foundry**
+
+> **Kumbuka:** Mifano ya GitHub itafutwa mwishoni mwa Julai 2026. [Mifano ya Microsoft Foundry](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) ni mbadala wa moja kwa moja.
+
+Mifano ya Microsoft Foundry ni njia ya moja kwa moja kabisa. Unaweza kupata haraka mfano wa Phi-3/3.5-Instruct kupitia kumbukumbu ya modeli ya Foundry. Ikiwa umeunganishwa na Azure AI Inference SDK / OpenAI SDK, unaweza kufikia API kupitia msimbo kukamilisha simu ya Phi-3/3.5-Instruct. Pia unaweza kujaribu athari mbalimbali kupitia Playground.
+
+- Onyesho: Ulinganisho wa athari za Phi-3-mini na Phi-3.5-mini katika muktadha wa Kichina
+
+![phi3](../../../translated_images/sw/gh1.126c6139713b622b.webp)
+
+![phi35](../../../translated_images/sw/gh2.07d7985af66f178d.webp)
+
+
+**Microsoft Foundry**
+
+Au kama tunataka kutumia mifano ya vision na MoE, unaweza kutumia Microsoft Foundry kukamilisha simu. Ikiwa una nia, unaweza kusoma Kitabu cha Mapishi cha Phi-3 kujifunza jinsi ya kuita Phi-3/3.5 Instruct, Vision, MoE kupitia Microsoft Foundry [Bofya kiungo hiki](https://github.com/microsoft/Phi-3CookBook/blob/main/md/02.QuickStart/AzureAIStudio_QuickStart.md?WT.mc_id=academic-105485-koreyst)
+
+
+**NVIDIA NIM**
+
+Mbali na orodha ya Mifano ya Microsoft Foundry iliyoko kwenye wingu, unaweza pia kutumia [NVIDIA NIM](https://developer.nvidia.com/nim?WT.mc_id=academic-105485-koreyst) kukamilisha simu zinazohusiana. Unaweza kutembelea NVIDIA NIM kukamilisha simu za API za Familia ya Phi-3/3.5. NVIDIA NIM (NVIDIA Inference Microservices) ni seti ya microservices za utabiri zilizowekwa kasi kusaidia waendelezaji kuanzisha mifano ya AI kwa ufanisi katika mazingira mbalimbali, ikiwa ni pamoja na wingu, vituo vya data, na vituo vya kazi.
+
+Hapa kuna sifa kuu za NVIDIA NIM:
+
+- **Urahisi wa Uanzishaji:** NIM huruhusu uanzishwaji wa mifano ya AI kwa amri moja, na kufanya iwe rahisi kuingizwa katika mtiririko wa kazi uliopo.
+
+- **Utendaji Uboreshwa:** Inatumia injini za undani zilizoboresha tayari za NVIDIA, kama TensorRT na TensorRT-LLM, kuhakikisha ucheleweshaji mdogo na throughput ya juu.
+- **Uwezo wa Kuongezeka:** NIM inaunga mkono autoscaling kwenye Kubernetes, ikiruhusu kushughulikia mizigo tofauti ya kazi kwa ufanisi.
+- **Usalama na Udhibiti:** Mashirika yanaweza kudhibiti data na programu zao kwa mwenyeji wa huduma za microservices za NIM kwenye miundombinu yao yenye usimamizi.
+- **API za Kiwango cha Sekta:** NIM hutoa API za kiwango cha sekta, kufanya iwe rahisi kujenga na kuunganisha programu za AI kama chatbots, wasaidizi wa AI, na zaidi.
+
+NIM ni sehemu ya NVIDIA AI Enterprise, inayolenga kurahisisha usambazaji na uendeshaji wa mifano ya AI, kuhakikisha zinaendesha kwa ufanisi kwenye GPUs za NVIDIA.
+
+- Onyesho: Kutumia NVIDIA NIM kupigia Phi-3.5-Vision-API [[Bonyeza kiungo hiki](./python/Phi-3-Vision-Nividia-NIM.ipynb?WT.mc_id=academic-105485-koreyst)]
+
+
+### Kuendesha Phi-3/3.5 Kwenye Kifaa Chako
+Undani kuhusiana na Phi-3, au mfano wowote wa lugha kama GPT-3, unamaanisha mchakato wa kuunda majibu au makadirio kulingana na ingizo linalopokelewa. Unapompa Phi-3 kauli au swali, hutumia mtandao wake wa neva uliofunzwa kubaini jibu lililo na uwezekano mkubwa na linalohusiana kwa kuchambua mifumo na uhusiano kwenye data iliyoandaliwa.
+
+**Hugging Face Transformer**
+Hugging Face Transformers ni maktaba yenye nguvu iliyoundwa kwa ajili ya usindikaji wa lugha asilia (NLP) na kazi nyingine za mashine ya kujifunza. Hapa kuna mambo muhimu kuhusu hiyo:
+
+1. **Modeli Zilizofunzwa Awali**: Inatoa maelfu ya modeli zilizofunzwa awali zinazotumika kwa kazi mbalimbali kama uainishaji wa maandishi, utambuzi wa majina ya vitu, majibu ya maswali, muhtasari, tafsiri, na utengenezaji wa maandishi.
+
+2. **Ushirikiano wa Mfumo:** Maktaba inasaidia mifumo mingi ya kujifunza kwa kina, ikiwa ni pamoja na PyTorch, TensorFlow, na JAX. Hii inakuwezesha kufunza mfano katika mfumo mmoja na kuutumia katika mwingine.
+
+3. **Uwezo wa Multimodal:** Mbali na NLP, Hugging Face Transformers pia inaunga mkono kazi katika kuona kwa kompyuta (mfano, uainishaji wa picha, utambuzi wa vitu) na usindikaji wa sauti (mfano, utambuzi wa hotuba, uainishaji wa sauti).
+
+4. **Urahisi wa Matumizi:** Maktaba hutoa API na zana za kupakua na kurekebisha modeli kwa urahisi, kufanya iweze kutumiwa na wanaoanza na wataalamu.
+
+5. **Jumuiya na Rasilimali:** Hugging Face ina jumuiya hai na nyaraka nyingi, mafunzo, na miongozo kusaidia watumiaji kuanza na kutumia maktaba kwa ufanisi.
+[nyaraka rasmi](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) au [ghala lao la GitHub](https://github.com/huggingface/transformers?WT.mc_id=academic-105485-koreyst).
+
+Hii ndiyo njia inayotumika zaidi, lakini pia inahitaji kuongezewa nguvu na GPU. Mwisho wa siku, hali kama Vision na MoE zinahitaji mahesabu mengi, ambayo yatafanya kuwa polepole sana kwenye CPU ikiwa hazitakuwa zimepimwa.
+
+
+- Onyesho: Kutumia Transformer kupigia Phi-3.5-Instruct [Bonyeza kiungo hiki](./python/phi35-instruct-demo.ipynb?WT.mc_id=academic-105485-koreyst)
+
+- Onyesho: Kutumia Transformer kupigia Phi-3.5-Vision [Bonyeza kiungo hiki](./python/phi35-vision-demo.ipynb?WT.mc_id=academic-105485-koreyst)
+
+- Onyesho: Kutumia Transformer kupigia Phi-3.5-MoE [Bonyeza kiungo hiki](./python/phi35_moe_demo.ipynb?WT.mc_id=academic-105485-koreyst)
+
+**Ollama**
+[Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst) ni jukwaa lililoundwa kurahisisha kuendesha mifano mikubwa ya lugha (LLMs) kwa karibu kwenye mashine yako. Inaunga mkono modeli mbalimbali kama Llama 3.1, Phi 3, Mistral, na Gemma 2, miongoni mwa zingine. Jukwaa linarahisisha mchakato kwa kuunganisha uzito wa modeli, usanidi, na data katika kifurushi kimoja, kufanya iwe ya kirahisi kwa watumiaji kubinafsisha na kuunda modeli zao. Ollama inapatikana kwa macOS, Linux, na Windows. Ni chombo kizuri ikiwa unatafuta kujaribu au kupeleka LLM bila kutegemea huduma za wingu. Ollama ni njia ya moja kwa moja, unahitaji tu kutekeleza amri ifuatayo.
+
+
+```bash
 
 ollama run phi3.5
 
-``` **ONNX Runtime for GenAI** [ONNX Runtime](https://github.com/microsoft/onnxruntime-genai?WT.mc_id=academic-105485-koreyst) ni kiendeshi cha mashine-jifunzaji cha kuvuka jukwaa kwa inference na mafunzo. ONNX Runtime for Generative AI (GENAI) ni zana yenye nguvu inayokusaidia kuendesha modeli za AI za kizazi kwa ufanisi katika majukwaa mbalimbali. ## ONNX Runtime ni nini? ONNX Runtime ni mradi wa chanzo wazi unaowezesha inference ya utendaji wa juu wa modeli za mashine-jifunzaji. Inasaidia modeli katika muundo wa Open Neural Network Exchange (ONNX), ambayo ni kiwango cha kuwakilisha modeli za mashine-jifunzaji.ONNX Runtime inference inaweza kuwezesha uzoefu wa haraka wa wateja na gharama za chini, kuunga mkono modeli kutoka mifumo ya kujifunza kwa kina kama PyTorch na TensorFlow/Keras pamoja na maktaba za mashine-jifunzaji za jadi kama scikit-learn, LightGBM, XGBoost, nk. ONNX Runtime inaendana na vifaa tofauti, madereva, na mifumo ya uendeshaji, na hutoa utendaji bora kwa kutumia viendeshi vya vifaa ambapo inafaa pamoja na uboreshaji wa grafu na ubadilishaji ## AI ya Kizazi ni nini? AI ya kizazi inahusu mifumo ya AI inayoweza kuzalisha maudhui mapya, kama maandishi, picha, au muziki, kulingana na data ambayo wamefundishwa nayo. Mifano ni pamoja na modeli za lugha kama GPT-3 na modeli za kizazi cha picha kama Stable Diffusion. Maktaba ya ONNX Runtime for GenAI inatoa mzunguko wa AI ya kizazi kwa modeli za ONNX, ikiwa ni pamoja na inference na ONNX Runtime, usindikaji wa logits, utafutaji na sampuli, na usimamizi wa cache ya KV. ## ONNX Runtime for GENAI ONNX Runtime for GENAI inaongeza uwezo wa ONNX Runtime kuunga mkono modeli za AI za kizazi. Hapa kuna baadhi ya vipengele muhimu: - **Uungaji Mkono Mpana wa Jukwaa:** Inafanya kazi katika majukwaa mbalimbali, ikiwa ni pamoja na Windows, Linux, macOS, Android, na iOS. - **Uungaji Mkono wa Modeli:** Inasaidia modeli nyingi maarufu za AI za kizazi, kama LLaMA, GPT-Neo, BLOOM, na zaidi. - **Uboreshaji wa Utendaji:** Inajumuisha uboreshaji kwa viendeshi vya vifaa tofauti kama GPU za NVIDIA, GPU za AMD, na zaidi. - **Urahisi wa Kutumia:** Inatoa API kwa urahisi wa kuunganisha katika programu, ikiruhusu kuzalisha maandishi, picha, na maudhui mengine kwa kodi ndogo - Watumiaji wanaweza kuita njia ya kiwango cha juu ya generate(), au kuendesha kila iteration ya modeli katika mzunguko, kuzalisha tokeni moja kwa wakati, na kwa hiari kusasisha vigezo vya kizazi ndani ya mzunguko. - ONNX runtime pia ina uungaji mkono kwa utafutaji wa haraka/boriti na sampuli za TopP, TopK ili kuzalisha mlolongo wa tokeni na usindikaji wa logits uliojengwa ndani kama adhabu za kurudia. Unaweza pia kuongeza alama za kawaida kwa urahisi. ## Kuanza Ili kuanza na ONNX Runtime for GENAI, unaweza kufuata hatua hizi: ### Sakinisha ONNX Runtime: ```Python
+```
+
+**Foundry Local**
+
+[Foundry Local](https://foundrylocal.ai?WT.mc_id=academic-105485-koreyst) ni mazingira ya Microsoft yanayotumika kando, kwenye kifaa, kwa kuendesha modeli kama Phi kabisa kwenye vifaa vyako - hakuna usajili wa Azure, funguo za API, au muunganisho wa mtandao unaohitajika. Inachagua kimsingi mtoaji bora wa utekelezaji (NPU, GPU, au CPU) na inatoa kiunganishi kinachotegemea OpenAI, hivyo msimbo wa SDK wa `openai`/Azure AI Inference unaweza kuelekezwa kwake kwa mabadiliko madogo. Angalia [nyaraka za Foundry Local](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-local/get-started?WT.mc_id=academic-105485-koreyst) kuanza.
+
+```bash
+
+winget install Microsoft.FoundryLocal
+foundry model run phi-3.5-mini
+
+```
+
+Au tumia SDK moja kwa moja katika Python:
+
+```bash
+
+pip install foundry-local-sdk
+
+```
+
+```python
+
+from foundry_local import FoundryLocalManager
+
+manager = FoundryLocalManager("phi-3.5-mini")
+print(manager.endpoint, manager.api_key)
+
+```
+
+**ONNX Runtime kwa GenAI**
+
+[ONNX Runtime](https://github.com/microsoft/onnxruntime-genai?WT.mc_id=academic-105485-koreyst) ni kiendeshi cha mashine ya kujifunza kikazi cha kuendesha na kufunza kinachotumika tofauti sana katika mifumo mingi. ONNX Runtime kwa Generative AI (GENAI) ni chombo chenye nguvu kinachokusaidia kuendesha mifano ya AI ya kizazi kwa ufanisi kwenye majukwaa mbalimbali.
+
+## ONNX Runtime ni Nini?
+ONNX Runtime ni mradi wa chanzo huria unaowezesha undani wa utendaji wa juu wa mifano ya mashine ya kujifunza. Inasaidia modeli katika muundo wa Open Neural Network Exchange (ONNX), ambao ni kiwango cha kuwakilisha mifano ya mashine ya kujifunza. ONNX Runtime inaweza kuwezesha uzoefu wa wateja wa haraka na gharama za chini, ikiunga mkono modeli kutoka kwa mifumo ya ujifunzaji wa kina kama PyTorch na TensorFlow/Keras pamoja na maktaba za jadi za mashine ya kujifunza kama scikit-learn, LightGBM, XGBoost, n.k. ONNX Runtime inalingana na vifaa tofauti, madereva, na mifumo ya uendeshaji, na hutoa utendaji bora kwa kutumia vijiti vya kasi vya vifaa pale inapowezekana sambamba na uboreshaji wa grafu na mabadiliko.
+
+## Je, Generative AI ni Nini?
+Generative AI inahusu mifumo ya AI inayoweza kuunda maudhui mapya, kama maandishi, picha, au muziki, kulingana na data walizofunzwa nayo. Mifano ni pamoja na modeli za lugha kama GPT-3 na modeli za uundaji picha kama Stable Diffusion. Maktaba ya ONNX Runtime kwa GenAI hutoa mzunguko wa AI wa kizazi kwa modeli za ONNX, ikiwa ni pamoja na undani kwa ONNX Runtime, usindikaji wa logits, utafutaji na sampuli, na usimamizi wa KV cache.
+
+## ONNX Runtime kwa GENAI
+ONNX Runtime kwa GENAI inaongeza uwezo wa ONNX Runtime kusaidia mifano ya generative AI. Hapa kuna baadhi ya vipengele muhimu:
+
+- **Unga Mkono Katika Majukwaa Mbalimbali:** Inafanya kazi kwenye majukwaa mbalimbali, ikiwa ni pamoja na Windows, Linux, macOS, Android, na iOS.
+- **Msaada wa Modeli:** Inaunga mkono modeli nyingi maarufu za AI ya kizazi, kama LLaMA, GPT-Neo, BLOOM, na nyingine nyingi.
+- **Uboreshaji wa Utendaji:** Inajumuisha maboresho kwa vijiti vya kasi vya vifaa kama GPUs za NVIDIA, GPUs za AMD, na zaidi2.
+- **Urahisi wa Matumizi:** Inatoa API kwa urahisi wa kuingiza katika programu, ikikuwezesha kuunda maandishi, picha, na maudhui mengine kwa msimbo mdogo.
+- Watumiaji wanaweza kupiga wito wa njia ya generate() ya kiwango cha juu, au kuendesha kila mzunguko wa mfano katika mzunguko, kuzalisha tokeni moja kwa wakati, na ikiwa wanataka kusasisha vigezo vya uzalishaji ndani ya mzunguko.
+- ONNX runtime pia ina msaada wa utafutaji wa kikundi / beam na sampuli za TopP, TopK kuzalisha mfuatano wa tokeni na usindikaji wa logits wa ndani kama adhabu za kurudia. Pia unaweza kuongeza alama za kawaida kwa urahisi.
+
+## Kuanzia
+Ili kuanza na ONNX Runtime kwa GENAI, unaweza kufuata hatua hizi:
+
+### Sakinisha ONNX Runtime:
+```Python
 pip install onnxruntime
-``` ### Sakinisha Vipanuzi vya AI ya Kizazi: ```Python
+```
+### Sakinisha Mwisho wa Generative AI:
+```Python
 pip install onnxruntime-genai
-``` ### Endesha Modeli: Hapa kuna mfano rahisi katika Python: ```Python
+```
+
+### Endesha Mfano: Huu ni mfano rahisi katika Python:
+```Python
 import onnxruntime_genai as og
 
 model = og.Model('path_to_your_model.onnx')
@@ -32,7 +283,11 @@ output_tokens = model.generate(input_tokens)
 output_text = tokenizer.decode(output_tokens)
 
 print(output_text) 
-``` ### Demo:Kutumia ONNX Runtime GenAI kuita Phi-3.5-Vision ```python
+```
+### Onyesho: Kutumia ONNX Runtime GenAI kupigia Phi-3.5-Vision
+
+
+```python
 
 import onnxruntime_genai as og
 
@@ -76,11 +331,25 @@ while not generator.is_done():
 
     new_token = generator.get_next_tokens()[0]
     
-    code += tokenizer_stream.decode(new_token)
+    output = tokenizer_stream.decode(new_token)
     
     print(tokenizer_stream.decode(new_token), end='', flush=True)
 
-``` **Wengine** Mbali na mbinu za rejea za ONNX Runtime na Ollama, tunaweza pia kukamilisha rejea ya modeli za upimaji kulingana na mbinu za rejea za modeli zinazotolewa na watengenezaji tofauti. Kama mfumo wa Apple MLX na Apple Metal, Qualcomm QNN na NPU, Intel OpenVINO na CPU/GPU, nk. Unaweza pia kupata maudhui zaidi kutoka [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst) ## Zaidi Tumeelewa misingi ya Familia ya Phi-3/3.5, lakini ili kujifunza zaidi kuhusu SLM tunahitaji maarifa zaidi. Unaweza kupata majibu katika Phi-3 Cookbook. Ikiwa unataka kujifunza zaidi, tafadhali tembelea [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst).
+```
 
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upotovu. Hati ya awali katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+
+**Mengineyo**
+
+Mbali na ONNX Runtime, Ollama, na mbinu za rejea za Foundry Local, tunaweza pia kukamilisha rejea za modeli za kiasi kulingana na mbinu za rejea za modeli zinazotolewa na wazalishaji tofauti. Kama mfuko wa Apple MLX pamoja na Apple Metal, Qualcomm QNN na NPU, Intel OpenVINO na CPU/GPU, n.k. Unaweza pia kupata maudhui zaidi kutoka [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst)
+
+
+## Zaidi
+
+Tumeelewa misingi ya Familia ya Phi-3/3.5, lakini kujifunza zaidi kuhusu SLM tunahitaji maarifa zaidi. Unaweza kupata majibu katika Phi-3 Cookbook. Ikiwa unataka kujifunza zaidi, tafadhali tembelea [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst).
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

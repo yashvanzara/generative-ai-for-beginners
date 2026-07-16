@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "11f03c81f190d9cbafd0f977dcbede6c",
-  "translation_date": "2025-05-20T07:06:26+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "en"
-}
--->
-[![Open Source Models](../../../translated_images/17-lesson-banner.85938ffe06e157e1dfc9ae2fcf0de326892e71c463f62b397291ad54bd8e9602.en.png)](https://aka.ms/gen-ai-lesson17-gh?WT.mc_id=academic-105485-koreyst)
+[![Open Source Models](../../../translated_images/en/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## Introduction
 
@@ -33,7 +24,7 @@ AI Agents are a very exciting field in the world of Generative AI. With this exc
 
 AI Agents allow Large Language Models (LLMs) to perform tasks by giving them access to a **state** and **tools**.
 
-![Agent Model](../../../translated_images/what-agent.61a7315e4b722e06561f6c93e682a51357308b53884f00af289b5a81e3e65242.en.png)
+![Agent Model](../../../translated_images/en/what-agent.21f2893bdfd01e6a.webp)
 
 Let's define these terms:
 
@@ -53,7 +44,7 @@ To manage the **state** , it uses a built-in function called the `AgentExecutor`
 
 The `Agent Executor` also stores the chat history to provide the context of the chat.
 
-![Langchain Agents](../../../translated_images/langchain-agents.4709b559c14be8903a59abf4ebef43916a23fac43924b133a7552121ff5e6730.en.png)
+![Langchain Agents](../../../translated_images/en/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChain offers a [catalog of tools](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) that can be imported into your application in which the LLM can get access to. These are made by the community and by the LangChain team.
 
@@ -85,7 +76,7 @@ To change and manage state, an assistant Agent generates Python code to complete
 
 Here is an example of the process:
 
-![AutoGen](../../../translated_images/autogen.8ac57409019150ec5a17c6381a92863116b19acce02604b4bf5681225dee62eb.en.png)
+![AutoGen](../../../translated_images/en/autogen.dee9a25a45fde584.webp)
 
 #### LLM Defined with a System Message
 
@@ -129,7 +120,7 @@ To manage the state of the conversation, TaskWeaver uses the concept of a `Plann
 
 To complete the tasks the `Planner` is exposed to the collection of tools called `Plugins`. This can be Python classes or a general code interpreter. This plugins are stored as embeddings so that the LLM can better search for the correct plugin.
 
-![Taskweaver](../../../translated_images/taskweaver.c0997002a3df51572f6cad019c41202b7c2110cbfcccc4af2e5d6a0ace4b4545.en.png)
+![Taskweaver](../../../translated_images/en/taskweaver.da8559999267715a.webp)
 
 Here is an example of a plugin to handle anomaly detection:
 
@@ -141,9 +132,9 @@ The code is verified before executing. Another feature to manage context in Task
 
 ## JARVIS
 
-The last agent framework we will explore is [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). What makes JARVIS unique is that it uses an LLM to manage the `state` of the conversation and the `tools`are other AI models. Each of the AI models are specialized models that perform certain tasks such as object detection, transcription or image captioning.
+The last agent framework we will explore is [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file&WT.mc_id=academic-105485-koreyst). What makes JARVIS unique is that it uses an LLM to manage the `state` of the conversation and the `tools`are other AI models. Each of the AI models are specialized models that perform certain tasks such as object detection, transcription or image captioning.
 
-![JARVIS](../../../translated_images/jarvis.d41d7c4c81bf015bd7ced7f1108abdec56b312472aaf3f63b5b0e82a5f4fb395.en.png)
+![JARVIS](../../../translated_images/en/jarvis.762ddbadbd1a3a33.webp)
 
 The LLM, being a general purpose model, receives the request from the user and identifies the specific task and any arguments/data that is needed to complete the task.
 
@@ -169,5 +160,9 @@ To continue your learning of AI Agents you can build with AutoGen:
 
 After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
 
-**Disclaimer**:  
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

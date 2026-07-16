@@ -1,181 +1,197 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e2f686f2eb794941761252ac5e8e090b",
-  "translation_date": "2025-05-19T14:14:48+00:00",
-  "source_file": "02-exploring-and-comparing-different-llms/README.md",
-  "language_code": "ms"
-}
--->
-# Meneroka dan Membandingkan Pelbagai LLM
+# Meneroka dan membandingkan pelbagai LLM
 
-> _Klik gambar di atas untuk menonton video pelajaran ini_
+[![Meneroka dan membandingkan pelbagai LLM](../../../translated_images/ms/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
 
-Dalam pelajaran sebelumnya, kita telah melihat bagaimana AI Generatif mengubah landskap teknologi, bagaimana Model Bahasa Besar (LLMs) berfungsi dan bagaimana sebuah perniagaan - seperti syarikat permulaan kita - dapat menggunakannya untuk kes penggunaan mereka dan berkembang! Dalam bab ini, kita akan membandingkan dan membezakan pelbagai jenis model bahasa besar (LLMs) untuk memahami kelebihan dan kekurangan mereka.
+> _Klik imej di atas untuk menonton video pelajaran ini_
 
-Langkah seterusnya dalam perjalanan syarikat permulaan kita adalah meneroka landskap semasa LLMs dan memahami mana yang sesuai untuk kes penggunaan kita.
+Dengan pelajaran sebelumnya, kita telah melihat bagaimana AI Generatif mengubah landskap teknologi, bagaimana Model Bahasa Besar (LLM) berfungsi dan bagaimana perniagaan - seperti permulaan kami - boleh menggunakannya untuk kes penggunaan mereka dan berkembang! Dalam bab ini, kami ingin membanding dan membezakan pelbagai jenis model bahasa besar (LLM) untuk memahami kelebihan dan kekurangannya.
+
+Langkah seterusnya dalam perjalanan permulaan kami adalah meneroka landskap semasa LLM dan memahami yang mana sesuai untuk kes penggunaan kami.
 
 ## Pengenalan
 
 Pelajaran ini akan merangkumi:
 
-- Pelbagai jenis LLMs dalam landskap semasa.
-- Ujian, iterasi, dan perbandingan model yang berbeza untuk kes penggunaan anda di Azure.
-- Bagaimana untuk melancarkan LLM.
+- Pelbagai jenis LLM dalam landskap semasa.
+- Ujian, iterasi, dan perbandingan model berbeza untuk kes penggunaan anda di Azure.
+- Cara menggunakan LLM.
 
 ## Matlamat Pembelajaran
 
-Selepas menyelesaikan pelajaran ini, anda akan dapat:
+Setelah menyelesaikan pelajaran ini, anda akan dapat:
 
 - Memilih model yang tepat untuk kes penggunaan anda.
-- Memahami cara menguji, mengulangi, dan meningkatkan prestasi model anda.
-- Mengetahui bagaimana perniagaan melancarkan model.
+- Memahami cara menguji, mengulangi, dan memperbaiki prestasi model anda.
+- Mengetahui bagaimana perniagaan menggunakan model.
 
-## Memahami Pelbagai Jenis LLMs
+## Fahami pelbagai jenis LLM
 
-LLMs boleh mempunyai pelbagai pengkategorian berdasarkan seni bina, data latihan, dan kes penggunaan mereka. Memahami perbezaan ini akan membantu syarikat permulaan kita memilih model yang tepat untuk senario, dan memahami cara menguji, mengulangi, dan meningkatkan prestasi.
+LLM boleh mempunyai pelbagai pengkelasan berdasarkan seni bina, data latihan, dan kes penggunaan mereka. Memahami perbezaan ini akan membantu permulaan kami memilih model yang sesuai untuk senario, dan memahami cara menguji, mengulangi, dan memperbaiki prestasi.
 
-Terdapat banyak jenis model LLM yang berbeza, pilihan anda bergantung pada apa yang anda ingin gunakan, data anda, berapa banyak yang anda sanggup bayar dan banyak lagi.
+Terdapat banyak jenis model LLM yang berbeza, pilihan model anda bergantung pada apa yang anda mahu gunakan, data anda, berapa banyak anda sedia bayar dan lain-lain.
 
-Bergantung pada jika anda ingin menggunakan model untuk teks, audio, video, penjanaan imej dan sebagainya, anda mungkin memilih jenis model yang berbeza.
+Bergantung pada sama ada anda mahu menggunakan model untuk teks, audio, video, penjanaan imej dan sebagainya, anda mungkin memilih jenis model yang berbeza.
 
-- **Pengiktirafan audio dan pertuturan**. Untuk tujuan ini, model jenis Whisper adalah pilihan yang hebat kerana ia adalah serba guna dan ditujukan kepada pengiktirafan pertuturan. Ia dilatih pada audio yang pelbagai dan dapat melakukan pengiktirafan pertuturan pelbagai bahasa. Ketahui lebih lanjut mengenai [model jenis Whisper di sini](https://platform.openai.com/docs/models/whisper?WT.mc_id=academic-105485-koreyst).
+- **Pengecaman audio dan pertuturan**. Model gaya Whisper masih berguna sebagai model pengecaman pertuturan tujuan umum, tetapi pilihan pengeluaran kini juga merangkumi model pertuturan-ke-teks yang lebih baru seperti `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, dan varian diarization. Nilai liputan bahasa, diarization, sokongan masa nyata, kelewatan, dan kos untuk senario anda. Ketahui lebih lanjut dalam [dokumentasi pertuturan-ke-teks OpenAI](https://platform.openai.com/docs/guides/speech-to-text?WT.mc_id=academic-105485-koreyst).
 
-- **Penjanaan imej**. Untuk penjanaan imej, DALL-E dan Midjourney adalah dua pilihan yang sangat terkenal. DALL-E ditawarkan oleh Azure OpenAI. [Baca lebih lanjut mengenai DALL-E di sini](https://platform.openai.com/docs/models/dall-e?WT.mc_id=academic-105485-koreyst) dan juga dalam Bab 9 kurikulum ini.
+- **Penjanaan imej**. DALL-E dan Midjourney adalah pilihan penjanaan imej yang terkenal, tetapi API imej OpenAI semasa tertumpu pada model GPT Image seperti `gpt-image-2`, sementara Stable Diffusion, Imagen, Flux, dan keluarga model lain juga adalah pilihan biasa. Bandingkan pengikut arahan (prompt adherence), sokongan penyuntingan, kawalan gaya, keperluan keselamatan, dan pelesenan. Ketahui lebih lanjut dalam [panduan penjanaan imej OpenAI](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst) dan Bab 9 kurikulum ini.
 
-- **Penjanaan teks**. Kebanyakan model dilatih pada penjanaan teks dan anda mempunyai pelbagai pilihan dari GPT-3.5 hingga GPT-4. Mereka datang dengan kos yang berbeza dengan GPT-4 menjadi yang paling mahal. Ia berbaloi untuk melihat [Azure OpenAI playground](https://oai.azure.com/portal/playground?WT.mc_id=academic-105485-koreyst) untuk menilai model mana yang paling sesuai dengan keperluan anda dari segi kemampuan dan kos.
+- **Penjanaan teks**. Model teks kini merangkumi model frontier, model penalaran, model kecil berlatensi rendah, dan model berat terbuka. Contoh semasa termasuk model OpenAI GPT-5.x, model Anthropic Claude 4.x, model Google Gemini 3.x, model Meta Llama 4, dan model Mistral. Jangan pilih hanya berdasarkan tarikh keluaran atau harga; bandingkan kualiti tugas, kelewatan, tingkap konteks, penggunaan alat, kelakuan keselamatan, ketersediaan serantau, dan kos keseluruhan. [Katalog model Microsoft Foundry](https://ai.azure.com/catalog?WT.mc_id=academic-105485-koreyst) adalah tempat yang baik untuk membanding model yang tersedia di Azure.
 
-- **Multi-modality**. Jika anda ingin menangani pelbagai jenis data dalam input dan output, anda mungkin ingin melihat model seperti [gpt-4 turbo dengan penglihatan atau gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models?WT.mc_id=academic-105485-koreyst) - keluaran terbaru model OpenAI - yang mampu menggabungkan pemprosesan bahasa semula jadi dengan pemahaman visual, membolehkan interaksi melalui antara muka multi-modal.
+- **Multi-modality**. Ramai model semasa boleh memproses lebih daripada teks. Sesetengah menerima input imej, audio, atau video; ada yang boleh memanggil alat; dan model khusus boleh menjana imej, audio, atau video. Contohnya, model OpenAI semasa menyokong input teks dan imej, model Gemini boleh menyokong input teks, kod, imej, audio, dan video bergantung pada varian, dan Llama 4 Scout dan Maverick adalah model berat terbuka yang secara asli multimodal. Sentiasa periksa setiap kad model untuk modul input dan output yang disokong sebelum membina aliran kerja di sekelilingnya.
 
-Memilih model bermakna anda mendapat beberapa kemampuan asas, yang mungkin tidak mencukupi. Seringkali anda mempunyai data khusus syarikat yang perlu anda beritahu LLM tentang. Terdapat beberapa pilihan berbeza tentang cara mendekatinya, lebih lanjut mengenai itu dalam bahagian seterusnya.
+Memilih model bermaksud anda mendapat beberapa keupayaan asas, yang mungkin tidak mencukupi. Selalunya anda mempunyai data khusus syarikat yang anda perlu beritahu LLM dengan cara tertentu. Terdapat beberapa pilihan berbeza tentang cara mendekati hal itu, lebih lanjut mengenai itu dalam bahagian berikut.
 
-### Model Asas berbanding LLMs
+### Model Asas berbanding LLM
 
-Istilah Model Asas telah [dicipta oleh penyelidik Stanford](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst) dan ditakrifkan sebagai model AI yang mengikuti beberapa kriteria, seperti:
+Istilah Model Asas telah [dibuat oleh penyelidik Stanford](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst) dan didefinisikan sebagai model AI yang memenuhi beberapa kriteria, seperti:
 
-- **Mereka dilatih menggunakan pembelajaran tanpa penyeliaan atau pembelajaran kendiri**, bermakna mereka dilatih pada data multi-modal tanpa label, dan mereka tidak memerlukan anotasi manusia atau pelabelan data untuk proses latihan mereka.
-- **Mereka adalah model yang sangat besar**, berdasarkan rangkaian neural yang sangat dalam dilatih pada berbilion parameter.
-- **Mereka biasanya bertujuan untuk berfungsi sebagai 'asas' untuk model lain**, bermakna mereka boleh digunakan sebagai titik permulaan untuk model lain dibina di atasnya, yang boleh dilakukan dengan penalaan halus.
+- **Mereka dilatih menggunakan pembelajaran tanpa pengawasan atau pembelajaran kendiri**, bermakna mereka dilatih pada data multimodal tanpa label, dan mereka tidak memerlukan anotasi manusia atau pelabelan data untuk proses latihan mereka.
+- **Mereka adalah model yang sangat besar**, berdasarkan rangkaian neural yang sangat dalam yang dilatih pada berbilion parameter.
+- **Mereka biasanya bertujuan untuk berfungsi sebagai ‘asas’ untuk model lain**, bermakna mereka boleh digunakan sebagai titik permulaan untuk model lain dibina di atasnya, yang boleh dilakukan dengan penalaan halus.
 
-Untuk menjelaskan lagi perbezaan ini, mari kita ambil ChatGPT sebagai contoh. Untuk membina versi pertama ChatGPT, model yang dipanggil GPT-3.5 berfungsi sebagai model asas. Ini bermakna OpenAI menggunakan beberapa data khusus chat untuk mencipta versi yang ditune dari GPT-3.5 yang khusus dalam berprestasi baik dalam senario perbualan, seperti chatbot.
+![Foundation Models versus LLMs](../../../translated_images/ms/FoundationModel.e4859dbb7a825c94.webp)
 
-### Model Sumber Terbuka berbanding Proprietari
+Sumber imej: [Panduan Penting Model Asas dan Model Bahasa Besar | oleh Babar M Bhatti | Medium
+](https://thebabar.medium.com/essential-guide-to-foundation-models-and-large-language-models-27dab58f7404)
 
-Cara lain untuk mengkategorikan LLMs adalah sama ada mereka sumber terbuka atau proprietari.
+Untuk menerangkan lagi perbezaan ini, mari ambil ChatGPT sebagai contoh sejarah. Versi awal ChatGPT menggunakan GPT-3.5 sebagai model asas. OpenAI kemudian menggunakan data khusus chat dan teknik penyelarasan untuk menghasilkan versi yang ditala yang berprestasi lebih baik dalam senario perbualan, seperti chatbot. Perkhidmatan AI moden sering mengalihkan antara beberapa varian model, jadi nama perkhidmatan dan nama model asas tidak selalu sama.
 
-Model sumber terbuka adalah model yang tersedia kepada umum dan boleh digunakan oleh sesiapa sahaja. Mereka sering dibuat tersedia oleh syarikat yang menciptanya, atau oleh komuniti penyelidikan. Model ini dibenarkan untuk diperiksa, diubah suai, dan disesuaikan untuk pelbagai kes penggunaan dalam LLMs. Walau bagaimanapun, mereka tidak selalu dioptimumkan untuk penggunaan produksi, dan mungkin tidak sebaik model proprietari. Selain itu, pembiayaan untuk model sumber terbuka boleh terhad, dan mereka mungkin tidak dikekalkan jangka panjang atau mungkin tidak dikemas kini dengan penyelidikan terbaru. Contoh model sumber terbuka yang popular termasuk [Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html?WT.mc_id=academic-105485-koreyst), [Bloom](https://huggingface.co/bigscience/bloom) dan [LLaMA](https://llama.meta.com).
+![Foundation Model](../../../translated_images/ms/Multimodal.2c389c6439e0fc51.webp)
 
-Model proprietari adalah model yang dimiliki oleh sebuah syarikat dan tidak dibuat tersedia kepada umum. Model ini sering dioptimumkan untuk penggunaan produksi. Walau bagaimanapun, mereka tidak dibenarkan untuk diperiksa, diubah suai, atau disesuaikan untuk kes penggunaan yang berbeza. Selain itu, mereka tidak selalu tersedia secara percuma, dan mungkin memerlukan langganan atau pembayaran untuk digunakan. Juga, pengguna tidak mempunyai kawalan ke atas data yang digunakan untuk melatih model, yang bermaksud mereka harus mempercayai pemilik model dengan memastikan komitmen kepada privasi data dan penggunaan AI yang bertanggungjawab. Contoh model proprietari yang popular termasuk [model OpenAI](https://platform.openai.com/docs/models/overview?WT.mc_id=academic-105485-koreyst), [Google Bard](https://sapling.ai/llm/bard?WT.mc_id=academic-105485-koreyst) atau [Claude 2](https://www.anthropic.com/index/claude-2?WT.mc_id=academic-105485-koreyst).
+Sumber imej: [2108.07258.pdf (arxiv.org)](https://arxiv.org/pdf/2108.07258.pdf?WT.mc_id=academic-105485-koreyst)
 
-### Pembentukan berbanding Penjanaan Imej berbanding Penjanaan Teks dan Kod
+### Model Berat Terbuka/Sumber Terbuka berbanding Model Proprietari
 
-LLMs juga boleh dikategorikan mengikut output yang mereka hasilkan.
+Satu lagi cara mengklasifikasikan LLM ialah sama ada mereka berat terbuka, sumber terbuka, atau proprietari.
 
-Pembentukan adalah satu set model yang boleh menukar teks menjadi bentuk numerik, dipanggil pembentukan, yang merupakan representasi numerik teks input. Pembentukan memudahkan mesin untuk memahami hubungan antara perkataan atau ayat dan boleh digunakan sebagai input oleh model lain, seperti model klasifikasi, atau model pengelompokan yang mempunyai prestasi yang lebih baik pada data numerik. Model pembentukan sering digunakan untuk pembelajaran pemindahan, di mana model dibina untuk tugas pengganti yang mana terdapat banyak data, dan kemudian berat model (pembentukan) digunakan semula untuk tugas hiliran lain. Contoh kategori ini adalah [pembentukan OpenAI](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst).
+Model sumber terbuka dan berat terbuka membuat artifak model tersedia untuk pemeriksaan, muat turun, atau penyesuaian, tetapi lesen mereka berbeza. Ada yang sepenuhnya sumber terbuka, manakala yang lain adalah model berat terbuka dengan sekatan penggunaan. Mereka berguna apabila perniagaan memerlukan kawalan lebih ke atas penyebaran, lokaliti data, kos, atau penyesuaian. Walau bagaimanapun, pasukan masih perlu meneliti syarat lesen, kos perkhidmatan, penyelenggaraan, kemas kini keselamatan, dan kualiti penilaian sebelum menggunakannya dalam pengeluaran. Contohnya termasuk [Meta Llama 4](https://ai.meta.com/blog/llama-4-multimodal-intelligence/?WT.mc_id=academic-105485-koreyst), beberapa [model Mistral](https://docs.mistral.ai/models/overview?WT.mc_id=academic-105485-koreyst), dan banyak model yang dihoskan di [Hugging Face](https://huggingface.co/models?WT.mc_id=academic-105485-koreyst).
 
-Model penjanaan imej adalah model yang menghasilkan imej. Model ini sering digunakan untuk penyuntingan imej, sintesis imej, dan terjemahan imej. Model penjanaan imej sering dilatih pada set data imej yang besar, seperti [LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst), dan boleh digunakan untuk menghasilkan imej baru atau untuk menyunting imej sedia ada dengan teknik inpainting, super-resolution, dan pewarnaan. Contoh termasuk [DALL-E-3](https://openai.com/dall-e-3?WT.mc_id=academic-105485-koreyst) dan [model Stable Diffusion](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst).
+Model proprietari dimiliki dan dihoskan oleh penyedia. Model ini sering dioptimumkan untuk penggunaan pengeluaran terurus dan boleh menawarkan sokongan kuat, sistem keselamatan, integrasi alat, dan skala. Walau bagaimanapun, pelanggan biasanya tidak boleh memeriksa atau mengubah berat model, dan mereka mesti meneliti terma penyedia untuk privasi, penyimpanan, pematuhan, dan penggunaan yang boleh diterima. Contoh termasuk [model OpenAI](https://platform.openai.com/docs/models?WT.mc_id=academic-105485-koreyst), [Google Gemini](https://deepmind.google/models/gemini/pro/?WT.mc_id=academic-105485-koreyst), dan [Anthropic Claude](https://platform.claude.com/docs/en/about-claude/models/overview?WT.mc_id=academic-105485-koreyst).
 
-Model penjanaan teks dan kod adalah model yang menghasilkan teks atau kod. Model ini sering digunakan untuk penjumlahan teks, terjemahan, dan penjawaban soalan. Model penjanaan teks sering dilatih pada set data teks yang besar, seperti [BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst), dan boleh digunakan untuk menghasilkan teks baru, atau untuk menjawab soalan. Model penjanaan kod, seperti [CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst), sering dilatih pada set data kod yang besar, seperti GitHub, dan boleh digunakan untuk menghasilkan kod baru, atau untuk memperbaiki bug dalam kod sedia ada.
+### Penjanaan embedding berbanding imej berbanding teks dan kod
 
-### Encoder-Decoder berbanding Decoder sahaja
+LLM juga boleh dikategorikan berdasarkan output yang dihasilkan.
 
-Untuk bercakap tentang pelbagai jenis seni bina LLMs, mari gunakan analogi.
+Embedding adalah satu set model yang boleh menukar teks menjadi bentuk nombor, dipanggil embedding, iaitu representasi nombor bagi teks input. Embedding memudahkan mesin memahami hubungan antara perkataan atau ayat dan boleh digunakan sebagai input oleh model lain, seperti model klasifikasi, atau model pengelompokan yang mempunyai prestasi lebih baik pada data nombor. Model embedding sering digunakan untuk pembelajaran pemindahan, di mana model dibina untuk tugas gantian yang mempunyai data yang banyak, dan kemudian berat model (embedding) digunakan semula untuk tugas hiliran lain. Contoh kategori ini ialah [embedding OpenAI](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst).
 
-Bayangkan pengurus anda memberi anda tugas untuk menulis kuiz untuk pelajar. Anda mempunyai dua rakan sekerja; satu bertanggungjawab mencipta kandungan dan yang lain bertanggungjawab menyemak mereka.
+![Embedding](../../../translated_images/ms/Embedding.c3708fe988ccf760.webp)
 
-Pencipta kandungan adalah seperti model Decoder sahaja, mereka boleh melihat topik dan melihat apa yang anda sudah tulis dan kemudian dia boleh menulis kursus berdasarkan itu. Mereka sangat baik dalam menulis kandungan yang menarik dan informatif, tetapi mereka tidak sangat baik dalam memahami topik dan objektif pembelajaran. Beberapa contoh model Decoder adalah model keluarga GPT, seperti GPT-3.
+Model penjanaan imej adalah model yang menjana imej. Model ini sering digunakan untuk penyuntingan imej, sintesis imej, dan terjemahan imej. Model penjanaan imej sering dilatih pada set data imej yang besar, seperti [LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst), dan boleh digunakan untuk menghasilkan imej baru atau mengedit imej sedia ada dengan teknik inpainting, resolusi tinggi, dan pewarnaan. Contohnya termasuk [model GPT Image](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst), [model Stable Diffusion](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst), dan model Imagen.
 
-Penyemak adalah seperti model Encoder sahaja, mereka melihat kursus yang ditulis dan jawapan, memperhatikan hubungan antara mereka dan memahami konteks, tetapi mereka tidak baik dalam menjana kandungan. Contoh model Encoder sahaja adalah BERT.
+![Penjanaan imej](../../../translated_images/ms/Image.349c080266a763fd.webp)
 
-Bayangkan kita boleh mempunyai seseorang juga yang boleh mencipta dan menyemak kuiz, ini adalah model Encoder-Decoder. Beberapa contoh adalah BART dan T5.
+Model penjanaan teks dan kod adalah model yang menjana teks atau kod. Model ini sering digunakan untuk ringkasan teks, terjemahan, dan menjawab soalan. Model penjanaan teks sering dilatih pada set data teks yang besar, seperti [BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst), dan boleh digunakan untuk menghasilkan teks baru, atau menjawab soalan. Model penjanaan kod, seperti [CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst), sering dilatih pada set data kod yang besar, seperti GitHub, dan boleh digunakan untuk menjana kod baru, atau membetulkan pepijat dalam kod sedia ada.
+
+![Penjanaan teks dan kod](../../../translated_images/ms/Text.a8c0cf139e5cc2a0.webp)
+
+### Encoder-Decoder berbanding hanya Decoder
+
+Untuk bercakap tentang pelbagai jenis seni bina LLM, mari gunakan analogi.
+
+Bayangkan pengurus anda memberi tugasan menulis kuiz untuk pelajar. Anda mempunyai dua rakan sekerja; seorang mengawasi penciptaan kandungan dan seorang lagi mengawasi semakan.
+
+Pencipta kandungan adalah seperti model hanya decoder: mereka boleh melihat topik, melihat apa yang anda sudah tulis, dan kemudian terus menjana kandungan berdasarkan konteks itu. Mereka sangat bagus menulis kandungan yang menarik dan informatif, tetapi tidak selalu pilihan terbaik apabila tugasan hanya untuk mengklasifikasikan, mendapatkan semula, atau mengekod maklumat. Contoh keluarga model hanya decoder termasuk model GPT dan Llama.
+
+Penilai adalah seperti model hanya Encoder, mereka melihat kursus yang ditulis dan jawapan, perhatikan hubungan antara mereka dan memahami konteks, tetapi mereka tidak pandai menjana kandungan. Contoh model hanya Encoder ialah BERT.
+
+Bayangkan kita juga mempunyai seseorang yang boleh mencipta dan menilai kuiz, ini adalah model Encoder-Decoder. Beberapa contoh ialah BART dan T5.
 
 ### Perkhidmatan berbanding Model
 
-Sekarang, mari bercakap tentang perbezaan antara perkhidmatan dan model. Perkhidmatan adalah produk yang ditawarkan oleh Penyedia Perkhidmatan Awan, dan sering kali merupakan gabungan model, data, dan komponen lain. Model adalah komponen teras perkhidmatan, dan sering kali merupakan model asas, seperti LLM.
+Sekarang, mari bercakap tentang perbezaan antara perkhidmatan dan model. Perkhidmatan adalah produk yang ditawarkan oleh Penyedia Perkhidmatan Awan, dan selalunya gabungan model, data, dan komponen lain. Model adalah komponen utama perkhidmatan, dan biasanya model asas, seperti LLM.
 
-Perkhidmatan sering dioptimumkan untuk penggunaan produksi dan sering kali lebih mudah digunakan daripada model, melalui antara muka pengguna grafik. Walau bagaimanapun, perkhidmatan tidak selalu tersedia secara percuma, dan mungkin memerlukan langganan atau pembayaran untuk digunakan, sebagai pertukaran untuk memanfaatkan peralatan dan sumber pemilik perkhidmatan, mengoptimumkan perbelanjaan dan skala dengan mudah. Contoh perkhidmatan adalah [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=academic-105485-koreyst), yang menawarkan pelan kadar bayar-seperti-anda-pergi, bermakna pengguna dikenakan bayaran secara proporsional dengan berapa banyak mereka menggunakan perkhidmatan. Juga, Azure OpenAI Service menawarkan keselamatan gred perusahaan dan rangka kerja AI yang bertanggungjawab di atas kemampuan model.
+Perkhidmatan sering dioptimumkan untuk penggunaan pengeluaran dan selalunya lebih mudah digunakan berbanding model, melalui antara muka pengguna grafik. Walau bagaimanapun, perkhidmatan tidak selalu tersedia secara percuma, dan mungkin memerlukan langganan atau bayaran untuk digunakan, sebagai pertukaran untuk menggunakan peralatan dan sumber pemilik perkhidmatan, mengoptimumkan perbelanjaan dan skala dengan mudah. Contoh perkhidmatan ialah [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=academic-105485-koreyst), yang menawarkan pelan kadar bayar-semasa-guna, bermakna pengguna dikenakan caj mengikut penggunaan perkhidmatan. Azure OpenAI Service juga menawarkan keselamatan bertaraf perusahaan dan rangka kerja AI bertanggungjawab di atas keupayaan model.
 
-Model hanyalah Rangkaian Neural, dengan parameter, berat, dan lain-lain. Membenarkan syarikat untuk menjalankan secara lokal, walau bagaimanapun, akan perlu membeli peralatan, membina struktur untuk skala dan membeli lesen atau menggunakan model sumber terbuka. Model seperti LLaMA tersedia untuk digunakan, memerlukan kuasa pengkomputeran untuk menjalankan model.
+Model adalah artifak rangkaian neural: parameter, berat, seni bina, tokenizer, dan konfigurasi sokongan. Menjalankan model secara lokal atau dalam persekitaran peribadi memerlukan perkakasan yang sesuai, infrastruktur perkhidmatan, pemantauan, dan sama ada lesen sumber terbuka/berat terbuka yang sesuai atau lesen komersial. Model berat terbuka seperti Llama 4 atau model Mistral boleh dihoskan sendiri, tetapi mereka masih memerlukan kuasa pengiraan dan kepakaran operasi.
 
-## Cara untuk menguji dan mengulangi dengan model yang berbeza untuk memahami prestasi di Azure
+## Cara menguji dan mengulangi dengan model berbeza untuk memahami prestasi di Azure
 
-Setelah pasukan kita meneroka landskap LLMs semasa dan mengenal pasti beberapa calon yang baik untuk senario mereka, langkah seterusnya adalah menguji mereka pada data mereka dan pada beban kerja mereka. Ini adalah proses iteratif, dilakukan melalui eksperimen dan ukuran.
-Kebanyakan model yang kita sebutkan dalam perenggan sebelumnya (model OpenAI, model sumber terbuka seperti Llama2, dan transformer Hugging Face) tersedia dalam [Katalog Model](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview?WT.mc_id=academic-105485-koreyst) di [Azure AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst).
 
-[Azure AI Studio](https://learn.microsoft.com/azure/ai-studio/what-is-ai-studio?WT.mc_id=academic-105485-koreyst) adalah Platform Awan yang direka untuk pembangun untuk membina aplikasi AI generatif dan menguruskan keseluruhan kitaran pembangunan - dari eksperimen hingga penilaian - dengan menggabungkan semua perkhidmatan AI Azure ke dalam satu hub dengan GUI yang berguna. Katalog Model di Azure AI Studio membolehkan pengguna untuk:
+Setelah pasukan kami meneroka landskap LLM semasa dan mengenal pasti beberapa calon yang baik untuk senario mereka, langkah seterusnya adalah mengujinya pada data mereka dan pada beban kerja mereka. Ini adalah proses berulang, dilakukan melalui eksperimen dan pengukuran.
+Kebanyakan model yang kami sebutkan dalam perenggan sebelumnya (model OpenAI, model berat terbuka seperti Llama 4 dan Mistral, dan model Hugging Face) tersedia dalam [Microsoft Foundry Models](https://learn.microsoft.com/azure/foundry/concepts/foundry-models-overview?WT.mc_id=academic-105485-koreyst).
 
-- Mencari Model Asas yang diminati dalam katalog - sama ada proprietari atau sumber terbuka, menapis mengikut tugas, lesen, atau nama. Untuk meningkatkan kebolehcarian, model diatur dalam koleksi, seperti koleksi Azure OpenAI, koleksi Hugging Face, dan banyak lagi.
+[Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry?WT.mc_id=academic-105485-koreyst), dahulunya Azure AI Studio/Azure AI Foundry, adalah platform Azure yang bersatu untuk membina aplikasi dan agen AI. Ia membantu pembangun menguruskan kitar hayat dari eksperimen dan penilaian hingga pelaksanaan, pemantauan, dan tadbir urus. Katalog model dalam Microsoft Foundry membolehkan pengguna untuk:
 
-- Menyemak kad model, termasuk penerangan terperinci tentang penggunaan yang dimaksudkan dan data latihan, sampel kod dan hasil penilaian pada perpustakaan penilaian dalaman.
-- Bandingkan penanda aras merentasi model dan set data yang tersedia dalam industri untuk menilai mana yang memenuhi senario perniagaan, melalui panel [Model Benchmarks](https://learn.microsoft.com/azure/ai-studio/how-to/model-benchmarks?WT.mc_id=academic-105485-koreyst).
+- Mencari model asas yang diminati dalam katalog, termasuk model yang dijual oleh Azure dan model dari rakan kongsi dan pembekal komuniti. Pengguna boleh menapis mengikut tugas, penyedia, lesen, pilihan pelaksanaan, atau nama.
 
-![Penanda aras model](../../../translated_images/ModelBenchmarks.b3b4182f762db04b59267af64ce77cc936d38adf40fb032f12acec9063578008.ms.png)
+![Model catalog](../../../translated_images/ms/AzureAIStudioModelCatalog.3cf8a499aa8ba031.webp)
 
-- Haluskan model pada data latihan khusus untuk meningkatkan prestasi model dalam beban kerja tertentu, dengan memanfaatkan keupayaan percubaan dan penjejakan Azure AI Studio.
+- Meninjau kad model, termasuk penerangan terperinci tentang penggunaan yang dimaksudkan dan data latihan, contoh kod dan keputusan penilaian pada perpustakaan penilaian dalaman.
 
-![Penyejukan model](../../../translated_images/FineTuning.f93db4ecbdc85b4a20ff1198fb82f5e2daa3a1ee328733b17d603727db20f5c0.ms.png)
+![Model card](../../../translated_images/ms/ModelCard.598051692c6e400d.webp)
 
-- Sebarkan model pra-latihan asal atau versi yang telah dihaluskan ke inferens masa nyata jauh - pengiraan terurus - atau titik akhir api tanpa pelayan - [bayar mengikut penggunaan](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview#model-deployment-managed-compute-and-serverless-api-pay-as-you-go?WT.mc_id=academic-105485-koreyst) - untuk membolehkan aplikasi menggunakannya.
+- Membandingkan penanda aras antara model dan set data yang tersedia dalam industri untuk menilai yang mana memenuhi senario perniagaan, melalui pane [Model Benchmarks](https://learn.microsoft.com/azure/ai-studio/how-to/model-benchmarks?WT.mc_id=academic-105485-koreyst).
 
-![Penyebaran model](../../../translated_images/ModelDeploy.7c78c2c5841567abf820d5da8354be454d3f20b62168905645aeac99e50c2562.ms.png)
+![Model benchmarks](../../../translated_images/ms/ModelBenchmarks.254cb20fbd06c03a.webp)
+
+- Menghaluskan model yang disokong pada data latihan tersuai untuk meningkatkan prestasi model pada beban kerja tertentu, menggunakan kebolehan eksperimen dan penjejakan Microsoft Foundry.
+
+![Model fine-tuning](../../../translated_images/ms/FineTuning.aac48f07142e36fd.webp)
+
+- Melaksanakan model terlatih asal atau versi yang dihaluskan ke titik inferens masa nyata jauh, menggunakan pengiraan terurus atau pilihan pelaksanaan tanpa pelayan, untuk membolehkan aplikasi menggunakannya.
+
+![Model deployment](../../../translated_images/ms/ModelDeploy.890da48cbd0bccdb.webp)
 
 > [!NOTE]
-> Tidak semua model dalam katalog kini tersedia untuk penyesuaian dan/atau penyebaran bayar mengikut penggunaan. Semak kad model untuk butiran tentang keupayaan dan batasan model.
+> Tidak semua model dalam katalog kini tersedia untuk penghalusan dan/atau pelaksanaan bayar-semasa-guna. Semak kad model untuk butiran mengenai kebolehan dan had model.
 
-## Meningkatkan hasil LLM
+## Memperbaiki keputusan LLM
 
-Kami telah meneroka dengan pasukan permulaan kami pelbagai jenis LLM dan Platform Awan (Azure Machine Learning) yang membolehkan kami membandingkan model yang berbeza, menilai mereka pada data ujian, meningkatkan prestasi dan menyebarkannya pada titik akhir inferens.
+Kami telah meneroka bersama pasukan startup kami pelbagai jenis LLM dan platform awan (Microsoft Foundry) yang membolehkan kami membandingkan model yang berlainan, menilainya pada data ujian, memperbaiki prestasi, dan melaksanakannya pada titik inferens.
 
-Tetapi bilakah mereka harus mempertimbangkan untuk menyesuaikan model daripada menggunakan model pra-latihan? Adakah terdapat pendekatan lain untuk meningkatkan prestasi model pada beban kerja tertentu?
+Tetapi bilakah mereka harus mempertimbangkan penghalusan model daripada menggunakan model terlatih siap? Adakah terdapat pendekatan lain untuk meningkatkan prestasi model pada beban kerja tertentu?
 
-Terdapat beberapa pendekatan yang boleh digunakan oleh perniagaan untuk mendapatkan hasil yang mereka perlukan daripada LLM. Anda boleh memilih jenis model yang berbeza dengan tahap latihan yang berbeza apabila menyebarkan LLM dalam pengeluaran, dengan tahap kerumitan, kos, dan kualiti yang berbeza. Berikut adalah beberapa pendekatan yang berbeza:
+Terdapat beberapa pendekatan yang perniagaan boleh gunakan untuk mendapatkan keputusan yang mereka perlukan daripada LLM. Anda boleh memilih jenis model yang berlainan dengan tahap latihan yang berbeza apabila melaksanakan LLM dalam pengeluaran, dengan tahap kerumitan, kos, dan kualiti yang berbeza. Berikut adalah beberapa pendekatan yang berbeza:
 
-- **Kejuruteraan prompt dengan konteks**. Idea ini adalah untuk memberikan konteks yang mencukupi apabila anda memberikan prompt untuk memastikan anda mendapat respons yang anda perlukan.
+- **Kejuruteraan prompt dengan konteks**. Idea adalah untuk menyediakan konteks yang cukup apabila anda prompt untuk memastikan anda mendapat jawapan yang anda perlukan.
 
-- **Retrieval Augmented Generation, RAG**. Data anda mungkin wujud dalam pangkalan data atau titik akhir web sebagai contoh, untuk memastikan data ini, atau sebahagian daripadanya, disertakan pada masa prompt, anda boleh mendapatkan data yang berkaitan dan menjadikannya sebahagian daripada prompt pengguna.
+- **Generasi Augmented Pengambilan, RAG**. Data anda mungkin wujud dalam pangkalan data atau titik akhir web sebagai contoh, untuk memastikan data ini, atau sebahagian daripadanya, dimasukkan pada masa prompt, anda boleh mengambil data berkaitan dan menjadikannya sebahagian daripada prompt pengguna.
 
-- **Model yang dihaluskan**. Di sini, anda melatih model lebih lanjut pada data anda sendiri yang menyebabkan model menjadi lebih tepat dan responsif kepada keperluan anda tetapi mungkin mahal.
+- **Model yang dihaluskan**. Di sini, anda melatih model lebih lanjut pada data anda sendiri yang menyebabkan model menjadi lebih tepat dan responsif terhadap keperluan anda tetapi mungkin mahal.
 
-![Penyebaran LLMs](../../../translated_images/Deploy.09224ecfe6a5ef47996fd0a44288772990139305451440c430662d43ac323ecd.ms.png)
+![LLMs deployment](../../../translated_images/ms/Deploy.18b2d27412ec8c02.webp)
 
 Sumber imej: [Four Ways that Enterprises Deploy LLMs | Fiddler AI Blog](https://www.fiddler.ai/blog/four-ways-that-enterprises-deploy-llms?WT.mc_id=academic-105485-koreyst)
 
 ### Kejuruteraan Prompt dengan Konteks
 
-LLM pra-latihan berfungsi dengan baik pada tugas bahasa semula jadi umum, walaupun dengan hanya memberikan prompt pendek, seperti ayat untuk dilengkapkan atau soalan – pembelajaran "zero-shot" yang dipanggil.
+LLM terlatih siap berfungsi dengan sangat baik pada tugas bahasa semula jadi yang umum, walaupun hanya dengan memanggilnya dengan prompt pendek, seperti ayat untuk dilengkapkan atau soalan – yang dikenali sebagai pembelajaran “zero-shot”.
 
-Walau bagaimanapun, lebih banyak pengguna dapat membingkai pertanyaan mereka, dengan permintaan terperinci dan contoh – Konteks – lebih tepat dan lebih dekat dengan jangkaan pengguna jawapannya. Dalam kes ini, kita bercakap tentang pembelajaran "one-shot" jika prompt termasuk hanya satu contoh dan "pembelajaran few-shot" jika ia termasuk beberapa contoh. Kejuruteraan prompt dengan konteks adalah pendekatan yang paling kos efektif untuk bermula.
+Walau bagaimanapun, semakin banyak pengguna dapat membingkai pertanyaan mereka, dengan permintaan terperinci dan contoh – Konteks – semakin tepat dan hampir dengan jangkaan pengguna jawapannya. Dalam hal ini, kita bercakap tentang pembelajaran “one-shot” jika prompt hanya mengandungi satu contoh dan “few-shot learning” jika ia mengandungi beberapa contoh.
+Kejuruteraan prompt dengan konteks adalah pendekatan yang paling menjimatkan kos untuk memulakan.
 
-### Retrieval Augmented Generation (RAG)
+### Generasi Augmented Pengambilan (RAG)
 
-LLM mempunyai batasan bahawa mereka hanya boleh menggunakan data yang telah digunakan semasa latihan mereka untuk menjana jawapan. Ini bermakna mereka tidak tahu apa-apa tentang fakta yang berlaku selepas proses latihan mereka, dan mereka tidak boleh mengakses maklumat bukan awam (seperti data syarikat). Ini boleh diatasi melalui RAG, teknik yang memperkayakan prompt dengan data luaran dalam bentuk cebisan dokumen, dengan mengambil kira had panjang prompt. Ini disokong oleh alat pangkalan data Vektor (seperti [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)) yang mendapatkan cebisan berguna daripada pelbagai sumber data pratakrif dan menambahkannya kepada Konteks prompt.
+LLM mempunyai had bahawa mereka hanya boleh menggunakan data yang telah digunakan semasa latihan mereka untuk menjana jawapan. Ini bermaksud mereka tidak mengetahui apa-apa tentang fakta yang berlaku selepas proses latihan mereka, dan mereka tidak dapat mengakses maklumat bukan awam (seperti data syarikat).
+Ini boleh diatasi melalui RAG, teknik yang menambah prompt dengan data luaran dalam bentuk potongan dokumen, mengambil kira had panjang prompt. Ini disokong oleh alat Pangkalan Data Vektor (seperti [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)) yang mengambil potongan berguna dari pelbagai sumber data yang telah ditentukan dan menambahkannya ke Konteks prompt.
 
-Teknik ini sangat berguna apabila perniagaan tidak mempunyai data yang mencukupi, masa yang mencukupi, atau sumber daya untuk menghaluskan LLM, tetapi masih ingin meningkatkan prestasi pada beban kerja tertentu dan mengurangkan risiko fabrikasi, iaitu, pemalsuan realiti atau kandungan berbahaya.
+Teknik ini sangat berguna apabila perniagaan tidak mempunyai cukup data, masa, atau sumber untuk menghaluskan LLM, tetapi masih ingin meningkatkan prestasi pada beban kerja tertentu dan mengurangkan risiko jawapan yang dihalusinasi, lapuk, atau tidak disokong.
 
 ### Model yang dihaluskan
 
-Penyejukan adalah proses yang memanfaatkan pembelajaran pemindahan untuk 'menyesuaikan' model kepada tugas hiliran atau untuk menyelesaikan masalah tertentu. Berbeza dengan pembelajaran few-shot dan RAG, ia menghasilkan model baru yang dihasilkan, dengan berat dan bias yang diperbaharui. Ia memerlukan satu set contoh latihan yang terdiri daripada satu input (prompt) dan output yang berkaitan (penyelesaian).
-Ini akan menjadi pendekatan pilihan jika:
+Penghalusan adalah proses yang menggunakan pembelajaran pemindahan untuk ‘menyesuaikan’ model kepada tugas huluan atau untuk menyelesaikan masalah tertentu. Berbeza dengan pembelajaran few-shot dan RAG, ia menghasilkan model baru dengan berat dan bias yang dikemas kini. Ia memerlukan set contoh latihan yang terdiri daripada satu input (prompt) dan output yang berkaitan (penyelesaian).
+Ini akan menjadi pendekatan yang disukai jika:
 
-- **Menggunakan model yang dihaluskan**. Perniagaan ingin menggunakan model kurang mampu yang dihaluskan (seperti model embedding) daripada model berprestasi tinggi, menghasilkan penyelesaian yang lebih kos efektif dan cepat.
+- **Menggunakan model khusus tugas yang lebih kecil**. Sesebuah perniagaan ingin menghaluskan model yang lebih kecil untuk tugas sempit daripada berulang kali menggunakan model frontier yang lebih besar, menghasilkan penyelesaian yang lebih menjimatkan kos dan cepat.
 
-- **Mempertimbangkan kependaman**. Kependaman adalah penting untuk kes penggunaan tertentu, jadi tidak mungkin menggunakan prompt yang sangat panjang atau bilangan contoh yang perlu dipelajari oleh model tidak sesuai dengan had panjang prompt.
+- **Mempertimbangkan kelewatan masa**. Kelewatan masa penting untuk kes penggunaan tertentu, jadi tidak mungkin menggunakan prompt yang sangat panjang atau jumlah contoh yang harus dipelajari dari model tidak sesuai dengan had panjang prompt.
 
-- **Sentiasa terkini**. Perniagaan mempunyai banyak data berkualiti tinggi dan label kebenaran asas serta sumber daya yang diperlukan untuk mengekalkan data ini terkini dari masa ke masa.
+- **Menyesuaikan tingkah laku stabil**. Sesebuah perniagaan mempunyai banyak contoh berkualiti tinggi dan ingin model secara konsisten mengikuti corak tugas, format output, nada, atau gaya khusus domain. Jika masalah utamanya adalah fakta terkini atau pengetahuan peribadi yang sering berubah, gunakan RAG dan bukan bergantung hanya pada penghalusan.
 
 ### Model terlatih
 
-Melatih LLM dari awal adalah tanpa keraguan pendekatan yang paling sukar dan paling kompleks untuk diterima pakai, memerlukan sejumlah besar data, sumber daya yang mahir, dan kuasa pengkomputeran yang sesuai. Pilihan ini harus dipertimbangkan hanya dalam senario di mana perniagaan mempunyai kes penggunaan khusus domain dan sejumlah besar data berpusatkan domain.
+Melatih LLM dari awal tanpa ragu-ragu adalah pendekatan yang paling sukar dan paling kompleks untuk digunakan, memerlukan sejumlah besar data, sumber mahir, dan kuasa pengkomputeran yang sesuai. Pilihan ini hanya harus dipertimbangkan dalam senario di mana perniagaan mempunyai kes penggunaan khusus domain dan sejumlah besar data berfokus domain.
 
-## Semakan pengetahuan
+## Semakan Pengetahuan
 
-Apakah pendekatan yang baik untuk meningkatkan hasil penyelesaian LLM?
+Apakah pendekatan yang baik untuk memperbaiki keputusan penyelesaian LLM?
 
 1. Kejuruteraan prompt dengan konteks
-2. RAG
-3. Model yang dihaluskan
+1. RAG
+1. Model yang dihaluskan
 
-A:3, jika anda mempunyai masa dan sumber daya serta data berkualiti tinggi, penyesuaian adalah pilihan yang lebih baik untuk sentiasa terkini. Walau bagaimanapun, jika anda ingin memperbaiki sesuatu dan kekurangan masa, pertimbangkan RAG terlebih dahulu.
+A: Ketiga-tiganya boleh membantu. Mulakan dengan kejuruteraan prompt dan konteks untuk penambahbaikan cepat, dan gunakan RAG apabila model memerlukan fakta terkini atau data perniagaan peribadi. Pilih penghalusan apabila anda mempunyai cukup contoh berkualiti tinggi dan memerlukan model mengikuti corak tugas, format, nada, atau domain secara konsisten.
 
 ## 🚀 Cabaran
 
@@ -183,9 +199,13 @@ Baca lebih lanjut tentang bagaimana anda boleh [menggunakan RAG](https://learn.m
 
 ## Kerja Hebat, Teruskan Pembelajaran Anda
 
-Selepas menyelesaikan pelajaran ini, lihat koleksi [Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) kami untuk terus meningkatkan pengetahuan Generative AI anda!
+Selepas menyelesaikan pelajaran ini, lihat koleksi [Pembelajaran AI Generatif kami](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) untuk terus meningkatkan pengetahuan AI Generatif anda!
 
-Pergi ke Pelajaran 3 di mana kami akan melihat bagaimana untuk [membangun dengan Generative AI Secara Bertanggungjawab](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)!
+Pergi ke Pelajaran 3 di mana kita akan melihat bagaimana untuk [membina dengan AI Generatif secara Bertanggungjawab](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)!
 
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

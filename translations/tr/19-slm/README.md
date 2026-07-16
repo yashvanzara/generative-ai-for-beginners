@@ -1,22 +1,273 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-05-20T09:50:03+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "tr"
-}
--->
-# Başlangıç Seviyesi için Üretici Yapay Zeka için Küçük Dil Modellerine Giriş Üretici yapay zeka, yeni içerik oluşturabilen sistemler yaratmaya odaklanan büyüleyici bir yapay zeka alanıdır. Bu içerik, metin ve görüntülerden müzik ve hatta tüm sanal ortamlara kadar çeşitlilik gösterebilir. Üretici yapay zekanın en heyecan verici uygulamalarından biri, dil modelleri alanındadır. ## Küçük Dil Modelleri Nedir? Küçük Dil Modeli (SLM), büyük bir dil modelinin (LLM) küçültülmüş bir varyantını temsil eder ve LLM'lerin birçok mimari ilkesini ve tekniğini kullanırken, önemli ölçüde azaltılmış bir hesaplama ayak izi sergiler. SLM'ler, insan benzeri metinler oluşturmak için tasarlanmış dil modellerinin bir alt kümesidir. GPT-4 gibi daha büyük emsallerinin aksine, SLM'ler daha kompakt ve verimlidir, bu da onları hesaplama kaynaklarının sınırlı olduğu uygulamalar için ideal hale getirir. Daha küçük boyutlarına rağmen, çeşitli görevleri yerine getirebilirler. Genellikle, SLM'ler, LLM'leri sıkıştırarak veya damıtarak oluşturulur ve orijinal modelin işlevselliğinin ve dil yeteneklerinin önemli bir kısmını korumayı amaçlar. Model boyutundaki bu azalma, genel karmaşıklığı azaltır, bu da SLM'leri hem bellek kullanımı hem de hesaplama gereksinimleri açısından daha verimli hale getirir. Bu optimizasyonlara rağmen, SLM'ler geniş bir doğal dil işleme (NLP) görevini yerine getirebilir: - Metin Oluşturma: Tutarlı ve bağlamsal olarak uygun cümleler veya paragraflar oluşturma. - Metin Tamamlama: Verilen bir uyarana dayalı olarak cümleleri tahmin etme ve tamamlama. - Çeviri: Metni bir dilden başka bir dile çevirme. - Özetleme: Uzun metin parçalarını daha kısa, daha sindirilebilir özetlere yoğunlaştırma. Ancak, daha büyük emsallerine kıyasla performans veya anlama derinliğinde bazı ödünleşmelerle. ## Küçük Dil Modelleri Nasıl Çalışır? SLM'ler, geniş miktarda metin verisi üzerinde eğitilir. Eğitim sırasında, dilin kalıplarını ve yapısını öğrenirler, bu da onların hem dilbilgisi açısından doğru hem de bağlamsal olarak uygun metinler oluşturmalarını sağlar. Eğitim süreci şunları içerir: - Veri Toplama: Çeşitli kaynaklardan büyük metin veri setleri toplama. - Ön İşleme: Verileri temizleme ve eğitime uygun hale getirme. - Eğitim: Makine öğrenme algoritmalarını kullanarak modelin metni anlama ve oluşturmayı öğrenmesi. - İnce Ayar: Modelin belirli görevlerdeki performansını artırmak için ayarlama. SLM'lerin geliştirilmesi, mobil cihazlar veya uç bilgi işlem platformları gibi kaynakların sınırlı olduğu ortamlarda dağıtılabilecek modellere olan artan ihtiyaçla uyumludur, burada tam ölçekli LLM'ler ağır kaynak talepleri nedeniyle pratik olmayabilir. Verimliliğe odaklanarak, SLM'ler performansı erişilebilirlikle dengeleyerek, çeşitli alanlarda daha geniş uygulama imkanı sağlar. ![slm](../../../translated_images/slm.e63e171d8045c28356253bb772597c333b20c51bc33ce7191b8b38a2e1375614.tr.png) ## Öğrenme Hedefleri Bu derste, SLM bilgilerini tanıtmayı ve Microsoft Phi-3 ile metin içeriği, görsel ve MoE gibi farklı senaryoları öğrenmeyi umuyoruz. Bu dersin sonunda, şu soruları yanıtlayabilecek durumda olmalısınız: - SLM nedir - SLM ve LLM arasındaki fark nedir - Microsoft Phi-3/3.5 Ailesi nedir - Microsoft Phi-3/3.5 Ailesi nasıl çıkarılır Hazır mısınız? Başlayalım. ## Büyük Dil Modelleri (LLM'ler) ve Küçük Dil Modelleri (SLM'ler) Arasındaki Farklılıklar Hem LLM'ler hem de SLM'ler, olasılıksal makine öğrenmesinin temel ilkeleri üzerine inşa edilmiştir ve mimari tasarım, eğitim metodolojileri, veri üretim süreçleri ve model değerlendirme tekniklerinde benzer yaklaşımları takip ederler. Ancak, bu iki model türünü farklı kılan birkaç önemli faktör vardır. ## Küçük Dil Modellerinin Uygulamaları SLM'ler, geniş bir uygulama yelpazesine sahiptir, bunlar arasında: - Chatbotlar: Müşteri desteği sağlama ve kullanıcılarla sohbet şeklinde etkileşim kurma. - İçerik Oluşturma: Yazarların fikir oluşturmasına veya tüm makaleleri taslak halinde hazırlamasına yardımcı olma. - Eğitim: Öğrencilere yazma ödevlerinde veya yeni diller öğrenmede yardımcı olma. - Erişilebilirlik: Engelli bireyler için metinden konuşmaya sistemleri gibi araçlar oluşturma. **Boyut** LLM'ler ve SLM'ler arasındaki temel bir fark, modellerin ölçeğinde yatmaktadır. ChatGPT (GPT-4) gibi LLM'ler, tahmini 1.76 trilyon parametreden oluşabilirken, Mistral 7B gibi açık kaynaklı SLM'ler yaklaşık 7 milyar parametreyle tasarlanmıştır. Bu fark, öncelikle model mimarisi ve eğitim süreçlerindeki farklılıklardan kaynaklanmaktadır. Örneğin, ChatGPT, bir kodlayıcı-çözücü çerçevesi içinde bir kendine dikkat mekanizması kullanırken, Mistral 7B, yalnızca bir çözücü modelinde daha verimli eğitim sağlayan kaydırma pencere dikkatini kullanır. Bu mimari varyans, bu modellerin karmaşıklığı ve performansı üzerinde derin etkiler yaratır. **Anlayış** SLM'ler, genellikle belirli alanlarda performans için optimize edilmiştir, bu da onları son derece uzmanlaşmış hale getirir ancak birden fazla bilgi alanında geniş bağlamsal anlayış sağlama yeteneklerini potansiyel olarak sınırlı kılar. Buna karşılık, LLM'ler, daha kapsamlı bir düzeyde insan benzeri zekayı simüle etmeyi amaçlar. Geniş, çeşitli veri setleri üzerinde eğitilen LLM'ler, çeşitli alanlarda iyi performans göstermek için tasarlanmıştır ve daha fazla çok yönlülük ve uyarlanabilirlik sunar. Sonuç olarak, LLM'ler, doğal dil işleme ve programlama gibi daha geniş bir aşağı akış görevleri yelpazesi için daha uygundur. **Bilgi İşlem** LLM'lerin eğitimi ve dağıtımı, genellikle büyük ölçekli GPU kümeleri dahil olmak üzere önemli hesaplama altyapısı gerektiren kaynak yoğun süreçlerdir. Örneğin, ChatGPT gibi bir modeli sıfırdan eğitmek, binlerce GPU'yu uzun süreler boyunca gerektirebilir. Buna karşılık, daha küçük parametre sayılarıyla SLM'ler, hesaplama kaynakları açısından daha erişilebilirdir. Mistral 7B gibi modeller, orta düzey GPU yeteneklerine sahip yerel makinelerde eğitilebilir ve çalıştırılabilir, ancak eğitim hala birden fazla GPU üzerinde birkaç saat gerektirir. **Önyargı** Önyargı, öncelikle eğitim verilerinin doğası nedeniyle LLM'lerde bilinen bir sorundur. Bu modeller, genellikle belirli grupları yetersiz temsil eden veya yanlış temsil eden, yanlış etiketleme tanıtan veya lehçe, coğrafi varyasyonlar ve dilbilgisi kurallarından etkilenmiş dil önyargılarını yansıtan, internetten açıkça erişilebilir verilere dayanır. Ayrıca, LLM mimarilerinin karmaşıklığı, dikkatli ince ayar yapılmadan fark edilmeden kalabilecek önyargıyı istemeden artırabilir. Öte yandan, daha sınırlı, alan özel veri setleri üzerinde eğitilen SLM'ler, bu tür önyargılara karşı doğası gereği daha az duyarlıdır, ancak bunlara karşı bağışık değildir. **Çıkarım** SLM'lerin azaltılmış boyutu, çıkarım hızında önemli bir avantaj sağlar ve yerel donanımda geniş paralel işlemeye gerek kalmadan verimli bir şekilde çıktılar üretmelerine olanak tanır. Buna karşılık, LLM'ler, boyutları ve karmaşıklıkları nedeniyle, kabul edilebilir çıkarım süreleri elde etmek için genellikle önemli paralel hesaplama kaynakları gerektirir. Birden fazla eşzamanlı kullanıcının varlığı, özellikle ölçeklendirilmiş olarak dağıtıldığında, LLM'lerin yanıt sürelerini daha da yavaşlatır. Özetle, hem LLM'ler hem de SLM'ler makine öğrenmesinde temel bir temeli paylaşsalar da, model boyutu, kaynak gereksinimleri, bağlamsal anlayış, önyargıya duyarlılık ve çıkarım hızı açısından önemli ölçüde farklılık gösterirler. Bu farklılıklar, farklı kullanım durumları için uygunluklarını yansıtır, LLM'ler daha çok yönlü ancak kaynak ağırlıklı olurken, SLM'ler azaltılmış hesaplama talepleriyle daha alan özel verimlilik sunar. ***Not: Bu bölümde, Microsoft Phi-3 / 3.5'i bir örnek olarak kullanarak SLM'yi tanıtacağız.*** ## Phi-3 / Phi-3.5 Ailesini Tanıtma Phi-3 / 3.5 Ailesi, esas olarak metin, görsel ve Ajan (MoE) uygulama senaryolarını hedefler: ### Phi-3 / 3.5 İnstruct Esas olarak metin oluşturma, sohbet tamamlama ve içerik bilgisi çıkarma vb. için. **Phi-3-mini** 3.8B dil modeli, Microsoft Azure AI Studio, Hugging Face ve Ollama'da mevcuttur. Phi-3 modelleri, eşit ve daha büyük boyutlardaki dil modellerini önemli ölçüde aşar (aşağıdaki karşılaştırma numaralarına bakın, daha yüksek sayılar daha iyidir). Phi-3-mini, kendi boyutunun iki katı büyüklüğündeki modelleri aşarken, Phi-3-küçük ve Phi-3-orta, GPT-3.5 dahil olmak üzere daha büyük modelleri aşar. **Phi-3-küçük ve orta** Sadece 7B parametre ile Phi-3-küçük, çeşitli dil, akıl yürütme, kodlama ve matematik karşılaştırmalarında GPT-3.5T'yi geride bırakır. 14B parametreli Phi-3-orta, bu eğilimi sürdürür ve Gemini 1.0 Pro'yu aşar. **Phi-3.5-mini** Bunu Phi-3-mini'nin bir yükseltmesi olarak düşünebiliriz. Parametreler değişmeden kalırken, çoklu dil desteğini geliştirmiştir (20+ dil desteklenir: Arapça, Çince, Çekçe, Danca, Felemenkçe, İngilizce, Fince, Fransızca, Almanca, İbranice, Macarca, İtalyanca, Japonca, Korece, Norveççe, Lehçe, Portekizce, Rusça, İspanyolca, İsveççe, Tayca, Türkçe, Ukraynaca) ve uzun bağlam için daha güçlü destek ekler. 3.8B parametreli Phi-3.5-mini, aynı boyuttaki dil modellerini aşar ve iki katı büyüklüğündeki modellerle eşdeğerdir. ### Phi-3 / 3.5 Görsel Phi-3/3.5'in İnstruct modelini Phi'nin anlama yeteneği olarak düşünebiliriz ve Görsel, Phi'ye dünyayı anlama yeteneği kazandırır. **Phi-3-Görsel** Sadece 4.2B parametreli Phi-3-görsel, genel görsel akıl yürütme görevlerinde, OCR ve tablo ve diyagram anlama görevlerinde Claude-3 Haiku ve Gemini 1.0 Pro V gibi daha büyük modelleri aşar. **Phi-3.5-Görsel** Phi-3.5-Görsel, Phi-3-Görsel'in bir yükseltmesidir ve çoklu görüntü desteği ekler. Bunu bir görme iyileştirmesi olarak düşünebilirsiniz, sadece resimleri görmekle kalmaz, aynı zamanda videoları da görebilir. Phi-3.5-görsel, OCR, tablo ve grafik anlama görevlerinde Claude-3.5 Sonnet ve Gemini 1.5 Flash gibi daha büyük modelleri aşar ve genel görsel bilgi akıl yürütme görevlerinde eşdeğerdir. Çoklu çerçeve girişi destekler, yani birden fazla giriş görüntüsünde akıl yürütme yapar. ### Phi-3.5-MoE ***Uzmanlar Karışımı (MoE)*** modellerin çok daha az hesaplama ile önceden eğitilmesine olanak tanır, bu da yoğun bir modelle aynı hesaplama bütçesiyle modeli veya veri seti boyutunu önemli ölçüde artırabileceğiniz anlamına gelir. Özellikle, bir MoE modeli, yoğun karşılığıyla aynı kaliteyi önceden eğitme sırasında çok daha hızlı bir şekilde elde etmelidir. Phi-3.5-MoE, 16x3.8B uzman modüllerinden oluşur. Sadece 6.6B aktif parametre ile Phi-3.5-MoE, çok daha büyük modellerle benzer bir akıl yürütme, dil anlama ve matematik seviyesi elde eder. Phi-3/3.5 Ailesi modelini farklı senaryolara dayalı olarak kullanabiliriz. LLM'den farklı olarak, Phi-3/3.5-mini veya Phi-3/3.5-Görsel'i uç cihazlarda dağıtabilirsiniz. ## Phi-3/3.5 Ailesi modelleri nasıl kullanılır Farklı senaryolarda Phi-3/3.5 kullanmayı umuyoruz. Sonraki adımda, farklı senaryolara dayalı olarak Phi-3/3.5 kullanacağız. ![phi3](../../../translated_images/phi3.031cf9ca915915dbb4e8bc1e2b8e1e93d4d8a865ec4ea6ecdff5847b027a5113.tr.png) ### Çıkarım farkı Bulut'un API'si **GitHub Modelleri** GitHub
-Modeller en doğrudan yoldur. Phi-3/3.5-Instruct modeline GitHub Modelleri üzerinden hızlıca erişebilirsiniz. Azure AI Inference SDK / OpenAI SDK ile birleştirildiğinde, Phi-3/3.5-Instruct çağrısını tamamlamak için API'ye kod aracılığıyla erişebilirsiniz. Ayrıca Playground üzerinden farklı etkileri test edebilirsiniz. - Demo: Çin senaryolarında Phi-3-mini ve Phi-3.5-mini etkilerinin karşılaştırılması ![phi3](../../../translated_images/gh1.33134727688b27f6eaeac67bd84dbef85626e2d8fe452d826d0b3c353e29a472.tr.png) ![phi35](../../../translated_images/gh2.9f09152ff1c8dfdb777bb774f961c9ddf743879fc2fb640597bb413b1f320b8a.tr.png) **Azure AI Studio** Veya vizyon ve MoE modellerini kullanmak istiyorsak, çağrıyı tamamlamak için Azure AI Studio'yu kullanabilirsiniz. İlginizi çekiyorsa, Phi-3/3.5 Instruct, Vision, MoE'yi Azure AI Studio üzerinden nasıl çağıracağınızı öğrenmek için Phi-3 Cookbook'u okuyabilirsiniz [Bu bağlantıya tıklayın](https://github.com/microsoft/Phi-3CookBook/blob/main/md/02.QuickStart/AzureAIStudio_QuickStart.md?WT.mc_id=academic-105485-koreyst) **NVIDIA NIM** Azure ve GitHub tarafından sağlanan bulut tabanlı Model Catalog çözümlerine ek olarak, [Nivida NIM](https://developer.nvidia.com/nim?WT.mc_id=academic-105485-koreyst) kullanarak ilgili çağrıları tamamlayabilirsiniz. Phi-3/3.5 Ailesi'nin API çağrılarını tamamlamak için NIVIDA NIM'i ziyaret edebilirsiniz. NVIDIA NIM (NVIDIA Inference Microservices), geliştiricilerin AI modellerini bulutlar, veri merkezleri ve iş istasyonları gibi çeşitli ortamlarda verimli bir şekilde dağıtmalarına yardımcı olmak için tasarlanmış hızlandırılmış tahmin mikro hizmetleri setidir. NVIDIA NIM'in bazı önemli özellikleri şunlardır: - **Kolay Dağıtım:** NIM, AI modellerinin tek bir komutla dağıtılmasına izin verir, bu da mevcut iş akışlarına entegrasyonu basit hale getirir. - **Optimizasyon Performansı:** Düşük gecikme süresi ve yüksek verim sağlamak için NVIDIA'nın önceden optimize edilmiş tahmin motorları, TensorRT ve TensorRT-LLM gibi, kullanır. - **Ölçeklenebilirlik:** NIM, Kubernetes üzerinde otomatik ölçeklendirmeyi destekler, değişen iş yüklerini etkili bir şekilde yönetmesini sağlar. - **Güvenlik ve Kontrol:** Kuruluşlar, NIM mikro hizmetlerini kendi yönetilen altyapılarında barındırarak veri ve uygulamaları üzerinde kontrol sahibi olabilirler. - **Standart API'ler:** NIM, endüstri standartlarında API'ler sağlar, bu da sohbet botları, AI asistanları ve daha fazlası gibi AI uygulamaları oluşturmayı ve entegre etmeyi kolaylaştırır. NIM, NVIDIA AI Enterprise'ın bir parçasıdır ve AI modellerinin dağıtımını ve işletilmesini basitleştirmeyi amaçlar, bu modellerin NVIDIA GPU'larında verimli çalışmasını sağlar. - Demo: Nividia NIM kullanarak Phi-3.5-Vision-API çağrısı [[Bu bağlantıya tıklayın](../../../19-slm/python/Phi-3-Vision-Nividia-NIM.ipynb)] ### Yerel ortamda Phi-3/3.5 tahmini Phi-3 veya GPT-3 gibi herhangi bir dil modeli ile ilgili tahmin, aldığı girdiye dayalı olarak yanıtlar veya tahminler oluşturma sürecini ifade eder. Phi-3'e bir istem veya soru verdiğinizde, eğitildiği verilerdeki desenleri ve ilişkileri analiz ederek en olası ve ilgili yanıtı çıkarmak için eğitilmiş sinir ağını kullanır. **Hugging Face Transformer** Hugging Face Transformers, doğal dil işleme (NLP) ve diğer makine öğrenimi görevleri için tasarlanmış güçlü bir kütüphanedir. İşte bazı önemli noktalar: 1. **Önceden Eğitilmiş Modeller**: Metin sınıflandırma, adlandırılmış varlık tanıma, soru yanıtlama, özetleme, çeviri ve metin üretimi gibi çeşitli görevler için kullanılabilecek binlerce önceden eğitilmiş model sağlar. 2. **Çerçeve Uyumluluğu**: Kütüphane, PyTorch, TensorFlow ve JAX gibi birden fazla derin öğrenme çerçevesini destekler. Bu, bir çerçevede model eğitmenizi ve başka bir çerçevede kullanmanızı sağlar. 3. **Çok Modlu Yetkinlikler**: NLP dışında, Hugging Face Transformers, bilgisayar vizyonu (örneğin, görüntü sınıflandırma, nesne algılama) ve ses işleme (örneğin, konuşma tanıma, ses sınıflandırma) görevlerini de destekler. 4. **Kullanım Kolaylığı**: Kütüphane, modelleri kolayca indirip ince ayar yapmayı sağlayan API'ler ve araçlar sunar, hem yeni başlayanlar hem de uzmanlar için erişilebilir hale getirir. 5. **Topluluk ve Kaynaklar**: Hugging Face, kullanıcıların başlamasına ve kütüphaneden en iyi şekilde yararlanmasına yardımcı olacak canlı bir topluluk ve kapsamlı belgeler, öğreticiler ve kılavuzlara sahiptir. [resmi belgeler](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) veya [GitHub deposu](https://github.com/huggingface/transformers?WT.mc_id=academic-105485-koreyst). Bu en yaygın kullanılan yöntemdir, ancak aynı zamanda GPU hızlandırması gerektirir. Sonuçta, Vision ve MoE gibi sahneler birçok hesaplama gerektirir, eğer kuantize edilmezlerse CPU'da çok sınırlı olacaktır. - Demo: Transformer kullanarak Phi-3.5-Instruct çağrısı [Bu bağlantıya tıklayın](../../../19-slm/python/phi35-instruct-demo.ipynb) - Demo: Transformer kullanarak Phi-3.5-Vision çağrısı [Bu bağlantıya tıklayın](../../../19-slm/python/phi35-vision-demo.ipynb) - Demo: Transformer kullanarak Phi-3.5-MoE çağrısı [Bu bağlantıya tıklayın](../../../19-slm/python/phi35_moe_demo.ipynb) **Ollama** [Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst), büyük dil modellerini (LLM'ler) yerel olarak makinenizde çalıştırmayı kolaylaştırmak için tasarlanmış bir platformdur. Llama 3.1, Phi 3, Mistral ve Gemma 2 gibi çeşitli modelleri destekler. Platform, model ağırlıklarını, yapılandırmayı ve verileri tek bir pakette birleştirerek kullanıcıların kendi modellerini özelleştirmesini ve oluşturmasını daha erişilebilir hale getirir. Ollama, macOS, Linux ve Windows için kullanılabilir. Bulut hizmetlerine güvenmeden LLM'lerle denemeler yapmak veya dağıtım yapmak istiyorsanız harika bir araçtır. Ollama en doğrudan yoldur, sadece aşağıdaki ifadeyi yürütmeniz gerekir. ```bash
+# Yeni Başlayanlar için Üretken Yapay Zeka İçin Küçük Dil Modellerine Giriş
+Üretken Yapay Zeka, yeni içerik oluşturabilen sistemler yaratmaya odaklanan büyüleyici bir yapay zeka alanıdır. Bu içerik metinden ve görüntülerden müziğe ve hatta tüm sanal ortamlara kadar uzanabilir. Üretken yapay zekanın en heyecan verici uygulamalarından biri dil modelleri alanındadır.
+
+## Küçük Dil Modelleri Nedir?
+
+Küçük Dil Modeli (KDM), büyük dil modeli (BDM) mimari ilkeleri ve tekniklerinden çoğunu kullanan, ancak önemli ölçüde azaltılmış bir hesaplama ayakizine sahip ölçeklendirilmiş bir BDM varyantıdır.
+
+KDM’ler, insan benzeri metinler üretmek için tasarlanmış dil modellerinin bir alt kümesidir. GPT-4 gibi daha büyük muadillerinin aksine, KDM’ler daha kompakt ve verimlidir, bu da onları hesaplama kaynaklarının sınırlı olduğu uygulamalar için ideal kılar. Daha küçük boyutlarına rağmen çeşitli görevleri yerine getirebilirler. Tipik olarak, KDM’ler, orijinal modelin işlevselliği ve dilsel yeteneklerinin önemli bir kısmını korumayı hedefleyerek BDM’lerin sıkıştırılması veya distilasyonu ile oluşturulur. Model boyutundaki bu küçülme, genel karmaşıklığı azaltır ve KDM’leri hem hafıza kullanımı hem de hesaplama gereksinimleri açısından daha verimli hale getirir. Bu optimizasyonlara rağmen, KDM’ler hala çok çeşitli doğal dil işleme (NLP) görevlerini gerçekleştirebilir:
+
+- Metin Üretimi: Tutarlı ve bağlamsal olarak ilgili cümleler veya paragraflar oluşturma.
+- Metin Tamamlama: Verilen bir isteme dayanarak cümleleri tahmin etme ve tamamlama.
+- Çeviri: Metni bir dilden diğerine çevirme.
+- Özetleme: Uzun metin parçalarını daha kısa, daha sindirilebilir özetlere dönüştürme.
+
+Daha büyük muadilleriyle kıyaslandığında performans veya anlama derinliği açısından bazı ödünler verilmiştir.
+
+## Küçük Dil Modelleri Nasıl Çalışır?
+KDM’ler çok büyük miktarda metin verisi üzerinde eğitilir. Eğitim sırasında dilin kalıplarını ve yapısını öğrenerek hem dilbilgisel olarak doğru hem de bağlama uygun metinler üretmelerini sağlarlar. Eğitim süreci şunları içerir:
+
+- Veri Toplama: Çeşitli kaynaklardan büyük metin veri setlerini toplama.
+- Ön İşleme: Verileri temizleme ve eğitime uygun hale getirme.
+- Eğitim: Modeli metni anlama ve üretme konusunda öğretmek için makine öğrenimi algoritmalarını kullanma.
+- İnce Ayar: Belirli görevlerde performansı artırmak için modeli ayarlama.
+
+KDM geliştirme, mobil cihazlar veya kenar bilişim platformları gibi kaynak kısıtlı ortamlarda kullanılabilen modeller ihtiyacının artmasıyla paralellik gösterir; çünkü tam ölçekli BDM’ler ağır kaynak gereksinimleri nedeniyle pratik olmayabilir. Verimliliğe odaklanarak KDM’ler, performans ve erişilebilirlik arasında denge kurar ve çeşitli alanlarda daha geniş uygulamalara olanak tanır.
+
+![slm](../../../translated_images/tr/slm.4058842744d0444a.webp)
+
+## Öğrenme Hedefleri
+
+Bu derste, KDM bilgisini tanıtmayı ve bunu Microsoft Phi-3 ile birleştirerek metin içeriği, görme ve MoE’de farklı senaryoları öğrenmeyi amaçlıyoruz.
+
+Dersin sonunda aşağıdaki soruları cevaplayabilecek durumda olmalısınız:
+
+- KDM nedir?
+- KDM ile BDM arasındaki fark nedir?
+- Microsoft Phi-3/3.5 Ailesi nedir?
+- Microsoft Phi-3/3.5 Ailesi ile nasıl çıkarım yapılır?
+
+Hazır mısınız? Başlayalım.
+
+## Büyük Dil Modelleri (BDM) ile Küçük Dil Modelleri (KDM) Arasındaki Farklar
+
+Hem BDM’ler hem de KDM’ler, mimari tasarım, eğitim metodolojileri, veri üretim süreçleri ve model değerlendirme tekniklerinde benzer yaklaşımları izleyen olasılıksal makine öğrenimi ilkelerine dayanmaktadır. Ancak bu iki model türünü birbirinden ayıran birkaç temel faktör vardır.
+
+## Küçük Dil Modellerinin Uygulamaları
+
+KDM’ler geniş bir uygulama yelpazesine sahiptir, bunlar arasında:
+
+- Sohbet Robotları: Müşteri desteği sağlama ve kullanıcılarla sohbet şeklinde etkileşime geçme.
+- İçerik Oluşturma: Yazarları fikir üretme veya hatta tam makaleler taslaklama konusunda destekleme.
+- Eğitim: Öğrencilere yazı ödevlerinde veya yeni diller öğrenmede yardımcı olma.
+- Erişilebilirlik: Metinden sese sistemleri gibi engelli bireyler için araçlar oluşturma.
+
+**Boyut**
+  
+BDM’ler ve KDM’ler arasındaki temel ayrım modellerin ölçeğindedir. ChatGPT (GPT-4) gibi BDM’ler yaklaşık 1.76 trilyon parametre içerebilirken, Mistral 7B gibi açık kaynak KDM’ler çok daha az parametreyle tasarlanmıştır — yaklaşık 7 milyar. Bu fark esas olarak model mimarisi ve eğitim süreçlerindeki farklılıklardan kaynaklanır. Örneğin, ChatGPT, bir kodlayıcı-çözücü yapısında kendi kendine dikkat mekanizması kullanırken, Mistral 7B sadece çözücü model içinde daha verimli eğitim sağlayan kayan pencere dikkat mekanizması kullanır. Bu mimari fark, modellerin karmaşıklığı ve performansı üzerinde derin etkiler yaratır.
+
+**Anlama**
+
+KDM’ler genellikle belirli alanlardaki performans için optimize edilmiştir, bu da onları oldukça uzmanlaştırılmış ancak çoklu bilgi alanlarında geniş kapsamlı bağlam anlayışı sağlama yeteneklerinde sınırlı yapar. Buna karşılık BDM’ler insan benzeri zekâyı daha kapsamlı düzeyde simüle etmeye çalışır. Büyük ve çeşitli veri setleri üzerinde eğitilen BDM’ler farklı alanlarda iyi performans gösterecek şekilde tasarlanmıştır, böylece daha fazla esneklik ve uyarlanabilirlik sunarlar. Bu nedenle, BDM’ler doğal dil işleme ve programlama gibi daha geniş yelpazedeki görevler için daha uygundur.
+
+**Hesaplama**
+
+BDM’lerin eğitimi ve dağıtımı kaynak gerektiren süreçlerdir ve genellikle büyük ölçekli GPU kümeleri gibi önemli hesaplama altyapıları gerektirir. Örneğin, ChatGPT gibi bir modeli sıfırdan eğitmek, binlerce GPU’nun uzun süreler boyunca kullanılması anlamına gelebilir. Buna karşılık KDM’ler daha küçük parametre sayılarına sahip olduklarından hesaplama kaynakları açısından daha erişilebilirdir. Mistral 7B gibi modeller, orta düzey GPU özelliklerine sahip yerel makinelerde eğitilip çalıştırılabilir, ancak eğitim yine de çoklu GPU’larda birkaç saat gerektirir.
+
+**Önyargı**
+
+Önyargı, BDM’lerde bilinen bir sorundur ve esas olarak eğitim verilerinin doğası nedeniyle ortaya çıkar. Bu modeller genellikle internetten açıkça erişilebilir ham verilere dayanır, bu veriler bazı grupları az temsil edebilir veya yanlış temsil edebilir, hatalı etiketlendirmeler içerebilir veya lehçe, coğrafi farklılıklar ve dilbilgisi kurallarının etkilediği dilsel önyargılar yansıtabilir. Ayrıca, BDM mimarilerinin karmaşıklığı, dikkatli ince ayar yapılmadığında önyargıyı istemeden artırabilir. Öte yandan, daha sınırlı, alan-spesifik veri setlerinde eğitilen KDM’ler bu tür önyargılara daha az maruz kalır, ancak tamamen bağışık değildir.
+
+**Çıkarım**
+
+KDM’lerin küçültülmüş boyutu onlara çıkarım hızı açısından önemli bir avantaj sağlar, böylece yerel donanım üzerinde verimli şekilde çıktı üretebilirler ve geniş çaplı paralel işlemeye ihtiyaç duymazlar. Buna karşılık BDM’ler, boyutları ve karmaşıklıkları nedeniyle kabul edilebilir çıkarım süreleri için genellikle önemli paralel hesaplama kaynaklarına gereksinim duyar. Çoklu eşzamanlı kullanıcıların varlığı, özellikle büyük çapta dağıtıldığında BDM’lerin yanıt sürelerini daha da yavaşlatır.
+
+Özetle, hem BDM’ler hem de KDM’ler makine öğreniminde ortak bir temele sahip olmakla birlikte, model boyutu, kaynak gereksinimleri, bağlamsal anlama, önyargıya yatkınlık ve çıkarım hızı bakımından önemli farklılıklar gösterirler. Bu farklılıklar, BDM’lerin daha esnek ancak kaynak tüketimi yüksek, KDM’lerin ise daha alan-spesifik verimli ve daha düşük hesaplama talebiyle farklı kullanım durumlarına uygunluğunu yansıtır.
+
+***Not: Bu derste, Microsoft Phi-3 / 3.5 örneği kullanılarak KDM tanıtılacaktır.***
+
+## Phi-3 / Phi-3.5 Ailesini Tanıtmak
+
+Phi-3 / 3.5 Ailesi esas olarak metin, görme ve Ajan (MoE) uygulama senaryolarına odaklanır:
+
+### Phi-3 / 3.5 Instruct
+
+Esas olarak metin üretimi, sohbet tamamlama ve içerik bilgi çıkarımı gibi görevler için.
+
+**Phi-3-mini**
+
+3.8 milyar parametreli bu dil modeli Microsoft Foundry, Hugging Face ve Ollama platformlarında mevcuttur. Phi-3 modelleri, eşit veya daha büyük boyuttaki dil modellerini önemli ölçüde geride bırakır (aşağıdaki benchmark sayıları daha yüksek olan daha iyidir). Phi-3-mini, kendi boyutunun iki katı büyüklüğündeki modelleri geride bırakırken, Phi-3-small ve Phi-3-medium daha büyük modelleri, hatta GPT-3.5’i geçer.
+
+**Phi-3-small & medium**
+
+Sadece 7 milyar parametre ile Phi-3-small, birçok dil, muhakeme, kodlama ve matematik benchmark’ında GPT-3.5T’yi yeniyor.
+
+14 milyar parametreli Phi-3-medium bu eğilimi sürdürerek Gemini 1.0 Pro’yu geçiyor.
+
+**Phi-3.5-mini**
+
+Phi-3-mini’nin bir yükseltmesi olarak düşünülebilir. Parametre sayısı değişmemiş olmasına rağmen, çoklu dili destekleme yeteneğini geliştirir (20+ dili destekler: Arapça, Çince, Çekçe, Danca, Hollandaca, İngilizce, Fince, Fransızca, Almanca, İbranice, Macarca, İtalyanca, Japonca, Korece, Norveççe, Lehçe, Portekizce, Rusça, İspanyolca, İsveççe, Tayca, Türkçe, Ukraynaca) ve uzun bağlam desteğini güçlendirir.
+
+3.8 milyar parametreli Phi-3.5-mini, aynı boyuttaki dil modellerini geride bırakır ve kendi boyutunun iki katı olan modellerle başa baştır.
+
+### Phi-3 / 3.5 Vision
+
+Phi-3/3.5 Instruct modelini Phi’nin anlama yeteneği olarak düşünebiliriz ve Vision ise Phi’ye dünyayı anlama gözleri verir.
+
+
+**Phi-3-Vision**
+
+Sadece 4.2 milyar parametreye sahip Phi-3-vision, genel görsel muhakeme görevlerinde, OCR, tablo ve diyagram anlama görevlerinde Claude-3 Haiku ve Gemini 1.0 Pro V gibi daha büyük modelleri geride bırakmaya devam eder.
+
+
+**Phi-3.5-Vision**
+
+Phi-3.5-Vision, Phi-3-Vision’ın bir yükseltmesidir; birden fazla görüntüyü destekler. Görme alanında bir iyileştirme olarak düşünebilirsiniz; sadece resimleri değil, videoları da görebilir.
+
+Phi-3.5-vision, OCR, tablo ve grafik anlama görevlerinde Claude-3.5 Sonnet ve Gemini 1.5 Flash gibi daha büyük modelleri geride bırakır; genel görsel bilgi muhakemesi görevlerinde ise denk performans gösterir. Çoklu kare girişini destekler, yani çoklu giriş görüntüleri üzerinde muhakeme yapabilir.
+
+
+### Phi-3.5-MoE
+
+***Mixture of Experts (MoE)***, modellerin çok daha az hesaplamayla önceden eğitilmesini mümkün kılar, bu da aynı hesaplama bütçesi ile model veya veri seti boyutunun dramatik şekilde artırılabileceği anlamına gelir. Özellikle, bir MoE modeli, ön eğitim sırasında yoğun model muadiline kıyasla aynı kaliteyi çok daha hızlı elde etmelidir.
+
+Phi-3.5-MoE, 16x3.8 milyar parametreli uzman modüllerden oluşur. Sadece 6.6 milyar aktif parametreye sahip Phi-3.5-MoE, çok daha büyük modellerle benzer seviyede muhakeme, dil anlama ve matematik başarısına ulaşır.
+
+Phi-3/3.5 Ailesi modelini farklı senaryolara göre kullanabiliriz. BDM’nin aksine, Phi-3/3.5-mini veya Phi-3/3.5-Vision’ı kenar cihazlarında dağıtabilirsiniz.
+
+
+## Phi-3/3.5 Aile Modellerinin Kullanımı
+
+Phi-3/3.5’i farklı senaryolarda kullanmayı umuyoruz. Sonraki adımda, farklı senaryolara göre Phi-3/3.5 kullanacağız.
+
+![phi3](../../../translated_images/tr/phi3.655208c3186ae381.webp)
+
+### Bulut API’leri Üzerinden Çıkarım
+
+**Microsoft Foundry Modelleri**
+
+> **Not:** GitHub Modelleri Temmuz 2026 sonunda kullanımdan kaldırılacak. [Microsoft Foundry Modelleri](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) doğrudan yerini alacaktır.
+
+Microsoft Foundry Modelleri en doğrudan yoldur. Phi-3/3.5-Instruct modeline Foundry model kataloğu aracılığıyla hızlıca erişebilirsiniz. Azure AI Inference SDK / OpenAI SDK ile API çağrısını kod yoluyla tamamlayabilirsiniz. Ayrıca farklı etkileri Playground üzerinden test edebilirsiniz.
+
+- Demo: Çin senaryolarında Phi-3-mini ve Phi-3.5-mini etkilerinin karşılaştırması
+
+![phi3](../../../translated_images/tr/gh1.126c6139713b622b.webp)
+
+![phi35](../../../translated_images/tr/gh2.07d7985af66f178d.webp)
+
+
+**Microsoft Foundry**
+
+Ya da görme ve MoE modellerini kullanmak istersek, Microsoft Foundry ile çağrıyı gerçekleştirebilirsiniz. İlgileniyorsanız, Phi-3 Cookbook’u okuyarak Microsoft Foundry üzerinden Phi-3/3.5 Instruct, Vision, MoE’nin nasıl çağrılacağını öğrenebilirsiniz [Bu bağlantıya tıklayın](https://github.com/microsoft/Phi-3CookBook/blob/main/md/02.QuickStart/AzureAIStudio_QuickStart.md?WT.mc_id=academic-105485-koreyst)
+
+
+**NVIDIA NIM**
+
+Bulut tabanlı Microsoft Foundry Modelleri kataloğunun yanı sıra, ilgili çağrıları tamamlamak için [NVIDIA NIM](https://developer.nvidia.com/nim?WT.mc_id=academic-105485-koreyst) kullanabilirsiniz. NVIDIA NIM (NVIDIA Inference Microservices), geliştiricilerin bulutlar, veri merkezleri ve iş istasyonları dahil olmak üzere çeşitli ortamlarda AI modellerini verimli şekilde dağıtmalarına yardımcı olmak üzere tasarlanmış hızlandırılmış çıkarım mikro servisleri setidir.
+
+İşte NVIDIA NIM’in bazı önemli özellikleri:
+
+- **Kolay Dağıtım:** NIM, AI modellerinin tek bir komutla dağıtımını mümkün kılarak mevcut iş akışlarına entegrasyonu basitleştirir.
+
+- **Optimize Edilmiş Performans:** Düşük gecikme ve yüksek verimlilik sağlamak için TensorRT ve TensorRT-LLM gibi NVIDIA’nın önceden optimize edilmiş çıkarım motorlarını kullanır.
+- **Ölçeklenebilirlik:** NIM, Kubernetes üzerinde otomatik ölçeklendirmeyi destekleyerek değişken iş yüklerini etkili bir şekilde yönetmesini sağlar.
+- **Güvenlik ve Kontrol:** Kuruluşlar, NIM mikroservislerini kendi yönetilen altyapılarında barındırarak veri ve uygulamaları üzerinde kontrol sahibi olabilirler.
+- **Standart API’ler:** NIM, chatbotlar, AI asistanları ve daha fazlası gibi AI uygulamalarını kolayca oluşturmak ve entegre etmek için endüstri standardı API’ler sunar.
+
+NIM, NVIDIA AI Enterprise’ın bir parçasıdır ve AI modellerinin dağıtımını ve operasyonelleştirilmesini basitleştirerek NVIDIA GPU’larında verimli çalışmasını sağlar.
+
+- Demo: NVIDIA NIM kullanarak Phi-3.5-Vision-API çağırma [[Bu bağlantıya tıklayın](./python/Phi-3-Vision-Nividia-NIM.ipynb?WT.mc_id=academic-105485-koreyst)]
+
+
+### Phi-3/3.5’ü Yerelde Çalıştırmak
+Phi-3 veya GPT-3 gibi herhangi bir dil modeline ilişkin çıkarım (inference), aldığı girdiye dayanarak yanıtlar veya tahminler oluşturma sürecine denir. Phi-3’e bir soru veya komut verdiğinizde, eğitildiği verideki desenleri ve ilişkileri analiz ederek en olası ve ilgili yanıtı oluşturmak için eğitilmiş sinir ağını kullanır.
+
+**Hugging Face Transformer**
+Hugging Face Transformers, doğal dil işleme (NLP) ve diğer makine öğrenimi görevleri için tasarlanmış güçlü bir kütüphanedir. İşte bu kütüphane hakkında bazı önemli noktalar:
+
+1. **Önceden Eğitilmiş Modeller:** Metin sınıflandırma, adlandırılmış varlık tanıma, soru yanıtlama, özetleme, çeviri ve metin üretimi gibi çeşitli görevler için kullanılabilecek binlerce önceden eğitilmiş model sunar.
+
+2. **Çerçeve Uyumluluğu:** Kütüphane, PyTorch, TensorFlow ve JAX gibi birçok derin öğrenme çerçevesini destekler. Bu sayede bir modeli bir çerçevede eğitip diğerinde kullanabilirsiniz.
+
+3. **Multimodal Yetkinlikler:** NLP’nin yanı sıra, Hugging Face Transformers bilgisayarlı görme (örneğin, görüntü sınıflandırma, nesne algılama) ve ses işleme (örneğin, konuşma tanıma, ses sınıflandırma) görevlerini de destekler.
+
+4. **Kullanım Kolaylığı:** Kütüphane, modelleri kolayca indirip ince ayar yapmanızı sağlayan API’ler ve araçlar sunar; hem yeni başlayanlar hem de uzmanlar için erişilebilirdir.
+
+5. **Topluluk ve Kaynaklar:** Hugging Face zengin bir topluluğa ve kapsamlı dökümantasyon, eğitim ve rehberlere sahiptir; kullanıcıların başlamasına ve kütüphaneden en iyi şekilde faydalanmasına yardımcı olur.
+[resmi dökümantasyon](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) veya onların [GitHub deposu](https://github.com/huggingface/transformers?WT.mc_id=academic-105485-koreyst).
+
+Bu en yaygın kullanılan yöntemdir ancak GPU hızlandırması gerektirir. Sonuçta Vision ve MoE gibi senaryolar çok fazla hesaplama gerektirir ve bunlar quantize edilmemişse CPU’da çok yavaş çalışacaktır.
+
+
+- Demo: Transformer kullanarak Phi-3.5-Instruct çağırma [Bu bağlantıya tıklayın](./python/phi35-instruct-demo.ipynb?WT.mc_id=academic-105485-koreyst)
+
+- Demo: Transformer kullanarak Phi-3.5-Vision çağırma [Bu bağlantıya tıklayın](./python/phi35-vision-demo.ipynb?WT.mc_id=academic-105485-koreyst)
+
+- Demo: Transformer kullanarak Phi-3.5-MoE çağırma [Bu bağlantıya tıklayın](./python/phi35_moe_demo.ipynb?WT.mc_id=academic-105485-koreyst)
+
+**Ollama**
+[Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst), büyük dil modellerini (LLM’ler) yerelde, kendi makinenizde çalıştırmayı kolaylaştırmak için tasarlanmış bir platformdur. Llama 3.1, Phi 3, Mistral ve Gemma 2 gibi çeşitli modelleri destekler. Platform, model ağırlıkları, yapılandırma ve veriyi tek bir paket halinde sunarak kullanıcıların kendi modellerini özelleştirmesini ve oluşturmasını daha erişilebilir hale getirir. Ollama macOS, Linux ve Windows için mevcuttur. Bulut servislerine bağlı kalmadan LLM’lerle denemeler yapmak veya dağıtmak isteyenler için harika bir araçtır. Ollama en doğrudan yoldur, sadece aşağıdaki komutu çalıştırmanız yeterlidir.
+
+
+```bash
 
 ollama run phi3.5
 
-``` **ONNX Runtime for GenAI** [ONNX Runtime](https://github.com/microsoft/onnxruntime-genai?WT.mc_id=academic-105485-koreyst), platformlar arası tahmin ve eğitim makine öğrenimi hızlandırıcısıdır. ONNX Runtime for Generative AI (GENAI), çeşitli platformlarda üretken AI modellerini verimli bir şekilde çalıştırmanıza yardımcı olan güçlü bir araçtır. ## ONNX Runtime nedir? ONNX Runtime, makine öğrenimi modellerinin yüksek performanslı tahminini sağlayan açık kaynaklı bir projedir. Makine öğrenimi modellerini temsil etmek için bir standart olan Open Neural Network Exchange (ONNX) formatındaki modelleri destekler.ONNX Runtime tahmini, PyTorch ve TensorFlow/Keras gibi derin öğrenme çerçevelerinin yanı sıra scikit-learn, LightGBM, XGBoost gibi klasik makine öğrenimi kütüphanelerinden modelleri destekleyerek daha hızlı müşteri deneyimleri ve daha düşük maliyetler sağlayabilir. ONNX Runtime, farklı donanımlar, sürücüler ve işletim sistemleri ile uyumludur ve donanım hızlandırıcılarını uygun olduğu yerlerde kullanarak grafik optimizasyonları ve dönüşümlerle optimal performans sağlar. ## Üretken AI nedir? Üretken AI, üzerinde eğitildiği verilere dayalı olarak yeni içerik, metin, görüntü veya müzik gibi, üretebilen AI sistemlerini ifade eder. Örnekler arasında GPT-3 gibi dil modelleri ve Stable Diffusion gibi görüntü üretim modelleri bulunur. ONNX Runtime for GenAI kütüphanesi, ONNX modelleri için üretken AI döngüsünü sağlar, ONNX Runtime ile tahmin, logit işleme, arama ve örnekleme ve KV önbellek yönetimi dahil. ## GENAI için ONNX Runtime ONNX Runtime for GENAI, ONNX Runtime'ın yeteneklerini üretken AI modellerini desteklemek için genişletir. İşte bazı önemli özellikler: - **Geniş Platform Desteği:** Windows, Linux, macOS, Android ve iOS dahil olmak üzere çeşitli platformlarda çalışır. - **Model Desteği:** LLaMA, GPT-Neo, BLOOM ve daha fazlası gibi birçok popüler üretken AI modelini destekler. - **Performans Optimizasyonu:** NVIDIA GPU'lar, AMD GPU'lar ve daha fazlası gibi farklı donanım hızlandırıcıları için optimizasyonlar içerir. - **Kullanım Kolaylığı:** Metin, görüntü ve diğer içerikleri minimum kodla üretmenize olanak tanıyan API'ler sağlar, uygulamalara kolay entegrasyon sağlar - Kullanıcılar, yüksek seviyeli bir generate() yöntemi çağırabilir veya modelin her yinelemesini bir döngüde çalıştırarak, bir seferde bir token üreterek ve döngü içinde üretim parametrelerini isteğe bağlı olarak güncelleyebilir. - ONNX runtime ayrıca token dizilerini oluşturmak için açgözlü/beam arama ve TopP, TopK örnekleme ve tekrar cezaları gibi yerleşik logit işlemeyi destekler. Ayrıca kolayca özel puanlama ekleyebilirsiniz. ## Başlarken GENAI için ONNX Runtime ile başlamak için şu adımları takip edebilirsiniz: ### ONNX Runtime'ı Yükleyin: ```Python
+```
+
+**Foundry Local**
+
+[Foundry Local](https://foundrylocal.ai?WT.mc_id=academic-105485-koreyst), Microsoft’un çevrimdışı, cihaz üzerinde çalışan bir çalışma zamanı ortamıdır; Phi gibi modelleri tamamen kendi donanımınızda çalıştırmanızı sağlar - Azure aboneliği, API anahtarı veya ağ bağlantısı gerekmez. Mevcut en iyi yürütme sağlayıcısını (NPU, GPU veya CPU) otomatik olarak seçer ve OpenAI uyumlu bir uç nokta sunar, böylece mevcut `openai` / Azure AI Inference SDK kodları minimum değişiklikle bu uç noktayı kullanabilir. Başlamak için [Foundry Local dökümantasyonunu](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-local/get-started?WT.mc_id=academic-105485-koreyst) inceleyin.
+
+```bash
+
+winget install Microsoft.FoundryLocal
+foundry model run phi-3.5-mini
+
+```
+
+Veya SDK’yı doğrudan Python’da kullanabilirsiniz:
+
+```bash
+
+pip install foundry-local-sdk
+
+```
+
+```python
+
+from foundry_local import FoundryLocalManager
+
+manager = FoundryLocalManager("phi-3.5-mini")
+print(manager.endpoint, manager.api_key)
+
+```
+
+**ONNX Runtime for GenAI**
+
+[ONNX Runtime](https://github.com/microsoft/onnxruntime-genai?WT.mc_id=academic-105485-koreyst), çapraz platform çıkarım ve eğitim için bir makine öğrenimi hızlandırıcıdır. ONNX Runtime for Generative AI (GENAI), üretken AI modellerini çeşitli platformlarda verimli çalıştırmanıza yardımcı olan güçlü bir araçtır.
+
+## ONNX Runtime Nedir?
+ONNX Runtime, makine öğrenimi modellerinin yüksek performanslı çıkarımını sağlayan açık kaynaklı bir projedir. Open Neural Network Exchange (ONNX) formatındaki modelleri destekler; bu, makine öğrenimi modellerini temsil etmek için standart bir formattır. ONNX Runtime çıkarımı, PyTorch ve TensorFlow/Keras gibi derin öğrenme çerçevelerinden ve scikit-learn, LightGBM, XGBoost gibi klasik makine öğrenimi kütüphanelerinden modelleri destekleyerek daha hızlı müşteri deneyimleri ve daha düşük maliyetler sağlar. Farklı donanımlar, sürücüler ve işletim sistemleri ile uyumludur ve grafik optimizasyonları ve dönüşümlerinin yanında donanım hızlandırıcılarından yararlanarak optimum performans sunar.
+
+## Üretken AI Nedir?
+Üretken AI, üzerinde eğitildiği verilere dayanarak yeni içerikler (metin, görsel, müzik gibi) oluşturabilen AI sistemlerini ifade eder. Örnekler arasında GPT-3 gibi dil modelleri ve Stable Diffusion gibi görsel üretim modelleri bulunur. ONNX Runtime for GenAI kütüphanesi, ONNX modeller için üretken AI döngüsünü sağlar; buna ONNX Runtime ile çıkarım, logit işleme, arama ve örnekleme ile KV önbellek yönetimi dahildir.
+
+## ONNX Runtime for GENAI
+ONNX Runtime for GENAI, ONNX Runtime’ın yeteneklerini üretken AI modellerini destekleyecek şekilde genişletir. Bazı önemli özellikleri şunlardır:
+
+- **Geniş Platform Desteği:** Windows, Linux, macOS, Android ve iOS dahil olmak üzere çeşitli platformlarda çalışır.
+- **Model Desteği:** LLaMA, GPT-Neo, BLOOM ve daha birçok popüler üretken AI modelini destekler.
+- **Performans Optimizasyonu:** NVIDIA GPU’lar, AMD GPU’lar ve daha fazlası gibi farklı donanım hızlandırıcıları için optimizasyonlar içerir.
+- **Kullanım Kolaylığı:** Uygulamalara kolay entegrasyon için API’ler sunar; minimum kod ile metin, görsel ve diğer içeriklerin üretimini sağlar.
+- Kullanıcılar yüksek seviyede generate() metodunu çağırabilir veya modeli döngü içinde çalıştırıp her seferinde bir token üretebilir ve döngü içinde üretim parametrelerini güncelleyebilir.
+- ONNX runtime ayrıca greedy/beam search ve TopP, TopK örnekleme desteği ile token dizileri üretmeyi ve tekrarlama cezaları gibi gömülü logit işleme özelliklerini destekler. Ayrıca özel skorlamalar kolaylıkla eklenebilir.
+
+## Başlangıç
+ONNX Runtime for GENAI ile başlamak için şu adımları izleyebilirsiniz:
+
+### ONNX Runtime Kurulumu:
+```Python
 pip install onnxruntime
-``` ### Üretken AI Uzantılarını Yükleyin: ```Python
+```
+### Üretken AI Eklentilerini Kurun:
+```Python
 pip install onnxruntime-genai
-``` ### Bir Model Çalıştırın: İşte Python'da basit bir örnek: ```Python
+```
+
+### Bir Model Çalıştırın: İşte Python’da basit bir örnek:
+```Python
 import onnxruntime_genai as og
 
 model = og.Model('path_to_your_model.onnx')
@@ -32,7 +283,11 @@ output_tokens = model.generate(input_tokens)
 output_text = tokenizer.decode(output_tokens)
 
 print(output_text) 
-``` ### Demo: ONNX Runtime GenAI kullanarak Phi-3.5-Vision çağrısı ```python
+```
+### Demo: ONNX Runtime GenAI kullanarak Phi-3.5-Vision çağrısı
+
+
+```python
 
 import onnxruntime_genai as og
 
@@ -76,11 +331,25 @@ while not generator.is_done():
 
     new_token = generator.get_next_tokens()[0]
     
-    code += tokenizer_stream.decode(new_token)
+    output = tokenizer_stream.decode(new_token)
     
     print(tokenizer_stream.decode(new_token), end='', flush=True)
 
-``` **Diğerleri** ONNX Runtime ve Ollama referans yöntemlerine ek olarak, farklı üreticiler tarafından sağlanan model referans yöntemlerine dayalı olarak nicel modellerin referansını tamamlayabiliriz. Apple Metal ile Apple MLX çerçevesi, Qualcomm QNN ile NPU, Intel OpenVINO ile CPU/GPU gibi. [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst) adresinden daha fazla içerik elde edebilirsiniz. ## Daha Fazlası Phi-3/3.5 Ailesinin temellerini öğrendik, ancak SLM hakkında daha fazla bilgi edinmek için daha fazla bilgiye ihtiyacımız var. Cevapları Phi-3 Cookbook'ta bulabilirsiniz. Daha fazla bilgi edinmek istiyorsanız, lütfen [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst) adresini ziyaret edin.
+```
 
-**Feragatname**: 
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumlu değiliz.
+
+**Diğerleri**
+
+ONNX Runtime, Ollama ve Foundry Local referans yöntemlerine ek olarak, farklı üreticilerin sağladığı model referans yöntemlerine dayalı kantitatif modellerin referanslarını da tamamlayabiliriz. Örneğin Apple Metal ile Apple MLX çerçevesi, Qualcomm QNN ile NPU, Intel OpenVINO ile CPU/GPU vb. Daha fazla içeriği [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst) adresinden edinebilirsiniz.
+
+
+## Daha Fazlası
+
+Phi-3/3.5 Ailesinin temellerini öğrendik, ancak SLM hakkında daha fazla bilgi edinmek için daha fazla bilgiye ihtiyacımız var. Cevapları Phi-3 Cookbook’ta bulabilirsiniz. Daha fazlasını öğrenmek istiyorsanız, lütfen [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst) ziyaret edin.
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

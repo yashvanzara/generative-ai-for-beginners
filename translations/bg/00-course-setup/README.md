@@ -1,163 +1,171 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9f4785899ee92500f524b4acb26e3bb3",
-  "translation_date": "2025-05-19T12:37:21+00:00",
-  "source_file": "00-course-setup/README.md",
-  "language_code": "bg"
-}
--->
 # Започване с този курс
 
-Много сме развълнувани, че започвате този курс и ще видим какво ще ви вдъхнови да създадете с Генеративния AI!
+Много се радваме, че започвате този курс и ще видите какво ще ви вдъхнови да създадете с Генеративен AI!
 
-За да гарантираме вашия успех, тази страница очертава стъпките за настройка, техническите изисквания и къде да получите помощ, ако е необходимо.
+За да гарантираме вашия успех, тази страница описва стъпките за настройка, техническите изисквания и къде да потърсите помощ при нужда.
 
 ## Стъпки за настройка
 
 За да започнете този курс, ще трябва да изпълните следните стъпки.
 
-### 1. Форкнете това хранилище
+### 1. Форкнете този репо
 
-[Форкнете цялото това хранилище](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) във вашия собствен GitHub акаунт, за да можете да променяте кода и да завършвате предизвикателствата. Можете също така да [звездате (🌟) това хранилище](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars?WT.mc_id=academic-105485-koreyst), за да го намерите и свързаните с него хранилища по-лесно.
+[Форкнете това цялостно репо](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) във вашия GitHub акаунт, за да можете да променяте код и да изпълнявате предизвикателствата. Можете също да [добавите звездичка (🌟) на това репо](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars?WT.mc_id=academic-105485-koreyst), за да го намирате по-лесно заедно със свързани репозитории.
 
-### 2. Създайте кодово пространство
+### 2. Създайте Codespace
 
-За да избегнете проблеми със зависимостите при изпълнение на кода, препоръчваме да изпълнявате този курс в [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=academic-105485-koreyst).
+За да избегнете проблеми с зависимости при стартиране на кода, препоръчваме да използвате този курс в [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=academic-105485-koreyst).
 
-Това може да бъде създадено, като изберете опцията `Code` на вашата форкната версия на това хранилище и изберете опцията **Codespaces**.
+Във вашия fork: **Code -> Codespaces -> New on main**
 
-![Диалогов прозорец, показващ бутони за създаване на кодово пространство](../../../00-course-setup/images/who-will-pay.webp)
+![Диалог, показващ бутони за създаване на codespace](../../../translated_images/bg/who-will-pay.4c0609b1c7780f44.webp)
 
-### 3. Съхранение на вашите API ключове
+#### 2.1 Добавете секретен ключ
 
-Поддържането на вашите API ключове безопасни и сигурни е важно, когато изграждате всякакъв вид приложение. Препоръчваме да не съхранявате никакви API ключове директно в кода си. Публикуването на тези данни в обществено хранилище може да доведе до проблеми със сигурността и дори нежелани разходи, ако бъдат използвани от злонамерен актьор.
-Ето ръководство стъпка по стъпка как да създадете `.env` файл за Python и да добавите `GITHUB_TOKEN`:
+1. ⚙️ Икона зъбно колело -> Command Palette -> Codespaces : Manage user secret -> Add a new secret.
+2. Име OPENAI_API_KEY, поставете вашия ключ, Запазете.
 
-1. **Навигирайте до вашата проектна директория**: Отворете вашия терминал или команден ред и навигирайте до кореновата директория на вашия проект, където искате да създадете файла `.env`.
+### 3. Какво следва?
 
-   ```bash
-   cd path/to/your/project
-   ```
+| Искам да…           | Отиди на…                                                               |
+|---------------------|-------------------------------------------------------------------------|
+| Започна урок 1      | [`01-introduction-to-genai`](../01-introduction-to-genai/README.md)     |
+| Работя офлайн       | [`setup-local.md`](02-setup-local.md)                                   |
+| Настройка на LLM доставчик | [`providers.md`](03-providers.md)                                        |
+| Срещна други учащи | [Присъединете се към Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)   |
 
-2. **Създайте файла `.env`**: Използвайте предпочитания от вас текстов редактор, за да създадете нов файл с име `.env`. Ако използвате командния ред, можете да използвате `touch` (on Unix-based systems) or `echo` (в Windows):
+## Отстраняване на неизправности
+
+
+| Симптом                                  | Решение                                                         |
+|------------------------------------------|-----------------------------------------------------------------|
+| Сглобяване на контейнер зацикля > 10 мин | **Codespaces ➜ “Rebuild Container”**                            |
+| `python: command not found`              | Терминалът не се е свързал; кликнете **+** ➜ *bash*            |
+| `401 Unauthorized` от OpenAI             | Грешен / изтекъл `OPENAI_API_KEY`                              |
+| VS Code показва “Dev container mounting…” | Презаредете таба на браузъра—понякога Codespaces губи връзка   |
+| Ядро на бележник липсва                  | Меню на бележника ➜ **Kernel ▸ Select Kernel ▸ Python 3**       |
 
    Unix-базирани системи:
+
    ```bash
    touch .env
    ```
 
    Windows:
+
    ```cmd
    echo . > .env
    ```
 
-3. **Редактирайте файла `.env`**: Отворете файла `.env` в текстов редактор (например, VS Code, Notepad++ или друг редактор). Добавете следния ред във файла, заменяйки `your_github_token_here` с вашия действителен GitHub токен:
+3. **Редактирайте `.env` файла**: Отворете .env файла в текстов редактор (напр. VS Code, Notepad++ или друг). Добавете следните редове, като замените плейсхолдърите с вашата реална крайна точка и ключ за Microsoft Foundry Models (вижте [`providers.md`](03-providers.md) за инструкции как да ги получите):
+
+   > **Забележка:** GitHub Models (с променливата `GITHUB_TOKEN`) ще бъде пенсиониран в края на юли 2026. Използвайте вместо това [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
 
    ```env
-   GITHUB_TOKEN=your_github_token_here
+   AZURE_INFERENCE_ENDPOINT=your_foundry_endpoint_here
+   AZURE_INFERENCE_CREDENTIAL=your_foundry_api_key_here
    ```
 
 4. **Запазете файла**: Запазете промените и затворете текстовия редактор.
 
-5. **Инсталирайте пакета `python-dotenv`**: If you haven't already, you'll need to install the `python-dotenv`, за да заредите променливите на околната среда от файла `.env` във вашето Python приложение. Можете да го инсталирате с `pip`:
+5. **Инсталирайте `python-dotenv`**: Ако още не сте, трябва да инсталирате пакета `python-dotenv`, който зарежда променливите от .env файла във вашето Python приложение. Можете да го инсталирате с `pip`:
 
    ```bash
    pip install python-dotenv
    ```
 
-6. **Заредете променливите на околната среда във вашия Python скрипт**: Във вашия Python скрипт използвайте пакета `python-dotenv`, за да заредите променливите на околната среда от файла `.env`:
+6. **Заредете променливите от околната среда в Python скрипта си**: В скрипта си използвайте `python-dotenv` за да заредите променливите от .env файла:
 
    ```python
    from dotenv import load_dotenv
    import os
 
-   # Load environment variables from .env file
+   # Заредете променливите на околната среда от .env файла
    load_dotenv()
 
-   # Access the GITHUB_TOKEN variable
-   github_token = os.getenv("GITHUB_TOKEN")
+   # Достъп до променливите на Microsoft Foundry Models
+   endpoint = os.getenv("AZURE_INFERENCE_ENDPOINT")
+   token = os.getenv("AZURE_INFERENCE_CREDENTIAL")
 
-   print(github_token)
+   print(endpoint)
    ```
 
-Това е всичко! Успешно създадохте `.env` файл, добавихте вашия GitHub токен и го заредихте във вашето Python приложение.
+Това е! Успешно създадохте `.env` файл, добавихте идентификационни данни за Microsoft Foundry Models и ги заредихте във вашето Python приложение.
 
-## Как да изпълните локално на вашия компютър
+## Как да стартирате локално на вашия компютър
 
-За да изпълните кода локално на вашия компютър, ще трябва да имате някаква версия на [Python инсталирана](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst).
+За да стартирате кода локално на вашия компютър, трябва да имате инсталирана някаква версия на [Python](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst).
 
-След това, за да използвате хранилището, трябва да го клонирате:
+За да използвате репозитория, трябва да го клонирате:
 
 ```shell
 git clone https://github.com/microsoft/generative-ai-for-beginners
 cd generative-ai-for-beginners
 ```
 
-След като всичко е проверено, можете да започнете!
+Когато сте готови с всичко, може да започнете!
 
 ## Допълнителни стъпки
 
 ### Инсталиране на Miniconda
 
-[Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) е лек инсталатор за инсталиране на [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst), Python, както и няколко пакета.
-Conda сама по себе си е мениджър на пакети, който улеснява настройването и превключването между различни Python [**виртуални среди**](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) и пакети. Тя също така е полезна за инсталиране на пакети, които не са налични чрез `pip`.
+[Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) е лек инсталатор за инсталиране на [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst), Python и няколко пакета.
+Conda е пакетен мениджър, който улеснява настройката и смяната между различни Python [**виртуални среди**](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) и пакети. Полезен е и за инсталиране на пакети, които не са налични през `pip`.
 
-You can follow the [MiniConda installation guide](https://docs.anaconda.com/free/miniconda/#quick-command-line-install?WT.mc_id=academic-105485-koreyst) to set it up.
+Можете да следвате [инструкциите за инсталиране на Miniconda](https://docs.anaconda.com/free/miniconda/#quick-command-line-install?WT.mc_id=academic-105485-koreyst) за настройка.
 
-With Miniconda installed, you need to clone the [repository](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) (if you haven't already)
+След като инсталирате Miniconda, трябва да клонирате [репозитория](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) (ако още не сте го направили).
 
-Next, you need to create a virtual environment. To do this with Conda, go ahead and create a new environment file (_environment.yml_). If you are following along using Codespaces, create this within the `.devcontainer` directory, thus `.devcontainer/environment.yml`.
+След това създайте виртуална среда. За да направите това с Conda, създайте нов файл за средата (_environment.yml_). Ако използвате Codespaces, създайте този файл в директорията `.devcontainer`, тоест `.devcontainer/environment.yml`.
 
-Продължете и попълнете файла на околната среда с фрагмента по-долу:
+Добавете в този файл следния кодов фрагмент:
 
 ```yml
 name: <environment-name>
 channels:
- - defaults
- - microsoft
+  - defaults
+  - microsoft
 dependencies:
-- python=<python-version>
-- openai
-- python-dotenv
-- pip
-- pip:
-    - azure-ai-ml
-
+  - python=<python-version>
+  - openai
+  - python-dotenv
+  - pip
+  - pip:
+      - azure-ai-ml
 ```
 
-Ако установите, че получавате грешки, използвайки conda, можете ръчно да инсталирате Microsoft AI Libraries, използвайки следната команда в терминал.
+Ако срещнете грешки при използването на conda, можете ръчно да инсталирате Microsoft AI библиотеките чрез следната команда в терминала.
 
 ```
 conda install -c microsoft azure-ai-ml
 ```
 
-Файлът на околната среда уточнява зависимостите, които ни трябват. `<environment-name>` refers to the name you would like to use for your Conda environment, and `<python-version>` is the version of Python you would like to use, for example, `3` е последната основна версия на Python.
+Файлът на средата задава зависимостите, които са нужни. `<environment-name>` е името, което желаете за вашата Conda среда, а `<python-version>` е версията на Python, например, `3` за последната главна версия на Python.
 
-С това, можете да продължите и да създадете вашата Conda среда, като изпълните командите по-долу във вашия команден ред/терминал
+След това създайте вашата Conda среда като изпълните командите по-долу в командния ред/терминала.
 
 ```bash
-conda env create --name ai4beg --file .devcontainer/environment.yml # .devcontainer sub path applies to only Codespace setups
+conda env create --name ai4beg --file .devcontainer/environment.yml # Под-пътят .devcontainer се прилага само за настройки на Codespace
 conda activate ai4beg
 ```
 
-Обърнете се към [ръководството за среди на Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html?WT.mc_id=academic-105485-koreyst), ако срещнете някакви проблеми.
+Вижте [упътването за Conda среди](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html?WT.mc_id=academic-105485-koreyst), ако срещнете проблеми.
 
-### Използване на Visual Studio Code с разширението за поддръжка на Python
+### Използване на Visual Studio Code с разширение за Python
 
-Препоръчваме използването на редактора [Visual Studio Code (VS Code)](https://code.visualstudio.com/?WT.mc_id=academic-105485-koreyst) с инсталирано разширение за поддръжка на Python за този курс. Това обаче е повече препоръка, отколкото задължително изискване.
+Препоръчваме да използвате [Visual Studio Code (VS Code)](https://code.visualstudio.com/?WT.mc_id=academic-105485-koreyst) с инсталирано [разширение за Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) за този курс. Това е препоръка, а не строго изискване.
 
-> **Забележка**: Като отворите хранилището на курса във VS Code, имате възможност да настроите проекта в контейнер. Това е заради [специалната `.devcontainer`](https://code.visualstudio.com/docs/devcontainers/containers?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) директория, намираща се в хранилището на курса. Повече за това по-късно.
+> **Забележка**: Като отворите курса в VS Code, имате опцията да настроите проекта във контейнер. Това е благодарение на [специалната `.devcontainer`](https://code.visualstudio.com/docs/devcontainers/containers?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) папка, намираща се в курсовия репозиторий. Подробнее за това по-късно.
 
-> **Забележка**: След като клонирате и отворите директорията във VS Code, тя автоматично ще ви предложи да инсталирате разширение за поддръжка на Python.
+> **Забележка**: След като клонирате и отворите директорията в VS Code, автоматично ще ви се предложи да инсталирате разширение за Python.
 
-> **Забележка**: Ако VS Code ви предложи да отворите хранилището в контейнер, откажете това искане, за да използвате локално инсталираната версия на Python.
+> **Забележка**: Ако VS Code ви предложи да презаредите репозитория във контейнер, откажете, за да използвате локално инсталираната версия на Python.
 
 ### Използване на Jupyter в браузъра
 
-Можете също така да работите по проекта, използвайки [Jupyter средата](https://jupyter.org?WT.mc_id=academic-105485-koreyst) директно във вашия браузър. Както класическият Jupyter, така и [Jupyter Hub](https://jupyter.org/hub?WT.mc_id=academic-105485-koreyst) предоставят доста приятна среда за разработка с функции като автоматично допълване, подчертаване на код и др.
+Можете да работите по проекта и с [Jupyter среда](https://jupyter.org?WT.mc_id=academic-105485-koreyst) директно в браузъра си. Класическият Jupyter и [Jupyter Hub](https://jupyter.org/hub?WT.mc_id=academic-105485-koreyst) осигуряват приятна работна среда с функции като авто-допълване, оцветяване на кода и други.
 
-За да стартирате Jupyter локално, отидете до терминала/командния ред, навигирайте до директорията на курса и изпълнете:
+За да стартирате Jupyter локално, отворете терминал/команден прозорец, навигирайте до директорията на курса и изпълнете:
 
 ```bash
 jupyter notebook
@@ -169,57 +177,63 @@ jupyter notebook
 jupyterhub
 ```
 
-Това ще стартира Jupyter инстанция и URL за достъп до нея ще бъде показан в прозореца на командния ред.
+Това ще стартира Jupyter и URL за достъп ще се покаже в командния прозорец.
 
-След като получите достъп до URL, трябва да видите съдържанието на курса и да можете да навигирате до всеки `*.ipynb` file. For example, `08-building-search-applications/python/oai-solution.ipynb`.
+След като достъпите URL, ще видите структурата на курса и ще можете да навигирате до всеки `*.ipynb` файл, например, `08-building-search-applications/python/oai-solution.ipynb`.
 
-### Running in a container
+### Стартиране в контейнер
 
-An alternative to setting everything up on your computer or Codespace is to use a [container](https://en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst). The special `.devcontainer` folder within the course repository makes it possible for VS Code to set up the project within a container. Outside of Codespaces, this will require the installation of Docker, and quite frankly, it involves a bit of work, so we recommend this only to those with experience working with containers.
+Алтернатива на настройването на всичко на вашия компютър или Codespace е използването на [контейнер](../../../00-course-setup/<https:/en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst>). Специалната `.devcontainer` папка на курсовия репозиторий позволява на VS Code да настрои проекта в контейнер. Извън Codespaces това изисква инсталиране на Docker и малко повече работа, затова препоръчваме това само за опитни с контейнери.
 
-One of the best ways to keep your API keys secure when using GitHub Codespaces is by using Codespace Secrets. Please follow the [Codespaces secrets management](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-secrets-for-your-codespaces?WT.mc_id=academic-105485-koreyst) guide to learn more about this.
+Един от най-добрите начини за защита на API ключовете при използване на GitHub Codespaces е чрез използването на Codespace Secrets. Моля, следвайте [упътването за управление на тайни в Codespaces](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-secrets-for-your-codespaces?WT.mc_id=academic-105485-koreyst).
 
-## Lessons and Technical Requirements
 
-The course has 6 concept lessons and 6 coding lessons.
+## Уроци и технически изисквания
 
-For the coding lessons, we are using the Azure OpenAI Service. You will need access to the Azure OpenAI service and an API key to run this code. You can apply to get access by [completing this application](https://azure.microsoft.com/products/ai-services/openai-service?WT.mc_id=academic-105485-koreyst).
+Курсът съдържа 6 концептуални урока и 6 урока по кодиране.
 
-While you wait for your application to be processed, each coding lesson also includes a `README.md` файл, където можете да видите кода и изходите.
+За уроките по кодиране използваме Azure OpenAI Сървис. Ще ви е необходим достъп до Azure OpenAI услугата и API ключ за стартирането на кода. Можете да кандидатствате за достъп като [попълните тази заявка](https://azure.microsoft.com/products/ai-services/openai-service?WT.mc_id=academic-105485-koreyst).
 
-## Използване на Azure OpenAI услугата за първи път
+Докато чакате обработката на вашата заявка, всеки урок по кодиране включва `README.md` файл, където можете да видите кода и изходите.
 
-Ако това е първият ви път, когато работите с Azure OpenAI услугата, моля, следвайте това ръководство как да [създадете и разположите ресурс за Azure OpenAI услуга.](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)
+## Използване на Azure OpenAI услуга за първи път
+
+Ако използвате Azure OpenAI услугата за първи път, моля следвайте това ръководство как да [създадете и разположите Azure OpenAI услуга.](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)
 
 ## Използване на OpenAI API за първи път
 
-Ако това е първият ви път, когато работите с OpenAI API, моля, следвайте ръководството как да [създадете и използвате интерфейса.](https://platform.openai.com/docs/quickstart?context=pythont&WT.mc_id=academic-105485-koreyst)
+Ако използвате OpenAI API за първи път, моля следвайте ръководството как да [създадете и използвате интерфейса.](https://platform.openai.com/docs/quickstart?context=pythont&WT.mc_id=academic-105485-koreyst)
 
-## Срещнете други обучаващи се
+## Срещнете други учащи
 
-Създадохме канали в нашия официален [AI Community Discord сървър](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst) за срещи с други обучаващи се. Това е страхотен начин да се свържете с други предприемачи, строители, студенти и всеки, който иска да се развива в Генеративния AI.
+Създадохме канали в официалния ни [AI Community Discord сървър](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst) за срещи с други учащи. Това е чудесен начин да се свържете с други с подобни интереси предприемачи, строители, студенти и всички, които искат да се развиват в Генеративен AI.
 
-[![Присъединете се към канала в Discord](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
+[![Присъединете се към дискорд канал](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
 
-Екипът на проекта също ще бъде на този Discord сървър, за да помага на всички обучаващи се.
+Проектният екип също ще бъде на този Discord сървър, за да помогне на всички учащи.
 
-## Допринасяне
+## Принос
 
-Този курс е инициатива с отворен код. Ако видите области за подобрение или проблеми, моля, създайте [Pull Request](https://github.com/microsoft/generative-ai-for-beginners/pulls?WT.mc_id=academic-105485-koreyst) или регистрирайте [GitHub проблем](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst).
+Този курс е проект с отворен код. Ако видите области за подобрение или проблеми, моля, създайте [Pull Request](https://github.com/microsoft/generative-ai-for-beginners/pulls?WT.mc_id=academic-105485-koreyst) или докладвайте [GitHub issue](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst).
 
-Екипът на проекта ще следи всички приноси. Допринасянето към отворен код е невероятен начин да изградите кариерата си в Генеративния AI.
+Проектният екип ще следи всички приноси. Участието в проекти с отворен код е страхотен начин да изградите кариера в Генеративен AI.
 
-Повечето приноси изискват от вас да се съгласите с Лицензионно споразумение за приносител (CLA), което декларира, че имате правото и наистина предоставяте ни правата да използваме вашия принос. За подробности, посетете [CLA, уебсайта на Лицензионното споразумение за приносител](https://cla.microsoft.com?WT.mc_id=academic-105485-koreyst).
+Повечето приноси изискват да се съгласите с Договор за лиценз на приносител (CLA), който декларира, че имате право и предоставяте на нас правата за използване на вашия принос. За подробности посетете [CLA, уебсайт за Договор за лиценз на приносител](https://cla.microsoft.com?WT.mc_id=academic-105485-koreyst).
 
-Важно: когато превеждате текст в това хранилище, моля, уверете се, че не използвате машинен превод. Ще проверим преводите чрез общността, така че моля, доброволствайте само за преводи на езици, на които сте компетентни.
+Важно: при превод на текст в този репо, моля не използвайте машинен превод. Ще проверяваме преводите чрез общността, така че се включвайте само в езиците, в които сте компетентни.
 
-Когато изпратите pull request, CLA-ботът автоматично ще определи дали трябва да предоставите CLA и ще украси PR съответно (например, етикет, коментар). Просто следвайте инструкциите, предоставени от бота. Ще трябва да направите това само веднъж за всички хранилища, използващи нашия CLA.
+Когато подадете pull request, CLA-бот автоматично ще определи дали трябва да предоставите CLA и ще маркира PR подходящо (напр. етикет, коментар). Просто следвайте инструкциите на бота. Това се прави само веднъж за всички репозиторита, използващи нашия CLA.
 
-Този проект е приел [Кодекса за поведение на Microsoft Open Source](https://opensource.microsoft.com/codeofconduct/?WT.mc_id=academic-105485-koreyst). За повече информация прочетете FAQ на Кодекса за поведение или се свържете с [Email opencode](opencode@microsoft.com) с всякакви допълнителни въпроси или коментари.
 
-## Да започнем
+Този проект е приел [Кодекса за поведение на Microsoft Open Source](https://opensource.microsoft.com/codeofconduct/?WT.mc_id=academic-105485-koreyst). За повече информация прочетете Често задаваните въпроси за Кодекса за поведение или се свържете с [Email opencode](opencode@microsoft.com) за допълнителни въпроси или коментари.
 
-Сега, когато завършихте необходимите стъпки за завършване на този курс, нека започнем с [въведение в Генеративния AI и LLMs](../01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst).
+## Нека започнем
 
-**Отказ от отговорност**:  
-Този документ е преведен с помощта на AI услуга за превод [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматичните преводи може да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Не носим отговорност за недоразумения или погрешни интерпретации, произтичащи от използването на този превод.
+Сега, когато сте завършили необходимите стъпки за завършване на този курс, нека започнем с [въведение в Генеративния AI и LLM](../01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst).
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Отказ от отговорност**:
+Този документ е преведен с помощта на AI преводачески услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Ние не носим отговорност за каквито и да е недоразумения или неправилни тълкувания, произтичащи от използването на този превод.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

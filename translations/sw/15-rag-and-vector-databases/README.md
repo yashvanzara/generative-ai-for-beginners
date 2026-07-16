@@ -1,93 +1,90 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "e2861bbca91c0567ef32bc77fe054f9e",
-  "translation_date": "2025-05-20T01:38:54+00:00",
-  "source_file": "15-rag-and-vector-databases/README.md",
-  "language_code": "sw"
-}
--->
-# Uzalishaji Ulioongezwa wa Urejelezaji (RAG) na Hifadhidata za Vector
+# Uundaji Ulioboreshwa kwa Urejeshaji (RAG) na Hifadhidata za Vector
 
-Katika somo la programu za utafutaji, tulijifunza kwa ufupi jinsi ya kuunganisha data yako kwenye Mifano Mikubwa ya Lugha (LLMs). Katika somo hili, tutachunguza zaidi dhana za kuweka data yako kwenye programu ya LLM, mbinu za mchakato huo na njia za kuhifadhi data, ikiwa ni pamoja na embeddings na maandishi.
+[![Uundaji Ulioboreshwa kwa Urejeshaji (RAG) na Hifadhidata za Vector](../../../translated_images/sw/15-lesson-banner.ac49e59506175d4f.webp)](https://youtu.be/4l8zhHUBeyI?si=BmvDmL1fnHtgQYkL)
+
+Katika somo la matumizi ya utafutaji, tulijifunza kwa kifupi jinsi ya kuingiza data yako mwenyewe ndani ya Modeli Kubwa za Lugha (LLMs). Katika somo hili, tutaingia zaidi katika dhana za kuweka data yako msingi katika programu yako ya LLM, jinsi mchakato unavyofanya kazi na mbinu za kuhifadhi data, pamoja na embeddings na maandishi.
 
 > **Video Inakuja Hivi Karibuni**
 
 ## Utangulizi
 
-Katika somo hili tutashughulikia yafuatayo:
+Katika somo hili tutashughulikia mambo yafuatayo:
 
-- Utangulizi wa RAG, ni nini na kwa nini inatumika katika AI (akili bandia).
+- Utangulizi wa RAG, ni nini na kwa nini inatumiwa katika AI (akili bandia).
 
-- Kuelewa hifadhidata za vector ni nini na kuunda moja kwa programu yetu.
+- Kuelewa ni nini hifadhidata za vector na jinsi ya kuunda moja kwa ajili ya programu yetu.
 
-- Mfano wa vitendo wa jinsi ya kuunganisha RAG kwenye programu.
+- Mfano wa vitendo wa jinsi ya kuingiza RAG katika programu.
 
 ## Malengo ya Kujifunza
 
-Baada ya kukamilisha somo hili, utaweza:
+Baada ya kumaliza somo hili, utaweza:
 
-- Kuelezea umuhimu wa RAG katika urejelezaji na usindikaji wa data.
+- Eleza umuhimu wa RAG katika urejeshaji na usindikaji wa data.
 
-- Kuseti programu ya RAG na kuweka data yako kwenye LLM
+- Sanidi programu ya RAG na uweke data zako kama msingi kwa LLM
 
-- Uunganishaji mzuri wa RAG na Hifadhidata za Vector katika Programu za LLM.
+- Uingizaji mzuri wa RAG na Hifadhidata za Vector katika Programu za LLM.
 
-## Hali Yetu: kuboresha LLM zetu na data yetu wenyewe
+## Hali Yetu: kuboresha LLM zetu na data zetu binafsi
 
-Kwa somo hili, tunataka kuongeza maelezo yetu wenyewe kwenye kampuni ya elimu, ambayo inaruhusu chatbot kupata maelezo zaidi kuhusu masomo mbalimbali. Kwa kutumia maelezo tuliyonayo, wanafunzi wataweza kusoma vizuri na kuelewa mada tofauti, na hivyo kufanya iwe rahisi kufanya mapitio ya mitihani yao. Ili kuunda hali yetu, tutatumia:
+Kwa somo hili, tunataka kuongeza maelezo yetu binafsi katika huduma ya elimu, ambayo inaruhusu chatbot kupata habari zaidi kuhusu masomo tofauti. Kutumia maelezo tunayayo, wanafunzi wataweza kusoma vizuri na kuelewa mada tofauti, na kufanya iwe rahisi kurudia kwa ajili ya mitihani yao. Kuunda hali yetu, tutatumia:
 
 - `Azure OpenAI:` LLM tutakayotumia kuunda chatbot yetu
 
-- `AI for beginners' lesson on Neural Networks`: hii itakuwa data tutakayoweka kwenye LLM yetu
+- `Somo la AI kwa wanaoanza' juu ya Mtandao wa Neva: hii itakuwa data tunayoweka msingi wa LLM yetu
 
 - `Azure AI Search` na `Azure Cosmos DB:` hifadhidata za vector kuhifadhi data yetu na kuunda index ya utafutaji
 
-Watumiaji wataweza kuunda majaribio ya mazoezi kutoka kwa maelezo yao, kadi za mapitio na kuyafupisha kwa muhtasari mfupi. Ili kuanza, hebu tuangalie RAG ni nini na jinsi inavyofanya kazi:
+Watumiaji wataweza kuunda maswali ya mazoezi kutoka kwa maelezo yao, kadi za maelezo za kurudia na kuzipatia muhtasari mfupi. Ili kuanza, tazama ni nini RAG na jinsi inavyofanya kazi:
 
-## Uzalishaji Ulioongezwa wa Urejelezaji (RAG)
+## Uundaji Ulioboreshwa kwa Urejeshaji (RAG)
 
-Chatbot inayotumia LLM inachakata maelekezo ya mtumiaji ili kutoa majibu. Imeundwa kuwa shirikishi na inashughulika na watumiaji katika mada mbalimbali. Hata hivyo, majibu yake yanategemea muktadha uliotolewa na data yake ya mafunzo ya msingi. Kwa mfano, ukomo wa maarifa ya GPT-4 ni Septemba 2021, ikimaanisha haina maarifa ya matukio yaliyotokea baada ya kipindi hiki. Zaidi ya hayo, data inayotumika kufundisha LLMs inakosa taarifa za siri kama vile maelezo binafsi au mwongozo wa bidhaa wa kampuni.
+Chatbot inayotumia LLM inashughulikia maelekezo ya mtumiaji kutengeneza majibu. Imetengenezwa kuwa ya kuingiliana na inashirikiana na watumiaji juu ya mada mbalimbali. Hata hivyo, majibu yake yanategemea muktadha uliotolewa na data yake ya msingi ya mafunzo. Kwa mfano, GPT-4 iliwa na ufahamu hadi Septemba 2021, ikimaanisha haijui matukio yaliyotokea baada ya kipindi hicho. Zaidi ya hayo, data inayotumika kufundisha LLM haijumuishi taarifa za siri kama maelezo binafsi au mwongozo wa bidhaa ya kampuni.
 
-### Jinsi RAGs (Uzalishaji Ulioongezwa wa Urejelezaji) zinavyofanya kazi
+### Jinsi RAGs (Uundaji Ulioboreshwa kwa Urejeshaji) unavyofanya kazi
 
-Fikiria unataka kutumia chatbot inayounda majaribio kutoka kwa maelezo yako, utahitaji muunganisho na msingi wa maarifa. Hapa ndipo RAG inakuja kuokoa. RAGs zinafanya kazi kama ifuatavyo:
+![mchoro unaoonyesha jinsi RAGs inavyofanya kazi](../../../translated_images/sw/how-rag-works.f5d0ff63942bd3a6.webp)
 
-- **Msingi wa maarifa:** Kabla ya urejelezaji, nyaraka hizi zinahitaji kusomwa na kusindika, kawaida kuvunja nyaraka kubwa kuwa vipande vidogo, kuzibadilisha kuwa embedding za maandishi na kuzihifadhi kwenye hifadhidata.
+Fikiria unataka kuanzisha chatbot inayotengeneza maswali kutoka kwa maelezo yako, utahitaji uhusiano na hifadhibase ya maarifa. Hapa ndipo RAG inapoingilia. RAGs hufanya kazi kama ifuatavyo:
+
+- **Hifadhibase ya maarifa:** Kabla ya urejeshaji, hati hizi zinapaswa kuingizwa na kusindika awali, kwa kawaida kugawanya hati kubwa katika vidogo vidogo, kugeuza kuwa embeddings za maandishi na kuzihifadhi katika hifadhidata.
 
 - **Swali la Mtumiaji:** mtumiaji anauliza swali
 
-- **Urejelezaji:** Mtumiaji anapouliza swali, mfano wa embedding unarejelea taarifa husika kutoka kwenye msingi wetu wa maarifa ili kutoa muktadha zaidi utakaounganishwa kwenye mwongozo.
+- **Urejeshaji:** Mtindo wa embedding hurudisha taarifa zinazohusiana kutoka hifadhibase yetu ya maarifa kutoa muktadha zaidi utakaoingizwa katika maelekezo.
 
-- **Uzalishaji Ulioongezwa:** LLM inaboresha jibu lake kulingana na data iliyorejelezwa. Inaruhusu jibu lililotolewa kuwa si tu kwa data ya awali iliyofundishwa bali pia taarifa husika kutoka kwenye muktadha ulioongezwa. Data iliyorejelezwa inatumika kuongeza majibu ya LLM. LLM kisha inarejesha jibu kwa swali la mtumiaji.
+- **Uundaji Ulioboreshwa:** LLM huongeza jibu hili kulingana na data iliyorejeshwa. Hii inaruhusu jibu kutengenezwa si tu kwa kutumia data ya awali, bali pia taarifa muhimu kutoka kwenye muktadha uliowekwa. Data iliyorejeshwa hutumiwa kuongeza ubora wa majibu ya LLM. Kisha LLM huirudisha jibu kwa swali la mtumiaji.
 
-Muundo wa RAGs unatekelezwa kwa kutumia transformers zinazojumuisha sehemu mbili: encoder na decoder. Kwa mfano, mtumiaji anapouliza swali, maandishi ya ingizo 'yanakodishwa' kuwa vectors zinazokamata maana ya maneno na vectors zinakodolewa' katika index ya nyaraka zetu na kuzalisha maandishi mapya kulingana na swali la mtumiaji. LLM hutumia mfano wa encoder-decoder kutoa matokeo.
+![mchoro unaoonyesha usanifu wa RAGs](../../../translated_images/sw/encoder-decode.f2658c25d0eadee2.webp)
 
-Mbinu mbili wakati wa kutekeleza RAG kulingana na karatasi iliyopendekezwa: [Uzalishaji Ulioongezwa wa Urejelezaji kwa Kazi za NLP (programu ya usindikaji wa lugha asilia) za maarifa ya kina](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst) ni:
+Usanifu wa RAGs umejengwa kwa kutumia transformers yenye sehemu mbili: encoder na decoder. Kwa mfano, mtumiaji anauliza swali, maandishi ya ingizo yana 'encoded' kuwa vectors zinazoshikilia maana ya maneno, na vectors hizo 'decoded' katika index ya hati na kutoa maandishi mapya kulingana na swali la mtumiaji. LLM hutumia model ya encoder-decoder ili kuzalisha matokeo.
 
-- **_RAG-Sequence_** kutumia nyaraka zilizorejelezwa kutabiri jibu bora linalowezekana kwa swali la mtumiaji
+Njia mbili za kutekeleza RAG kulingana na karatasi iliyopewa: [Retrieval-Augmented Generation for Knowledge intensive NLP (natural language processing software) Tasks](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst) ni:
 
-- **RAG-Token** kutumia nyaraka kuzalisha tokeni inayofuata, kisha kuzirejelea kujibu swali la mtumiaji
+- **_RAG-Sequence_** kutumia hati zilizopatikana kutabiri jibu bora kabisa kwa swali la mtumiaji
 
-### Kwa nini utumie RAGs?
+- **RAG-Token** kutumia hati kuunda token inayofuata, kisha kuzipata tena kutoa jibu kwa swali la mtumiaji
 
-- **Utajiri wa taarifa:** inahakikisha majibu ya maandishi ni ya kisasa na ya sasa. Kwa hivyo, inaboresha utendaji kwenye kazi maalum za kikoa kwa kufikia msingi wa maarifa wa ndani.
+### Kwa nini utumie RAGs? 
 
-- Inapunguza utengenezaji kwa kutumia **data inayothibitishwa** kwenye msingi wa maarifa kutoa muktadha kwa maswali ya mtumiaji.
+- **Utajiri wa taarifa:** kuhakikisha majibu ya maandishi ni ya kisasa na ya sasa. Hii huchangia utendaji bora kwenye kazi maalum kwa kupata taarifa za ndani ya hifadhibase.
 
-- Ni **gharama nafuu** kwani ni ya kiuchumi zaidi ikilinganishwa na kurekebisha LLM
+- Kupunguza uongo kwa kutumia **data inayothibitishwa** katika hifadhibase kutoa muktadha kwa maswali ya mtumiaji.
 
-## Kuunda msingi wa maarifa
+- Ni **gharama nafuu** kwa kuwa ni ya bei rahisi ikilinganishwa na kufundisha LLM upya
 
-Programu yetu inategemea data yetu binafsi yaani, somo la Mtandao wa Neural kwenye mtaala wa AI Kwa Kompyuta.
+## Kuunda hifadhibase ya maarifa
+
+Programu yetu itategemea data binafsi ya somo la Mtandao wa Neva katika mtaala wa AI kwa Wanaoanza.
 
 ### Hifadhidata za Vector
 
-Hifadhidata ya vector, tofauti na hifadhidata za jadi, ni hifadhidata maalum iliyoundwa kuhifadhi, kusimamia na kutafuta vectors zilizowekwa. Inahifadhi uwakilishi wa nambari za nyaraka. Kuvunja data kuwa embeddings za nambari kunarahisisha mfumo wetu wa AI kuelewa na kusindika data.
+Hifadhidata ya vector, tofauti na hifadhidata za kawaida, ni hifadhidata maalum iliyotengenezwa kuhifadhi, kusimamia na kutafuta vectors zenye embeddings. Hifadhi inawakilisho wa nambari wa hati. Kugawanya data kuwa embeddings za nambari hurahisisha mfumo wetu wa AI kuelewa na kutambua data.
 
-Tunatunza embeddings zetu kwenye hifadhidata za vector kwani LLMs zina kikomo cha idadi ya tokeni wanazokubali kama ingizo. Kwa kuwa huwezi kupitisha embeddings zote kwa LLM, tutahitaji kuzivunja vipande na mtumiaji anapouliza swali, embeddings zinazofanana zaidi na swali zitarudishwa pamoja na mwongozo. Kuvunja pia kunapunguza gharama za idadi ya tokeni zinazopitishwa kupitia LLM.
+Tunahifadhi embeddings zetu katika hifadhidata za vector kwani LLM zina kikomo cha idadi ya tokens wanazokubali kama ingizo. Kwa kuwa huwezi kupitisha embeddings zote kwa LLM, tunahitaji kuzivunja katika vipande na mtumiaji anapouliza swali, embeddings zinazofanana zaidi na swali zitarejeshwa pamoja na maelekezo. Ugawaji pia hupunguza gharama za tokens zinazopitishwa kwa LLM.
 
-Baadhi ya hifadhidata maarufu za vector ni pamoja na Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant na DeepLake. Unaweza kuunda mfano wa Azure Cosmos DB kwa kutumia Azure CLI na amri ifuatayo:
+Baadhi ya hifadhidata maarufu za vector ni Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant na DeepLake. Unaweza kuunda mfano wa Azure Cosmos DB kwa kutumia Azure CLI kwa amri ifuatayo:
 
 ```bash
 az login
@@ -96,9 +93,9 @@ az cosmosdb create -n <cosmos-db-name> -r <resource-group-name>
 az cosmosdb list-keys -n <cosmos-db-name> -g <resource-group-name>
 ```
 
-### Kutoka maandishi hadi embeddings
+### Kutoka maandishi kwenda embeddings
 
-Kabla ya kuhifadhi data yetu, tutahitaji kuibadilisha kuwa embeddings za vector kabla ya kuhifadhiwa kwenye hifadhidata. Ikiwa unafanya kazi na nyaraka kubwa au maandishi marefu, unaweza kuyavunja kulingana na maswali unayotarajia. Kuvunja kunaweza kufanywa katika kiwango cha sentensi, au katika kiwango cha aya. Kwa kuwa kuvunja kunatokana na maana kutoka kwa maneno yanayozunguka, unaweza kuongeza muktadha mwingine kwenye kipande, kwa mfano, kwa kuongeza kichwa cha nyaraka au kujumuisha maandishi kabla au baada ya kipande. Unaweza kuvunja data kama ifuatavyo:
+Kabla ya kuhifadhi data yetu, tutahitaji kuibadilisha kuwa vector embeddings kabla haijahifadhiwa katika hifadhidata. Ikiwa unafanya kazi na hati kubwa au maandishi marefu, unaweza kuyagawa kulingana na maswali unayoyatarajia. Ugawaji unaweza kufanywa kwenye sentensi au aya. Kwa kuwa ugawaji hutegemea maana ya maneno yanayozunguka, unaweza kuongeza muktadha mwingine kwa kipande, kwa mfano kwa kuongeza kichwa cha hati au maandishi kabla au baada ya kipande. Unaweza kugawa data kama ifuatavyo:
 
 ```python
 def split_text(text, max_length, min_length):
@@ -112,69 +109,68 @@ def split_text(text, max_length, min_length):
             chunks.append(' '.join(current_chunk))
             current_chunk = []
 
-    # If the last chunk didn't reach the minimum length, add it anyway
+    # Ikiwa kipande cha mwisho hakifikii urefu wa chini, ongeza hata hivyo
     if current_chunk:
         chunks.append(' '.join(current_chunk))
 
     return chunks
 ```
 
-Mara baada ya kuvunjwa, tunaweza kisha kuweka maandishi yetu kwa kutumia mifano tofauti ya embedding. Baadhi ya mifano unayoweza kutumia ni pamoja na: word2vec, ada-002 na OpenAI, Azure Computer Vision na mengine mengi. Kuchagua mfano wa kutumia kutategemea lugha unazotumia, aina ya maudhui yaliyowekwa (maandishi/picha/sauti), saizi ya ingizo inayoweza kuwekwa na urefu wa matokeo ya embedding.
+Baada ya kugawa, tunaweza kisha kuingiza maandishi yetu kwa kutumia modeli tofauti za embedding. Baadhi ya modeli unazoweza kutumia ni pamoja na: word2vec, ada-002 ya OpenAI, Azure Computer Vision na nyingine nyingi. Kuchagua modeli kutategemea lugha unazotumia, aina ya maudhui yaliyofunikwa (maandishi/picha/sauti), ukubwa wa ingizo unaoweza kufunika na urefu wa matokeo ya embedding.
 
-Mfano wa maandishi yaliyowekwa kwa kutumia mfano wa OpenAI `text-embedding-ada-002` ni:
+Mfano wa maandishi yaliyo embedded kwa kutumia modeli ya OpenAI `text-embedding-ada-002` ni:
+![embedding ya neno paka](../../../translated_images/sw/cat.74cbd7946bc9ca38.webp)
 
-## Urejelezaji na Utafutaji wa Vector
+## Urejeshaji na Utafutaji wa Vector
 
-Mtumiaji anapouliza swali, urejelezaji unalibadilisha kuwa vector kwa kutumia encoder ya swali, kisha inatafuta kupitia index yetu ya utafutaji wa nyaraka kwa vectors husika katika nyaraka zinazohusiana na ingizo. Mara imekamilika, inabadilisha vector ya ingizo na vectors za nyaraka kuwa maandishi na kuyapitisha kupitia LLM.
+Mtumiaji anapouliza swali, retriever hugeuza swali hilo kuva vector kwa kutumia query encoder, kisha huita hifadhidata yetu ya hati kwa ajili ya vectors zinazohusiana. Baada ya hapo hubadilisha vector ya ingizo na vectors za hati kuwa maandishi na kupitisha kupitia LLM.
 
-### Urejelezaji
+### Urejeshaji
 
-Urejelezaji hufanyika wakati mfumo unajaribu haraka kupata nyaraka kutoka kwenye index zinazokidhi vigezo vya utafutaji. Lengo la urejelezaji ni kupata nyaraka ambazo zitatumika kutoa muktadha na kuweka LLM kwenye data yako.
+Urejeshaji hutokea wakati mfumo unajaribu haraka kupata hati kutoka kwenye index zinazokidhi vigezo vya utafutaji. Lengo la retriever ni kupata hati zitakazotumika kutoa muktadha na kuweka LLM msingi kwenye data yako.
 
-Kuna njia kadhaa za kufanya utafutaji ndani ya hifadhidata yetu kama:
+Kuna njia kadhaa za kufanya utafutaji ndani ya hifadhidata zetu kama:
 
 - **Utafutaji wa maneno muhimu** - hutumika kwa utafutaji wa maandishi
 
-- **Utafutaji wa semantiki** - hutumia maana ya semantiki ya maneno
+- **Utafutaji wa vector** - hubadilisha hati kutoka maandishi kuwa vectors kwa kutumia modeli za embedding, kuruhusu **utaftaji wa maana** kwa kutumia maana ya maneno. Urejeshaji hufanywa kwa kuuliza hati zenye vectors zinazofanana zaidi na swali la mtumiaji.
 
-- **Utafutaji wa vector** - hubadilisha nyaraka kutoka maandishi kuwa uwakilishi wa vector kwa kutumia mifano ya embedding. Urejelezaji utafanywa kwa kuuliza nyaraka ambazo uwakilishi wa vector ni karibu na swali la mtumiaji.
+- **Mchanganyiko** - mchanganyiko wa utafutaji wa maneno muhimu na vector.
 
-- **Mseto** - mchanganyiko wa utafutaji wa maneno muhimu na vector.
+Changamoto kwa urejeshaji ni pale ambapo hakuna jibu linalofanana na swali kwenye hifadhidata, mfumo utaenda kurejesha taarifa bora walizopata, lakini unaweza kutumia mbinu kama kuweka umbali wa juu kwa umuhimu au kutumia utafutaji mchanganyiko unaochanganya maneno muhimu na vector. Katika somo hili tutatumia utafutaji mchanganyiko, mchanganyiko wa utafutaji wa vector na maneno muhimu. Tutahifadhi data zetu katika dataframe yenye safu zinazoonyesha vipande pamoja na embeddings.
 
-Changamoto na urejelezaji huja wakati hakuna jibu linalofanana na swali kwenye hifadhidata, mfumo kisha utarejesha taarifa bora wanayoweza kupata, hata hivyo, unaweza kutumia mbinu kama kuweka umbali wa juu kwa umuhimu au kutumia utafutaji mseto unaounganisha maneno muhimu na utafutaji wa vector. Katika somo hili tutatumia utafutaji mseto, mchanganyiko wa utafutaji wa vector na maneno muhimu. Tutahifadhi data yetu kwenye dataframe na safu zilizo na vipande pamoja na embeddings.
+### Usanifu wa Vector
 
-### Ufanano wa Vector
+Retriever atatafuta katika hifadhibase ya maarifa kwa embeddings zilizosogezana karibu, jirani wa karibu zaidi, kwani maandishi hayo ni sawa. Katika hali mtumiaji aulize swali, kwanza huingizwa na kisha kulinganishwa na embeddings zinazofanana. Kipimo cha kawaida kinachotumika kutafuta kufanana kwa vectors ni cosine similarity ambacho kinategemea pembe kati ya vectors mbili.
 
-Urejelezaji utatafuta kupitia hifadhidata ya maarifa kwa embeddings ambazo ziko karibu, jirani ya karibu, kwani ni maandishi yanayofanana. Katika hali ambayo mtumiaji anauliza swali, kwanza linawekwa kisha linafananishwa na embeddings zinazofanana. Kipimo cha kawaida kinachotumika kupata jinsi vectors tofauti zinavyofanana ni ufanano wa cosine ambao unategemea pembe kati ya vectors mbili.
+Tunaweza kupima ufanana kwa njia nyingine kama umbali wa Euclidean unaoelezea mstari wa moja kwa moja kati ya mwisho wa vectors na dot product inayopima jumla ya mazao ya vipengele vinavyolingana vya vectors mbili.
 
-Tunaweza kupima ufanano kwa kutumia mbadala mwingine tunaoweza kutumia ni umbali wa Euclidean ambao ni mstari wa moja kwa moja kati ya mwisho wa vectors na bidhaa ya nukta ambayo hupima jumla ya bidhaa za vipengele vya vectors mbili.
+### Index ya utafutaji
 
-### Index ya Utafutaji
-
-Wakati wa kufanya urejelezaji, tutahitaji kujenga index ya utafutaji kwa msingi wetu wa maarifa kabla ya kufanya utafutaji. Index itahifadhi embeddings zetu na inaweza kurejea haraka vipande vinavyofanana zaidi hata katika hifadhidata kubwa. Tunaweza kuunda index yetu kwa ndani kwa kutumia:
+Wakati wa kufanya urejeshaji, tunapaswa kujenga index ya utafutaji ya hifadhibase ya maarifa kabla ya kufanya utafutaji. Index itahifadhi embeddings zetu na inaweza kurejesha haraka vipande vinavyofanana hata katika hifadhidata kubwa. Tunaweza kuunda index yetu kwa mtaa kwa kutumia:
 
 ```python
 from sklearn.neighbors import NearestNeighbors
 
 embeddings = flattened_df['embeddings'].to_list()
 
-# Create the search index
+# Unda faharasa la utafutaji
 nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(embeddings)
 
-# To query the index, you can use the kneighbors method
+# Kuuliza faharasa, unaweza kutumia njia ya kneighbors
 distances, indices = nbrs.kneighbors(embeddings)
 ```
 
-### Kupanga upya
+### Upangaji upya (Re-ranking)
 
-Mara baada ya kuuliza hifadhidata, unaweza kuhitaji kupanga matokeo kutoka kwa yale muhimu zaidi. LLM inayopanga upya hutumia Kujifunza kwa Mashine kuboresha umuhimu wa matokeo ya utafutaji kwa kuyapanga kutoka kwa yale muhimu zaidi. Kwa kutumia Azure AI Search, kupanga upya kunafanywa kiotomatiki kwako kwa kutumia mpangaji wa semantiki. Mfano wa jinsi kupanga upya kunavyofanya kazi kwa kutumia majirani wa karibu zaidi:
+Baada ya kuuliza hifadhidata, huenda ukahitaji kupanga matokeo kuanzia yale yenye umuhimu zaidi. Reranking LLM hutumia Kujifunza kwa Mashine kuboresha umuhimu wa matokeo ya utafutaji kwa kuwapangilia kutoka yale ya umuhimu zaidi. Kutumia Azure AI Search, upangaji upya hufanywa kiotomatiki kwa kutumia semantic reranker. Mfano wa jinsi reranking inavyofanya kazi kwa kutumia majirani wa karibu:
 
 ```python
-# Find the most similar documents
+# Tafuta hati zinazofanana zaidi
 distances, indices = nbrs.kneighbors([query_vector])
 
 index = []
-# Print the most similar documents
+# Chapisha hati zinazofanana zaidi
 for i in range(3):
     index = indices[0][i]
     for index in indices[0]:
@@ -185,88 +181,93 @@ for i in range(3):
         print(f"Index {index} not found in DataFrame")
 ```
 
-## Kuweka Yote Pamoja
+## Kuunganisha yote pamoja
 
-Hatua ya mwisho ni kuongeza LLM yetu kwenye mchanganyiko ili tuweze kupata majibu ambayo yamewekwa kwenye data yetu. Tunaweza kuitekeleza kama ifuatavyo:
+Hatua ya mwisho ni kuongeza LLM yetu kuweza kupata majibu ya msingi kutoka data yetu. Tunaweza kuitekeleza kama ifuatavyo:
 
 ```python
 user_input = "what is a perceptron?"
 
 def chatbot(user_input):
-    # Convert the question to a query vector
+    # Badilisha swali kuwa vector ya utafutaji
     query_vector = create_embeddings(user_input)
 
-    # Find the most similar documents
+    # Tafuta nyaraka zinazofanana zaidi
     distances, indices = nbrs.kneighbors([query_vector])
 
-    # add documents to query  to provide context
+    # ongeza nyaraka kwenye utafutaji kutoa muktadha
     history = []
     for index in indices[0]:
         history.append(flattened_df['chunks'].iloc[index])
 
-    # combine the history and the user input
+    # changanya historia na maingizo ya mtumiaji
     history.append(user_input)
 
-    # create a message object
+    # tengeneza kitu cha ujumbe
     messages=[
         {"role": "system", "content": "You are an AI assistant that helps with AI questions."},
-        {"role": "user", "content": history[-1]}
+        {"role": "user", "content": "\n\n".join(history) }
     ]
 
-    # use chat completion to generate a response
-    response = openai.chat.completions.create(
-        model="gpt-4",
+    # tumia API ya Majibu kuunda jibu
+    response = client.responses.create(
+        model="gpt-4o-mini",
         temperature=0.7,
-        max_tokens=800,
-        messages=messages
+        max_output_tokens=800,
+        input=messages,
+        store=False,
     )
 
-    return response.choices[0].message
+    return response.output_text
 
 chatbot(user_input)
 ```
 
-## Kutathmini Programu Yetu
+## Kutathmini programu yetu
 
-### Viwango vya Tathmini
+### Vipimo vya Tathmini
 
-- Ubora wa majibu yaliyotolewa kuhakikisha inasikika kwa kawaida, kwa ufasaha na kama ya kibinadamu
+- Ubora wa majibu yanayotolewa kuhakikisha kuwa yanasikika asili, yanasomeka na yanafanana na sauti ya kibinadamu
 
-- Uwekaji wa data: kutathmini kama jibu lililotoka kwa nyaraka zilizotolewa
+- Uzingatiaji wa data: kutathmini kama jibu lililotolewa linatokana na hati zilizotolewa
 
-- Umuhimu: kutathmini jibu linafanana na linahusiana na swali lililoulizwa
+- Umuhimu: kutathmini kama jibu linaendana na swali liloulizwa
 
-- Ufasaha - kama jibu lina mantiki kisarufi
+- Ufasaha - kama jibu lina mantiki katika sarufi
 
-## Matumizi ya RAG (Uzalishaji Ulioongezwa wa Urejelezaji) na hifadhidata za vector
+## Matumizi ya RAG (Uundaji Ulioboreshwa kwa Urejeshaji) na hifadhidata za vector
 
-Kuna matumizi mengi tofauti ambapo miito ya kazi inaweza kuboresha programu yako kama:
+Kuna matumizi mengi tofauti ambapo function calls zinaweza kuboresha programu yako kama:
 
-- Maswali na Majibu: kuweka data ya kampuni yako kwenye chat inayoweza kutumiwa na wafanyakazi kuuliza maswali.
+- Maswali na Majibu: kuweka data ya kampuni yako kama msingi wa mazungumzo yanayoweza kutumiwa na wafanyakazi kuuliza maswali.
 
-- Mifumo ya Mapendekezo: ambapo unaweza kuunda mfumo unaolingana na maadili yanayofanana zaidi mfano filamu, mikahawa na mengi zaidi.
+- Mifumo ya Mapendekezo: ambapo unaweza kuunda mfumo unaolingana na thamani zinazofanana zaidi mfano sinema, migahawa na zaidi.
 
 - Huduma za Chatbot: unaweza kuhifadhi historia ya mazungumzo na kubinafsisha mazungumzo kulingana na data ya mtumiaji.
 
-- Utafutaji wa picha kulingana na embeddings za vector, muhimu wakati wa kutambua picha na kugundua hitilafu.
+- Utafutaji wa picha kwa kutumia vector embeddings, muhimu kwa utambuzi wa picha na kugundua dosari.
 
 ## Muhtasari
 
-Tumeshughulikia maeneo ya msingi ya RAG kutoka kuongeza data yetu kwenye programu, swali la mtumiaji na matokeo. Ili kurahisisha uundaji wa RAG, unaweza kutumia mifumo kama Semanti Kernel, Langchain au Autogen.
+Tumefunika maeneo ya msingi ya RAG kutoka kuongeza data yetu kwenye programu, swali la mtumiaji na matokeo. Ili kurahisisha uundaji wa RAG, unaweza kutumia mifumo kama Semanti Kernel, Langchain au Autogen.
 
-## Kazi
+## Kazi ya nyumbani
 
-Ili kuendelea kujifunza kwako kuhusu Uzalishaji Ulioongezwa wa Urejelezaji (RAG) unaweza kujenga:
+Kuendelea kujifunza Uundaji Ulioboreshwa kwa Urejeshaji (RAG) unaweza kujenga:
 
-- Jenga sehemu ya mbele kwa programu kwa kutumia mfumo wa chaguo lako
+- Jenga kiolesura cha mbele cha programu kwa kutumia mfumo unaoupenda
 
-- Tumia mfumo, ama LangChain au Semantic Kernel, na uunde upya programu yako.
+- Tumia mfumo, iwe LangChain au Semantic Kernel, na uendeleze upya programu yako.
 
 Hongera kwa kumaliza somo 👏.
 
-## Kujifunza hakuishii hapa, endelea na Safari
+## Kujifunza hakukomi hapa, endelea Safari
 
-Baada ya kukamilisha somo hili, angalia [Mkusanyiko wetu wa Kujifunza AI Inayozalisha](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ili kuendelea kuongeza maarifa yako ya AI Inayozalisha!
+Baada ya kumaliza somo hili, angalia mkusanyiko wetu wa [Mafunzo ya AI ya Uundaji](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ili kuendelea kuinua maarifa yako ya AI ya Uundaji!
 
-**Kanusho**: 
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asilia katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutokuelewana au tafsiri zisizo sahihi zinazoibuka kutokana na matumizi ya tafsiri hii.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

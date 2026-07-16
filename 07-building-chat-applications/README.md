@@ -1,6 +1,6 @@
 # Building Generative AI-Powered Chat Applications
 
-[![Building Generative AI-Powered Chat Applications](./images/07-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://aka.ms/gen-ai-lessons7-gh?WT.mc_id=academic-105485-koreyst)
+[![Building Generative AI-Powered Chat Applications](./images/07-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
 
 > _(Click the image above to view video of this lesson)_
 
@@ -72,10 +72,11 @@ client = OpenAI(
     api_key=API_KEY
     )
 
-chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Suggest two titles for an instructional lesson on chat applications for generative AI."}])
+response = client.responses.create(model="gpt-5-mini", input="Suggest two titles for an instructional lesson on chat applications for generative AI.", store=False)
+print(response.output_text)
 ```
 
-The above example uses the GPT-3.5 Turbo model to complete the prompt, but notice that the API key is set prior to doing so. You'd receive an error if you didn't set the key.
+The above example uses the GPT-5 mini model with the Responses API to complete the prompt, but notice that the API key is set prior to doing so. You'd receive an error if you didn't set the key.
 
 ## User Experience (UX)
 
@@ -95,7 +96,7 @@ This "profile" prompts ChatGPT to create a lesson plan on linked lists. Notice t
 
 ### Microsoft's System Message Framework for Large Language Models
 
-[Microsoft has provided guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) for writing effective system messages when generating responses from LLMs broken down into 4 areas:
+[Microsoft has provided guidance](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) for writing effective system messages when generating responses from LLMs broken down into 4 areas:
 
 1. Defining who the model is for, as well as its capabilities and limitations.
 2. Defining the model's output format.
@@ -175,7 +176,7 @@ Microsoft's approach to Responsible AI has identified six principles that should
 
 ## Assignment
 
-See [assignment](./python?WT.mc_id=academic-105485-koreyst) it will take you through a series of exercises from running your first chat prompts, to classifying and summarizing text and more. Notice that the assignments are available in different programming languages!
+See [assignment](./python?WT.mc_id=academic-105485-koreyst). It will take you through a series of exercises from running your first chat prompts, to classifying and summarizing text and more. Notice that the assignments are available in different programming languages!
 
 ## Great Work! Continue the Journey
 

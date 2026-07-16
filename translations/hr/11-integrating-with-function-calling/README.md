@@ -1,83 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77a48a201447be19aa7560706d6f93a0",
-  "translation_date": "2025-05-19T21:39:29+00:00",
-  "source_file": "11-integrating-with-function-calling/README.md",
-  "language_code": "hr"
-}
--->
-# Integracija s pozivima funkcija
+# Integracija s pozivanjem funkcija
 
-Naučili ste dosta toga u prethodnim lekcijama. Međutim, možemo se još poboljšati. Neke stvari koje možemo poboljšati su kako možemo dobiti konzistentniji format odgovora kako bismo olakšali rad s odgovorima u daljnjem procesu. Također, možda ćemo htjeti dodati podatke iz drugih izvora kako bismo dodatno obogatili našu aplikaciju.
+[![Integracija s pozivanjem funkcija](../../../translated_images/hr/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-Gore navedeni problemi su ono što ovaj poglavlje želi riješiti.
+Do sada ste naučili dosta u prethodnim lekcijama. Međutim, možemo se dodatno unaprijediti. Neke stvari koje možemo riješiti su kako dobiti konzistentniji format odgovora kako bi bilo lakše raditi s odgovorom u daljnjoj obradi. Također, možda ćemo htjeti dodati podatke iz drugih izvora kako bismo dodatno obogatili našu aplikaciju.
+
+Gore spomenuti problemi su ono na što se ovaj poglavlje fokusira.
 
 ## Uvod
 
 Ova lekcija će pokriti:
 
-- Objasniti što je pozivanje funkcija i njegove slučajeve korištenja.
+- Objasniti što je pozivanje funkcija i njihove primjene.
 - Kreiranje poziva funkcije koristeći Azure OpenAI.
 - Kako integrirati poziv funkcije u aplikaciju.
 
 ## Ciljevi učenja
 
-Do kraja ove lekcije moći ćete:
+Do kraja ove lekcije, moći ćete:
 
 - Objasniti svrhu korištenja pozivanja funkcija.
-- Postaviti Poziv funkcije koristeći Azure OpenAI Service.
-- Dizajnirati učinkovite pozive funkcija za slučaj korištenja vaše aplikacije.
+- Postaviti poziv funkcije korištenjem Azure OpenAI servisa.
+- Dizajnirati učinkovite pozive funkcija za slučaj uporabe vaše aplikacije.
 
-## Scenarij: Poboljšanje našeg chatbota funkcijama
+## Scenarij: Poboljšanje našeg chatbota pomoću funkcija
 
-Za ovu lekciju želimo izgraditi značajku za našu edukacijsku startup tvrtku koja omogućava korisnicima da koriste chatbot za pronalaženje tehničkih tečajeva. Preporučit ćemo tečajeve koji odgovaraju njihovoj razini vještine, trenutnoj ulozi i tehnologiji od interesa.
+Za ovu lekciju želimo izgraditi značajku za naš edukacijski startup koja korisnicima omogućuje korištenje chatbota za pronalaženje tehničkih tečajeva. Preporučivat ćemo tečajeve koji odgovaraju njihovoj razini znanja, trenutnoj ulozi i tehnologiji od interesa.
 
-Za dovršavanje ovog scenarija koristit ćemo kombinaciju:
+Za dovršetak ovog scenarija koristit ćemo kombinaciju:
 
-- `Azure OpenAI` za kreiranje iskustva chata za korisnika.
-- `Microsoft Learn Catalog API` za pomoć korisnicima u pronalaženju tečajeva na temelju zahtjeva korisnika.
-- `Function Calling` za uzimanje korisnikovog upita i slanje funkciji kako bi se izvršio API zahtjev.
+- `Azure OpenAI` za stvaranje iskustva razgovora za korisnika.
+- `Microsoft Learn Catalog API` koji pomaže korisnicima pronaći tečajeve temeljem zahtjeva korisnika.
+- `Pozivanje funkcija` za preuzimanje upita korisnika i slanje funkciji da izvrši API zahtjev.
 
 Za početak, pogledajmo zašto bismo uopće željeli koristiti pozivanje funkcija:
 
 ## Zašto pozivanje funkcija
 
-Prije pozivanja funkcija, odgovori iz LLM-a bili su nestrukturirani i nedosljedni. Programeri su morali pisati složeni kod za validaciju kako bi bili sigurni da mogu rukovati svakom varijacijom odgovora. Korisnici nisu mogli dobiti odgovore poput "Kakvo je trenutno vrijeme u Stockholmu?". To je zato što su modeli bili ograničeni na vrijeme kada su podaci bili obučeni.
+Prije pozivanja funkcija, odgovori iz LLM-a bili su nestrukturirani i nekonzistentni. Programeri su morali pisati složene validacijske kodove kako bi osigurali rukovanje svake varijacije odgovora. Korisnici nisu mogli dobiti odgovore poput "Kakvo je trenutno vrijeme u Stockholmu?". To je zato što su modeli bili ograničeni na vrijeme kad su podaci bili trenirani.
 
-Pozivanje funkcija je značajka Azure OpenAI Service koja prevladava sljedeća ograničenja:
+Pozivanje funkcija je značajka Azure OpenAI servisa koja premošćuje sljedeća ograničenja:
 
-- **Konzistentan format odgovora**. Ako možemo bolje kontrolirati format odgovora, možemo lakše integrirati odgovor u daljnje sustave.
-- **Vanjski podaci**. Mogućnost korištenja podataka iz drugih izvora aplikacije u kontekstu chata.
+- **Konzistentan format odgovora**. Ako možemo bolje kontrolirati format odgovora, možemo lakše integrirati odgovor u druge sustave.
+- **Vanjski podaci**. Mogućnost korištenja podataka iz drugih izvora aplikacije u kontekstu razgovora.
 
-## Ilustriranje problema kroz scenarij
+## Ilustracija problema kroz scenarij
 
-> Preporučujemo da koristite [priloženi notebook](../../../11-integrating-with-function-calling/python/aoai-assignment.ipynb) ako želite pokrenuti dolje navedeni scenarij. Također možete samo čitati kako pokušavamo ilustrirati problem gdje funkcije mogu pomoći u rješavanju problema.
+> Preporučujemo da koristite [priloženi notebook](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) ako želite pokrenuti donji scenarij. Također možete samo čitati dok pokušavamo ilustrirati problem gdje funkcije mogu pomoći riješiti problem.
 
 Pogledajmo primjer koji ilustrira problem formata odgovora:
 
-Recimo da želimo kreirati bazu podataka studentskih podataka kako bismo im mogli preporučiti pravi tečaj. Dolje imamo dva opisa studenata koji su vrlo slični u podacima koje sadrže.
+Pretpostavimo da želimo stvoriti bazu podataka podataka o studentima kako bismo im mogli predložiti pravi tečaj. Ispod imamo dva opisa studenata koja su vrlo slična u podacima koje sadrže.
 
-1. Kreirajte vezu s našim Azure OpenAI resursom:
+1. Stvorite vezu na naš Azure OpenAI resurs:
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # API za odgovore se poslužuje s Azure OpenAI (Microsoft Foundry) v1 krajnje točke,
+   # stoga usmjeravamo OpenAI klijent na <your-endpoint>/openai/v1/.
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   Dolje je neki Python kod za konfiguriranje naše veze s Azure OpenAI gdje postavljamo `api_type`, `api_base`, `api_version` and `api_key`.
+   Ispod se nalazi Python kod za konfiguraciju naše veze s Azure OpenAI. Budući da koristimo v1 endpoint, potrebno je postaviti samo `api_key` i `base_url` (nije potrebna `api_version`).
 
-1. Creating two student descriptions using variables `student_1_description` and `student_2_description`.
+1. Stvaranje dva opisa studenata pomoću varijabli `student_1_description` i `student_2_description`.
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -85,9 +81,9 @@ Recimo da želimo kreirati bazu podataka studentskih podataka kako bismo im mogl
    student_2_description = "Michael Lee is a sophomore majoring in computer science at Stanford University. He has a 3.8 GPA. Michael is known for his programming skills and is an active member of the university's Robotics Club. He hopes to pursue a career in artificial intelligence after finishing his studies."
    ```
 
-   Želimo poslati gore navedene opise studenata LLM-u kako bi obradio podatke. Ti podaci kasnije se mogu koristiti u našoj aplikaciji i poslati na API ili pohraniti u bazu podataka.
+   Želimo poslati gornje opise studenata LLM-u kako bi se podaci parsirali. Ti podaci kasnije se mogu koristiti u našoj aplikaciji i poslati na API ili pohraniti u bazu podataka.
 
-1. Kreirajmo dva identična prompta u kojima instruiramo LLM o informacijama koje nas zanimaju:
+1. Stvorimo dva identična prompta u kojima uputimo LLM na koje informacije nas zanimaju:
 
    ```python
    prompt1 = f'''
@@ -117,33 +113,35 @@ Recimo da želimo kreirati bazu podataka studentskih podataka kako bismo im mogl
    '''
    ```
 
-   Gore navedeni prompti instruiraju LLM da izvuče informacije i vrati odgovor u JSON formatu.
+   Gornji prompti upute LLM da izvuče informacije i vrati odgovor u JSON formatu.
 
-1. Nakon postavljanja prompta i veze s Azure OpenAI, sada ćemo poslati promte LLM-u koristeći `openai.ChatCompletion`. We store the prompt in the `messages` variable and assign the role to `user`. Ovo je da oponašamo poruku korisnika koja se piše chatbotu.
+1. Nakon pripreme prompta i veze na Azure OpenAI, sada ćemo poslati prompt LLM-u koristeći `client.responses.create`. Pohranjujemo prompt u varijablu `input` i dodjeljujemo ulogu `user`. Ovo je da se oponaša poruka od korisnika napisana chatbotu.
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # odgovor na upit jedan
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # odgovor na upit dva
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-Sada možemo poslati oba zahtjeva LLM-u i ispitati odgovor koji primimo pronalazeći ga ovako `openai_response1['choices'][0]['message']['content']`.
+Sada možemo poslati oba zahtjeva LLM-u i pregledati odgovor koji dobijemo pronalaženjem kao `openai_response1.output_text`.
 
-1. Lastly, we can convert the response to JSON format by calling `json.loads`:
+1. Na kraju, možemo konvertirati odgovor u JSON format pozivom `json.loads`:
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # Učitavanje odgovora kao JSON objekta
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
@@ -171,59 +169,60 @@ Sada možemo poslati oba zahtjeva LLM-u i ispitati odgovor koji primimo pronalaz
    }
    ```
 
-   Iako su prompti isti i opisi slični, vidimo vrijednosti `Grades` property formatted differently, as we can sometimes get the format `3.7` or `3.7 GPA` for example.
+   Iako su prompti isti i opisi su slični, vidimo da su vrijednosti svojstva `Grades` formatirane različito, budući da ponekad dobijemo format `3.7` ili na primjer `3.7 GPA`.
 
-   This result is because the LLM takes unstructured data in the form of the written prompt and returns also unstructured data. We need to have a structured format so that we know what to expect when storing or using this data
+   Ovaj rezultat je zato što LLM uzima nestrukturirane podatke u obliku napisanog prompta i također vraća nestrukturirane podatke. Trebamo imati strukturirani format kako bismo znali što očekivati pri pohrani ili korištenju tih podataka.
 
-So how do we solve the formatting problem then? By using functional calling, we can make sure that we receive structured data back. When using function calling, the LLM does not actually call or run any functions. Instead, we create a structure for the LLM to follow for its responses. We then use those structured responses to know what function to run in our applications.
+Pa kako onda riješiti problem formatiranja? Korištenjem pozivanja funkcija možemo osigurati da primimo strukturirane podatke natrag. Kod pozivanja funkcija LLM zapravo ne poziva ili ne izvršava nikakve funkcije. Umjesto toga, stvaramo strukturu koju LLM treba slijediti u svojim odgovorima. Zatim koristimo te strukturirane odgovore da znamo koju funkciju treba izvršiti u našim aplikacijama.
 
-![function flow](../../../translated_images/Function-Flow.01a723a374f79e5856d9915c39e16c59fa2a00c113698b22a28e616224f407e1.hr.png)
+![function flow](../../../translated_images/hr/Function-Flow.083875364af4f4bb.webp)
 
-We can then take what is returned from the function and send this back to the LLM. The LLM will then respond using natural language to answer the user's query.
+Tada možemo uzeti ono što funkcija vrati i poslati to natrag LLM-u. LLM će tada odgovoriti prirodnim jezikom na upit korisnika.
 
-## Use Cases for using function calls
+## Primjeri upotrebe pozivanja funkcija
 
-There are many different use cases where function calls can improve your app like:
+Postoji mnogo različitih slučajeva gdje pozivi funkcija mogu poboljšati vašu aplikaciju, kao što su:
 
-- **Calling External Tools**. Chatbots are great at providing answers to questions from users. By using function calling, the chatbots can use messages from users to complete certain tasks. For example, a student can ask the chatbot to "Send an email to my instructor saying I need more assistance with this subject". This can make a function call to `send_email(to: string, body: string)`
+- **Pozivanje vanjskih alata**. Chatbotovi su odlični u pružanju odgovora na pitanja korisnika. Korištenjem pozivanja funkcija, chatbotovi mogu koristiti poruke korisnika za izvršenje određenih zadataka. Na primjer, student može tražiti od chatbota da "Pošalje e-mail mom predavaču da trebam dodatnu pomoć vezano uz ovaj predmet". To može biti funkcijski poziv `send_email(to: string, body: string)`
 
-- **Create API or Database Queries**. Users can find information using natural language that gets converted into a formatted query or API request. An example of this could be a teacher who requests "Who are the students that completed the last assignment" which could call a function named `get_completed(student_name: string, assignment: int, current_status: string)`
+- **Kreiranje API ili baza podataka upita**. Korisnici mogu pronaći informacije korištenjem prirodnog jezika koje se zatim konvertiraju u formatirani upit ili API zahtjev. Primjer ovoga može biti učitelj koji traži "Koji su studenti završili zadnji zadatak" što može pozvati funkciju nazvanu `get_completed(student_name: string, assignment: int, current_status: string)`
 
-- **Creating Structured Data**. Users can take a block of text or CSV and use the LLM to extract important information from it. For example, a student can convert a Wikipedia article about peace agreements to create AI flashcards. This can be done by using a function called `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
+- **Kreiranje strukturiranih podataka**. Korisnici mogu uzeti blok teksta ili CSV i koristiti LLM za izvlačenje važnih informacija iz njega. Primjerice, student može pretvoriti Wikipedia članak o mirovnim sporazumima u AI flash kartice. Ovo se može napraviti korištenjem funkcije `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
 
-## Creating Your First Function Call
+## Kreiranje vašeg prvog poziva funkcije
 
-The process of creating a function call includes 3 main steps:
+Proces kreiranja poziva funkcije uključuje 3 glavna koraka:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. **Pozivanje** Responses API-ja s listom vaših funkcija (alata) i porukom korisnika.
+2. **Čitanje** odgovora modela da bi se izvršila radnja, tj. izvršio poziv funkcije ili API poziv.
+3. **Izvršavanje** još jednog poziva Responses API-ju s odgovorom iz vaše funkcije kako bi se ta informacija iskoristila za kreiranje odgovora korisniku.
 
-![LLM Flow](../../../translated_images/LLM-Flow.7df9f166be50aa324705f2ccddc04a27cfc7b87e57b1fbe65eb534059a3b8b66.hr.png)
+![LLM Flow](../../../translated_images/hr/LLM-Flow.3285ed8caf4796d7.webp)
 
-### Step 1 - creating messages
+### Korak 1 - kreiranje poruka
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+Prvi korak je kreirati poruku korisnika. Ovo može biti dinamički dodijeljeno uzimanjem vrijednosti iz tekstualnog input polja ili možete ovdje dodijeliti vrijednost. Ako radite prvi put s Responses API-jem, trebamo definirati `role` i `content` poruke.
 
-The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` i primjer pitanja.
+`role` može biti `system` (kreiranje pravila), `assistant` (model) ili `user` (krajnji korisnik). Za pozivanje funkcija, dodijelit ćemo `user` i primjer pitanja.
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Dodjeljivanjem različitih uloga, jasno je LLM-u je li to sustav koji nešto govori ili korisnik, što pomaže u izgradnji povijesti razgovora na koju LLM može nadograditi.
+Dodjeljivanjem različitih uloga, jasno je za LLM da li nešto kaže sustav ili korisnik, što pomaže u gradnji povijesti razgovora koju LLM može koristiti.
 
 ### Korak 2 - kreiranje funkcija
 
-Sljedeće ćemo definirati funkciju i parametre te funkcije. Ovdje ćemo koristiti samo jednu funkciju nazvanu `search_courses` but you can create multiple functions.
+Zatim ćemo definirati funkciju i parametre te funkcije. Ovdje ćemo koristiti samo jednu funkciju nazvanu `search_courses` ali možete kreirati i više funkcija.
 
-> **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
+> **Važno** : Funkcije su uključene u sistemsku poruku LLM-u i ulaze u količinu dostupnih tokena koje imate.
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters`:
+Ispod stvaramo funkcije kao niz stavki. Svaka stavka je alat u formatu flat Responses API-ja, s svojstvima `type`, `name`, `description` i `parameters`:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -250,75 +249,76 @@ functions = [
 ]
 ```
 
-Opišimo svaki primjer funkcije detaljnije dolje:
+Opisat ćemo detaljnije svaku instancu funkcije ispod:
 
-- `name` - The name of the function that we want to have called.
-- `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
-  1.  `type` - The data type of the properties will be stored in.
-  1.  `properties` - List of the specific values that the model will use for its response
-      1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
-      1. `type` - The data type of this property, for example, `string`.
-      1. `description` - Description of the specific property.
+- `name` - Ime funkcije koju želimo pozvati.
+- `description` - Opis kako funkcija radi. Važno je biti specifičan i jasan.
+- `parameters` - Lista vrijednosti i formata koje želite da model proizvede u svom odgovoru. Parametri se sastoje od stavki koje imaju sljedeća svojstva:
+  1.  `type` - Tip podatka svojstava u kojoj će biti pohranjeni.
+  1.  `properties` - Lista specifičnih vrijednosti koje će model koristiti za svoj odgovor
+      1. `name` - Ključ je ime svojstva koje će model koristiti u svom formatiranom odgovoru, na primjer, `product`.
+      1. `type` - Tip podatka ovog svojstva, na primjer, `string`.
+      1. `description` - Opis specifičnog svojstva.
 
-There's also an optional property `required` - required property for the function call to be completed.
+Postoji i opcionalno svojstvo `required` - zahtijevano svojstvo za dovršetak poziva funkcije.
 
-### Step 3 - Making the function call
+### Korak 3 - Izvršavanje poziva funkcije
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+Nakon definiranja funkcije, sada je potrebno uključiti je u poziv Responses API-ja. To činimo dodavanjem `tools` u zahtjev. U ovom slučaju `tools=functions`.
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+Također postoji opcija postaviti `tool_choice` na `auto`. To znači da ćemo pustiti LLM da odluči koja će funkcija biti pozvana na osnovu poruke korisnika umjesto da je sami dodijelimo.
 
-Here's some code below where we call `ChatCompletion.create`, note how we set `functions=functions` and `function_call="auto"` i time dati LLM-u izbor kada da pozove funkcije koje mu pružamo:
+Ispod je kod u kojem pozivamo `client.responses.create`, primijetite kako postavljamo `tools=functions` i `tool_choice="auto"` dajući tako LLM-u slobodu kad će pozvati funkcije koje mu pružimo:
 
 ```python
-response = client.chat.completions.create(model=deployment,
-                                        messages=messages,
-                                        functions=functions,
-                                        function_call="auto")
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-print(response.choices[0].message)
+print(response.output)
 ```
 
-Odgovor koji sada dolazi izgleda ovako:
+Odgovor koji dolazi sada uključuje stavku `function_call` u `response.output` koja izgleda ovako:
 
 ```json
 {
-  "role": "assistant",
-  "function_call": {
-    "name": "search_courses",
-    "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
-  }
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
 }
 ```
 
-Ovdje možemo vidjeti kako funkcija `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+Ovdje možemo vidjeti kako je funkcija `search_courses` pozvana i s kojim argumentima, kako je navedeno u svojstvu `arguments` u JSON odgovoru.
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` vrijednost:
+Zaključak je da je LLM uspio pronaći podatke koji odgovaraju argumentima funkcije dok ih je izvlačio iz vrijednosti dodijeljene parametru `input` u pozivu Responses API-ja. Ispod podsjetnik na `messages` vrijednost:
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Kao što možete vidjeti, `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+Kao što vidite, `student`, `Azure` i `beginner` su izdvojeni iz `messages` i postavljeni kao ulaz u funkciju. Korištenje funkcija na ovaj način je izvrstan način izvlačenja informacija iz prompta, ali i za pružanje strukture LLM-u i imati ponovljivo funkcioniranje.
 
-Next, we need to see how we can use this in our app.
+Sljedeće, trebamo vidjeti kako možemo ovo iskoristiti u našoj aplikaciji.
 
-## Integrating Function Calls into an Application
+## Integracija poziva funkcija u aplikaciju
 
-After we have tested the formatted response from the LLM, we can now integrate this into an application.
+Nakon što smo testirali formatirani odgovor iz LLM-a, sada to možemo integrirati u aplikaciju.
 
-### Managing the flow
+### Upravljanje protokom
 
-To integrate this into our application, let's take the following steps:
+Za integraciju u našu aplikaciju, poduzmimo sljedeće korake:
 
-1. First, let's make the call to the OpenAI services and store the message in a variable called `response_message`.
+1. Prvo, izvršimo poziv OpenAI servisa i izdvojimo stavke poziva funkcija iz odgovora `output`.
 
    ```python
-   response_message = response.choices[0].message
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
    ```
 
-1. Sada ćemo definirati funkciju koja će pozvati Microsoft Learn API kako bi dobila popis tečajeva:
+1. Sada definirat ćemo funkciju koja će pozvati Microsoft Learn API da dobije listu tečajeva:
 
    ```python
    import requests
@@ -340,53 +340,45 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   Primijetite kako sada kreiramo stvarnu Python funkciju koja se mapira na imena funkcija uvedena u `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   Primijetite kako sada stvaramo stvarnu Python funkciju koja mapira imena funkcija predstavljena u varijabli `functions`. Također vršimo stvarne vanjske API pozive da dohvatimo potrebne podatke. U ovom slučaju koristimo Microsoft Learn API za pretraživanje modula za obuku.
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+Dobro, stvorili smo varijablu `functions` i odgovarajuću Python funkciju, kako LLM-u reći kako povezati ta dva da bi naša Python funkcija bila pozvana?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call` je dio toga i poziva istaknutu funkciju. Evo kako možete napraviti spomenutu provjeru dolje:
+1. Da bismo provjerili treba li pozvati Python funkciju, trebamo pogledati odgovor LLM-a i vidjeti sadrži li stavku `function_call` i zatim pozvati označenu funkciju. Evo kako to možete provjeriti ispod:
 
    ```python
-   # Check if the model wants to call a function
-   if response_message.function_call.name:
-    print("Recommended Function call:")
-    print(response_message.function_call.name)
-    print()
+   # Provjeri želi li model pozvati funkciju
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
 
-    # Call the function.
-    function_name = response_message.function_call.name
+     # Pozovi funkciju.
+     function_name = tool_call.name
 
-    available_functions = {
-            "search_courses": search_courses,
-    }
-    function_to_call = available_functions[function_name]
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
 
-    function_args = json.loads(response_message.function_call.arguments)
-    function_response = function_to_call(**function_args)
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
-    print(function_response)
-    print(type(function_response))
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
 
-
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
-        {
-            "role": response_message.role,
-            "function_call": {
-                "name": function_name,
-                "arguments": response_message.function_call.arguments,
-            },
-            "content": None
-        }
-    )
-    messages.append( # adding function response to messages
-        {
-            "role": "function",
-            "name": function_name,
-            "content":function_response,
-        }
-    )
+     # Dodaj poziv funkcije i njegov rezultat natrag u razgovor.
+     # Stavka function_call modela mora biti dodana prije njegovog izlaza.
+     messages.append(tool_call)  # stavka function_call asistenta
+     messages.append( # rezultat funkcije
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
    ```
 
    Ove tri linije osiguravaju da izvučemo ime funkcije, argumente i izvršimo poziv:
@@ -394,11 +386,11 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    ```python
    function_to_call = available_functions[function_name]
 
-   function_args = json.loads(response_message.function_call.arguments)
+   function_args = json.loads(tool_call.arguments)
    function_response = function_to_call(**function_args)
    ```
 
-   Dolje je izlaz iz pokretanja našeg koda:
+   Ispod je izlaz pri pokretanju našeg koda:
 
    **Izlaz**
 
@@ -419,50 +411,60 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. Sada ćemo poslati ažuriranu poruku, `messages` LLM-u kako bismo primili odgovor u prirodnom jeziku umjesto API odgovora u JSON formatu.
+1. Sada ćemo poslati ažuriranu poruku, `messages` LLM-u kako bismo mogli dobiti odgovor na prirodnom jeziku umjesto JSON formata odgovora API-ja.
 
    ```python
    print("Messages in next request:")
    print(messages)
    print()
 
-   second_response = client.chat.completions.create(
-      messages=messages,
+   second_response = client.responses.create(
+      input=messages,
       model=deployment,
-      function_call="auto",
-      functions=functions,
-      temperature=0
-         )  # get a new response from GPT where it can see the function response
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # dobiti novi odgovor od modela gdje može vidjeti odgovor funkcije
 
 
-   print(second_response.choices[0].message)
+   print(second_response.output_text)
    ```
 
    **Izlaz**
 
-   ```python
-   {
-     "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
-   }
+   ```text
+   I found some good courses for beginner students to learn Azure:
 
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
    ```
 
-## Zadaci
+## Zadatak
 
-Za nastavak vašeg učenja o Azure OpenAI Function Calling možete izgraditi:
+Za nastavak učenja o Azure OpenAI Function Calling možete izgraditi:
 
-- Više parametara funkcije koji bi mogli pomoći učenicima u pronalaženju više tečajeva.
-- Kreirajte još jedan poziv funkcije koji uzima više informacija od učenika kao što je njihov materinji jezik
-- Kreirajte rukovanje greškama kada poziv funkcije i/ili API poziv ne vrati odgovarajuće tečajeve
+- Više parametara funkcije koji bi mogli pomoći učenicima pronaći više tečajeva.
 
-Savjet: Slijedite [Learn API reference documentation](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) stranicu da vidite kako i gdje su ti podaci dostupni.
+- Napravite još jedan poziv funkcije koji uzima više informacija od učenika, poput njihovog izvornog jezika
+- Napravite rukovanje greškama kada poziv funkcije i/ili API poziv ne vrati prikladne tečajeve
 
-## Odlično! Nastavite s učenjem
+Hint: Slijedite [Learn API referentnu dokumentaciju](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) kako biste vidjeli kako i gdje su ti podaci dostupni.
 
-Nakon završetka ove lekcije, pogledajte našu [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) da nastavite s nadogradnjom vašeg znanja o Generativnoj AI!
+## Sjajan posao! Nastavite svoje putovanje
+
+Nakon što završite ovu lekciju, pogledajte našu [Generative AI Learning kolekciju](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) kako biste nastavili podizati svoje znanje o Generativnoj AI!
 
 Pređite na Lekciju 12, gdje ćemo pogledati kako [dizajnirati UX za AI aplikacije](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
-**Odricanje odgovornosti**:  
-Ovaj dokument je preveden koristeći AI uslugu prevođenja [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, molimo vas da budete svjesni da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne odgovaramo za nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Napomena**:
+Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati greške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporuča se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

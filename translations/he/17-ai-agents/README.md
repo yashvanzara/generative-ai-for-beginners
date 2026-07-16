@@ -1,71 +1,62 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "11f03c81f190d9cbafd0f977dcbede6c",
-  "translation_date": "2025-05-20T07:27:23+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "he"
-}
--->
-[![מודלים בקוד פתוח](../../../translated_images/17-lesson-banner.85938ffe06e157e1dfc9ae2fcf0de326892e71c463f62b397291ad54bd8e9602.he.png)](https://aka.ms/gen-ai-lesson17-gh?WT.mc_id=academic-105485-koreyst)
+[![מודלים קוד פתוח](../../../translated_images/he/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## מבוא
 
-סוכני AI מייצגים התפתחות מרגשת ב-AI גנרטיבי, המאפשרים למודלים שפתיים גדולים (LLMs) להתפתח מעוזרים לסוכנים המסוגלים לבצע פעולות. מסגרות סוכני AI מאפשרות למפתחים ליצור יישומים שנותנים ל-LLMs גישה לכלים וניהול מצבים. מסגרות אלו גם משפרות את הנראות, ומאפשרות למשתמשים ולמפתחים לעקוב אחר הפעולות המתוכננות על ידי LLMs, ובכך לשפר את ניהול החוויות.
+סוכני בינה מלאכותית (AI Agents) מהווים פיתוח מרתק בתחום הבינה המלאכותית היוצרת, המאפשר למודלים שפתיים גדולים (LLMs) להתפתח מעוזרים לסוכנים המסוגלים לנקוט בפעולות. מסגרות סוכני AI מאפשרות למפתחים ליצור יישומים שנותנים ל-LLMs גישה לכלים ולניהול מצב. מסגרות אלו גם משפרות את השקיפות, ומאפשרות למשתמשים ולמפתחים לעקוב אחרי הפעולות שתוכננו על ידי ה-LLMs, ובכך משפרות את ניהול החוויה.
 
-השיעור יכסה את התחומים הבאים:
+השיעור יעסוק בתחומים הבאים:
 
-- הבנת מהו סוכן AI - מה בדיוק הוא סוכן AI?
-- חקר ארבע מסגרות סוכני AI שונות - מה מייחד אותן?
-- יישום סוכני AI אלה למקרי שימוש שונים - מתי עלינו להשתמש בסוכני AI?
+- הבנת מהו סוכן בינה מלאכותית - מה בעצם הוא סוכן AI?
+- חקר חמש מסגרות סוכני AI שונות - מה מבדל אותן?
+- יישום סוכני AI במקרים שונים - מתי כדאי להשתמש בסוכני AI?
 
-## מטרות למידה
+## מטרות הלמידה
 
-לאחר שיעור זה, תוכלו:
+לאחר שתיקחו את השיעור, תוכלו:
 
-- להסביר מה הם סוכני AI וכיצד ניתן להשתמש בהם.
-- להבין את ההבדלים בין כמה ממסגרות סוכני AI הפופולריות וכיצד הן שונות.
-- להבין כיצד סוכני AI פועלים כדי לבנות יישומים איתם.
+- להסביר מה הם סוכני AI ואיך ניתן להשתמש בהם.
+- להבין את ההבדלים בין כמה מהמסגרות הפופולריות לסוכני AI, וכיצד הן שונות.
+- להבין כיצד פועלים סוכני AI על מנת לבנות יישומים איתם.
 
 ## מה הם סוכני AI?
 
-סוכני AI הם תחום מרתק בעולם ה-AI הגנרטיבי. עם ההתרגשות הזו מגיעה לפעמים בלבול במונחים וביישומם. כדי לשמור על פשטות והכללה של רוב הכלים המתייחסים לסוכני AI, נשתמש בהגדרה זו:
+סוכני AI הם תחום מרתק מאוד בעולם הבינה המלאכותית היוצרת. עם ההתלהבות הזאת לעיתים מופיעים בלבולים במונחים ובשימושם. על מנת לשמור על פשטות ולהיות כוללניים לרוב הכלים המתייחסים לסוכני AI, נשתמש בהגדרה הבאה:
 
 סוכני AI מאפשרים למודלים שפתיים גדולים (LLMs) לבצע משימות על ידי מתן גישה ל**מצב** ו**כלים**.
 
-![מודל סוכן](../../../translated_images/what-agent.61a7315e4b722e06561f6c93e682a51357308b53884f00af289b5a81e3e65242.he.png)
+![מודל סוכן](../../../translated_images/he/what-agent.21f2893bdfd01e6a.webp)
 
-בואו נגדיר את המונחים האלה:
+נבהיר את המונחים הבאים:
 
-**מודלים שפתיים גדולים** - אלה הם המודלים המוזכרים לאורך כל הקורס כמו GPT-3.5, GPT-4, Llama-2, וכו'.
+**מודלים שפתיים גדולים** - אלו הם המודלים המוזכרים לאורך הקורס כגון GPT-3.5, GPT-4, Llama-2 וכו'.
 
-**מצב** - זה מתייחס להקשר שבו ה-LLM פועל. ה-LLM משתמש בהקשר של פעולותיו הקודמות וההקשר הנוכחי, מכוון את קבלת ההחלטות שלו לפעולות הבאות. מסגרות סוכני AI מאפשרות למפתחים לשמור על הקשר זה בצורה קלה יותר.
+**מצב** - מתייחס להקשר שבו מודל השפה עובד. המודל משתמש בקונטקסט של פעולות העבר והקונטקסט הנוכחי, ומנחה את קבלת ההחלטות שלו בפעולות הבאות. מסגרות סוכני AI מאפשרות למפתחים לנהל את ההקשר הזה בקלות רבה יותר.
 
-**כלים** - כדי להשלים את המשימה שהמשתמש ביקש ושה-LLM תכנן, ה-LLM צריך גישה לכלים. כמה דוגמאות לכלים יכולות להיות מסד נתונים, API, יישום חיצוני או אפילו LLM אחר!
+**כלים** - על מנת להשלים את המשימה שהמשתמש ביקש והמודל תכנן, המודל צריך גישה לכלים. דוגמאות לכלים יכולות להיות מסד נתונים, API, אפליקציה חיצונית או אפילו מודל שפה נוסף!
 
-ההגדרות הללו יעניקו לכם בסיס טוב ככל שנתקדם ונבחן כיצד הן מיושמות. בואו נחקור כמה מסגרות סוכני AI שונות:
+הגדרות אלו יעניקו לכם בסיס טוב להמשך בהתבוננות על יישומם. בואו נחקור כמה מסגרות שונות לסוכני AI:
 
 ## סוכני LangChain
 
-[סוכני LangChain](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) הם יישום של ההגדרות שסיפקנו לעיל.
+[סוכני LangChain](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) הם מימוש של ההגדרות שסיפקנו לעיל.
 
-כדי לנהל את ה**מצב**, הוא משתמש בפונקציה מובנית שנקראת `AgentExecutor`. זה מקבל את ה`agent` המוגדרים ואת ה`tools` הזמינים לו.
+לניהול ה**מצב**, משתמשים בפונקציה מובנית בשם `AgentExecutor`. זו מקבלת את ה`agent` שהוגדר וה`tools` הזמינים לו.
 
-ה`Agent Executor` גם מאחסן את היסטוריית הצ'אט כדי לספק את הקשר הצ'אט.
+ה`Agent Executor` גם שומר את היסטוריית השיחות כדי לספק את הקונטקסט של השיחה.
 
-![סוכני Langchain](../../../translated_images/langchain-agents.4709b559c14be8903a59abf4ebef43916a23fac43924b133a7552121ff5e6730.he.png)
+![סוכני LangChain](../../../translated_images/he/langchain-agents.edcc55b5d5c43716.webp)
 
-LangChain מציעה [קטלוג של כלים](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) שניתן לייבא ליישום שלכם שבו ה-LLM יכול לקבל גישה. אלה נוצרו על ידי הקהילה ועל ידי צוות LangChain.
+LangChain מציעה [קטלוג כלים](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) שניתן לייבא ליישום שלכם ולקבל דרכם גישה ל-LLM. כלים אלו נבנו על ידי הקהילה וצוות LangChain.
 
-אתם יכולים להגדיר את הכלים האלה ולהעביר אותם ל`Agent Executor`.
+לאחר מכן ניתן להגדיר כלים אלו ולהעבירם ל`Agent Executor`.
 
-נראות היא היבט חשוב נוסף כאשר מדברים על סוכני AI. חשוב למפתחי יישומים להבין איזה כלי ה-LLM משתמש ולמה. לשם כך, הצוות ב-LangChain פיתח את LangSmith.
+שקיפות היא היבט חשוב נוסף כשמדברים על סוכני AI. חשוב שמפתחי יישומים יבינו איזה כלי ה-LLM משתמש ולמה. לשם כך, צוות LangChain פיתח את LangSmith.
 
 ## AutoGen
 
-מסגרת סוכני AI הבאה שנדון בה היא [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). המיקוד המרכזי של AutoGen הוא שיחות. סוכנים הם גם **ניתנים לשיחה** וגם **מותאמים אישית**.
+מסגרת סוכן ה-AI הבאה נדון בה היא [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). המוקד המרכזי ב-AutoGen הוא שיחות. הסוכנים גם **ניתנים לשיחה** וגם **ניתנים להתאמה אישית**.
 
-**ניתנים לשיחה -** LLMs יכולים להתחיל ולהמשיך שיחה עם LLM אחר כדי להשלים משימה. זה נעשה על ידי יצירת `AssistantAgents` ומתן להם הודעת מערכת ספציפית.
+**ניתנים לשיחה** - מודלים שפתיים גדולים יכולים לפתוח ולהמשיך שיחה עם מודל שפה נוסף על מנת להשלים משימה. הדבר נעשה על ידי יצירת `AssistantAgents` ומתן הודעת מערכת ספציפית להם.
 
 ```python
 
@@ -73,7 +64,7 @@ autogen.AssistantAgent( name="Coder", llm_config=llm_config, ) pm = autogen.Assi
 
 ```
 
-**מותאמים אישית** - סוכנים יכולים להיות מוגדרים לא רק כ-LLMs אלא גם כמשתמש או כלי. כמפתח, אתם יכולים להגדיר `UserProxyAgent` שאחראי על אינטראקציה עם המשתמש לקבלת משוב בהשלמת משימה. משוב זה יכול להמשיך את ביצוע המשימה או להפסיק אותה.
+**ניתנים להתאמה אישית** - סוכנים יכולים להיות מוגדרים לא רק כמודלים שפתיים אלא גם כמשתמש או ככלי. כמפתח, ניתן להגדיר `UserProxyAgent` שאחראי על אינטראקציה עם המשתמש לקבלת משוב להשלמת המשימה. משוב זה יכול להמשיך את ביצוע המשימה או לעצור אותה.
 
 ```python
 user_proxy = UserProxyAgent(name="user_proxy")
@@ -81,30 +72,30 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 ### מצב וכלים
 
-כדי לשנות ולנהל מצב, סוכן עוזר מייצר קוד פייתון כדי להשלים את המשימה.
+לניהול ושינוי מצב, סוכן עוזר (Assistant Agent) מייצר קוד פייתון לביצוע המשימה.
 
-הנה דוגמה לתהליך:
+לדוגמה של התהליך:
 
-![AutoGen](../../../translated_images/autogen.8ac57409019150ec5a17c6381a92863116b19acce02604b4bf5681225dee62eb.he.png)
+![AutoGen](../../../translated_images/he/autogen.dee9a25a45fde584.webp)
 
-#### LLM מוגדר עם הודעת מערכת
+#### מודל שפה מוגדר עם הודעת מערכת
 
 ```python
 system_message="For weather related tasks, only use the functions you have been provided with. Reply TERMINATE when the task is done."
 ```
 
-הודעות מערכת אלו מכוונות את ה-LLM הספציפי לאילו פונקציות רלוונטיות למשימתו. זכרו, עם AutoGen אתם יכולים להגדיר מספר AssistantAgents עם הודעות מערכת שונות.
+הודעת מערכת זו מכוונת את מודל השפה הספציפי אילו פונקציות רלוונטיות למשימה שלו. זכרו, עם AutoGen תוכלו להגדיר מספר AssistantAgents עם הודעות מערכת שונות.
 
-#### צ'אט מתחיל על ידי משתמש
+#### משתמש מתחיל שיחה
 
 ```python
 user_proxy.initiate_chat( chatbot, message="I am planning a trip to NYC next week, can you help me pick out what to wear? ", )
 
 ```
 
-הודעה זו מ-user_proxy (אדם) היא מה שיתחיל את תהליך הסוכן לחקור את הפונקציות האפשריות שהוא צריך לבצע.
+הודעה זו מ`user_proxy` (אנושי) תתחיל את תהליך הסוכן לחקור את הפונקציות האפשריות שהוא צריך לבצע.
 
-#### פונקציה מבוצעת
+#### הפעלת פונקציה
 
 ```bash
 chatbot (to user_proxy):
@@ -115,59 +106,145 @@ chatbot (to user_proxy):
 
 ```
 
-לאחר עיבוד הצ'אט הראשוני, הסוכן ישלח את הכלי המוצע לקריאה. במקרה זה, מדובר בפונקציה שנקראת `get_weather`. Depending on your configuration, this function can be automatically executed and read by the Agent or can be executed based on user input.
+לאחר עיבוד השיחה ההתחלתית, הסוכן ישלח את ההמלצה לקרוא לכלי. במקרה הזה, זו פונקציה בשם `get_weather`. בהתאם לקונפיגורציה, פונקציה זו יכולה להתבצע אוטומטית ולהיקרא על ידי הסוכן או להידרש הפעלה על ידי המשתמש.
 
-You can find a list of [AutoGen code samples](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) to further explore how to get started building.
+תוכלו למצוא רשימת [דוגמאות קוד AutoGen](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) להמשך חקר ופיתוח.
+
+## מסגרת סוכנים של מיקרוסופט
+
+[מסגרת סוכני מיקרוסופט](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst) היא ערכת פיתוח קוד פתוח של מיקרוסופט לבניית סוכני AI ומערכות רב-סוכניות בשפות **Python** ו**.NET**. היא משלבת את היתרונות של שני פרויקטים קודמים של מיקרוסופט — תכונות הארגון של **Semantic Kernel** ואת תזמור הסוכנים הרבים של **AutoGen** — במסגרת אחת נתמכת. אם אתם מתחילים בפרויקט סוכן חדש היום, זו ההמלצה להמשיך במקום AutoGen.
+
+המסגרת מתרחבת מסוכן שיחה יחיד ועד לזרימות עבודה מורכבות של סוכנים רבים, ומשתלבת ישירות עם Microsoft Foundry, Azure OpenAI, ו-OpenAI. היא גם מספקת תצפיות משולבות דרך OpenTelemetry כדי שתוכלו לעקוב בדיוק מה הסוכנים עושים.
+
+### מצב וכלים
+
+**מצב** - המסגרת מנהלת עבורכם את קונטקסט השיחה דרך **תפריטים** (threads). הסוכן עוקב אחר היסטוריית ההודעות (בקשות משתמש, קריאות לכלים ותוצאותיהם), כך שכל סיבוב מתבסס על הקודמים. ניתן גם לשמור תפריטים כדי להשהות ולהמשיך שיחה מאוחר יותר.
+
+**כלים** - אתם מספקים לסוכן כלים על ידי העברת פונקציות פייתון רגילות. פרמטרים עם טיפוס מועברים אוטומטית לסכימה, כך שהמודל יודע מתי ואיך לקרוא להם (קריאת פונקציות). המסגרת גם תומכת בשרתים של Model Context Protocol (MCP) וכלים מתארחים כמו פרשן קוד.
+
+כאן דוגמה לסוכן יחיד עם כלי מותאם אישי:
+
+```python
+import asyncio
+from typing import Annotated
+
+from pydantic import Field
+from agent_framework import Agent
+from agent_framework.openai import OpenAIChatClient
+
+
+def get_weather(
+    location: Annotated[str, Field(description="The location to get the weather for.")],
+) -> str:
+    """Get the weather for a given location."""
+    return f"The weather in {location} is sunny with a high of 22°C."
+
+
+async def main():
+    agent = Agent(
+        client=OpenAIChatClient(),
+        instructions="You are a helpful assistant that can answer weather questions.",
+        tools=[get_weather],
+    )
+
+    response = await agent.run("What's the weather in Amsterdam?")
+    print(response)
+
+
+asyncio.run(main())
+```
+
+כדי להתחבר ל-Azure OpenAI ב-Microsoft Foundry במקום זאת, העבירו את נקודת הסיום ואישורי הגישה ללקוח:
+
+```python
+from azure.identity.aio import AzureCliCredential
+from agent_framework.openai import OpenAIChatClient
+
+client = OpenAIChatClient(
+    model="my-gpt-4o-deployment",
+    azure_endpoint="https://my-resource.openai.azure.com",
+    credential=AzureCliCredential(),
+)
+```
+
+### זרימות עבודה עם סוכנים מרובים
+
+היתרון האמיתי של המסגרת הוא התזמור של כמה סוכנים יחד. לדוגמה, ניתן להריץ סוכנים בזה אחר זה (כאשר כל אחד מעביר את הקונטקסט לסוכן הבא) או לפצל לסוכנים רבים במקביל ולרכז את התוצאות שלהם:
+
+```python
+from agent_framework.orchestrations import SequentialBuilder, ConcurrentBuilder
+
+# הרץ סוכנים ברצף, מעביר את הקשר של השיחה לאורך השרשרת
+sequential = SequentialBuilder(participants=[researcher, writer, editor]).build()
+
+# פזר אל הסוכנים במקביל, ואז אסוף את התגובות שלהם
+concurrent = ConcurrentBuilder(participants=[analyst_a, analyst_b, analyst_c]).build()
+```
+
+להתקין את המסגרת ולהתחיל:
+
+```bash
+pip install agent-framework-core
+# אינטגרציות אופציונליות
+pip install agent-framework-openai       # OpenAI ו-Azure OpenAI
+pip install agent-framework-foundry      # Microsoft Foundry
+```
+
+אפשר לחקור עוד ב[מאגר מסגרת הסוכנים של מיקרוסופט](https://github.com/microsoft/agent-framework?WT.mc_id=academic-105485-koreyst) וב[תיעוד הרשמי](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst).
 
 ## Taskweaver
 
-The next agent framework we will explore is [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). It is known as a "code-first" agent because instead of working strictly with `strings` , it can work with DataFrames in Python. This becomes extremely useful for data analysis and generation tasks. This can be things like creating graphs and charts or generating random numbers.
+מסגרת הסוכן הבאה שנחקור היא [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). היא ידועה כסוכן "קוד-קודם" מאחר שבמקום לעבוד רק עם `strings`, היא יכולה לעבוד עם DataFrames בפייתון. זה מאוד שימושי לניתוח ויצירת נתונים, לדוגמה יצירת גרפים, טבלאות או יצירת מספרים אקראיים.
 
-### State and Tools
+### מצב וכלים
 
-To manage the state of the conversation, TaskWeaver uses the concept of a `Planner`. The `Planner` is a LLM that takes the request from the users and maps out the tasks that need to be completed to fulfill this request.
+לניהול מצב השיחה, TaskWeaver משתמש ב"רעיון" של `Planner`. ה`Planner` הוא מודל שפה גדול שלוקח את הבקשה מהמשתמשים וממפה את המשימות שצריך להשלים כדי למלא את הבקשה.
 
-To complete the tasks the `Planner` is exposed to the collection of tools called `Plugins`. אלו יכולים להיות מחלקות פייתון או מתורגמן קוד כללי. תוספים אלו מאוחסנים כהטמעות כדי שה-LLM יוכל לחפש טוב יותר את התוסף הנכון.
+כדי להשלים את המשימות, ה`Planner` נגיש לאוסף כלים הנקראים `Plugins`. אלה יכולים להיות מחלקות פייתון או פרשן קוד כללי. תוספים אלו נשמרים כמטבעות (embeddings) כך שהמודל יכול לחפש טוב יותר את התוסף הנכון.
 
-![Taskweaver](../../../translated_images/taskweaver.c0997002a3df51572f6cad019c41202b7c2110cbfcccc4af2e5d6a0ace4b4545.he.png)
+![Taskweaver](../../../translated_images/he/taskweaver.da8559999267715a.webp)
 
-הנה דוגמה לתוסף לטיפול בזיהוי חריגות:
+הנה דוגמה לתוסף לניהול גילוי חריגות:
 
 ```python
 class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_col_name: str, value_col_name: str):
 ```
 
-הקוד מאומת לפני הביצוע. תכונה נוספת לניהול הקשר ב-Taskweaver היא `experience`. Experience allows for the context of a conversation to be stored over to the long term in a YAML file. This can be configured so that the LLM improves over time on certain tasks given that it is exposed to prior conversations.
+הקוד מאומת לפני ההפעלה. תכונה נוספת לניהול הקונטקסט ב-Taskweaver היא `experience`. Experience מאפשר לאחסן את הקונטקסט של שיחה לאורך זמן בקובץ YAML. ניתן להגדיר זאת כך שהמודל ישתפר עם הזמן במשימות מסוימות בעלי גישה לשיחות קודמות.
 
 ## JARVIS
 
-The last agent framework we will explore is [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). What makes JARVIS unique is that it uses an LLM to manage the `state` של השיחה וה`tools` הם מודלים AI אחרים. כל אחד מהמודלים הם מודלים מיוחדים המבצעים משימות מסוימות כמו זיהוי אובייקטים, תמלול או כיתוב תמונות.
+המסגרת הסופית שנחקור היא [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file&WT.mc_id=academic-105485-koreyst). מה שמייחד את JARVIS הוא שהוא משתמש במודל שפה לנהל את `המצב` של השיחה, ו`הכלים` הם מודלים של AI אחרים. כל אחד מהמודלים מיוחד לביצוע משימות מסוימות כגון זיהוי עצמים, תמלול או כיתוב תמונות.
 
-![JARVIS](../../../translated_images/jarvis.d41d7c4c81bf015bd7ced7f1108abdec56b312472aaf3f63b5b0e82a5f4fb395.he.png)
+![JARVIS](../../../translated_images/he/jarvis.762ddbadbd1a3a33.webp)
 
-ה-LLM, בהיותו מודל כללי, מקבל את הבקשה מהמשתמש ומזהה את המשימה הספציפית וכל טיעונים/נתונים הנדרשים להשלמת המשימה.
+מודל השפה, כמכלול כללי, מקבל את הבקשה מהמשתמש ומזהה את המשימה הספציפית וכל ארגומנטים/נתונים הדרושים להשלמת המשימה.
 
 ```python
 [{"task": "object-detection", "id": 0, "dep": [-1], "args": {"image": "e1.jpg" }}]
 ```
 
-ה-LLM אז מעצב את הבקשה באופן שהמודל AI המיוחד יכול לפרש, כמו JSON. ברגע שהמודל AI החזיר את התחזית שלו בהתבסס על המשימה, ה-LLM מקבל את התגובה.
+מודל השפה מעצב את הבקשה בצורה שהמודל המיוחד יכול לפרש, כמו JSON. לאחר שהמודל המיוחד הוחזר עם התחזית שלו בהתבסס על המשימה, מודל השפה מקבל את התגובה.
 
-אם נדרשים מספר מודלים להשלמת המשימה, הוא גם יפרש את התגובה מהמודלים הללו לפני שיחבר אותם יחד ליצירת התגובה למשתמש.
+אם יש צורך במספר מודלים להשלמת המשימה, הוא גם מפרש את התגובות מהם לפני שאיגד אותם ליצירת התגובה למשתמש.
 
-הדוגמה הבאה מראה כיצד זה יעבוד כאשר משתמש מבקש תיאור וספירה של האובייקטים בתמונה:
+הדוגמה למטה מראה איך זה יעבוד כאשר משתמש מבקש תיאור וספירת עצמים בתמונה:
 
 ## משימה
 
-כדי להמשיך את הלמידה שלכם על סוכני AI, אתם יכולים לבנות עם AutoGen:
+להמשך למידה על סוכני AI תוכלו לבנות עם מסגרת הסוכנים של מיקרוסופט:
 
-- יישום המדמה פגישת עסקים עם מחלקות שונות של סטארט-אפ חינוכי.
-- יצירת הודעות מערכת שמנחות את ה-LLMs בהבנת פרסונות וקדימויות שונות, ומאפשרות למשתמש להציע רעיון למוצר חדש.
-- ה-LLM צריך אז לייצר שאלות המשך מכל מחלקה כדי לחדד ולשפר את ההצעה ורעיון המוצר.
+- אפליקציה המדמה ישיבת עסקים עם מחלקות שונות של סטארטאפ חינוכי.
+- צרו הודעות מערכת שמנחות את ה-LLM להבין פרסונות שונות ועדיפויות, ומאפשרות למשתמש להציג רעיון מוצר חדש.
+- לאחר מכן על ה-LLM להפיק שאלות המשך מכל מחלקה לשיפור והעמקת ההצעה ורעיון המוצר.
 
-## הלמידה לא נעצרת כאן, המשיכו במסע
+## הלמידה לא נגמרת כאן, המשיכו במסע
 
-לאחר השלמת שיעור זה, עיינו באוסף [למידת AI גנרטיבי](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) שלנו כדי להמשיך לשפר את הידע שלכם ב-AI גנרטיבי!
+לאחר שתסיימו את השיעור, בדקו את [אוסף הלמידה של בינה מלאכותית יוצרת](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) כדי להמשיך להעשיר את הידע שלכם בתחום!
 
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום AI [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור הסמכותי. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לכל אי-הבנות או פרשנויות שגויות הנובעות מהשימוש בתרגום זה.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

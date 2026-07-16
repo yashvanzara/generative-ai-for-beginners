@@ -1,56 +1,47 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "59021c5f419d3feda19075910a74280a",
-  "translation_date": "2025-05-20T06:44:12+00:00",
-  "source_file": "15-rag-and-vector-databases/data/perceptron.md",
-  "language_code": "sr"
-}
--->
-# Uvod u neuronske mreže: Perceptron
+# Увод у неуронске мреже: Перцептрон
 
-Jedan od prvih pokušaja implementacije nečega sličnog savremenoj neuronskoj mreži izvršio je Frank Rosenblatt iz Cornell Aeronautical Laboratory 1957. godine. To je bila hardverska implementacija nazvana "Mark-1", dizajnirana da prepoznaje primitivne geometrijske figure, kao što su trouglovi, kvadrati i krugovi.
+Један од првих покушаја да се имплементира нешто слично модерној неуронској мрежи направио је Френк Розенблат са Корнел аеронаутичке лабораторије 1957. године. Ради се о хардверској имплементацији под називом "Mark-1", дизајнираној да препозна примитивне геометријске облике, као што су троуглови, квадрати и кругови.
 
 |      |      |
 |--------------|-----------|
-|<img src='images/Rosenblatt-wikipedia.jpg' alt='Frank Rosenblatt'/> | <img src='images/Mark_I_perceptron_wikipedia.jpg' alt='The Mark 1 Perceptron' />|
+|<img src='../../../../translated_images/sr/Rosenblatt-wikipedia.1d205667acda28c0.webp' alt='Frank Rosenblatt'/> | <img src='../../../../translated_images/sr/Mark_I_perceptron_wikipedia.434e46ca39e2be80.webp' alt='The Mark 1 Perceptron' />|
 
-> Slike sa Wikipedije
+> Слике са Википедије
 
-Ulazna slika je predstavljena nizom fotocelija od 20x20, tako da je neuronska mreža imala 400 ulaza i jedan binarni izlaz. Jednostavna mreža je sadržala jedan neuron, koji se takođe naziva **jedinica logičkog praga**. Težine neuronske mreže delovale su kao potenciometri koji su zahtevali ručno podešavanje tokom faze obuke.
+Улазна слика је представљена као матрица од 20x20 фотосензора, тако да је неуронска мрежа имала 400 улаза и један бинарни излаз. Једноставна мрежа садржала је један неурон, који се такође називао **логичка јединица прага**. Тежине у неуронској мрежи понашале су се као потенциометри који су захтевали ручно подешавање током фазе учења.
 
-> ✅ Potenciometar je uređaj koji omogućava korisniku da podešava otpor u kolu.
+> ✅ Потенциометар је уређај који омогућава кориснику да подеси отпор у колу.
 
-> The New York Times je tada pisao o perceptronu: *embrion elektronskog računara za koji [mornarica] očekuje da će moći da hoda, govori, vidi, piše, reprodukuje se i bude svestan svog postojanja.*
+> The New York Times је у то време писао о перцептрону: *ембрион електронског рачунара који [морнарица] очекује да ће моћи да хода, говори, види, пише, репродукује се и буде свестан свог постојања.*
 
-## Model perceptrona
+## Модел перцептрона
 
-Pretpostavimo da imamo N karakteristika u našem modelu, u kom slučaju bi ulazni vektor bio vektor veličine N. Perceptron je model **binarne klasifikacije**, tj. može da razlikuje između dve klase ulaznih podataka. Pretpostavićemo da za svaki ulazni vektor x izlaz našeg perceptrona bude ili +1 ili -1, u zavisnosti od klase. Izlaz će se izračunavati pomoću formule:
+Претпоставимо да у нашем моделу имамо N карактеристика, у ком случају би улазни вектор био вектор величине N. Перцептрон је модел **бинарне класификације**, односно може да разликује између две класе улазних података. Претпоставићемо да за сваки улазни вектор x излаз нашег перцептрона може бити или +1 или -1, у зависности од класе. Излаз ће се израчунати по формули:
 
 y(x) = f(w<sup>T</sup>x)
 
-gde je f stepenasta funkcija aktivacije
+где је f функција корак активације
 
-## Obuka perceptrona
+## Тренирање перцептрона
 
-Da bismo obučili perceptron, treba da pronađemo vektor težina w koji klasifikuje većinu vrednosti tačno, tj. rezultira najmanjom **greškom**. Ova greška je definisana **kriterijumom perceptrona** na sledeći način:
+Да бисмо тренирали перцептрон, потребно је да пронађемо вектор тежина w који највећи број вредности класификује исправно, односно да резултује најмањом **грешком**. Ова грешка је дефинисана **перцептрон критеријумом** на следећи начин:
 
 E(w) = -∑w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
 
-gde:
+где:
 
-* suma se uzima za one tačke podataka za obuku i koje rezultiraju pogrešnom klasifikacijom
-* x<sub>i</sub> je ulazni podatak, a t<sub>i</sub> je ili -1 ili +1 za negativne i pozitivne primere odgovarajuće.
+* збир се узима преко оних тренинг података i који доводе до погрешне класификације
+* x<sub>i</sub> је улазни податак, а t<sub>i</sub> је или -1 или +1 за негативне и позитивне примере редом.
 
-Ovaj kriterijum se smatra funkcijom težina w, i treba da ga minimiziramo. Često se koristi metoda zvana **spuštanje niz gradijent**, u kojoj počinjemo sa nekim početnim težinama w<sup>(0)</sup>, a zatim u svakom koraku ažuriramo težine prema formuli:
+Овај критеријум се посматра као функција тежина w, и потребно га је минимизовати. Често се користи метода која се зове **градијентни спуст**, у којој почињемо са неким почетним тежинама w<sup>(0)</sup>, а затим на сваком кораку ажурирамо тежине по формули:
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> - η∇E(w)
 
-Ovde je η tzv. **stopa učenja**, a ∇E(w) označava **gradijent** E. Nakon što izračunamo gradijent, dobijamo
+Овде је η такозвана **степен учења**, а ∇E(w) означава **градијент** функције E. Након израчунавања градијента добијамо
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> + ∑ηx<sub>i</sub>t<sub>i</sub>
 
-Algoritam u Python-u izgleda ovako:
+Алгоритам у Питону изгледа овако:
 
 ```python
 def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
@@ -72,26 +63,27 @@ def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
     return weights
 ```
 
-## Zaključak
+## Закључак
 
-U ovoj lekciji ste naučili o perceptronu, koji je model binarne klasifikacije, i kako ga obučiti koristeći vektor težina.
+У овој лекцији сте научили о перцептрону, који је модел бинарне класификације, и како га тренирати коришћењем вектора тежина.
 
-## 🚀 Izazov
+## 🚀 Изазов
 
-Ako želite da pokušate da napravite svoj perceptron, isprobajte ovu laboratoriju na Microsoft Learn koja koristi Azure ML dizajner.
+Ако желите да покушате да направите свој перцептрон, испробајте овај лабораторијски задатак на Microsoft Learn који користи Azure ML дизајнер
 
-## Pregled i samostalno učenje
 
-Da biste videli kako možemo koristiti perceptron za rešavanje jednostavnog problema kao i problema iz stvarnog života, i da nastavite sa učenjem - idite na beležnicu o perceptronu.
+## Преглед и самостално учење
 
-Evo zanimljivog članka o perceptronima.
+Да бисте видели како можемо користити перцептрон за решавање једноставних као и стварних проблема, и да наставите са учењем - идите на Perceptron notebook.
 
-## Zadatak
+Ево и један занимљив чланак о перцептронима.
 
-U ovoj lekciji smo implementirali perceptron za zadatak binarne klasifikacije, i koristili smo ga za klasifikaciju između dve rukom pisane cifre. U ovoj laboratoriji, od vas se traži da rešite problem klasifikacije cifara u celosti, tj. da odredite koja cifra najverovatnije odgovara datoj slici.
+## Задатак
 
-* Uputstva
-* Beležnica
+У овој лекцији смо имплементирали перцептрон за задатак бинарне класификације, и користили га да класификујемо између две руком написане цифре. У овом лабораторијском задатку, од вас се тражи да решите проблем класификације цифара у потпуности, односно да одредите која цифра највероватније одговара датој слици.
 
-**Одричање од одговорности**:  
-Овај документ је преведен користећи услугу превођења вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо ка тачности, молимо вас да будете свесни да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати меродавним извором. За критичне информације, препоручује се професионални превод од стране људи. Не сносимо одговорност за било какве неспоразуме или погрешна тумачења која произилазе из коришћења овог превода.
+* Упутства
+* Notebook
+
+**Одрицање од одговорности**:  
+Овај документ је преведен коришћењем AI услуге за превођење [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да превод буде тачан, молимо вас да имате у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитетним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.

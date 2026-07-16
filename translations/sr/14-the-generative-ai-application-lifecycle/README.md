@@ -1,99 +1,94 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "27a5347a5022d5ef0a72ab029b03526a",
-  "translation_date": "2025-05-20T00:57:07+00:00",
-  "source_file": "14-the-generative-ai-application-lifecycle/README.md",
-  "language_code": "sr"
-}
--->
-[![Integracija sa pozivanjem funkcija](../../../translated_images/14-lesson-banner.0b85d0b37979269e80a18bb1e758e1ccca0a2195b426a0af666c8ad14aee60b0.sr.png)](https://aka.ms/gen-ai-lesson14-gh?WT.mc_id=academic-105485-koreyst)
+[![Интеграција са позивом функције](../../../translated_images/sr/14-lesson-banner.066d74a31727ac12.webp)](https://youtu.be/ewtQY_RJrzs?si=dyJ2bjiljH7UUHCh)
 
-# Životni ciklus aplikacija generativne AI
+# Животни циклус апликације генеративне вештачке интелигенције
 
-Važno pitanje za sve AI aplikacije je relevantnost AI funkcija, jer je AI oblast koja se brzo razvija. Da bi vaša aplikacija ostala relevantna, pouzdana i robusna, potrebno je da je kontinuirano pratite, ocenjujete i unapređujete. Tu dolazi životni ciklus generativne AI.
+Важно питање за све апликације вештачке интелигенције је релевантност AI функција, обзиром да је AI брзо развијајућа област, да бисте осигурали да ваша апликација остане релевантна, поуздана и робусна, потребно је да је континуирано пратите, процењујете и унапређујете. Управо ту долази до изражаја животни циклус генеративне вештачке интелигенције.
 
-Životni ciklus generativne AI je okvir koji vas vodi kroz faze razvoja, implementacije i održavanja generativne AI aplikacije. Pomaže vam da definišete ciljeve, merite performanse, identifikujete izazove i implementirate rešenja. Takođe vam pomaže da uskladite vašu aplikaciju sa etičkim i pravnim standardima vašeg domena i vaših zainteresovanih strana. Prateći životni ciklus generativne AI, možete osigurati da vaša aplikacija uvek donosi vrednost i zadovoljava vaše korisnike.
+Животни циклус генеративне вештачке интелигенције је оквир који вас води кроз фазе развоја, увођења и одржавања апликације генеративне вештачке интелигенције. Помоћи ће вам да дефинишете своје циљеве, мерите своје перформансе, идентификујете изазове и имплементирате решења. Такође вам помаже да ускладите своју апликацију са етичким и законским стандардима ваше области и заинтересованих страна. Пратећи животни циклус генеративне AI, можете осигурати да ваша апликација увек пружа вредност и задовољава своје кориснике.
 
-## Uvod
+## Увод
 
-U ovom poglavlju ćete:
+У овом поглављу ћете:
 
-- Razumeti promena paradigme sa MLOps na LLMOps
-- Životni ciklus LLM-a
-- Alati za životni ciklus
-- Metrifikacija i evaluacija životnog ciklusa
+- Разумети парадигму промене од MLOps до LLMOps
+- Животни циклус LLM
+- Алати за животни циклус
+- Метрификација и евалуација животног циклуса
 
-## Razumeti promena paradigme sa MLOps na LLMOps
+## Разумети парадигму промене од MLOps до LLMOps
 
-LLM-ovi su novi alat u arsenalu veštačke inteligencije, izuzetno su moćni u zadacima analize i generacije za aplikacije, međutim, ova moć ima neke posledice u tome kako pojednostavljujemo AI i klasične zadatke mašinskog učenja.
+LLM-ови су нови алат у арсеналу вештачке интелигенције, изузетно су моћни за задатке анализе и генерације у апликацијама, али ова моћ има последице у томе како оптимизујемо AI и класичне задатке машинског учења.
 
-Sa ovim, potrebna nam je nova paradigma da prilagodimo ovaj alat u dinamičnom okruženju, sa pravim podsticajima. Možemo kategorisati starije AI aplikacije kao "ML aplikacije", a novije AI aplikacije kao "GenAI aplikacije" ili jednostavno "AI aplikacije", odražavajući mainstream tehnologiju i tehnike korišćene u to vreme. Ovo menja našu naraciju na više načina, pogledajte sledeće poređenje.
+Због тога нам је потребна нова парадигма да прилагодимо овај алат динамично, са исправним подстицајима. Можемо старије AI апликације означити као "ML апликације" а новије као "GenAI апликације" или једноставно "AI апликације", што одражава доминантне технологије и технике у то време. Ово помера наш наратив на више начина, погледајте упоредну анализу испод.
 
-![LLMOps vs. MLOps poređenje](../../../translated_images/01-llmops-shift.82d7bf6eb2d98a01e35f234df654e9aa4ebec89792f274695a5da8dc3f388084.sr.png)
+![Упоредба LLMOps и MLOps](../../../translated_images/sr/01-llmops-shift.29bc933cb3bb0080.webp)
 
-Primetite da u LLMOps-u, više smo fokusirani na razvoj aplikacija, koristeći integracije kao ključnu tačku, koristeći "Modeli-kao-usluga" i razmišljajući o sledećim tačkama za metrike.
+Обратите пажњу да у LLMOps-у више фокусирамо на развојне инжењере апликација, користећи интеграције као кључну тачку, користећи "моделе као услугу" и размишљајући о следећим метричким параметрима.
 
-- Kvalitet: Kvalitet odgovora
-- Šteta: Odgovorna AI
-- Iskrenost: Utemeljenost odgovora (Da li ima smisla? Da li je tačno?)
-- Trošak: Budžet rešenja
-- Kašnjenje: Prosečno vreme za odgovor tokena
+- Квалитет: Квалитет одговора
+- Штета: Одговорна вештачка интелигенција
+- Искреност: Заснованост одговора (Има ли смисла? Да ли је исправан?)
+- Трошак: Буџет решења
+- Задршка: Просечно време одзива по кључној речи
 
-## Životni ciklus LLM-a
+## Животни циклус LLM
 
-Prvo, da bismo razumeli životni ciklus i modifikacije, hajde da zabeležimo sledeću infografiku.
+Прво, да бисмо разумели животни циклус и измене, погледајте следећу инфографику.
 
-![LLMOps infografika](../../../translated_images/02-llmops.287de964b5ce9577678b7f053efb3a3c92adf0852c882c5bae94c11b7563e4db.sr.png)
+![LLMOps инфографика](../../../translated_images/sr/02-llmops.70a942ead05a7645.webp)
 
-Kao što možete primetiti, ovo je drugačije od uobičajenih životnih ciklusa iz MLOps-a. LLM-ovi imaju mnogo novih zahteva, kao što su Prompting, različite tehnike za poboljšanje kvaliteta (Fine-Tuning, RAG, Meta-Prompts), različite procene i odgovornost sa odgovornom AI, na kraju, nove evaluacione metrike (Kvalitet, Šteta, Iskrenost, Trošak i Kašnjenje).
+Као што можете приметити, ово је другачије од уобичајених животних циклуса у MLOps-у. LLM има много нових захтева, као што су Подстицање (Prompting), различите технике за побољшање квалитета (финетјунинг, RAG, мета-подстицаји), другачија процена и одговорност са одговорном AI, и на крају, нови оценски критеријуми (Квалитет, Штета, Искреност, Трошак и Задршка).
 
-Na primer, pogledajte kako mi idejemo. Koristeći inženjering prompta da eksperimentišemo sa raznim LLM-ovima kako bismo istražili mogućnosti da testiramo da li bi njihova hipoteza mogla biti tačna.
+На пример, погледајте како размишљамо. Користећи инжењеринг подстицаја за експериментисање са различитим LLM-овима како бисмо истражили могућности и тестирали да ли њихова хипотеза може бити тачна.
 
-Primetite da ovo nije linearno, već integrisani ciklusi, iterativni i sa sveobuhvatnim ciklusom.
+Обратите пажњу да ово није линеарни процес, већ интегрисани циклуси, итеративни и са општим циклом изнад.
 
-Kako bismo mogli istražiti te korake? Hajde da uđemo u detalje kako bismo mogli izgraditi životni ciklus.
+Како можемо истражити ове кораке? Хајде да уђемо у детаље како можемо изградити животни циклус.
 
-![LLMOps Workflow](../../../translated_images/03-llm-stage-flows.f3b87c210c1fe37084a7b7408877ff1688e2dc565694789820ec259e76d4ed05.sr.png)
+![LLMOps радни ток](../../../translated_images/sr/03-llm-stage-flows.3a1e1c401235a6cf.webp)
 
-Ovo može izgledati pomalo komplikovano, hajde da se fokusiramo na tri velike korake prvo.
+Ово може изгледати компликовано, хајде да се најпре фокусирамо на три главна корака.
 
-1. Ideiranje/Istraživanje: Istraživanje, ovde možemo istraživati prema našim poslovnim potrebama. Prototipiranje, kreiranje [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) i testiranje da li je dovoljno efikasan za našu hipotezu.
-2. Izgradnja/Povećanje: Implementacija, sada počinjemo da ocenjujemo za veće skupove podataka, implementiramo tehnike, kao što su Fine-tuning i RAG, da proverimo robusnost našeg rešenja. Ako nije, ponovno implementiranje, dodavanje novih koraka u našem toku ili restrukturiranje podataka, može pomoći. Nakon testiranja našeg toka i naše skale, ako radi i proverimo naše metrike, spreman je za sledeći korak.
-3. Operacionalizacija: Integracija, sada dodavanje sistema za praćenje i upozorenja u naš sistem, implementacija i integracija aplikacije u našu aplikaciju.
+1. Идеја/истраживање: Истраживање, овде можемо истражити према нашим пословним потребама. Прототиповање, креирање [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) и тестирање његове ефикасности за нашу хипотезу.
+1. Изградња/допринес: Имплементација, сада почињемо са проценом за веће скупове података користећи технике као што су финетјунинг и RAG, да бисмо проверили робусност решења. Ако није робусно, поновна имплементација, додавање нових корака у ток или реструктурирање података може помоћи. Након тестирања тока и скале, ако ради и метрике су адекватне, спремни сте за следећи корак.
+1. Оперативизација: Интеграција, сада додавамо праћење и алармне системе у наш систем, као и имплементацију и интеграцију апликације.
 
-Zatim, imamo sveobuhvatan ciklus upravljanja, fokusirajući se na sigurnost, usklađenost i upravljanje.
+Затим следи општи циклус управљања, са фокусом на безбедност, усаглашеност и управљање.
 
-Čestitamo, sada imate svoju AI aplikaciju spremnu za rad i operativnu. Za praktično iskustvo, pogledajte [Contoso Chat Demo.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreys)
+Честитамо, сада имате своју AI апликацију спремну за рад и операције. За практично искуство, погледајте [Contoso Chat Demo.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst)
 
-Sada, koje alate možemo koristiti?
+Сада, које алате можемо користити?
 
-## Alati za životni ciklus
+## Алати за животни циклус
 
-Za alate, Microsoft pruža [Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys) i [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) da olakša i učini vaš ciklus jednostavnim za implementaciju i spremnim za rad.
+За алате, Microsoft пружа [Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) и [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) који олакшавају имплементацију вашег циклуса и припремају га за покретање.
 
-[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys), omogućava vam da koristite [AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreys). AI Studio je web portal koji vam omogućava da istražujete modele, uzorke i alate. Upravljanje vašim resursima, razvoj UI tokova i SDK/CLI opcije za razvoj baziran na kodu.
+[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) вам омогућава коришћење [Microsoft Foundry](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst). Microsoft Foundry (раније Azure AI Studio) је веб портал који вам омогућава да истражујете моделе, примере и алате, управљате ресурсима и користите UI развојне токове као и SDK/CLI опције за развој првенствено заснован на коду.
 
-![Azure AI mogućnosti](../../../translated_images/04-azure-ai-platform.bf903e8cdf00f73896d804bd8e6bea62f5280498c998271bd5629c1efa8b466f.sr.png)
+![Могућности Azure AI](../../../translated_images/sr/04-azure-ai-platform.80203baf03a12fa8.webp)
 
-Azure AI, omogućava vam da koristite više resursa, da upravljate vašim operacijama, uslugama, projektima, potrebama za pretragom vektora i bazama podataka.
+Azure AI вам омогућава да користите више ресурса за управљање операцијама, услугама, пројектима, претрагом вектора и базама података.
 
-![LLMOps sa Azure AI](../../../translated_images/05-llm-azure-ai-prompt.dc29c0d74b1dd939f7c6cbf28b1fee54b9a846ba04d4068c40134e2627cb7232.sr.png)
+![LLMOps са Azure AI](../../../translated_images/sr/05-llm-azure-ai-prompt.a5ce85cdbb494bdf.webp)
 
-Kreirajte, od Proof-of-Concept(POC) do aplikacija velikog obima sa PromptFlow:
+Конструишите од контролних доказа (POC) до широкомасовних апликација користећи PromptFlow:
 
-- Dizajnirajte i izgradite aplikacije iz VS Code, sa vizuelnim i funkcionalnim alatima
-- Testirajte i fino podešavajte vaše aplikacije za kvalitetnu AI, sa lakoćom.
-- Koristite Azure AI Studio za integraciju i iteraciju sa cloud-om, push i implementaciju za brzu integraciju.
+- Дизајнирајте и правите апликације из VS Code, са визуелним и функционалним алатима
+- Тестирајте и финетјунирајте своје апликације за квалитетну AI са лакоћом.
+- Користите Microsoft Foundry за интеграцију и итерацију са облаком, пуш и деплој за брзу интеграцију.
 
-![LLMOps sa PromptFlow](../../../translated_images/06-llm-promptflow.8f0a6fcbea793a042a3db89ca1db1aa8fd540526958c97b5e894748fb4a87edd.sr.png)
+![LLMOps са PromptFlow](../../../translated_images/sr/06-llm-promptflow.a183eba07a3a7fdf.webp)
 
-## Sjajno! Nastavite sa učenjem!
+## Одлично! Наставите са учењем!
 
-Izvanredno, sada saznajte više o tome kako strukturiramo aplikaciju da koristi koncepte sa [Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst), da proverite kako Cloud Advocacy dodaje te koncepte u demonstracije. Za više sadržaja, pogledajte naš [Ignite breakout session!
+Невероватно, сада научите више о томе како структуирамо апликацију да бисте употребили концепте са [Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst), да видите како Cloud Advocacy примењује те концепте у демонстрацијама. За више садржаја, погледајте нашу [Ignite breakout сесију!
 ](https://www.youtube.com/watch?v=DdOylyrTOWg)
 
-Sada, pogledajte Lekciju 15, da razumete kako [Povećana generacija pretrage i vektorske baze podataka](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) utiču na generativnu AI i kako napraviti angažovanije aplikacije!
+Сада погледајте лекцију 15, да бисте разумели како [Retrieval Augmented Generation и векторске базе података](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) утичу на генеративну AI и како да направите занимљивије апликације!
 
-**Одрицање од одговорности**:  
-Овај документ је преведен коришћењем услуге превођења помоћу вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, молимо вас да будете свесни да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на свом изворном језику треба сматрати ауторитативним извором. За критичне информације, препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразумевања или погрешна тумачења настала коришћењем овог превода.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Изјава о одрицању одговорности**:
+Овај документ је преведен коришћењем услуге за аутоматски превод [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,174 +1,170 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "5ec6c92b629564538ef397c550adb73e",
-  "translation_date": "2025-05-19T16:51:54+00:00",
-  "source_file": "06-text-generation-apps/README.md",
-  "language_code": "pa"
-}
--->
-# ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ
+# ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣਾ
 
-[![ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ](../../../translated_images/06-lesson-banner.90d8a665630e46b2990412d7c7d3d43c30f2441c95c0ee93e0763fb252734e83.pa.png)](https://aka.ms/gen-ai-lesson6-gh?WT.mc_id=academic-105485-koreyst)
+[![ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣਾ](../../../translated_images/pa/06-lesson-banner.a5c629f990a636c8.webp)](https://youtu.be/0Y5Luf5sRQA?si=t_xVg0clnAI4oUFZ)
 
-> _(ਇਸ ਪਾਠ ਦੇ ਵੀਡੀਓ ਨੂੰ ਦੇਖਣ ਲਈ ਉੱਪਰ ਦੀ ਤਸਵੀਰ 'ਤੇ ਕਲਿਕ ਕਰੋ)_
+> _(ਇਸ ਪਾਠ ਦੇ ਵੀਡੀਓ ਨੂੰ ਦੇਖਣ ਲਈ ਉਪਰ ਦਿੱਤੀ ਚਿੱਤਰ 'ਤੇ ਕਲਿੱਕ ਕਰੋ)_
 
-ਤੁਸੀਂ ਹੁਣ ਤੱਕ ਇਸ ਪਾਠਕ੍ਰਮ ਦੇ ਮਾਧਿਅਮ ਨਾਲ ਦੇਖਿਆ ਹੈ ਕਿ ਕੁਝ ਮੁੱਖ ਸੰਕਲਪ ਹਨ ਜਿਵੇਂ ਕਿ ਪ੍ਰੋਮਪਟ ਅਤੇ ਇੱਕ ਪੂਰੀ ਵਿਸ਼ੇਸ਼ਤਾ "ਪ੍ਰੋਮਪਟ ਇੰਜੀਨੀਅਰਿੰਗ" ਕਹੀ ਜਾਂਦੀ ਹੈ। ਬਹੁਤ ਸਾਰੇ ਸੰਦ ਜਿਨ੍ਹਾਂ ਨਾਲ ਤੁਸੀਂ ਸੰਪਰਕ ਕਰ ਸਕਦੇ ਹੋ ਜਿਵੇਂ ਕਿ ChatGPT, Office 365, Microsoft Power Platform ਅਤੇ ਹੋਰ, ਤੁਹਾਨੂੰ ਕੁਝ ਹਾਸਲ ਕਰਨ ਲਈ ਪ੍ਰੋਮਪਟ ਵਰਤਣ ਦੀ ਸਹਾਇਤਾ ਕਰਦੇ ਹਨ।
+ਤੁਸੀਂ ਇਸ ਕ੍ਰਿਕੁਲਮ ਦੁਆਰਾ ਹੁਣ ਤੱਕ ਵੇਖਿਆ ਹੈ ਕਿ ਪ੍ਰਾਂਪਟਾਂ ਵਰਗੇ ਮੂਲਭੂਤ ਸੰਕਲਪ ਹਨ ਅਤੇ ਇੱਕ ਪੂਰਾ ਵਿਭਾਗ "prompt engineering" ਨਾਲ ਵੀ ਸਬੰਧਿਤ ਹੈ। ਕਈ ਸੰਦ ਜਿਵੇਂ ChatGPT, Office 365, Microsoft Power Platform ਅਤੇ ਹੋਰ, ਤੁਹਾਨੂੰ ਕਿਸੇ ਕੰਮ ਨੂੰ ਪੂਰਾ ਕਰਨ ਲਈ ਪ੍ਰਾਂਪਟਾਂ ਦੇ ਉਪਯੋਗ ਨਾਲ ਸਹਾਇਤਾ ਕਰਦੇ ਹਨ।
 
-ਇੱਕ ਐਪ ਵਿੱਚ ਇਸ ਤਰ੍ਹਾਂ ਦਾ ਅਨੁਭਵ ਸ਼ਾਮਲ ਕਰਨ ਲਈ, ਤੁਹਾਨੂੰ ਪ੍ਰੋਮਪਟ, ਪੂਰਨਤਾ ਵਰਗੇ ਸੰਕਲਪਾਂ ਨੂੰ ਸਮਝਣ ਦੀ ਲੋੜ ਹੈ ਅਤੇ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਲਾਇਬ੍ਰੇਰੀ ਚੁਣੋ। ਇਹੀ ਹੈ ਜੋ ਤੁਸੀਂ ਇਸ ਅਧਿਆਇ ਵਿੱਚ ਸਿੱਖੋਗੇ।
+ਤੁਹਾਡੇ ਲਈ ਐਪ ਵਿੱਚ ਐਸਾ ਅਨੁਭਵ ਜੋੜਨ ਲਈ, ਤੁਹਾਨੂੰ ਪ੍ਰਾਂਪਟ, ਪੂਰਨਾਂ ਅਤੇ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਲਾਇਬ੍ਰੇਰੀ ਚੁਣਨ ਵਰਗੇ ਸੰਕਲਪਾਂ ਨੂੰ ਸਮਝਣਾ ਜਰੂਰੀ ਹੈ। ਇਹੀ ਤੁਸੀਂ ਇਸ ਅਧਿਆਇ ਵਿੱਚ ਸਿੱਖੋਗੇ।
 
-## ਪ੍ਰਸਤਾਵਨਾ
+## ਪਰਿਚਯ
 
 ਇਸ ਅਧਿਆਇ ਵਿੱਚ, ਤੁਸੀਂ:
 
-- openai ਲਾਇਬ੍ਰੇਰੀ ਅਤੇ ਇਸਦੇ ਮੁੱਖ ਸੰਕਲਪਾਂ ਬਾਰੇ ਸਿੱਖੋ।
-- openai ਵਰਤ ਕੇ ਇੱਕ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਓ।
-- ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਉਣ ਲਈ ਪ੍ਰੋਮਪਟ, ਟੈਂਪਰਚਰ, ਅਤੇ ਟੋਕਨ ਵਰਗੇ ਸੰਕਲਪਾਂ ਨੂੰ ਵਰਤਣ ਦਾ ਤਰੀਕਾ ਸਮਝੋ।
+- openai ਲਾਇਬ੍ਰੇਰੀ ਅਤੇ ਇਸਦੇ ਮੁੱਖ ਸੰਕਲਪਾਂ ਬਾਰੇ ਸਿੱਖੋਗੇ।
+- openai ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਇੱਕ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਵੋਗੇ।
+- ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਉਣ ਲਈ ਪ੍ਰਾਂਪਟ, ਤਾਪਮਾਨ ਅਤੇ ਟੋਕਨਾਂ ਵਰਗੇ ਸੰਕਲਪਾਂ ਦੀ ਵਰਤੋਂ ਕਿਵੇਂ ਕਰਨੀ ਹੈ, ਇਹ ਸਮਝੋਗੇ।
 
-## ਸਿੱਖਣ ਦੇ ਲਕਸ਼
+## ਸਿੱਖਣ ਦੇ ਲਕੜੀ
 
-ਇਸ ਪਾਠ ਦੇ ਅੰਤ ਵਿੱਚ, ਤੁਸੀਂ ਸਮਝਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ:
+ਇਸ ਪਾਠ ਦੇ ਅੰਤ ਵਿੱਚ, ਤੁਸੀਂ ਸਮਰੱਥ ਹੋਵੋਗੇ:
 
-- ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਕੀ ਹੈ, ਇਹ ਸਮਝਾਓ।
-- openai ਵਰਤ ਕੇ ਇੱਕ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਓ।
-- ਆਪਣੇ ਐਪ ਨੂੰ ਵਧੇਰੇ ਜਾਂ ਘੱਟ ਟੋਕਨ ਵਰਤਣ ਲਈ ਸੰਰਚਿਤ ਕਰੋ ਅਤੇ ਬਦਲਦੇ ਟੈਂਪਰਚਰ ਨਾਲ ਵੱਖ-ਵੱਖ ਨਤੀਜੇ ਲਈ।
+- ਟੈਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਕੀ ਹੈ, ਸਮਝਾ ਸਕੋਗੇ।
+- openai ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾ ਸਕੋਗੇ।
+- ਆਪਣੀ ਐਪ ਨੂੰ ਵੱਧ ਜਾਂ ਘੱਟ ਟੋਕਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਸੰਰਚਿਤ ਕਰ ਸਕੋਗੇ ਅਤੇ ਵੱਖ ਵੱਖ ਨਤੀਜਿਆਂ ਲਈ ਤਾਪਮਾਨ ਨੂੰ ਵੀ ਬਦਲ ਸਕੋਗੇ।
 
-## ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਕੀ ਹੈ?
+## ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਕੀ ਹੁੰਦੀ ਹੈ?
 
-ਆਮ ਤੌਰ 'ਤੇ ਜਦੋਂ ਤੁਸੀਂ ਇੱਕ ਐਪ ਬਣਾਉਂਦੇ ਹੋ ਤਾਂ ਇਸਦਾ ਕੁਝ ਕਿਸਮ ਦਾ ਇੰਟਰਫੇਸ ਹੁੰਦਾ ਹੈ ਜਿਵੇਂ ਕਿ ਹੇਠਾਂ ਦਿੱਤਾ ਗਿਆ ਹੈ:
+ਆਮ ਤੌਰ ਤੇ ਕਦੋਂ ਤੁਸੀਂ ਕੋਈ ਐਪ ਬਣਾਉਂਦੇ ਹੋ ਤਾਂ ਇਸ ਦਾ ਕੋਈ ਇੰਟਰਫੇਸ ਹੁੰਦਾ ਹੈ, ਜਿਵੇਂ ਕਿ:
 
-- ਕਮਾਂਡ-ਅਧਾਰਿਤ। ਕਨਸੋਲ ਐਪਸ ਆਮ ਤੌਰ 'ਤੇ ਐਪਸ ਹੁੰਦੀਆਂ ਹਨ ਜਿੱਥੇ ਤੁਸੀਂ ਇੱਕ ਕਮਾਂਡ ਲਿਖਦੇ ਹੋ ਅਤੇ ਇਹ ਇੱਕ ਕੰਮ ਕਰਦੀ ਹੈ। ਉਦਾਹਰਣ ਲਈ, `git` ਇੱਕ ਕਮਾਂਡ-ਅਧਾਰਿਤ ਐਪ ਹੈ।
-- ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ (UI)। ਕੁਝ ਐਪਸ ਵਿੱਚ ਗ੍ਰਾਫਿਕਲ ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ (GUIs) ਹੁੰਦੇ ਹਨ ਜਿੱਥੇ ਤੁਸੀਂ ਬਟਨ 'ਤੇ ਕਲਿਕ ਕਰਦੇ ਹੋ, ਟੈਕਸਟ ਦਾਖਲ ਕਰਦੇ ਹੋ, ਵਿਕਲਪ ਚੁਣਦੇ ਹੋ ਅਤੇ ਹੋਰ।
+- ਕਮਾਂਡ ਅਧਾਰਿਤ। ਕਨਸੋਲ ਐਪ ਉਹ ਹੁੰਦੀ ਹੈ ਜਿੱਥੇ ਤੁਸੀਂ ਕਮਾਂਡ ਟਾਈਪ ਕਰਦੇ ਹੋ ਅਤੇ ਇਹ ਕੰਮ ਕਰਦਾ ਹੈ। ਉਦਾਹਰਣ ਵਜੋਂ, `git` ਇੱਕ ਕਮਾਂਡ ਅਧਾਰਿਤ ਐਪ ਹੈ।
+- ਉਪਭੁੋਗਤਾ ਇੰਟਰਫੇਸ (UI)। ਕੁਝ ਐਪ ਗ੍ਰਾਫ਼ਿਕਲ ਉਪਭੋਗਤਾ ਇੰਟਰਫੇਸ (GUIs) ਵਾਲੀਆਂ ਹੁੰਦੀਆਂ ਹਨ ਜਿੱਥੇ ਤੁਸੀਂ ਬਟਨਾਂ ਨੂੰ ਕਲਿੱਕ ਕਰਦੇ ਹੋ, ਲਿਖਾਈ ਕਰਦੇ ਹੋ, ਵਿਕਲਪ ਚੁਣਦੇ ਹੋ ਅਤੇ ਹੋਰ।
 
-### ਕਨਸੋਲ ਅਤੇ UI ਐਪਸ ਸੀਮਿਤ ਹਨ
+### ਕਨਸੋਲ ਅਤੇ UI ਐਪਾਂ ਸੀਮਤ ਹੁੰਦੀਆਂ ਹਨ
 
-ਇਸਨੂੰ ਇੱਕ ਕਮਾਂਡ-ਅਧਾਰਿਤ ਐਪ ਨਾਲ ਤੁਲਨਾ ਕਰੋ ਜਿੱਥੇ ਤੁਸੀਂ ਇੱਕ ਕਮਾਂਡ ਲਿਖਦੇ ਹੋ:
+ਇਸ ਨੂੰ ਉਸ ਕਮਾਂਡ ਅਧਾਰਿਤ ਐਪ ਨਾਲ ਤੁਲਨਾ ਕਰੋ ਜਿੱਥੇ ਤੁਸੀਂ ਖਾਸ ਕਮਾਂਡ ਟਾਈਪ ਕਰਦੇ ਹੋ:
 
-- **ਇਹ ਸੀਮਿਤ ਹੈ**। ਤੁਸੀਂ ਸਿਰਫ ਉਹਨਾਂ ਕਮਾਂਡਾਂ ਨੂੰ ਲਿਖ ਸਕਦੇ ਹੋ ਜੋ ਐਪ ਸਹਾਇਕ ਕਰਦਾ ਹੈ।
-- **ਭਾਸ਼ਾ ਵਿਸ਼ੇਸ਼**। ਕੁਝ ਐਪਸ ਬਹੁਤ ਸਾਰੀਆਂ ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦੇ ਹਨ, ਪਰ ਮੂਲ ਰੂਪ ਵਿੱਚ ਐਪ ਨੂੰ ਇੱਕ ਵਿਸ਼ੇਸ਼ ਭਾਸ਼ਾ ਲਈ ਬਣਾਇਆ ਜਾਂਦਾ ਹੈ, ਭਾਵੇਂ ਤੁਸੀਂ ਹੋਰ ਭਾਸ਼ਾ ਸਮਰਥਨ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ।
+- **ਇਹ ਸੀਮਤ ਹੈ**। ਤੁਸੀਂ ਕੋਈ ਵੀ ਕਮਾਂਡ ਨਹੀਂ ਟਾਈਪ ਕਰ ਸਕਦੇ, ਸਿਰਫ ਉਹ ਕਮਾਂਡ ਜੋ ਐਪ ਸਮਰਥਨ ਕਰਦੀ ਹੈ।
+- **ਭਾਸ਼ਾ ਨਿਰਧਾਰਿਤ**। ਬਹੁਤ ਸਾਰੀਆਂ ਐਪਾਂ ਕਈ ਭਾਸ਼ਾਵਾਂ ਲਈ ਸਮਰਥਨ ਕਰਦੀਆਂ ਹਨ, ਪਰ ਡਿਫਾਲਟ ਰੂਪ ਵਿੱਚ ਇਹ ਖਾਸ ਭਾਸ਼ਾ ਲਈ ਬਣਾਈਆਂ ਗਈਆਂ ਹੁੰਦੀਆਂ ਹਨ, ਯਦਿਪਿ ਤੁਸੀਂ ਹੋਰ ਭਾਸ਼ਾ ਸਮਰਥਨ ਵੀ ਜੋੜ ਸਕਦੇ ਹੋ।
 
-### ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪਸ ਦੇ ਲਾਭ
+### ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪਾਂ ਦੇ ਫਾਇਦੇ
 
-ਤਾਂ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਕਿਸ ਤਰ੍ਹਾਂ ਵੱਖਰਾ ਹੈ?
+ਤਾਂ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਵਿੱਚ ਕੀ ਅੰਤਰ ਹੈ?
 
-ਇੱਕ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਵਿੱਚ, ਤੁਹਾਡੇ ਕੋਲ ਵਧੇਰੇ ਲਚਕਦਾਰਤਾ ਹੁੰਦੀ ਹੈ, ਤੁਸੀਂ ਕਿਸੇ ਕਮਾਂਡ ਜਾਂ ਵਿਸ਼ੇਸ਼ ਇਨਪੁਟ ਭਾਸ਼ਾ ਤੱਕ ਸੀਮਿਤ ਨਹੀਂ ਹੁੰਦੇ। ਇਸਦੀ ਬਜਾਏ, ਤੁਸੀਂ ਐਪ ਨਾਲ ਸੰਪਰਕ ਕਰਨ ਲਈ ਕੁਦਰਤੀ ਭਾਸ਼ਾ ਵਰਤ ਸਕਦੇ ਹੋ। ਇੱਕ ਹੋਰ ਲਾਭ ਇਹ ਹੈ ਕਿ ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਇੱਕ ਡਾਟਾ ਸਰੋਤ ਨਾਲ ਸੰਪਰਕ ਕਰ ਰਹੇ ਹੋ ਜੋ ਬਹੁਤ ਵੱਡੇ ਜਾਣਕਾਰੀ ਦੇ ਭੰਡਾਰ 'ਤੇ ਪ੍ਰਸ਼ਿਖਿਤ ਕੀਤਾ ਗਿਆ ਹੈ, ਜਦੋਂ ਕਿ ਇੱਕ ਪਾਰੰਪਰਿਕ ਐਪ ਡਾਟਾਬੇਸ ਵਿੱਚ ਮੌਜੂਦ ਜਾਣਕਾਰੀ ਤੱਕ ਸੀਮਿਤ ਹੋ ਸਕਦਾ ਹੈ।
+ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਵਿੱਚ, ਤੁਹਾਡੇ ਕੋਲ ਹੋਰ ਲਚੀਲਾਪਣ ਹੁੰਦਾ ਹੈ, ਤੁਸੀਂ ਕਮਾਂਡਾਂ ਜਾਂ ਖ਼ਾਸ ਸ਼ੁਰੂਆਤੀ ਭਾਸ਼ਾ ਤੱਕ ਸੀਮਤ ਨਹੀਂ ਹੋ। ਇਸ ਦੀ ਥਾਂ, ਤੁਸੀਂ ਕੁਦਰਤੀ ਭਾਸ਼ਾ ਦੀ ਵਰਤੋਂ ਨਾਲ ਐਪ ਨਾਲ ਗੱਲਬਾਤ ਕਰ ਸਕਦੇ ਹੋ। ਇੱਕ ਹੋਰ ਫਾਇਦਾ ਇਹ ਹੈ ਕਿ ਤੁਸੀਂ ਇੱਕ ਡਾਟਾ ਸਰੋਤ ਨਾਲ ਸੰਚਾਰ ਕਰ ਰਹੇ ਹੋ ਜੋ ਵੱਡੇ ਪਾਠਕਾਂਡ ਜਾਂ ਜਾਣਕਾਰੀ ਸ਼੍ਰੋਤ ਉੱਤੇ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਹੈ, ਜਦੋਂ ਕਿ ਪਾਰੰਪਰਿਕ ਐਪ ਡਾਟਾਬੇਸ ਵਿੱਚ ਸੀਮਤ ਹੋ ਸਕਦੀ ਹੈ।
 
-### ਮੈਂ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਨਾਲ ਕੀ ਬਣਾ ਸਕਦਾ ਹਾਂ?
+### ਮੈਂ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਨਾਲ ਕੀ ਕੁਝ ਬਣਾ ਸਕਦਾ ਹਾਂ?
 
-ਕਈ ਚੀਜ਼ਾਂ ਹਨ ਜੋ ਤੁਸੀਂ ਬਣਾ ਸਕਦੇ ਹੋ। ਉਦਾਹਰਣ ਲਈ:
+ਤੁਸੀਂ ਬਹੁਤ ਕੁਝ ਬਣਾ ਸਕਦੇ ਹੋ। ਉਦਾਹਰਣ ਲਈ:
 
-- **ਇੱਕ ਚੈਟਬੋਟ**। ਇੱਕ ਚੈਟਬੋਟ ਜੋ ਵੱਖ-ਵੱਖ ਵਿਸ਼ਿਆਂ ਬਾਰੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਦਿੰਦਾ ਹੈ, ਜਿਵੇਂ ਕਿ ਤੁਹਾਡੀ ਕੰਪਨੀ ਅਤੇ ਇਸਦੇ ਉਤਪਾਦਾਂ ਬਾਰੇ ਇੱਕ ਚੰਗਾ ਮੇਲ ਹੋ ਸਕਦਾ ਹੈ।
-- **ਹੈਲਪਰ**। LLMs ਟੈਕਸਟ ਦਾ ਸੰਖੇਪ ਕਰਨ, ਟੈਕਸਟ ਤੋਂ ਅੰਤਰਦ੍ਰਿਸ਼ਟੀ ਪ੍ਰਾਪਤ ਕਰਨ, ਰਿਜ਼ੂਮ ਜਿਵੇਂ ਟੈਕਸਟ ਉਤਪਾਦਿਤ ਕਰਨ ਵਿੱਚ ਮਹਾਨ ਹਨ।
-- **ਕੋਡ ਸਹਾਇਕ**। ਤੁਸੀਂ ਜੋ ਭਾਸ਼ਾ ਮਾਡਲ ਵਰਤਦੇ ਹੋ ਉਸ ਦੇ ਆਧਾਰ 'ਤੇ, ਤੁਸੀਂ ਇੱਕ ਕੋਡ ਸਹਾਇਕ ਬਣਾ ਸਕਦੇ ਹੋ ਜੋ ਤੁਹਾਨੂੰ ਕੋਡ ਲਿਖਣ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ। ਉਦਾਹਰਣ ਲਈ, ਤੁਸੀਂ GitHub Copilot ਜਿਵੇਂ ਉਤਪਾਦ ਨਾਲ-साथ ChatGPT ਵਰਤ ਸਕਦੇ ਹੋ ਜੋ ਤੁਹਾਨੂੰ ਕੋਡ ਲਿਖਣ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ।
+- **ਇੱਕ ਚੈਟਬੋਟ**। ਇੱਕ ਚੈਟਬੋਟ ਜੋ ਤੁਹਾਡੇ ਕੰਪਨੀ ਅਤੇ ਇਸਦੇ ਉਤਪਾਦਾਂ ਬਾਰੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਦਿੰਦਾ ਹੈ, ਇਹ ਇਕ ਚੰਗਾ ਵਿਕਲਪ ਹੋ ਸਕਦਾ ਹੈ।
+- **ਮਦਦਗਾਰ**। LLMs ਟੈਕਸਟ ਦਾ ਸਾਰ ਇੱਕੱਠਾ ਕਰਨ, ਜਾਣਕਾਰੀਆਂ ਪ੍ਰਾਪਤ ਕਰਨ, ਰੋਜ਼ਗਾਰਜੀਵੀ ਲਿਖਣ ਵਰਗੀਆਂ ਚੀਜ਼ਾਂ ਵਿੱਚ ਬਹੁਤ ਵਧੀਆ ਹਨ।
+- **ਕੋਡ ਸਹਾਇਕ**। ਜਿਸ ਭਾਸ਼ਾ ਮਾਡਲ ਦੀ ਤੁਸੀਂ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਉਸ ਦੇ ਅਨੁਸਾਰ, ਤੁਸੀਂ ਇੱਕ ਕੋਡ ਸਹਾਇਕ ਬਣਾ ਸਕਦੇ ਹੋ ਜੋ ਤੁਹਾਨੂੰ ਕੋਡ ਲਿਖਣ ਵਿੱਚ ਸਹਾਇਤਾ ਕਰਦਾ ਹੈ। ਉਦਾਹਰਣ ਲਈ, ਤੁਸੀਂ GitHub Copilot ਜਾਂ ChatGPT ਵਰਗੇ ਉਤਪਾਦ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹੋ।
 
 ## ਮੈਂ ਕਿਵੇਂ ਸ਼ੁਰੂ ਕਰ ਸਕਦਾ ਹਾਂ?
 
-ਖੈਰ, ਤੁਹਾਨੂੰ ਇੱਕ LLM ਨਾਲ ਇਕੱਤਰ ਹੋਣ ਦਾ ਤਰੀਕਾ ਲੱਭਣ ਦੀ ਲੋੜ ਹੈ ਜੋ ਆਮ ਤੌਰ 'ਤੇ ਹੇਠਾਂ ਦਿੱਤੇ ਦੋ ਪਹੁੰਚਾਂ ਨੂੰ ਸ਼ਾਮਲ ਕਰਦਾ ਹੈ:
+ਸੋ, ਤੁਹਾਨੂੰ LLM ਨਾਲ ਇਕੱਠਾ ਕਰਨ ਦਾ ਤਰੀਕਾ ਲੱਭਣਾ ਪੈਂਦਾ ਹੈ ਜੋ ਅਮੂਮਨ ਦੋ ਤਰੀਕਿਆਂ ਵਿੱਚੋਂ ਕੋਈ ਹੁੰਦਾ ਹੈ:
 
-- ਇੱਕ API ਵਰਤੋ। ਇੱਥੇ ਤੁਸੀਂ ਆਪਣਾ ਪ੍ਰੋਮਪਟ ਬਣਾਉਣ ਦੇ ਨਾਲ ਵੈੱਬ ਬੇਨਤੀ ਕਰਦੇ ਹੋ ਅਤੇ ਵਾਪਸ ਜਨਰੇਟ ਕੀਤਾ ਟੈਕਸਟ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹੋ।
-- ਇੱਕ ਲਾਇਬ੍ਰੇਰੀ ਵਰਤੋ। ਲਾਇਬ੍ਰੇਰੀਆਂ API ਕਾਲਾਂ ਨੂੰ ਘੇਰੀ ਹੋਈ ਸਹਾਇਕ ਕਰਦੀਆਂ ਹਨ ਅਤੇ ਉਹਨਾਂ ਨੂੰ ਵਰਤਣ ਲਈ ਆਸਾਨ ਬਣਾਉਂਦੀਆਂ ਹਨ।
+- API ਦੀ ਵਰਤੋਂ ਕਰੋ। ਇੱਥੇ ਤੁਸੀਂ ਆਪਣੇ ਪ੍ਰਾਂਪਟ ਨਾਲ ਵੈੱਬ ਬੇਨਤੀਆਂ ਬਣਾਉਂਦੇ ਹੋ ਅਤੇ ਜਨਰੇਟ ਕੀਤਾ ਟੈਕਸਟ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹੋ।
+- ਲਾਇਬ੍ਰੇਰੀ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਲਾਇਬ੍ਰੇਰੀਆਂ API ਕਾਲਜ਼ ਨੂੰ ਇੰਕੈਪਸੂਲੇਟ ਕਰਦੀਆਂ ਹਨ ਅਤੇ ਇਸ ਨੂੰ ਵਰਤਣ ਬਹੁਤ ਸੌਖਾ ਬਣਾਉਂਦੀਆਂ ਹਨ।
 
-## ਲਾਇਬ੍ਰੇਰੀ/SDKs
+## ਲਾਇਬ੍ਰੇਰੀਆਂ/SDKs
 
-LLMs ਨਾਲ ਕੰਮ ਕਰਨ ਲਈ ਕੁਝ ਜਾਣੇ-ਪਛਾਣੇ ਲਾਇਬ੍ਰੇਰੀ ਹਨ ਜਿਵੇਂ ਕਿ:
+LLMs ਨਾਲ ਕੰਮ ਕਰਨ ਲਈ ਕੁਝ ਪ੍ਰਸਿੱਧ ਲਾਇਬ੍ਰੇਰੀਆਂ ਹਨ ਜਿਵੇਂ ਕਿ:
 
-- **openai**, ਇਹ ਲਾਇਬ੍ਰੇਰੀ ਤੁਹਾਡੇ ਮਾਡਲ ਨਾਲ ਜੁੜਨ ਅਤੇ ਪ੍ਰੋਮਪਟ ਭੇਜਣ ਲਈ ਆਸਾਨੀ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ।
+- **openai**, ਇਹ ਲਾਇਬ੍ਰੇਰੀ ਤੁਹਾਡੇ ਮਾਡਲ ਨਾਲ ਜੁੜਨ ਅਤੇ ਪ੍ਰਾਂਪਟ ਭੇਜਣ ਵਿੱਚ ਆਸਾਨੀ ਕਰਦੀ ਹੈ।
 
-ਫਿਰ ਕੁਝ ਲਾਇਬ੍ਰੇਰੀਆਂ ਹਨ ਜੋ ਇੱਕ ਉੱਚ ਪੱਧਰ 'ਤੇ ਕੰਮ ਕਰਦੀਆਂ ਹਨ ਜਿਵੇਂ ਕਿ:
+ਫਿਰ ਕੁਝ ਲਾਇਬ੍ਰੇਰੀਆਂ ਹਨ ਜੋ ਉਦ੍ਧਾਤ ਸਤਰ 'ਤੇ ਕੰਮ ਕਰਦੀਆਂ ਹਨ ਜਿਵੇਂ ਕਿ:
 
-- **Langchain**। Langchain ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ ਅਤੇ Python ਦਾ ਸਮਰਥਨ ਕਰਦਾ ਹੈ।
-- **Semantic Kernel**। Semantic Kernel Microsoft ਦੁਆਰਾ ਇੱਕ ਲਾਇਬ੍ਰੇਰੀ ਹੈ ਜੋ C#, Python, ਅਤੇ Java ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦਾ ਹੈ।
+- **Langchain**। Langchain ਮਸ਼ਹੂਰ ਹੈ ਅਤੇ ਪਾਇਥਨ ਨੂੰ ਸਮਰਥਨ ਕਰਦਾ ਹੈ।
+- **Semantic Kernel**। Semantic Kernel ਮਾਇਕ੍ਰੋਸਾਫਟ ਦੀ ਲਾਇਬ੍ਰੇਰੀ ਹੈ ਜੋ C#, ਪਾਇਥਨ ਅਤੇ ਜਾਵਾ ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦੀ ਹੈ।
 
-## openai ਵਰਤ ਕੇ ਪਹਿਲਾ ਐਪ
+## openai ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪਹਿਲੀ ਐਪ
 
-ਚਲੋ ਦੇਖੀਏ ਕਿ ਅਸੀਂ ਆਪਣਾ ਪਹਿਲਾ ਐਪ ਕਿਵੇਂ ਬਣਾਉਣ ਦੇ, ਕਿਹੜੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਦੀ ਲੋੜ ਹੈ, ਕਿੰਨਾ ਜ਼ਰੂਰੀ ਹੈ ਅਤੇ ਹੋਰ।
+ਆਓ ਵੇਖੀਏ ਕਿ ਆਪਣੀ ਪਹਿਲੀ ਐਪ ਕਿਵੇਂ ਬਣਾਉਣੀ ਹੈ, ਸਾਨੂੰ ਕਿਹੜੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਦੀ ਲੋੜ ਹੈ, ਇਹ ਕਿੰਨੀ ਲੋੜੀਂਦੀ ਹੈ ਆਦਿ।
 
 ### openai ਇੰਸਟਾਲ ਕਰੋ
 
-OpenAI ਜਾਂ Azure OpenAI ਨਾਲ ਸੰਪਰਕ ਕਰਨ ਲਈ ਬਹੁਤ ਸਾਰੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਹਨ। ਕਈ ਪ੍ਰੋਗਰਾਮਿੰਗ ਭਾਸ਼ਾਵਾਂ ਵਰਤਣਾ ਵੀ ਸੰਭਵ ਹੈ ਜਿਵੇਂ ਕਿ C#, Python, JavaScript, Java ਅਤੇ ਹੋਰ। ਅਸੀਂ `openai` Python ਲਾਇਬ੍ਰੇਰੀ ਦੀ ਚੋਣ ਕੀਤੀ ਹੈ, ਇਸ ਲਈ ਅਸੀਂ `pip` ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਵਰਤਾਂਗੇ।
+OpenAI ਜਾਂ Azure OpenAI ਨਾਲ ਇੰਟਰੈਕਟ ਕਰਨ ਲਈ ਬਹੁਤ ਸਾਰੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਹਨ। ਕਈ ਪ੍ਰੋਗ੍ਰਾਮਿੰਗ ਭਾਸ਼ਾਵਾਂ ਵੀ ਵਰਤੀ ਜਾ ਸਕਦੀਆਂ ਹਨ ਜਿਵੇਂ C#, ਪਾਇਥਨ, ਜਾਵਾਸਕ੍ਰਿਪਟ, ਜਾਵਾ ਅਤੇ ਹੋਰ। ਅਸੀਂ `openai` ਪਾਇਥਨ ਲਾਇਬ੍ਰੇਰੀ ਨੂੰ ਬਰਤਣ ਲਈ ਚੁਣਿਆ ਹੈ, ਇਸ ਲਈ ਅਸੀਂ `pip` ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਾਂਗੇ।
 
 ```bash
 pip install openai
 ```
 
-### ਇੱਕ ਸਰੋਤ ਬਣਾਓ
+### ਇੱਕ ਰੀਸੋਰਸ ਬਣਾਓ
 
-ਤੁਹਾਨੂੰ ਹੇਠਾਂ ਦਿੱਤੇ ਕਦਮ ਕਰਨ ਦੀ ਲੋੜ ਹੈ:
+ਤੁਹਾਨੂੰ ਹੇਠ ਲਿਖੇ ਕਦਮ ਕਰਨੇ ਹੁੰਦੇ ਹਨ:
 
 - Azure 'ਤੇ ਇੱਕ ਖਾਤਾ ਬਣਾਓ [https://azure.microsoft.com/free/](https://azure.microsoft.com/free/?WT.mc_id=academic-105485-koreyst)।
-- Azure OpenAI 'ਤੇ ਪਹੁੰਚ ਪ੍ਰਾਪਤ ਕਰੋ। [https://learn.microsoft.com/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai](https://learn.microsoft.com/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai?WT.mc_id=academic-105485-koreyst) 'ਤੇ ਜਾਓ ਅਤੇ ਪਹੁੰਚ ਲਈ ਬੇਨਤੀ ਕਰੋ।
+- Azure OpenAI ਦੀ ਪਹੁੰਚ ਪ੍ਰਾਪਤ ਕਰੋ। ਜਾਓ [https://learn.microsoft.com/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai](https://learn.microsoft.com/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai?WT.mc_id=academic-105485-koreyst) ਅਤੇ ਪਹੁੰਚ ਦੀ ਅਰਜ਼ੀ ਦਿਓ।
 
   > [!NOTE]
-  > ਲਿਖਣ ਦੇ ਸਮੇਂ, ਤੁਹਾਨੂੰ Azure OpenAI 'ਤੇ ਪਹੁੰਚ ਲਈ ਅਰਜ਼ੀ ਦੇਣੀ ਪੈਦੀ ਹੈ।
+  > ਲਿਖਣ ਸਮੇਂ, ਤੁਹਾਨੂੰ Azure OpenAI ਲਈ ਪਹੁੰਚ ਲਈ ਅਰਜ਼ੀ ਦੇਣੀ ਪੈਂਦੀ ਹੈ।
 
 - Python ਇੰਸਟਾਲ ਕਰੋ <https://www.python.org/>
-- ਇੱਕ Azure OpenAI Service ਸਰੋਤ ਬਣਾਇਆ ਹੋਇਆ ਹੈ। ਇਹ ਗਾਈਡ ਦੇਖੋ ਕਿ [ਸਰੋਤ ਕਿਵੇਂ ਬਣਾਇਆ ਜਾਵੇ](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal?WT.mc_id=academic-105485-koreyst)।
+- Azure OpenAI ਸੇਵਾ ਦਾ ਇੱਕ ਰੀਸੋਰਸ ਬਣਾਇਆ ਹੋਇਆ ਹੋਵੇ। ਇਸ ਗਾਈਡ ਦੇਖੋ ਕਿਵੇਂ [ਰੀਸੋਰਸ ਬਣਾਉਣਾ](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal?WT.mc_id=academic-105485-koreyst)।
 
-### API ਕੁੰਜੀ ਅਤੇ ਐਂਡਪੋਇੰਟ ਖੋਜੋ
+### API ਕੁੰਜੀ ਅਤੇ ਐਂਡਪੋਇੰਟ ਲੱਭੋ
 
-ਇਸ ਸਮੇਂ, ਤੁਹਾਨੂੰ ਆਪਣੀ `openai` ਲਾਇਬ੍ਰੇਰੀ ਨੂੰ ਦੱਸਣ ਦੀ ਲੋੜ ਹੈ ਕਿ ਕਿਹੜੀ API ਕੁੰਜੀ ਵਰਤਣੀ ਹੈ। ਆਪਣੀ API ਕੁੰਜੀ ਲੱਭਣ ਲਈ, ਆਪਣੇ Azure OpenAI ਸਰੋਤ ਦੇ "Keys and Endpoint" ਭਾਗ 'ਤੇ ਜਾਓ ਅਤੇ "Key 1" ਮੁੱਲ ਨੂੰ ਕਾਪੀ ਕਰੋ।
+ਇਸ ਸਮੇਂ, ਤੁਹਾਨੂੰ ਆਪਣੇ `openai` ਲਾਇਬ੍ਰੇਰੀ ਨੂੰ ਦੱਸਣਾ ਪੈਂਦਾ ਹੈ ਕਿ ਕਿਹੜੀ API ਕੁੰਜੀ ਵਰਤਣੀ ਹੈ। ਆਪਣੀ API ਕੁੰਜੀ ਲੱਭਣ ਲਈ, ਆਪਣੇ Azure OpenAI ਰੀਸੋਰਸ ਦੇ "Keys and Endpoint" ਸੈਕਸ਼ਨ ਵਿੱਚ ਜਾਓ ਅਤੇ "Key 1" ਦੀ ਕਾਪੀ ਬਣਾਓ।
 
-![Keys and Endpoint ਸਰੋਤ ਬਲੇਡ Azure ਪੋਰਟਲ ਵਿੱਚ](https://learn.microsoft.com/azure/ai-services/openai/media/quickstarts/endpoint.png?WT.mc_id=academic-105485-koreyst)
+![Keys and Endpoint resource blade in Azure Portal](https://learn.microsoft.com/azure/ai-services/openai/media/quickstarts/endpoint.png?WT.mc_id=academic-105485-koreyst)
 
-ਹੁਣ ਕਿ ਤੁਸੀਂ ਇਹ ਜਾਣਕਾਰੀ ਕਾਪੀ ਕਰ ਲਈ ਹੈ, ਚਲੋ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ ਇਸ ਨੂੰ ਵਰਤਣ ਲਈ ਸੂਚਿਤ ਕਰਦੇ ਹਾਂ।
+ਹੁਣ ਜਦੋਂ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਇਹ ਜਾਣਕਾਰੀ ਕਾਪੀ ਹੋ ਗਈ ਹੈ, ਆਓ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ ਇਸਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਦਈਏ।
 
 > [!NOTE]
-> ਆਪਣੀ API ਕੁੰਜੀ ਨੂੰ ਆਪਣੇ ਕੋਡ ਤੋਂ ਵੱਖ ਕਰਨਾ ਮੁੱਲਵਾਨ ਹੈ। ਤੁਸੀਂ ਵਾਤਾਵਰਣ ਚਰਾਂ ਦਾ ਉਪਯੋਗ ਕਰਕੇ ਇਹ ਕਰ ਸਕਦੇ ਹੋ।
+> ਆਪਣੇ API ਕੁੰਜੀ ਨੂੰ ਆਪਣੇ ਕੋਡ ਤੋਂ ਵੱਖਰਾ ਰੱਖਣਾ ਵਧੀਆ ਹੁੰਦਾ ਹੈ। ਤੁਸੀਂ ਇਹ ਵਾਤਾਵਰਣ ਚਰ ਹਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕਰ ਸਕਦੇ ਹੋ।
 >
-> - ਵਾਤਾਵਰਣ ਚਰ `OPENAI_API_KEY` to your API key.
->   `export OPENAI_API_KEY='sk-...'` ਸੈਟ ਕਰੋ।
+> - ਵਾਤਾਵਰਣ ਚਰ `OPENAI_API_KEY` ਨੂੰ ਆਪਣੀ API ਕੁੰਜੀ 'ਤੇ ਸੈੱਟ ਕਰੋ।
+>   `export OPENAI_API_KEY='sk-...'`
 
-### Azure ਸੰਰਚਨਾ ਸੈਟਅੱਪ
+### Azure ਕੰਫਿਗਰੇਸ਼ਨ ਸੈਟਅਪ ਕਰੋ
 
-ਜੇਕਰ ਤੁਸੀਂ Azure OpenAI ਵਰਤ ਰਹੇ ਹੋ, ਤਾਂ ਇੱਥੇ ਹੈ ਕਿ ਤੁਸੀਂ ਸੰਰਚਨਾ ਕਿਵੇਂ ਸੈਟਅੱਪ ਕਰਦੇ ਹੋ:
+ਜੇ ਤੁਸੀਂ Azure OpenAI (ਹੁਣ Microsoft Foundry ਦਾ ਹਿੱਸਾ) ਵਰਤ ਰਹੇ ਹੋ, ਇਹ ਹੈ ਕੰਫਿਗਰੇਸ਼ਨ ਸੈਟਅਪ ਕਰਨ ਦਾ ਤਰੀਕਾ। ਅਸੀਂ ਪਾਰੰਪਰਿਕ `OpenAI` ਕਲਾਇੰਟ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਾਂ ਜੋ Azure OpenAI `/openai/v1/` ਐਂਡਪੋਇੰਟ ਵਲ ਇਸ਼ਾਰਾ ਕਰਦਾ ਹੈ, ਜੋ Responses API ਨਾਲ ਕੰਮ ਕਰਦਾ ਹੈ ਅਤੇ `api_version` ਦੀ ਲੋੜ ਨਹੀਂ ਹੁੰਦੀ:
 
 ```python
-openai.api_type = 'azure'
-openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.api_version = '2023-05-15'
-openai.api_base = os.getenv("API_BASE")
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    base_url=f"{os.environ['AZURE_OPENAI_ENDPOINT'].rstrip('/')}/openai/v1/",
+)
 ```
 
-ਉਪਰ ਹੇਠਾਂ ਦਿੱਤਾ ਗਿਆ ਹੈ:
+ਉਪਰੋਕਤ ਵਿੱਚ ਅਸੀਂ ਹੇਠ ਲਿਖੀਆਂ ਚੀਜ਼ਾਂ ਸੈੱਟ ਕਰ ਰਹੇ ਹਾਂ:
 
-- `api_type` to `azure`. This tells the library to use Azure OpenAI and not OpenAI.
-- `api_key`, this is your API key found in the Azure Portal.
-- `api_version`, this is the version of the API you want to use. At the time of writing, the latest version is `2023-05-15`.
-- `api_base`, this is the endpoint of the API. You can find it in the Azure Portal next to your API key.
+- `api_key`, ਇਹ ਤੁਹਾਡੀ API ਕੁੰਜੀ ਹੈ ਜੋ Azure Portal ਜਾਂ Microsoft Foundry ਪੋਰਟਲ ਵਿੱਚ ਮਿਲਦੀ ਹੈ।
+- `base_url`, ਇਹ ਤੁਹਾਡੇ Foundry ਰੀਸੋਰਸ ਐਂਡਪੋਇੰਟ ਨਾਲ `/openai/v1/` ਜੋੜਕੇ ਬਣਾਈ ਜਾਂਦੀ ਹੈ। ਸਥਾਈ v1 ਐਂਡਪੋਇੰਟ OpenAI ਅਤੇ Azure OpenAI ਫੈਲਾਵ 'ਤੇ ਕੰਮ ਕਰਦਾ ਹੈ ਬਿਨਾਂ `api_version` ਦੀ ਦੇਖਭਾਲ।
 
-> [!NOTE] > `os.getenv` is a function that reads environment variables. You can use it to read environment variables like `OPENAI_API_KEY` and `API_BASE`. Set these environment variables in your terminal or by using a library like `dotenv`.
+> [!NOTE] > `os.environ` ਵਾਤਾਵਰਣ ਚਰ ਨੂੰ ਪੜ੍ਹਦਾ ਹੈ। ਤੁਸੀਂ ਇਸਨੂੰ `AZURE_OPENAI_API_KEY` ਅਤੇ `AZURE_OPENAI_ENDPOINT` ਵਰਗੇ ਵਾਤਾਵਰਣ ਚਰਾਂ ਨੂੰ ਪੜ੍ਹਨ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ। ਆਪਣੀ ਟਰਮਿਨਲ ਵਿੱਚ ਇਹਨਾਂ ਵਾਤਾਵਰਣ ਚਰਾਂ ਨੂੰ ਸੈੱਟ ਕਰੋ ਜਾਂ `dotenv` ਵਰਗੇ ਲਾਇਬ੍ਰੇਰੀ ਦੀ ਵਰਤੋਂ ਕਰੋ।
 
-## Generate text
+## ਟੈਕਸਟ ਬਣਾਓ
 
-The way to generate text is to use the `Completion` ਕਲਾਸ। ਇਹਦਾ ਉਦਾਹਰਣ:
+ਟੈਕਸਟ ਬਣਾਉਣ ਦਾ ਤਰੀਕਾ Responses API ਦੀ `responses.create` ਵਿਧੀ ਦੀ ਵਰਤੋਂ ਕਰਨਾ ਹੈ। ਇਹ ਰਹੀ ਇੱਕ ਉਦਾਹਰਣ:
 
 ```python
 prompt = "Complete the following: Once upon a time there was a"
 
-completion = openai.Completion.create(model="davinci-002", prompt=prompt)
-print(completion.choices[0].text)
+response = client.responses.create(
+    model="gpt-4o-mini",  # ਇਹ ਤੁਹਾਡਾ ਮਾਡਲ ਤੈਨਾਤ ਕਰਨ ਦਾ ਨਾਮ ਹੈ
+    input=prompt,
+    store=False,
+)
+print(response.output_text)
 ```
 
-ਉਪਰੋਕਤ ਕੋਡ ਵਿੱਚ, ਅਸੀਂ ਇੱਕ ਪੂਰਨਤਾ ਵਸਤੂ ਬਣਾਉਂਦੇ ਹਾਂ ਅਤੇ ਮਾਡਲ ਅਤੇ ਪ੍ਰੋਮਪਟ ਪਾਸ ਕਰਦੇ ਹਾਂ। ਫਿਰ ਅਸੀਂ ਜਨਰੇਟ ਕੀਤਾ ਟੈਕਸਟ ਪ੍ਰਿੰਟ ਕਰਦੇ ਹਾਂ।
+ਉਪਰੋਕਤ ਕੋਡ ਵਿੱਚ, ਅਸੀਂ ਇੱਕ ਜਵਾਬ ਬਣਾਉਂਦੇ ਹਾਂ ਅਤੇ ਮਾਡਲ ਤੇ ਪ੍ਰਾਂਪਟ ਦਿੰਦੇ ਹਾਂ। ਫਿਰ ਅਸੀਂ `response.output_text` ਰਾਹੀਂ ਬਣਾਇਆ ਹੋਇਆ ਟੈਕਸਟ ਪ੍ਰਿੰਟ ਕਰਦੇ ਹਾਂ।
 
-### ਚੈਟ ਪੂਰਨਤਾ
+### ਬਹੁ-ਮੁੜ ਗੱਲਬਾਤਾਂ
 
-ਹੁਣ ਤੱਕ, ਤੁਸੀਂ ਦੇਖਿਆ ਹੈ ਕਿ ਅਸੀਂ `Completion` to generate text. But there's another class called `ChatCompletion` ਵਰਤ ਰਹੇ ਹਾਂ ਜੋ ਚੈਟਬੋਟਸ ਲਈ ਜ਼ਿਆਦਾ ਸੁਹਜ ਹੈ। ਇਸਦਾ ਉਦਾਹਰਣ:
+Responses API ਨਿਰਦੇਸ਼ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਅਤੇ ਬਹੁ-ਮੁੜ ਚੈਟਬੋਟ ਦੋਵਾਂ ਲਈ ਚੰਗੀ ਤਰ੍ਹਾਂ ਉਪਯੋਗੀ ਹੈ - ਤੁਸੀਂ `input` ਵਿੱਚ ਸੁਨੇਹਿਆਂ ਦੀ ਸੂਚੀ ਪੈਅਦੇ ਹੋ ਜੋ ਗੱਲਬਾਤ ਬਣਾਉਂਦਾ ਹੈ:
 
 ```python
-import openai
+from openai import OpenAI
 
-openai.api_key = "sk-..."
+client = OpenAI(api_key="sk-...")
 
-completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world"}])
-print(completion.choices[0].message.content)
+response = client.responses.create(model="gpt-4o-mini", input="Hello world", store=False)
+print(response.output_text)
 ```
 
-ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ 'ਤੇ ਹੋਰ ਇੱਕ ਆਉਣ ਵਾਲੇ ਅਧਿਆਇ ਵਿੱਚ।
+ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਬਾਰੇ ਹੋਰ ਇਕ ਅਧਿਆਇ ਵਿੱਚ ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਮਿਲੇਗੀ।
 
-## ਅਭਿਆਸ - ਆਪਣਾ ਪਹਿਲਾ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ
+## ਅਭਿਆਸ - ਤੁਹਾਡੀ ਪਹਿਲੀ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ
 
-ਹੁਣ ਕਿ ਅਸੀਂ ਸਿੱਖਿਆ ਕਿ openai ਨੂੰ ਕਿਵੇਂ ਸੈਟਅੱਪ ਅਤੇ ਸੰਰਚਿਤ ਕਰਨਾ ਹੈ, ਇਹ ਸਮਾਂ ਹੈ ਕਿ ਆਪਣਾ ਪਹਿਲਾ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਬਣਾਉਣ ਦਾ। ਆਪਣਾ ਐਪ ਬਣਾਉਣ ਲਈ, ਇਹ ਕਦਮ ਕਰੋ:
+ਹੁਣ ਜਦੋਂ ਅਸੀਂ openai ਸੈਟਅਪ ਅਤੇ ਸੰਰਚਨਾ ਸਿੱਖ ਲਈ ਹੈ, ਸਮਾਂ ਹੈ ਆਪਣੀ ਪਹਿਲੀ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਐਪ ਬਨਾਉਣ ਦਾ। ਆਪਣੀ ਐਪ ਬਣਾਉਣ ਲਈ ਇਹ ਕਦਮ ਲਵੋ:
 
 1. ਇੱਕ ਵਰਚੁਅਲ ਵਾਤਾਵਰਣ ਬਣਾਓ ਅਤੇ openai ਇੰਸਟਾਲ ਕਰੋ:
 
@@ -179,38 +175,37 @@ print(completion.choices[0].message.content)
    ```
 
    > [!NOTE]
-   > ਜੇਕਰ ਤੁਸੀਂ Windows ਵਰਤ ਰਹੇ ਹੋ ਤਾਂ `venv\Scripts\activate` instead of `source venv/bin/activate`.
+   > ਜੇ ਤੁਸੀਂ Windows ਵਰਤ ਰਹੇ ਹੋ ਤਾਂ `source venv/bin/activate` ਦੀ ਥਾਂ `venv\Scripts\activate` ਟਾਈપ ਕਰੋ।
 
    > [!NOTE]
-   > Locate your Azure OpenAI key by going to [https://portal.azure.com/](https://portal.azure.com/?WT.mc_id=academic-105485-koreyst) and search for `Open AI` and select the `Open AI resource` and then select `Keys and Endpoint` and copy the `Key 1` ਮੁੱਲ ਲਿਖੋ।
+   > ਆਪਣੀ Azure OpenAI ਕੁੰਜੀ ਇਹਨਾਂ ਸਥਾਨਾਂ 'ਤੇ ਲੱਭੋ: [https://portal.azure.com/](https://portal.azure.com/?WT.mc_id=academic-105485-koreyst), ਫਿਰ ਸ਼ੋਧ ਕਰੋ `Open AI`, `Open AI resource` ਚੁਣੋ, ਫਿਰ `Keys and Endpoint` ਤੇ ਜਾ ਕੇ `Key 1` ਦੀ ਕਾਪੀ ਤਿਆਰ ਕਰੋ।
 
-1. ਇੱਕ _app.py_ ਫਾਈਲ ਬਣਾਓ ਅਤੇ ਇਸ ਵਿੱਚ ਹੇਠਾਂ ਦਿੱਤਾ ਕੋਡ ਦਿਓ:
+1. ਇੱਕ ਫਾਇਲ _app.py_ ਬਣਾਓ ਅਤੇ ਹੇਠ ਲਿਖਿਆ ਕੋਡ ਪਾਓ:
 
    ```python
-   import openai
+   import os
+   from openai import OpenAI
 
-   openai.api_key = "<replace this value with your open ai key or Azure OpenAI key>"
-
-   openai.api_type = 'azure'
-   openai.api_version = '2023-05-15'
-   openai.api_base = "<endpoint found in Azure Portal where your API key is>"
+   client = OpenAI(
+       api_key="<replace this value with your Azure OpenAI key>",
+       base_url="<endpoint found in Azure Portal>/openai/v1/",
+   )
    deployment_name = "<deployment name>"
 
-   # add your completion code
+   # ਆਪਣਾ ਪੂਰਾ ਕਰਨ ਦਾ ਕੋਡ ਸ਼ਾਮਲ ਕਰੋ
    prompt = "Complete the following: Once upon a time there was a"
-   messages = [{"role": "user", "content": prompt}]
 
-   # make completion
-   completion = openai.chat.completions.create(model=deployment_name, messages=messages)
+   # Responses API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇਕ ਬੇਨਤੀ ਕਰੋ
+   response = client.responses.create(model=deployment_name, input=prompt, store=False)
 
-   # print response
-   print(completion.choices[0].message.content)
+   # ਜਵਾਬ ਛਪਾਓ
+   print(response.output_text)
    ```
 
    > [!NOTE]
-   > ਜੇਕਰ ਤੁਸੀਂ Azure OpenAI ਵਰਤ ਰਹੇ ਹੋ, ਤਾਂ ਤੁਹਾਨੂੰ `api_type` to `azure` and set the `api_key` ਨੂੰ ਆਪਣੇ Azure OpenAI ਕੁੰਜੀ ਨਾਲ ਸੈਟ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।
+   > ਜੇ ਤੁਸੀਂ ਸਾਫ OpenAI ਵਰਤ ਰਹੇ ਹੋ (Azure نہیں), ਤਾਂ ਵਰਤੋਂ ਕਰੋ `client = OpenAI(api_key="<replace this value with your OpenAI key>")` (ਕੋਈ `base_url` ਨਹੀਂ) ਅਤੇ ਮਾਡਲ ਦਾ ਨਾਂ ਜਿਵੇਂ `gpt-4o-mini` ਦਿਓ deployment ਦੇ ਨਾਂ ਦੀ ਥਾਂ।
 
-   ਤੁਹਾਨੂੰ ਹੇਠਾਂ ਦਿੱਤੇ ਜਿਵੇਂ ਨਤੀਜੇ ਦੇਖਣੇ ਚਾਹੀਦੇ ਹਨ:
+   ਤੁਸੀਂ ਹੇਠ ਲਿਖੇ ਵਾਂਗ ਨਤੀਜਾ ਵੇਖੋਗੇ:
 
    ```output
     very unhappy _____.
@@ -218,25 +213,25 @@ print(completion.choices[0].message.content)
    Once upon a time there was a very unhappy mermaid.
    ```
 
-## ਵੱਖ-ਵੱਖ ਚੀਜ਼ਾਂ ਲਈ ਵੱਖ-ਵੱਖ ਕਿਸਮ ਦੇ ਪ੍ਰੋਮਪਟ
+## ਵੱਖ-ਵੱਖ ਕਿਸਮਾਂ ਦੇ ਪ੍ਰਾਂਪਟ, ਵੱਖ-ਵੱਖ ਕੰਮਾਂ ਲਈ
 
-ਹੁਣ ਤੁਸੀਂ ਦੇਖਿਆ ਹੈ ਕਿ ਇੱਕ ਪ੍ਰੋਮਪਟ ਵਰਤ ਕੇ ਟੈਕਸਟ ਕਿਵੇਂ ਜਨਰੇਟ ਕਰਨਾ ਹੈ। ਤੁਹਾਡੇ ਕੋਲ ਇੱਕ ਪ੍ਰੋਗਰਾਮ ਹੈ ਜੋ ਚਲ ਰਿਹਾ ਹੈ ਜੋ ਤੁਸੀਂ ਵੱਖ-ਵੱਖ ਕਿਸਮ ਦੇ ਟੈਕਸਟ ਜਨਰੇਟ ਕਰਨ ਲਈ ਸੋਧ ਅਤੇ ਬਦਲ ਸਕਦੇ ਹੋ।
+ਹੁਣ ਤੁਸੀਂ ਦੇਖਿਆ ਕਿ ਕਿਸ ਤਰ੍ਹਾਂ ਪ੍ਰਾਂਪਟ ਵਰਤ ਕੇ ਟੈਕਸਟ ਬਣਾਇਆ ਜਾਂਦਾ ਹੈ। ਤੁਹਾਡੇ ਕੋਲ ਇੱਕ ਪ੍ਰੋਗਰਾਮ ਵੀ ਚੱਲ ਰਿਹਾ ਹੈ ਜਿਸਨੂੰ ਤੁਸੀਂ ਬਦਲ ਕੇ ਵੱਖ-ਵੱਖ ਕਿਸਮਾਂ ਦੇ ਟੈਕਸਟ ਉਤਪੰਨ ਕਰ ਸਕਦੇ ਹੋ।
 
-ਪ੍ਰੋਮਪਟ ਵੱਖ-ਵੱਖ ਕੰਮਾਂ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ। ਉਦਾਹਰਣ ਲਈ:
+ਪ੍ਰਾਂਪਟ ਹਰ ਤਰ੍ਹਾਂ ਦੇ ਕੰਮਾਂ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ। ਉਦਾਹਰਣ ਲਈ:
 
-- **ਟੈਕਸਟ ਦੀ ਕਿਸਮ ਜਨਰੇਟ ਕਰੋ**। ਉਦਾਹਰਣ ਲਈ, ਤੁਸੀਂ ਇੱਕ ਕਵਿਤਾ, ਇੱਕ ਕਵਿਜ਼ ਲਈ ਸਵਾਲ ਆਦਿ ਜਨਰੇਟ ਕਰ ਸਕਦੇ ਹੋ।
-- **ਜਾਣਕਾਰੀ ਲੁਕਾਓ**। ਤੁਸੀਂ ਜਾਣਕਾਰੀ ਲੱਭਣ ਲਈ ਪ੍ਰੋਮਪਟ ਵਰਤ ਸਕਦੇ ਹੋ ਜਿਵੇਂ ਕਿ ਹੇਠਾਂ ਦਿੱਤਾ ਉਦਾਹਰਣ 'What does CORS mean in web development?'।
-- **ਕੋਡ ਜਨਰੇਟ ਕਰੋ**। ਤੁਸੀਂ ਕੋਡ ਜਨਰੇਟ ਕਰਨ ਲਈ ਪ੍ਰੋਮਪਟ ਵਰਤ ਸਕਦੇ ਹੋ, ਉਦਾਹਰਣ ਲਈ ਇਮੇਲ ਨੂੰ ਸਤਾਵਾਂ ਕਰਨ ਲਈ ਵਰਤੀ ਜਾਣ ਵਾਲੀ ਇੱਕ ਨਿਯਮਤ ਅਭਿਵੈਕਤੀ ਵਿਕਸਿਤ ਕਰਨਾ ਜਾਂ ਕਿਉਂਕਿ ਇੱਕ ਪੂਰਾ ਪ੍ਰੋਗਰਾਮ ਜਨਰੇਟ ਕਰਨਾ, ਜਿਵੇਂ ਕਿ ਇੱਕ ਵੈੱਬ ਐਪ?
+- **ਟੈਕਸਟ ਦੀ ਕਿਸਮ ਉਤਪੰਨ ਕਰੋ**। ਉਦਾਹਰਣ ਵਜੋਂ, ਤੁਸੀਂ ਕੁਵਿਤਾ, ਪ੍ਰਸ਼ਨਾਂ ਦੀ ਸੂਚੀ ਜੋੜ ਸਕਦੇ ਹੋ ਆਦਿ।
+- **ਜਾਣਕਾਰੀ ਲੱਭੋ**। ਤੁਸੀਂ ਪ੍ਰਾਂਪਟ ਵਰਤ ਕੇ ਜਾਣਕਾਰੀ ਲੱਭ ਸਕਦੇ ਹੋ, ਜਿਵੇਂ ਕਿ 'ਵੈੱਬ ਡਿਵੈਲਪਮੈਂਟ ਵਿੱਚ CORS ਦਾ ਕੀ ਮਤਲਬ ਹੈ?'।
+- **ਕੋਡ ਬਣਾਓ**। ਪ੍ਰਾਂਪਟ ਵਰਤੀ ਜਾ ਸਕਦੀ ਹੈ ਕੋਡ ਬਣਾਉਣ ਲਈ, ਜਿਵੇਂ ਕਿ ਇਮੇਲ ਵੈਧਤਾ ਲਈ ਰੈਗੁਲਰ ਐਕਸਪ੍ਰੈਸ਼ਨ ਲਿਖਣਾ ਜਾਂ ਪੂਰੇ ਪ੍ਰੋਗਰਾਮ ਜਿਵੇਂ ਵੈੱਬ ਐਪ ਤਿਆਰ ਕਰਨਾ।
 
-## ਇੱਕ ਹੋਰ ਵਿਅਵਹਾਰਿਕ ਉਪਯੋਗਤਾ: ਇੱਕ ਰੇਸਿਪੀ ਜਨਰੇਟਰ
+## ਇੱਕ ਵੱਧ ਕਾਰਗਰ ਵਰਤੋਂ ਦਾ ਮਾਮਲਾ: ਰੇਸਪੀ ਜਨਰੇਟਰ
 
-ਕਲਪਨਾ ਕਰੋ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਘਰ ਵਿੱਚ ਸਮੱਗਰੀ ਹੈ ਅਤੇ ਤੁਸੀਂ ਕੁਝ ਪਕਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ। ਇਸ ਲਈ, ਤੁਹਾਨੂੰ ਇੱਕ ਰੇਸਿਪੀ ਦੀ ਲੋੜ ਹੈ। ਰੇਸਿਪੀਆਂ ਲੱਭਣ ਦਾ ਇੱਕ ਤਰੀਕਾ ਇੱਕ ਖੋਜ ਇੰਜਣ ਨੂੰ ਵਰਤਣਾ ਹੈ ਜਾਂ ਤੁਸੀਂ ਇਸ ਲਈ ਇੱਕ LLM ਵਰਤ ਸਕਦੇ ਹੋ।
+ਕਲਪਨਾ ਕਰੋ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਘਰ ਵਿੱਚ ਸਮੱਗਰੀ ਹੈ ਅਤੇ ਤੁਸੀਂ ਕੁਝ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ। ਇਸ ਲਈ, ਤੁਹਾਨੂੰ ਇੱਕ ਰੇਸਪੀ ਦੀ ਲੋੜ ਹੈ। ਰੇਸਪੀ ਲੱਭਣ ਲਈ ਤੁਸੀਂ ਸਰਚ ਇੰਜਣ ਵਰਤ ਸਕਦੇ ਹੋ ਜਾਂ LLM ਦੀ ਮਦਦ ਲੈ ਸਕਦੇ ਹੋ।
 
-ਤੁਸੀਂ ਹੇਠਾਂ ਦਿੱਤਾ ਪ੍ਰੋਮਪਟ ਲਿਖ ਸਕਦੇ ਹੋ:
+ਤੁਸੀਂ ਕੁਝ ਇਸ ਤਰ੍ਹਾਂ ਦਾ ਪ੍ਰਾਂਪਟ ਲਿਖ ਸਕਦੇ ਹੋ:
 
-> "ਮੈਨੂੰ ਹੇਠਾਂ ਦਿੱਤੀ ਸਮੱਗਰੀ ਨਾਲ ਇਕ ਪਕਵਾਨ ਲਈ 5 ਰੇਸਿਪੀਆਂ ਦਿਖਾਓ: ਚਿਕਨ, ਆਲੂ, ਅਤੇ ਗਾਜਰ। ਪ੍ਰਤੀ ਰੇਸਿਪੀ, ਵਰਤੀ ਸਮੱਗਰੀ ਦੀ ਸੂਚੀ ਦਿਓ"
+> "ਨਿਮਨਲਿਖਿਤ ਸਮੱਗਰੀਆਂ ਵਾਲੇ ਵਿਅੰਜਨ ਲਈ 5 ਰੇਸਪੀਆਂ ਦਿਖਾਓ: ਚਿਕਨ, ਆਲੂ, ਤੇ ਗਾਜਰ। ਹਰ ਰੇਸਪੀ ਲਈ, ਸਾਰੀ ਵਰਤੀ ਗਈ ਸਮੱਗਰੀ ਦੀ ਸੁਚੀ ਦਿਓ।"
 
-ਉਪਰੋਕਤ ਪ੍ਰੋਮਪਟ ਦੇ ਨਾਲ, ਤੁਹਾਨੂੰ ਇਸਦੇ ਜਿਵੇਂ ਜਵਾਬ ਮਿਲ ਸਕਦਾ ਹੈ:
+ਇਸ ਪ੍ਰਾਂਪਟ ਦੇ ਨਾਲ ਤੁਹਾਨੂੰ ਸਬੰਧਤ ਨਤੀਜਾ ਮਿਲ ਸਕਦਾ ਹੈ:
 
 ```output
 1. Roasted Chicken and Vegetables:
@@ -300,14 +295,374 @@ Ingredients:
 - 1 teaspoon dried oregano
 ```
 
-ਇਹ ਨਤੀਜਾ ਬਹੁਤ ਵਧੀਆ ਹੈ, ਮੈਨੂੰ ਪਕਾਉਣ ਲਈ ਪਤਾ ਹੈ। ਇਸ ਸਮੇਂ, ਕੀ ਕਾਰਗਰ ਸੁਧਾਰਾਂ ਹੋ ਸਕਦੇ ਹਨ:
+ਇਹ ਨਤੀਜਾ ਵਧੀਆ ਹੈ, ਮੈਨੂੰ ਪਤਾ ਲੱਗ ਗਿਆ ਕਿ ਕੀ ਬਣਾਉਣਾ ਹੈ। ਇਸ ਸਮੇਂ, ਕੁਝ ਸੁਤਰੰਸ਼ ਇਹ ਹੋ ਸਕਦੇ ਹਨ:
 
-- ਉਹ ਸਮੱਗਰੀ ਹਟਾਉਣਾ ਜੋ ਮੈਨੂੰ ਪਸੰਦ ਨਹੀਂ ਹੈ ਜਾਂ ਜਿਸ ਨਾਲ ਮੈਂ الرجਿਕ ਹਾਂ।
-- ਇੱਕ ਖਰੀਦਦਾਰੀ ਸੂਚੀ ਬਣਾਓ, ਜੇਕਰ ਮੇਰੇ ਕੋਲ ਸਾਰੇ ਸਮੱਗਰੀ ਘਰ ਵਿੱਚ ਨਹੀਂ ਹਨ।
+- ਉਹ ਸਮੱਗਰੀ ਫਿਲਟਰ ਕਰੋ ਜੋ ਮੈਨੂੰ ਪਸੰਦ ਨਹੀਂ ਜਾਂ ਜਿਸ ਨਾਲ ਮੈਨੂੰ ਐਲਰਜੀ ਹੈ।
+- ਜੇ ਇੱਕ ਜਿੰਨਾ ਵੀ ਸਮੱਗਰੀ ਘਰ ਵਿੱਚ ਨਹੀਂ ਹੈ, ਤਾਂ ਇਸ ਲਈ ਖਰੀਦਦਾਰੀ ਦੀ ਸੂਚੀ ਬਣਾਓ।
 
-ਉਪਰੋਕਤ ਮਾਮਲਿਆਂ ਲਈ, ਆਓ ਇੱਕ ਹੋਰ ਪ੍ਰੋਮਪਟ ਸ਼ਾਮਲ ਕਰਦੇ ਹਾਂ:
+ਉਪਰੋਕਤ ਮਾਮਲਿਆਂ ਲਈ, ਆਓ ਇੱਕ ਹੋਰ ਪ੍ਰਾਂਪਟ ਜੋੜੀਏ:
 
-> "ਕਿਰਪਾ ਕਰਕੇ ਲਸਣ ਵਾਲੀਆਂ ਰੇਸਿਪੀਆਂ ਨੂੰ ਹਟਾਓ ਕਿਉਂਕਿ ਮੈਂ ਇਸ ਨਾਲ الرجਿਕ ਹਾਂ ਅਤੇ ਇਸ ਨੂੰ ਕੁਝ ਹੋਰ ਨਾਲ ਬਦਲੋ। ਸਾਰੇ ਰੇਸਿਪੀਆਂ ਲਈ ਇੱਕ ਖਰੀਦਦਾਰੀ ਸੂਚੀ ਬਣਾਓ, ਇਹ ਧ
+> "ਕਿਰਪਾ ਕਰਕੇ ਪ੍ਰੈਸਲੀ ਰੇਸਪੀਆਂ ਜੋ ਮੇਰੇ ਲਈ ਨੁਕਸਾਨਦਾਇਕ ਹਨ ਅਤੇ ਮੈਂਦੇ ਐਲਰਜਿਕ ਹਾਂ ਉਹ ਹਟਾਓ ਅਤੇ ਓਥੇ ਕੁਝ ਹੋਰ ਨਾਲ ਬਦਲੋ। ਨਾਲ ਹੀ, ਮੌਜੂਦਾ ਚਿਕਨ, ਆਲੂ ਅਤੇ ਗਾਜਰ ਨੂੰ ਧਿਆਨ ਵਿੱਚ ਰੱਖ ਕੇ ਖਰੀਦਦਾਰੀ ਦੀ ਸੂਚੀ ਤਿਆਰ ਕਰੋ।"
 
-**ਅਸਵੀਕਰਤਾ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਅਤ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਣਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੇ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+ਹੁਣ ਤੁਹਾਨੂੰ ਨਵਾਂ ਨਤੀਜਾ ਮਿਲੇਗਾ, ਜਿਵੇਂ:
+
+```output
+1. Roasted Chicken and Vegetables:
+Ingredients:
+- 4 chicken thighs
+- 2 potatoes, cut into cubes
+- 2 carrots, cut into cubes
+- 2 tablespoons olive oil
+- 1 teaspoon dried thyme
+- 1 teaspoon dried oregano
+- Salt and pepper, to taste
+
+2. Chicken and Potato Stew:
+Ingredients:
+- 2 tablespoons olive oil
+- 1 onion, diced
+- 2 chicken breasts, cut into cubes
+- 2 potatoes, cut into cubes
+- 2 carrots, cut into cubes
+- 1 teaspoon dried oregano
+- 1 teaspoon dried thyme
+- 1 cup chicken broth
+- Salt and pepper, to taste
+
+3. Chicken and Potato Bake:
+Ingredients:
+- 2 tablespoons olive oil
+- 2 chicken breasts, cut into cubes
+- 2 potatoes, cut into cubes
+- 2 carrots, cut into cubes
+- 1 onion, diced
+- 1 teaspoon dried oregano
+- 1 teaspoon dried thyme
+- 1 cup chicken broth
+- Salt and pepper, to taste
+
+4. Chicken and Potato Soup:
+Ingredients:
+- 2 tablespoons olive oil
+- 1 onion, diced
+- 2 chicken breasts, cut into cubes
+- 2 potatoes, cut into cubes
+- 2 carrots, cut into cubes
+- 1 teaspoon dried oregano
+- 1 teaspoon dried thyme
+- 4 cups chicken broth
+- Salt and pepper, to taste
+
+5. Chicken and Potato Hash:
+Ingredients:
+- 2 tablespoons olive oil
+- 2 chicken breasts, cut into cubes
+- 2 potatoes, cut into cubes
+- 2 carrots, cut into cubes
+- 1 onion, diced
+- 1 teaspoon dried oregano
+
+Shopping List:
+- Olive oil
+- Onion
+- Thyme
+- Oregano
+- Salt
+- Pepper
+```
+
+ਇਹ ਤੁਹਾਡੇ ਪੰਜ ਰੇਸਪੀਆਂ ਹਨ, ਜਿਨ੍ਹਾਂ ਵਿੱਚ ਲਸਣ ਨਹੀਂ ਹੈ ਅਤੇ ਤੁਹਾਡੇ ਘਰ ਵਾਲੀ ਸਮੱਗਰੀ ਨੂੰ ਧਿਆਨ ਵਿੱਚ ਰੱਖ ਕੇ ਖਰੀਦਦਾਰੀ ਸੂਚੀ ਵੀ ਹੈ।
+
+## ਅਭਿਆਸ - ਇੱਕ ਰੇਸਪੀ ਜਨਰੇਟਰ ਬਣਾਓ
+
+ਹੁਣ ਜਦੋਂ ਅਸੀਂ ਇੱਕ ਸਨੀਹਾ ਕਥਾ ਵਜੋਂ ਅਭਿਆਸ ਕੀਤਾ ਹੈ, ਆਓ ਉਸਦੇ ਲਈ ਕੋਡ ਲਿਖੀਏ। ਇਸ ਲਈ ਇਹ ਕਦਮ ਲਵੋ:
+
+1. ਮੌਜੂਦਾ _app.py_ ਫਾਇਲ ਨੂੰ ਸ਼ੁਰੂਆਤ ਲਈ ਵਰਤੋਂ
+1. `prompt` ਵੈਰੀਅਬਲ ਲੱਭੋ ਅਤੇ ਇਸ ਦਾ ਕੋਡ ਹੇਠ ਲਿਖੇ ਤਰੀਕੇ ਨਾਲ ਬਦਲੋ:
+
+   ```python
+   prompt = "Show me 5 recipes for a dish with the following ingredients: chicken, potatoes, and carrots. Per recipe, list all the ingredients used"
+   ```
+
+   ਹੁਣ ਜੇ ਤੁਸੀਂ ਕੋਡ ਚਲਾਓ ਤਾਂ ਤੁਹਾਨੂੰ ਇਸ ਦੇ ਸਮਾਨ ਨਤੀਜਾ ਮਿਲੇਗਾ:
+
+   ```output
+   -Chicken Stew with Potatoes and Carrots: 3 tablespoons oil, 1 onion, chopped, 2 cloves garlic, minced, 1 carrot, peeled and chopped, 1 potato, peeled and chopped, 1 bay leaf, 1 thyme sprig, 1/2 teaspoon salt, 1/4 teaspoon black pepper, 1 1/2 cups chicken broth, 1/2 cup dry white wine, 2 tablespoons chopped fresh parsley, 2 tablespoons unsalted butter, 1 1/2 pounds boneless, skinless chicken thighs, cut into 1-inch pieces
+   -Oven-Roasted Chicken with Potatoes and Carrots: 3 tablespoons extra-virgin olive oil, 1 tablespoon Dijon mustard, 1 tablespoon chopped fresh rosemary, 1 tablespoon chopped fresh thyme, 4 cloves garlic, minced, 1 1/2 pounds small red potatoes, quartered, 1 1/2 pounds carrots, quartered lengthwise, 1/2 teaspoon salt, 1/4 teaspoon black pepper, 1 (4-pound) whole chicken
+   -Chicken, Potato, and Carrot Casserole: cooking spray, 1 large onion, chopped, 2 cloves garlic, minced, 1 carrot, peeled and shredded, 1 potato, peeled and shredded, 1/2 teaspoon dried thyme leaves, 1/4 teaspoon salt, 1/4 teaspoon black pepper, 2 cups fat-free, low-sodium chicken broth, 1 cup frozen peas, 1/4 cup all-purpose flour, 1 cup 2% reduced-fat milk, 1/4 cup grated Parmesan cheese
+
+   -One Pot Chicken and Potato Dinner: 2 tablespoons olive oil, 1 pound boneless, skinless chicken thighs, cut into 1-inch pieces, 1 large onion, chopped, 3 cloves garlic, minced, 1 carrot, peeled and chopped, 1 potato, peeled and chopped, 1 bay leaf, 1 thyme sprig, 1/2 teaspoon salt, 1/4 teaspoon black pepper, 2 cups chicken broth, 1/2 cup dry white wine
+
+   -Chicken, Potato, and Carrot Curry: 1 tablespoon vegetable oil, 1 large onion, chopped, 2 cloves garlic, minced, 1 carrot, peeled and chopped, 1 potato, peeled and chopped, 1 teaspoon ground coriander, 1 teaspoon ground cumin, 1/2 teaspoon ground turmeric, 1/2 teaspoon ground ginger, 1/4 teaspoon cayenne pepper, 2 cups chicken broth, 1/2 cup dry white wine, 1 (15-ounce) can chickpeas, drained and rinsed, 1/2 cup raisins, 1/2 cup chopped fresh cilantro
+   ```
+
+   > ਨੋਟ ਕਰੋ, ਤੁਹਾਡਾ LLM ਨਾਨ ਡੀਟੇਰਮਿਨਿਸਟਿਕ ਹੈ, ਇਸ ਕਰਕੇ ਹਰ ਵਾਰੀ ਇਹ ਵੱਖ-ਵੱਖ ਨਤੀਜੇ ਦੇ ਸਕਦਾ ਹੈ।
+
+   ਵਧੀਆ, ਆਓ ਵੇਖੀਏ ਇਸ ਨੂੰ ਕਿਵੇਂ ਸੁਧਾਰਿਆ ਜਾ ਸਕਦਾ ਹੈ। ਸੁਧਾਰ ਲਈ, ਅਸੀਂ ਚਾਹੁੰਦੇ ਹਾਂ ਕਿ ਕੋਡ ਲਚੀਲਾ ਹੋਵੇ, ਤਾਂ ਜੋ ਸਮੱਗਰੀ ਅਤੇ ਰੇਸਪੀ ਦੀ ਗਿਣਤੀ ਬਦਲੀ ਜਾ ਸਕੇ।
+
+1. ਆਓ ਕੋਡ ਇਸ ਤਰੀਕੇ ਨਾਲ ਬਦਲੋ:
+
+   ```python
+   no_recipes = input("No of recipes (for example, 5): ")
+
+   ingredients = input("List of ingredients (for example, chicken, potatoes, and carrots): ")
+
+   # ਪ੍ਰੋੰਪਟ ਅਤੇ ਸਮੱਗਰੀ ਵਿੱਚ ਵਿਧੀਆਂ ਦੀ ਗਿਣਤੀ ਦੀ ਵਿਚੋਲੀ ਕਰਨਾ
+   prompt = f"Show me {no_recipes} recipes for a dish with the following ingredients: {ingredients}. Per recipe, list all the ingredients used"
+   ```
+
+   ਟੈਸਟ ਚਲਾਉਣ ਲਈ ਇਹ ਕੋਡ ਇਸ ਤਰ੍ਹਾਂ ਲੱਗ ਸਕਦਾ ਹੈ:
+
+   ```output
+   No of recipes (for example, 5): 3
+   List of ingredients (for example, chicken, potatoes, and carrots): milk,strawberries
+
+   -Strawberry milk shake: milk, strawberries, sugar, vanilla extract, ice cubes
+   -Strawberry shortcake: milk, flour, baking powder, sugar, salt, unsalted butter, strawberries, whipped cream
+   -Strawberry milk: milk, strawberries, sugar, vanilla extract
+   ```
+
+### ਫਿਲਟਰ ਅਤੇ ਖਰੀਦਦਾਰੀ ਸੂਚੀ ਜੁੜਕੇ ਸੁਧਾਰ ਕਰੋ
+
+ਸਾਡੇ ਕੋਲ ਹੁਣ ਇੱਕ ਕੰਮ ਕਰਨ ਵਾਲੀ ਐਪ ਹੈ ਜੋ ਰੇਸਪੀ ਬਣਾਉਂਦੀ ਹੈ ਅਤੇ ਜੋ ਉਪਭੋਗਤਾ ਦੇ ਇਨਪੁੱਟਾਂ ਤੇ ਵਧੀਕ ਨਮ੍ਰਤਾ ਨਾਲ ਨਿਰਭਰ ਕਰਦੀ ਹੈ, ਜਿਵੇਂ ਕਿ ਰੇਸਪੀ ਦੀ ਗਿਣਤੀ ਅਤੇ ਸਮੱਗਰੀ।
+
+ਇਸਨੂੰ ਹੋਰ ਸੁਧਾਰਨ ਲਈ, ਅਸੀਂ ਇਹ ਚਾਹੁੰਦੇ ਹਾਂ:
+
+- **ਸਮੱਗਰੀਆਂ ਨੂੰ ਫਿਲਟਰ ਕਰੋ**। ਅਸੀਂ ਉਹ ਸਮੱਗਰੀ ਹਟਾਉਂਣ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹਾਂ ਜੋ ਸਾਨੂੰ ਪਸੰਦ ਨਹੀਂ ਜਾਂ ਜਿਸ ਨਾਲ ਐਲਰਜੀ ਹੈ। ਇਹ ਕਰਨ ਲਈ, ਅਸੀਂ ਆਪਣੀ ਮੌਜੂਦਾ ਪ੍ਰਾਂਪਟ ਨੂੰ ਸੋਧ ਕੇ ਇਸ ਦੇ ਅੰਤੀਮ ਵਿੱਚ ਇੱਕ ਫਿਲਟਰ ਸ਼ਰਤ ਜੋੜ ਸਕਦੇ ਹਾਂ:
+
+  ```python
+  filter = input("Filter (for example, vegetarian, vegan, or gluten-free): ")
+
+  prompt = f"Show me {no_recipes} recipes for a dish with the following ingredients: {ingredients}. Per recipe, list all the ingredients used, no {filter}"
+  ```
+
+  ਉਪਰ, ਅਸੀਂ ਪ੍ਰਾਂਪਟ ਦੇ ਅੰਤ ਵਿੱਚ `{filter}` ਜੋੜਿਆ ਹੈ ਅਤੇ ਫਿਲਟਰ ਮੁੱਲ ਉਪਭੋਗਤਾ ਤੋਂ ਲਿਆ ਗਿਆ ਹੈ।
+
+  ਪ੍ਰੋਗਰਾਮ ਚਲਾਉਣ ਲਈ ਇੱਕ ਉਦਾਹਰਣ ਇਨਪੁੱਟ ਹੁਣ ਇਸ ਤਰ੍ਹਾਂ ਦਿੱਸ ਸਕਦਾ ਹੈ:
+
+  ```output
+  No of recipes (for example, 5): 3
+  List of ingredients (for example, chicken, potatoes, and carrots): onion,milk
+  Filter (for example, vegetarian, vegan, or gluten-free): no milk
+
+  1. French Onion Soup
+
+  Ingredients:
+
+  -1 large onion, sliced
+  -3 cups beef broth
+  -1 cup milk
+  -6 slices french bread
+  -1/4 cup shredded Parmesan cheese
+  -1 tablespoon butter
+  -1 teaspoon dried thyme
+  -1/4 teaspoon salt
+  -1/4 teaspoon black pepper
+
+  Instructions:
+
+  1. In a large pot, sauté onions in butter until golden brown.
+  2. Add beef broth, milk, thyme, salt, and pepper. Bring to a boil.
+  3. Reduce heat and simmer for 10 minutes.
+  4. Place french bread slices on soup bowls.
+  5. Ladle soup over bread.
+  6. Sprinkle with Parmesan cheese.
+
+  2. Onion and Potato Soup
+
+  Ingredients:
+
+  -1 large onion, chopped
+  -2 cups potatoes, diced
+  -3 cups vegetable broth
+  -1 cup milk
+  -1/4 teaspoon black pepper
+
+  Instructions:
+
+  1. In a large pot, sauté onions in butter until golden brown.
+  2. Add potatoes, vegetable broth, milk, and pepper. Bring to a boil.
+  3. Reduce heat and simmer for 10 minutes.
+  4. Serve hot.
+
+  3. Creamy Onion Soup
+
+  Ingredients:
+
+  -1 large onion, chopped
+  -3 cups vegetable broth
+  -1 cup milk
+  -1/4 teaspoon black pepper
+  -1/4 cup all-purpose flour
+  -1/2 cup shredded Parmesan cheese
+
+  Instructions:
+
+  1. In a large pot, sauté onions in butter until golden brown.
+  2. Add vegetable broth, milk, and pepper. Bring to a boil.
+  3. Reduce heat and simmer for 10 minutes.
+  4. In a small bowl, whisk together flour and Parmesan cheese until smooth.
+  5. Add to soup and simmer for an additional 5 minutes, or until soup has thickened.
+  ```
+
+  ਦੇਖੋ ਜੇ ਕਿਸੇ ਰੇਸਪੀ ਵਿੱਚ ਦੂਧ ਹੈ ਤਾਂ ਉਹ ਫਿਲਟਰ ਕੀਤਾ ਗਿਆ ਹੈ। ਪਰ ਜੇ ਤੁਸੀਂ ਲੈਕਟੋਜ਼ ਇੰਟੋਲਰੈਂਟ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਚੀਜ਼ ਵਾਲੀਆਂ ਰੇਸਪੀਆਂ ਵੀ ਫਿਲਟਰ ਕਰਨਾ ਚਾਹੋਗੇ, ਇਸ ਲਈ ਇਹ ਸਾਫ ਹੋਣਾ ਜਰੂਰੀ ਹੈ।
+
+
+- **ਖਰੀਦਦਾਰੀ ਦੀ ਸੂਚੀ ਬਣਾਓ**। ਅਸੀਂ ਘਰ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਜੋ ਕੁਝ ਹੈ, ਉਸਨੂੰ ਧਿਆਨ ਵਿੱਚ ਰੱਖਦੇ ਹੋਏ ਖਰੀਦਦਾਰੀ ਦੀ ਸੂਚੀ ਬਣਾਉਣੀ ਚਾਹੁੰਦੇ ਹਾਂ।
+
+  ਇਸ ਫੰਕਸ਼ਨਲਟੀ ਲਈ, ਅਸੀਂ ਸਾਰੀ ਗੱਲ ਇੱਕ ਪ੍ਰਾਂਪਟ ਵਿੱਚ ਹੱਲ ਕਰ ਸਕਦੇ ਹਾਂ ਜਾਂ ਇਸਨੂੰ ਦੋ ਪ੍ਰਾਂਪਟਾਂ ਵਿੱਚ ਵੰਡ ਸਕਦੇ ਹਾਂ। ਚਲੋ ਦੂਜੇ ਤਰੀਕੇ ਨੂੰ ਅਜ਼ਮਾਈਏ। ਇੱਥੇ ਅਸੀਂ ਇੱਕ ਵਾਧੂ ਪ੍ਰਾਂਪਟ ਸ਼ਾਮਲ ਕਰਨ ਦੀ ਸਿਫਾਰਿਸ਼ ਕਰ ਰਹੇ ਹਾਂ, ਪਰ ਇਹ ਕੰਮ ਕਰਨ ਲਈ, ਸਾਨੂੰ ਪਹਿਲੇ ਪ੍ਰਾਂਪਟ ਦੇ ਨਤੀਜੇ ਨੂੰ ਦੂਜੇ ਪ੍ਰਾਂਪਟ ਦੇ ਸੰਦਰਭ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨਾ ਪਵੇਗਾ।
+
+  ਉਸ ਕੋਡ ਦਾ ਹਿੱਸਾ ਲੱਭੋ ਜੋ ਪਹਿਲੇ ਪ੍ਰਾਂਪਟ ਦੇ ਨਤੀਜੇ ਨੂੰ ਪ੍ਰਿੰਟ ਕਰਦਾ ਹੈ ਅਤੇ ਹੇਠ ਲਿਖਿਆ ਕੋਡ ਉਸਦੇ ਨਾਲ ਹੇਠਾਂ ਜੋੜੋ:
+
+  ```python
+  old_prompt_result = response.output_text
+  prompt = "Produce a shopping list for the generated recipes and please don't include ingredients that I already have."
+
+  new_prompt = f"{old_prompt_result} {prompt}"
+  response = client.responses.create(model=deployment_name, input=new_prompt, max_output_tokens=1200, store=False)
+
+  # ਪ੍ਰਤੀਕਿਰਿਆ ਪ੍ਰਿੰਟ ਕਰੋ
+  print("Shopping list:")
+  print(response.output_text)
+  ```
+
+  ਹੇਠ ਲਿਖੇ ਗੱਲਾਂ ਨੂੰ ਧਿਆਨ ਦਿਓ:
+
+  1. ਅਸੀਂ ਇੱਕ ਨਵਾਂ ਪ੍ਰਾਂਪਟ ਤਿਆਰ ਕਰ ਰਹੇ ਹਾਂ ਜੋ ਪਹਿਲੇ ਪ੍ਰਾਂਪਟ ਦੇ ਨਤੀਜੇ ਨੂੰ ਨਵੇਂ ਪ੍ਰਾਂਪਟ ਨਾਲ ਜੋੜਦਾ ਹੈ:
+
+     ```python
+     new_prompt = f"{old_prompt_result} {prompt}"
+     ```
+
+  1. ਅਸੀਂ ਇੱਕ ਨਵੀਂ ਬੇਨਤੀ ਕਰਦੇ ਹਾਂ, ਪਰ ਪਹਿਲੇ ਪ੍ਰਾਂਪਟ ਵਿੱਚ ਪੁੱਛੇ ਟੋਕਨ ਦੀ ਗਿਣਤੀ ਨੁੰ ਵੀ ਧਿਆਨ ਵਿੱਚ ਰੱਖਦੇ ਹਾਂ, ਇਸ ਵਾਰੀ ਅਸੀਂ ਕਹਿੰਦੇ ਹਾਂ `max_output_tokens` 1200 ਹੈ।
+
+     ```python
+     response = client.responses.create(model=deployment_name, input=new_prompt, max_output_tokens=1200, store=False)
+     ```
+
+     ਇਸ ਕੋਡ ਨੂੰ ਚਲਾਉਂਦੇ ਹੋਏ, ਅਸੀਂ ਹੁਣ ਹੇਠ ਲਿਖੇ ਆਉਟਪੁੱਟ 'ਤੇ ਪਹੁੰਚਦੇ ਹਾਂ:
+
+     ```output
+     No of recipes (for example, 5): 2
+     List of ingredients (for example, chicken, potatoes, and carrots): apple,flour
+     Filter (for example, vegetarian, vegan, or gluten-free): sugar
+
+
+     -Apple and flour pancakes: 1 cup flour, 1/2 tsp baking powder, 1/2 tsp baking soda, 1/4 tsp salt, 1 tbsp sugar, 1 egg, 1 cup buttermilk or sour milk, 1/4 cup melted butter, 1 Granny Smith apple, peeled and grated
+     -Apple fritters: 1-1/2 cups flour, 1 tsp baking powder, 1/4 tsp salt, 1/4 tsp baking soda, 1/4 tsp nutmeg, 1/4 tsp cinnamon, 1/4 tsp allspice, 1/4 cup sugar, 1/4 cup vegetable shortening, 1/4 cup milk, 1 egg, 2 cups shredded, peeled apples
+     Shopping list:
+     -Flour, baking powder, baking soda, salt, sugar, egg, buttermilk, butter, apple, nutmeg, cinnamon, allspice
+     ```
+
+## ਤੁਹਾਡੇ ਸੈਟਅੱਪ ਨੂੰ ਸੁਧਾਰੋ
+
+ਇਸ ਸਮੇਂ ਸਾਡੇ ਕੋਲ ਇੱਕ ਐਸਾ ਕੋਡ ਹੈ ਜੋ ਕੰਮ ਕਰਦਾ ਹੈ, ਪਰ ਕੁਝ ਸੋਧਾਂ ਹਨ ਜੋ ਅਸੀਂ ਚੀਜ਼ਾਂ ਨੂੰ ਹੋਰ ਬਿਹਤਰ ਬਣਾਉਣ ਲਈ ਕਰ ਸਕਦੇ ਹਾਂ। ਕੁਝ ਗੱਲਾਂ ਜੋ ਅਸੀਂ ਕਰ ਸਕਦੇ ਹਾਂ, ਉਹ ਹਨ:
+
+- **ਰਹਸਿਆਂ ਨੂੰ ਕੋਡ ਤੋਂ ਅਲੱਗ ਕਰੋ**, ਜਿਵੇਂ ਕਿ API ਕੁੰਜੀ। ਰਹਸੇ ਕੋਡ ਵਿੱਚ ਨਹੀਂ ਹੋਣੇ ਚਾਹੀਦੇ ਅਤੇ ਉਹਨਾਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਥਾਂ 'ਤੇ ਸਟੋਰ ਕੀਤਾ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਰਹਸਿਆਂ ਨੂੰ ਕੋਡ ਤੋਂ ਅਲੱਗ ਕਰਨ ਲਈ ਅਸੀਂ ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ ਅਤੇ `python-dotenv` ਵਰਗੀਆਂ ਲਾਈਬ੍ਰੇਰੀਆਂ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹਾਂ ਜੋ ਉਹਨਾਂ ਨੂੰ ਫਾਈਲ ਤੋਂ ਲੋਡ ਕਰਦੀਆਂ ਹਨ। ਕੋਡ ਵਿੱਚ ਇਹ ਇੰਝ ਦਿਖਾਈ ਦੇਵੇਗਾ:
+
+  1. ਇੱਕ `.env` ਫਾਈਲ ਬਣਾਓ ਜਿਸ ਵਿੱਚ ਹੇਠ ਲਿਖਿਆ ਸਮੱਗਰੀ ਹੋਵੇ:
+
+     ```bash
+     OPENAI_API_KEY=sk-...
+     ```
+
+     > ਧਿਆਨ ਦਿਓ, Microsoft Foundry ਵਿੱਚ Azure OpenAI ਲਈ, ਤੁਹਾਨੂੰ ਬਦਲ ਕੇ ਹੇਠ ਲਿਖੇ ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ ਸੈੱਟ ਕਰਨੇ ਪੈਣਗੇ:
+
+     ```bash
+     AZURE_OPENAI_API_KEY=<replace>
+     AZURE_OPENAI_ENDPOINT=<replace>
+     AZURE_OPENAI_API_VERSION=2024-10-21
+     ```
+
+     ਕੋਡ ਵਿੱਚ ਤੁਸੀਂ ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ ਇਸ ਤਰ੍ਹਾਂ ਲੋਡ ਕਰੋਗੇ:
+
+     ```python
+     import os
+     from dotenv import load_dotenv
+     from openai import OpenAI
+
+     load_dotenv()
+
+     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+     ```
+
+- **ਟੋਕਨ ਦੀ ਲੰਬਾਈ 'ਤੇ ਇੱਕ ਸ਼ਬਦ**। ਸਾਨੂੰ ਇਹ ਧਿਆਨ ਵਿੱਚ ਰੱਖਣਾ ਚਾਹੀਦਾ ਹੈ ਕਿ ਅਸੀਂ ਕਿੰਨੇ ਟੋਕਨ ਵਰਤਕੇ ਲਿਖਤ ਤਿਆਰ ਕਰ ਰਹੇ ਹਾਂ। ਟੋਕਨਾਂ ਦੀ ਲਾਗਤ ਹੁੰਦੀ ਹੈ, ਇਸ ਲਈ ਜਿੱਥੇ ਸੰਭਵ ਹੋਵੇ, ਸਾਨੂੰ ਵਰਤੇ ਗਏ ਟੋਕਨ ਦੀ ਗਿਣਤੀ ਨੂੰ ਸਾਬਤਕਾਰਿਤ ਅਤੇ ਕਿਫਾਇਤੀ ਬਣਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ। ਉਦਾਹਰਣ ਲਈ, ਕੀ ਅਸੀਂ ਪ੍ਰਾਂਪਟ ਨੂੰ ਇਸ ਤਰ੍ਹਾਂ ਲਿਖ ਸਕਦੇ ਹਾਂ ਕਿ ਘੱਟ ਟੋਕਨ ਦੀ ਲੋੜ ਹੋਵੇ?
+
+  ਟੋਕਨ ਦੀ ਗਿਣਤੀ ਬਦਲਣ ਲਈ, ਤੁਸੀਂ `max_output_tokens` ਪੈਰਾਮੀਟਰ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹੋ। ਉਦਾਹਰਣ ਲਈ, ਜੇ ਤੁਸੀਂ 100 ਟੋਕਨ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ, ਤਾਂ ਇਹ ਕਰ ਸਕਦੇ ਹੋ:
+
+  ```python
+  response = client.responses.create(model=deployment, input=prompt, max_output_tokens=100, store=False)
+  ```
+
+- **ਤਾਪਮਾਨ (ਤੇਮਪਰੇਚਰ) ਨਾਲ ਪ੍ਰਯੋਗ**। ਤਾਪਮਾਨ ਇੱਕ ਗੱਲ ਹੈ ਜਿਸ ਬਾਰੇ ਅਸੀਂ ਇਸ ਤੱਕ ਗੱਲ ਨਹੀਂ ਕੀਤੀ, ਪਰ ਇਹ ਸਾਡੇ ਪ੍ਰੋਗ੍ਰਾਮ ਦੀ ਕਾਰਗੁਜ਼ਾਰੀ ਲਈ ਇੱਕ ਜਰੂਰੀ ਸੰਦਰਭ ਹੈ। ਜਿੰਨਾ ਵੱਧ ਤਾਪਮਾਨ ਮੁੱਲ ਹੋਵੇਗਾ, ਆਉਟਪੁੱਟ ਉਤਨੀ ਹੀ ਜਿਆਦਾ ਬੇਤਰਤੀਬ ਹੋਵੇਗਾ। ਵਿਰੋਧ ਵਿੱਚ, ਜਿੰਨਾ ਘੱਟ ਤਾਪਮਾਨ ਮੁੱਲ ਹੋਵੇਗਾ, ਆਉਟਪੁੱਟ ਉਤਨਾ ਹੀ ਜਿਆਦਾ ਅਨੁਮਾਨਯੋਗ ਹੋਵੇਗਾ। ਸੋਚੋ ਕਿ ਤੁਸੀਂ ਆਪਣੇ ਆਉਟਪੁੱਟ ਵਿੱਚ ਫ਼ਰਕ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਨਹੀਂ।
+
+  ਤਾਪਮਾਨ ਬਦਲਣ ਲਈ, ਤੁਸੀਂ `temperature` ਪੈਰਾਮੀਟਰ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹੋ। ਉਦਾਹਰਣ ਲਈ, ਜੇ ਤੁਸੀਂ 0.5 ਦਾ ਤਾਪਮਾਨ ਚਾਹੁੰਦੇ ਹੋ, ਤਾਂ ਇਹ ਕਰਨਾ:
+
+  ```python
+  response = client.responses.create(model=deployment, input=prompt, temperature=0.5, store=False)
+  ```
+
+  > ਧਿਆਨ ਦਿਓ, 1.0 ਦੇ ਨੇੜੇ ਹੋਣ 'ਤੇ ਆਉਟਪੁੱਟ ਜਿਆਦਾ ਬਦਲਦਾ ਰਹੇਗਾ।
+
+## ਅਸਾਈਨਮੈਂਟ
+
+ਇਸ ਅਸਾਈਨਮੈਂਟ ਲਈ, ਤੁਸੀਂ ਚੁਣ ਸਕਦੇ ਹੋ ਕਿ ਕੀ ਬਣਾਉਣਾ ਹੈ।
+
+ਇੱਥੇ ਕੁਝ ਸਿਫਾਰਸ਼ਾਂ ਹਨ:
+
+- ਰੈਸੀਪੀ ਜੈਨਰੇਟਰ ਐਪ ਨੂੰ ਹੋਰ ਬਿਹਤਰ ਬਣਾਉਣ ਲਈ ਸੋਧੋ। ਤਾਪਮਾਨ ਮੁੱਲਾਂ ਅਤੇ ਪ੍ਰਾਂਪਟਾਂ ਨਾਲ ਖੇਡੋ ਅਤੇ ਵੇਖੋ ਕਿ ਤੁਸੀਂ ਕਿਸ ਤਰ੍ਹਾਂ ਦੇ ਨਤੀਜੇ ਲਿਆ ਸਕਦੇ ਹੋ।
+- "ਅਧਿਐਨ ਸਾਥੀ" ਬਣਾਓ। ਇਹ ਐਪ ਕਿਸੇ ਵਿਸ਼ੇ ਬਾਰੇ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਦੇ ਸਕਦੀ ਹੈ, ਉਦਾਹਰਣ ਲਈ Python। ਤੁਹਾਡੇ ਕੋਲ ਐਸੇ ਪ੍ਰਾਂਪਟ ਹੋ ਸਕਦੇ ਹਨ "Python ਵਿੱਚ ਕਿਸੇ ਵਿਸ਼ੇ ਦਾ ਕੀ ਮਤਲਬ ਹੈ?", ਜਾਂ ਕੋਈ ਪ੍ਰਾਂਪਟ ਕਿ ਮੈਂ ਕਿਸੇ ਵਿਸ਼ੇ ਲਈ ਕੋਡ ਦਿਖਾਓ ਆਦਿ।
+- ਇਤਿਹਾਸ ਬਾਟ, ਇਤਿਹਾਸ ਨੂੰ ਜਿਊਂਦਾ ਕਰੋ, ਬਾਟ ਨੂੰ ਇੱਕ ਵਿਸ਼ੇਸ਼ ਇਤਿਹਾਸਕ ਪਾਤਰ ਵਜੋਂ ਕਿਰਦਾਰ ਨਿਭਾਉਣ ਲਈ ਕਹੋ ਅਤੇ ਉਸਦੇ ਜੀਵਨ ਅਤੇ ਸਮੇਂ ਬਾਰੇ ਸਵਾਲਾਂ ਪੁੱਛੋ।
+
+## ਹੱਲ
+
+### ਅਧਿਐਨ ਸਾਥੀ
+
+ਹੇਠਾਂ ਇੱਕ ਸ਼ੁਰੂਆਤੀ ਪ੍ਰਾਂਪਟ ਦਿੱਤਾ ਗਿਆ ਹੈ, ਦੇਖੋ ਕਿ ਤੁਸੀਂ ਇਸ ਨੂੰ ਕਿਵੇਂ ਵਰਤ ਸਕਦੇ ਹੋ ਅਤੇ ਇਸ ਨੂੰ ਆਪਣੀ ਪਸੰਦ ਅਨੁਸਾਰ ਸੋਧ ਸਕਦੇ ਹੋ।
+
+```text
+- "You're an expert on the Python language
+
+    Suggest a beginner lesson for Python in the following format:
+
+    Format:
+    - concepts:
+    - brief explanation of the lesson:
+    - exercise in code with solutions"
+```
+
+### ਇਤਿਹਾਸ ਬਾਟ
+
+ਇੱਥੇ ਕੁਝ ਪ੍ਰਾਂਪਟ ਹਨ ਜੋ ਤੁਸੀਂ ਵਰਤ ਸਕਦੇ ਹੋ:
+
+```text
+- "You are Abe Lincoln, tell me about yourself in 3 sentences, and respond using grammar and words like Abe would have used"
+- "You are Abe Lincoln, respond using grammar and words like Abe would have used:
+
+   Tell me about your greatest accomplishments, in 300 words"
+```
+
+## ਗਿਆਨ ਜਾਂਚ
+
+ਤਾਪਮਾਨ (temperature) ਦਾ ਕੀ ਮਤਲਬ ਹੈ?
+
+1. ਇਹ ਨਿਰਧਾਰਤ ਕਰਦਾ ਹੈ ਕਿ ਆਉਟਪੁੱਟ ਕਿੰਨਾ ਬੇਤਰਤੀਬ ਹੋਵੇਗਾ।
+1. ਇਹ ਨਿਰਧਾਰਤ ਕਰਦਾ ਹੈ ਕਿ ਜਵਾਬ ਕਿੰਨਾ ਵੱਡਾ ਹੋਵੇਗਾ।
+1. ਇਹ ਨਿਰਧਾਰਤ ਕਰਦਾ ਹੈ ਕਿ ਕਿੰਨੇ ਟੋਕਨ ਵਰਤੇ ਜਾਣਗੇ।
+
+## 🚀 ਚੈਲੇਂਜ
+
+ਜਦੋਂ ਅਸਾਈਨਮੈਂਟ 'ਤੇ ਕੰਮ ਕਰ ਰਹੇ ਹੋ, ਤਾਪਮਾਨ ਨੂੰ ਵੱਖਰੇ-ਵੱਖਰੇ ਮੁੱਲਾਂ ਤੇ ਸੈੱਟ ਕਰਕੇ ਦੇਖੋ, ਜਿਵੇਂ 0, 0.5, ਅਤੇ 1। ਯਾਦ ਰੱਖੋ ਕਿ 0 ਸਭ ਤੋਂ ਘੱਟ ਬਦਲਾਅ ਹੈ ਅਤੇ 1 ਸਭ ਤੋਂ ਜ਼ਿਆਦਾ। ਤੁਹਾਡੇ ਐਪ ਲਈ ਸਭ ਤੋਂ ਵਧੀਆ ਮੁੱਲ ਕਿਹੜਾ ਹੈ?
+
+## ਸ਼ਾਬਾਸ਼! ਆਪਣਾ ਅਧਿਐਨ ਜਾਰੀ ਰੱਖੋ
+
+ਇਸ ਪਾਠ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਸਾਡੇ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ਨੂੰ ਦੇਖੋ ਤਾਂ ਜੋ ਤੁਸੀਂ ਆਪਣੀ Generative AI ਦੀ ਜਾਣਕਾਰੀ ਵਿੱਚ ਵਾਧਾ ਕਰ ਸਕੋ!
+
+ਲੈਸਨ 7 ਤੇ ਜਾਓ ਜਿੱਥੇ ਅਸੀਂ ਵੇਖਾਂਗੇ ਕਿ [ਚੈਟ ਐਪਲੀਕੇਸ਼ਨ ਕਿਵੇਂ ਬਣਾਏ ਜਾਣ](../07-building-chat-applications/README.md?WT.mc_id=academic-105485-koreyst)ਗੀਆਂ!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

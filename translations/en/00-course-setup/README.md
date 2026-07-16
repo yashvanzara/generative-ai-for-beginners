@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9f4785899ee92500f524b4acb26e3bb3",
-  "translation_date": "2025-05-19T12:16:21+00:00",
-  "source_file": "00-course-setup/README.md",
-  "language_code": "en"
-}
--->
 # Getting Started with this course
 
 We are very excited for you to start this course and see what you get inspired to build with Generative AI!
@@ -25,28 +16,43 @@ To start taking this course, you will need to complete the following steps.
 
 To avoid any dependency issues when running the code, we recommend running this course in a [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=academic-105485-koreyst).
 
-This can be created by selecting the `Code` option on your forked version of this repo and selecting the **Codespaces** option.
+In your fork: **Code -> Codespaces -> New on main**
 
-![Dialog showing buttons to create a codespace](../../../00-course-setup/images/who-will-pay.webp)
+![Dialog showing buttons to create a codespace](../../../translated_images/en/who-will-pay.4c0609b1c7780f44.webp)
 
-### 3. Storing Your API Keys
+#### 2.1 Add a secret
 
-Keeping your API keys safe and secure is important when building any type of application. We recommend not to store any API keys directly in your code. Committing those details to a public repository could result in security issues and even unwanted costs if used by a bad actor. Here's a step-by-step guide on how to create a `.env` file for Python and add the `GITHUB_TOKEN`:
+1. ⚙️ Gear icon -> Command Pallete-> Codespaces : Manage user secret -> Add a new secret.
+2. Name OPENAI_API_KEY, paste your key, Save.
 
-1. **Navigate to Your Project Directory**: Open your terminal or command prompt and navigate to your project's root directory where you want to create the `.env` file.
+### 3.  What’s next?
 
-   ```bash
-   cd path/to/your/project
-   ```
+| I want to…          | Go to…                                                                  |
+|---------------------|-------------------------------------------------------------------------|
+| Start Lesson 1      | [`01-introduction-to-genai`](../01-introduction-to-genai/README.md)     |
+| Work offline        | [`setup-local.md`](02-setup-local.md)                                   |
+| Setup an LLM Provider | [`providers.md`](03-providers.md)                                        |
+| Meet other learners | [Join our Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)   |
 
-2. **Create the `.env` File**: Use your preferred text editor to create a new file named `.env`. If you're using the command line, you can use `touch` (on Unix-based systems) or `echo` (on Windows):
+## Troubleshooting
+
+
+| Symptom                                   | Fix                                                             |
+|-------------------------------------------|-----------------------------------------------------------------|
+| Container build stuck > 10 min            | **Codespaces ➜ “Rebuild Container”**                            |
+| `python: command not found`               | Terminal didn’t attach; click **+** ➜ *bash*                    |
+| `401 Unauthorized` from OpenAI            | Wrong / expired `OPENAI_API_KEY`                                |
+| VS Code shows “Dev container mounting…”   | Refresh the browser tab—Codespaces sometimes loses connection   |
+| Notebook kernel missing                   | Notebook menu ➜ **Kernel ▸ Select Kernel ▸ Python 3**           |
 
    Unix-based systems:
+
    ```bash
    touch .env
    ```
 
    Windows:
+
    ```cmd
    echo . > .env
    ```
@@ -99,7 +105,8 @@ Once you have everything checked out, you can get started!
 
 ### Installing Miniconda
 
-[Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) is a lightweight installer for installing [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst), Python, as well as a few packages. Conda itself is a package manager, that makes it easy to setup and switch between different Python [**virtual environments**](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) and packages. It also comes in handy for installing packages that are not available via `pip`.
+[Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) is a lightweight installer for installing [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst), Python, as well as a few packages.
+Conda itself is a package manager, that makes it easy to setup and switch between different Python [**virtual environments**](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) and packages. It also comes in handy for installing packages that are not available via `pip`.
 
 You can follow the [MiniConda installation guide](https://docs.anaconda.com/free/miniconda/#quick-command-line-install?WT.mc_id=academic-105485-koreyst) to set it up.
 
@@ -112,19 +119,18 @@ Go ahead and populate your environment file with the snippet below:
 ```yml
 name: <environment-name>
 channels:
- - defaults
- - microsoft
+  - defaults
+  - microsoft
 dependencies:
-- python=<python-version>
-- openai
-- python-dotenv
-- pip
-- pip:
-    - azure-ai-ml
-
+  - python=<python-version>
+  - openai
+  - python-dotenv
+  - pip
+  - pip:
+      - azure-ai-ml
 ```
 
-If you find you getting errors using conda you can manually install the Microsoft AI Libraries using the following command in a terminal.
+If you find you are getting errors using conda you can manually install the Microsoft AI Libraries using the following command in a terminal.
 
 ```
 conda install -c microsoft azure-ai-ml
@@ -135,7 +141,7 @@ The environment file specifies the dependencies we need. `<environment-name>` re
 With that done, you can go ahead and create your Conda environment by running the commands below in your command line/terminal
 
 ```bash
-conda env create --name ai4beg --file .devcontainer/environment.yml # .devcontainer sub path applies to only Codespace setups
+conda env create --name ai4beg --file .devcontainer/environment.yml # The .devcontainer sub path applies only to Codespace setups
 conda activate ai4beg
 ```
 
@@ -173,9 +179,10 @@ Once you access the URL, you should see the course outline and be able to naviga
 
 ### Running in a container
 
-An alternative to setting everything up on your computer or Codespace is to use a [container](https://en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst). The special `.devcontainer` folder within the course repository makes it possible for VS Code to set up the project within a container. Outside of Codespaces, this will require the installation of Docker, and quite frankly, it involves a bit of work, so we recommend this only to those with experience working with containers.
+An alternative to setting everything up on your computer or Codespace is to use a [container](https://en.wikipedia.org/wiki/Containerization_%28computing%29?WT.mc_id=academic-105485-koreyst). The special `.devcontainer` folder within the course repository makes it possible for VS Code to set up the project within a container. Outside of Codespaces, this will require the installation of Docker, and quite frankly, it involves a bit of work, so we recommend this only to those with experience working with containers.
 
 One of the best ways to keep your API keys secure when using GitHub Codespaces is by using Codespace Secrets. Please follow the [Codespaces secrets management](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-secrets-for-your-codespaces?WT.mc_id=academic-105485-koreyst) guide to learn more about this.
+
 
 ## Lessons and Technical Requirements
 
@@ -216,8 +223,11 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/?WT.mc_id=academic-105485-koreyst). For more information read the Code of Conduct FAQ or contact [Email opencode](opencode@microsoft.com) with any additional questions or comments.
 
 ## Let's Get Started
-
 Now that you have completed the needed steps to complete this course, let's get started by getting an [introduction to Generative AI and LLMs](../01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst).
 
-**Disclaimer**:  
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

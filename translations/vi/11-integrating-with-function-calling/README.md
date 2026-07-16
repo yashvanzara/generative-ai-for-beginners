@@ -1,83 +1,79 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "77a48a201447be19aa7560706d6f93a0",
-  "translation_date": "2025-05-19T21:33:36+00:00",
-  "source_file": "11-integrating-with-function-calling/README.md",
-  "language_code": "vi"
-}
--->
 # Tích hợp với gọi hàm
 
-Bạn đã học được khá nhiều trong các bài học trước. Tuy nhiên, chúng ta có thể cải thiện thêm. Một số vấn đề chúng ta có thể giải quyết là làm thế nào để có được định dạng phản hồi nhất quán hơn để dễ dàng làm việc với phản hồi ở các bước sau. Ngoài ra, chúng ta có thể muốn thêm dữ liệu từ các nguồn khác để làm phong phú thêm ứng dụng của mình.
+[![Tích hợp với gọi hàm](../../../translated_images/vi/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-Những vấn đề được đề cập ở trên là những gì chương này muốn giải quyết.
+Bạn đã học được khá nhiều cho đến giờ trong các bài học trước. Tuy nhiên, chúng ta có thể cải thiện hơn nữa. Một số vấn đề chúng ta có thể giải quyết là làm thế nào để có định dạng phản hồi nhất quán hơn nhằm giúp dễ dàng xử lý phản hồi trong các bước tiếp theo. Ngoài ra, chúng ta có thể muốn thêm dữ liệu từ các nguồn khác để làm giàu thêm cho ứng dụng của mình.
+
+Những vấn đề đã được nhắc đến trên đây chính là những gì chương này muốn giải quyết.
 
 ## Giới thiệu
 
-Bài học này sẽ bao gồm:
+Bài học này sẽ giới thiệu:
 
-- Giải thích gọi hàm là gì và các trường hợp sử dụng của nó.
+- Giải thích về gọi hàm là gì và các trường hợp sử dụng của nó.
 - Tạo một cuộc gọi hàm sử dụng Azure OpenAI.
-- Cách tích hợp một cuộc gọi hàm vào một ứng dụng.
+- Cách tích hợp một cuộc gọi hàm vào ứng dụng.
 
 ## Mục tiêu học tập
 
-Kết thúc bài học này, bạn sẽ có thể:
+Đến cuối bài học này, bạn sẽ có thể:
 
-- Giải thích mục đích của việc sử dụng gọi hàm.
-- Thiết lập Gọi Hàm sử dụng Dịch vụ Azure OpenAI.
-- Thiết kế các cuộc gọi hàm hiệu quả cho trường hợp sử dụng ứng dụng của bạn.
+- Giải thích mục đích sử dụng gọi hàm.
+- Thiết lập Cuộc Gọi Hàm sử dụng dịch vụ Azure OpenAI.
+- Thiết kế các cuộc gọi hàm hiệu quả cho trường hợp sử dụng của ứng dụng bạn.
 
-## Kịch bản: Cải thiện chatbot của chúng ta với các hàm
+## Tình huống: Cải thiện chatbot của chúng ta với các hàm
 
-Trong bài học này, chúng ta muốn xây dựng một tính năng cho startup giáo dục của mình cho phép người dùng sử dụng chatbot để tìm các khóa học kỹ thuật. Chúng ta sẽ đề xuất các khóa học phù hợp với trình độ kỹ năng, vai trò hiện tại và công nghệ mà họ quan tâm.
+Cho bài học này, chúng ta muốn xây dựng một tính năng cho startup giáo dục của mình cho phép người dùng sử dụng chatbot để tìm các khóa học kỹ thuật. Chúng ta sẽ đề xuất các khóa học phù hợp với trình độ kỹ năng, vai trò hiện tại và công nghệ họ quan tâm.
 
-Để hoàn thành kịch bản này, chúng ta sẽ sử dụng kết hợp của:
+Để hoàn thành tình huống này, chúng ta sẽ sử dụng kết hợp:
 
-- `Azure OpenAI` để tạo trải nghiệm chat cho người dùng.
-- `Microsoft Learn Catalog API` để giúp người dùng tìm các khóa học dựa trên yêu cầu của họ.
-- `Function Calling` để lấy truy vấn của người dùng và gửi nó đến một hàm để thực hiện yêu cầu API.
+- `Azure OpenAI` để tạo trải nghiệm trò chuyện cho người dùng.
+- `Microsoft Learn Catalog API` để giúp người dùng tìm khóa học dựa trên yêu cầu.
+- `Gọi Hàm` để lấy truy vấn của người dùng và gửi nó đến một hàm để thực hiện yêu cầu API.
 
-Để bắt đầu, hãy xem tại sao chúng ta lại muốn sử dụng gọi hàm ngay từ đầu:
+Để bắt đầu, hãy xem tại sao chúng ta muốn dùng gọi hàm ngay từ đầu:
 
-## Tại sao Gọi Hàm
+## Tại sao dùng Gọi Hàm
 
-Trước khi có gọi hàm, phản hồi từ một LLM không có cấu trúc và không nhất quán. Các nhà phát triển phải viết mã xác thực phức tạp để đảm bảo họ có thể xử lý từng biến thể của phản hồi. Người dùng không thể nhận được câu trả lời như "Thời tiết hiện tại ở Stockholm là gì?". Điều này là do các mô hình bị giới hạn vào thời điểm dữ liệu được huấn luyện.
+Trước khi có gọi hàm, các phản hồi từ LLM rất không có cấu trúc và không nhất quán. Các nhà phát triển phải viết mã kiểm tra phức tạp để đảm bảo có thể xử lý mọi biến thể phản hồi. Người dùng cũng không thể có câu trả lời như "Thời tiết hiện tại ở Stockholm như thế nào?". Bởi vì các mô hình bị giới hạn ở dữ liệu được đào tạo tại thời điểm đó.
 
-Gọi Hàm là một tính năng của Dịch vụ Azure OpenAI để vượt qua những hạn chế sau:
+Gọi Hàm là một tính năng của dịch vụ Azure OpenAI nhằm khắc phục các hạn chế sau:
 
-- **Định dạng phản hồi nhất quán**. Nếu chúng ta có thể kiểm soát tốt hơn định dạng phản hồi, chúng ta có thể dễ dàng tích hợp phản hồi vào các hệ thống khác.
-- **Dữ liệu bên ngoài**. Khả năng sử dụng dữ liệu từ các nguồn khác của ứng dụng trong ngữ cảnh chat.
+- **Định dạng phản hồi nhất quán**. Nếu chúng ta kiểm soát tốt hơn định dạng phản hồi, ta có thể dễ dàng tích hợp phản hồi cho các hệ thống bên dưới.
+- **Dữ liệu bên ngoài**. Có khả năng sử dụng dữ liệu từ các nguồn khác của ứng dụng trong ngữ cảnh trò chuyện.
 
-## Minh họa vấn đề qua một kịch bản
+## Minh họa vấn đề qua một tình huống
 
-> Chúng tôi khuyến nghị bạn sử dụng [notebook đính kèm](../../../11-integrating-with-function-calling/python/aoai-assignment.ipynb) nếu bạn muốn chạy kịch bản dưới đây. Bạn cũng có thể chỉ đọc theo khi chúng tôi đang cố gắng minh họa một vấn đề mà các hàm có thể giúp giải quyết.
+> Chúng tôi khuyên bạn sử dụng [notebook kèm theo](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) nếu bạn muốn chạy tình huống dưới đây. Bạn cũng có thể chỉ đọc theo khi chúng tôi cố gắng minh họa vấn đề mà hàm có thể giúp giải quyết.
 
-Hãy xem ví dụ minh họa vấn đề định dạng phản hồi:
+Hãy xem ví dụ minh họa vấn đề với định dạng phản hồi:
 
-Giả sử chúng ta muốn tạo một cơ sở dữ liệu về dữ liệu sinh viên để chúng ta có thể gợi ý khóa học phù hợp cho họ. Dưới đây chúng ta có hai mô tả về sinh viên rất giống nhau trong dữ liệu mà chúng chứa.
+Giả sử chúng ta muốn tạo một cơ sở dữ liệu về dữ liệu sinh viên để có thể gợi ý khóa học phù hợp cho họ. Dưới đây là hai mô tả về sinh viên rất giống nhau về dữ liệu chứa trong đó.
 
-1. Tạo một kết nối tới tài nguyên Azure OpenAI của chúng ta:
+1. Tạo kết nối đến tài nguyên Azure OpenAI của chúng ta:
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # API Phản hồi được phục vụ từ điểm cuối Azure OpenAI (Microsoft Foundry) v1
+   # nên chúng tôi hướng client OpenAI đến <your-endpoint>/openai/v1/.
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   Dưới đây là một số mã Python để cấu hình kết nối của chúng ta tới Azure OpenAI nơi chúng ta thiết lập `api_type`, `api_base`, `api_version` and `api_key`.
+   Dưới đây là một số mã Python để cấu hình kết nối của chúng ta tới Azure OpenAI. Vì dùng điểm cuối v1, chúng ta chỉ cần thiết lập `api_key` và `base_url` (không cần `api_version`).
 
-1. Creating two student descriptions using variables `student_1_description` and `student_2_description`.
+1. Tạo hai biến mô tả sinh viên với tên `student_1_description` và `student_2_description`.
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -85,9 +81,9 @@ Giả sử chúng ta muốn tạo một cơ sở dữ liệu về dữ liệu si
    student_2_description = "Michael Lee is a sophomore majoring in computer science at Stanford University. He has a 3.8 GPA. Michael is known for his programming skills and is an active member of the university's Robotics Club. He hopes to pursue a career in artificial intelligence after finishing his studies."
    ```
 
-   Chúng ta muốn gửi các mô tả sinh viên ở trên tới một LLM để phân tích dữ liệu. Dữ liệu này có thể được sử dụng trong ứng dụng của chúng ta và được gửi tới một API hoặc lưu trữ trong cơ sở dữ liệu.
+   Chúng ta muốn gửi các mô tả sinh viên trên đến LLM để phân tích dữ liệu. Dữ liệu này có thể được sử dụng trong ứng dụng và gửi đến API hoặc lưu vào cơ sở dữ liệu.
 
-1. Hãy tạo hai lời nhắc giống hệt nhau trong đó chúng ta hướng dẫn LLM về thông tin mà chúng ta quan tâm:
+1. Hãy tạo hai prompt giống hệt nhau mà trong đó chúng ta chỉ dẫn cho LLM biết thông tin nào quan tâm:
 
    ```python
    prompt1 = f'''
@@ -117,33 +113,35 @@ Giả sử chúng ta muốn tạo một cơ sở dữ liệu về dữ liệu si
    '''
    ```
 
-   Các lời nhắc ở trên hướng dẫn LLM trích xuất thông tin và trả lại phản hồi ở định dạng JSON.
+   Các prompt trên yêu cầu LLM trích xuất thông tin và trả về phản hồi ở định dạng JSON.
 
-1. Sau khi thiết lập các lời nhắc và kết nối tới Azure OpenAI, chúng ta sẽ gửi các lời nhắc tới LLM bằng cách sử dụng `openai.ChatCompletion`. We store the prompt in the `messages` variable and assign the role to `user`. Điều này để mô phỏng một tin nhắn từ người dùng được viết tới chatbot.
+1. Sau khi thiết lập prompt và kết nối Azure OpenAI, ta sẽ gửi prompt đến LLM sử dụng `client.responses.create`. Chúng ta lưu prompt trong biến `input` và gán vai trò `user`. Điều này nhằm bắt chước một thông điệp do người dùng viết cho chatbot.
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # phản hồi từ lời nhắc một
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # phản hồi từ lời nhắc hai
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-Giờ chúng ta có thể gửi cả hai yêu cầu tới LLM và kiểm tra phản hồi mà chúng ta nhận được bằng cách tìm nó như sau `openai_response1['choices'][0]['message']['content']`.
+Bây giờ ta có thể gửi cả hai yêu cầu đến LLM và xem xét phản hồi nhận được bằng cách tìm như sau `openai_response1.output_text`.
 
-1. Lastly, we can convert the response to JSON format by calling `json.loads`:
+1. Cuối cùng, chúng ta có thể chuyển phản hồi thành định dạng JSON bằng cách gọi `json.loads`:
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # Tải phản hồi dưới dạng đối tượng JSON
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
@@ -171,59 +169,60 @@ Giờ chúng ta có thể gửi cả hai yêu cầu tới LLM và kiểm tra ph�
    }
    ```
 
-   Mặc dù các lời nhắc giống nhau và các mô tả tương tự, chúng ta thấy các giá trị của `Grades` property formatted differently, as we can sometimes get the format `3.7` or `3.7 GPA` for example.
+   Mặc dù prompt giống nhau và mô tả cũng tương tự, nhưng ta thấy các giá trị của thuộc tính `Grades` được định dạng khác nhau, ví dụ có khi nhận được `3.7` hoặc `3.7 GPA`.
 
-   This result is because the LLM takes unstructured data in the form of the written prompt and returns also unstructured data. We need to have a structured format so that we know what to expect when storing or using this data
+   Kết quả này là do LLM nhận dữ liệu không có cấu trúc từ prompt viết tay và trả về cũng dữ liệu không có cấu trúc. Ta cần có định dạng cấu trúc để biết được gì sẽ nhận được khi lưu hoặc sử dụng dữ liệu.
 
-So how do we solve the formatting problem then? By using functional calling, we can make sure that we receive structured data back. When using function calling, the LLM does not actually call or run any functions. Instead, we create a structure for the LLM to follow for its responses. We then use those structured responses to know what function to run in our applications.
+Vậy làm sao để ta giải quyết vấn đề định dạng này? Bằng cách sử dụng gọi hàm, chúng ta có thể đảm bảo nhận được dữ liệu có cấu trúc. Khi dùng gọi hàm, LLM không thực sự gọi hoặc chạy hàm nào. Thay vào đó, ta tạo ra một cấu trúc để LLM tuân theo phản hồi của nó. Rồi dùng những phản hồi có cấu trúc đó để biết hàm nào cần chạy trong ứng dụng.
 
-![function flow](../../../translated_images/Function-Flow.01a723a374f79e5856d9915c39e16c59fa2a00c113698b22a28e616224f407e1.vi.png)
+![dòng chảy hàm](../../../translated_images/vi/Function-Flow.083875364af4f4bb.webp)
 
-We can then take what is returned from the function and send this back to the LLM. The LLM will then respond using natural language to answer the user's query.
+Ta có thể lấy dữ liệu trả về từ hàm và gửi lại cho LLM. LLM sẽ trả lời bằng ngôn ngữ tự nhiên để đáp lại truy vấn của người dùng.
 
-## Use Cases for using function calls
+## Các trường hợp sử dụng gọi hàm
 
-There are many different use cases where function calls can improve your app like:
+Có nhiều trường hợp khác nhau mà gọi hàm có thể cải thiện ứng dụng của bạn như:
 
-- **Calling External Tools**. Chatbots are great at providing answers to questions from users. By using function calling, the chatbots can use messages from users to complete certain tasks. For example, a student can ask the chatbot to "Send an email to my instructor saying I need more assistance with this subject". This can make a function call to `send_email(to: string, body: string)`
+- **Gọi công cụ bên ngoài**. Chatbot rất giỏi trong việc cung cấp câu trả lời cho các câu hỏi của người dùng. Bằng cách sử dụng gọi hàm, chatbot có thể dùng tin nhắn từ người dùng để hoàn thành một số nhiệm vụ. Ví dụ, sinh viên có thể yêu cầu chatbot "Gửi email cho giảng viên của tôi nói rằng tôi cần thêm trợ giúp với môn này". Chatbot có thể thực hiện gọi hàm `send_email(to: string, body: string)`
 
-- **Create API or Database Queries**. Users can find information using natural language that gets converted into a formatted query or API request. An example of this could be a teacher who requests "Who are the students that completed the last assignment" which could call a function named `get_completed(student_name: string, assignment: int, current_status: string)`
+- **Tạo truy vấn API hoặc cơ sở dữ liệu**. Người dùng có thể tìm thông tin dùng ngôn ngữ tự nhiên được chuyển đổi thành truy vấn hoặc yêu cầu API định dạng sẵn. Ví dụ một giáo viên hỏi "Ai là những học sinh đã hoàn thành bài tập cuối cùng" có thể gọi hàm `get_completed(student_name: string, assignment: int, current_status: string)`
 
-- **Creating Structured Data**. Users can take a block of text or CSV and use the LLM to extract important information from it. For example, a student can convert a Wikipedia article about peace agreements to create AI flashcards. This can be done by using a function called `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
+- **Tạo dữ liệu có cấu trúc**. Người dùng có thể lấy một đoạn văn bản hoặc CSV và dùng LLM để trích thông tin quan trọng. Ví dụ sinh viên chuyển đổi bài Wikipedia về các thỏa thuận hòa bình để tạo flashcard AI. Việc này có thể làm bằng gọi hàm `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)`
 
-## Creating Your First Function Call
+## Tạo Cuộc Gọi Hàm Đầu Tiên của Bạn
 
-The process of creating a function call includes 3 main steps:
+Quá trình tạo cuộc gọi hàm gồm 3 bước chính:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. **Gọi** API Responses với danh sách các hàm (công cụ) và tin nhắn người dùng.
+2. **Đọc** phản hồi của mô hình để thực hiện hành động tức chạy hàm hoặc gọi API.
+3. **Thực hiện** gọi tiếp theo đến API Responses với phản hồi từ hàm để dùng thông tin đó tạo phản hồi cho người dùng.
 
-![LLM Flow](../../../translated_images/LLM-Flow.7df9f166be50aa324705f2ccddc04a27cfc7b87e57b1fbe65eb534059a3b8b66.vi.png)
+![Dòng chảy LLM](../../../translated_images/vi/LLM-Flow.3285ed8caf4796d7.webp)
 
-### Step 1 - creating messages
+### Bước 1 - Tạo tin nhắn
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+Bước đầu là tạo một tin nhắn người dùng. Điều này có thể được gán động bằng cách lấy giá trị nhập văn bản hoặc bạn có thể gán giá trị ở đây. Nếu đây là lần đầu bạn làm việc với API Responses, ta cần định nghĩa `role` và `content` của tin nhắn.
 
-The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` và một câu hỏi ví dụ.
+`role` có thể là `system` (tạo quy tắc), `assistant` (mô hình) hoặc `user` (người dùng cuối). Đối với gọi hàm, ta gán là `user` và kèm theo câu hỏi mẫu.
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Bằng cách gán các vai trò khác nhau, rõ ràng hơn cho LLM nếu đó là hệ thống nói điều gì đó hay người dùng, điều này giúp xây dựng lịch sử cuộc trò chuyện mà LLM có thể phát triển.
+Việc gán các vai trò khác nhau giúp LLM rõ ràng hơn liệu đang là hệ thống nói hay người dùng nói, điều này giúp xây dựng lịch sử hội thoại mà LLM dựa vào đó.
 
-### Bước 2 - tạo các hàm
+### Bước 2 - tạo hàm
 
-Tiếp theo, chúng ta sẽ định nghĩa một hàm và các tham số của hàm đó. Chúng ta sẽ chỉ sử dụng một hàm ở đây gọi là `search_courses` but you can create multiple functions.
+Tiếp theo, ta sẽ định nghĩa một hàm và các tham số của hàm đó. Ta chỉ dùng một hàm duy nhất là `search_courses` nhưng bạn có thể tạo nhiều hàm.
 
-> **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
+> **Quan trọng**: Các hàm được đưa vào tin nhắn hệ thống gửi đến LLM và sẽ tính vào số token khả dụng của bạn.
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters`:
+Dưới đây, ta tạo một mảng các hàm. Mỗi phần tử là một công cụ theo định dạng phẳng API Responses, với thuộc tính `type`, `name`, `description` và `parameters`:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -250,75 +249,76 @@ functions = [
 ]
 ```
 
-Hãy mô tả chi tiết hơn từng trường hợp hàm bên dưới:
+Hãy mô tả từng phần tử hàm chi tiết bên dưới:
 
-- `name` - The name of the function that we want to have called.
-- `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
-  1.  `type` - The data type of the properties will be stored in.
-  1.  `properties` - List of the specific values that the model will use for its response
-      1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
-      1. `type` - The data type of this property, for example, `string`.
-      1. `description` - Description of the specific property.
+- `name` - Tên hàm bạn muốn gọi.
+- `description` - Mô tả cách thức hoạt động của hàm. Ở đây cần rõ ràng và cụ thể.
+- `parameters` - Danh sách các giá trị và định dạng bạn muốn mô hình trả về trong phản hồi của nó. Mảng parameters gồm các phần tử có các thuộc tính sau:
+  1. `type` - Kiểu dữ liệu mà thuộc tính sẽ được lưu.
+  1. `properties` - Danh sách giá trị cụ thể mà mô hình sẽ dùng cho phản hồi.
+      1. `name` - Khóa là tên thuộc tính mà mô hình sẽ dùng trong phản hồi có cấu trúc, ví dụ như `product`.
+      1. `type` - Kiểu dữ liệu của thuộc tính, ví dụ `string`.
+      1. `description` - Mô tả thuộc tính cụ thể.
 
-There's also an optional property `required` - required property for the function call to be completed.
+Cũng có thuộc tính tùy chọn `required` - thuộc tính bắt buộc để cuộc gọi hàm hoàn thành.
 
-### Step 3 - Making the function call
+### Bước 3 - Thực hiện cuộc gọi hàm
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+Sau khi định nghĩa hàm, ta cần đưa nó vào trong cuộc gọi API Responses. Ta làm điều này bằng cách thêm `tools` vào yêu cầu. Trong trường hợp này `tools=functions`.
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+Ngoài ra có tùy chọn `tool_choice` là `auto`. Có nghĩa ta để cho LLM quyết định hàm nào nên được gọi dựa trên tin nhắn người dùng thay vì gán cố định.
 
-Here's some code below where we call `ChatCompletion.create`, note how we set `functions=functions` and `function_call="auto"` và do đó cho LLM lựa chọn khi nào gọi các hàm mà chúng ta cung cấp cho nó:
+Dưới đây là đoạn mã gọi `client.responses.create`, chú ý ta đặt `tools=functions` và `tool_choice="auto"` để cho phép LLM chọn hàm khi nào gọi:
 
 ```python
-response = client.chat.completions.create(model=deployment,
-                                        messages=messages,
-                                        functions=functions,
-                                        function_call="auto")
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-print(response.choices[0].message)
+print(response.output)
 ```
 
-Phản hồi trở về bây giờ trông như thế này:
+Phản hồi thu về bây giờ có thêm mục `function_call` trong `response.output` trông như sau:
 
 ```json
 {
-  "role": "assistant",
-  "function_call": {
-    "name": "search_courses",
-    "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
-  }
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
 }
 ```
 
-Ở đây chúng ta có thể thấy cách hàm `search_courses` was called and with what arguments, as listed in the `arguments` property in the JSON response.
+Ở đây ta thấy hàm `search_courses` được gọi với các tham số liệt kê trong thuộc tính `arguments` của phản hồi JSON.
 
-The conclusion the LLM was able to find the data to fit the arguments of the function as it was extracting it from the value provided to the `messages` parameter in the chat completion call. Below is a reminder of the `messages` giá trị:
+Kết luận là LLM đã tìm được dữ liệu phù hợp các đối số của hàm khi lấy ra từ giá trị truyền vào tham số `input` trong gọi API Responses. Dưới đây là nhắc lại giá trị `messages`:
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Như bạn có thể thấy, `student`, `Azure` and `beginner` was extracted from `messages` and set as input to the function. Using functions this way is a great way to extract information from a prompt but also to provide structure to the LLM and have reusable functionality.
+Như bạn thấy, `student`, `Azure` và `beginner` được trích ra từ `messages` và đặt làm đầu vào cho hàm. Dùng hàm theo cách này giúp trích xuất thông tin từ prompt đồng thời tạo cấu trúc cho LLM và có thể tái sử dụng tính năng.
 
-Next, we need to see how we can use this in our app.
+Tiếp theo, chúng ta cần xem làm sao dùng điều này trong ứng dụng.
 
-## Integrating Function Calls into an Application
+## Tích hợp Cuộc Gọi Hàm vào Ứng dụng
 
-After we have tested the formatted response from the LLM, we can now integrate this into an application.
+Sau khi đã thử phản hồi có cấu trúc từ LLM, ta có thể tích hợp vào ứng dụng.
 
-### Managing the flow
+### Quản lý luồng xử lý
 
-To integrate this into our application, let's take the following steps:
+Để tích hợp vào ứng dụng ta thực hiện các bước sau:
 
-1. First, let's make the call to the OpenAI services and store the message in a variable called `response_message`.
+1. Trước tiên, gọi dịch vụ OpenAI và trích xuất phần tử gọi hàm từ phản hồi `output`.
 
    ```python
-   response_message = response.choices[0].message
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
    ```
 
-1. Giờ chúng ta sẽ định nghĩa hàm sẽ gọi API Microsoft Learn để lấy danh sách các khóa học:
+1. Bây giờ định nghĩa hàm sẽ gọi Microsoft Learn API để lấy danh sách khóa học:
 
    ```python
    import requests
@@ -340,65 +340,57 @@ To integrate this into our application, let's take the following steps:
      return str(results)
    ```
 
-   Lưu ý cách chúng ta tạo một hàm Python thực tế ánh xạ tới các tên hàm đã được giới thiệu trong `functions` variable. We're also making real external API calls to fetch the data we need. In this case, we go against the Microsoft Learn API to search for training modules.
+   Lưu ý ta đang tạo hàm Python thực tế tương ứng với tên hàm trong biến `functions`. Chúng ta cũng gọi API bên ngoài thực tế để lấy dữ liệu cần. Trong trường hợp này, ta gọi API Microsoft Learn để tìm module đào tạo.
 
-Ok, so we created `functions` variables and a corresponding Python function, how do we tell the LLM how to map these two together so our Python function is called?
+Vậy, ta đã có biến `functions` và hàm Python tương ứng, làm sao ta nói LLM kết nối hai cái này để gọi hàm Python?
 
-1. To see if we need to call a Python function, we need to look into the LLM response and see if `function_call` là một phần của nó và gọi hàm đã chỉ định. Dưới đây là cách bạn có thể thực hiện kiểm tra được đề cập:
+1. Để biết có cần gọi hàm Python hay không, ta xem trong phản hồi LLM có phần tử `function_call` không và gọi hàm được chỉ ra. Dưới đây là cách kiểm tra:
 
    ```python
-   # Check if the model wants to call a function
-   if response_message.function_call.name:
-    print("Recommended Function call:")
-    print(response_message.function_call.name)
-    print()
+   # Kiểm tra xem mô hình có muốn gọi một hàm không
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
 
-    # Call the function.
-    function_name = response_message.function_call.name
+     # Gọi hàm đó.
+     function_name = tool_call.name
 
-    available_functions = {
-            "search_courses": search_courses,
-    }
-    function_to_call = available_functions[function_name]
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
 
-    function_args = json.loads(response_message.function_call.arguments)
-    function_response = function_to_call(**function_args)
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
 
-    print("Output of function call:")
-    print(function_response)
-    print(type(function_response))
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
 
-
-    # Add the assistant response and function response to the messages
-    messages.append( # adding assistant response to messages
-        {
-            "role": response_message.role,
-            "function_call": {
-                "name": function_name,
-                "arguments": response_message.function_call.arguments,
-            },
-            "content": None
-        }
-    )
-    messages.append( # adding function response to messages
-        {
-            "role": "function",
-            "name": function_name,
-            "content":function_response,
-        }
-    )
+     # Thêm cuộc gọi hàm và kết quả của nó trở lại cuộc trò chuyện.
+     # Mục function_call của mô hình phải được thêm vào trước phần đầu ra của nó.
+     messages.append(tool_call)  # mục function_call của trợ lý
+     messages.append( # kết quả của hàm
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
    ```
 
-   Ba dòng này, đảm bảo chúng ta trích xuất tên hàm, các tham số và thực hiện cuộc gọi:
+   Ba dòng này đảm bảo ta lấy được tên hàm, tham số và gọi hàm:
 
    ```python
    function_to_call = available_functions[function_name]
 
-   function_args = json.loads(response_message.function_call.arguments)
+   function_args = json.loads(tool_call.arguments)
    function_response = function_to_call(**function_args)
    ```
 
-   Dưới đây là kết quả đầu ra từ việc chạy mã của chúng ta:
+   Dưới đây là kết quả chạy mã:
 
    **Kết quả**
 
@@ -419,50 +411,60 @@ Ok, so we created `functions` variables and a corresponding Python function, how
    <class 'str'>
    ```
 
-1. Giờ chúng ta sẽ gửi tin nhắn đã cập nhật, `messages` tới LLM để chúng ta có thể nhận được phản hồi ngôn ngữ tự nhiên thay vì phản hồi định dạng JSON API.
+1. Giờ ta sẽ gửi lại tin nhắn cập nhật `messages` cho LLM để nhận phản hồi bằng ngôn ngữ tự nhiên thay vì JSON dạng API.
 
    ```python
    print("Messages in next request:")
    print(messages)
    print()
 
-   second_response = client.chat.completions.create(
-      messages=messages,
+   second_response = client.responses.create(
+      input=messages,
       model=deployment,
-      function_call="auto",
-      functions=functions,
-      temperature=0
-         )  # get a new response from GPT where it can see the function response
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # lấy phản hồi mới từ mô hình nơi nó có thể thấy phản hồi của hàm
 
 
-   print(second_response.choices[0].message)
+   print(second_response.output_text)
    ```
 
    **Kết quả**
 
-   ```python
-   {
-     "role": "assistant",
-     "content": "I found some good courses for beginner students to learn Azure:\n\n1. [Describe concepts of cryptography] (https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)\n2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)\n3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)\n4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)\n5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)\n\nYou can click on the links to access the courses."
-   }
+   ```text
+   I found some good courses for beginner students to learn Azure:
 
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
    ```
 
 ## Bài tập
 
-Để tiếp tục học tập về Gọi Hàm Azure OpenAI bạn có thể xây dựng:
+Để tiếp tục học Gọi Hàm Azure OpenAI bạn có thể xây dựng:
 
-- Thêm các tham số của hàm có thể giúp người học tìm thấy nhiều khóa học hơn.
+- Thêm các tham số cho hàm có thể giúp người học tìm thêm nhiều khóa học hơn.
+
 - Tạo một cuộc gọi hàm khác lấy thêm thông tin từ người học như ngôn ngữ mẹ đẻ của họ
 - Tạo xử lý lỗi khi cuộc gọi hàm và/hoặc cuộc gọi API không trả về khóa học phù hợp nào
 
-Gợi ý: Theo dõi trang [tài liệu tham khảo API Learn](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) để xem cách và nơi dữ liệu này có sẵn.
+Gợi ý: Theo dõi trang [Tài liệu tham khảo API Learn](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) để xem cách thức và nơi dữ liệu này có sẵn.
 
 ## Làm tốt lắm! Tiếp tục hành trình
 
-Sau khi hoàn thành bài học này, hãy xem bộ sưu tập [Học AI Tạo Sinh](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) của chúng tôi để tiếp tục nâng cao kiến thức về AI Tạo Sinh của bạn!
+Sau khi hoàn thành bài học này, hãy xem bộ sưu tập [Học Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) của chúng tôi để tiếp tục nâng cao kiến thức Generative AI của bạn!
 
-Hãy tiến tới Bài học 12, nơi chúng ta sẽ xem xét cách [thiết kế UX cho các ứng dụng AI](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Hãy chuyển sang Bài học 12, nơi chúng ta sẽ xem cách [thiết kế UX cho ứng dụng AI](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
-**Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sự không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

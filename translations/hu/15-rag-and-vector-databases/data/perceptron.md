@@ -1,52 +1,43 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "59021c5f419d3feda19075910a74280a",
-  "translation_date": "2025-05-20T06:42:38+00:00",
-  "source_file": "15-rag-and-vector-databases/data/perceptron.md",
-  "language_code": "hu"
-}
--->
 # Bevezetés a neurális hálózatokba: Perceptron
 
-Az egyik első kísérlet egy modern neurális hálózat megvalósítására Frank Rosenblatt nevéhez fűződik, aki a Cornell Aeronautical Laboratoryban dolgozott 1957-ben. Ez egy hardveres megvalósítás volt, amit "Mark-1"-nek hívtak, és primitív geometriai alakzatok, például háromszögek, négyzetek és körök felismerésére tervezték.
+Az egyik első kísérlet arra, hogy valami hasonlót hozzanak létre a modern neurális hálózathoz, Frank Rosenblatt nevéhez fűződik, aki 1957-ben a Cornell Aeronautical Laboratory-nál dolgozott. Ez egy hardveres megvalósítás volt, amit "Mark-1"-nek neveztek, és primitív geometriai alakzatok, például háromszögek, négyzetek és körök felismerésére tervezték.
 
 |      |      |
 |--------------|-----------|
-|<img src='images/Rosenblatt-wikipedia.jpg' alt='Frank Rosenblatt'/> | <img src='images/Mark_I_perceptron_wikipedia.jpg' alt='A Mark 1 Perceptron' />|
+|<img src='../../../../translated_images/hu/Rosenblatt-wikipedia.1d205667acda28c0.webp' alt='Frank Rosenblatt'/> | <img src='../../../../translated_images/hu/Mark_I_perceptron_wikipedia.434e46ca39e2be80.webp' alt='The Mark 1 Perceptron' />|
 
 > Képek a Wikipédiáról
 
-A bemeneti kép egy 20x20 fotocella mátrixként volt reprezentálva, így a neurális hálózatnak 400 bemenete és egy bináris kimenete volt. Egy egyszerű hálózat egy neuront tartalmazott, amit **küszöb logikai egységnek** is neveztek. A neurális hálózat súlyai potenciométerekként működtek, amelyek kézi beállítást igényeltek a tanulási fázis során.
+A bemeneti képet egy 20x20-as fotocella-rács reprezentálta, így a neurális hálózatnak 400 bemenete és egy bináris kimenete volt. Egy egyszerű hálózat egyetlen neuront tartalmazott, amit **küszöblogikai egységnek** is neveznek. A neurális hálózat súlyai potméterekhez hasonlóan működtek, amelyeket a tanulási fázis során kézzel kellett beállítani.
 
-> ✅ A potenciométer egy olyan eszköz, amely lehetővé teszi a felhasználó számára, hogy beállítsa egy áramkör ellenállását.
+> ✅ A potméter egy olyan eszköz, amely lehetővé teszi a felhasználó számára az áramkör ellenállásának állítását.
 
-> A New York Times abban az időben így írt a perceptronról: *az elektronikus számítógép embriója, amelyről [a Haditengerészet] azt várja, hogy képes lesz járni, beszélni, látni, írni, reprodukálni önmagát és tudatában lenni a létezésének.*
+> A New York Times akkoriban így írt a perceptronról: *az elektronikus számítógép embriója, amelyről a [Haditengerészet] azt várja, hogy képes lesz járni, beszélni, látni, írni, önmagát reprodukálni és tudatában lenni a létezésének.*
 
 ## Perceptron modell
 
-Tegyük fel, hogy N jellemzőnk van a modellünkben, ebben az esetben a bemeneti vektor egy N méretű vektor lenne. A perceptron egy **bináris osztályozási** modell, azaz két osztályt tud megkülönböztetni a bemeneti adatok közül. Feltételezzük, hogy minden bemeneti vektor x esetén a perceptronunk kimenete +1 vagy -1 lesz, az osztálytól függően. A kimenet a következő képlet alapján kerül kiszámításra:
+Tegyük fel, hogy a modellünkben N jellemző van, ekkor a bemeneti vektor mérete N lesz. A perceptron egy **bináris osztályozó** modell, vagyis képes megkülönböztetni két osztályba tartozó bemeneti adatot. Feltételezzük, hogy minden bemeneti vektor x esetén a perceptron kimenete vagy +1, vagy -1 lesz, az osztálytól függően. A kimenetet a következő képlettel számítjuk ki:
 
 y(x) = f(w<sup>T</sup>x)
 
-ahol f egy lépés aktivációs függvény
+ahol f egy lépcsős aktivációs függvény
 
 ## A perceptron tanítása
 
-A perceptron tanításához meg kell találnunk egy súlyvektort w, amely a legtöbb értéket helyesen osztályozza, azaz a legkisebb **hibát** eredményezi. Ez a hiba a **perceptron kritérium** alapján van definiálva a következő módon:
+A perceptron tanításához meg kell találnunk egy w súlyvektort, amely a legtöbb értéket helyesen osztályozza, vagyis a legkisebb **hibát** eredményezi. Ezt a hibát a **perceptron kritérium** a következőképpen definiálja:
 
 E(w) = -∑w<sup>T</sup>x<sub>i</sub>t<sub>i</sub>
 
 ahol:
 
-* az összeg azoknál a tanulási adatpontoknál i van véve, amelyek helytelen osztályozást eredményeznek
-* x<sub>i</sub> a bemeneti adat, és t<sub>i</sub> vagy -1 vagy +1 a negatív és pozitív példák esetén.
+* az összeg azokból a tanító adatpontokból i származik, amelyek helytelen osztályozást eredményeznek
+* x<sub>i</sub> a bemeneti adat, t<sub>i</sub> pedig -1 vagy +1 a negatív és pozitív példák esetén.
 
-Ezt a kritériumot a súlyok w függvényének tekintjük, és minimalizálnunk kell. Gyakran egy **gradiens csökkenés** nevű módszert alkalmaznak, amely során néhány kezdeti súllyal w<sup>(0)</sup> kezdünk, majd minden lépésnél frissítjük a súlyokat a következő képlet szerint:
+Ezt a kritériumot a súlyok w függvényének tekintjük, és minimalizálni szeretnénk. Gyakran alkalmazzák a **gradiens csökkenés** nevű módszert, amely során egy kezdeti súlyvektorral w<sup>(0)</sup> indulunk, majd minden lépésben a súlyokat a következő képlettel frissítjük:
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> - η∇E(w)
 
-Itt η az úgynevezett **tanulási ráta**, és ∇E(w) jelöli az E **gradiensét**. Miután kiszámítjuk a gradienset, a következőképpen végzünk:
+Itt η az úgynevezett **tanulási ráta**, ∇E(w) pedig E gradiensét jelöli. A gradiens kiszámítása után a képlet a következő lesz:
 
 w<sup>(t+1)</sup> = w<sup>(t)</sup> + ∑ηx<sub>i</sub>t<sub>i</sub>
 
@@ -72,26 +63,26 @@ def train(positive_examples, negative_examples, num_iterations = 100, eta = 1):
     return weights
 ```
 
-## Következtetés
+## Összefoglalás
 
-Ebben a leckében megismerkedtél a perceptronnal, amely egy bináris osztályozási modell, és megtanultad, hogyan lehet tanítani egy súlyvektor használatával.
+Ebben a leckében megismerted a perceptront, amely egy bináris osztályozó modell, és azt, hogyan tanítható egy súlyvektor segítségével.
 
 ## 🚀 Kihívás
 
-Ha szeretnéd kipróbálni saját perceptron létrehozását, próbáld ki ezt a labort a Microsoft Learn-en, amely az Azure ML tervezőt használja.
+Ha szeretnéd kipróbálni a saját perceptronod megépítését, próbáld ki ezt a Microsoft Learn laboratóriumot, amely az Azure ML designer-t használja.
 
 ## Áttekintés és önálló tanulás
 
-Ha szeretnéd látni, hogyan használhatjuk a perceptront játékos problémák és valós életbeli problémák megoldására, és folytatni a tanulást - menj a Perceptron jegyzetfüzethez.
+Ahhoz, hogy megtudd, hogyan használhatjuk a perceptront játékos problémák és valós életbeli feladatok megoldására, és hogy tovább tanulhass, látogass el a Perceptron jegyzetfüzethez.
 
-Itt van egy érdekes cikk a perceptronokról is.
+Itt egy érdekes cikk is a perceptronokról.
 
 ## Feladat
 
-Ebben a leckében megvalósítottunk egy perceptront bináris osztályozási feladathoz, és használtuk két kézzel írott számjegy közötti osztályozásra. Ebben a laborban arra kérünk, hogy teljesen oldd meg a számjegyosztályozás problémáját, azaz határozd meg, melyik számjegy valószínűleg megfelel egy adott képnek.
+Ebben a leckében egy bináris osztályozási feladatra implementáltunk egy perceptront, és két kézzel írt számjegy osztályozására használtuk. Ebben a laborban azt a feladatot kell megoldanod, hogy teljes egészében osztályozd a számjegyeket, vagyis határozd meg, melyik számjegy valószínűleg melyik képen szerepel.
 
-* Útmutatások
+* Utasítások
 * Jegyzetfüzet
 
-**Felelősség kizárása**:  
-Ez a dokumentum a [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén professzionális emberi fordítás ajánlott. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félremagyarázásokért.
+**Jogi nyilatkozat**:  
+Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén professzionális emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.

@@ -1,27 +1,21 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4c2a0b0c738b649ef049fb99a23be661",
-  "translation_date": "2025-05-20T11:11:07+00:00",
-  "source_file": "21-meta/README.md",
-  "language_code": "tr"
-}
--->
-# Meta Ailesi Modelleriyle İnşa Etme
+# Meta Ailesi Modelleri ile İnşa Etmek
 
 ## Giriş
 
-Bu derste ele alınacak konular:
+Bu ders şunları kapsayacak:
 
-- İki ana Meta ailesi modeli - Llama 3.1 ve Llama 3.2'yi keşfetme
-- Her modelin kullanım alanları ve senaryolarını anlama
-- Her modelin benzersiz özelliklerini gösteren kod örneği
+- İki ana Meta aile modeli - Llama 3.1 ve Llama 3.2'yi keşfetmek
+- Her modelin kullanım senaryolarını anlamak
+- Her modelin benzersiz özelliklerini göstermek için kod örneği
 
-## Meta Ailesi Modelleri
 
-Bu derste Meta ailesinden veya "Llama Sürüsü"nden 2 modeli - Llama 3.1 ve Llama 3.2 - keşfedeceğiz.
+## Meta Aile Modelleri
 
-Bu modeller farklı varyantlarda gelir ve GitHub Model pazarında mevcuttur. AI modelleriyle [prototip oluşturma](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst) için GitHub Modellerini kullanma hakkında daha fazla bilgi burada.
+Bu derste, Meta ailesinden veya "Llama Sürüsü"nden 2 modeli keşfedeceğiz - Llama 3.1 ve Llama 3.2.
+
+Bu modeller farklı varyantlarda gelir ve [Microsoft Foundry Modelleri kataloğunda](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) mevcuttur.
+
+> **Not:** GitHub Modelleri Temmuz 2026 sonunda kullanımdan kaldırılacaktır. AI modelleriyle prototip oluşturmak için [Microsoft Foundry Modelleri](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) hakkında daha fazla bilgi burada bulunmaktadır.
 
 Model Varyantları:
 - Llama 3.1 - 70B Instruct
@@ -29,39 +23,39 @@ Model Varyantları:
 - Llama 3.2 - 11B Vision Instruct
 - Llama 3.2 - 90B Vision Instruct
 
-*Not: Llama 3 de GitHub Modellerinde mevcuttur ancak bu derste ele alınmayacaktır*
+*Not: Llama 3, Microsoft Foundry Modellerinde de mevcuttur ancak bu derste ele alınmayacaktır*
 
 ## Llama 3.1
 
-405 Milyar Parametre ile Llama 3.1, açık kaynak LLM kategorisine girer.
+405 Milyar Parametre ile Llama 3.1 açık kaynak LLM kategorisine girer.
 
-Model, önceki Llama 3 sürümüne şu şekilde bir yükseltme sunar:
+Model, önceki sürüm Llama 3'e şu yönden geliştirmeler sunar:
 
-- Daha geniş bağlam penceresi - 128k token vs 8k token
-- Daha büyük Maksimum Çıktı Tokenları - 4096 vs 2048
-- Daha iyi Çok Dilli Destek - eğitim tokenlarının artışı nedeniyle
+- Daha büyük bağlam penceresi - 128k token vs 8k token
+- Daha büyük Maksimum Çıktı Tokenı - 4096 vs 2048
+- Daha iyi Çok-dilli Destek - eğitim token sayısındaki artış sayesinde
 
-Bu özellikler, Llama 3.1'in GenAI uygulamaları oluştururken daha karmaşık kullanım senaryolarını ele almasını sağlar:
-- Yerel Fonksiyon Çağrısı - LLM iş akışının dışında harici araçları ve fonksiyonları çağırma yeteneği
-- Daha İyi RAG Performansı - daha yüksek bağlam penceresi nedeniyle
-- Sentetik Veri Üretimi - ince ayar gibi görevler için etkili veri oluşturma yeteneği
+Bunlar Llama 3.1'in GenAI uygulamaları geliştirirken daha karmaşık kullanım senaryolarını ele almasını sağlar:
+- Yerel Fonksiyon Çağırma - LLM iş akışının dışındaki harici araçları ve fonksiyonları çağırabilme yeteneği
+- Daha İyi RAG Performansı - daha yüksek bağlam penceresi sayesinde
+- Sentetik Veri Üretimi - ince ayar gibi görevler için etkili veri oluşturabilme yeteneği
 
-### Yerel Fonksiyon Çağrısı
+### Yerel Fonksiyon Çağırma
 
-Llama 3.1, fonksiyon veya araç çağrıları yapmada daha etkili olacak şekilde ince ayar yapılmıştır. Ayrıca, kullanıcının isteğine göre kullanılacak iki yerleşik araç vardır. Bu araçlar:
+Llama 3.1, fonksiyon veya araç çağrılarında daha etkili olmak üzere ince ayar yapılmıştır. Ayrıca model, kullanıcıdan gelen isteme bağlı olarak kullanılması gereken iki yerleşik araca sahiptir. Bu araçlar:
 
 - **Brave Search** - Web araması yaparak hava durumu gibi güncel bilgileri almak için kullanılabilir
-- **Wolfram Alpha** - Daha karmaşık matematiksel hesaplamalar için kullanılabilir, böylece kendi fonksiyonlarınızı yazmanıza gerek kalmaz.
+- **Wolfram Alpha** - Kendi fonksiyonlarınızı yazmanıza gerek kalmadan daha karmaşık matematiksel hesaplamalar için kullanılabilir.
 
-Ayrıca LLM'in çağırabileceği kendi özel araçlarınızı da oluşturabilirsiniz.
+Kendi özel araçlarınızı da oluşturup LLM'in çağırmasını sağlayabilirsiniz.
 
 Aşağıdaki kod örneğinde:
 
-- Sisteme mevcut araçları (brave_search, wolfram_alpha) tanımlarız.
-- Belirli bir şehirdeki hava durumu hakkında bir kullanıcı isteği göndeririz.
-- LLM, Brave Search aracını çağırarak şu şekilde yanıt verecektir `<|python_tag|>brave_search.call(query="Stockholm weather")`
+- Sistem isteminde mevcut araçlar (brave_search, wolfram_alpha) tanımlanır.
+- Belirli bir şehirdeki hava durumunu soran kullanıcı istemi gönderilir.
+- LLM, Brave Search aracını çağıran şu şekilde yanıt verir: `<|python_tag|>brave_search.call(query="Stockholm weather")`
 
-*Not: Bu örnek sadece araç çağrısı yapar, sonuçları almak isterseniz, Brave API sayfasında ücretsiz bir hesap oluşturmanız ve fonksiyonu tanımlamanız gerekecektir*
+*Not: Bu örnek sadece araç çağrısı yapar, sonuçları almak isterseniz Brave API sayfasında ücretsiz hesap oluşturmalı ve fonksiyonun kendisini tanımlamalısınız.*
 
 ```python 
 import os
@@ -69,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Bunları Microsoft Foundry projenizin "Genel Bakış" sayfasından alın
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -103,15 +98,16 @@ print(response.choices[0].message.content)
 
 ## Llama 3.2
 
-Bir LLM olmasına rağmen, Llama 3.1'in bir sınırlaması çoklu modluluk eksikliğidir. Yani, farklı türdeki girdileri, örneğin resimleri istem olarak kullanma ve yanıt sağlama yeteneği. Bu yetenek, Llama 3.2'nin ana özelliklerinden biridir. Bu özellikler ayrıca şunları içerir:
+Llama 3.1 bir LLM olmasına rağmen, bir sınırlama olarak multimodalite desteği yoktur. Yani, görüntü gibi farklı giriş türlerini istem olarak kullanıp yanıt verme yeteneği yoktur. Bu yetenek Llama 3.2'nin ana özelliklerinden biridir. Bu özellikler ayrıca şunları içerir:
 
-- Çoklu Modluluk - hem metin hem de görüntü istemlerini değerlendirme yeteneği
-- Küçük ve Orta boyut varyasyonları (11B ve 90B) - bu, esnek dağıtım seçenekleri sunar,
-- Yalnızca metin varyasyonları (1B ve 3B) - bu, modelin uç / mobil cihazlarda dağıtılmasını sağlar ve düşük gecikme süresi sunar
+- Multimodalite - hem metin hem de görüntü istemlerini değerlendirebilme kabiliyeti
+- Küçük ve Orta boy varyantlar (11B ve 90B) - esnek dağıtım seçenekleri sağlar
+- Sadece metin varyantları (1B ve 3B) - modelin uç / mobil cihazlarda dağıtılmasına olanak verir ve düşük gecikme sunar
 
-Çoklu modluluk desteği, açık kaynak modeller dünyasında büyük bir adımı temsil eder. Aşağıdaki kod örneği, hem bir görüntü hem de metin istemi alarak Llama 3.2 90B'den görüntünün analizini alır.
+Multimodal destek, açık kaynak modeller dünyasında büyük bir adımdır. Aşağıdaki kod örneği hem görüntü hem de metin istemi alarak Llama 3.2 90B tarafından görüntü analizi yapmaktadır.
 
-### Llama 3.2 ile Çoklu Modluluk Desteği
+
+### Llama 3.2 ile Multimodal Destek
 
 ```python 
 import os
@@ -126,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Bunları Microsoft Foundry projenizin "Genel Bakış" sayfasından alın
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -158,9 +155,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## Öğrenme burada bitmiyor, Yolculuğa devam edin
+## Öğrenme burada bitmiyor, yolculuğa devam edin
 
-Bu dersi tamamladıktan sonra, Generative AI bilginizi geliştirmeye devam etmek için [Generative AI Öğrenme koleksiyonumuzu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) inceleyin!
+Bu dersi tamamladıktan sonra, [Üretken AI Öğrenme koleksiyonumuzu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) inceleyerek Üretken AI bilginizi geliştirmeye devam edin!
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından doğabilecek yanlış anlama veya yanlış yorumlamalardan sorumlu değiliz.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

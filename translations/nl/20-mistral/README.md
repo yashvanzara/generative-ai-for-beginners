@@ -1,48 +1,42 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "4bd0fafda5d66cd9d60f1ebc7820415e",
-  "translation_date": "2025-05-20T10:59:35+00:00",
-  "source_file": "20-mistral/README.md",
-  "language_code": "nl"
-}
--->
-# Bouwen met Mistral Modellen
+# Bouwen met Mistral-modellen 
 
-## Introductie
+## Introductie 
 
-Deze les behandelt:
-- Het verkennen van de verschillende Mistral Modellen
-- Begrijpen van de gebruiksscenario's voor elk model
-- Codevoorbeelden tonen de unieke kenmerken van elk model.
+Deze les behandelt: 
+- Het verkennen van de verschillende Mistral-modellen 
+- Het begrijpen van de use-cases en scenario's voor elk model 
+- Het verkennen van codevoorbeelden die de unieke eigenschappen van elk model laten zien. 
 
-## De Mistral Modellen
+## De Mistral-modellen 
 
-In deze les zullen we 3 verschillende Mistral modellen verkennen: **Mistral Large**, **Mistral Small** en **Mistral Nemo**.
+In deze les verkennen we 3 verschillende Mistral-modellen: 
+**Mistral Large**, **Mistral Small** en **Mistral Nemo**. 
 
-Elk van deze modellen is gratis beschikbaar op de Github Model marketplace. De code in dit notebook zal deze modellen gebruiken om de code uit te voeren. Hier zijn meer details over het gebruik van Github Models om te [prototypen met AI modellen](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+Elk van deze modellen is gratis beschikbaar op [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst). De code in deze notebook gebruikt deze modellen om de code uit te voeren.
+
+> **Opmerking:** GitHub Models wordt met eind juli 2026 uitgefaseerd. Hier zijn meer details over het gebruik van [Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) om te prototypen met AI-modellen. 
+
 
 ## Mistral Large 2 (2407)
+Mistral Large 2 is momenteel het vlaggenschipmodel van Mistral en is ontworpen voor zakelijk gebruik. 
 
-Mistral Large 2 is momenteel het vlaggenschipmodel van Mistral en is ontworpen voor zakelijk gebruik.
+Dit model is een upgrade van het oorspronkelijke Mistral Large door het bieden van 
+-  Groter contextvenster - 128k vs 32k 
+-  Betere prestaties bij wiskunde- en codeertaken - 76,9% gemiddelde nauwkeurigheid versus 60,4% 
+-  Verbeterde meertalige prestaties - talen omvatten: Engels, Frans, Duits, Spaans, Italiaans, Portugees, Nederlands, Russisch, Chinees, Japans, Koreaans, Arabisch en Hindi.
 
-Het model is een upgrade van de originele Mistral Large en biedt:
-- Groter Contextvenster - 128k vs 32k
-- Betere prestaties bij Wiskunde en Coderingstaken - 76.9% gemiddelde nauwkeurigheid vs 60.4%
-- Verbeterde meertalige prestaties - talen zijn onder andere: Engels, Frans, Duits, Spaans, Italiaans, Portugees, Nederlands, Russisch, Chinees, Japans, Koreaans, Arabisch en Hindi.
-
-Met deze kenmerken blinkt Mistral Large uit in:
+Met deze functies blinkt Mistral Large uit in 
 - *Retrieval Augmented Generation (RAG)* - dankzij het grotere contextvenster
-- *Functie Aanroepen* - dit model heeft native functieaanroepen die integratie met externe tools en API's mogelijk maken. Deze oproepen kunnen zowel parallel als opeenvolgend worden uitgevoerd.
-- *Codegeneratie* - dit model blinkt uit in Python, Java, TypeScript en C++ generatie.
+- *Function Calling* - dit model ondersteunt native function calling, wat integratie met externe tools en API's mogelijk maakt. Deze aanroepen kunnen zowel parallel als achtereenvolgens worden gedaan. 
+- *Codegeneratie* - dit model excelleert in het genereren van Python, Java, TypeScript en C++. 
 
-### RAG Voorbeeld met Mistral Large 2
+### RAG-voorbeeld met Mistral Large 2 
 
-In dit voorbeeld gebruiken we Mistral Large 2 om een RAG-patroon uit te voeren over een tekstdocument. De vraag is in het Koreaans geschreven en vraagt naar de activiteiten van de auteur voor de universiteit.
+In dit voorbeeld gebruiken we Mistral Large 2 om een RAG-patroon toe te passen op een tekstdocument. De vraag is geschreven in het Koreaans en gaat over de activiteiten van de auteur voordat hij/zij naar de universiteit ging. 
 
-Het gebruikt het Cohere Embeddings Model om embeddings van het tekstdocument en de vraag te maken. Voor dit voorbeeld gebruikt het het faiss Python-pakket als een vectorstore.
+Het gebruikt het Cohere Embeddings Model om embeddings van het tekstdocument en ook van de vraag te maken. Voor dit voorbeeld gebruikt het de faiss Python-package als vector store. 
 
-De prompt die naar het Mistral model wordt gestuurd, bevat zowel de vragen als de opgehaalde stukken die vergelijkbaar zijn met de vraag. Het model geeft vervolgens een antwoord in natuurlijke taal.
+De prompt die naar het Mistral-model wordt gestuurd bevat zowel de vragen als de opgehaalde tekststukken die vergelijkbaar zijn met de vraag. Het model geeft vervolgens een natuurlijke taalreactie. 
 
 ```python 
 pip install faiss-cpu
@@ -59,9 +53,10 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference import EmbeddingsClient
 
-endpoint = "https://models.inference.ai.azure.com"
+# Haal deze op van de "Overzicht" pagina van je Microsoft Foundry-project
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -100,7 +95,7 @@ d = text_embeddings.shape[1]
 index = faiss.IndexFlatL2(d)
 index.add(text_embeddings)
 
-question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?？"
+question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?"
 
 question_embedding = embed_client.embed(
     input=[question],
@@ -110,7 +105,7 @@ question_embedding = embed_client.embed(
 question_embeddings = np.array(question_embedding.data[0].embedding)
 
 
-D, I = index.search(question_embeddings.reshape(1, -1), k=2) # distance, index
+D, I = index.search(question_embeddings.reshape(1, -1), k=2) # afstand, index
 retrieved_chunks = [chunks[i] for i in I.tolist()[0]]
 
 prompt = f"""
@@ -138,30 +133,30 @@ chat_response = client.complete(
 print(chat_response.choices[0].message.content)
 ```
 
-## Mistral Small
+## Mistral Small 
+Mistral Small is een ander model uit de Mistral-familie binnen de premier/enterprise categorie. Zoals de naam al doet vermoeden, is dit model een Klein Taalmodel (SLM). De voordelen van het gebruik van Mistral Small zijn: 
+- Kostenbesparing vergeleken met Mistral LLM's zoals Mistral Large en NeMo - 80% prijsverlaging
+- Lage latentie - snellere respons vergeleken met Mistral's LLM's
+- Flexibel - kan worden ingezet in verschillende omgevingen met minder beperkingen op vereiste middelen. 
 
-Mistral Small is een ander model in de Mistral familie van modellen onder de premier/enterprise categorie. Zoals de naam al aangeeft, is dit model een Small Language Model (SLM). De voordelen van het gebruik van Mistral Small zijn dat het:
-- Kostenbesparend is vergeleken met Mistral LLMs zoals Mistral Large en NeMo - 80% prijsdaling
-- Lage latentie heeft - snellere respons vergeleken met Mistral's LLMs
-- Flexibel is - kan in verschillende omgevingen worden ingezet met minder beperkingen op vereiste middelen.
 
-Mistral Small is uitstekend geschikt voor:
-- Tekstgebaseerde taken zoals samenvatting, sentimentanalyse en vertaling.
-- Toepassingen waar frequente verzoeken worden gedaan vanwege zijn kosteneffectiviteit
-- Taken met lage latentie zoals code review en codesuggesties
+Mistral Small is uitstekend geschikt voor: 
+- Tekstgebaseerde taken zoals samenvatting, sentimentanalyse en vertaling. 
+- Toepassingen waarbij frequent verzoeken worden gedaan vanwege de kosteneffectiviteit. 
+- Code taken met lage latentie zoals code reviews en codevoorstellen. 
 
-## Vergelijking van Mistral Small en Mistral Large
+## Vergelijking tussen Mistral Small en Mistral Large 
 
-Om verschillen in latentie tussen Mistral Small en Large te laten zien, voer de onderstaande cellen uit.
+Om de verschillen in latentie tussen Mistral Small en Large te tonen, voer je de onderstaande cellen uit. 
 
-Je zou een verschil in responstijden van 3-5 seconden moeten zien. Let ook op de lengte en stijl van de reacties bij dezelfde prompt.
+Je zou een verschil in responstijden van 3-5 seconden moeten zien. Let ook op de reactielengte en stijl bij dezelfde prompt.  
 
 ```python 
 
 import os 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-small"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -190,9 +185,9 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -216,30 +211,31 @@ print(response.choices[0].message.content)
 
 ## Mistral NeMo
 
-In vergelijking met de andere twee modellen die in deze les worden besproken, is Mistral NeMo het enige gratis model met een Apache2 Licentie.
+In vergelijking met de andere twee modellen die in deze les worden besproken, is Mistral NeMo het enige gratis model met een Apache2-licentie. 
 
-Het wordt gezien als een upgrade van de eerdere open source LLM van Mistral, Mistral 7B.
+Het wordt gezien als een upgrade van het eerdere open source LLM van Mistral, Mistral 7B. 
 
-Enkele andere kenmerken van het NeMo model zijn:
+Enkele andere kenmerken van het NeMo-model zijn: 
 
-- *Efficiëntere tokenisatie:* Dit model gebruikt de Tekken tokenizer in plaats van de meer algemeen gebruikte tiktoken. Dit zorgt voor betere prestaties over meer talen en code.
+- *Efficiëntere tokenisatie:* Dit model gebruikt de Tekken-tokenizer in plaats van de meer gebruikelijke tiktoken. Dit zorgt voor betere prestaties voor meer talen en code. 
 
-- *Fijn afstemmen:* Het basismodel is beschikbaar voor fijn afstemmen. Dit zorgt voor meer flexibiliteit voor gebruiksscenario's waar fijn afstemmen nodig kan zijn.
+- *Fijn afstemmen:* Het basismodel is beschikbaar voor fijn afstemmen. Dit biedt meer flexibiliteit voor use-cases waar fijn afstemmen nodig kan zijn. 
 
-- *Native Functie Aanroepen* - Net als Mistral Large is dit model getraind op functieaanroepen. Dit maakt het uniek als een van de eerste open source modellen die dit doet.
+- *Native Function Calling* - Net als Mistral Large is dit model getraind op function calling. Dit maakt het uniek als een van de eerste open source modellen met deze eigenschap. 
 
-### Vergelijking van Tokenizers
 
-In dit voorbeeld zullen we kijken hoe Mistral NeMo omgaat met tokenisatie in vergelijking met Mistral Large.
+### Vergelijking van tokenizers 
 
-Beide voorbeelden nemen dezelfde prompt, maar je zou moeten zien dat NeMo minder tokens teruggeeft dan Mistral Large.
+In dit voorbeeld kijken we hoe Mistral NeMo tokenisatie aanpakt vergeleken met Mistral Large. 
+
+Beide voorbeelden nemen dezelfde prompt, maar je zou moeten zien dat NeMo minder tokens teruggeeft dan Mistral Large. 
 
 ```bash
 pip install mistral-common
 ```
 
 ```python 
-# Import needed packages:
+# Importeer benodigde pakketten:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -250,13 +246,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# Laad Mistral tokenizer
 
-model_name = "open-mistral-nemo	"
+model_name = "open-mistral-nemo"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# Tokeniseer een lijst met berichten
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -274,7 +270,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -290,12 +286,12 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# Tel het aantal tokens
 print(len(tokens))
 ```
 
 ```python
-# Import needed packages:
+# Importeer benodigde pakketten:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -306,13 +302,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# Laad Mistral tokenizer
 
 model_name = "mistral-large-latest"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# Tokeniseer een lijst met berichten
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -330,7 +326,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -346,13 +342,17 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# Tel het aantal tokens
 print(len(tokens))
 ```
 
-## Het leren stopt hier niet, ga door met de reis
+## Leren stopt hier niet, ga verder met de reis
 
-Na het voltooien van deze les, bekijk onze [Generative AI Learning collectie](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) om je kennis van Generative AI verder te vergroten!
+Na het voltooien van deze les, bekijk onze [Generative AI Learning-collectie](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) om je kennis van Generative AI verder te vergroten!
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, willen we u erop wijzen dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in zijn oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

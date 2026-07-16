@@ -1,39 +1,34 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0d69f2d5814a698d3de5d0235940b5ae",
-  "translation_date": "2025-05-19T18:49:21+00:00",
-  "source_file": "08-building-search-applications/scripts/README.md",
-  "language_code": "pa"
-}
--->
-# ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡਾਟਾ ਤਿਆਰੀ
+# ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡੇਟਾ ਤਿਆਰੀ
 
-ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡਾਟਾ ਤਿਆਰੀ ਸਕ੍ਰਿਪਟ YouTube ਵੀਡੀਓ ਟ੍ਰਾਂਸਕ੍ਰਿਪਟ ਡਾਊਨਲੋਡ ਕਰਦੇ ਹਨ ਅਤੇ ਉਨ੍ਹਾਂ ਨੂੰ OpenAI ਐਮਬੈਡਿੰਗ ਅਤੇ ਫੰਕਸ਼ਨ ਦੇ ਨਮੂਨੇ ਨਾਲ ਸੈਮਾਂਟਿਕ ਖੋਜ ਲਈ ਵਰਤਣ ਲਈ ਤਿਆਰ ਕਰਦੇ ਹਨ।
+ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡੇਟਾ ਤਿਆਰੀ ਸਕ੍ਰਿਪਟ YouTube ਵੀਡੀਓ ਟ੍ਰਾਂਸਕ੍ਰਿਪਟ ਡਾਊਨਲੋਡ ਕਰਦੀਆਂ ਹਨ ਅਤੇ ਉਨ੍ਹਾਂ ਨੂੰ OpenAI ਐਮਬੈੱਡਿੰਗ ਅਤੇ ਫੰਕਸ਼ਨਸ ਦੇ ਨਾਲ Semantic Search ਦੇ ਨਮੂਨੇ ਲਈ ਤਿਆਰ ਕਰਦੀਆਂ ਹਨ।
 
-ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡਾਟਾ ਤਿਆਰੀ ਸਕ੍ਰਿਪਟ ਨੂੰ ਨਵੀਂ ਰਿਲੀਜ਼ ਕੀਤੀਆਂ ਗਈਆਂ Windows 11, macOS Ventura ਅਤੇ Ubuntu 22.04 (ਅਤੇ ਇਸ ਤੋਂ ਉੱਪਰ) 'ਤੇ ਟੈਸਟ ਕੀਤਾ ਗਿਆ ਹੈ।
+ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡੇਟਾ ਤਿਆਰੀ ਸਕ੍ਰਿਪਟਾਂ ਨੂੰ ਨਵੀਆਂ ਰਿਲੀਜ਼ਾਂ Windows 11, macOS Ventura ਅਤੇ Ubuntu 22.04 (ਅਤੇ ਉੱਪਰ) 'ਤੇ ਟੈਸਟ ਕੀਤਾ ਗਿਆ ਹੈ।
 
-## ਲੋੜੀਂਦੇ Azure OpenAI ਸੇਵਾ ਸਰੋਤ ਬਣਾਓ
+## ਲੋੜੀਂਦੇ Azure OpenAI ਸਰਵਿਸ ਸਾਧਨ ਬਣਾਓ
 
-1. ਸਰੋਤ ਸਮੂਹ ਬਣਾਓ
+> [!IMPORTANT]
+> ਅਸੀਂ ਸਿਫਾਰਸ਼ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ OpenAI ਨਾਲ ਸੁਮੇਲਤਾ ਯਕੀਨੀ ਬਣਾਉਣ ਲਈ Azure CLI ਨੂੰ ਨਵੀਂ ਵਰਜਨ 'ਤੇ ਅੱਪਡੇਟ ਕਰੋ
+> ਵੇਖੋ [ਡੌਕਯੂਮੇਂਟੇਸ਼ਨ](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
+
+1. ਏਕ ਰਿਸੋਰਸ ਗਰੁੱਪ ਬਣਾਓ
 
 > [!NOTE]
-> ਇਸ ਹਦਾਇਤਾਂ ਲਈ ਅਸੀਂ East US ਵਿੱਚ "semantic-video-search" ਨਾਮਕ ਸਰੋਤ ਸਮੂਹ ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹਾਂ।
-> ਤੁਸੀਂ ਸਰੋਤ ਸਮੂਹ ਦਾ ਨਾਮ ਬਦਲ ਸਕਦੇ ਹੋ, ਪਰ ਜਦੋਂ ਸਰੋਤਾਂ ਲਈ ਸਥਾਨ ਬਦਲਦੇ ਹੋ, 
-> [ਮਾਡਲ ਉਪਲਬਧਤਾ ਟੇਬਲ](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst) ਦੀ ਜਾਂਚ ਕਰੋ।
+> ਇਹਨਾਂ ਹਦਾਇਤਾਂ ਲਈ ਅਸੀਂ East US ਵਿੱਚ "semantic-video-search" ਨਾਮਕ ਰਿਸੋਰਸ ਗਰੁੱਪ ਵਰਤ ਰਹੇ ਹਾਂ।
+> ਤੁਸੀਂ ਰਿਸੋਰਸ ਗਰੁੱਪ ਦਾ ਨਾਮ ਬਦਲ ਸਕਦੇ ਹੋ, ਪਰ ਜਦੋਂ ਤੁਸੀਂ ਸਾਧਨਾਂ ਦੀ ਥਾਂ ਬਦਲਦੇ ਹੋ,
+> ਤਾਂ [ਮਾਡਲ ਉਪਲਬਧਤਾ ਟੇਬਲ](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst) ਨੂੰ ਵੇਖੋ।
 
 ```console
 az group create --name semantic-video-search --location eastus
 ```
 
-1. ਇੱਕ Azure OpenAI ਸੇਵਾ ਸਰੋਤ ਬਣਾਓ।
+1. ਇੱਕ Azure OpenAI ਸਰਵਿਸ ਸਾਧਨ ਬਣਾਓ।
 
 ```console
 az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਵਰਤੋਂ ਲਈ ਐਂਡਪੌਇੰਟ ਅਤੇ ਕੁੰਜੀਆਂ ਪ੍ਰਾਪਤ ਕਰੋ
+1. ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਵਰਤੋਂ ਲਈ ਐਂਡਪੁਆਇੰਟ ਅਤੇ ਕੁੰਜੀਆਂ ਪ੍ਰਾਪਤ ਕਰੋ
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -42,9 +37,9 @@ az cognitiveservices account keys list --name semantic-video-openai \
    --resource-group semantic-video-search | jq -r .key1
 ```
 
-1. ਹੇਠਾਂ ਦਿੱਤੇ ਮਾਡਲ ਤੈਨਾਤ ਕਰੋ:
-   - `text-embedding-ada-002` version `2` or greater, named `text-embedding-ada-002`
-   - `gpt-35-turbo` version `0613` or greater, named `gpt-35-turbo`
+1. ਹੇਠਾਂ ਦਿੱਤੇ ਮਾਡਲ ਤਾਇਨਾਤ ਕਰੋ:
+   - `text-embedding-ada-002` ਵਰਜਨ `2` ਜਾਂ ਵੱਧ, ਜਿਸਨੂੰ `text-embedding-ada-002` ਨਾਮ ਦਿੱਤਾ ਗਿਆ ਹੈ
+   - `gpt-4o-mini` ਜਿਸਨੂੰ `gpt-4o-mini` ਨਾਮ ਦਿੱਤਾ ਗਿਆ ਹੈ
 
 ```console
 az cognitiveservices account deployment create \
@@ -58,26 +53,25 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-4o-mini \
+    --model-name gpt-4o-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
 ```
 
-## ਲੋੜੀਂਦਾ ਸੌਫਟਵੇਅਰ
+## ਲੋੜੀਂਦਾ ਸਾਫਟਵੇਅਰ
 
-- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) ਜਾਂ ਇਸ ਤੋਂ ਵੱਧ
+- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) ਜਾਂ ਵੱਧ
 
-## ਵਾਤਾਵਰਣ ਚਲ
+## ਮਾਹੌਲੀਆ ਵੈਰੀਏਬਲ
 
-ਹੇਠਾਂ ਦਿੱਤੇ ਵਾਤਾਵਰਣ ਚਲਾਂ ਦੀ ਲੋੜ ਹੈ YouTube ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡਾਟਾ ਤਿਆਰੀ ਸਕ੍ਰਿਪਟ ਚਲਾਉਣ ਲਈ।
+YouTube ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡੇਟਾ ਤਿਆਰੀ ਸਕ੍ਰਿਪਟ ਚਲਾਉਣ ਲਈ ਹੇਠਾਂ ਦਿੱਤੇ ਮਾਹੌਲੀਆ ਵੈਰੀਏਬਲ ਲੋੜੀਂਦੇ ਹਨ।
 
-### Windows 'ਤੇ
+### ਵਿੰਡੋਜ਼ 'ਤੇ
 
-ਸੁਝਾਅ ਹੈ ਕਿ ਇਹ ਚਲ ਆਪਣੇ `user` environment variables.
-`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` for [USER] > `New` ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ।
+ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਕਿ ਤੁਸੀਂ ਇਹ ਵੈਰੀਏਬਲ ਆਪਣੇ `user` ਮਾਹੌਲ ਵੈਰੀਏਬਲਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ।
+`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `[USER]` ਲਈ `User variables` > `New`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -86,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
-### Linux ਅਤੇ macOS 'ਤੇ
+<!-- ਤੁਸੀਂ ਇਹ ਮਾਹੌਲ ਵੈਰੀਏਬਲ ਆਪਣੇ PowerShell ਪ੍ਰੋਫਾਈਲ ਵਿੱਚ ਵੀ ਜੋੜ ਸਕਦੇ ਹੋ।
 
-ਸੁਝਾਅ ਹੈ ਕਿ ਹੇਠਾਂ ਦਿੱਤੇ ਐਕਸਪੋਰਟਸ ਨੂੰ ਆਪਣੇ `~/.bashrc` or `~/.zshrc` ਫਾਇਲ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ।
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<ਤੁਹਾਡੀ Azure OpenAI ਸਰਵਿਸ API ਕੁੰਜੀ>"
+$env:AZURE_OPENAI_ENDPOINT = "<ਤੁਹਾਡਾ Azure OpenAI ਸਰਵਿਸ ਐਂਡਪੁਆਇੰਟ>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<ਤੁਹਾਡਾ Azure OpenAI ਸਰਵਿਸ ਮਾਡਲ ਤਾਇਨਾਤੀ ਨਾਮ>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<ਤੁਹਾਡੀ ਗੂਗਲ ਡਿਵੈਲਪਰ API ਕੁੰਜੀ>"
+``` -->
+
+### ਲਿਨਕਸ ਅਤੇ macOS 'ਤੇ
+
+ਸੋਝੀਦਾਰੀ ਹੈ ਕਿ ਤੁਸੀਂ ਹੇਠਾਂ ਦਿੱਤੇ ਨਿਰਯਾਤ ਆਪਣੇ `~/.bashrc` ਜਾਂ `~/.zshrc` ਫਾਈਲ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ।
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -97,10 +100,10 @@ export AZURE_OPENAI_MODEL_DEPLOYMENT_NAME=<your Azure OpenAI Service model deplo
 export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ```
 
-## ਲੋੜੀਂਦੇ Python ਲਾਇਬ੍ਰੇਰੀਜ਼ ਇੰਸਟਾਲ ਕਰੋ
+## ਲੋੜੀਂਦੀਆਂ Python ਲਾਇਬ੍ਰੇਰੀਆਂ ਇੰਸਟਾਲ ਕਰੋ
 
-1. ਜੇਕਰ [git ਕਲਾਇੰਟ](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) ਪਹਿਲਾਂ ਤੋਂ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ ਤਾਂ ਉਸਨੂੰ ਇੰਸਟਾਲ ਕਰੋ।
-1. ਇੱਕ `Terminal` ਵਿੰਡੋ ਤੋਂ, ਨਮੂਨੇ ਨੂੰ ਆਪਣੇ ਪਸੰਦੀਦਾ ਰੇਪੋ ਫੋਲਡਰ ਵਿੱਚ ਕਲੋਨ ਕਰੋ।
+1. ਜੇ ਨਹੀਂ ਕੀਤਾ ਤੁਸੀਂ [git client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) ਇੰਸਟਾਲ ਕਰੋ।
+1. ਇੱਕ `Terminal` ਵਿੰਡੋ ਤੋਂ, ਨਮੂਨਾ ਆਪਣੇ ਮਨਪਸੰਦ ਰੇਪੋ ਫੋਲਡਰ ਵਿੱਚ ਕਲੋਨ ਕਰੋ।
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -114,59 +117,63 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. ਇੱਕ Python ਵਰਚੁਅਲ ਵਾਤਾਵਰਣ ਬਣਾਓ।
 
-    Windows 'ਤੇ:
+    ਵਿੰਡੋਜ਼ 'ਤੇ:
 
     ```powershell
     python -m venv .venv
     ```
 
-    macOS ਅਤੇ Linux 'ਤੇ:
+    macOS ਅਤੇ ਲਿਨਕਸ 'ਤੇ:
 
     ```bash
     python3 -m venv .venv
     ```
 
-1. Python ਵਰਚੁਅਲ ਵਾਤਾਵਰਣ ਨੂੰ ਐਕਟੀਵੇਟ ਕਰੋ।
+1. Python ਵਰਚੁਅਲ ਵਾਤਾਵਰਣ ਸਰਗਰਮ ਕਰੋ।
 
-   Windows 'ਤੇ:
+   ਵਿੰਡੋਜ਼ 'ਤੇ:
 
    ```powershell
    .venv\Scripts\activate
    ```
 
-   macOS ਅਤੇ Linux 'ਤੇ:
+   macOS ਅਤੇ ਲਿਨਕਸ 'ਤੇ:
 
    ```bash
    source .venv/bin/activate
    ```
 
-1. ਲੋੜੀਂਦੇ ਲਾਇਬ੍ਰੇਰੀਜ਼ ਇੰਸਟਾਲ ਕਰੋ।
+1. ਲੋੜੀਂਦੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਇੰਸਟਾਲ ਕਰੋ।
 
-   Windows 'ਤੇ:
+   ਵਿੰਡੋਜ਼ 'ਤੇ:
 
    ```powershell
    pip install -r requirements.txt
    ```
 
-   macOS ਅਤੇ Linux 'ਤੇ:
+   macOS ਅਤੇ ਲਿਨਕਸ 'ਤੇ:
 
    ```bash
    pip3 install -r requirements.txt
    ```
 
-## YouTube ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡਾਟਾ ਤਿਆਰੀ ਸਕ੍ਰਿਪਟ ਚਲਾਓ
+## YouTube ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ ਡੇਟਾ ਤਿਆਰੀ ਸਕ੍ਰਿਪਟਾਂ ਚਲਾਓ
 
-### Windows 'ਤੇ
+### ਵਿੰਡੋਜ਼ 'ਤੇ
 
 ```powershell
 .\transcripts_prepare.ps1
 ```
 
-### macOS ਅਤੇ Linux 'ਤੇ
+### macOS ਅਤੇ ਲਿਨਕਸ 'ਤੇ
 
 ```bash
 ./transcripts_prepare.sh
 ```
 
-**ਅਸਵੀਕਰਤੀਕਰਨ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਹਾਲਾਂਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁੱਛੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪ੍ਰੋਫੈਸ਼ਨਲ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

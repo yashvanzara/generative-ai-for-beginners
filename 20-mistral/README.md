@@ -5,14 +5,16 @@
 This lesson will cover: 
 - Exploring the different Mistral Models 
 - Understanding the use-cases and scenarios for each model 
-- Code samples show the unique features of each model. 
+- Exploring code samples that show the unique features of each model. 
 
 ## The Mistral Models 
 
 In this lesson, we will explore 3 different Mistral models: 
 **Mistral Large**, **Mistral Small** and **Mistral Nemo**. 
 
-Each of these models is available free on the Github Model marketplace. The code in this notebook will be using these models to run the code. Here are more details on using Github Models to [prototype with AI models](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst). 
+Each of these models is available free on [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst). The code in this notebook will be using these models to run the code.
+
+> **Note:** GitHub Models is retiring at the end of July 2026. Here are more details on using [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) to prototype with AI models. 
 
 
 ## Mistral Large 2 (2407)
@@ -51,9 +53,10 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference import EmbeddingsClient
 
-endpoint = "https://models.inference.ai.azure.com"
+# Get these from your Microsoft Foundry project's "Overview" page
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -92,7 +95,7 @@ d = text_embeddings.shape[1]
 index = faiss.IndexFlatL2(d)
 index.add(text_embeddings)
 
-question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?？"
+question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?"
 
 question_embedding = embed_client.embed(
     input=[question],
@@ -151,9 +154,9 @@ You should see a difference in response times between 3-5 seconds. Also note the
 ```python 
 
 import os 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-small"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -182,9 +185,9 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -214,7 +217,7 @@ It is viewed as an upgrade to the earlier open source LLM from Mistral, Mistral 
 
 Some other features of the NeMo model are: 
 
-- *More efficient tokenization:* This model using the Tekken tokenizer over the more commonly used tiktoken. This allows for better performance over more languages and code. 
+- *More efficient tokenization:* This model uses the Tekken tokenizer over the more commonly used tiktoken. This allows for better performance over more languages and code. 
 
 - *Finetuning:* The base model is available for finetuning. This allows for more flexibility for use-cases where finetuning may be needed. 
 
@@ -225,7 +228,7 @@ Some other features of the NeMo model are:
 
 In this sample, we will look at how Mistral NeMo handles tokenization compared to Mistral Large. 
 
-Both samples take the same prompt but you should see that NeMo returns back less tokens vs Mistral Large. 
+Both samples take the same prompt but you should see that NeMo returns fewer tokens than Mistral Large. 
 
 ```bash
 pip install mistral-common
@@ -245,7 +248,7 @@ from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
 # Load Mistral tokenizer
 
-model_name = "open-mistral-nemo	"
+model_name = "open-mistral-nemo"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
@@ -267,7 +270,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -323,7 +326,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -343,6 +346,6 @@ tokens, text = tokenized.tokens, tokenized.text
 print(len(tokens))
 ```
 
-## Learning does not stop here, continue the Journey
+## Learning does not stop here, continue the journey
 
 After completing this lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue leveling up your Generative AI knowledge!
